@@ -50,7 +50,7 @@ terraform apply \
 Because the GCP provider for Terraform doesn't yet allow us to [attach the required license for enabling virtualization extensions](https://cloud.google.com/compute/docs/instances/enable-nested-virtualization-vm-instances), we stop after this disk creation, so that we can then create the required image using the `gcloud` utility based from this disk:
 
 ```
-gcloud config set core/project nre-learning
+gcloud config set core/project $(gcloud projects list | grep nre-learning | awk '{print $1}')
 
 gcloud compute images create nested-vm-image \
   --source-disk u16-disk --source-disk-zone us-west1-a \
