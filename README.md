@@ -72,7 +72,7 @@ gcloud compute scp ./junos-vmx-x86-64-18.1R1.9.qcow2 nrelearn:~
 Now, let's SSH into our new instance:
 
 ```
-gcloud compute ssh gcloud compute ssh nrelearn
+gcloud compute ssh nrelearn
 ```
 
 Install dependencies, set up hugepages, and copy the vMX image into place:
@@ -148,7 +148,7 @@ id_rsa.pub  license-eval.txt  junos-vmx-x86-64-17.3R1.10.qcow2
 Eventually we want to build our own Dockerfiles per lab, as well as the infrastructure for actually running them, but this is all I have for now. Ensure you can run the vMX image with:
 
 ```
-sudo docker run -d --privileged --volume=~/myfiles/:/u marcelwiget/vmx-docker-light
+sudo docker run --name nre-learning -d --privileged --volume=$HOME/myfiles/:/u marcelwiget/vmx-docker-light
 ```
 
 > Omit the `-d` flag to get instant feedback, or continue to run in detached mode and use `docker logs` to see startup status.
