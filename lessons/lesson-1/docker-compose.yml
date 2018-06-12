@@ -1,29 +1,32 @@
 version: "3"
 
+# This is an example lab using docker compose. In the future, this will likely be laid out similarly with kubernetes definitions.
+# For now, compose is a good enough PoC
+
 services:
 
-  # vmx1:
-  #   # build: src/
-  #   image: marcelwiget/vmx-docker-light:latest
-  #   privileged: true
-  #   tty: true
-  #   stdin_open: true
-  #   ports:
-  #     - "22"
-  #     - "830"
-  #   environment:
-  #     - ID=vmx1
-  #     - LICENSE=license-eval.txt
-  #     - IMAGE=junos-vmx-x86-64-17.3R1.10.qcow2
-  #     - PUBLICKEY=id_rsa.pub
-  #     - CONFIG=vmx1.conf
-  #   volumes:
-  #     - $PWD:/u:ro
-  #     - /var/run/docker.sock:/var/run/docker.sock
-  #   networks:
-  #     net-0:
-  #     net-1:
-  #     net-2:
+  vmx1:
+    # build: src/
+    image: marcelwiget/vmx-docker-light:latest
+    privileged: true
+    tty: true
+    stdin_open: true
+    ports:
+      - "22"
+      - "830"
+    environment:
+      - ID=vmx1
+      - LICENSE=license-eval.txt
+      - IMAGE=junos-vmx-x86-64-17.3R1.10.qcow2
+      - PUBLICKEY=id_rsa.pub
+      - CONFIG=vmx1.conf
+    volumes:
+      - $HOME:/u:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      net-0:
+      net-1:
+      net-2:
 
   lab1notebook:
     build:
@@ -31,3 +34,8 @@ services:
       dockerfile: lesson-1/Dockerfile-jupyter
     ports:
       - "8888"
+
+networks:
+  net-0:
+  net-1:
+  net-2:
