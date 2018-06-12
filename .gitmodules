@@ -1,0 +1,3 @@
+[submodule "contrail-ansible-deployer"]
+	path = contrail-ansible-deployer
+	url = git@github.com:Juniper/contrail-ansible-deployer.git
