@@ -1,0 +1,94 @@
+---
+- name: Prep instances (sudo)
+  hosts: all
+  become: yes
+  vars:
+    ansible_ssh_private_key_file: ~/.ssh/google_compute_engine
+  gather_facts: yes
+  tasks:
+    - name: Install Yum deps
+      yum:
+        name: "{{ item }}"
+        state: latest
+        update_cache: yes
+      with_items:
+        - epel-release
+        - python-pip
+        - git
+    
+    # sudo yum upgrade python*
+  
+    - name: Install pip deps
+      pip:
+        name: "{{ item }}"
+      with_items:
+        - docker-compose
+
+    - name: Install Docker
+      shell: curl -fsSL https://get.docker.com/ | sh
+
+    - name: Start Docker
+      shell: systemctl start docker
+
+    - name: Set up hugepages
+      shell: sysctl vm.nr_hugepages=1024
+
+    - name: Monkey-patch docker-py
+      shell: "{{ item }}"
+      with_items:
+      - pip uninstall docker-py --no-cache-dir
+      - pip install docker==3.1.4
+
+# sudo usermod -aG docker $USER
+
+- name: Prep instances
+  hosts: all
+  vars:
+    ansible_ssh_private_key_file: ~/.ssh/google_compute_engine
+  gather_facts: yes
+  tasks:
+    - name: Install Yum deps
+      yum:
+        name: "{{ item }}"
+        state: latest
+        update_cache: yes
+      with_items:
+        - epel-release
+        - python-pip
+
+    - name: Create directory for vMX files
+      file:
+        path: ~/myfiles
+        state: directory
+        mode: 0755
+
+    - stat: path=~/myfiles/junos-vmx-x86-64-18.1R1.9.qcow2
+      register: image_exists
+      
+    - name: Copy vMX image to instance (please be patient)
+      copy:
+        src: ./junos-vmx-x86-64-18.1R1.9.qcow2
+        dest: ~/myfiles/junos-vmx-x86-64-18.1R1.9.qcow2
+      when: image_exists.stat.exists == False
+
+    - stat: path=~/.ssh/id_rsa.pub
+      register: ssh_key_exists
+
+    - name: Copy public SSH key to vMX
+      shell: ssh-keygen -b 2048 -t rsa -f ~/.ssh/id_rsa -q -N ""
+      when: ssh_key_exists.stat.exists == False
+
+    - stat: path=~/myfiles/id_rsa.pub
+      register: ssh_key_copied
+
+    - name: Copy public SSH key to vMX
+      shell: cp ~/.ssh/id_rsa.pub ~/myfiles
+      when: ssh_key_copied.stat.exists == False
+
+    - name: Download vMX eval
+      shell: curl -o ~/myfiles/license-eval.txt https://www.juniper.net/us/en/dm/free-vmx-trial/E421992502.txt
+
+    - name: Clone nre-learning repo to instance
+      git:
+        repo: 'https://github.com/Mierdin/nre-learn'
+        dest: ~/nre-learn/
