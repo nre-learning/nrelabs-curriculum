@@ -30,7 +30,7 @@
     - name: Start Docker
       shell: "{{ item }}"
       with_items:
-        - sudo systemctl enable docker
+        - systemctl enable docker
         - systemctl start docker
 
     # TODO NOT currently persistent across reboots. Need to do this.

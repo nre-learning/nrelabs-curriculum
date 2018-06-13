@@ -37,11 +37,19 @@ services:
       - $HOME/.ssh/:/home/jovyan/.ssh/:ro
     ports:
       - "8888:8888"
+    networks:
+      net-0:
+      net-1:
+      net-2:
 
-    # lesson-1_vmx1_1.lesson-1_net-0
-
-    # Very important that the containers in these compose files are on the same networks, so we can reference via hostname and not
-    # worry about IPs baked into notebooks
+  web:
+    image: xtermjs/xterm.js
+    volumes:
+      - ../../xterm.js/demo:/usr/src/app/demo
+      - $HOME/.ssh/:/root/.ssh/:ro
+    ports:
+      - 3000:3000
+    command: ["npm", "start"]
     networks:
       net-0:
       net-1:
