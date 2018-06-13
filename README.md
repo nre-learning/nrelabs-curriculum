@@ -123,6 +123,8 @@ FreeBSD/amd64 (lesson-1_vmx1_1) (ttyu0)
 login:
 ```
 
+> **DON'T** continue until you see this, as there won't be anything for the lab to connect to until you do. In the future, we'll be spawning all this ahead of time so that when the user wants to connect, there's one waiting for them. For now, we cook everything to order. :smile:
+
 <!-- docker logs lesson-1_vmx1_1 | grep password -->
 
 Exit the shell of the instance, and get back to the machine you were running `gcloud` commands from. Run this to open the jupyter notebook:
