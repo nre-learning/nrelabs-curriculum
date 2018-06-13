@@ -38,6 +38,8 @@
     # echo "loop" | sudo tee /etc/modules-load.d/loop.conf   -----maybe?
     - name: Set up hugepages
       shell: sysctl vm.nr_hugepages=1024
+
+    # TODO Doesn't seem to be working. Still have to run this myself. Also should make this persistent too.
     - name: Load loop kernel module
       shell: modprobe loop
 
@@ -94,4 +96,4 @@
         force: yes
 
     - name: Copy SSH keys to lessons dir
-      shell: mkdir -p ~/nre-learn/lessons/ssh && cp ~/.ssh/id_rsa ~/nre-learn/lessons/ssh/id_rsa.pub && cp -r ~/.ssh/id_rsa ~/nre-learn/lessons/ssh/id_rsa.pub
+      shell: mkdir -p ~/nre-learn/lessons/ssh && cp ~/.ssh/id_rsa ~/nre-learn/lessons/ssh/id_rsa && cp -r ~/.ssh/id_rsa.pub ~/nre-learn/lessons/ssh/id_rsa.pub
