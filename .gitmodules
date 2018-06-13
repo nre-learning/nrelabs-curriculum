@@ -1,6 +1,6 @@
 [submodule "contrail-ansible-deployer"]
 	path = contrail-ansible-deployer
-	url = https://github.com/Mierdin/contrail-ansible-deployer.git
+	url = https://github.com/nre-learning/contrail-ansible-deployer.git
 [submodule "xterm.js"]
 	path = xterm.js
-	url = https://github.com/Mierdin/xterm.js.git
+	url = https://github.com/nre-learning/xterm.js.git
