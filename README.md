@@ -56,7 +56,7 @@ terraform apply \
     -target=google_compute_disk.centos7_disk
 ```
 
-Because the GCP provider for Terraform doesn't yet allow us to [attach the required license for enabling virtualization extensions](https://cloud.google.com/compute/docs/instances/enable-nested-virtualization-vm-instances), we stop after this disk creation, so that we can then create the required image using the `gcloud` utility based from this disk:
+Because the GCP provider for Terraform [doesn't yet allow](https://github.com/terraform-providers/terraform-provider-google/issues/1045) us to [attach the required license for enabling virtualization extensions](https://cloud.google.com/compute/docs/instances/enable-nested-virtualization-vm-instances), we stop after this disk creation, so that we can then create the required image using the `gcloud` utility based from this disk:
 
 > I'm planning to propose a PR for the GCP terraform provider to add the `--licenses` field, so we don't have to do this silliness. Should be straightforward.
 
