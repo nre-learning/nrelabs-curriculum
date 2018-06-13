@@ -6,10 +6,6 @@
     ansible_ssh_private_key_file: ~/.ssh/google_compute_engine
   gather_facts: yes
   tasks:
-
-    - name: because cloud.
-      shell: yum-config-manager --save --setopt=google-cloud-compute.skip_if_unavailable=true
-
     - name: Install Yum deps
       yum:
         name: "{{ item }}"
@@ -32,18 +28,24 @@
       shell: curl -fsSL https://get.docker.com/ | sh
 
     - name: Start Docker
-      shell: systemctl start docker
+      shell: "{{ item }}"
+      with_items:
+        - sudo systemctl enable docker
+        - systemctl start docker
 
+    # TODO NOT currently persistent across reboots. Need to do this.
+    # echo "loop" | sudo tee /etc/modules-load.d/loop.conf   -----maybe?
     - name: Set up hugepages
       shell: sysctl vm.nr_hugepages=1024
+    - name: Load loop kernel module
+      shell: modprobe loop
 
     - name: Monkey-patch docker-py
       shell: "{{ item }}"
       with_items:
       # - pip uninstall docker-py --no-cache-dir
-      - pip install docker==3.1.4
-
-# sudo usermod -aG docker $USER
+      # - pip install docker==3.1.4
+      - pip install docker
 
 - name: Prep instances
   hosts: all
@@ -51,14 +53,6 @@
     ansible_ssh_private_key_file: ~/.ssh/google_compute_engine
   gather_facts: yes
   tasks:
-    - name: Install Yum deps
-      yum:
-        name: "{{ item }}"
-        state: latest
-        update_cache: yes
-      with_items:
-        - epel-release
-        - python-pip
 
     - name: Create directory for vMX files
       file:
