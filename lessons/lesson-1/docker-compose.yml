@@ -33,8 +33,6 @@ services:
     build:
       context: ..
       dockerfile: lesson-1/Dockerfile-jupyter
-    volumes:
-      - $HOME/.ssh/:/home/jovyan/.ssh/:ro
     ports:
       - "8888:8888"
     networks:
@@ -45,6 +43,7 @@ services:
   web:
     image: xtermjs/xterm.js
     volumes:
+      # Should bake this into the image if possible
       - ../../xterm.js/demo:/usr/src/app/demo
       - $HOME/.ssh/:/root/.ssh/:rw
     ports:

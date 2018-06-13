@@ -89,6 +89,9 @@
 
     - name: Clone nre-learning repo to instance
       git:
-        repo: 'https://github.com/Mierdin/nre-learn'
+        repo: 'https://github.com/nre-learning/nre-learn'
         dest: ~/nre-learn/
         force: yes
+
+    - name: Copy SSH keys to lessons dir
+      shell: mkdir -p ~/nre-learn/lessons/ssh && cp ~/.ssh/id_rsa ~/nre-learn/lessons/ssh/id_rsa.pub && cp -r ~/.ssh/id_rsa ~/nre-learn/lessons/ssh/id_rsa.pub
