@@ -24,6 +24,7 @@
       with_items:
         - docker-compose
 
+    # TODO should only do this if not installed.
     - name: Install Docker
       shell: curl -fsSL https://get.docker.com/ | sh
 

@@ -46,7 +46,7 @@ services:
     image: xtermjs/xterm.js
     volumes:
       - ../../xterm.js/demo:/usr/src/app/demo
-      - $HOME/.ssh/:/root/.ssh/:ro
+      - $HOME/.ssh/:/root/.ssh/:rw
     ports:
       - 3000:3000
     command: ["npm", "start"]

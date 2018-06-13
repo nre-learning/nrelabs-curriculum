@@ -4,5 +4,4 @@ RUN pip install -r /requirements.txt
 RUN mkdir /home/jovyan/.jupyter
 ADD lesson-1/lesson1.ipynb /home/jovyan/work/
 ADD base-jupyter-config.py /home/jovyan/.jupyter/jupyter_notebook_config.py
-
 # http://127.0.0.1:32770/notebooks/work/lesson1.ipynb
