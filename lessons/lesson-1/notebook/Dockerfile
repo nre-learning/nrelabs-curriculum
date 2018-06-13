@@ -1,8 +1,8 @@
 FROM jupyter/minimal-notebook
-ADD lesson-1/requirements.txt /
+ADD lesson-1/jupyter/requirements.txt /
 RUN pip install -r /requirements.txt
 RUN mkdir /home/jovyan/.jupyter
-ADD lesson-1/lesson1.ipynb /home/jovyan/work/
+ADD lesson-1/jupyter/lesson1.ipynb /home/jovyan/work/
 ADD base-jupyter-config.py /home/jovyan/.jupyter/jupyter_notebook_config.py
 
 # Not ideal way of doing this, but works for now.

@@ -7,4 +7,4 @@ c.NotebookApp.password = ''
 # c.NotebookApp.password_required = False
 
 # For embedding inside other pages
-c.NotebookApp.tornado_settings = { 'headers': { 'Content-Security-Policy': "frame-ancestors 'self' http://35.230.95.255:3000/" } }
+c.NotebookApp.tornado_settings = { 'headers': { 'Content-Security-Policy': "frame-ancestors 'self' http://*" } }

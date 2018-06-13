@@ -127,15 +127,17 @@ login:
 
 <!-- docker logs lesson-1_vmx1_1 | grep password -->
 
-Exit the shell of the instance, and get back to the machine you were running `gcloud` commands from. Run this to open the jupyter notebook:
+Exit the shell of the instance, and get back to the machine you were running `gcloud` commands from. Run this to get access to the example demo application:
 
 ```
-open "http://$(gcloud compute instances describe tf-controller01 | grep natIP | awk '{print $2}'):8888/notebooks/work/lesson1.ipynb"
+open "http://$(gcloud compute instances describe tf-controller01 | grep natIP | awk '{print $2}'):3000/"
 ```
 
-Hit next a few times to test it out. It should look something like this if it worked:
+Hit next a few times in the notebook pane to test it out. It should look something like this if it worked:
 
 ![](images/example_lesson1.png?raw=true "lesson1")
+
+You can also poke around the on-screen terminal - this is our vMX image - it's the actual Junos system that our jupyter notebook queried.
 
 ## Cleaning Up
 
