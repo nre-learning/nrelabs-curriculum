@@ -5,6 +5,8 @@ resource "google_compute_disk" "centos7_disk" {
   zone  = "${var.zone}"
   image = "${var.os["centos-7"]}"
 
+  size = 40
+
   depends_on = [
     "google_project_services.project",
   ]

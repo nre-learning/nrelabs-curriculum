@@ -227,7 +227,7 @@
 #
 #  The string should be of the form type:salt:hashed-password.
 
-# Password is "juniper"
+# Password is "juniper", but I'm also disabling this below
 c.NotebookApp.password = 'sha1:9fd6b8a45182:3cdeb2d4e19729e0bbb6504c5c3ebc98de5d23b1'
 
 ## Forces users to use a password for the Notebook server. This is useful in a
@@ -236,7 +236,7 @@ c.NotebookApp.password = 'sha1:9fd6b8a45182:3cdeb2d4e19729e0bbb6504c5c3ebc98de5d
 #
 #  In such a case, server the notebook server on localhost is not secure since
 #  any user can connect to the notebook server via ssh.
-#c.NotebookApp.password_required = False
+c.NotebookApp.password_required = False
 
 ## The port the notebook server will listen on.
 #c.NotebookApp.port = 8888

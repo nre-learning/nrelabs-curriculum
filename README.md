@@ -77,13 +77,22 @@ terraform apply -auto-approve
 Time to run ansible:
 
 ```
-cat terraform.tfstate | grep '.*_nat_ip.*\|.*tags\.[0-9][0-9].*' | cut -d':' -f2 | awk '{print $1}' | cut -d'"' -f2 > hosts
+gcloud compute config-ssh
+cat terraform.tfstate | grep '.*_nat_ip.*\|.*tags\.[0-9][0-9].*' | cut -d':' -f2 | awk '{print $1}' | cut -d'"' -f2 >| hosts
 ansible-playbook -i hosts prepinstances.yml
 ```
 
 > The Ansible playbook assumes you extracted the vMX image downloaded earlier to `./junos-vmx-x86-64-18.1R1.9.qcow2` and will take care of copying it to the instance(s).
 
 ## Finally...
+
+Optionally, you can run this to provide `sudo`-less docker access:
+
+```
+gcloud compute ssh tf-controller01 -- 'sudo usermod -aG docker $USER'
+```
+
+> You'll see `Connection to <ip> closed.`, this is normal
 
 Now, let's SSH into our new instance:
 
@@ -95,18 +104,50 @@ Finally, you should be able to run the docker-compose lab:
 
 ```
 cd ~/nre-learn/lessons/lesson-1
-docker-compose up -d
+docker-compose up -d --build
 ```
+
+You can tail the logs of the vMX container to know when it's finished booting:
+
+```
+docker logs -f lesson-1_vmx1_1
+```
+
+You'll see something like this when the vMX is booted and ready to use:
+
+```
+Tue Jun 12 21:24:32 UTC 2018
+
+FreeBSD/amd64 (lesson-1_vmx1_1) (ttyu0)
+
+login:
+```
+
+<!-- docker logs lesson-1_vmx1_1 | grep password -->
+
+Exit the shell of the instance, and get back to the machine you were running `gcloud` commands from. Run this to open the jupyter notebook:
+
+```
+open "http://$(gcloud compute instances describe tf-controller01 | grep natIP | awk '{print $2}'):8888/notebooks/work/lesson1.ipynb"
+```
+
+Hit next a few times to test it out. It should look something like this if it worked:
+
+![](images/example_lesson1.png?raw=true "lesson1")
 
 ## Cleaning Up
 
 As expected, clean up with `terraform destroy`
 
+# TODOs
 
+Some links that will be useful later for orchestrating network isolation between labs and within labs
+https://www.juniper.net/documentation/en_US/contrail4.1/topics/concept/kubernetes-cni-contrail.html
+http://dougbtv.com/nfvpe/2017/02/22/multus-cni/
+Question is, can we do multiple interfaces with contrail too?
 
-
-
-
-
+Need to secure jupyter notebooks
+https://jupyter-notebook.readthedocs.io/en/stable/public_server.html
+That's also useful for embedding somewhere
 
 

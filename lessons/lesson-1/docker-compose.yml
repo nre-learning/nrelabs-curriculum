@@ -12,7 +12,7 @@ services:
     tty: true
     stdin_open: true
     ports:
-      - "22"
+      - "2222:22"
       - "830"
     environment:
       - ID=vmx1
@@ -33,8 +33,19 @@ services:
     build:
       context: ..
       dockerfile: lesson-1/Dockerfile-jupyter
+    volumes:
+      - $HOME/.ssh/:/home/jovyan/.ssh/:ro
     ports:
-      - "8888"
+      - "8888:8888"
+
+    # lesson-1_vmx1_1.lesson-1_net-0
+
+    # Very important that the containers in these compose files are on the same networks, so we can reference via hostname and not
+    # worry about IPs baked into notebooks
+    networks:
+      net-0:
+      net-1:
+      net-2:
 
 networks:
   net-0:
