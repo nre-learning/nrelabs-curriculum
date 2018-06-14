@@ -54,7 +54,7 @@
   hosts: all
   vars:
     ansible_ssh_private_key_file: ~/.ssh/google_compute_engine
-  gather_facts: yes
+  gather_facts: no
   tasks:
 
     - name: Create directory for vMX files
@@ -89,11 +89,22 @@
     - name: Download vMX eval
       shell: curl -o ~/myfiles/license-eval.txt https://www.juniper.net/us/en/dm/free-vmx-trial/E421992502.txt
 
+    - name: Remove nre-learning repo
+      shell: rm -rf ~/nre-learn
+
     - name: Clone nre-learning repo to instance
       git:
         repo: 'https://github.com/nre-learning/nre-learn'
         dest: ~/nre-learn/
         force: yes
+
+    # - name: Place external IP into xterm app
+    #   template:
+    #     src: /mytemplates/foo.j2
+    #     dest: /etc/file.conf
+    #     owner: bin
+    #     group: wheel
+    #     mode: 0644
 
     - name: Copy SSH keys to lessons dir
       shell: mkdir -p ~/nre-learn/lessons/ssh && cp ~/.ssh/id_rsa ~/nre-learn/lessons/ssh/id_rsa && cp -r ~/.ssh/id_rsa.pub ~/nre-learn/lessons/ssh/id_rsa.pub
