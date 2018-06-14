@@ -38,7 +38,8 @@ app.post('/terminals', function (req, res) {
 
       // Automatically SSH to vMX
       term.write('ssh root@lesson-1_vmx1_1.lesson-1_net-0\r');
-      term.write('cli\r')
+      term.write('clear\r');
+      term.write('cli\r');
 
   console.log('Created terminal with PID: ' + term.pid);
   terminals[term.pid] = term;
