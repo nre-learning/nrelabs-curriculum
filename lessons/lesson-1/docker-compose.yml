@@ -5,42 +5,42 @@ version: "3"
 
 services:
 
-  # vmx1:
-  #   # build: src/
-  #   build:
-  #     context: ..
-  #     dockerfile: lesson-1/vmx/Dockerfile
-  #   privileged: true
-  #   tty: true
-  #   stdin_open: true
-  #   ports:
-  #     - "2222:22"
-  #     - "830"
-  #   environment:
-  #     - ID=vmx1
-  #     - LICENSE=license-eval.txt
-  #     - IMAGE=junos-vmx-x86-64-18.1R1.9.qcow2
-  #     - PUBLICKEY=id_rsa.pub
-  #     - CONFIG=vmx1.conf
-  #   volumes:
-  #     # docker run --privileged --volume=$HOME/myfiles/:/u marcelwiget/vmx-docker-light
-  #     - $HOME/myfiles/:/u:ro
-  #     - /var/run/docker.sock:/var/run/docker.sock
-  #   networks:
-  #     net-0:
-  #     net-1:
-  #     net-2:
+  vmx1:
+    # build: src/
+    build:
+      context: ..
+      dockerfile: lesson-1/vmx1/Dockerfile
+    privileged: true
+    tty: true
+    stdin_open: true
+    ports:
+      - "2222:22"
+      - "830"
+    environment:
+      - ID=vmx1
+      - LICENSE=license-eval.txt
+      - IMAGE=junos-vmx-x86-64-18.1R1.9.qcow2
+      - PUBLICKEY=id_rsa.pub
+      - CONFIG=vmx1.conf
+    volumes:
+      # docker run --privileged --volume=$HOME/myfiles/:/u marcelwiget/vmx-docker-light
+      - $HOME/myfiles/:/u:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      net-0:
+      net-1:
+      net-2:
 
-  # notebook:
-  #   build:
-  #     context: ..
-  #     dockerfile: lesson-1/notebook/Dockerfile
-  #   ports:
-  #     - "8888:8888"
-  #   networks:
-  #     net-0:
-  #     net-1:
-  #     net-2:
+  notebook:
+    build:
+      context: ..
+      dockerfile: lesson-1/notebook/Dockerfile
+    ports:
+      - "8888:8888"
+    networks:
+      net-0:
+      net-1:
+      net-2:
 
   web:
     build:
