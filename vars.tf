@@ -12,3 +12,7 @@ variable "os" {
     "centos-7"    = "centos-cloud/centos-7-v20180523"
   }
 }
+
+variable "zone_domain_name" {
+  default = "networkreliability.engineering."
+}

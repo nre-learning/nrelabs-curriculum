@@ -7,10 +7,11 @@
   gather_facts: yes
   tasks:
     - name: Install Yum deps
-      yum:
-        name: "{{ item }}"
-        state: latest
-        update_cache: yes
+      shell: "yum install {{ item }}"
+    # yum:
+      #   name: "{{ item }}"
+      #   state: latest
+      #   update_cache: yes
       with_items:
         - epel-release
         - python-pip
@@ -18,21 +19,21 @@
     
     # sudo yum upgrade python*
   
-    - name: Install pip deps
-      pip:
-        name: "{{ item }}"
-      with_items:
-        - docker-compose
+    # - name: Install pip deps
+    #   pip:
+    #     name: "{{ item }}"
+    #   with_items:
+    #     - docker-compose
 
     # TODO should only do this if not installed.
-    - name: Install Docker
-      shell: curl -fsSL https://get.docker.com/ | sh
+    # - name: Install Docker
+    #   shell: curl -fsSL https://get.docker.com/ | sh
 
-    - name: Start Docker
-      shell: "{{ item }}"
-      with_items:
-        - systemctl enable docker
-        - systemctl start docker
+    # - name: Start Docker
+    #   shell: "{{ item }}"
+    #   with_items:
+    #     - systemctl enable docker
+    #     - systemctl start docker
 
     # TODO NOT currently persistent across reboots. Need to do this.
     # echo "loop" | sudo tee /etc/modules-load.d/loop.conf   -----maybe?
@@ -43,12 +44,18 @@
     - name: Load loop kernel module
       shell: modprobe loop
 
-    - name: Monkey-patch docker-py
-      shell: "{{ item }}"
-      with_items:
-      # - pip uninstall docker-py --no-cache-dir
-      # - pip install docker==3.1.4
-      - pip install docker
+    # This caused problems installing contrail since docker-py is already installed, and we also installed docker.
+    # need to probably redo this and only install docker-py
+    # and monky patch it the way you were going to
+    #
+    # - name: Monkey-patch docker-py
+    #   shell: "{{ item }}"
+    #   with_items:
+    #   - pip uninstall docker-py --no-cache-dir
+    #   - pip install docker==3.1.4
+    #   - pip install logconfig
+    #   - pip install docker
+
 
 - name: Prep instances
   hosts: all
@@ -66,11 +73,11 @@
     - stat: path=~/myfiles/junos-vmx-x86-64-18.1R1.9.qcow2
       register: image_exists
       
-    - name: Copy vMX image to instance (please be patient)
-      copy:
-        src: ./junos-vmx-x86-64-18.1R1.9.qcow2
-        dest: ~/myfiles/junos-vmx-x86-64-18.1R1.9.qcow2
-      when: image_exists.stat.exists == False
+    # - name: Copy vMX image to instance (please be patient)
+    #   copy:
+    #     src: ./junos-vmx-x86-64-18.1R1.9.qcow2
+    #     dest: ~/myfiles/junos-vmx-x86-64-18.1R1.9.qcow2
+    #   when: image_exists.stat.exists == False
 
     - stat: path=~/.ssh/id_rsa.pub
       register: ssh_key_exists
@@ -82,9 +89,9 @@
     - stat: path=~/myfiles/id_rsa.pub
       register: ssh_key_copied
 
-    - name: Copy public SSH key to vMX
-      shell: cp ~/.ssh/id_rsa.pub ~/myfiles
-      when: ssh_key_copied.stat.exists == False
+    # - name: Copy public SSH key to vMX
+    #   shell: cp ~/.ssh/id_rsa.pub ~/myfiles
+    #   when: ssh_key_copied.stat.exists == False
 
     - name: Download vMX eval
       shell: curl -o ~/myfiles/license-eval.txt https://www.juniper.net/us/en/dm/free-vmx-trial/E421992502.txt

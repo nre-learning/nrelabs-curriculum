@@ -1,0 +1,37 @@
+provider_config:
+  bms:
+    service_account_email: nre-svcaccount@nre-learning-6db61dad.iam.gserviceaccount.com
+    credentials_file: ~/client_secret_708413169496-ln5eisidgspn4t81pka4k31sqcu4nh3q.apps.googleusercontent.com.json # TODO need to figure out how to generate this with gcloud or terraform. You gen'd this with the GCP console http://libcloud.readthedocs.io/en/latest/_modules/libcloud/common/google.html
+    project_id: nre-learning-6db61dad
+    ssh_user: mierdin
+    machine_type: n1-standard-4
+    image: centos-7
+    network: default-internal
+    subnetwork: default-internal
+    zone: us-west1-a
+    disk_size: 50
+instances:
+  tf-controller0:
+    provider: bms
+    roles:
+      config_database:
+      config:
+      control:
+      analytics_database:
+      analytics:
+      webui:
+      k8s_master:
+  tf-compute0:
+    provider: bms
+    roles:
+      vrouter:
+      k8s_node:
+  tf-compute1:
+    provider: bms
+    roles:
+      vrouter:
+      k8s_node:
+contrail_configuration:
+  CONTAINER_REGISTRY: opencontrailnightly
+  CONTRAIL_VERSION: master-75
+  UPGRADE_KERNEL: true

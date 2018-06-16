@@ -78,8 +78,10 @@ Time to run ansible:
 
 ```
 gcloud compute config-ssh
-cat terraform.tfstate | grep '.*_nat_ip.*\|.*tags\.[0-9][0-9].*' | cut -d':' -f2 | awk '{print $1}' | cut -d'"' -f2 >| hosts
-ansible-playbook -i hosts prepinstances.yml
+ansible-playbook -i inventory.yml prepinstances.yml
+ansible-playbook -e orchestrator=kubernetes -i inventory.yml contrail-ansible-deployer/playbooks/configure_instances.yml
+# This installs k8s AND TF.
+ansible-playbook -e orchestrator=kubernetes -i inventory.yml  contrail-ansible-deployer/playbooks/install_contrail.yml
 ```
 
 > The Ansible playbook assumes you extracted the vMX image downloaded earlier to `./junos-vmx-x86-64-18.1R1.9.qcow2` and will take care of copying it to the instance(s).
@@ -150,8 +152,31 @@ https://www.juniper.net/documentation/en_US/contrail4.1/topics/concept/kubernete
 http://dougbtv.com/nfvpe/2017/02/22/multus-cni/
 Question is, can we do multiple interfaces with contrail too?
 
+https://medium.com/google-cloud/understanding-kubernetes-networking-pods-7117dd28727
+
 Need to secure jupyter notebooks
 https://jupyter-notebook.readthedocs.io/en/stable/public_server.html
 That's also useful for embedding somewhere
 
 > **ABSOLUTELY NOTHING IS SECURED** - need to do this.
+
+
+- [ ] Need to add k8s and contrail setup
+- [ ] Also add DNS resolution so you don't have to fuck with IP addresses any more
+
+
+
+
+# Maybe need?
+
+Install libcloud:
+
+```
+virtualenv -p python3 venv && source venv/bin/activate
+pip install apache-libcloud pycrypto
+```
+
+```
+gcloud iam service-accounts keys create ~/ansible-gcloud.json \
+  --iam-account ansible-sa@$(gcloud projects list | grep nre-learning | awk '{print $1}').iam.gserviceaccount.com
+```
