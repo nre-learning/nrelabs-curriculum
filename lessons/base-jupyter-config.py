@@ -7,4 +7,4 @@ c.NotebookApp.password = ''
 # c.NotebookApp.password_required = False
 
 # For embedding inside other pages
-c.NotebookApp.tornado_settings = { 'headers': { 'Content-Security-Policy': "frame-ancestors 'self' http://tf-controller01.labs.networkreliability.engineering" } }
+c.NotebookApp.tornado_settings = { 'headers': { 'Content-Security-Policy': "frame-ancestors 'self' http://tf-controller0.labs.networkreliability.engineering:9090/" } }
