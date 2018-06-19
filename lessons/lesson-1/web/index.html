@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Example NRE app</title>
+    <link rel="stylesheet" href="/build/xterm.css" />
+    <link rel="stylesheet" href="/build/addons/fullscreen/fullscreen.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.1/es6-promise.auto.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js"></script>
+  </head>
+  <body>
+    <h1 style="color: #2D2E2C">Example NRE Exercise</h1>
+    <div>
+      <div style="float: left; width: 48%; height: 500px;">
+        <iframe src="http://tf-controller0.labs.networkreliability.engineering:8888/notebooks/work/lesson1.ipynb" width="100%" height="100%" scrolling="yes"></iframe>
+      </div>
+      <div style="float: left; width: 48%; height: 500px;">
+        <iframe src="http://tf-controller0.labs.networkreliability.engineering:3123/" width="100%" height="100%" scrolling="yes"></iframe>
+      </div>
+    </div>
+    <hr/>
+    <p><strong>Attention:</strong> The demo is a barebones implementation and is designed for the development and evaluation of the NRE labs only. Exposing the demo to the public as is would introduce security risks for the host.</p>
+    <script src="dist/bundle.js" defer ></script>
+  </body>
+</html>
