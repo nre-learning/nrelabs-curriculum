@@ -58,6 +58,13 @@ services:
       net-1:
       net-2:
 
+  web:
+    build:
+      context: ..
+      dockerfile: lesson-1/web/Dockerfile
+    ports:
+      - 9090:90
+
 networks:
   net-0:
   net-1:

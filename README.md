@@ -88,7 +88,7 @@ ansible-playbook -i inventory.yml prepinstances.yml
 Optionally, you can run this to provide `sudo`-less docker access:
 
 ```
-gcloud compute ssh tf-controller01 -- 'sudo usermod -aG docker $USER'
+gcloud compute ssh tf-controller0 -- 'sudo usermod -aG docker $USER'
 ```
 
 > You'll see `Connection to <ip> closed.`, this is normal
@@ -96,12 +96,13 @@ gcloud compute ssh tf-controller01 -- 'sudo usermod -aG docker $USER'
 Now, let's SSH into our new instance:
 
 ```
-gcloud compute ssh tf-controller01
+gcloud compute ssh tf-controller0
 ```
 
 Finally, you should be able to run the docker-compose lab:
 
 ```
+sudo pip install docker-compose
 cd ~/nre-learn/lessons/lesson-1
 docker-compose up -d --build
 ```
