@@ -9,11 +9,56 @@ resource "google_dns_managed_zone" "primary_zone" {
   ]
 }
 
+resource "google_dns_record_set" "nre_ns" {
+  name    = "${google_dns_managed_zone.primary_zone.dns_name}"
+  type    = "NS"
+  ttl     = 300
+  project = "${google_project.project.project_id}"
+
+  depends_on = [
+    "google_dns_managed_zone.primary_zone",
+  ]
+
+  managed_zone = "${google_dns_managed_zone.primary_zone.name}"
+
+  rrdatas = [
+    "ns-cloud-b1.googledomains.com.",
+    "ns-cloud-b2.googledomains.com.",
+    "ns-cloud-b3.googledomains.com.",
+    "ns-cloud-b4.googledomains.com.",
+  ]
+}
+
+resource "google_dns_record_set" "github_pages" {
+  name    = "${google_dns_managed_zone.primary_zone.dns_name}"
+  type    = "A"
+  ttl     = 300
+  project = "${google_project.project.project_id}"
+
+  depends_on = [
+    "google_dns_managed_zone.primary_zone",
+  ]
+
+  managed_zone = "${google_dns_managed_zone.primary_zone.name}"
+
+  rrdatas = [
+    "185.199.108.153",
+    "185.199.109.153",
+    "185.199.110.153",
+    "185.199.111.153",
+  ]
+}
+
 resource "google_dns_record_set" "labs" {
   name    = "labs.${google_dns_managed_zone.primary_zone.dns_name}"
   type    = "A"
-  ttl     = 60
+  ttl     = 300
   project = "${google_project.project.project_id}"
+
+  depends_on = [
+    "google_dns_managed_zone.primary_zone",
+    "google_compute_instance.tf-controller",
+  ]
 
   managed_zone = "${google_dns_managed_zone.primary_zone.name}"
 
@@ -28,8 +73,13 @@ resource "google_dns_record_set" "labs" {
 resource "google_dns_record_set" "tf-controller0" {
   name    = "tf-controller0.labs.${google_dns_managed_zone.primary_zone.dns_name}"
   type    = "A"
-  ttl     = 60
+  ttl     = 300
   project = "${google_project.project.project_id}"
+
+  depends_on = [
+    "google_dns_managed_zone.primary_zone",
+    "google_compute_instance.tf-controller",
+  ]
 
   managed_zone = "${google_dns_managed_zone.primary_zone.name}"
 
@@ -41,8 +91,13 @@ resource "google_dns_record_set" "tf-controller0" {
 resource "google_dns_record_set" "tf-compute0" {
   name    = "tf-compute0.labs.${google_dns_managed_zone.primary_zone.dns_name}"
   type    = "A"
-  ttl     = 60
+  ttl     = 300
   project = "${google_project.project.project_id}"
+
+  depends_on = [
+    "google_dns_managed_zone.primary_zone",
+    "google_compute_instance.tf-compute",
+  ]
 
   managed_zone = "${google_dns_managed_zone.primary_zone.name}"
 
@@ -54,8 +109,13 @@ resource "google_dns_record_set" "tf-compute0" {
 resource "google_dns_record_set" "tf-compute1" {
   name    = "tf-compute1.labs.${google_dns_managed_zone.primary_zone.dns_name}"
   type    = "A"
-  ttl     = 60
+  ttl     = 300
   project = "${google_project.project.project_id}"
+
+  depends_on = [
+    "google_dns_managed_zone.primary_zone",
+    "google_compute_instance.tf-compute",
+  ]
 
   managed_zone = "${google_dns_managed_zone.primary_zone.name}"
 

@@ -33,5 +33,5 @@ instances:
       k8s_node:
 contrail_configuration:
   CONTAINER_REGISTRY: opencontrailnightly
-  CONTRAIL_VERSION: master-75
+  CONTRAIL_VERSION: master-144
   UPGRADE_KERNEL: true

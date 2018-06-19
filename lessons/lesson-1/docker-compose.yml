@@ -24,7 +24,7 @@ services:
       - CONFIG=vmx1.conf
     volumes:
       # docker run --privileged --volume=$HOME/myfiles/:/u marcelwiget/vmx-docker-light
-      - $HOME/myfiles/:/u:ro
+      - /home/mierdin/myfiles/:/u:ro
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
       net-0:
@@ -42,16 +42,16 @@ services:
       net-1:
       net-2:
 
-  web:
+  xterm:
     build:
       context: ..
-      dockerfile: lesson-1/web/Dockerfile
+      dockerfile: lesson-1/xterm/Dockerfile
     volumes:
       # Should bake this into the image if possible
       # - ../../xterm.js/demo:/usr/src/app/demo
       - $HOME/.ssh/:/root/.ssh/:rw
     ports:
-      - 3000:3000
+      - 3123:3000
     command: ["npm", "start"]
     networks:
       net-0:

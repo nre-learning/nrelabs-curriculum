@@ -1,7 +1,7 @@
 localhost:
   hosts:
     localhost:
-      config_file: ../../configinstances.yaml
+      config_file: ../../_ansible_contrail_config.yaml
       connection: local
       ansible_connection: local
       python_interpreter: python

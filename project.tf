@@ -23,9 +23,12 @@ resource "google_project" "project" {
 resource "google_project_services" "project" {
   project = "${google_project.project.project_id}"
 
+  // Services to allow in this project. These are the APIs that are enabled for this project.
   services = [
     "compute.googleapis.com",
     "oslogin.googleapis.com",
+    "iam.googleapis.com",
+    "dns.googleapis.com",
   ]
 }
 

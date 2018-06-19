@@ -1,13 +1,13 @@
 ---
 - name: Prep instances (sudo)
-  hosts: all
+  hosts: container_hosts
   become: yes
   vars:
     ansible_ssh_private_key_file: ~/.ssh/google_compute_engine
   gather_facts: yes
   tasks:
     - name: Install Yum deps
-      shell: "yum install {{ item }}"
+      shell: "yum install -y {{ item }}"
     # yum:
       #   name: "{{ item }}"
       #   state: latest
@@ -16,7 +16,7 @@
         - epel-release
         - python-pip
         - git
-    
+
     # sudo yum upgrade python*
   
     # - name: Install pip deps
@@ -34,6 +34,8 @@
     #   with_items:
     #     - systemctl enable docker
     #     - systemctl start docker
+
+    #TODO configure sudoless docker
 
     # TODO NOT currently persistent across reboots. Need to do this.
     # echo "loop" | sudo tee /etc/modules-load.d/loop.conf   -----maybe?
@@ -57,8 +59,12 @@
     #   - pip install docker
 
 
-- name: Prep instances
-  hosts: all
+# We are doing this in a separate play becuase for now, we don't need to copy
+# the image to all of our hosts, since we're not running kubernetes yet. Just
+# a single host is fine for now.
+- name: Copy vMX image
+  hosts: container_hosts
+  hosts: tf-controller0.labs.networkreliability.engineering
   vars:
     ansible_ssh_private_key_file: ~/.ssh/google_compute_engine
   gather_facts: no
@@ -72,15 +78,28 @@
 
     - stat: path=~/myfiles/junos-vmx-x86-64-18.1R1.9.qcow2
       register: image_exists
-      
-    # - name: Copy vMX image to instance (please be patient)
-    #   copy:
-    #     src: ./junos-vmx-x86-64-18.1R1.9.qcow2
-    #     dest: ~/myfiles/junos-vmx-x86-64-18.1R1.9.qcow2
-    #   when: image_exists.stat.exists == False
+
+    - debug:
+        msg: "{{ image_exists }}"
+
+    - name: Copy vMX image to instance (please be patient)
+      copy:
+        src: ./junos-vmx-x86-64-18.1R1.9.qcow2
+        dest: ~/myfiles/junos-vmx-x86-64-18.1R1.9.qcow2
+      when: image_exists.stat.exists == False
+
+- name: Finish prep
+  hosts: container_hosts
+  vars:
+    ansible_ssh_private_key_file: ~/.ssh/google_compute_engine
+  gather_facts: no
+  tasks:
 
     - stat: path=~/.ssh/id_rsa.pub
       register: ssh_key_exists
+
+    - debug:
+        msg: "{{ ssh_key_exists }}"
 
     - name: Copy public SSH key to vMX
       shell: ssh-keygen -b 2048 -t rsa -f ~/.ssh/id_rsa -q -N ""
@@ -89,9 +108,12 @@
     - stat: path=~/myfiles/id_rsa.pub
       register: ssh_key_copied
 
-    # - name: Copy public SSH key to vMX
-    #   shell: cp ~/.ssh/id_rsa.pub ~/myfiles
-    #   when: ssh_key_copied.stat.exists == False
+    - debug:
+        msg: "{{ ssh_key_copied }}"
+
+    - name: Copy public SSH key to vMX
+      shell: cp ~/.ssh/id_rsa.pub ~/myfiles
+      when: ssh_key_copied.stat.exists == False
 
     - name: Download vMX eval
       shell: curl -o ~/myfiles/license-eval.txt https://www.juniper.net/us/en/dm/free-vmx-trial/E421992502.txt
@@ -105,13 +127,20 @@
         dest: ~/nre-learn/
         force: yes
 
-    # - name: Place external IP into xterm app
-    #   template:
-    #     src: /mytemplates/foo.j2
-    #     dest: /etc/file.conf
-    #     owner: bin
-    #     group: wheel
-    #     mode: 0644
-
     - name: Copy SSH keys to lessons dir
       shell: mkdir -p ~/nre-learn/lessons/ssh && cp ~/.ssh/id_rsa ~/nre-learn/lessons/ssh/id_rsa && cp -r ~/.ssh/id_rsa.pub ~/nre-learn/lessons/ssh/id_rsa.pub
+
+- name: Install Kubernetes, Tungsten, and dependencies
+  hosts: container_hosts
+  become: yes
+  vars:
+    orchestrator: kubernetes
+  gather_facts: yes
+  roles:
+    - configure_instances
+    - { role: install_contrail, when: skip_contrail is not defined or not skip_contrail|bool }
+  vars_files:
+    - "_ansible_contrail_config.yaml"
+  environment:
+    - https_proxy: "{{ contrail_configuration.HTTPS_PROXY | default('') }}"
+    - http_proxy: "{{ contrail_configuration.HTTP_PROXY | default('') }}"

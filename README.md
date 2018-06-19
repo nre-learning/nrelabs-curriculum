@@ -74,14 +74,11 @@ Once our new image exists, we can apply the remaining terraform resources:
 terraform apply -auto-approve
 ```
 
-Time to run ansible:
+At this point, you should wait a few minutes for DNS to update. Once the hostnames referenced in the Ansible inventory are resolving correctly, we can run the playbook that will configure the instances and install kubernetes and tungsten.
 
 ```
 gcloud compute config-ssh
 ansible-playbook -i inventory.yml prepinstances.yml
-ansible-playbook -e orchestrator=kubernetes -i inventory.yml contrail-ansible-deployer/playbooks/configure_instances.yml
-# This installs k8s AND TF.
-ansible-playbook -e orchestrator=kubernetes -i inventory.yml  contrail-ansible-deployer/playbooks/install_contrail.yml
 ```
 
 > The Ansible playbook assumes you extracted the vMX image downloaded earlier to `./junos-vmx-x86-64-18.1R1.9.qcow2` and will take care of copying it to the instance(s).
@@ -158,12 +155,9 @@ Need to secure jupyter notebooks
 https://jupyter-notebook.readthedocs.io/en/stable/public_server.html
 That's also useful for embedding somewhere
 
-> **ABSOLUTELY NOTHING IS SECURED** - need to do this.
+**ABSOLUTELY NOTHING IS SECURED** - need to do this.
 
-
-- [ ] Need to add k8s and contrail setup
-- [ ] Also add DNS resolution so you don't have to fuck with IP addresses any more
-
+All of our customizations to the contrail ansible stuff should be maintained outside the repo. Need to work to get the submodule back on track with upstream, rather than try to maintain a fork long-term.
 
 
 
@@ -173,10 +167,23 @@ Install libcloud:
 
 ```
 virtualenv -p python3 venv && source venv/bin/activate
-pip install apache-libcloud pycrypto
+pip3 install -r requirements.txt
 ```
 
 ```
 gcloud iam service-accounts keys create ~/ansible-gcloud.json \
   --iam-account ansible-sa@$(gcloud projects list | grep nre-learning | awk '{print $1}').iam.gserviceaccount.com
 ```
+
+
+
+```
+mkdir -p $HOME/.kube && cp -u /etc/kubernetes/admin.conf $HOME/.kube/config && chown -R $(id -u):$(id -g) $HOME/.kube
+```
+
+
+# Accessing Resources
+
+Resources below:
+
+- [Contrail UI](https://tf-controller0.labs.networkreliability.engineering:8143/)
