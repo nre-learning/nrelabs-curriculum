@@ -10,6 +10,7 @@ provider_config:
     subnetwork: default-internal
     zone: us-west1-a
     disk_size: 50
+    ntpserver: pool.ntp.org
 instances:
   tf-controller0:
     provider: bms
@@ -33,5 +34,17 @@ instances:
       k8s_node:
 contrail_configuration:
   CONTAINER_REGISTRY: opencontrailnightly
-  CONTRAIL_VERSION: master-144
+  # CONTRAIL_VERSION: master-75
+  CONTRAIL_VERSION: latest
   UPGRADE_KERNEL: true
+  CONTROLLER_NODES: 10.138.0.5
+  CLOUD_ORCHESTRATOR: kubernetes
+  KUBERNETES_API_SERVER: 10.138.0.5
+  ANALYTICSDB_NODES: 10.138.0.5
+  WEBUI_NODES: 10.138.0.5
+  ANALYTICS_NODES: 10.138.0.5
+  CONTROL_NODES: 10.138.0.5
+  CONFIGDB_NODES: 10.138.0.5
+  CONFIG_NODES: 10.138.0.5
+  # If we stick with this, we have to reserve this for the controller(s) in the VPC
+  DATABASE_NODEMGR__DEFAULTS__minimum_diskGB: 50

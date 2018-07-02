@@ -1,4 +1,38 @@
 ---
+
+- name: Setup DB
+  hosts: db_hosts
+  vars:
+    ansible_ssh_private_key_file: ~/.ssh/google_compute_engine
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: Install postgres
+      package:
+        name: "{{ item }}"
+        state: latest
+      with_items:
+        - postgresql-server
+        - postgresql-contrib
+
+    - name: Init DB cluster
+      shell: postgresql-setup initdb
+      ignore_errors: yes
+
+    - name: Install pg_hba config
+      template:
+        src: templates/pg_hba.conf.j2
+        dest:  /var/lib/pgsql/data/pg_hba.conf
+        owner: postgres
+        group: postgres
+        mode: 0600
+
+    - name: Enable and restart postgresql
+      service:
+        name: postgresql
+        state: restarted
+        enabled: yes
+
 - name: Prep instances (sudo)
   hosts: container_hosts
   become: yes
@@ -6,16 +40,15 @@
     ansible_ssh_private_key_file: ~/.ssh/google_compute_engine
   gather_facts: yes
   tasks:
-    - name: Install Yum deps
-      shell: "yum install -y {{ item }}"
-    # yum:
-      #   name: "{{ item }}"
-      #   state: latest
-      #   update_cache: yes
+    - name: Install deps
+      package:
+        name: "{{ item }}"
+        state: latest
       with_items:
         - epel-release
         - python-pip
         - git
+        - htop
 
     # sudo yum upgrade python*
   
@@ -58,13 +91,12 @@
     #   - pip install logconfig
     #   - pip install docker
 
-
 # We are doing this in a separate play becuase for now, we don't need to copy
 # the image to all of our hosts, since we're not running kubernetes yet. Just
 # a single host is fine for now.
 - name: Copy vMX image
   hosts: container_hosts
-  hosts: tf-controller0.labs.networkreliability.engineering
+  # hosts: tf-controller0.labs.networkreliability.engineering
   vars:
     ansible_ssh_private_key_file: ~/.ssh/google_compute_engine
   gather_facts: no
@@ -82,11 +114,11 @@
     - debug:
         msg: "{{ image_exists }}"
 
-    - name: Copy vMX image to instance (please be patient)
-      copy:
-        src: ./junos-vmx-x86-64-18.1R1.9.qcow2
-        dest: ~/myfiles/junos-vmx-x86-64-18.1R1.9.qcow2
-      when: image_exists.stat.exists == False
+    # - name: Copy vMX image to instance (please be patient)
+    #   copy:
+    #     src: ./junos-vmx-x86-64-18.1R1.9.qcow2
+    #     dest: ~/myfiles/junos-vmx-x86-64-18.1R1.9.qcow2
+    #   when: image_exists.stat.exists == False
 
 - name: Finish prep
   hosts: container_hosts
@@ -112,23 +144,23 @@
         msg: "{{ ssh_key_copied }}"
 
     - name: Copy public SSH key to vMX
-      shell: cp ~/.ssh/id_rsa.pub ~/myfiles
+      shell: cp ~/.ssh/id_rsa.pub ~/myfiles/id_rsa.pub
       when: ssh_key_copied.stat.exists == False
 
     - name: Download vMX eval
       shell: curl -o ~/myfiles/license-eval.txt https://www.juniper.net/us/en/dm/free-vmx-trial/E421992502.txt
 
-    - name: Remove nre-learning repo
-      shell: rm -rf ~/nre-learn
+    - name: Remove antidote repo
+      shell: rm -rf ~/antidote
 
-    - name: Clone nre-learning repo to instance
+    - name: Clone antidote repo to instance
       git:
-        repo: 'https://github.com/nre-learning/nre-learn'
-        dest: ~/nre-learn/
+        repo: 'https://github.com/nre-learning/antidote'
+        dest: ~/antidote/
         force: yes
 
     - name: Copy SSH keys to lessons dir
-      shell: mkdir -p ~/nre-learn/lessons/ssh && cp ~/.ssh/id_rsa ~/nre-learn/lessons/ssh/id_rsa && cp -r ~/.ssh/id_rsa.pub ~/nre-learn/lessons/ssh/id_rsa.pub
+      shell: mkdir -p ~/antidote/lessons/ssh && cp ~/.ssh/id_rsa ~/antidote/lessons/ssh/id_rsa && cp -r ~/.ssh/id_rsa.pub ~/antidote/lessons/ssh/id_rsa.pub
 
 - name: Install Kubernetes, Tungsten, and dependencies
   hosts: container_hosts
@@ -144,3 +176,7 @@
   environment:
     - https_proxy: "{{ contrail_configuration.HTTPS_PROXY | default('') }}"
     - http_proxy: "{{ contrail_configuration.HTTP_PROXY | default('') }}"
+
+
+
+
