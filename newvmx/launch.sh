@@ -435,4 +435,12 @@ qemu-system-x86_64 -M pc $ENABLEKVM -smp 1 -m $VCPMEM \
   -device virtio-net-pci,netdev=tc0,mac=$mymac \
   -netdev type=tap,id=tc1,ifname=em1,script=no,downscript=no \
   -device virtio-net-pci,netdev=tc1 \
+  -netdev type=tap,id=tc2,ifname=em2,script=no,downscript=no \
+  -device virtio-net-pci,netdev=tc2 \
+  -netdev type=tap,id=tc3,ifname=em3,script=no,downscript=no \
+  -device virtio-net-pci,netdev=tc3 \
+  -netdev type=tap,id=tc4,ifname=em4,script=no,downscript=no \
+  -device virtio-net-pci,netdev=tc4 \
+  -netdev type=tap,id=tc5,ifname=em5,script=no,downscript=no \
+  -device virtio-net-pci,netdev=tc5 \
   -nographic || true
