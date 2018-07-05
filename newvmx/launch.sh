@@ -379,24 +379,6 @@ brctl addif br-net1 em3
 brctl addif br-net0 net1
 brctl show
 
-brctl addbr br-net2
-ip addr add 131.0.0.16/8 dev br-net2
-ip link set up br-net2
-ip tuntap add dev em4 mode tap
-ifconfig em4 up promisc
-brctl addif br-net2 em4
-brctl addif br-net0 net2
-brctl show
-
-brctl addbr br-net3
-ip addr add 132.0.0.16/8 dev br-net3
-ip link set up br-net3
-ip tuntap add dev em5 mode tap
-ifconfig em5 up promisc
-brctl addif br-net3 em5
-brctl addif br-net0 net3
-brctl show
-
 
 CFGDRIVE=/tmp/configdrive.qcow2
 echo "Creating config drive $CFGDRIVE"
@@ -442,8 +424,4 @@ qemu-system-x86_64 -M pc $ENABLEKVM -smp 1 -m $VCPMEM \
   -device virtio-net-pci,netdev=tc2 \
   -netdev type=tap,id=tc3,ifname=em3,script=no,downscript=no \
   -device virtio-net-pci,netdev=tc3 \
-  -netdev type=tap,id=tc4,ifname=em4,script=no,downscript=no \
-  -device virtio-net-pci,netdev=tc4 \
-  -netdev type=tap,id=tc5,ifname=em5,script=no,downscript=no \
-  -device virtio-net-pci,netdev=tc5 \
   -nographic || true
