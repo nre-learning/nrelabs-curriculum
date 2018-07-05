@@ -376,6 +376,7 @@ ip link set up br-net1
 ip tuntap add dev em3 mode tap
 ifconfig em3 up promisc
 brctl addif br-net1 em3
+brctl addif br-net0 net1
 brctl show
 
 brctl addbr br-net2
@@ -384,6 +385,7 @@ ip link set up br-net2
 ip tuntap add dev em4 mode tap
 ifconfig em4 up promisc
 brctl addif br-net2 em4
+brctl addif br-net0 net2
 brctl show
 
 brctl addbr br-net3
@@ -392,6 +394,7 @@ ip link set up br-net3
 ip tuntap add dev em5 mode tap
 ifconfig em5 up promisc
 brctl addif br-net3 em5
+brctl addif br-net0 net3
 brctl show
 
 
