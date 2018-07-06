@@ -1,0 +1,33 @@
+apiVersion: "kubernetes.com/v1"
+kind: Network
+metadata:
+  name: flannel-12
+plugin: flannel
+args: '[
+        {
+                "type": "flannel",
+                "name": "flannel-12",
+                "subnetFile": "/run/flannel/subnet1.env",
+                "dataDir": "/var/lib/cni/flannel/1",
+                "delegate": {
+                        "bridge": "kbr12",
+                        "isDefaultGateway": true
+                }
+        }
+]'
+
+[mierdin@tf-compute0 ~]$ cat /run/flannel/subnet.env
+FLANNEL_NETWORK=10.244.0.0/16
+FLANNEL_SUBNET=10.244.0.1/24
+FLANNEL_MTU=1410
+FLANNEL_IPMASQ=true
+[mierdin@tf-compute0 ~]$ cat /run/flannel/subnet1.env
+FLANNEL_NETWORK=10.245.0.0/16
+FLANNEL_SUBNET=10.245.0.1/24
+FLANNEL_MTU=1410
+FLANNEL_IPMASQ=true
+[mierdin@tf-compute0 ~]$ cat /run/flannel/subnet2.env
+FLANNEL_NETWORK=10.246.0.0/16
+FLANNEL_SUBNET=10.246.0.1/24
+FLANNEL_MTU=1410
+FLANNEL_IPMASQ=true
