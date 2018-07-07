@@ -1,66 +1,36 @@
-resource "google_dns_managed_zone" "primary_zone" {
-  name        = "nre"
-  dns_name    = "${var.zone_domain_name}"
-  description = "Main zone for NRE labs"
-  project     = "${google_project.project.project_id}"
+# For this terraform project, we only want to manage the "labs.networkreliability.engineering"
+# subdomain. The root domain is managed outside of this, and we don't want
+# the github page to be taken down when this is rebuilt.
 
-  depends_on = [
-    "google_project_services.project",
-  ]
-}
+# resource "google_dns_managed_zone" "labs_zone" {
+#   name        = "labs"
+#   dns_name    = "labs.${var.zone_domain_name}"
+#   description = "Main zone for NRE labs"
 
-resource "google_dns_record_set" "nre_ns" {
-  name    = "${google_dns_managed_zone.primary_zone.dns_name}"
-  type    = "NS"
-  ttl     = 300
-  project = "${google_project.project.project_id}"
+#   # project     = "${google_project.project.project_id}"
+#   project = "networkreliabilityengineering"
 
-  depends_on = [
-    "google_dns_managed_zone.primary_zone",
-  ]
-
-  managed_zone = "${google_dns_managed_zone.primary_zone.name}"
-
-  rrdatas = [
-    "ns-cloud-b1.googledomains.com.",
-    "ns-cloud-b2.googledomains.com.",
-    "ns-cloud-b3.googledomains.com.",
-    "ns-cloud-b4.googledomains.com.",
-  ]
-}
-
-resource "google_dns_record_set" "github_pages" {
-  name    = "${google_dns_managed_zone.primary_zone.dns_name}"
-  type    = "A"
-  ttl     = 300
-  project = "${google_project.project.project_id}"
-
-  depends_on = [
-    "google_dns_managed_zone.primary_zone",
-  ]
-
-  managed_zone = "${google_dns_managed_zone.primary_zone.name}"
-
-  rrdatas = [
-    "185.199.108.153",
-    "185.199.109.153",
-    "185.199.110.153",
-    "185.199.111.153",
-  ]
-}
+#   depends_on = [
+#     "google_project_services.project",
+#   ]
+# }
 
 resource "google_dns_record_set" "labs" {
-  name    = "labs.${google_dns_managed_zone.primary_zone.dns_name}"
-  type    = "A"
-  ttl     = 300
-  project = "${google_project.project.project_id}"
+  # name = "${google_dns_managed_zone.labs_zone.dns_name}"
+  name = "labs.networkreliability.engineering."
+  type = "A"
+  ttl  = 300
+
+  # project = "${google_project.project.project_id}"
+  project = "networkreliabilityengineering"
 
   depends_on = [
-    "google_dns_managed_zone.primary_zone",
+    # "google_dns_managed_zone.labs_zone",
     "google_compute_instance.tf-controller",
   ]
 
-  managed_zone = "${google_dns_managed_zone.primary_zone.name}"
+  # managed_zone = "${google_dns_managed_zone.labs_zone.name}"
+  managed_zone = "nre"
 
   // Setting to tf-controller0 for now, but in the future this should point to a web application
   // for overviewing the labs.
@@ -71,17 +41,21 @@ resource "google_dns_record_set" "labs" {
 
 // TODO(mierdin): needs to be more dynamic, based on how many instances were spun up, rather than explicit references to instance names
 resource "google_dns_record_set" "tf-controller0" {
-  name    = "tf-controller0.labs.${google_dns_managed_zone.primary_zone.dns_name}"
-  type    = "A"
-  ttl     = 300
-  project = "${google_project.project.project_id}"
+  # name = "tf-controller0.${google_dns_managed_zone.labs_zone.dns_name}"
+  name = "tf-controller0.labs.networkreliability.engineering."
+  type = "A"
+  ttl  = 300
+
+  # project = "${google_project.project.project_id}"
+  project = "networkreliabilityengineering"
 
   depends_on = [
-    "google_dns_managed_zone.primary_zone",
+    # "google_dns_managed_zone.labs_zone",
     "google_compute_instance.tf-controller",
   ]
 
-  managed_zone = "${google_dns_managed_zone.primary_zone.name}"
+  # managed_zone = "${google_dns_managed_zone.labs_zone.name}"
+  managed_zone = "nre"
 
   rrdatas = [
     "${google_compute_instance.tf-controller.0.network_interface.0.access_config.0.assigned_nat_ip}",
@@ -89,17 +63,21 @@ resource "google_dns_record_set" "tf-controller0" {
 }
 
 resource "google_dns_record_set" "tf-compute0" {
-  name    = "tf-compute0.labs.${google_dns_managed_zone.primary_zone.dns_name}"
-  type    = "A"
-  ttl     = 300
-  project = "${google_project.project.project_id}"
+  # name = "tf-compute0.${google_dns_managed_zone.labs_zone.dns_name}"
+  name = "tf-compute0.labs.networkreliability.engineering."
+  type = "A"
+  ttl  = 300
+
+  # project = "${google_project.project.project_id}"
+  project = "networkreliabilityengineering"
 
   depends_on = [
-    "google_dns_managed_zone.primary_zone",
+    # "google_dns_managed_zone.labs_zone",
     "google_compute_instance.tf-compute",
   ]
 
-  managed_zone = "${google_dns_managed_zone.primary_zone.name}"
+  # managed_zone = "${google_dns_managed_zone.labs_zone.name}"
+  managed_zone = "nre"
 
   rrdatas = [
     "${google_compute_instance.tf-compute.0.network_interface.0.access_config.0.assigned_nat_ip}",
@@ -107,19 +85,45 @@ resource "google_dns_record_set" "tf-compute0" {
 }
 
 resource "google_dns_record_set" "tf-compute1" {
-  name    = "tf-compute1.labs.${google_dns_managed_zone.primary_zone.dns_name}"
-  type    = "A"
-  ttl     = 300
-  project = "${google_project.project.project_id}"
+  # name = "tf-compute1.${google_dns_managed_zone.labs_zone.dns_name}"
+  name = "tf-compute1.labs.networkreliability.engineering."
+  type = "A"
+  ttl  = 300
+
+  # project = "${google_project.project.project_id}"
+  project = "networkreliabilityengineering"
 
   depends_on = [
-    "google_dns_managed_zone.primary_zone",
+    # "google_dns_managed_zone.labs_zone",
     "google_compute_instance.tf-compute",
   ]
 
-  managed_zone = "${google_dns_managed_zone.primary_zone.name}"
+  # managed_zone = "${google_dns_managed_zone.labs_zone.name}"
+  managed_zone = "nre"
 
   rrdatas = [
     "${google_compute_instance.tf-compute.1.network_interface.0.access_config.0.assigned_nat_ip}",
+  ]
+}
+
+resource "google_dns_record_set" "db0" {
+  # name = "db0.${google_dns_managed_zone.labs_zone.dns_name}"
+  name = "db0.labs.networkreliability.engineering."
+  type = "A"
+  ttl  = 300
+
+  # project = "${google_project.project.project_id}"
+  project = "networkreliabilityengineering"
+
+  depends_on = [
+    # "google_dns_managed_zone.labs_zone",
+    "google_compute_instance.db",
+  ]
+
+  # managed_zone = "${google_dns_managed_zone.labs_zone.name}"
+  managed_zone = "nre"
+
+  rrdatas = [
+    "${google_compute_instance.db.0.network_interface.0.access_config.0.assigned_nat_ip}",
   ]
 }

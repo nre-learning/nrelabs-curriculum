@@ -16,3 +16,9 @@ variable "os" {
 variable "zone_domain_name" {
   default = "networkreliability.engineering."
 }
+
+variable "project" {
+  default = "networkreliabilityengineering"
+
+  # default = "${google_project_services.project.project}"
+}

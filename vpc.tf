@@ -1,7 +1,11 @@
 resource "google_compute_firewall" "supersecure" {
   name = "supersecure"
 
-  project = "${google_project_services.project.project}"
+  project = "${var.project}"
+
+  depends_on = [
+    "google_project_services.project",
+  ]
 
   network = "${google_compute_network.default-internal.name}"
 
@@ -13,7 +17,12 @@ resource "google_compute_firewall" "supersecure" {
 }
 
 resource "google_compute_network" "default-internal" {
-  name                    = "default-internal"
-  project                 = "${google_project_services.project.project}"
+  name = "default-internal"
+
+  depends_on = [
+    "google_project_services.project",
+  ]
+
+  project                 = "${var.project}"
   auto_create_subnetworks = "true"
 }
