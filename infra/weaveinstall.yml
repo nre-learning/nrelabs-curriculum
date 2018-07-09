@@ -170,8 +170,8 @@ items:
                     fieldRef:
                       apiVersion: v1
                       fieldPath: spec.nodeName
-              image: 'mierdin/weave:latest'
-              imagePullPolicy: Never
+              image: 'mierdin/weave-kube:latest'
+              imagePullPolicy: Always
               livenessProbe:
                 httpGet:
                   host: 127.0.0.1
