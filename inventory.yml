@@ -1,55 +1,17 @@
-localhost:
-  hosts:
-    localhost:
-      config_file: ../../_ansible_contrail_config.yaml
-      connection: local
-      ansible_connection: local
-      python_interpreter: python
-      ansible_python_interpreter: python
-      instances:
-        tf-controller0:
-          ip: tf-controller0.labs.networkreliability.engineering
-          private_ip: tf-controller0
-          provider: bms
-          roles:
-            config_database:
-            config:
-            control:
-            analytics_database:
-            analytics:
-            webui:
-            k8s_master:
-        tf-compute0:
-          ip: tf-compute0.labs.networkreliability.engineering
-          private_ip: tf-controller0
-          provider: bms
-          roles:
-            vrouter:
-            k8s_node:
-        tf-compute1:
-          ip: tf-compute1.labs.networkreliability.engineering
-          private_ip: tf-controller1
-          provider: bms
-          roles:
-            vrouter:
-            k8s_node:
-
-container_hosts:
-  hosts:
-    tf-compute0.labs.networkreliability.engineering:
-      instance_name: tf-compute0
-      private_ip: tf-compute0
-    tf-compute1.labs.networkreliability.engineering:
-      instance_name: tf-compute1
-      private_ip: tf-compute1
-    tf-controller0.labs.networkreliability.engineering:
-      instance_name: tf-controller0
-      private_ip: tf-controller0
+all:
   vars:
     ansible_ssh_private_key_file: ~/.ssh/google_compute_engine
+
+kubernetes_hosts:
+  children:
+    kubernetes_master:
+      hosts:
+        tf-controller0.labs.networkreliability.engineering:
+    kubernetes_workers:
+      hosts:
+        tf-compute0.labs.networkreliability.engineering:
+        tf-compute1.labs.networkreliability.engineering:
 
 db_hosts:
   hosts:
     db0.labs.networkreliability.engineering:
-  vars:
-    ansible_ssh_private_key_file: ~/.ssh/google_compute_engine
