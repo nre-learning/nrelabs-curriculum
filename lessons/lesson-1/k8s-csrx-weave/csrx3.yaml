@@ -2,30 +2,21 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: csrx2
+  name: csrx3
   # namespace: lesson1-abcdef
   labels:
     antidote_lab: "1"
     lab_instance: "1"
-    podname: "csrx2"
+    podname: "csrx3"
   annotations:
     networks: '[
-        { "name": "weave-mgmt" }
+        { "name": "weave-mgmt" },
+        { "name": "weave-23" },
+        { "name": "weave-31" }
     ]'
 spec:
-  # # https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
-  # affinity:
-  #     podAffinity:
-  #       requiredDuringSchedulingIgnoredDuringExecution:
-  #       - labelSelector:
-  #           matchExpressions:
-  #           - key: antidote_lab
-  #             operator: In
-  #             values:
-  #             - "1"
-  #         topologyKey: kubernetes.io/hostname
   containers:
-  - name: csrx1
+  - name: csrx3
     image: csrx:18.1R1.9
     securityContext:
       privileged: true
@@ -41,12 +32,12 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: csrx2-service
+  name: csrx3-service
 spec:
   selector:
     antidote_lab: "1"
     lab_instance: "1"
-    podname: "csrx2"
+    podname: "csrx3"
   ports:
     - name: ssh
       port: 22

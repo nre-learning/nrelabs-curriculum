@@ -170,7 +170,7 @@ items:
                     fieldRef:
                       apiVersion: v1
                       fieldPath: spec.nodeName
-              image: 'weaveworks/weave-kube:latest'
+              image: 'mierdin/weave:latest'
               imagePullPolicy: Never
               livenessProbe:
                 httpGet:
