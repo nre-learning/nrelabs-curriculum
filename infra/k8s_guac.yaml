@@ -1,0 +1,47 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: guacamole
+  labels:
+    app: guacamole
+    antidote_role: infra
+spec:
+  containers:
+  - name: some-guacd
+    image: guacamole/guacd
+    ports:
+    - containerPort: 4822
+  - name: some-guacamole
+    image: guacamole/guacamole
+    env:
+    - name: GUACD_HOSTNAME
+      value: "127.0.0.1"
+    - name: GUACD_PORT
+      value: "4822"
+    - name: POSTGRES_HOSTNAME
+      value: "db0.labs.networkreliability.engineering"
+    # - name: POSTGRES_PORT
+    #   value: "5432"
+    - name: POSTGRES_DATABASE
+      value: "guacamole_db"
+    - name: POSTGRES_USER
+      value: "guacuser"
+    - name: POSTGRES_PASSWORD
+      value: "guac"
+    ports:
+    - containerPort: 8080
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: guac-service
+  namespace: default
+spec:
+  selector:
+    app: guacamole
+  ports:
+    - port: 8085
+      targetPort: 8080
+  type: LoadBalancer
