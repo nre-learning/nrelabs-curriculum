@@ -1,0 +1,20 @@
+apiVersion: "kubernetes.com/v1"
+kind: Network
+metadata:
+  name: weave-lab1
+plugin: weave-net
+args: '[
+        {
+                "name": "weave-lab1",
+                "type": "weave-net",
+                "hairpinMode": false,
+                "delegate": {
+                        "hairpinMode": false
+                }
+        }
+]'
+
+# Some lessons learned:
+# - Don't try to use a bridge other than "weave"
+# - Don't try to do your own IPAM. The k8s services don't select the right interface,
+#   and it doesn't look like weave can expose networks that you impose your own IPAM on
