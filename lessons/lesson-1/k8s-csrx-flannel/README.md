@@ -15,3 +15,13 @@ set /coreos.com/network/config '{ "Network": "10.5.0.0/16", "Backend": {"Type": 
 ```
 
 kubectl get ds --namespace=kube-system kube-flannel-ds
+
+
+          try the blow,may be useful
+          edit /etc/kubernetes/manifests/kube-controller-manager.yaml
+          at command ,add
+          --allocate-node-cidrs=true
+          --cluster-cidr=10.244.0.0/16
+          then,reload all kubelets
+
+Fixing the above will generate the subnets file for you.

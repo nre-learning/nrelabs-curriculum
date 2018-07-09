@@ -10,20 +10,20 @@ metadata:
     podname: "csrx2"
   annotations:
     networks: '[
-        { "name": "flannel-mgmt" }
+        { "name": "weave-mgmt" }
     ]'
 spec:
-  # https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
-  affinity:
-      podAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-        - labelSelector:
-            matchExpressions:
-            - key: antidote_lab
-              operator: In
-              values:
-              - "1"
-          topologyKey: kubernetes.io/hostname
+  # # https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+  # affinity:
+  #     podAffinity:
+  #       requiredDuringSchedulingIgnoredDuringExecution:
+  #       - labelSelector:
+  #           matchExpressions:
+  #           - key: antidote_lab
+  #             operator: In
+  #             values:
+  #             - "1"
+  #         topologyKey: kubernetes.io/hostname
   containers:
   - name: csrx1
     image: csrx:18.1R1.9

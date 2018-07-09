@@ -1,13 +1,14 @@
 apiVersion: "kubernetes.com/v1"
 kind: Network
 metadata:
-  name: weave12
+  name: weave-mgmt
 plugin: weave-net
 args: '[
         {
                 "name": "weave-mgmt",
                 "type": "weave-net",
-                "hairpinMode": true,
+                "hairpinMode": false,
+                "bridge": "weave-brmgmt",
                 "ipam": {
                         "type": "host-local",
                         "subnet": "10.1.1.0/24",
@@ -17,6 +18,10 @@ args: '[
                                 { "dst": "0.0.0.0/0" }
                         ],
                         "gateway": "10.1.1.1"
+                },
+                "delegate": {
+                        "hairpinMode": false,
+                        "bridge": "weave-brmgmt"
                 }
         }
 ]'
