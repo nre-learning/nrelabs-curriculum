@@ -1,11 +1,33 @@
 ---
+apiVersion: "kubernetes.com/v1"
+kind: Network
+metadata:
+  name: guac-net
+plugin: weave-net
+args: '[
+        {
+                "name": "guac-net",
+                "type": "weave-net",
+                "hairpinMode": false,
+                "delegate": {
+                        "hairpinMode": false
+                }
+        }
+]'
+
+
+---
 apiVersion: v1
 kind: Pod
 metadata:
-  name: guacamole
+  name: guac
   labels:
     app: guacamole
     antidote_role: infra
+  annotations:
+    networks: '[
+        { "name": "guac-net" }
+    ]'
 spec:
   containers:
   - name: some-guacd
@@ -20,13 +42,14 @@ spec:
     - name: GUACD_PORT
       value: "4822"
     - name: POSTGRES_HOSTNAME
-      value: "db0.labs.networkreliability.engineering"
+      # value: "db0.labs.networkreliability.engineering"
+      value: 10.138.0.3
     # - name: POSTGRES_PORT
     #   value: "5432"
     - name: POSTGRES_DATABASE
       value: "guacamole_db"
     - name: POSTGRES_USER
-      value: "guacuser"
+      value: "guac_user"
     - name: POSTGRES_PASSWORD
       value: "guac"
     ports:
@@ -44,4 +67,4 @@ spec:
   ports:
     - port: 8085
       targetPort: 8080
-  type: LoadBalancer
+  type: NodePort
