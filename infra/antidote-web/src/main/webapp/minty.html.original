@@ -1,111 +1,28 @@
-<!DOCTYPE HTML>
-<html>
-
-    <head>
-        <title>Guacamole Tutorial</title>
-        <meta charset="utf-8">
-        <title>Bootswatch: Minty</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <link rel="stylesheet" href="css/bootstrap.css" media="screen">
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-        <script>
-    
-            // need to verify this is correct   
-         var _gaq = _gaq || [];
-          _gaq.push(['_setAccount', 'UA-120903857-1']);
-          _gaq.push(['_setDomainName', "networkreliability.engineering"]);
-            _gaq.push(['_setAllowLinker', true]);
-          _gaq.push(['_trackPageview']);
-    
-         (function() {
-           var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-           ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-           var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-         })();
-    
-        </script>
-    </head>
-
-    <body>
-        <p>Hello World</p>
-
-            <!-- Load guacamole-common-js -->
-            <script type="text/javascript" src="guacamole-common-js/all.min.js"></script>
-    
-            <!-- Main terminal window -->
-            <div id="display"></div>
-    
-            <!-- Initialize guac client -->
-            <script type="text/javascript" src="js/guacamole-client.js"></script>
-    </body>
-
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="utf-8">
+    <title>Bootswatch: Minty</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="bootstrap.css" media="screen">
+    <link rel="stylesheet" href="custom.min.css">
+    <script>
 
+     var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-120903857-1']);
+      _gaq.push(['_setDomainName', "labs.networkreliability.engineering"]);
+        _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+
+     (function() {
+       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+     })();
+
+    </script>
   </head>
   <body>
     <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
