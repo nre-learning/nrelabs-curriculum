@@ -18,7 +18,7 @@ resource "google_compute_instance" "tf-controller" {
   }
 
   # project = "${google_project_services.project.project}"
-  project = "networkreliabilityengineering"
+  project = "${var.project}"
   tags    = []
 
   boot_disk {
@@ -36,10 +36,53 @@ resource "google_compute_instance" "tf-controller" {
   }
 }
 
-resource "google_compute_instance" "tf-compute" {
-  count = 2
+data "google_compute_region_instance_group" "computes" {
+  # name      = "computes"
+  project   = "${var.project}"
+  region    = "${var.region}"
+  self_link = "${google_compute_region_instance_group_manager.computes.instance_group}"
+}
 
-  name = "tf-compute${count.index}"
+resource "google_compute_region_instance_group_manager" "computes" {
+  name    = "computes"
+  project = "${var.project}"
+
+  base_instance_name = "a-compute"
+  instance_template  = "${google_compute_instance_template.antidote-computes.self_link}"
+  region             = "${var.region}"
+
+  named_port {
+    name = "nrehttp"
+    port = 30001
+  }
+
+  # named_port {
+  #   name = "https"
+  #   port = 30002
+  # }
+}
+
+resource "google_compute_region_autoscaler" "computes-scaler" {
+  name    = "computes-scaler"
+  project = "${var.project}"
+  region  = "${var.region}"
+  target  = "${google_compute_region_instance_group_manager.computes.self_link}"
+
+  autoscaling_policy = {
+    max_replicas    = 2
+    min_replicas    = 2
+    cooldown_period = 60
+
+    cpu_utilization {
+      target = 0.8
+    }
+  }
+}
+
+resource "google_compute_instance_template" "antidote-computes" {
+  name        = "antidote-computes"
+  project     = "${var.project}"
+  description = "This template is used to create antidote compute instances."
 
   # 8 vCPUs, 30GB RAM
   # machine_type = "n1-standard-8"
@@ -49,17 +92,18 @@ resource "google_compute_instance" "tf-compute" {
     "google_project_services.project",
     "google_compute_image.nested-vm-image",
   ]
-  zone = "${var.zone}"
-  metadata {
-    hostname = "tf-compute${count.index}"
-  }
-  # project = "${google_project_services.project.project}"
-  project = "networkreliabilityengineering"
-  tags    = []
-  boot_disk {
-    initialize_params {
-      image = "nested-vm-image"
-    }
+  instance_description = "antidote compute instance"
+  can_ip_forward       = true
+
+  # scheduling {
+  #   automatic_restart   = true
+  #   on_host_maintenance = "MIGRATE"
+  # }
+
+  disk {
+    source_image = "nested-vm-image"
+    auto_delete  = true
+    boot         = true
   }
   network_interface {
     network       = "${google_compute_network.default-internal.name}"
@@ -88,8 +132,7 @@ resource "google_compute_instance" "db" {
 
   boot_disk {
     initialize_params {
-      # image = "${var.os["centos-7"]}"
-      image = "${google_compute_image.nested-vm-image.self_link}"
+      image = "${var.os["centos-7"]}"
     }
   }
 

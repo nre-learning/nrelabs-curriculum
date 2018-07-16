@@ -8,7 +8,7 @@
 #   description = "Main zone for NRE labs"
 
 #   # project     = "${google_project.project.project_id}"
-#   project = "networkreliabilityengineering"
+# project = "${var.project}"
 
 #   depends_on = [
 #     "google_project_services.project",
@@ -32,10 +32,9 @@ resource "google_dns_record_set" "labs" {
   # managed_zone = "${google_dns_managed_zone.labs_zone.name}"
   managed_zone = "nre"
 
-  // Setting to tf-controller0 for now, but in the future this should point to a web application
-  // for overviewing the labs.
+  # Primary ingress for the NRE labs, so we're directing to the static IP provisioned for our load balancer.
   rrdatas = [
-    "${google_compute_instance.tf-controller.0.network_interface.0.access_config.0.assigned_nat_ip}",
+    "${google_compute_global_address.nrefrontend.address}",
   ]
 }
 
@@ -47,7 +46,7 @@ resource "google_dns_record_set" "tf-controller0" {
   ttl  = 300
 
   # project = "${google_project.project.project_id}"
-  project = "networkreliabilityengineering"
+  project = "${var.project}"
 
   depends_on = [
     # "google_dns_managed_zone.labs_zone",
@@ -62,50 +61,6 @@ resource "google_dns_record_set" "tf-controller0" {
   ]
 }
 
-resource "google_dns_record_set" "tf-compute0" {
-  # name = "tf-compute0.${google_dns_managed_zone.labs_zone.dns_name}"
-  name = "tf-compute0.labs.networkreliability.engineering."
-  type = "A"
-  ttl  = 300
-
-  # project = "${google_project.project.project_id}"
-  project = "networkreliabilityengineering"
-
-  depends_on = [
-    # "google_dns_managed_zone.labs_zone",
-    "google_compute_instance.tf-compute",
-  ]
-
-  # managed_zone = "${google_dns_managed_zone.labs_zone.name}"
-  managed_zone = "nre"
-
-  rrdatas = [
-    "${google_compute_instance.tf-compute.0.network_interface.0.access_config.0.assigned_nat_ip}",
-  ]
-}
-
-resource "google_dns_record_set" "tf-compute1" {
-  # name = "tf-compute1.${google_dns_managed_zone.labs_zone.dns_name}"
-  name = "tf-compute1.labs.networkreliability.engineering."
-  type = "A"
-  ttl  = 300
-
-  # project = "${google_project.project.project_id}"
-  project = "networkreliabilityengineering"
-
-  depends_on = [
-    # "google_dns_managed_zone.labs_zone",
-    "google_compute_instance.tf-compute",
-  ]
-
-  # managed_zone = "${google_dns_managed_zone.labs_zone.name}"
-  managed_zone = "nre"
-
-  rrdatas = [
-    "${google_compute_instance.tf-compute.1.network_interface.0.access_config.0.assigned_nat_ip}",
-  ]
-}
-
 resource "google_dns_record_set" "db0" {
   # name = "db0.${google_dns_managed_zone.labs_zone.dns_name}"
   name = "db0.labs.networkreliability.engineering."
@@ -113,7 +68,7 @@ resource "google_dns_record_set" "db0" {
   ttl  = 300
 
   # project = "${google_project.project.project_id}"
-  project = "networkreliabilityengineering"
+  project = "${var.project}"
 
   depends_on = [
     # "google_dns_managed_zone.labs_zone",
