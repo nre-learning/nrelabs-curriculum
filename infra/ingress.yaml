@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: antidote-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.org/ssl-services: "antidote-web-service"
+    ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  tls:
+    - hosts:
+      - labs.networkreliability.engineering
+      secretName: tls-certificate
+  rules:
+  - host: labs.networkreliability.engineering
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: antidote-web-service
+          servicePort: 8080
+      - path: /jupyter
+        backend:
+          serviceName: jupyter-service
+          servicePort: 8888
+
+# https://hackernoon.com/setting-up-nginx-ingress-on-kubernetes-2b733d8d2f45
+# https://danielfm.me/posts/painless-nginx-ingress.html
+

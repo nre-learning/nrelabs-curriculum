@@ -56,10 +56,10 @@ resource "google_compute_region_instance_group_manager" "computes" {
     port = 30001
   }
 
-  # named_port {
-  #   name = "https"
-  #   port = 30002
-  # }
+  named_port {
+    name = "https"
+    port = 30002
+  }
 }
 
 resource "google_compute_region_autoscaler" "computes-scaler" {

@@ -1,0 +1,166 @@
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: ingress
+rules:
+- apiGroups:
+  - ""
+  - "extensions"
+  resources:
+  - configmaps
+  - secrets
+  - services
+  - endpoints
+  - ingresses
+  - nodes
+  verbs:
+  - list
+  - watch
+- apiGroups:
+  - "extensions"
+  resources:
+  - ingresses
+  verbs:
+  - get
+- apiGroups:
+  - ""
+  resources:
+  - events
+  verbs:
+  - create
+- apiGroups:
+  - "extensions"
+  resources:
+  - ingresses/status
+  verbs:
+  - update
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: ingress-ns
+  namespace: default
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  - configmaps
+  verbs:
+  - list
+- apiGroups:
+  - ""
+  resources:
+  - services
+  - configmaps
+  verbs:
+  - get
+- apiGroups:
+  - ""
+  resources:
+  - endpoints
+  verbs:
+  - get
+  - create
+  - update
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: ingress-ns-binding
+  namespace: default
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: ingress-ns
+subjects:
+  - kind: ServiceAccount
+    name: default
+    namespace: default
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: ingress-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: ingress
+subjects:
+  - kind: ServiceAccount
+    name: default
+    namespace: default
+
+---
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata: 
+  name: nginx-ingress-controller
+spec: 
+  replicas: 1
+  revisionHistoryLimit: 3
+  template: 
+    metadata: 
+      labels: 
+        k8s-app: nginx-ingress-lb
+    spec: 
+      containers: 
+        - args: 
+            - /nginx-ingress-controller
+            - "--default-backend-service=$(POD_NAMESPACE)/antidote-web-service"
+            - "--default-ssl-certificate=$(POD_NAMESPACE)/tls-certificate"
+          env: 
+            - name: POD_NAME
+              valueFrom: 
+                fieldRef: 
+                  fieldPath: metadata.name
+            - name: POD_NAMESPACE
+              valueFrom: 
+                fieldRef: 
+                  fieldPath: metadata.namespace
+          image: "gcr.io/google_containers/nginx-ingress-controller:0.9.0-beta.5"
+          imagePullPolicy: Always
+          livenessProbe: 
+            httpGet: 
+              path: /healthz
+              port: 10254
+              scheme: HTTP
+            initialDelaySeconds: 10
+            timeoutSeconds: 5
+          name: nginx-ingress-controller
+          ports: 
+            - containerPort: 80
+              name: http
+              protocol: TCP
+            - containerPort: 443
+              name: https
+              protocol: TCP
+          volumeMounts: 
+            - mountPath: /etc/nginx-ssl/dhparam
+              name: tls-dhparam-vol
+      terminationGracePeriodSeconds: 60
+      volumes: 
+        - name: tls-dhparam-vol
+          secret: 
+            secretName: tls-dhparam
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-ingress
+spec:
+  type: NodePort
+  ports:
+  - name: http
+    port: 30001
+    nodePort: 30001
+    targetPort: http
+  - name: https
+    port: 30002
+    nodePort: 30002
+    targetPort: https
+  selector:
+    k8s-app: nginx-ingress-lb

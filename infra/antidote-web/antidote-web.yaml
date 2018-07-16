@@ -1,40 +1,18 @@
 ---
-apiVersion: "kubernetes.com/v1"
-kind: Network
-metadata:
-  name: guac-net
-plugin: weave-net
-args: '[
-        {
-                "name": "guac-net",
-                "type": "weave-net",
-                "hairpinMode": false,
-                "delegate": {
-                        "hairpinMode": false
-                }
-        }
-]'
-
-
----
 apiVersion: v1
 kind: Pod
 metadata:
-  name: guac
+  name: antidote-web
   labels:
-    app: guacamole
+    app: antidote-web
     antidote_role: infra
-  annotations:
-    networks: '[
-        { "name": "guac-net" }
-    ]'
 spec:
   containers:
-  - name: some-guacd
+  - name: guacd
     image: guacamole/guacd
     ports:
     - containerPort: 4822
-  - name: some-guacamole
+  - name: guacamole
     image: guacamole/guacamole
     env:
     - name: GUACD_HOSTNAME
@@ -42,8 +20,7 @@ spec:
     - name: GUACD_PORT
       value: "4822"
     - name: POSTGRES_HOSTNAME
-      # value: "db0.labs.networkreliability.engineering"
-      value: 10.138.0.3
+      value: "db0.labs.networkreliability.engineering"
     # - name: POSTGRES_PORT
     #   value: "5432"
     - name: POSTGRES_DATABASE
@@ -54,17 +31,24 @@ spec:
       value: "guac"
     ports:
     - containerPort: 8080
+    volumeMounts:
+      - name: tomcat-users
+        mountPath: /usr/local/tomcat/conf/tomcat-users.xml
+  volumes:
+    - name: tomcat-users
+      hostPath:
+        path: /home/mierdin/tomcat-users.xml
 
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: guac-service
+  name: antidote-web-service
   namespace: default
 spec:
   selector:
-    app: guacamole
+    app: antidote-web
   ports:
-    - port: 8085
+    - port: 8080
       targetPort: 8080
-  type: NodePort
+  type: LoadBalancer

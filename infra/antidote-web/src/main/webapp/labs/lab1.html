@@ -63,9 +63,9 @@
     </div>
 
     <!-- For some reason the header is hiding behind the navbar. Giving it a little boost -->
-    <div style="padding: 75px;"></div>
+    <div style="padding: 40px;"></div>
 
-    <div class="container">
+    <div class="container" style="height: 700px; overflow: auto;">
         <div class="bs-docs-section">
             <div class="row">
                 <div class="col-lg-12">
@@ -79,6 +79,19 @@
             <div class="row text-center">
                 <div class="col" style="overflow: auto;">
                     <h2>CSRX</h2>
+
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">cSRX1</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">cSRX2</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">cSRX3</a>
+                        </li>
+                    </ul>
+
                     <!-- Display -->
                     <div id="display"></div>
 
@@ -146,9 +159,10 @@
 
         </div>
 
-        <!-- <div class="text-center">
-            <button type="button" class="btn btn-primary">Start Lab</button>
-        </div> -->
+        <div class="text-center">
+                <!-- <button type="button" class="btn btn-primary">Start Lab</button> -->
+                <button type="button" class="btn btn-primary btn-lg btn-block">Show Topology</button>
+        </div>
 
         <!-- <footer id="footer">
             <div class="row">

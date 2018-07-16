@@ -1,0 +1,28 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: jupyter
+  labels:
+    app: jupyter
+    antidote_role: infra
+spec:
+  containers:
+  - name: jupyter
+    image: antidotelabs/jupyter
+    ports:
+    - containerPort: 8888
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: jupyter-service
+  namespace: default
+spec:
+  selector:
+    app: jupyter
+  ports:
+    - port: 8888
+      targetPort: 8888
+  type: LoadBalancer
