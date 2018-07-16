@@ -15,6 +15,7 @@
     </properties>
 
     <build>
+        <finalName>antidote-web</finalName>
         <plugins>
 
             <!-- Compile using Java 1.8 -->

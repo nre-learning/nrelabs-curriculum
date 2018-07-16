@@ -25,12 +25,31 @@
         })();
 
     </script>
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/icons/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
 </head>
 
 <body>
-    <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+    <div class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
-            <a href="#" class="navbar-brand">NRE Labs</a>
+            <a href="https://labs.networkreliability.engineering" class="navbar-brand">
+                <img src="../images/nrelabs.png" style="width:48px;height:48px"> NRE Labs</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
                 aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -42,9 +61,9 @@
                             <span class="caret"></span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="labs">
-                            <a class="dropdown-item" href="labs/index.html">What are these?</a>
+                            <a class="dropdown-item" href="index.html">What are these?</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="labs/lab1.html">Lab 1 - Introduction</a>
+                            <a class="dropdown-item" href="lab1.html">Lab 1 - Introduction</a>
                         </div>
                     </li>
                     <li class="nav-item">
@@ -54,7 +73,7 @@
 
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="http://networkreliability.engineering">NRE Home</a>
+                        <a class="nav-link" href="https://networkreliability.engineering">NRE Home</a>
                     </li>
                 </ul>
 
@@ -151,7 +170,7 @@
                 </div>
                 <div class="col">
                     <h2>Jupyter Notebook</h2>
-                    <iframe src="http://tf-compute1.labs.networkreliability.engineering:30057/notebooks/work/lesson1.ipynb" width="100%" height="600px"
+                    <iframe src="https://labs.networkreliability.engineering/jupyter/notebooks/work/lesson1.ipynb" width="100%" height="600px"
                         frameborder="0" />
                 </div>
             </div>
@@ -160,31 +179,51 @@
         </div>
 
         <div class="text-center">
-                <!-- <button type="button" class="btn btn-primary">Start Lab</button> -->
-                <button type="button" class="btn btn-primary btn-lg btn-block">Show Topology</button>
+            <!-- <button type="button" class="btn btn-primary">Start Lab</button> -->
+            <button type="button" class="btn btn-primary btn-lg btn-block">Show Topology</button>
         </div>
 
-        <!-- <footer id="footer">
+        <footer id="footer">
             <div class="row">
-            <div class="col-lg-12">
+                <div class="col-lg-12">
 
-                <ul class="list-unstyled">
-                <li class="float-lg-right"><a href="#top">Back to top</a></li>
-                <li><a href="http://blog.bootswatch.com" onclick="pageTracker._link(this.href); return false;">Blog</a></li>
-                <li><a href="https://feeds.feedburner.com/bootswatch">RSS</a></li>
-                <li><a href="https://twitter.com/bootswatch">Twitter</a></li>
-                <li><a href="https://github.com/thomaspark/bootswatch/">GitHub</a></li>
-                <li><a href="../help/#api">API</a></li>
-                <li><a href="../help/#donate">Donate</a></li>
-                </ul>
-                <p>Made by <a href="http://thomaspark.co">Thomas Park</a>.</p>
-                <p>Code released under the <a href="https://github.com/thomaspark/bootswatch/blob/master/LICENSE">MIT License</a>.</p>
-                <p>Based on <a href="https://getbootstrap.com" rel="nofollow">Bootstrap</a>. Icons from <a href="http://fontawesome.io/" rel="nofollow">Font Awesome</a>. Web fonts from <a href="https://fonts.google.com/" rel="nofollow">Google</a>.</p>
+                    <!-- <ul class="list-unstyled">
+                            <li class="float-lg-right">
+                                <a href="#top">Back to top</a>
+                            </li>
+                            <li>
+                                <a href="http://blog.bootswatch.com" onclick="pageTracker._link(this.href); return false;">Blog</a>
+                            </li>
+                            <li>
+                                <a href="https://feeds.feedburner.com/bootswatch">RSS</a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/bootswatch">Twitter</a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/thomaspark/bootswatch/">GitHub</a>
+                            </li>
+                            <li>
+                                <a href="../help/#api">API</a>
+                            </li>
+                            <li>
+                                <a href="../help/#donate">Donate</a>
+                            </li>
+                        </ul> -->
 
+                    <p>Built by the
+                        <a href="https://github.com/orgs/nre-learning/people" target="_blank">NRE Learning Team</a> at
+                        <a href="https://www.juniper.net/us/en/solutions/automation/" target="_blank">Juniper Networks</a>.</p>
+                    <p>Theme by
+                        <a href="http://thomaspark.co">Thomas Park</a>. Theme code released under the
+                        <a href="https://github.com/thomaspark/bootswatch/blob/master/LICENSE">MIT License</a>.</p>
+                    <p>The
+                        <a href="https://github.com/nre-learning/antidote" target="_blank">Antidote Project</a> is published under Apache v2.</p>
+
+                </div>
             </div>
-            </div>
 
-        </footer> -->
+        </footer>
 
 
     </div>
