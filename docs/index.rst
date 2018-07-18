@@ -16,6 +16,7 @@ Welcome to antidote's documentation!
    coreservices.rst
    labscheduling.rst
    roadmap.rst
+   design.rst
 
 Indices and tables
 ==================
