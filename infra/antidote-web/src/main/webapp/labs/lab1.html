@@ -138,8 +138,23 @@
                             alert(error);
                         };
 
+                        // var tunnelDetails = {};
+                        // tunnelDetails.labNumber = "1";
+                        // tunnelDetails.labInstance = "1";
+                        // tunnelDetails.sessionId = "1";
+                        // tunnelDetails.entityId = "csrx1";
+
+                        var tunnelDetails = {
+                            labNumber: "1",
+                            labInstance: "1",
+                            sessionId: "1",
+                            entityId: "csrx1"
+                        };
+
+                        var params = 'csrx1';
+
                         // Connect
-                        guac.connect();
+                        guac.connect(params);
 
                         // Disconnect on close
                         window.onunload = function () {
@@ -170,7 +185,7 @@
                 </div>
                 <div class="col">
                     <h2>Jupyter Notebook</h2>
-                    <iframe src="https://labs.networkreliability.engineering/jupyter/notebooks/work/lesson1.ipynb" width="100%" height="600px"
+                    <iframe src="http://vip.labs.networkreliability.engineering:30008/notebooks/work/lesson1.ipynb" width="100%" height="600px"
                         frameborder="0" />
                 </div>
             </div>
