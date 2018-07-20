@@ -8,3 +8,5 @@ Also explain the GCE layout in general, and just mention terraform files after t
 .. image:: images/overallinfra.png
 
 Should also recreate the setup instructions from the README somewhere here, and point the README here.
+
+Need to explain network layout. From LB down to Pod.

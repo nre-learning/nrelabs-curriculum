@@ -5,6 +5,8 @@ Roadmap
 
 - Load balancing configuration
 - Redo everything's configuration now that DNS is fixed in k8s
+- provision on demand, and give popup in meantime // https://getbootstrap.com/docs/4.0/components/modal/
+- basic round robin load balancer for lab services. Just need a VIP to point to, and it does IP load balancing, not TCP
 
 # Post-v0.1 Feature Roadmap
 
