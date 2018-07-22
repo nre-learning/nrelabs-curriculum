@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="stylesheet" href="../css/bootstrap.css" media="screen">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/lablayout.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script>
@@ -82,121 +83,259 @@
     </div>
 
     <!-- For some reason the header is hiding behind the navbar. Giving it a little boost -->
-    <div style="padding: 40px;"></div>
+    <div style="padding: 20px;"></div>
 
-    <div class="container" style="height: 700px; overflow: auto;">
-        <div class="bs-docs-section">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="page-header">
-                        <h1 id="forms">Lab 1</h1>
-                        <p> In this lab we'll get an intro to the NRE labs.</p>
+    <div class="panel-container">
+
+        <div class="panel-left content resizable" style="transition: all 0s ease 0s; width: 894px;">
+
+            <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+
+                <header class="post-header">
+                    <h1 class="post-title" itemprop="name headline">Introduction to NRE</h1>
+                    <p class="post-meta">
+                        <time datetime="2017-12-07T00:00:00+00:00" itemprop="datePublished">Dec 7, 2017</time> •
+                        <span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+                            <span itemprop="name">@Mierdin</span>
+                        </span>
+                    </p>
+                    <blockquote>
+                        <strong></strong>
+                        <p>
+                            <strong>Time:</strong> Approximately 5 minutes</p>
+                    </blockquote>
+
+                </header>
+
+                <div class="post-content" itemprop="articleBody">
+                    <p>Hello World!</p>
+                </div>
+            </article>
+        </div>
+
+
+        <div class="splitter" style="touch-action: none;">
+        </div>
+
+        <div class="panel-right">
+            <span class="resize-warning">Navigate to the various devices or Jupyter notebooks in this lab via the tabs below.
+            </span>
+
+            <!-- <div class="term1">
+                    <input type="button" value="Log-in to access" class="btn btn-lg btn-primary">
+                </div>
+
+                <div class="term2"></div> -->
+
+            <div class="bs-component">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active show" data-toggle="tab" href="#csrx1">csrx1</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#csrx2">csrx2</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#csrx3">csrx3</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#jupyter">Jupyter</a>
+                    </li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                    <!-- profile -->
+                    <div class="tab-pane fade active show" id="csrx1">
+                        <!-- Display -->
+                        <div id="display1"></div>
+
+                        <!-- Guacamole JavaScript API -->
+                        <script type="text/javascript" src="../guacamole-common-js/all.min.js"></script>
+                        <!-- Init -->
+                        <script type="text/javascript"> /* <![CDATA[ */
+
+                            // Get display div from document
+                            var display1 = document.getElementById("display1");
+
+                            // Instantiate client, using an HTTP tunnel for communications.
+                            var guac1 = new Guacamole.Client(
+                                new Guacamole.HTTPTunnel("../tunnel")
+                            );
+
+                            // Add client to display div
+                            // var dis =  guac.getDisplay().getElement();
+                            // dis.getElementsByTagName("canvas")[0].style = "width:100px;"
+                            // dis.setAttribute("style", "width:100px");
+                            display1.appendChild(guac1.getDisplay().getElement());
+
+                            // Error handler
+                            guac1.onerror = function (error) {
+                                alert(error);
+                            };
+
+                            var params = 'csrx1';
+
+                            // Connect
+                            guac1.connect(params);
+
+                            // Disconnect on close
+                            window.onunload = function () {
+                                guac.disconnect();
+                            }
+
+                            // Mouse
+                            var mouse1 = new Guacamole.Mouse(guac1.getDisplay().getElement());
+
+                            mouse1.onmousedown =
+                                mouse1.onmouseup =
+                                mouse1.onmousemove = function (mouseState1) {
+                                    guac1.sendMouseState(mouseState1);
+                                };
+
+                            // Keyboard
+                            var keyboard1 = new Guacamole.Keyboard(document);
+
+                            keyboard1.onkeydown = function (keysym1) {
+                                guac1.sendKeyEvent(1, keysym1);
+                            };
+
+                            keyboard1.onkeyup = function (keysym1) {
+                                guac1.sendKeyEvent(0, keysym1);
+                            };
+
+                            /* ]]> */</script>
+                    </div>
+                    <div class="tab-pane fade" id="csrx2">
+                        <!-- Display -->
+                        <div id="display2"></div>
+
+                        <!-- Guacamole JavaScript API -->
+                        <script type="text/javascript" src="../guacamole-common-js/all.min.js"></script>
+                        <!-- Init -->
+                        <script type="text/javascript"> /* <![CDATA[ */
+
+                            // Get display div from document
+                            var display2 = document.getElementById("display2");
+
+                            // Instantiate client, using an HTTP tunnel for communications.
+                            var guac2 = new Guacamole.Client(
+                                new Guacamole.HTTPTunnel("../tunnel")
+                            );
+
+                            // Add client to display div
+                            // var dis =  guac.getDisplay().getElement();
+                            // dis.getElementsByTagName("canvas")[0].style = "width:100px;"
+                            // dis.setAttribute("style", "width:100px");
+                            display2.appendChild(guac2.getDisplay().getElement());
+
+                            // Error handler
+                            guac2.onerror = function (error) {
+                                alert(error);
+                            };
+
+                            var params = 'csrx2';
+
+                            // Connect
+                            guac2.connect(params);
+
+                            // Disconnect on close
+                            window.onunload = function () {
+                                guac2.disconnect();
+                            }
+
+                            // Mouse
+                            var mouse2 = new Guacamole.Mouse(guac2.getDisplay().getElement());
+
+                            mouse2.onmousedown =
+                                mouse2.onmouseup =
+                                mouse2.onmousemove = function (mouseState2) {
+                                    guac2.sendMouseState(mouseState2);
+                                };
+
+                            // Keyboard
+                            var keyboard2 = new Guacamole.Keyboard(document);
+
+                            keyboard2.onkeydown = function (keysym2) {
+                                guac2.sendKeyEvent(1, keysym2);
+                            };
+
+                            keyboard2.onkeyup = function (keysym2) {
+                                guac2.sendKeyEvent(0, keysym2);
+                            };
+
+                                 /* ]]> */</script>
+                    </div>
+                    <div class="tab-pane fade" id="csrx3">
+                        <!-- Display -->
+                        <div id="display3"></div>
+
+                        <!-- Guacamole JavaScript API -->
+                        <script type="text/javascript" src="../guacamole-common-js/all.min.js"></script>
+                        <!-- Init -->
+                        <script type="text/javascript"> /* <![CDATA[ */
+
+                            // Get display div from document
+                            var display3 = document.getElementById("display3");
+
+                            // Instantiate client, using an HTTP tunnel for communications.
+                            var guac3 = new Guacamole.Client(
+                                new Guacamole.HTTPTunnel("../tunnel")
+                            );
+
+                            // Add client to display div
+                            // var dis =  guac.getDisplay().getElement();
+                            // dis.getElementsByTagName("canvas")[0].style = "width:100px;"
+                            // dis.setAttribute("style", "width:100px");
+                            display3.appendChild(guac3.getDisplay().getElement());
+
+                            // Error handler
+                            guac3.onerror = function (error) {
+                                alert(error);
+                            };
+
+                            var params = 'csrx3';
+
+                            // Connect
+                            guac3.connect(params);
+
+                            // Disconnect on close
+                            window.onunload = function () {
+                                guac3.disconnect();
+                            }
+
+                            // Mouse
+                            var mouse3 = new Guacamole.Mouse(guac3.getDisplay().getElement());
+
+                            mouse3.onmousedown =
+                                mouse3.onmouseup =
+                                mouse3.onmousemove = function (mouseState3) {
+                                    guac3.sendMouseState(mouseState3);
+                                };
+
+                            // Keyboard
+                            var keyboard3 = new Guacamole.Keyboard(document);
+
+                            keyboard3.onkeydown = function (keysym3) {
+                                guac3.sendKeyEvent(1, keysym3);
+                            };
+
+                            keyboard3.onkeyup = function (keysym3) {
+                                guac3.sendKeyEvent(0, keysym3);
+                            };
+
+                                    /* ]]> */</script>
+                    </div>
+                    <div class="tab-pane fade" id="jupyter">
+                        <iframe src="http://vip.labs.networkreliability.engineering:30008/notebooks/work/lesson1.ipynb" width="100%" height="600px"
+                            frameborder="0" />
                     </div>
                 </div>
             </div>
 
-            <div class="row text-center">
-                <div class="col" style="overflow: auto;">
-                    <h2>CSRX</h2>
-
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">cSRX1</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">cSRX2</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">cSRX3</a>
-                        </li>
-                    </ul>
-
-                    <!-- Display -->
-                    <div id="display"></div>
-
-                    <!-- Guacamole JavaScript API -->
-                    <script type="text/javascript" src="../guacamole-common-js/all.min.js"></script>
-                    <!-- Init -->
-                    <script type="text/javascript"> /* <![CDATA[ */
-
-                        // Get display div from document
-                        var display = document.getElementById("display");
-
-                        // Instantiate client, using an HTTP tunnel for communications.
-                        var guac = new Guacamole.Client(
-                            new Guacamole.HTTPTunnel("../tunnel")
-                        );
-
-                        // Add client to display div
-                        // var dis =  guac.getDisplay().getElement();
-                        // dis.getElementsByTagName("canvas")[0].style = "width:100px;"
-                        // dis.setAttribute("style", "width:100px");
-                        display.appendChild(guac.getDisplay().getElement());
-
-                        // Error handler
-                        guac.onerror = function (error) {
-                            alert(error);
-                        };
-
-                        // var tunnelDetails = {};
-                        // tunnelDetails.labNumber = "1";
-                        // tunnelDetails.labInstance = "1";
-                        // tunnelDetails.sessionId = "1";
-                        // tunnelDetails.entityId = "csrx1";
-
-                        var tunnelDetails = {
-                            labNumber: "1",
-                            labInstance: "1",
-                            sessionId: "1",
-                            entityId: "csrx1"
-                        };
-
-                        var params = 'csrx1';
-
-                        // Connect
-                        guac.connect(params);
-
-                        // Disconnect on close
-                        window.onunload = function () {
-                            guac.disconnect();
-                        }
-
-                        // Mouse
-                        var mouse = new Guacamole.Mouse(guac.getDisplay().getElement());
-
-                        mouse.onmousedown =
-                            mouse.onmouseup =
-                            mouse.onmousemove = function (mouseState) {
-                                guac.sendMouseState(mouseState);
-                            };
-
-                        // Keyboard
-                        var keyboard = new Guacamole.Keyboard(document);
-
-                        keyboard.onkeydown = function (keysym) {
-                            guac.sendKeyEvent(1, keysym);
-                        };
-
-                        keyboard.onkeyup = function (keysym) {
-                            guac.sendKeyEvent(0, keysym);
-                        };
-
-        /* ]]> */</script>
-                </div>
-                <div class="col">
-                    <h2>Jupyter Notebook</h2>
-                    <iframe src="http://vip.labs.networkreliability.engineering:30008/notebooks/work/lesson1.ipynb" width="100%" height="600px"
-                        frameborder="0" />
-                </div>
-            </div>
-
-
         </div>
+    </div>
 
-        <div class="text-center">
-            <!-- <button type="button" class="btn btn-primary">Start Lab</button> -->
-            <button type="button" class="btn btn-primary btn-lg btn-block">Show Topology</button>
-        </div>
+    <div class="container" style="height: 700px; overflow: auto;">
+
 
         <footer id="footer">
             <div class="row">
