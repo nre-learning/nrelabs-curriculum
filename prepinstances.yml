@@ -23,6 +23,14 @@
         group: postgres
         mode: 0600
 
+    - name: Install postgresql.conf
+      template:
+        src: templates/postgresql.conf
+        dest:  /var/lib/pgsql/data/postgresql.conf
+        owner: postgres
+        group: postgres
+        mode: 0600
+
     - name: Enable and restart postgresql
       service:
         name: postgresql
@@ -302,7 +310,3 @@
 
   - name: install weave via vendored manifest
     shell: kubectl apply -f ~/antidote/infra/weaveinstall.yml
-
-
-# I don't **think** I need to restart the kubelet now, this just takes care of deploying the binaries.
-

@@ -9,9 +9,10 @@ kubernetes_hosts:
         tf-controller0.labs.networkreliability.engineering:
     kubernetes_workers:
       hosts:
-        tf-compute0.labs.networkreliability.engineering:
-        tf-compute1.labs.networkreliability.engineering:
 
+        # TODO need to do dynamic inventory for these
+        tf-compute0:
+        tf-compute1:
 db_hosts:
   hosts:
     db0.labs.networkreliability.engineering:

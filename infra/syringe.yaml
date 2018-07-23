@@ -1,0 +1,60 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: syringe
+  labels:
+    app: syringe
+    antidote_role: infra
+spec:
+  containers:
+  - name: syringe
+    image: antidotelabs/syringe:latest
+    imagePullPolicy: Always
+    ports:
+    - containerPort: 8086
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: syringe-service
+  namespace: default
+spec:
+  selector:
+    app: syringe
+  ports:
+    - port: 8086
+      targetPort: 8086
+      nodePort: 30010
+  type: NodePort
+
+# ---
+# apiVersion: extensions/v1beta1
+# kind: Ingress
+# metadata:
+#   annotations:
+#     ingress.kubernetes.io/ingress.class: "nginx"
+#     ingress.kubernetes.io/ssl-services: "antidote-web-service"
+#     ingress.kubernetes.io/ssl-redirect: "false"
+#     ingress.kubernetes.io/force-ssl-redirect: "false"
+#     ingress.kubernetes.io/rewrite-target: "/antidote-web"
+#     nginx.ingress.kubernetes.io/rewrite-target: "/antidote-web"
+#     # ingress.kubernetes.io/limit-connections
+#     # ingress.kubernetes.io/limit-rps
+#   name: antidote-web-ingress
+#   namespace: default
+# spec:
+#   tls:
+#     - hosts:
+#       - labs.networkreliability.engineering
+#       secretName: tls-certificate
+#   rules:
+#   - host: labs.networkreliability.engineering
+#     http:
+#       paths:
+#       - path: "/"
+#         backend:
+#           serviceName: antidote-web-service
+#           servicePort: 8080
+

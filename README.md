@@ -40,71 +40,37 @@ You will also want to [set up a billing account](https://cloud.google.com/billin
 Make sure to clone this repo so you can get access to the Terraform configs and Ansible playbooks for provisioning the environment.
 
 ```
-git clone https://github.com/Mierdin/nre-learn && cd nre-learn
+git clone https://github.com/nre-learning/antidote && cd antidote
 ```
 
-We need to run the terraform configs in stages, which will be explained shortly. For now, we just want to run the configs pertaining to the creation of a new GCP project and a new disk:
+All of Antidotes infrastructure is defined in Terraform configurations. So we just need to run `terraform apply`:
 
-> At this point, Terraform will prompt you to provide the billing account ID you just retrieved in the previous step. **NOTE THAT THIS WILL IMMEDIATELY MAKE CHANGES IN YOUR ENVIRONMENT**. Use this with caution, as this instructions do not include a `terraform plan` step. Use these commands with caution.
-
-```
-terraform init
-terraform apply \
-    -auto-approve \
-    -target=google_project.project \
-    -target=google_project_services.project \
-    -target=google_compute_disk.centos7_disk
-```
-
-Because the GCP provider for Terraform [doesn't yet allow](https://github.com/terraform-providers/terraform-provider-google/issues/1045) us to [attach the required license for enabling virtualization extensions](https://cloud.google.com/compute/docs/instances/enable-nested-virtualization-vm-instances), we stop after this disk creation, so that we can then create the required image using the `gcloud` utility based from this disk:
-
-> I'm planning to propose a PR for the GCP terraform provider to add the `--licenses` field, so we don't have to do this silliness. Should be straightforward.
-
-```
-gcloud config set core/project $(gcloud projects list | grep nre-learning | awk '{print $1}')
-
-gcloud compute images create nested-vm-image \
-  --source-disk centos7-disk --source-disk-zone us-west1-a \
-  --licenses "https://www.googleapis.com/compute/v1/projects/vm-options/global/licenses/enable-vmx"
-```
-
-Once our new image exists, we can apply the remaining terraform resources:
+> At this point, Terraform will prompt you to provide the billing account ID you just retrieved in the previous step. **NOTE THAT THIS WILL IMMEDIATELY MAKE CHANGES IN YOUR ENVIRONMENT**. Use this with caution, as these instructions do not include a `terraform plan` step. Use these commands with caution.
 
 ```
 terraform apply -auto-approve
 ```
 
+> If this breaks on the image creation step, you likely need to get an updated Terraform installation, or update your providers using `terraform init`, as the `--licenses` parameter was only added in my [recent PR](https://github.com/terraform-providers/terraform-provider-google/pull/1717/).
+
 At this point, you should wait a few minutes for DNS to update. Once the hostnames referenced in the Ansible inventory are resolving correctly, we can run the playbook that will configure the instances and install kubernetes and tungsten.
 
 ```
-gcloud compute config-ssh
+gcloud config set core/project networkreliabilityengineering && gcloud compute config-ssh
 ansible-playbook -i inventory.yml prepinstances.yml
 ```
 
-> The Ansible playbook assumes you extracted the vMX image downloaded earlier to `./junos-vmx-x86-64-18.1R1.9.qcow2` and will take care of copying it to the instance(s).
-
-## Finally...
-
-Optionally, you can run this to provide `sudo`-less docker access:
+Next, you should install the Network CRD:
 
 ```
-gcloud compute ssh tf-controller0 -- 'sudo usermod -aG docker $USER'
+kubectl create -f infra/crdnetwork.yaml
 ```
 
-> You'll see `Connection to <ip> closed.`, this is normal
-
-Now, let's SSH into our new instance:
+Finally, you should be able to run the example lesson:
 
 ```
-gcloud compute ssh tf-controller0
-```
-
-Finally, you should be able to run the docker-compose lab:
-
-```
-sudo pip install docker-compose
-cd ~/nre-learn/lessons/lesson-1
-docker-compose up -d --build
+cd lessons/lesson-1/k8s-csrx-weave/
+./start.sh
 ```
 
 You can tail the logs of the vMX container to know when it's finished booting:
@@ -178,13 +144,32 @@ gcloud iam service-accounts keys create ~/ansible-gcloud.json \
 
 
 
-```
-mkdir -p $HOME/.kube && cp -u /etc/kubernetes/admin.conf $HOME/.kube/config && chown -R $(id -u):$(id -g) $HOME/.kube
-```
 
 
-# Accessing Resources
 
-Resources below:
 
-- [Contrail UI](https://tf-controller0.labs.networkreliability.engineering:8143/)
+# Load Balancing Notes
+
+Your load balancer will need to:
+- Delete the lab if the load balancer loses contact with the client after a certain period of time (see next)
+- Do some kind of rate-limiting - if possible, it would be nice if we could re-attach to an existing session if the person simply refreshes the page
+
+
+
+
+
+
+TODOs
+- need to fix DNS resolution in the guac container, and probably jupyter as well. Jupyter will need to be able to resolve to the same hostname but the IP might be different
+- need to automate the setup of guacamole - not just the database configuration above but also automating the provisioning of connections.
+- you will likely need to write a bit of javascript that hides the terminal until guacamole is ready, and/or until the underlying lab is ready. (see if guacamole can do this later waiting for you)
+- Rotating SSL certificates
+- All secrets. Tomcat, kubernetes, syringe. Need a way to update these easily so you can secure this thing
+- secure kubernetes. Shouldn't allow direct access to tf-controller0, perhaps set up a VPN
+- Need to gather a list of secrets, and make it easy to rotate them and store them outside this repo.
+- Update LB confnig
+- dynamic inventory for compute hosts    https://docs.ansible.com/ansible/latest/scenario_guides/guide_gce.html
+- how to scale?
+- HTTPS (get rid of http) with letsencrypt. Don't forget to reenable redirection in the ingress
+- jupyter without iframe https://groups.google.com/forum/#!topic/jupyter/1eh-Myq9q4Q
+- jupyter letsencrypt cert. Also tomcat cert. How to secure privkeys in docker containers?

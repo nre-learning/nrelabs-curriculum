@@ -23,3 +23,8 @@ Some lessons could be a group of inter-related tasks.  A troubleshooting workflo
 ### Considerations
 
 There are a number of languages, tools, and libraries/packages that could be leveraged to build a lesson.  Consider using open-source tools for the lessons, or tools that are at least free.  This helps ensure that a user could more easily replicate what is shown in the lesson.
+
+## Loose Lesson Ideas
+
+- bgp unnumbered - marcel
+- telemetry - jag

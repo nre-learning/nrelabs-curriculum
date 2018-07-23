@@ -1,0 +1,4 @@
+.git
+.dockerignore
+*.bz2
+*.qcow2

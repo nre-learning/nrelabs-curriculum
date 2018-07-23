@@ -1,0 +1,30 @@
+FROM jupyter/minimal-notebook
+ADD notebook/requirements.txt /home/jovyan/requirements.txt
+RUN pip install -r /home/jovyan/requirements.txt
+RUN mkdir /home/jovyan/.jupyter
+ADD notebook/base-jupyter-config.py /home/jovyan/.jupyter/jupyter_notebook_config.py
+
+# Add lesson notebook
+ADD notebook/lesson1.ipynb /home/jovyan/work/
+# TODO(mierdin): Need to convert this to a volume mapped to host FS so we can use one image
+
+
+# Not ideal way of doing this, but works for now.
+# ADD --chown=jovyan:1001 ssh/id_rsa.pub /home/jovyan/.ssh/id_rsa.pub
+# ADD --chown=jovyan:1001 ssh/id_rsa /home/jovyan/.ssh/id_rsa
+
+# Switch to root to set entrypoint
+USER root
+
+# Generate self-signed cert
+RUN mkdir -p /opt/jupyterssl
+# RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /opt/jupyterssl/selfsigned.key -out /opt/jupyterssl/selfsigned.crt -subj "/C=US/ST=Oregon/L=Portland/O=Juniper Networks/OU=NRE Labs/CN=labs.networkreliability.engineering"
+ADD infra/letsencrypt/etc/live/networkreliability.engineering/fullchain.pem /opt/jupyterssl/
+ADD infra/letsencrypt/etc/live/networkreliability.engineering/privkey.pem /opt/jupyterssl/
+
+# Configure container startup
+ENTRYPOINT ["tini", "-g", "--"]
+CMD ["/usr/local/bin/start-notebook.sh", " --certfile=/opt/jupyterssl/fullchain.pem",  "--keyfile=/opt/jupyterssl/privkey.pem"]
+
+# Switch back to jovyan to avoid accidental container runs as root
+USER $NB_UID

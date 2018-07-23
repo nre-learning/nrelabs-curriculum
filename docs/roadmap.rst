@@ -94,3 +94,22 @@ What are we postponing for future versions?
 - Automatically rendering lab pages rather than having to do it statically each lab
 - GUI for putting together lab files
 
+
+
+
+
+
+TOADO
+
+Need two new types - black box, and simple linux machine. The latter may not be necessary if we can SSH to it. Also may need a "configurator" type.
+
+Need to be able to provide default configs as part of the lab definition. Can't require people to bake up their own images no matter what
+
+Don't reset tunnels when you click on another tab. Preserve the tunnel history.
+
+Each lab also needs a diagram and a description/walkthrough of the lab, in addition to any jupyter style walkthrough
+
+each lab needs tags and categories (latter for navbar)
+
+Labs HTML files should be jinja2 templates and you should render them when you build the webapp. Should write a python script to do this, driven by
+syringefiles.
