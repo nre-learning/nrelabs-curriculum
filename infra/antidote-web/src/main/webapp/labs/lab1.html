@@ -27,22 +27,27 @@
 
     </script>
 
-    <link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/icons/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/icons/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/icons/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/icons/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/icons/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/icons/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="/icons/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/icons/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
-    <link rel="manifest" href="/icons/manifest.json">
+    <!-- Guacamole JavaScript API -->
+    <script type="text/javascript" src="../guacamole-common-js/all.min.js"></script>
+    <!-- Init -->
+    <script type="text/javascript" src="../js/guacamole-client.js"></script>
+
+    <link rel="apple-touch-icon" sizes="57x57" href="../icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="../icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="../icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="../icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="../icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="../icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="../icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="../icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="../icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../icons/favicon-16x16.png">
+    <link rel="manifest" href="../icons/manifest.json">
     <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="/icons/ms-icon-144x144.png">
+    <meta name="msapplication-TileImage" content="../icons/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
 </head>
 
@@ -101,7 +106,7 @@
 
     <!-- For some reason the header is hiding behind the navbar. Giving it a little boost -->
     <div style="padding: 20px; margin: 0 auto;">
-        <p style="color: #FF7133;">NRE Labs is in early alpha status. We reserve the right to take this site offline at any time for maintainance.</p>
+        <p style="color: #FF7133;">NRE Labs is in early alpha status. We reserve the right to take this site offline at any time for maintenance.</p>
     </div>
 
     <div class="panel-container">
@@ -166,182 +171,14 @@
                     <div class="tab-pane fade active show" id="csrx1">
                         <!-- Display -->
                         <div id="display1"></div>
-
-                        <!-- Guacamole JavaScript API -->
-                        <script type="text/javascript" src="../guacamole-common-js/all.min.js"></script>
-                        <!-- Init -->
-                        <script type="text/javascript"> /* <![CDATA[ */
-
-                            // Get display div from document
-                            var display1 = document.getElementById("display1");
-
-                            // Instantiate client, using an HTTP tunnel for communications.
-                            var guac1 = new Guacamole.Client(
-                                new Guacamole.HTTPTunnel("../tunnel")
-                            );
-
-                            // Add client to display div
-                            // var dis =  guac.getDisplay().getElement();
-                            // dis.getElementsByTagName("canvas")[0].style = "width:100px;"
-                            // dis.setAttribute("style", "width:100px");
-                            display1.appendChild(guac1.getDisplay().getElement());
-
-                            // Error handler
-                            guac1.onerror = function (error) {
-                                alert(error);
-                            };
-
-                            var params = 'csrx1';
-
-                            // Connect
-                            guac1.connect(params);
-
-                            // Disconnect on close
-                            window.onunload = function () {
-                                guac.disconnect();
-                            }
-
-                            // Mouse
-                            var mouse1 = new Guacamole.Mouse(guac1.getDisplay().getElement());
-
-                            mouse1.onmousedown =
-                                mouse1.onmouseup =
-                                mouse1.onmousemove = function (mouseState1) {
-                                    guac1.sendMouseState(mouseState1);
-                                };
-
-                            // Keyboard
-                            var keyboard1 = new Guacamole.Keyboard(document);
-
-                            keyboard1.onkeydown = function (keysym1) {
-                                guac1.sendKeyEvent(1, keysym1);
-                            };
-
-                            keyboard1.onkeyup = function (keysym1) {
-                                guac1.sendKeyEvent(0, keysym1);
-                            };
-
-                            /* ]]> */</script>
                     </div>
                     <div class="tab-pane fade" id="csrx2">
                         <!-- Display -->
                         <div id="display2"></div>
-
-                        <!-- Guacamole JavaScript API -->
-                        <script type="text/javascript" src="../guacamole-common-js/all.min.js"></script>
-                        <!-- Init -->
-                        <script type="text/javascript"> /* <![CDATA[ */
-
-                            // Get display div from document
-                            var display2 = document.getElementById("display2");
-
-                            // Instantiate client, using an HTTP tunnel for communications.
-                            var guac2 = new Guacamole.Client(
-                                new Guacamole.HTTPTunnel("../tunnel")
-                            );
-
-                            // Add client to display div
-                            // var dis =  guac.getDisplay().getElement();
-                            // dis.getElementsByTagName("canvas")[0].style = "width:100px;"
-                            // dis.setAttribute("style", "width:100px");
-                            display2.appendChild(guac2.getDisplay().getElement());
-
-                            // Error handler
-                            guac2.onerror = function (error) {
-                                alert(error);
-                            };
-
-                            var params = 'csrx2';
-
-                            // Connect
-                            guac2.connect(params);
-
-                            // Disconnect on close
-                            window.onunload = function () {
-                                guac2.disconnect();
-                            }
-
-                            // Mouse
-                            var mouse2 = new Guacamole.Mouse(guac2.getDisplay().getElement());
-
-                            mouse2.onmousedown =
-                                mouse2.onmouseup =
-                                mouse2.onmousemove = function (mouseState2) {
-                                    guac2.sendMouseState(mouseState2);
-                                };
-
-                            // Keyboard
-                            var keyboard2 = new Guacamole.Keyboard(document);
-
-                            keyboard2.onkeydown = function (keysym2) {
-                                guac2.sendKeyEvent(1, keysym2);
-                            };
-
-                            keyboard2.onkeyup = function (keysym2) {
-                                guac2.sendKeyEvent(0, keysym2);
-                            };
-
-                                 /* ]]> */</script>
                     </div>
                     <div class="tab-pane fade" id="csrx3">
                         <!-- Display -->
                         <div id="display3"></div>
-
-                        <!-- Guacamole JavaScript API -->
-                        <script type="text/javascript" src="../guacamole-common-js/all.min.js"></script>
-                        <!-- Init -->
-                        <script type="text/javascript"> /* <![CDATA[ */
-
-                            // Get display div from document
-                            var display3 = document.getElementById("display3");
-
-                            // Instantiate client, using an HTTP tunnel for communications.
-                            var guac3 = new Guacamole.Client(
-                                new Guacamole.HTTPTunnel("../tunnel")
-                            );
-
-                            // Add client to display div
-                            // var dis =  guac.getDisplay().getElement();
-                            // dis.getElementsByTagName("canvas")[0].style = "width:100px;"
-                            // dis.setAttribute("style", "width:100px");
-                            display3.appendChild(guac3.getDisplay().getElement());
-
-                            // Error handler
-                            guac3.onerror = function (error) {
-                                alert(error);
-                            };
-
-                            var params = 'csrx3';
-
-                            // Connect
-                            guac3.connect(params);
-
-                            // Disconnect on close
-                            window.onunload = function () {
-                                guac3.disconnect();
-                            }
-
-                            // Mouse
-                            var mouse3 = new Guacamole.Mouse(guac3.getDisplay().getElement());
-
-                            mouse3.onmousedown =
-                                mouse3.onmouseup =
-                                mouse3.onmousemove = function (mouseState3) {
-                                    guac3.sendMouseState(mouseState3);
-                                };
-
-                            // Keyboard
-                            var keyboard3 = new Guacamole.Keyboard(document);
-
-                            keyboard3.onkeydown = function (keysym3) {
-                                guac3.sendKeyEvent(1, keysym3);
-                            };
-
-                            keyboard3.onkeyup = function (keysym3) {
-                                guac3.sendKeyEvent(0, keysym3);
-                            };
-
-                                    /* ]]> */</script>
                     </div>
                     <div class="tab-pane fade" id="jupyter">
                         <iframe src="https://vip.labs.networkreliability.engineering:30008/notebooks/work/lesson1.ipynb" width="100%" height="600px"
