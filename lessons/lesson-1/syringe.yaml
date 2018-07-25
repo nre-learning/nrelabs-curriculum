@@ -1,0 +1,27 @@
+---
+labName: lab-1
+labID: 1
+devices:
+- name: csrx1
+  image: csrx:18.1R1.9
+  # defaultConfig: config.txt
+- name: csrx2
+  image: csrx:18.1R1.9
+  # defaultConfig: config.txt
+- name: csrx3
+  image: csrx:18.1R1.9
+  # defaultConfig: config.txt
+connections:
+- a: csrx1
+  b: csrx2
+- a: csrx2
+  b: csrx3
+- a: csrx3
+  b: csrx1
+notebook: /Users/mierdin/Code/Juniper/antidote/lessons/lesson-1/lesson.ipynb
+
+
+# lab update process:
+# - pull repo on all hosts
+# - restart pods
+# - syringe will clear out all labs
