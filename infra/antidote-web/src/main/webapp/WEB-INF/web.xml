@@ -16,7 +16,7 @@
         <description>Tunnel servlet.</description>
         <servlet-name>Tunnel</servlet-name>
         <servlet-class>
-            org.apache.guacamole.net.example.TutorialGuacamoleTunnelServlet
+            org.apache.guacamole.net.antidote.GuacamoleTunnelServlet
         </servlet-class>
     </servlet>
 

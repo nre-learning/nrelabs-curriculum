@@ -1,3 +1,6 @@
-# NRE Learning - Lesson 1
+# Introduction to NRE Labs
 
-Description of Lesson 1 here.
+Author: [@Mierdin](https://twitter.com/mierdin)
+
+Time: Approximately 5 minutes
+

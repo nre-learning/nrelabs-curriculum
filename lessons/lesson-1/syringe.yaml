@@ -4,13 +4,13 @@ labID: 1
 devices:
 - name: csrx1
   image: csrx:18.1R1.9
-  # defaultConfig: config.txt
+  defaultConfig: "https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-1/config1.txt"
 - name: csrx2
   image: csrx:18.1R1.9
-  # defaultConfig: config.txt
+  defaultConfig: "https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-1/config2.txt"
 - name: csrx3
   image: csrx:18.1R1.9
-  # defaultConfig: config.txt
+  defaultConfig: "https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-1/config3.txt"
 connections:
 - a: csrx1
   b: csrx2
@@ -19,6 +19,7 @@ connections:
 - a: csrx3
   b: csrx1
 notebook: yes
+labguide: "https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-1/README.md"
 
 
 # lab update process:
