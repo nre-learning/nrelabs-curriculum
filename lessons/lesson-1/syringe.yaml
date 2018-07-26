@@ -18,7 +18,7 @@ connections:
   b: csrx3
 - a: csrx3
   b: csrx1
-notebook: /Users/mierdin/Code/Juniper/antidote/lessons/lesson-1/lesson.ipynb
+notebook: yes
 
 
 # lab update process:
