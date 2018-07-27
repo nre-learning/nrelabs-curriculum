@@ -101,8 +101,6 @@ What are we postponing for future versions?
 
 TOADO
 
-Need two new types - black box, and simple linux machine. The latter may not be necessary if we can SSH to it. Also may need a "configurator" type.
-
 Need to be able to provide default configs as part of the lab definition. Can't require people to bake up their own images no matter what
 
 Don't reset tunnels when you click on another tab. Preserve the tunnel history.
