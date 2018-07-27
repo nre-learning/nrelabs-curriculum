@@ -4,10 +4,6 @@ RUN pip install -r /home/jovyan/requirements.txt
 RUN mkdir /home/jovyan/.jupyter
 ADD notebook/base-jupyter-config.py /home/jovyan/.jupyter/jupyter_notebook_config.py
 
-# Add lesson notebook
-ADD notebook/lesson1.ipynb /home/jovyan/work/
-# TODO(mierdin): Need to convert this to a volume mapped to host FS so we can use one image
-
 
 # Not ideal way of doing this, but works for now.
 # ADD --chown=jovyan:1001 ssh/id_rsa.pub /home/jovyan/.ssh/id_rsa.pub
