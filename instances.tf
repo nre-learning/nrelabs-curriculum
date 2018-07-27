@@ -110,35 +110,3 @@ resource "google_compute_instance_template" "antidote-computes" {
     access_config = {}
   }
 }
-
-resource "google_compute_instance" "db" {
-  count = 1
-
-  name         = "db${count.index}"
-  machine_type = "n1-standard-2"
-
-  depends_on = [
-    "google_project_services.project",
-  ]
-
-  zone = "${var.zone}"
-
-  metadata {
-    hostname = "db${count.index}"
-  }
-
-  project = "${var.project}"
-  tags    = []
-
-  boot_disk {
-    initialize_params {
-      image = "${var.os["centos-7"]}"
-    }
-  }
-
-  # TODO(mierdin): DEFINITELY need to restrict access here.
-  network_interface {
-    network       = "${google_compute_network.default-internal.name}"
-    access_config = {}
-  }
-}

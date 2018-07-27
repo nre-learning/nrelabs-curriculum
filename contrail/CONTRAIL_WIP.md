@@ -96,3 +96,14 @@ AUTHN_TYPE = noauth
 
 https://www.juniper.net/documentation/en_US/contrail4.1/topics/task/verification/verifying-cni-k8s.html
 https://www.juniper.net/documentation/en_US/contrail4.1/topics/task/configuration/node-status-vnc.html
+
+
+https://medium.com/google-cloud/understanding-kubernetes-networking-pods-7117dd28727
+
+
+Some links that will be useful later for orchestrating network isolation between labs and within labs
+https://www.juniper.net/documentation/en_US/contrail4.1/topics/concept/kubernetes-cni-contrail.html
+http://dougbtv.com/nfvpe/2017/02/22/multus-cni/
+Question is, can we do multiple interfaces with contrail too?
+
+All of our customizations to the contrail ansible stuff should be maintained outside the repo. Need to work to get the submodule back on track with upstream, rather than try to maintain a fork long-term.

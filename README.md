@@ -109,22 +109,6 @@ You can also poke around the on-screen terminal - this is our vMX image - it's t
 
 As expected, clean up with `terraform destroy`
 
-# TODOs
-
-Some links that will be useful later for orchestrating network isolation between labs and within labs
-https://www.juniper.net/documentation/en_US/contrail4.1/topics/concept/kubernetes-cni-contrail.html
-http://dougbtv.com/nfvpe/2017/02/22/multus-cni/
-Question is, can we do multiple interfaces with contrail too?
-
-https://medium.com/google-cloud/understanding-kubernetes-networking-pods-7117dd28727
-
-Need to secure jupyter notebooks
-https://jupyter-notebook.readthedocs.io/en/stable/public_server.html
-That's also useful for embedding somewhere
-
-**ABSOLUTELY NOTHING IS SECURED** - need to do this.
-
-All of our customizations to the contrail ansible stuff should be maintained outside the repo. Need to work to get the submodule back on track with upstream, rather than try to maintain a fork long-term.
 
 
 
@@ -143,23 +127,7 @@ gcloud iam service-accounts keys create ~/ansible-gcloud.json \
 ```
 
 
-
-
-
-
-
-# Load Balancing Notes
-
-Your load balancer will need to:
-- Delete the lab if the load balancer loses contact with the client after a certain period of time (see next)
-- Do some kind of rate-limiting - if possible, it would be nice if we could re-attach to an existing session if the person simply refreshes the page
-
-
-
-
-
-
-TODOs
+# TODOs
 - need to fix DNS resolution in the guac container, and probably jupyter as well. Jupyter will need to be able to resolve to the same hostname but the IP might be different
 - you will likely need to write a bit of javascript that hides the terminal until guacamole is ready, and/or until the underlying lab is ready. (see if guacamole can do this later waiting for you)
 - Rotating SSL certificates
@@ -185,3 +153,6 @@ TODOs
 - Consider linking labs together in a lesson and provisioning all of them at once.
 - document everything that needs to go into a lesson directory (syringe.yaml and README.md at a minimum), and then what's optional depending on what's in the syringefile.
 - generate the lesson README in the browser, make it look just like the docker labs example - that looked nice. You'll need to add a place in the syringe.yaml file for it. Just provide a URL and it will get passed down to the browser.
+- DNS and IP addressing for each namespace. Need to document how this is laid out. Maybe the mgmt network gets IPAM'd? DNS in the management network has to work, at a minimum.
+- **ABSOLUTELY NOTHING IS SECURED** - need to do this.
+- Modify the syringe and web ingresses so that we do some basic security checks. Rate-limiting for sure, and possibly also client-IP matching. Can nginx

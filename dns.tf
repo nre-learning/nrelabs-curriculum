@@ -60,25 +60,3 @@ resource "google_dns_record_set" "tf-controller0" {
     "${google_compute_instance.tf-controller.0.network_interface.0.access_config.0.assigned_nat_ip}",
   ]
 }
-
-resource "google_dns_record_set" "db0" {
-  # name = "db0.${google_dns_managed_zone.labs_zone.dns_name}"
-  name = "db0.labs.networkreliability.engineering."
-  type = "A"
-  ttl  = 300
-
-  # project = "${google_project.project.project_id}"
-  project = "${var.project}"
-
-  depends_on = [
-    # "google_dns_managed_zone.labs_zone",
-    "google_compute_instance.db",
-  ]
-
-  # managed_zone = "${google_dns_managed_zone.labs_zone.name}"
-  managed_zone = "nre"
-
-  rrdatas = [
-    "${google_compute_instance.db.0.network_interface.0.access_config.0.assigned_nat_ip}",
-  ]
-}
