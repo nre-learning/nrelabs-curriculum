@@ -1,6 +1,7 @@
 ---
 labName: lab-1
 labID: 1
+category: introductory
 devices:
 - name: csrx1
   image: csrx:18.1R1.9
@@ -20,9 +21,3 @@ connections:
   b: csrx1
 notebook: yes
 labguide: "https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-1/README.md"
-
-
-# lab update process:
-# - pull repo on all hosts
-# - restart pods
-# - syringe will clear out all labs
