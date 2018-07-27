@@ -20,4 +20,4 @@ Each lab will come with a lab guide, which you're reading right now. So if you'r
 
 To the left you'll also notice a collection of tabs, each of which represents a resource that this lab will use. It could be a terminal session with a Junos router or switch, or it could be a Jupyter notebook containing a cool automation script, or maybe a regular linux machine for running some interesting tools or applications from. The lab guide will explain not only which resources do what, but also how the whole lab fits together.
 
-We hope you enjoy NRE Labs! Please see Antidote's [contact page](http://antidoteproject.readthedocs.io/en/latest/contributing.html) if you have feedback or questions.
+We hope you enjoy NRE Labs! Please see Antidote's [contact page](http://antidoteproject.readthedocs.io/en/latest/contributing.html) if you have feedback or questions
