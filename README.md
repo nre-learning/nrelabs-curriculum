@@ -161,11 +161,11 @@ Your load balancer will need to:
 
 TODOs
 - need to fix DNS resolution in the guac container, and probably jupyter as well. Jupyter will need to be able to resolve to the same hostname but the IP might be different
-- need to automate the setup of guacamole - not just the database configuration above but also automating the provisioning of connections.
 - you will likely need to write a bit of javascript that hides the terminal until guacamole is ready, and/or until the underlying lab is ready. (see if guacamole can do this later waiting for you)
 - Rotating SSL certificates
 - All secrets. Tomcat, kubernetes, syringe. Need a way to update these easily so you can secure this thing
-- secure kubernetes. Shouldn't allow direct access to tf-controller0, perhaps set up a VPN
+- secure kubernetes. Shouldn't allow direct access to tf-controller0, perhaps set up a VPN?
+- secure syringe service account
 - Need to gather a list of secrets, and make it easy to rotate them and store them outside this repo.
 - Update LB confnig
 - dynamic inventory for compute hosts    https://docs.ansible.com/ansible/latest/scenario_guides/guide_gce.html
@@ -173,3 +173,15 @@ TODOs
 - HTTPS (get rid of http) with letsencrypt. Don't forget to reenable redirection in the ingress
 - jupyter without iframe https://groups.google.com/forum/#!topic/jupyter/1eh-Myq9q4Q
 - jupyter letsencrypt cert. Also tomcat cert. How to secure privkeys in docker containers?
+- Document network connectivity provided by syringe
+- Convert lab page into a single dynamic page - will have to generate html from markdown somewhere, and source either the markdown or the resulting HTML from syringe
+- Syringe docs, including the syringe.yaml DSL
+- Add health checks in syringe and update ready status when it checks out
+- scale antidote-web
+- firm up security on ingress for antidote
+- Logging and instrumentation in syringe is desperately needed
+- Are the networks namespace-aware? Does the weave veth pair also need to have ns in the name?
+- Garbage collection. Do it at a set interval? What about adding event handlers to either JS or Java or both? Actually would be nice if you could add close handlers but also update a last_used timestamp for the session when an API call is made, and have a goroutine running in the background cleaning them up. Actually do this only. Don't clean up when they leave the page or refresh. That will result in a shit UX. Do an async cleanup on the back end based on timeouts. You could also introduce a button that lets them reset the lab environment if you want down the road. Document this behavior. Also document the design between request and get, and how this allows us to do a request on each page load and it doesn't matter 
+- Consider linking labs together in a lesson and provisioning all of them at once.
+- document everything that needs to go into a lesson directory (syringe.yaml and README.md at a minimum), and then what's optional depending on what's in the syringefile.
+- generate the lesson README in the browser, make it look just like the docker labs example - that looked nice. You'll need to add a place in the syringe.yaml file for it. Just provide a URL and it will get passed down to the browser.
