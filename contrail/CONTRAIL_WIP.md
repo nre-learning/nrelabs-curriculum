@@ -18,7 +18,9 @@ https://tf-controller0.labs.networkreliability.engineering:8143/
 
 
 # Resources
-
+https://github.com/Juniper/contrail-controller/wiki/Contrail-daemons'-configuration
+https://github.com/Juniper/contrail-specs/blob/master/device-discovery-and-image-management.md#4-implementation
+https://github.com/tonyliu0592/contrail/wiki/Configuration-API
 https://github.com/containernetworking/cni/tree/master/cnitool
 
 https://www.juniper.net/documentation/en_US/contrail5.0/topics/concept/install-microsvcs-helm-multi-faq-50.html
