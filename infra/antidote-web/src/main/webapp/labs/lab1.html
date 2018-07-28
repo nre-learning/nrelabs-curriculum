@@ -28,6 +28,7 @@
     </script>
 
     <script type="text/javascript" src="../guacamole-common-js/all.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.min.js"></script>
     <script type="text/javascript" src="../js/nrelabs-client.js"></script>
 
     <link rel="apple-touch-icon" sizes="57x57" href="../icons/apple-icon-57x57.png">
@@ -104,7 +105,7 @@
 
     <!-- For some reason the header is hiding behind the navbar. Giving it a little boost -->
     <div style="padding: 20px; margin: 0 auto;">
-        <p style="color: #FF7133;">NRE Labs is in early alpha status. Please bear with us as we continue working to make it awesome.</p>
+        <p style="color: #FF7133;">NRE Labs is in early alpha status. Please bear with us as we <a target="_blank" href="http://antidoteproject.readthedocs.io/en/latest/construction.html">continue working to make it awesome.</a></p>
     </div>
 
     <!-- Modal -->
@@ -112,8 +113,9 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Please wait</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Please wait...</h5>
                 </div>
+                <img class="modal-image" src="../images/flask.gif" style="max-width: 100px;">
                 <div id="modal-body" class="modal-body">
                     Please wait...
                 </div>
@@ -131,8 +133,8 @@
 
         <div class="panel-left content resizable" style="transition: all 0s ease 0s; width: 894px;">
 
-            <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
-
+            <article id="labGuide" class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+                <!-- 
                 <header class="post-header">
                     <h1 class="post-title" itemprop="name headline">Introduction to NRE</h1>
                     <p class="post-meta">
@@ -151,8 +153,8 @@
                 <div class="post-content" itemprop="articleBody">
                     <p>Hello World!</p>
 
-                </div>
-            </article>
+                </div> -->
+            </article> 
         </div>
 
 
@@ -160,7 +162,7 @@
         </div>
 
         <div class="panel-right" style="height: 700px;">
-            <span class="resize-warning">Navigate to the various devices or Jupyter notebooks in this lab via the tabs below.
+            <span class="resize-warning">Use the tabs below to access the available resources in this lab.
             </span>
 
             <div class="bs-component">

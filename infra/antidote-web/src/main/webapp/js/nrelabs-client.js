@@ -26,7 +26,8 @@ function getRandomModalMessage() {
         "Sweeping technical debt under the rug...",
         "Definitely not mining cryptocurrency in your browser...",
         "Duct-taping 53 javascript frameworks together...",
-        "Dividing by zer-dfghfd,d,$,40-d-df45tg45f..."
+        "Dividing by < ERR - DIVIDE BY ZERO. SHUTTING DOWN. AND I WAS JUST LEARNING TO LOVE.....>",
+        "try { toilTime / automatingTime; } catch (DivideByZeroException e) { panic(“More NRE Labs”); }",
     ];
     return messages[Math.floor(Math.random() * messages.length)];
 }
@@ -107,8 +108,24 @@ async function requestLab() {
 
         endpoints = sort("Name", endpoints);
         addTabs(endpoints);
+        renderLabGuide(response2.LabGuide);
         break;
     }
+}
+
+function renderLabGuide(url) {
+
+    var lgGetter = new XMLHttpRequest();
+    lgGetter.open('GET', url, false);
+    lgGetter.send();
+    
+    var converter = new showdown.Converter();
+    var labHtml = converter.makeHtml(lgGetter.responseText);
+    document.getElementById("labGuide").innerHTML = labHtml;
+
+    console.log("Rendered to HTML");
+    console.log(lgGetter.responseText);
+    console.log(labHtml);
 }
 
 function addTabs(endpoints) {
