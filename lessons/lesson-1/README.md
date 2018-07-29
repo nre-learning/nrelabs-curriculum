@@ -6,7 +6,7 @@
 
 Welcome to NRE Labs! This is a new initiative for making network automation more accessible in a whole new way.
 
-![NRE Labs](https://github.com/nre-learning/antidote/blob/master/infra/antidote-web/src/main/webapp/images/nrelabs.png?raw=true)
+![NRE Labs](https://github.com/nre-learning/antidote/blob/master/platform/antidote-web/src/main/webapp/images/nrelabs.png?raw=true)
 
 Here, you'll find a collection of courses, lessons, and labs, all aimed at helping you get started with the various subjects within network automation, so you can quickly add skills to your resume, and bring reliability to your infrastructure.
 
