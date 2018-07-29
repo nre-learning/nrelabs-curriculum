@@ -24,7 +24,7 @@ rm -rf vmx
 - Terraform
 - Ansible
 
-## Walkthrough
+## Infrastructure Setup
 
 Follow [the instructions for installing the Google Cloud SDK](https://cloud.google.com/sdk/gcloud/), and then run these commands to authenticate:
 
@@ -35,7 +35,7 @@ gcloud config set compute/zone us-west1-a
 gcloud config set compute/region us-west1
 ```
 
-You will also want to [set up a billing account](https://cloud.google.com/billing/docs/how-to/manage-billing-account), and write down the billing account ID (you can find this on the [billing console](https://console.cloud.google.com/billing)). You'll need that in the next step.
+You will also want to [set up a billing account](https://cloud.google.com/billing/docs/how-to/manage-billing-account), and write down the billing account ID (you can find this on the [billing console](https://console.cloud.google.com/billing)). You'll need that when we run terraform.
 
 Make sure to clone this repo so you can get access to the Terraform configs and Ansible playbooks for provisioning the environment.
 
@@ -45,20 +45,60 @@ git clone https://github.com/nre-learning/antidote && cd antidote
 
 All of Antidotes infrastructure is defined in Terraform configurations. So we just need to run `terraform apply`:
 
-> At this point, Terraform will prompt you to provide the billing account ID you just retrieved in the previous step. **NOTE THAT THIS WILL IMMEDIATELY MAKE CHANGES IN YOUR ENVIRONMENT**. Use this with caution, as these instructions do not include a `terraform plan` step. Use these commands with caution.
+> At this point, Terraform will prompt you to provide the billing account ID you just retrieved in the previous step. It goes without saying but **NOTE THAT THIS WILL MAKE CHANGES IN YOUR ENVIRONMENT**. Review the output of `terraform apply` or `terraform plan` to determine the scope of the changes you're making. 
 
 ```
-terraform apply -auto-approve
+cd infrastructure/
+terraform apply
 ```
 
-> If this breaks on the image creation step, you likely need to get an updated Terraform installation, or update your providers using `terraform init`, as the `--licenses` parameter was only added in my [recent PR](https://github.com/terraform-providers/terraform-provider-google/pull/1717/).
-
-At this point, you should wait a few minutes for DNS to update. Once the hostnames referenced in the Ansible inventory are resolving correctly, we can run the playbook that will configure the instances and install kubernetes and tungsten.
+Once terraform creates all of the necessary resources, it's time to run our ansible playbook.
 
 ```
 gcloud config set core/project networkreliabilityengineering && gcloud compute config-ssh
-ansible-playbook -i inventory.yml prepinstances.yml
+virtualenv -p python3 venv && source venv/bin/activate
+pip3 install -r requirements.txt
+ansible-playbook -i inventory/ prepinstances.yml
 ```
+
+## Platform Setup
+
+Next we need to start the services that will power Antidote. In order to do that, we need to configure kubectl. There's a file `kubeconfig` located in the `tmp/` directory alongside the playbook we just ran. Edit that file to point to `k8s.labs.networkreliability.engineering` instead of the internal IP that's currently there. Then, copy it to `~/.kube/config` on your system.
+
+Finally, look up the external IP address for the first controller, and add an entry for `k8s.labs.networkreliability.engineering` to point to this address.
+
+```
+sudo cp tmp/kubeconfig ~/.kube/config
+sudo vi ~/.kube/config
+sudo vi /etc/hosts
+```
+
+You should now be able to run kubectl commands. Verify with:
+
+```
+kubectl get nodes
+```
+
+Enter the `platform` directory and execute the shell script to upload all of the platform kubernetes manifests:
+
+```
+cd ../platform/
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Next, you should install the Network CRD:
 
@@ -108,51 +148,3 @@ You can also poke around the on-screen terminal - this is our vMX image - it's t
 ## Cleaning Up
 
 As expected, clean up with `terraform destroy`
-
-
-
-
-# Maybe need?
-
-Install libcloud:
-
-```
-virtualenv -p python3 venv && source venv/bin/activate
-pip3 install -r requirements.txt
-```
-
-```
-gcloud iam service-accounts keys create ~/ansible-gcloud.json \
-  --iam-account ansible-sa@$(gcloud projects list | grep nre-learning | awk '{print $1}').iam.gserviceaccount.com
-```
-
-
-# TODOs
-- need to fix DNS resolution in the guac container, and probably jupyter as well. Jupyter will need to be able to resolve to the same hostname but the IP might be different
-- you will likely need to write a bit of javascript that hides the terminal until guacamole is ready, and/or until the underlying lab is ready. (see if guacamole can do this later waiting for you)
-- Rotating SSL certificates
-- All secrets. Tomcat, kubernetes, syringe. Need a way to update these easily so you can secure this thing
-- secure kubernetes. Shouldn't allow direct access to tf-controller0, perhaps set up a VPN?
-- secure syringe service account
-- Need to gather a list of secrets, and make it easy to rotate them and store them outside this repo.
-- Update LB confnig
-- dynamic inventory for compute hosts    https://docs.ansible.com/ansible/latest/scenario_guides/guide_gce.html
-- how to scale?
-- HTTPS (get rid of http) with letsencrypt. Don't forget to reenable redirection in the ingress
-- jupyter without iframe https://groups.google.com/forum/#!topic/jupyter/1eh-Myq9q4Q
-- jupyter letsencrypt cert. Also tomcat cert. How to secure privkeys in docker containers?
-- Document network connectivity provided by syringe
-- Convert lab page into a single dynamic page - will have to generate html from markdown somewhere, and source either the markdown or the resulting HTML from syringe
-- Syringe docs, including the syringe.yaml DSL
-- Add health checks in syringe and update ready status when it checks out
-- scale antidote-web
-- firm up security on ingress for antidote
-- Logging and instrumentation in syringe is desperately needed
-- Are the networks namespace-aware? Does the weave veth pair also need to have ns in the name?
-- Garbage collection. Do it at a set interval? What about adding event handlers to either JS or Java or both? Actually would be nice if you could add close handlers but also update a last_used timestamp for the session when an API call is made, and have a goroutine running in the background cleaning them up. Actually do this only. Don't clean up when they leave the page or refresh. That will result in a shit UX. Do an async cleanup on the back end based on timeouts. You could also introduce a button that lets them reset the lab environment if you want down the road. Document this behavior. Also document the design between request and get, and how this allows us to do a request on each page load and it doesn't matter 
-- Consider linking labs together in a lesson and provisioning all of them at once.
-- document everything that needs to go into a lesson directory (syringe.yaml and README.md at a minimum), and then what's optional depending on what's in the syringefile.
-- generate the lesson README in the browser, make it look just like the docker labs example - that looked nice. You'll need to add a place in the syringe.yaml file for it. Just provide a URL and it will get passed down to the browser.
-- DNS and IP addressing for each namespace. Need to document how this is laid out. Maybe the mgmt network gets IPAM'd? DNS in the management network has to work, at a minimum.
-- **ABSOLUTELY NOTHING IS SECURED** - need to do this.
-- Modify the syringe and web ingresses so that we do some basic security checks. Rate-limiting for sure, and possibly also client-IP matching. Can nginx

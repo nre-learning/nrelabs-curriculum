@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>NRE Labs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="../css/bootstrap.css" media="screen">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/lablayout.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script>
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-120903857-1']);
+        _gaq.push(['_setDomainName', "labs.networkreliability.engineering"]);
+        _gaq.push(['_setAllowLinker', true]);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+
+    <script type="text/javascript" src="../guacamole-common-js/all.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.min.js"></script>
+    <script type="text/javascript" src="../js/nrelabs-client.js"></script>
+
+    <link rel="apple-touch-icon" sizes="57x57" href="../icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="../icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="../icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="../icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="../icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="../icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="../icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="../icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="../icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../icons/favicon-16x16.png">
+    <link rel="manifest" href="../icons/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="../icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+    <div class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a href="https://labs.networkreliability.engineering" class="navbar-brand">
+                <img src="../images/nrelabs.png" style="width:48px;height:48px"> NRE Labs</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="labs">Troubleshooting
+                            <span class="caret"></span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="labs">
+                            <a class="dropdown-item" href="labs/lab1.html">Lab 1 - Introduction</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="labs">Verification
+                            <span class="caret"></span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="labs">
+                            <a class="dropdown-item" href="labs/lab1.html">Lab 1 - Introduction</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="labs">Configuration
+                            <span class="caret"></span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="labs">
+                            <a class="dropdown-item" href="labs/lab1.html">Lab 1 - Introduction</a>
+                        </div>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" target="_blank" href="http://antidoteproject.readthedocs.io/en/latest/contributing.html">Contribute to NRE Labs!</a>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://networkreliability.engineering">NRE Home</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- For some reason the header is hiding behind the navbar. Giving it a little boost -->
+    <div style="padding: 20px; margin: 0 auto;">
+        <p style="color: #FF7133;">NRE Labs is in early alpha status. Please bear with us as we
+            <a target="_blank" href="http://antidoteproject.readthedocs.io/en/latest/construction.html">continue working to make it awesome.</a>
+        </p>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Please wait...</h5>
+                </div>
+                <img class="modal-image" src="../images/flask.gif" style="max-width: 100px;">
+                <div id="modal-body" class="modal-body">
+                    Please wait...
+                </div>
+                <div class="progress" style="width: 90%; margin: 0 auto;">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0"
+                        aria-valuemax="100" style="width: 100%"></div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-container" style="height: 700px;">
+
+        <div class="panel-left content resizable" style="transition: all 0s ease 0s; width: 894px;">
+
+            <article id="labGuide" class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+                <!-- 
+                <header class="post-header">
+                    <h1 class="post-title" itemprop="name headline">Introduction to NRE</h1>
+                    <p class="post-meta">
+                        <time datetime="2017-12-07T00:00:00+00:00" itemprop="datePublished">Dec 7, 2017</time> •
+                        <span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+                            <span itemprop="name">@Mierdin</span>
+                        </span>
+                    </p>
+                    <blockquote>
+                        <strong></strong>
+                        <p><strong>Time:</strong> Approximately 5 minutes</p>
+                    </blockquote>
+
+                </header>
+
+                <div class="post-content" itemprop="articleBody">
+                    <p>Hello World!</p>
+
+                </div> -->
+            </article>
+        </div>
+
+
+        <div class="splitter" style="touch-action: none;">
+        </div>
+
+        <div class="panel-right" style="height: 700px;">
+            <span class="resize-warning">Use the tabs below to access the available resources in this lab.
+            </span>
+
+            <div class="bs-component">
+                <ul id="tabHeaders" class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active show" data-toggle="tab" href="#start">Select "Request Lab"</a>
+                    </li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane fade active show" id="start" height="650px">
+                        <p>Select "request lab" to the left to start this lab</p>
+                        <img class="imgcenter" src="https://labs.networkreliability.engineering/images/nrelabs.png" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

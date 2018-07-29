@@ -1,0 +1,12 @@
+---
+- name: Prep instances (sudo)
+  hosts: tag_kubernetes
+  become: yes
+  tasks:
+
+  - name: set master token
+    set_fact:
+      mastertoken: "mastertokenfoobar"
+
+  - debug:
+      msg: "{{ groups['tag_kubernetescontrollers'] | first }}"
