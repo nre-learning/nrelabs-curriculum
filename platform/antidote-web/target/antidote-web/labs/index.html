@@ -62,26 +62,35 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="labs">Troubleshooting
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="labs">
+                            <img src="../images/tshoot_selected.png" style="height:60px">
                             <span class="caret"></span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="labs">
+                            <a class="dropdown-item" href="../labs/troubleshooting.html">What is Troubleshooting?</a>
+                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="../labs/?labId=1">Lab 1 - Introduction</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="labs">Verification
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="labs">
+                            <img src="../images/verify_selected.png" style="height:60px">
                             <span class="caret"></span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="labs">
+                            <a class="dropdown-item" href="../labs/verification.html">What is Verification?</a>
+                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="../labs/?labId=1">Lab 1 - Introduction</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="labs">Configuration
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="labs">
+                            <img src="../images/configure_selected.png" style="height:60px">
                             <span class="caret"></span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="labs">
+                            <a class="dropdown-item" href="../labs/configuration.html">What is Configuration?</a>
+                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="../labs/?labId=1">Lab 1 - Introduction</a>
                         </div>
                     </li>
@@ -105,7 +114,33 @@
 
     <!-- For some reason the header is hiding behind the navbar. Giving it a little boost -->
     <div style="padding: 20px; margin: 0 auto;">
-        <p style="color: #FF7133;">NRE Labs is in early alpha status. Please bear with us as we
+        <div style="float: left;">
+            Labs
+            <ul class="pagination pagination-sm">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">&laquo;</a>
+                </li>
+                <li class="page-item active">
+                    <a class="page-link" href="#">1</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">2</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">3</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">4</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">5</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">&raquo;</a>
+                </li>
+            </ul>
+        </div>
+        <p style="float: left; color: #FF7133;">NRE Labs is in early alpha status. Please bear with us as we
             <a target="_blank" href="http://antidoteproject.readthedocs.io/en/latest/construction.html">continue working to make it awesome.</a>
         </p>
     </div>
@@ -131,9 +166,9 @@
         </div>
     </div>
 
-    <div class="panel-container" style="height: 700px;">
+    <div class="panel-container" style="height: 80%;">
 
-        <div class="panel-left content resizable" style="transition: all 0s ease 0s; width: 894px;">
+        <div class="panel-left content resizable" style="transition: all 0s ease 0s; width: 50%;">
 
             <article id="labGuide" class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
                 <!-- 
@@ -163,7 +198,7 @@
         <div class="splitter" style="touch-action: none;">
         </div>
 
-        <div class="panel-right" style="height: 700px;">
+        <div class="panel-right" style="height: 700px; width: 50%">
             <span class="resize-warning">Use the tabs below to access the available resources in this lab.
             </span>
 

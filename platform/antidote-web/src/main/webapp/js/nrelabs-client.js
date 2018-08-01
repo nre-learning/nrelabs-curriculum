@@ -280,8 +280,6 @@ function deleteLab() {
 async function guacInitRetry(endpoints) {
     for (; ;) {
         var guacSuccess = guacInit(endpoints);
-        console.log("POOP")
-        console.log(endpoints)
         if (guacSuccess == true) {
             break;
         }

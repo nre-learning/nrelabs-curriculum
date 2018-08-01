@@ -130,6 +130,9 @@ async function requestLab() {
 
         endpoints = sort("Name", endpoints);
         renderLabGuide(response2.LabGuide);
+
+        // for some reason, even though the syringe health checks work,
+        // we still can't connect right away. Adding short sleep to account for this for now
         await sleep(4000);
         addTabs(endpoints);
         $("#exampleModal").modal("hide");
@@ -277,8 +280,6 @@ function deleteLab() {
 async function guacInitRetry(endpoints) {
     for (; ;) {
         var guacSuccess = guacInit(endpoints);
-        console.log("POOP")
-        console.log(endpoints)
         if (guacSuccess == true) {
             break;
         }
