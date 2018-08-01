@@ -252,4 +252,4 @@
   tasks:
 
   - name: install weave via vendored manifest
-    shell: kubectl apply -f ~/antidote/infra/weaveinstall.yml
+    shell: kubectl apply -f ~/antidote/platform/weaveinstall.yml

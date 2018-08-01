@@ -4,6 +4,8 @@ resource "google_compute_disk" "centos7_disk" {
   # project = "${google_project.project.project_id}"
   project = "networkreliabilityengineering"
 
+  type = "pd-ssd"
+
   zone  = "${var.zone}"
   image = "${var.os["centos-7"]}"
 
