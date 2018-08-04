@@ -1,0 +1,266 @@
+######
+# This contains all of the kubernetes manifests for running the shared topology. This should be started with all of the other
+# platform resources, as it will be up all the time.
+######
+
+###
+# NETWORKS
+###
+
+---
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: 12-net
+  namespace: lab0
+spec: 
+  config: '{
+              "name": "12-net",
+              "type": "bridge",
+              "plugin": "bridge",
+              "bridge": "12-bridge",
+              "forceAddress": false,
+              "hairpinMode": false,
+              "delegate": {
+                      "hairpinMode": false
+              },
+              "ipam": {
+                "type": "host-local",
+                "subnet": "10.10.12.0/24"
+              }
+}'
+
+---
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: 23-net
+  namespace: lab0
+spec: 
+  config: '{
+  "name": "23-net",
+  "type": "bridge",
+  "plugin": "bridge",
+  "bridge": "23-bridge",
+  "forceAddress": false,
+  "hairpinMode": false,
+  "delegate": {
+          "hairpinMode": false
+  },
+  "ipam": {
+    "type": "host-local",
+    "subnet": "10.10.23.0/24"
+  }
+}'
+
+---
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: 31-net
+  namespace: lab0
+spec: 
+  config: '{
+  "name": "31-net",
+  "type": "bridge",
+  "plugin": "bridge",
+  "bridge": "31-bridge",
+  "forceAddress": false,
+  "hairpinMode": false,
+  "delegate": {
+          "hairpinMode": false
+  },
+  "ipam": {
+    "type": "host-local",
+    "subnet": "10.10.31.0/24"
+  }
+}'
+
+###
+# PODS
+###
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vqfx1
+  namespace: lab0
+  labels:
+    antidote_lab: "0"
+    podname: "vqfx1"
+  annotations:
+    k8s.v1.cni.cncf.io/networks: '[
+            { "name": "31-net" },
+            { "name": "12-net" }
+    ]'
+spec:
+  hostname: vqfx1
+  affinity:
+      podAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+            - key: antidote_lab
+              operator: In
+              values:
+              - "0"
+          topologyKey: kubernetes.io/hostname
+  containers:
+  - name: vqfx1
+    image: antidotelabs/vr-vqfx:15.1X53-D60
+    imagePullPolicy: Always
+    env:
+    - name: VQFX_HOSTNAME
+      value: "vqfx1"
+    securityContext:
+      privileged: true
+      allowPrivilegeEscalation: true
+    ports:
+    - containerPort: 22
+    - containerPort: 830
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vqfx2
+  namespace: lab0
+  labels:
+    antidote_lab: "0"
+    podname: "vqfx2"
+  annotations:
+    k8s.v1.cni.cncf.io/networks: '[
+            { "name": "12-net" },
+            { "name": "23-net" }
+    ]'
+spec:
+  hostname: vqfx2
+  affinity:
+      podAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+            - key: antidote_lab
+              operator: In
+              values:
+              - "0"
+          topologyKey: kubernetes.io/hostname
+  containers:
+  - name: vqfx2
+    image: antidotelabs/vr-vqfx:15.1X53-D60
+    imagePullPolicy: Always
+    env:
+    - name: VQFX_HOSTNAME
+      value: "vqfx2"
+    securityContext:
+      privileged: true
+      allowPrivilegeEscalation: true
+    ports:
+    - containerPort: 22
+    - containerPort: 830
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vqfx3
+  namespace: lab0
+  labels:
+    antidote_lab: "0"
+    podname: "vqfx3"
+  annotations:
+    k8s.v1.cni.cncf.io/networks: '[
+            { "name": "23-net" },
+            { "name": "31-net" }
+    ]'
+spec:
+  hostname: vqfx3
+  affinity:
+      podAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+            - key: antidote_lab
+              operator: In
+              values:
+              - "0"
+          topologyKey: kubernetes.io/hostname
+  containers:
+  - name: vqfx3
+    image: antidotelabs/vr-vqfx:15.1X53-D60
+    imagePullPolicy: Always
+    env:
+    - name: VQFX_HOSTNAME
+      value: "vqfx3"
+    securityContext:
+      privileged: true
+      allowPrivilegeEscalation: true
+    ports:
+    - containerPort: 22
+    - containerPort: 830
+
+
+###
+# SERVICES
+###
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: vqfx1
+  namespace: lab0
+spec:
+  selector:
+    antidote_lab: "0"
+    podname: "vqfx1"
+  ports:
+    - name: ssh
+      port: 22
+      targetPort: 22
+      nodePort: 30011
+    - name: netconf
+      port: 830
+      targetPort: 830
+  type: NodePort
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: vqfx2
+  namespace: lab0
+spec:
+  selector:
+    antidote_lab: "0"
+    podname: "vqfx2"
+  ports:
+    - name: ssh
+      port: 22
+      targetPort: 22
+      nodePort: 30012
+    - name: netconf
+      port: 830
+      targetPort: 830
+  type: NodePort
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: vqfx3
+  namespace: lab0
+spec:
+  selector:
+    antidote_lab: "0"
+    podname: "vqfx3"
+  ports:
+    - name: ssh
+      port: 22
+      targetPort: 22
+      nodePort: 30013
+    - name: netconf
+      port: 830
+      targetPort: 830
+  type: NodePort

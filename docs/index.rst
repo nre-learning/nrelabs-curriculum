@@ -13,6 +13,7 @@ Welcome to antidote's documentation!
    intro.rst
    usecases.rst
    infrastructure.rst
+   lessonnetworking.rst
    building/building.rst
    coreservices.rst
    labscheduling.rst

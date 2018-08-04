@@ -7,7 +7,9 @@ kubectl create secret tls tls-certificate --key letsencrypt/etc/live/networkreli
 
 echo "Creating platform services"
 
+kubectl create -f multusinstall.yml
 kubectl create -f nginx-controller.yaml
+kubectl create -f lab0.yaml
 kubectl create -f syringek8s.yaml
 kubectl create -f antidote-web/antidote-web.yaml
 

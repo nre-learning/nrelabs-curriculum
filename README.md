@@ -52,7 +52,11 @@ cd infrastructure/
 terraform apply
 ```
 
-Once terraform creates all of the necessary resources, it's time to run our ansible playbook.
+Once terraform creates all of the necessary resources, we first need to do a little manual work. We need to create an A record in the GCE dashboard for `vip.labs.networkreliability.engineering`, and add all of the provisioned NAT IPs (external) for each of the instances in the `workers` instance group.
+
+Do this before moving on. Eventually this will be replaced with a proper load balancing setup.
+
+Now, it's time to run our ansible playbook.
 
 ```
 gcloud config set core/project networkreliabilityengineering && gcloud compute config-ssh
@@ -73,6 +77,8 @@ sudo vi ~/.kube/config
 sudo vi /etc/hosts
 ```
 
+There are reasons why this is necessary right now but it shouldn't be in the future.
+
 You should now be able to run kubectl commands. Verify with:
 
 ```
@@ -83,7 +89,7 @@ Enter the `platform` directory and execute the shell script to upload all of the
 
 ```
 cd ../platform/
-
+./start.sh
 ```
 
 

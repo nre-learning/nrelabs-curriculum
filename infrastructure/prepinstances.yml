@@ -112,6 +112,17 @@
       debug:
         msg: "{{ output.stdout }}"
 
+    # - name: Clone multus repo to instance
+    #   git:
+    #     repo: 'https://github.com/intel/multus-cni'
+    #     dest: ~/multus-cni/
+    #     version: v3.0
+    #     force: yes
+    #   ignore_errors: yes
+
+    # - name: Install Multus via DS
+    #   shell: cat ~/multus-cni/images/{multus-daemonset.yml,flannel-daemonset.yml} | kubectl apply -f -
+
     - name: Get kube config file
       fetch:
         # src: /home/mierdin/.kube/config
@@ -146,18 +157,19 @@
       dest: /etc/kubernetes/node-kubeconfig.yaml
       force: no
 
-  - name: Clone multus repo to instance
-    git:
-      repo: 'https://github.com/intel/multus-cni'
-      dest: ~/multus-cni/
-      force: yes
-    ignore_errors: yes
+  # - name: Clone multus repo to instance
+  #   git:
+  #     repo: 'https://github.com/intel/multus-cni'
+  #     dest: ~/multus-cni/
+  #     version: v3.0
+  #     force: yes
+  #   ignore_errors: yes
 
-  - name: Compile multus
-    shell: cd ~/multus-cni && ./build
+  # - name: Compile multus
+  #   shell: cd ~/multus-cni && ./build
 
-  - name: Install multus
-    shell: cp ~/multus-cni/bin/multus /opt/cni/bin
+  # - name: Install multus
+  #   shell: cp ~/multus-cni/bin/multus /opt/cni/bin
 
   - name: Create CNI directory
     file:
@@ -251,5 +263,5 @@
   hosts: tag_kubernetescontrollers
   tasks:
 
-  - name: install weave via vendored manifest
+  - name: installweave via vendored manifest
     shell: kubectl apply -f ~/antidote/platform/weaveinstall.yml

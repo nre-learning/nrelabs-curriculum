@@ -1,0 +1,7 @@
+---
+labName: lab-11
+labID: 11
+category: introductory
+sharedTopology: yes
+notebook: yes
+labguide: "https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-1/README.md"

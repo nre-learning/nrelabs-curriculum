@@ -1,6 +1,0 @@
-FROM marcelwiget/vmx-docker-light
-
-RUN apt-get update
-RUN apt-get install -y python python3 python-pip python3-pip
-RUN sudo pip3 install --upgrade pip
-RUN pip install jupyter --ignore-installed six
