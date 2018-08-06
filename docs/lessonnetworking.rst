@@ -1,7 +1,9 @@
-Lessons Networking in Antidote
+.. networking:
+
+Lab Networking
 ================================
 
-In order to connect 
+In order to connect
 
 - Use affinity rules to place pods within the same lesson instance all on the same host. Note that a lesson instance is specific to a user's session.
   Another user will have a different lesson instance even if it's from the exact same lesson ID/definition.
@@ -46,7 +48,7 @@ We'll demonstrate this with a simple busybox image for simplicity.
     kind: NetworkAttachmentDefinition
     metadata:
         name: 12-net
-    spec: 
+    spec:
         config: '{
             "name": "12-net",
             "type": "bridge",
@@ -68,7 +70,7 @@ We'll demonstrate this with a simple busybox image for simplicity.
     kind: NetworkAttachmentDefinition
     metadata:
         name: 23-net
-    spec: 
+    spec:
         config: '{
             "name": "23-net",
             "type": "bridge",
@@ -90,7 +92,7 @@ We'll demonstrate this with a simple busybox image for simplicity.
     kind: NetworkAttachmentDefinition
     metadata:
         name: 31-net
-    spec: 
+    spec:
         config: '{
             "name": "31-net",
             "type": "bridge",
@@ -250,7 +252,7 @@ Let's take a peek into our pods to look at the network interfaces it sees:
 
 .. code:: bash
 
-    kubectl exec bb1 ip addr show  
+    kubectl exec bb1 ip addr show
 
     1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue qlen 1000
         link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
@@ -279,7 +281,7 @@ Let's take a peek into our pods to look at the network interfaces it sees:
 
 .. code:: bash
 
-    kubectl exec bb2 ip addr show 
+    kubectl exec bb2 ip addr show
 
         link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
         inet 127.0.0.1/8 scope host lo
@@ -307,7 +309,7 @@ Let's take a peek into our pods to look at the network interfaces it sees:
 
 .. code:: bash
 
-    kubectl exec bb3 ip addr show       
+    kubectl exec bb3 ip addr show
 
     1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue qlen 1000
         link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
@@ -338,7 +340,7 @@ We can, of course, ping bb2 and bb3 from bb1 using the addresses shown above:
 
 .. code:: bash
 
-    kubectl exec -it bb1 /bin/sh 
+    kubectl exec -it bb1 /bin/sh
     / # ping 10.10.12.6 -c3
     PING 10.10.12.6 (10.10.12.6): 56 data bytes
     64 bytes from 10.10.12.6: seq=0 ttl=64 time=0.101 ms
@@ -363,7 +365,7 @@ DNS
 
 DNS in Antidote is done the typical Kubernetes way, outlined in https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/.
 
-Each pod in a lab, whether a 
+Each pod in a lab, whether a
 
 
 in-pod

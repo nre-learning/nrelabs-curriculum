@@ -1,9 +1,6 @@
-.. antidote documentation master file, created by
-   sphinx-quickstart on Wed Jul 18 00:42:07 2018.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+.. antidote documentation master file
 
-Welcome to antidote's documentation!
+Welcome to Antidote's documentation!
 ====================================
 
 .. toctree::
@@ -11,14 +8,13 @@ Welcome to antidote's documentation!
    :caption: Contents:
 
    intro.rst
-   usecases.rst
+   nrelabs.rst
    infrastructure.rst
    lessonnetworking.rst
-   building/building.rst
-   coreservices.rst
    labscheduling.rst
    roadmap.rst
-   design.rst
+   contributing.rst
+   contact.rst
 
 Indices and tables
 ==================
