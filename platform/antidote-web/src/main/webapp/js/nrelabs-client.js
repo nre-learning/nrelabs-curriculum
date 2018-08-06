@@ -38,6 +38,10 @@ function getRandomModalMessage() {
         "Duct-taping 53 javascript frameworks together...",
         "Dividing by < ERR - DIVIDE BY ZERO. SHUTTING DOWN. AND I WAS JUST LEARNING TO LOVE.....>",
         "try { toilTime / automatingTime; } catch (DivideByZeroException e) { panic(“More NRE Labs”); }",
+        "Thank you for your call. You've reached 1-800-NRE-Labs. Please hold for Dr. Automation.",
+        "I'd tell you a joke about UDP, but you probably wouldn't get it.",
+        "Now rendering an NRE's best friend for you to play fetch with.",
+        "Our Lab-Retriever, CloudDog, is still a puppy. Thanks for your patience.",
         "Calculating airspeed velocity of an unladen swallow..."
     ];
     return messages[Math.floor(Math.random() * messages.length)];
@@ -370,5 +374,3 @@ function guacInit(endpoints) {
 document.addEventListener('DOMContentLoaded', function () {
     provisionLab();
 });
-
-
