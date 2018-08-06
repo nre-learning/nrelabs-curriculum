@@ -4,7 +4,7 @@
 NRE Labs
 ================================
 
-NRE Labs flagship and reference deployment of Antidote.
+NRE Labs is the flagship and reference deployment of Antidote.
 
 .. image:: images/NRELabs-Large-onBlack.png
 
