@@ -56,13 +56,13 @@ related Lessons.
 
 Here is a list of Courses currently under consideration and development:
 
-# Troubleshooting and Common Tasks
-# Configuration
-# Telemetry
-# Security
-# Testing and Validation
-# Infrastructure as code
-# Event-driven infrastructure
+#. Troubleshooting and Common Tasks
+#. Configuration
+#. Telemetry
+#. Security
+#. Testing and Validation
+#. Infrastructure as code
+#. Event-driven infrastructure
 
 NRE Labs Roadmap
 ---------------------------
