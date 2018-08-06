@@ -1,0 +1,35 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: napalm
+spec:
+  template:
+    metadata:
+      name: napalm
+      annotations:
+        k8s.v1.cni.cncf.io/networks: '[
+                { "name": "dummy" }
+        ]'
+    spec:
+      containers:
+      - name: napalm
+        image: antidotelabs/napalm 
+        command:
+         - napalm
+         - --user=root
+         - --password=VR-netlab9
+         - --vendor=junos
+         - --optional_args=port=30021
+         - vip.labs.networkreliability.engineering
+         - configure
+         - /vqfx1.txt
+         - --strategy=merge
+        volumeMounts:
+          - name: vqfx1config
+            mountPath: /vqfx1.txt
+      volumes:
+        - name: vqfx1config
+          hostPath:
+            path: /home/mierdin/antidote/platform/sharedlab/vqfx1.txt
+      restartPolicy: Never

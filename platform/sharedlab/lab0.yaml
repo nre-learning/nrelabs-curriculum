@@ -12,7 +12,7 @@ apiVersion: "k8s.cni.cncf.io/v1"
 kind: NetworkAttachmentDefinition
 metadata:
   name: 12-net
-  namespace: lab0
+  # namespace: lab0
 spec: 
   config: '{
               "name": "12-net",
@@ -35,7 +35,7 @@ apiVersion: "k8s.cni.cncf.io/v1"
 kind: NetworkAttachmentDefinition
 metadata:
   name: 23-net
-  namespace: lab0
+  # namespace: lab0
 spec: 
   config: '{
   "name": "23-net",
@@ -58,7 +58,7 @@ apiVersion: "k8s.cni.cncf.io/v1"
 kind: NetworkAttachmentDefinition
 metadata:
   name: 31-net
-  namespace: lab0
+  # namespace: lab0
 spec: 
   config: '{
   "name": "31-net",
@@ -85,7 +85,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: vqfx1
-  namespace: lab0
+  # namespace: lab0
   labels:
     antidote_lab: "0"
     podname: "vqfx1"
@@ -125,7 +125,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: vqfx2
-  namespace: lab0
+  # namespace: lab0
   labels:
     antidote_lab: "0"
     podname: "vqfx2"
@@ -165,7 +165,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: vqfx3
-  namespace: lab0
+  # namespace: lab0
   labels:
     antidote_lab: "0"
     podname: "vqfx3"
@@ -210,7 +210,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: vqfx1
-  namespace: lab0
+  # namespace: lab0
 spec:
   selector:
     antidote_lab: "0"
@@ -219,7 +219,7 @@ spec:
     - name: ssh
       port: 22
       targetPort: 22
-      nodePort: 30011
+      nodePort: 30021
     - name: netconf
       port: 830
       targetPort: 830
@@ -230,7 +230,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: vqfx2
-  namespace: lab0
+  # namespace: lab0
 spec:
   selector:
     antidote_lab: "0"
@@ -239,7 +239,7 @@ spec:
     - name: ssh
       port: 22
       targetPort: 22
-      nodePort: 30012
+      nodePort: 30022
     - name: netconf
       port: 830
       targetPort: 830
@@ -250,7 +250,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: vqfx3
-  namespace: lab0
+  # namespace: lab0
 spec:
   selector:
     antidote_lab: "0"
@@ -259,7 +259,7 @@ spec:
     - name: ssh
       port: 22
       targetPort: 22
-      nodePort: 30013
+      nodePort: 30023
     - name: netconf
       port: 830
       targetPort: 830
