@@ -68,7 +68,7 @@ public class GuacamoleTunnelServlet
         guacConfig.setParameter("hostname", "vip.labs.networkreliability.engineering");
         guacConfig.setParameter("port", devicePort);
         guacConfig.setParameter("username", "root");
-        guacConfig.setParameter("password", "Password1!");
+        guacConfig.setParameter("password", "VR-netlab9");
 
         // Connect to guacd - everything is hard-coded here.
         GuacamoleSocket socket = new ConfiguredGuacamoleSocket(

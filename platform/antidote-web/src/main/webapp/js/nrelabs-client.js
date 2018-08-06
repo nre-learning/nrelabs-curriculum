@@ -183,9 +183,11 @@ function addTabs(endpoints) {
             if (i == 0) {
                 newTabContent.classList.add('active', 'show');
             }
+            newTabContent.height="650px"
 
             var newGuacDiv = document.createElement("DIV");
             newGuacDiv.id = "display" + endpoints[i].Name
+            newGuacDiv.height="600px"
 
             newTabContent.appendChild(newGuacDiv)
 
@@ -305,6 +307,9 @@ function guacInit(endpoints) {
             thisTerminal.guac = new Guacamole.Client(
                 new Guacamole.HTTPTunnel("../tunnel")
             );
+
+            console.log("sending size")
+            thisTerminal.guac.sendSize(950, 600)
 
             thisTerminal.guac.onerror = function (error) {
                 console.log(error);

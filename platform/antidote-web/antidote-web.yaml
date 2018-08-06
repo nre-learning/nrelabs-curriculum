@@ -6,6 +6,8 @@ metadata:
   labels:
     app: antidote-web
     antidote_role: infra
+  annotations:
+    k8s.v1.cni.cncf.io/networks: dummy
 spec:
   containers:
   - name: guacd
