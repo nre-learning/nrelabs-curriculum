@@ -6,9 +6,9 @@ talk about the strange, not quote canonical way we're using k8s for lab scheduli
 Talk about isolation
 
 What is a Lab?
-----------
+---------------
 
-When a user logs in to the NRE Labs portal to access an excercise, a variety of provisioning activities happen
+When a user logs in to the NRE Labs portal to access an exercise, a variety of provisioning activities happen
 automatically on the back-end. A big portion of this is defining and scheduling kubernetes resources to support that exercise.
 
 We need `Pods <https://kubernetes.io/docs/concepts/workloads/pods/pod/>`_ to run the container images for our network devices, Jupyter notebooks, and anything else
