@@ -1,20 +1,51 @@
 ---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: git-clone
+data:
+  git-clone.sh: |
+    #!/bin/sh -e
+    REPO=$1
+    REF=$2
+    DIR=$3
+    # Init Containers will re-run on Pod restart. Remove the directory's contents
+    # and reprovision when this happens.
+    if [ -d "$DIR" ]; then
+        rm -rf $( find $DIR -mindepth 1 )
+    fi
+    git clone $REPO $DIR
+    cd $DIR
+    git reset --hard $REF
+
+---
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: napalm
+  name: configure-lab0-vqfx1
 spec:
   template:
     metadata:
       name: napalm
-      annotations:
-        k8s.v1.cni.cncf.io/networks: '[
-                { "name": "dummy" }
-        ]'
     spec:
+      initContainers:
+      - name: git-clone
+        image: alpine/git # Any image with git will do
+        command:
+        - /usr/local/git/git-clone.sh
+        args:
+        - "https://github.com/nre-learning/antidote.git"
+        - "master"
+        - "/antidote"
+        volumeMounts:
+        - name: git-clone
+          mountPath: /usr/local/git
+        - name: git-volume
+          mountPath: /antidote
+
       containers:
       - name: napalm
-        image: antidotelabs/napalm 
+        image: antidotelabs/napalm
         command:
          - napalm
          - --user=root
@@ -23,13 +54,118 @@ spec:
          - --optional_args=port=30021
          - vip.labs.networkreliability.engineering
          - configure
-         - /vqfx1.txt
+         - /antidote/platform/sharedlab/vqfx1.txt
          - --strategy=merge
         volumeMounts:
-          - name: vqfx1config
-            mountPath: /vqfx1.txt
+          - mountPath: /antidote
+            name: git-volume
       volumes:
-        - name: vqfx1config
-          hostPath:
-            path: /home/mierdin/antidote/platform/sharedlab/vqfx1.txt
+        - name: git-volume
+          emptyDir: {}
+        - name: git-clone
+          configMap:
+            name: git-clone
+            defaultMode: 0755
+      restartPolicy: Never
+
+
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: configure-lab0-vqfx2
+spec:
+  template:
+    metadata:
+      name: napalm
+    spec:
+      initContainers:
+      - name: git-clone
+        image: alpine/git # Any image with git will do
+        command:
+        - /usr/local/git/git-clone.sh
+        args:
+        - "https://github.com/nre-learning/antidote.git"
+        - "master"
+        - "/antidote"
+        volumeMounts:
+        - name: git-clone
+          mountPath: /usr/local/git
+        - name: git-volume
+          mountPath: /antidote
+
+      containers:
+      - name: napalm
+        image: antidotelabs/napalm
+        command:
+         - napalm
+         - --user=root
+         - --password=VR-netlab9
+         - --vendor=junos
+         - --optional_args=port=30022
+         - vip.labs.networkreliability.engineering
+         - configure
+         - /antidote/platform/sharedlab/vqfx2.txt
+         - --strategy=merge
+        volumeMounts:
+          - mountPath: /antidote
+            name: git-volume
+      volumes:
+        - name: git-volume
+          emptyDir: {}
+        - name: git-clone
+          configMap:
+            name: git-clone
+            defaultMode: 0755
+      restartPolicy: Never
+
+
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: configure-lab0-vqfx3
+spec:
+  template:
+    metadata:
+      name: napalm
+    spec:
+      initContainers:
+      - name: git-clone
+        image: alpine/git # Any image with git will do
+        command:
+        - /usr/local/git/git-clone.sh
+        args:
+        - "https://github.com/nre-learning/antidote.git"
+        - "master"
+        - "/antidote"
+        volumeMounts:
+        - name: git-clone
+          mountPath: /usr/local/git
+        - name: git-volume
+          mountPath: /antidote
+
+      containers:
+      - name: napalm
+        image: antidotelabs/napalm
+        command:
+         - napalm
+         - --user=root
+         - --password=VR-netlab9
+         - --vendor=junos
+         - --optional_args=port=30023
+         - vip.labs.networkreliability.engineering
+         - configure
+         - /antidote/platform/sharedlab/vqfx3.txt
+         - --strategy=merge
+        volumeMounts:
+          - mountPath: /antidote
+            name: git-volume
+      volumes:
+        - name: git-volume
+          emptyDir: {}
+        - name: git-clone
+          configMap:
+            name: git-clone
+            defaultMode: 0755
       restartPolicy: Never
