@@ -1,1 +1,1 @@
-Point to docs page on this shared lab
+See https://antidoteproject.readthedocs.io/
