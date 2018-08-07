@@ -74,6 +74,23 @@ data:
     {
       "name": "multus-cni-network",
       "type": "multus",
+      "delegates": [
+        {
+          "name": "defaultnet",
+          "type": "bridge",
+          "plugin": "bridge",
+          "bridge": "default-br0",
+          "forceAddress": false,
+          "hairpinMode": false,
+          "delegate": {
+                  "hairpinMode": false
+          },
+          "ipam": {
+            "type": "host-local",
+            "subnet": 192.168.0.0/16
+          }
+        }
+      ],
       "kubeconfig": "/etc/cni/net.d/multus.d/multus.kubeconfig"
     }
 # -------------- for openshift.
@@ -108,7 +125,12 @@ spec:
       serviceAccountName: multus
       containers:
       - name: kube-multus
-        image: nfvpe/multus:v3.0
+        # TODO(mierdin): Update to version after v3.0 when it comes out
+        # or use v3.0 once the commits have been updated to include that fix
+        # https://github.com/intel/multus-cni/issues/122
+        # image: nfvpe/multus:v3.0
+        image: nfvpe/multus:latest
+        imagePullPolicy: Always
         resources:
           requests:
             cpu: "100m"
