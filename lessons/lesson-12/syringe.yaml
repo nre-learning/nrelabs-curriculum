@@ -5,11 +5,11 @@ course: configuration
 # Verify this is the default
 # sharedTopology: false
 devices:
-- name: vqrx1
+- name: vqfx1
   image: antidotelabs/vr-vqfx:15.1X53-D60
-- name: vqrx2
+- name: vqfx2
   image: antidotelabs/vr-vqfx:15.1X53-D60
-- name: vqrx3
+- name: vqfx3
   image: antidotelabs/vr-vqfx:15.1X53-D60
 connections:
 - a: vqfx1
