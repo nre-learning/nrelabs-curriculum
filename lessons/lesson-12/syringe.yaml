@@ -1,0 +1,43 @@
+---
+lessonName: lab-12
+lessonID: 12
+course: configuration
+# Verify this is the default
+# sharedTopology: false
+devices:
+- name: vqrx1
+  image: antidotelabs/vr-vqfx:15.1X53-D60
+- name: vqrx2
+  image: antidotelabs/vr-vqfx:15.1X53-D60
+- name: vqrx3
+  image: antidotelabs/vr-vqfx:15.1X53-D60
+connections:
+- a: vqfx1
+  b: vqfx2
+- a: vqfx2
+  b: vqfx3
+- a: vqfx3
+  b: vqfx1
+stages:
+  1:
+    labguide: stage1/guide.md
+
+    # If sharedTopology is enabled, this is ignored.
+    configs:
+      vqfx1: stage1/configs/vqfx1.txt
+      vqfx2: stage1/configs/vqfx2.txt
+      vqfx3: stage1/configs/vqfx3.txt
+
+    # Optional. If detected, a notebook instance will be spun up when this stage is set, and the referenced file will be placed there.
+    notebook: stage1/notebook.ipynb
+  2:
+    labguide: stage2/guide.md
+
+    # If sharedTopology is enabled, this is ignored.
+    configs:
+      vqfx1: stage2/configs/vqfx1.txt
+      vqfx2: stage2/configs/vqfx2.txt
+      vqfx3: stage2/configs/vqfx3.txt
+
+    # Optional. If detected, a notebook instance will be spun up when this stage is set, and the referenced file will be placed there.
+    notebook: stage2/notebook.ipynb
