@@ -20,7 +20,7 @@ connections:
   b: vqfx1
 stages:
   1:
-    labguide: stage1/guide.md
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-1/stage1/guide.md
 
     # If sharedTopology is enabled, this is ignored.
     configs:
@@ -28,10 +28,10 @@ stages:
       vqfx2: stage1/configs/vqfx2.txt
       vqfx3: stage1/configs/vqfx3.txt
 
-    # Optional. If detected, a notebook instance will be spun up when this stage is set, and the referenced file will be placed there.
+    # Optional. If set, a jupyter instance will be spun up when this stage is set, and the referenced file will be placed there.
     notebook: stage1/notebook.ipynb
   2:
-    labguide: stage2/guide.md
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-1/stage2/guide.md
 
     # If sharedTopology is enabled, this is ignored.
     configs:
@@ -39,5 +39,5 @@ stages:
       vqfx2: stage2/configs/vqfx2.txt
       vqfx3: stage2/configs/vqfx3.txt
 
-    # Optional. If detected, a notebook instance will be spun up when this stage is set, and the referenced file will be placed there.
+    # Optional. If set, a jupyter instance will be spun up when this stage is set, and the referenced file will be placed there.
     notebook: stage2/notebook.ipynb
