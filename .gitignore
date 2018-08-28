@@ -1,0 +1,41 @@
+.terraform/
+.vagrant/
+*.log
+*tfstate*
+*.qcow2*
+*account.json*
+*.retry
+hosts
+venv/
+
+# This is where I placed my updated gcp provider
+terraform.d/
+
+# This is where ansible places files for copying between instances
+tmp/
+
+csrx-18.1R1.9.img.bz2
+
+infra/antidote-web/target/
+
+# Certs stuff
+platform/ssl/
+platform/letsencrypt/
+
+# Docs
+docs/.Python
+docs/bin/
+docs/include/
+docs/lib/
+docs/_build/
+*.DS_Store*
+docs/local/
+*pip-selfcheck.json
+docs/virtualenv/
+
+*billing_override.tf*
+
+_old_contrail/
+*ansiblekey.json
+
+platform/antidote-web/target/
