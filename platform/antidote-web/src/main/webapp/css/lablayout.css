@@ -161,7 +161,7 @@ footer {
     flex-direction: row;
     overflow: hidden;
     height: 100%;
-    /* flex: 1 1 auto; */
+    flex: 1 1 auto;
     xtouch-action: none
 }
 

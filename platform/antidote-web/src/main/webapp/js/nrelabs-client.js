@@ -8,14 +8,14 @@ function getSession() {
     return sessionCookie;
 }
 
-function getLabId() {
+function getLessonId() {
     var url = new URL(window.location.href);
-    var labId = url.searchParams.get("labId");
-    if (labId == null || labId == "") {
-        alert("Error: labId not provided. Page will not load correctly.")
+    var lessonId = url.searchParams.get("lessonId");
+    if (lessonId == null || lessonId == "") {
+        alert("Error: lessonId not provided. Page will not load correctly.")
         return 0;
     }
-    return parseInt(labId);
+    return parseInt(lessonId);
 }
 
 function makeid() {
@@ -47,7 +47,7 @@ function getRandomModalMessage() {
     return messages[Math.floor(Math.random() * messages.length)];
 }
 
-async function requestLab() {
+async function requestLesson() {
 
     var myNode = document.getElementById("tabHeaders");
     while (myNode.firstChild) {
@@ -60,22 +60,22 @@ async function requestLab() {
     }
 
     var data = {};
-    data.labId = getLabId();
+    data.lessonId = getLessonId();
     data.sessionId = getSession();
 
+    console.log("Sent lesson ID:" + data.lessonId);
     console.log("Sent session ID:" + data.sessionId);
-    console.log("Sent lab ID:" + data.labId);
 
     var json = JSON.stringify(data);
 
-    // Send lab request
+    // Send lesson request
     // TODO(mierdin): for both of these loops, need to break if we either get a non 200 status for too long,
-    // or if the lab fails to provision (ready: true) before a timeout. Can't just loop endlessly.
+    // or if the lesson fails to provision (ready: true) before a timeout. Can't just loop endlessly.
     for (; ;) {
         var xhttp = new XMLHttpRequest();
 
         // Doing synchronous calls for now, need to convert to asynchronous
-        xhttp.open("POST", "https://labs.networkreliability.engineering/syringe/exp/livelab", false);
+        xhttp.open("POST", "https://labs.networkreliability.engineering/syringe/exp/livelesson", false);
         xhttp.setRequestHeader('Content-type', 'application/json; charset=utf-8');
         xhttp.send(json);
 
@@ -89,14 +89,14 @@ async function requestLab() {
 
     var attempts = 1;
 
-    // get livelab
+    // get livelesson
     for (; ;) {
         response = JSON.parse(xhttp.responseText);
-        console.log("Received lab UUID from syringe: " + response.id)
+        console.log("Received lesson UUID from syringe: " + response.id)
 
-        // Here we go get the livelab we requested, verify it's ready, and once it is, start wiring up endpoints.
+        // Here we go get the livelesson we requested, verify it's ready, and once it is, start wiring up endpoints.
         var xhttp2 = new XMLHttpRequest();
-        xhttp2.open("GET", "https://labs.networkreliability.engineering/syringe/exp/livelab/" + response.id, false);
+        xhttp2.open("GET", "https://labs.networkreliability.engineering/syringe/exp/livelesson/" + response.id, false);
         xhttp2.setRequestHeader('Content-type', 'application/json; charset=utf-8');
         xhttp2.send();
 
@@ -106,13 +106,13 @@ async function requestLab() {
             continue;
         }
 
-        console.log("Received lab information from syringe:")
+        console.log("Received lesson information from syringe:")
         console.log(JSON.parse(xhttp2.responseText));
 
         var response2 = JSON.parse(xhttp2.responseText);
 
         if (!response2.Ready) {
-            console.log("GET received data, but lab not ready. Attempt #" + attempts)
+            console.log("GET received data, but lesson not ready. Attempt #" + attempts)
             attempts++;
             await sleep(2000);
             continue;
@@ -137,6 +137,7 @@ async function requestLab() {
 
         // for some reason, even though the syringe health checks work,
         // we still can't connect right away. Adding short sleep to account for this for now
+        // TODO try removing this now that the health check is SSH based
         await sleep(4000);
         addTabs(endpoints);
         $("#exampleModal").modal("hide");
@@ -157,6 +158,12 @@ function renderLabGuide(url) {
     console.log("Rendered to HTML");
     console.log(lgGetter.responseText);
     console.log(labHtml);
+}
+
+function rescale(browserDisp, guacDisp) {
+    var scale = Math.min(browserDisp.offsetWidth / Math.max(guacDisp.getWidth(), 1), browserDisp.offsetHeight / Math.max(guacDisp.getHeight(), 1));
+    console.log("Scale factor is: " + scale)
+    guacDisp.scale(scale);
 }
 
 function addTabs(endpoints) {
@@ -187,11 +194,15 @@ function addTabs(endpoints) {
             if (i == 0) {
                 newTabContent.classList.add('active', 'show');
             }
-            newTabContent.height="650px"
+            // newTabContent.height="350px";
+            // newTabContent.style.height = "350px";
+            newTabContent.style="height: 100%;";
 
             var newGuacDiv = document.createElement("DIV");
             newGuacDiv.id = "display" + endpoints[i].Name
-            newGuacDiv.height="600px"
+            // newGuacDiv.height="300px";
+            // newGuacDiv.style.height = "300px";
+
 
             newTabContent.appendChild(newGuacDiv)
 
@@ -231,7 +242,7 @@ function addTabs(endpoints) {
             iframe.width = "100%"
             iframe.height = "600px"
             iframe.frameBorder = "0"
-            iframe.src = "https://vip.labs.networkreliability.engineering:" + String(endpoints[i].Port) + "/notebooks/work/lesson.ipynb"
+            iframe.src = "https://vip.labs.networkreliability.engineering:" + String(endpoints[i].Port) + "/notebooks/lesson-" + getLessonId() + "/lesson.ipynb"
             newTabContent.appendChild(iframe);
             document.getElementById("myTabContent").appendChild(newTabContent);
 
@@ -250,38 +261,39 @@ function sleep(ms) {
 //     $("#exampleModal").modal("hide");
 // }
 
-function provisionLab() {
+function provisionLesson() {
     var modal = document.getElementById("modal-body");
     modal.removeChild(modal.firstChild);
     var modalMessage = document.createTextNode(getRandomModalMessage());
     modal.appendChild(modalMessage);
     $("#exampleModal").modal("show");
 
-    requestLab();
+    requestLesson();
 
     // $("#exampleModal").modal("hide");
 }
 
 // Do NOT do this. Horrendous User experience.
-// window.onbeforeunload = deleteLab;
+// window.onbeforeunload = deleteLesson;
 //
-// Call deleteLab ONLY in response to an explicit user event, where they're able to understand
+// Call deleteLesson ONLY in response to an explicit user event, where they're able to understand
 // what it means. Do not call this on a load or unload event. Seriously. Kittens might die.
+// Actually don't do this either. Just rely on GC
 //
-function deleteLab() {
+// function deleteLesson() {
 
-    var data = {};
-    data.labId = 1;
-    data.sessionId = getSession();
-    var json = JSON.stringify(data);
+//     var data = {};
+//     data.Id = 1;
+//     data.sessionId = getSession();
+//     var json = JSON.stringify(data);
 
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("DELETE", "https://labs.networkreliability.engineering/syringe/exp/livelab", true);
-    xhttp.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-    xhttp.send(json);
+//     var xhttp = new XMLHttpRequest();
+//     xhttp.open("DELETE", "https://labs.networkreliability.engineering/syringe/exp/livelesson", true);
+//     xhttp.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+//     xhttp.send(json);
 
-    return null;
-}
+//     return null;
+// }
 
 async function guacInitRetry(endpoints) {
     for (; ;) {
@@ -305,15 +317,14 @@ function guacInit(endpoints) {
 
             var thisTerminal = {};
 
+            var tunnel = new Guacamole.HTTPTunnel("../tunnel")
+
             console.log("Adding guac configuration for " + endpoints[i].Name)
 
             thisTerminal.display = document.getElementById("display" + endpoints[i].Name);
             thisTerminal.guac = new Guacamole.Client(
-                new Guacamole.HTTPTunnel("../tunnel")
+                tunnel
             );
-
-            console.log("sending size")
-            thisTerminal.guac.sendSize(950, 600)
 
             thisTerminal.guac.onerror = function (error) {
                 console.log(error);
@@ -321,7 +332,8 @@ function guacInit(endpoints) {
                 return false
             };
 
-            thisTerminal.guac.connect(endpoints[i].Port);
+            connectData = endpoints[i].Port + ";" + String(document.getElementById("tabPane").offsetWidth) + ";" + String(document.getElementById("tabPane").offsetHeight - 42);
+            thisTerminal.guac.connect(connectData);
 
             thisTerminal.display.appendChild(thisTerminal.guac.getDisplay().getElement());
 
@@ -329,7 +341,6 @@ function guacInit(endpoints) {
             window.onunload = function () {
                 thisTerminal.guac.disconnect();
             }
-
 
             thisTerminal.mouse = new Guacamole.Mouse(thisTerminal.guac.getDisplay().getElement());
             thisTerminal.mouse.onmousedown =
@@ -372,5 +383,5 @@ function guacInit(endpoints) {
 
 // Run all this once the DOM is fully rendered so we can get a handle on the DIVs
 document.addEventListener('DOMContentLoaded', function () {
-    provisionLab();
+    provisionLesson();
 });

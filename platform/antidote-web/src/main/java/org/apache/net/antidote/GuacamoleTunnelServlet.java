@@ -12,33 +12,11 @@ import org.apache.guacamole.net.InetGuacamoleSocket;
 import org.apache.guacamole.net.SimpleGuacamoleTunnel;
 import org.apache.guacamole.protocol.ConfiguredGuacamoleSocket;
 import org.apache.guacamole.protocol.GuacamoleConfiguration;
+import org.apache.guacamole.protocol.GuacamoleClientInformation;
 import org.apache.guacamole.servlet.GuacamoleHTTPTunnelServlet;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-
-class Lab {
-    public int LabUUID;
-    public int labId;
-    public Endpoint[] endpoints = new Endpoint[]{};
-    public boolean ready;
-}
-
-class Endpoint {
-    public String name;
-    public String type;
-    public String port;
-}
 
 public class GuacamoleTunnelServlet
     extends GuacamoleHTTPTunnelServlet {
@@ -49,11 +27,21 @@ public class GuacamoleTunnelServlet
 
         Logger log = Logger.getLogger("com.antidote.servlet");
 
-        // Get device port from request body
         String devicePort = "";
+        Integer width = 0;
+        Integer height = 0;
         try {
             BufferedReader reader = request.getReader();
-            devicePort = reader.readLine();
+            String connectData = reader.readLine();
+
+            log.info("Raw connect data: " + connectData);
+
+            String data[]= connectData.split(";");
+
+            devicePort = data[0];
+            width = Integer.parseInt(data[1]);
+            height = Integer.parseInt(data[2]);
+
             reader.close();
         } catch (IOException e) {
             log.info("Problem getting device port " + e.getMessage());
@@ -70,10 +58,17 @@ public class GuacamoleTunnelServlet
         guacConfig.setParameter("username", "root");
         guacConfig.setParameter("password", "VR-netlab9");
 
+        // TODO(mierdin): Temporary fix for now, we're passing screen height and width in connection data. Think there should be a better way
+        // http://apache-guacamole-general-user-mailing-list.2363388.n4.nabble.com/SSH-size-and-colors-of-canvas-td988.html
+        GuacamoleClientInformation clientInfo = new GuacamoleClientInformation();
+        clientInfo.setOptimalScreenWidth(width);
+        clientInfo.setOptimalScreenHeight(height);
+
         // Connect to guacd - everything is hard-coded here.
         GuacamoleSocket socket = new ConfiguredGuacamoleSocket(
                 new InetGuacamoleSocket("localhost", 4822),
-                guacConfig
+                guacConfig,
+                clientInfo
         );
 
         GuacamoleTunnel tunnel = new SimpleGuacamoleTunnel(socket);

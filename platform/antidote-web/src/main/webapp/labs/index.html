@@ -113,7 +113,7 @@
     </div>
 
     <!-- For some reason the header is hiding behind the navbar. Giving it a little boost -->
-    <div style="padding: 20px; margin: 0 auto;">
+    <div style="margin: 0 auto;">
         <div style="float: left;">
             Labs
             <ul class="pagination pagination-sm">
@@ -166,7 +166,7 @@
         </div>
     </div>
 
-    <div class="panel-container" style="height: 80%;">
+    <div class="panel-container">
 
         <div class="panel-left content resizable" style="transition: all 0s ease 0s; width: 50%;">
 
@@ -198,18 +198,18 @@
         <div class="splitter" style="touch-action: none;">
         </div>
 
-        <div class="panel-right" style="height: 700px; width: 50%">
+        <div class="panel-right" style="height: 100%; width: 50%">
             <span class="resize-warning">Use the tabs below to access the available resources in this lab.
             </span>
 
-            <div class="bs-component">
+            <div id="tabPane" class="bs-component">
                 <ul id="tabHeaders" class="nav nav-tabs">
                     <li class="nav-item">
                         <a class="nav-link active show" data-toggle="tab" href="#start">Select "Request Lab"</a>
                     </li>
                 </ul>
                 <div id="myTabContent" class="tab-content">
-                    <div class="tab-pane fade active show" id="start" height="650px">
+                    <div class="tab-pane fade active show" id="start" style="height: 100%;">
                         <p>Select "request lab" to the left to start this lab</p>
                         <img class="imgcenter" src="https://labs.networkreliability.engineering/images/nrelabs.png" />
                     </div>
