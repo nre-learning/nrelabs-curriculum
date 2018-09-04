@@ -63,7 +63,7 @@
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="labs">
-                            <img src="../images/tshoot_selected.png" style="height:60px">
+                            <img src="../images/tshoot_selected.png" style="height:30px">
                             <span class="caret"></span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="labs">
@@ -74,7 +74,7 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="labs">
-                            <img src="../images/verify_selected.png" style="height:60px">
+                            <img src="../images/verify_selected.png" style="height:30px">
                             <span class="caret"></span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="labs">
@@ -85,7 +85,7 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="labs">
-                            <img src="../images/configure_selected.png" style="height:60px">
+                            <img src="../images/configure_selected.png" style="height:30px">
                             <span class="caret"></span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="labs">
@@ -112,11 +112,10 @@
         </div>
     </div>
 
-    <!-- For some reason the header is hiding behind the navbar. Giving it a little boost -->
-    <div style="margin: 0 auto;">
+    <div style="padding: 10px;">
         <div style="float: left;">
-            Labs
-            <ul class="pagination pagination-sm">
+            <p style="float: left;padding-right: 10px;padding-top: 2px;">Select lesson stage: </p>
+            <ul id="lessonStagesPagination" class="pagination pagination-sm">
                 <li class="page-item disabled">
                     <a class="page-link" href="#">&laquo;</a>
                 </li>
@@ -140,7 +139,7 @@
                 </li>
             </ul>
         </div>
-        <p style="float: left; color: #FF7133;">NRE Labs is in early alpha status. Please bear with us as we
+        <p style="float: right; color: #FF7133;">NRE Labs is in early alpha status. Please bear with us as we
             <a target="_blank" href="http://antidoteproject.readthedocs.io/en/latest/construction.html">continue working to make it awesome.</a>
         </p>
     </div>
