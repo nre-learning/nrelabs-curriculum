@@ -4,6 +4,13 @@ lessonID: 12
 course: configuration
 # Verify this is the default
 # sharedTopology: false
+
+# TODO(mierdin): sharedTopology being enabled should ignore devices and connections, but NOT utilities.
+# TODO(mierdin): What about IP addressing for utilities?
+
+utilities:
+- name: linux1
+  image: antidotelabs/utility
 devices:
 - name: vqfx1
   image: antidotelabs/vr-vqfx:15.1X53-D60
@@ -18,8 +25,12 @@ connections:
   b: vqfx3
 - a: vqfx3
   b: vqfx1
+- a: vqfx1
+  b: linux1
 stages:
   1:
+
+    # TODO(mierdin): Provide this via the Syringe API
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-12/stage1/guide.md
 
     # If sharedTopology is enabled, this is ignored.
@@ -28,9 +39,10 @@ stages:
       vqfx2: stage1/configs/vqfx2.txt
       vqfx3: stage1/configs/vqfx3.txt
 
-    # Optional. If set, a jupyter instance will be spun up when this stage is set, and the referenced file will be placed there.
-    notebook: stage1/notebook.ipynb
+    # Optional. If set, a jupyter instance will be spun up when this stage is set. Must be located at lesson-<lesson #>/stage<stage #>/notebook.ipynb
+    notebook: yes
   2:
+
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-12/stage2/guide.md
 
     # If sharedTopology is enabled, this is ignored.
@@ -39,5 +51,5 @@ stages:
       vqfx2: stage2/configs/vqfx2.txt
       vqfx3: stage2/configs/vqfx3.txt
 
-    # Optional. If set, a jupyter instance will be spun up when this stage is set, and the referenced file will be placed there.
-    notebook: stage2/notebook.ipynb
+    # Optional. If set, a jupyter instance will be spun up when this stage is set. Must be located at lesson-<lesson #>/stage<stage #>/notebook.ipynb
+    notebook: yes
