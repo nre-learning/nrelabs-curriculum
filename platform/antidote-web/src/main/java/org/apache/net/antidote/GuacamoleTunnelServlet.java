@@ -30,6 +30,7 @@ public class GuacamoleTunnelServlet
         String devicePort = "";
         Integer width = 0;
         Integer height = 0;
+        String password = "";
         try {
             BufferedReader reader = request.getReader();
             String connectData = reader.readLine();
@@ -41,6 +42,7 @@ public class GuacamoleTunnelServlet
             devicePort = data[0];
             width = Integer.parseInt(data[1]);
             height = Integer.parseInt(data[2]);
+            password = data[3];
 
             reader.close();
         } catch (IOException e) {
@@ -56,7 +58,7 @@ public class GuacamoleTunnelServlet
         guacConfig.setParameter("hostname", "vip.labs.networkreliability.engineering");
         guacConfig.setParameter("port", devicePort);
         guacConfig.setParameter("username", "root");
-        guacConfig.setParameter("password", "VR-netlab9");
+        guacConfig.setParameter("password", password);
 
         // TODO(mierdin): Temporary fix for now, we're passing screen height and width in connection data. Think there should be a better way
         // http://apache-guacamole-general-user-mailing-list.2363388.n4.nabble.com/SSH-size-and-colors-of-canvas-td988.html

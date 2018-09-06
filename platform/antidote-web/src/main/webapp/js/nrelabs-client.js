@@ -18,6 +18,17 @@ function getLessonId() {
     return parseInt(lessonId);
 }
 
+function getLessonStage() {
+    var url = new URL(window.location.href);
+    var lessonStage = url.searchParams.get("lessonStage");
+    if (lessonStage == null || lessonStage == "") {
+        console.log("Error: lessonStage not provided. Defaulting to 1.")
+        return 1;
+    }
+    return parseInt(lessonStage);
+}
+
+
 function makeid() {
     var text = "";
 
@@ -32,6 +43,8 @@ function makeid() {
 }
 
 function getRandomModalMessage() {
+ 
+    // Include memes? https://imgur.com/gallery/y0LQyOV
     var messages = [
         "Sweeping technical debt under the rug...",
         "Definitely not mining cryptocurrency in your browser...",
@@ -47,7 +60,54 @@ function getRandomModalMessage() {
     return messages[Math.floor(Math.random() * messages.length)];
 }
 
+function renderLessonStages() {
+    var reqLessonDef = new XMLHttpRequest();
+
+    // Doing synchronous calls for now, need to convert to asynchronous
+    reqLessonDef.open("GET", "https://labs.networkreliability.engineering/syringe/exp/lessondef/" + getLessonId(), false);
+    reqLessonDef.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+    reqLessonDef.send();
+
+    if (reqLessonDef.status != 200) {
+        console.log("Unable to get lesson def")
+    } else {
+        console.log("Received lesson def from syringe:")
+        console.log(JSON.parse(reqLessonDef.responseText));
+
+        var lessonDefResponse = JSON.parse(reqLessonDef.responseText);
+    }
+
+    var stages = parseInt(lessonDefResponse.Stages)
+
+    for (i = 1; i <= stages; i++) {
+
+        var stageEntry = document.createElement('li');
+        stageEntry.classList.add('page-item');
+
+        if (i == getLessonStage()) {
+            stageEntry.classList.add('active');
+        }
+
+        var stageLink = document.createElement('a');
+        stageLink.appendChild(document.createTextNode(i));
+        stageLink.classList.add('page-link');
+        stageLink.href = ".?lessonId=" + getLessonId() + ",lessonStage=" + i;
+        stageEntry.appendChild(stageLink);
+
+        document.getElementById("lessonStagesPagination").appendChild(stageEntry);
+    }
+
+
+
+    // <li class="page-item active">
+    //     <a class="page-link" href="#">1</a>
+    // </li>
+
+}
+
 async function requestLesson() {
+
+    renderLessonStages()
 
     var myNode = document.getElementById("tabHeaders");
     while (myNode.firstChild) {
@@ -69,7 +129,7 @@ async function requestLesson() {
     var json = JSON.stringify(data);
 
     // Send lesson request
-    // TODO(mierdin): for both of these loops, need to break if we either get a non 200 status for too long,
+    // TODO(mierdin): for all these loops, need to break if we either get a non 200 status for too long,
     // or if the lesson fails to provision (ready: true) before a timeout. Can't just loop endlessly.
     for (; ;) {
         var xhttp = new XMLHttpRequest();
@@ -170,7 +230,7 @@ function addTabs(endpoints) {
 
     // Add Devices tabs
     for (var i = 0; i < endpoints.length; i++) {
-        if (endpoints[i].Type == "DEVICE") {
+        if (endpoints[i].Type == "DEVICE" || endpoints[i].Type == "UTILITY") {
             console.log("Adding " + endpoints[i].Name);
             var newTabHeader = document.createElement("LI");
             newTabHeader.classList.add('nav-item');
@@ -242,7 +302,7 @@ function addTabs(endpoints) {
             iframe.width = "100%"
             iframe.height = "600px"
             iframe.frameBorder = "0"
-            iframe.src = "https://vip.labs.networkreliability.engineering:" + String(endpoints[i].Port) + "/notebooks/lesson-" + getLessonId() + "/lesson.ipynb"
+            iframe.src = "https://vip.labs.networkreliability.engineering:" + String(endpoints[i].Port) + "/notebooks/lesson-" + getLessonId() + "/stage" + getLessonStage() + "/notebook.ipynb"
             newTabContent.appendChild(iframe);
             document.getElementById("myTabContent").appendChild(newTabContent);
 
@@ -313,7 +373,7 @@ var terminals = {};
 function guacInit(endpoints) {
 
     for (var i = 0; i < endpoints.length; i++) {
-        if (endpoints[i].Type == "DEVICE") {
+        if (endpoints[i].Type == "DEVICE" || endpoints[i].Type == "UTILITY") {
 
             var thisTerminal = {};
 
@@ -332,7 +392,14 @@ function guacInit(endpoints) {
                 return false
             };
 
-            connectData = endpoints[i].Port + ";" + String(document.getElementById("tabPane").offsetWidth) + ";" + String(document.getElementById("tabPane").offsetHeight - 42);
+            var password = ""
+            if (endpoints[i].Type == "DEVICE") {
+                password = "VR-netlab9"
+            } else if (endpoints[i].Type == "UTILITY") {
+                password = "antidotepassword"
+            }
+
+            connectData = endpoints[i].Port + ";" + String(document.getElementById("tabPane").offsetWidth) + ";" + String(document.getElementById("tabPane").offsetHeight - 42) + ";" + password;
             thisTerminal.guac.connect(connectData);
 
             thisTerminal.display.appendChild(thisTerminal.guac.getDisplay().getElement());
