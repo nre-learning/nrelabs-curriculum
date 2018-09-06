@@ -1,8 +1,8 @@
 FROM jupyter/minimal-notebook
-ADD notebook/requirements.txt /home/jovyan/requirements.txt
+ADD images/notebook/requirements.txt /home/jovyan/requirements.txt
 RUN pip install -r /home/jovyan/requirements.txt
 RUN mkdir /home/jovyan/.jupyter
-ADD notebook/base-jupyter-config.py /home/jovyan/.jupyter/jupyter_notebook_config.py
+ADD images/notebook/base-jupyter-config.py /home/jovyan/.jupyter/jupyter_notebook_config.py
 
 
 # Not ideal way of doing this, but works for now.
@@ -15,8 +15,8 @@ USER root
 # Generate self-signed cert
 RUN mkdir -p /opt/jupyterssl
 # RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /opt/jupyterssl/selfsigned.key -out /opt/jupyterssl/selfsigned.crt -subj "/C=US/ST=Oregon/L=Portland/O=Juniper Networks/OU=NRE Labs/CN=labs.networkreliability.engineering"
-ADD infra/letsencrypt/etc/live/networkreliability.engineering/fullchain.pem /opt/jupyterssl/
-ADD infra/letsencrypt/etc/live/networkreliability.engineering/privkey.pem /opt/jupyterssl/
+ADD platform/letsencrypt/etc/live/networkreliability.engineering/fullchain.pem /opt/jupyterssl/
+ADD platform/letsencrypt/etc/live/networkreliability.engineering/privkey.pem /opt/jupyterssl/
 
 # Configure container startup
 ENTRYPOINT ["tini", "-g", "--"]
