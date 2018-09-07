@@ -91,7 +91,7 @@ function renderLessonStages() {
         var stageLink = document.createElement('a');
         stageLink.appendChild(document.createTextNode(i));
         stageLink.classList.add('page-link');
-        stageLink.href = ".?lessonId=" + getLessonId() + ",lessonStage=" + i;
+        stageLink.href = ".?lessonId=" + getLessonId() + "&lessonStage=" + i;
         stageEntry.appendChild(stageLink);
 
         document.getElementById("lessonStagesPagination").appendChild(stageEntry);
