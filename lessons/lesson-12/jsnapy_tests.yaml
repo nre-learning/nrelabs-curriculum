@@ -1,0 +1,10 @@
+---
+test_applications:
+  - rpc: get-config
+  - item:
+      id: ./name
+      xpath: 'applications/application[name="k8sfrontend"]'
+      tests:
+        - is-equal: destination-port, 30589
+          info: "Test Succeeded!!, destination-port is <{{post['destination-port']}}>"
+          err: "Test Failed!!!, destination-port is <{{post['destination-port']}}>"

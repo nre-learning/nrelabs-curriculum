@@ -1,0 +1,16 @@
+---
+hosts:
+  - device: vqfx1.default.svc.cluster.local
+    username : root
+    passwd: VR-netlab9
+    port: 22
+  - device: vqfx2.default.svc.cluster.local
+    username : root
+    passwd: VR-netlab9
+    port: 22
+  - device: vqfx3.default.svc.cluster.local
+    username : root
+    passwd: VR-netlab9
+    port: 22
+tests:
+    - jsnapy_tests.yaml
