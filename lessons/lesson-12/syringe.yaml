@@ -1,7 +1,7 @@
 ---
 lessonName: Network Unit Testing with JSNAPY
 lessonID: 12
-category: configuration
+category: verification
 
 sharedTopology: false
 
@@ -11,6 +11,7 @@ sharedTopology: false
 utilities:
 - name: linux1
   image: antidotelabs/utility
+
 devices:
 - name: vqfx1
   image: antidotelabs/vr-vqfx:15.1X53-D60
@@ -18,6 +19,7 @@ devices:
   image: antidotelabs/vr-vqfx:15.1X53-D60
 - name: vqfx3
   image: antidotelabs/vr-vqfx:15.1X53-D60
+
 connections:
 - a: vqfx1
   b: vqfx2
@@ -31,6 +33,7 @@ connections:
 - a: vqfx1
   b: linux1
   subnet: 10.1.0.0/24
+
 stages:
   1:
 

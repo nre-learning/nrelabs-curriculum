@@ -1,10 +1,10 @@
 ---
-test_applications:
+test_bgp_config:
   - rpc: get-config
   - item:
       id: ./name
-      xpath: 'applications/application[name="k8sfrontend"]'
+      xpath: 'protocols/bgp/group[name="PEERS"]'
       tests:
-        - is-equal: destination-port, 30589
-          info: "Test Succeeded!!, destination-port is <{{post['destination-port']}}>"
-          err: "Test Failed!!!, destination-port is <{{post['destination-port']}}>"
+        - exists: ./name
+          info: "Test Succeeded!!, <{{post['name']}}> exists."
+          err: "Test Failed!! is <{{post['name']}}> exists."
