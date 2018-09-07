@@ -5,6 +5,75 @@ test_bgp_config:
       id: ./name
       xpath: 'protocols/bgp/group[name="PEERS"]'
       tests:
-        - exists: ./name
+        - exists: ./peer-as
           info: "Test Succeeded!!, <{{post['name']}}> exists."
           err: "Test Failed!! is <{{post['name']}}> exists."
+
+test_rpc_bgp:
+  - rpc: get-bgp-summary-information
+  - item:
+      xpath: '//bgp-information'
+      tests:
+        - is-equal: group-count, 1
+          err: "Test Failed!! BGP group count is <{{post['group-count']}}>"
+          info: "Test succeeded!! BGP group count is: <{{post['group-count']}}>"
+
+        - is-equal: peer-count, 2
+          err: "Test Failed!! BGP group configured peer count is <{{post['peer-count']}}>"
+          info: "Test succeeded!! BGP group configured peer count is: <{{post['peer-count']}}>"
+
+        - is-equal: down-peer-count, 0
+          err: "Test Failed!! BGP down peer count is <{{post['down-peer-count']}}>"
+          info: "Test succeeded!! BGP down peer count is: <{{post['down-peer-count']}}>"
+
+# vagrant@vqfx-re> show bgp summary | display xml
+# <rpc-reply xmlns:junos="http://xml.juniper.net/junos/17.4R1/junos">
+#     <bgp-information xmlns="http://xml.juniper.net/junos/17.4R1/junos-routing">
+#         <group-count>1</group-count>
+#         <peer-count>2</peer-count>
+#         <down-peer-count>2</down-peer-count>
+#         <bgp-rib junos:style="brief">
+#             <name>inet.0</name>
+#             <total-prefix-count>0</total-prefix-count>
+#             <received-prefix-count>0</received-prefix-count>
+#             <accepted-prefix-count>0</accepted-prefix-count>
+#             <active-prefix-count>0</active-prefix-count>
+#             <suppressed-prefix-count>0</suppressed-prefix-count>
+#             <history-prefix-count>0</history-prefix-count>
+#             <damped-prefix-count>0</damped-prefix-count>
+#             <total-external-prefix-count>0</total-external-prefix-count>
+#             <active-external-prefix-count>0</active-external-prefix-count>
+#             <accepted-external-prefix-count>0</accepted-external-prefix-count>
+#             <suppressed-external-prefix-count>0</suppressed-external-prefix-count>
+#             <total-internal-prefix-count>0</total-internal-prefix-count>
+#             <active-internal-prefix-count>0</active-internal-prefix-count>
+#             <accepted-internal-prefix-count>0</accepted-internal-prefix-count>
+#             <suppressed-internal-prefix-count>0</suppressed-internal-prefix-count>
+#             <pending-prefix-count>0</pending-prefix-count>
+#             <bgp-rib-state>BGP restart is complete</bgp-rib-state>
+#         </bgp-rib>
+#         <bgp-peer junos:style="terse" heading="Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn State|#Active/Received/Accepted/Damped...">
+#             <peer-address>1.1.1.1</peer-address>
+#             <peer-as>64002</peer-as>
+#             <input-messages>0</input-messages>
+#             <output-messages>0</output-messages>
+#             <route-queue-count>0</route-queue-count>
+#             <flap-count>0</flap-count>
+#             <elapsed-time junos:seconds="6">6</elapsed-time>
+#             <peer-state>Idle</peer-state>
+#         </bgp-peer>
+#         <bgp-peer junos:style="terse">
+#             <peer-address>1.1.1.2</peer-address>
+#             <peer-as>64003</peer-as>
+#             <input-messages>0</input-messages>
+#             <output-messages>0</output-messages>
+#             <route-queue-count>0</route-queue-count>
+#             <flap-count>0</flap-count>
+#             <elapsed-time junos:seconds="6">6</elapsed-time>
+#             <peer-state>Idle</peer-state>
+#         </bgp-peer>
+#     </bgp-information>
+#     <cli>
+#         <banner>{master:0}</banner>
+#     </cli>
+# </rpc-reply>

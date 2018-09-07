@@ -1,4 +1,4 @@
-<configuration junos:commit-seconds="1536280379" junos:commit-localtime="2018-09-07 00:32:59 UTC" junos:commit-user="root">
+<configuration>
         <version>15.1X53-D60.4</version>
         <system>
             <host-name>vqfx1</host-name>
