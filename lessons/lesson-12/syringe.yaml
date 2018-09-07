@@ -1,9 +1,9 @@
 ---
-lessonName: lab-12
+lessonName: Network Unit Testing with JSNAPY
 lessonID: 12
 course: configuration
-# Verify this is the default
-# sharedTopology: false
+
+sharedTopology: false
 
 # TODO(mierdin): sharedTopology being enabled should ignore devices and connections, but NOT utilities.
 # TODO(mierdin): What about IP addressing for utilities?
