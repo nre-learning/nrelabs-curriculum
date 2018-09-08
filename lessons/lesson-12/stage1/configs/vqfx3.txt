@@ -132,20 +132,6 @@
             </autonomous-system>
         </routing-options>
         <protocols>
-            <bgp operation="replace">
-                <group>
-                    <name>PEERS</name>
-                    <type>external</type>
-                    <neighbor>
-                        <name>10.23.0.12</name>
-                        <peer-as>64002</peer-as>
-                    </neighbor>
-                    <neighbor>
-                        <name>10.31.0.11</name>
-                        <peer-as>64001</peer-as>
-                    </neighbor>
-                </group>
-            </bgp>
             <igmp-snooping>
                 <vlan>
                     <name>default</name>
