@@ -1,4 +1,4 @@
-<configuration>
+<configuration operation="replace">
         <version>15.1X53-D60.4</version>
         <system>
             <host-name>vqfx3</host-name>
