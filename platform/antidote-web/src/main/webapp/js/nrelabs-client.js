@@ -28,6 +28,33 @@ function getLessonStage() {
     return parseInt(lessonStage);
 }
 
+// TODO(mierdin): build an extension to showdown so you don't have to provide the snippet index in the lesson guide
+function runSnippetInTab(tabName, snippetIndex) {
+
+    // Select tab
+    $('.nav-tabs a[href="#' + tabName + '"]').tab('show')
+
+    // TODO(mierdin): https://sourceforge.net/p/guacamole/discussion/1110834/thread/3243e595/
+    // is this really the best way?
+    // For each character in the given string
+    var snippetText = document.getElementById('labGuide').getElementsByTagName('pre')[parseInt(snippetIndex)].innerText;
+    for (var i=0; i < snippetText.length; i++) {
+
+        // Get current codepoint
+        var codepoint = snippetText.charCodeAt(i);
+
+        // Convert to keysym
+        var keysym;
+        if (codepoint >= 0x0100)
+            keysym = 0x01000000 | codepoint;
+        else
+            keysym = codepoint;
+
+        // Press/release key
+        terminals[tabName].guac.sendKeyEvent(1, keysym);
+        terminals[tabName].guac.sendKeyEvent(0, keysym);
+    }
+}
 
 function makeid() {
     var text = "";
@@ -60,8 +87,51 @@ function getRandomModalMessage() {
     return messages[Math.floor(Math.random() * messages.length)];
 }
 
+function renderLessonCategories() {
+
+    var categories = {
+        "introductory": "introMenu",
+        "troubleshooting": "troubleshootingMenu",
+        "verification": "verificationMenu",
+        "configuration": "configurationMenu"
+    };
+
+    // Go through each category
+    for (var catName in categories) {
+
+        if (categories.hasOwnProperty(catName)) {
+            var data = {
+                "Category": catName
+            };
+            var json = JSON.stringify(data);
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "https://labs.networkreliability.engineering/syringe/exp/lessondef", false);
+            xhttp.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+            xhttp.send(json);
+            response = JSON.parse(xhttp.responseText);
+            console.log("Received lesson defs(" + catName + ") fom syringe:")
+            console.log(response)
+        
+            var lessondefs = response.lessondefs;
+            if (lessondefs) {
+                for (var i = 0; i < lessondefs.length; i++) {
+                    console.log("Adding lesson to menu - " + lessondefs[i].LessonName)
+                    var lessonLink = document.createElement('a');
+                    lessonLink.appendChild(document.createTextNode("Lesson " + lessondefs[i].LessonId + " - " + lessondefs[i].LessonName));
+                    lessonLink.classList.add('dropdown-item');
+                    lessonLink.href = ".?lessonId=" + lessondefs[i].LessonId + "&lessonStage=1";
+                    document.getElementById(categories[catName]).appendChild(lessonLink);
+                }
+            }
+
+        }
+    }
+}
+
 function renderLessonStages() {
     var reqLessonDef = new XMLHttpRequest();
+
+    // TODO(mierdin): This is the first call to syringe, you should either here or elasewhere, handle errors and notify user.
 
     // Doing synchronous calls for now, need to convert to asynchronous
     reqLessonDef.open("GET", "https://labs.networkreliability.engineering/syringe/exp/lessondef/" + getLessonId(), false);
@@ -107,6 +177,8 @@ function renderLessonStages() {
 
 async function requestLesson() {
 
+    renderLessonCategories()
+
     renderLessonStages()
 
     var myNode = document.getElementById("tabHeaders");
@@ -122,9 +194,11 @@ async function requestLesson() {
     var data = {};
     data.lessonId = getLessonId();
     data.sessionId = getSession();
+    data.lessonStage = getLessonStage();
 
     console.log("Sent lesson ID:" + data.lessonId);
     console.log("Sent session ID:" + data.sessionId);
+    console.log("Sent lesson stage:" + data.lessonStage);
 
     var json = JSON.stringify(data);
 
@@ -333,27 +407,6 @@ function provisionLesson() {
     // $("#exampleModal").modal("hide");
 }
 
-// Do NOT do this. Horrendous User experience.
-// window.onbeforeunload = deleteLesson;
-//
-// Call deleteLesson ONLY in response to an explicit user event, where they're able to understand
-// what it means. Do not call this on a load or unload event. Seriously. Kittens might die.
-// Actually don't do this either. Just rely on GC
-//
-// function deleteLesson() {
-
-//     var data = {};
-//     data.Id = 1;
-//     data.sessionId = getSession();
-//     var json = JSON.stringify(data);
-
-//     var xhttp = new XMLHttpRequest();
-//     xhttp.open("DELETE", "https://labs.networkreliability.engineering/syringe/exp/livelesson", true);
-//     xhttp.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-//     xhttp.send(json);
-
-//     return null;
-// }
 
 async function guacInitRetry(endpoints) {
     for (; ;) {
@@ -409,19 +462,26 @@ function guacInit(endpoints) {
                 thisTerminal.guac.disconnect();
             }
 
-            thisTerminal.mouse = new Guacamole.Mouse(thisTerminal.guac.getDisplay().getElement());
-            thisTerminal.mouse.onmousedown =
-                thisTerminal.mouse.onmouseup =
-                thisTerminal.mouse.onmousemove = function (mouseState) {
-                    thisTerminal.guac.sendMouseState(mouseState);
-                };
-
             terminals[endpoints[i].Name] = thisTerminal
         }
     }
 
     // This is a HORRIBLY inefficient approach but javascript is blazing fast so *shrug*
     // (just kidding we should revisit this sometime. (TODO))
+    mouse = new Guacamole.Mouse(thisTerminal.guac.getDisplay().getElement());
+    mouse.onmousedown =
+        mouse.onmouseup =
+        mouse.onmousemove = function (mouseState) {
+            var tabs = document.getElementById("myTabContent").children;
+            for (var i = 0; i < tabs.length; i++) {
+                var tab = tabs[i];
+                if (tab.classList.contains("show")) {
+                    console.log(terminals[tab.id])
+                    terminals[tab.id].sendMouseState(mouseState);
+                }
+            }
+        };
+
     var keyboard = new Guacamole.Keyboard(document);
     keyboard.onkeydown = function (keysym) {
         var tabs = document.getElementById("myTabContent").children;

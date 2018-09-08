@@ -49,57 +49,71 @@
     <div class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
             <a href="https://labs.networkreliability.engineering" class="navbar-brand">
-                <img src="images/nrelabs.png" style="width:48px;height:48px"> NRE Labs</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
-                aria-expanded="false" aria-label="Toggle navigation">
+                <img src="../images/nrelabs.png" style="width:48px;height:48px"> NRE Labs</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="labs">
-                            <img src="images/tshoot_selected.png" style="height:30px">
+                            <img src="../images/intro_selected.png" style="height:30px">
                             <span class="caret"></span>
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="labs">
-                            <a class="dropdown-item" href="../labs/troubleshooting.html">What is Troubleshooting?</a>
+                        <div id="introMenu" class="dropdown-menu" aria-labelledby="labs">
+                            <a class="dropdown-item" href="../labs/troubleshooting.html">Introductory</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="../labs/?labId=1">Lab 1 - Introduction</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="labs">
-                            <img src="images/verify_selected.png" style="height:30px">
+                            <img src="../images/tshoot_selected.png" style="height:30px">
                             <span class="caret"></span>
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="labs">
-                            <a class="dropdown-item" href="../labs/verification.html">What is Verification?</a>
+                        <div id="troubleshootingMenu" class="dropdown-menu" aria-labelledby="labs">
+                            <a class="dropdown-item" href="../labs/troubleshooting.html">Troubleshooting</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="../labs/?labId=1">Lab 1 - Introduction</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="labs">
-                            <img src="images/configure_selected.png" style="height:30px">
+                            <img src="../images/verify_selected.png" style="height:30px">
                             <span class="caret"></span>
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="labs">
-                            <a class="dropdown-item" href="../labs/configuration.html">What is Configuration?</a>
+                        <div id="verificationMenu" class="dropdown-menu" aria-labelledby="labs">
+                            <a class="dropdown-item" href="../labs/verification.html">Verification</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="../labs/?labId=1">Lab 1 - Introduction</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="labs">
+                            <img src="../images/configure_selected.png" style="height:30px">
+                            <span class="caret"></span>
+                        </a>
+                        <div id="configurationMenu" class="dropdown-menu" aria-labelledby="labs">
+                            <a class="dropdown-item" href="../labs/configuration.html">Configuration</a>
+                            <div class="dropdown-divider"></div>
                         </div>
                     </li>
                 </ul>
 
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="https://labs.networkreliability.engineering/contribute">Contribute to NRE Labs!</a>
+                        <a class="nav-link" target="_blank" href="http://antidoteproject.readthedocs.io/en/latest/contributing.html">Contribute!</a>
                     </li>
-                </ul>
-
-                <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="https://networkreliability.engineering">NRE Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="labs">
+                            More Labby Goodness
+                            <span class="caret"></span>
+                        </a>
+                        <div id="configurationMenu" class="dropdown-menu" aria-labelledby="labs">
+                            <a class="dropdown-item" href="https://jlabs.juniper.net/jcl/">Juniper Cloud Labs</a>
+                            <a class="dropdown-item" href="https://jlabs.juniper.net/vlabs/">Juniper vLabs</a>
+                        </div>
                     </li>
                 </ul>
 
@@ -119,13 +133,16 @@
                     <div class="bs-component">
                         <div class="jumbotron">
                             <h1 class="display-3">Automation. Un-shackled.</h1>
-                            <p class="lead">NRE Labs is a no-strings-attached initiative to make automation more consumable to the masses.
-                                Through short exercises, totally contained within the browser, you can learn the skills that
+                            <p class="lead">NRE Labs is a no-strings-attached initiative to make automation more
+                                consumable to the masses.
+                                Through short exercises, totally contained within the browser, you can learn the skills
+                                that
                                 will put you on the path to becoming a Network Reliability Engineer</p>
                             <hr class="my-4">
                             <p>Get started learning about automation, right now, all in your browser!</p>
                             <p class="lead">
-                                <a class="btn btn-primary btn-lg" href="labs/?labId=1" role="button">Take me there!</a>
+                                <a class="btn btn-primary btn-lg" href="abs/?lessonId=12&lessonStage=1" role="button">Take
+                                    me there!</a>
                             </p>
                         </div>
                     </div>
@@ -139,7 +156,8 @@
                             <div class="card-header"></div>
                             <div class="card-body">
                                 <h4 class="card-title">No experts allowed.</h4>
-                                <p class="card-text">NRE Labs assumes nothing about your background or training. Everything is contained in the
+                                <p class="card-text">NRE Labs assumes nothing about your background or training.
+                                    Everything is contained in the
                                     browser, and lets you learn at your own pace.</p>
                             </div>
                         </div>
@@ -151,7 +169,8 @@
                             <div class="card-header"></div>
                             <div class="card-body">
                                 <h4 class="card-title">Paywalls are so last year.</h4>
-                                <p class="card-text">We don't track you for sales purposes. This is an educational tool aimed at helping the industry
+                                <p class="card-text">We don't track you for sales purposes. This is an educational tool
+                                    aimed at helping the industry
                                     consume automation more readily.</p>
                             </div>
                         </div>
@@ -165,7 +184,8 @@
                             <div class="card-body">
                                 <h4 class="card-title">Open Source.</h4>
                                 <p class="card-text">NRE Labs is built on
-                                    <a href="https://github.com/nre-learning/antidote" target="_blank">Antidote,</a> an open source project published on Github under an Apache v2 license to
+                                    <a href="https://github.com/nre-learning/antidote" target="_blank">Antidote,</a> an
+                                    open source project published on Github under an Apache v2 license to
                                     make it easier to consume bite-sized chunks of automation.</p>
                             </div>
                         </div>
@@ -212,7 +232,8 @@
                         <a href="http://thomaspark.co">Thomas Park</a>. Theme code released under the
                         <a href="https://github.com/thomaspark/bootswatch/blob/master/LICENSE">MIT License</a>.</p>
                     <p>The
-                        <a href="https://github.com/nre-learning/antidote" target="_blank">Antidote Project</a> is published under Apache v2.</p>
+                        <a href="https://github.com/nre-learning/antidote" target="_blank">Antidote Project</a> is
+                        published under Apache v2.</p>
 
                 </div>
             </div>
