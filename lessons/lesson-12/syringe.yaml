@@ -3,9 +3,8 @@ lessonName: Network Unit Testing with JSNAPY
 lessonID: 12
 category: verification
 
-sharedTopology: false
+topologyType: custom
 
-# TODO(mierdin): sharedTopology being enabled should ignore devices and connections, but NOT utilities.
 # TODO(mierdin): What about IP addressing for utilities?
 
 utilities:
