@@ -1,14 +1,14 @@
 ---
 hosts:
-  - device: vqfx1-svc
+  - device: vqfx1
     username : root
     passwd: VR-netlab9
     port: 22
-  - device: vqfx2-svc
+  - device: vqfx2
     username : root
     passwd: VR-netlab9
     port: 22
-  - device: vqfx3-svc
+  - device: vqfx3
     username : root
     passwd: VR-netlab9
     port: 22
