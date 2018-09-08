@@ -3,7 +3,7 @@ lessonName: Introduction to YAML
 lessonID: 14
 category: introductory
 
-sharedTopology: false
+sharedTopology: true
 
 utilities:
 - name: linux1
