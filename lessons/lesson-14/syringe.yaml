@@ -1,0 +1,17 @@
+---
+lessonName: Introduction to YAML
+lessonID: 14
+category: introductory
+
+sharedTopology: false
+
+utilities:
+- name: linux1
+  image: antidotelabs/utility
+
+stages:
+  1:
+    # TODO(mierdin): Provide this via the Syringe API
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-14/stage1/guide.md
+  2:
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-14/stage2/guide.md
