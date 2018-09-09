@@ -10,9 +10,10 @@ cat basicdict.yaml
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 0)">Run this snippet</button>
 
-This lesson comes with a basic Python script that imports this YAML file, and loads it into a Python dictionary, which is Python's construct for storing key/value pairs. You can look at this script if you wish, but the main thing is running it so we can let it tell us some things about our YAML file:
+In this lesson, we'll work with this YAML data using the interactive Python shell. Run the below snippet to load up our YAML file in Python:
 
 ```
+python
 import yaml
 import sys
 yamlFile = open('basicdict.yaml', 'r')
@@ -25,7 +26,7 @@ At this point, `yamlDict` is a Python dictionary that contains the key-value pai
 ```
 print("There are %d key-value pairs in this YAML file" % len(yamlDict))
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 2)">Run this snippet</button>
 
 We can also use a loop to iterate through this dictionary, and print out each key-value pair, and look at their type:
 
@@ -35,4 +36,4 @@ We can also use a loop to iterate through this dictionary, and print out each ke
 for key, value in yamlDict:
     print("The key %s is of type %s and its value %s is of type %s" % (key, type(key), value, type(value)))
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 3)">Run this snippet</button>
