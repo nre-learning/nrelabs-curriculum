@@ -30,7 +30,7 @@ connections:
 
 stages:
   1:
-    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-14/stage1/guide.md
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-15/stage1/guide.md
 
     configs:
       vqfx1: stage1/configs/vqfx1.txt

@@ -1,0 +1,4 @@
+---
+vlans: [10, 20, 30]
+hostname: vqfx1
+interfaces: 48
