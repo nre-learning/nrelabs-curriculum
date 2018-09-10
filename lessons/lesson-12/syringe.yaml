@@ -36,6 +36,8 @@ connections:
 stages:
   1:
 
+    description: No BGP config - tests fail
+
     # TODO(mierdin): Provide this via the Syringe API
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-12/stage1/guide.md
 
@@ -48,6 +50,8 @@ stages:
     # Optional. If set, a jupyter instance will be spun up when this stage is set. Must be located at lesson-<lesson #>/stage<stage #>/notebook.ipynb
     notebook: no
   2:
+
+    description: Correct BGP config - tests pass
 
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-12/stage2/guide.md
 

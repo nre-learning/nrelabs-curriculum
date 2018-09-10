@@ -11,4 +11,5 @@ utilities:
 
 stages:
   1:
+    description: Your first commit
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-17/stage1/guide.md

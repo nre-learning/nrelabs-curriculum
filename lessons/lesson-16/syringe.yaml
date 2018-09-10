@@ -11,4 +11,5 @@ utilities:
 
 stages:
   1:
+    description: Basic variable replacement
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-16/stage1/guide.md

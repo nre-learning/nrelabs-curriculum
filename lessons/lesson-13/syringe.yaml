@@ -36,6 +36,8 @@ connections:
 stages:
   1:
 
+    description: Get device facts
+
     # TODO(mierdin): Provide this via the Syringe API
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-12/stage1/guide.md
 

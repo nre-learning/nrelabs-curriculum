@@ -31,7 +31,7 @@ connections:
 stages:
   1:
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-15/stage1/guide.md
-
+    description: Actions
     configs:
       vqfx1: stage1/configs/vqfx1.txt
       vqfx2: stage1/configs/vqfx2.txt
