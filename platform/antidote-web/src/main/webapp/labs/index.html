@@ -63,41 +63,41 @@
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="labs">
-                            <img src="../images/intro_selected.png" style="height:30px">
+                            <img src="/images/intro_selected.png" style="height:30px">
                             <span class="caret"></span>
                         </a>
                         <div id="introMenu" class="dropdown-menu" aria-labelledby="labs">
-                            <a class="dropdown-item" href="../labs/troubleshooting.html">Introductory</a>
+                            <a class="dropdown-item" href="#">Fundamentals</a>
                             <div class="dropdown-divider"></div>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="labs">
-                            <img src="../images/tshoot_selected.png" style="height:30px">
+                            <img src="/images/tshoot_selected.png" style="height:30px">
                             <span class="caret"></span>
                         </a>
                         <div id="troubleshootingMenu" class="dropdown-menu" aria-labelledby="labs">
-                            <a class="dropdown-item" href="../labs/troubleshooting.html">Troubleshooting</a>
+                            <a class="dropdown-item" href="#">Troubleshooting</a>
                             <div class="dropdown-divider"></div>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="labs">
-                            <img src="../images/verify_selected.png" style="height:30px">
+                            <img src="/images/verify_selected.png" style="height:30px">
                             <span class="caret"></span>
                         </a>
                         <div id="verificationMenu" class="dropdown-menu" aria-labelledby="labs">
-                            <a class="dropdown-item" href="../labs/verification.html">Verification</a>
+                            <a class="dropdown-item" href="#">Verification</a>
                             <div class="dropdown-divider"></div>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="labs">
-                            <img src="../images/configure_selected.png" style="height:30px">
+                            <img src="/images/configure_selected.png" style="height:30px">
                             <span class="caret"></span>
                         </a>
                         <div id="configurationMenu" class="dropdown-menu" aria-labelledby="labs">
-                            <a class="dropdown-item" href="../labs/configuration.html">Configuration</a>
+                            <a class="dropdown-item" href="#">Configuration</a>
                             <div class="dropdown-divider"></div>
                         </div>
                     </li>
@@ -127,15 +127,23 @@
     </div>
 
     <div style="padding: 10px;">
-        <div style="float: left;">
+        <div style="width: 50%; float: left;">
             <p style="float: left;padding-right: 10px;padding-top: 2px;">Select lesson stage: </p>
-            <ul id="lessonStagesPagination" class="pagination pagination-sm">
-            </ul>
+            <ul id="lessonStagesPagination" class="pagination pagination-sm"></ul>
+            <!-- <select style="float: right;" class="form-control" id="exampleSelect1">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select> -->
         </div>
-        <p style="float: right; color: #FF7133;">NRE Labs is in early alpha status. Please bear with us as we
-            <a target="_blank" href="http://antidoteproject.readthedocs.io/en/latest/construction.html">continue
-                working to make it awesome.</a>
-        </p>
+        <div style="width: 50%; float: right;">
+            <p style="float: center; color: #FF7133;">NRE Labs is in early alpha status. Please bear with us as we
+                <a target="_blank" href="http://antidoteproject.readthedocs.io/en/latest/construction.html">continue
+                    working to make it awesome.</a>
+            </p>
+        </div>
     </div>
 
     <!-- Modal -->
@@ -165,7 +173,8 @@
         <div class="panel-left content resizable" style="transition: all 0s ease 0s; width: 40%;">
 
             <article id="labGuide" class="post" itemscope="" itemtype="http://schema.org/BlogPosting"></article>
-            <!-- <a class="btn btn-primary btn-lg btn-block" href=".?lessonId=12&lessonStage=2" role="button">GOTO NEXT (TODO - make dynamic)</a> -->
+            <a id="gotoNextStage" class="btn btn-primary btn-lg btn-block" href="#" role="button">Go to the next stage
+                in this lesson!</a>
         </div>
 
 
@@ -173,7 +182,8 @@
         </div>
 
         <div class="panel-right" style="height: 100%; width: 60%">
-            <span class="resize-warning">Use the tabs below to access the available resources in this lesson.
+            <span class="resize-warning">Use the tabs below to use this lesson's resources. Play around and explore,
+                they're yours!
             </span>
 
             <div id="tabPane" class="bs-component">

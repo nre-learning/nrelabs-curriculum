@@ -1,3 +1,5 @@
+// This function generates a unique session ID so we can make sure you consistently connect to your lab resources on the back-end.
+// We're not doing anything nefarious with this ID - this is just to make sure you have a good experience on the front-end.
 function getSession() {
     var sessionCookie = document.cookie.replace(/(?:(?:^|.*;\s*)nreLabsSession\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     if (sessionCookie == "") {
@@ -12,7 +14,7 @@ function getLessonId() {
     var url = new URL(window.location.href);
     var lessonId = url.searchParams.get("lessonId");
     if (lessonId == null || lessonId == "") {
-        alert("Error: lessonId not provided. Page will not load correctly.")
+        console.log("Error: lessonId not provided. Page will not load correctly.")
         return 0;
     }
     return parseInt(lessonId);
@@ -117,9 +119,10 @@ function renderLessonCategories() {
                 for (var i = 0; i < lessondefs.length; i++) {
                     console.log("Adding lesson to menu - " + lessondefs[i].LessonName)
                     var lessonLink = document.createElement('a');
-                    lessonLink.appendChild(document.createTextNode("Lesson " + lessondefs[i].LessonId + " - " + lessondefs[i].LessonName));
+                    // lessonLink.appendChild(document.createTextNode("Lesson " + lessondefs[i].LessonId + " - " + lessondefs[i].LessonName));
+                    lessonLink.appendChild(document.createTextNode(lessondefs[i].LessonName));
                     lessonLink.classList.add('dropdown-item');
-                    lessonLink.href = ".?lessonId=" + lessondefs[i].LessonId + "&lessonStage=1";
+                    lessonLink.href = "/labs/?lessonId=" + lessondefs[i].LessonId + "&lessonStage=1";
                     document.getElementById(categories[catName]).appendChild(lessonLink);
                 }
             }
@@ -176,8 +179,6 @@ function renderLessonStages() {
 }
 
 async function requestLesson() {
-
-    renderLessonCategories()
 
     renderLessonStages()
 
@@ -269,6 +270,11 @@ async function requestLesson() {
         endpoints = sort("Name", endpoints);
         renderLabGuide(response2.LabGuide);
 
+        // TODO(mierdin) need to check to see if there are stages left. Otherwise syringe will assume stage 1 (once I handle this on that end too)
+        var nextLessonStage = parseInt(getLessonStage()) + 1
+
+        document.getElementById("gotoNextStage").href = "/labs/?lessonId=" + getLessonId() + "&lessonStage=" + nextLessonStage
+
         // for some reason, even though the syringe health checks work,
         // we still can't connect right away. Adding short sleep to account for this for now
         // TODO try removing this now that the health check is SSH based
@@ -289,9 +295,13 @@ function renderLabGuide(url) {
     var labHtml = converter.makeHtml(lgGetter.responseText);
     document.getElementById("labGuide").innerHTML = labHtml;
 
-    console.log("Rendered to HTML");
-    console.log(lgGetter.responseText);
-    console.log(labHtml);
+
+
+    
+
+    // console.log("Rendered to HTML");
+    // console.log(lgGetter.responseText);
+    // console.log(labHtml);
 }
 
 function rescale(browserDisp, guacDisp) {
@@ -510,5 +520,11 @@ function guacInit(endpoints) {
 
 // Run all this once the DOM is fully rendered so we can get a handle on the DIVs
 document.addEventListener('DOMContentLoaded', function () {
-    provisionLesson();
+
+    renderLessonCategories()
+
+    if (getLessonId() != 0) {
+        provisionLesson();
+    }
+
 });
