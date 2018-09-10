@@ -1,0 +1,14 @@
+---
+lessonName: Version Control with Git
+lessonID: 17
+category: introductory
+
+topologyType: none
+
+utilities:
+- name: linux1
+  image: antidotelabs/utility
+
+stages:
+  1:
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-17/stage1/guide.md

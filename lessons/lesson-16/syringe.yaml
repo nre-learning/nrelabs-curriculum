@@ -1,0 +1,14 @@
+---
+lessonName: Using Jinja to for Config Templates
+lessonID: 16
+category: introductory
+
+topologyType: none
+
+utilities:
+- name: linux1
+  image: antidotelabs/utility
+
+stages:
+  1:
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-16/stage1/guide.md

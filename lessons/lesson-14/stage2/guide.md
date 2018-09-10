@@ -1,12 +1,14 @@
 # Introduction to YAML
-## Part 1 - Dictionary
+## Part 2 - Dictionaries
 
 In this lesson, we'll give a quick overview of YAML - what it is, why we use it, and some of the basic concepts you'll need to know in order to use it in your network automation journey.
 
-One of the most basic but still very useful aspects of using YAML for network automation is that we can use it to store some basic key/value pairs in a file. Let's look at the contents of this file now:
+Often, being able to represent an ordered list of values isn't enough. Sometimes we need to be able to look up certain configuration properties by name. For instance, in the previous example, in order to be able to look up the SNMP community string, you'd have to know which item that value was located in the list in order to look it up programmatically. 
+
+A better option for this problem is a Dictionary. They're similar to lists, but instead of storing an ordered sequence of values, they represent an unordered sequence of key/value pairs:
 
 ```
-cd /antidote/lessons/lesson-14/stage1/
+cd /antidote/lessons/lesson-14/stage2/
 cat basicdict.yaml
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 0)">Run this snippet</button>
@@ -34,7 +36,26 @@ We can also use a loop to iterate through this dictionary, and print out each ke
 > This example uses strings for all keys and values but both YAML and Python are quite flexible, and can use a variety of other data types as values and even keys, including integers, lists, dictionaries, and more.
 
 ```
-for key, value in yamlDict:
+for key, value in yamlDict.items():
     print("The key %s is of type %s and its value %s is of type %s" % (key, type(key), value, type(value)))
+
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 3)">Run this snippet</button>
+
+As mentioned before, dictionaries are useful for looking up a specific value if you know the key, rather than having to know which item in a list that value is found in. In this case, we can simply look up the SNMP community string by referencing the key `snmpcommunity`:
+
+```
+yamlDict['snmpcommunity']
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 4)">Run this snippet</button>
+
+YAML and Python are quite liberal with the types that can be stored in a dictionary. We have a second YAML file that has a list (Python's version of an array), a string, and an integer, all stored as different values in the same dictionary:
+
+```
+yamlFile = open('complexdict.yaml', 'r')
+yamlDict = yaml.load(yamlFile)
+for key, value in yamlDict.items():
+    print("The key %s is of type %s and its value %s is of type %s" % (key, type(key), value, type(value)))
+
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 5)">Run this snippet</button>
