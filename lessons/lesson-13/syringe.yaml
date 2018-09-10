@@ -1,0 +1,61 @@
+---
+lessonName: Multi-Vendor Network Automation with NAPALM
+lessonID: 13
+category: configuration
+
+topologyType: custom
+
+# TODO(mierdin): What about IP addressing for utilities?
+
+utilities:
+- name: linux1
+  image: antidotelabs/utility
+
+devices:
+- name: vqfx1
+  image: antidotelabs/vr-vqfx:15.1X53-D60
+- name: vqfx2
+  image: antidotelabs/vr-vqfx:15.1X53-D60
+- name: vqfx3
+  image: antidotelabs/vr-vqfx:15.1X53-D60
+
+connections:
+- a: vqfx1
+  b: vqfx2
+  subnet: 10.12.0.0/24
+- a: vqfx2
+  b: vqfx3
+  subnet: 10.23.0.0/24
+- a: vqfx3
+  b: vqfx1
+  subnet: 10.31.0.0/24
+- a: vqfx1
+  b: linux1
+  subnet: 10.1.0.0/24
+
+stages:
+  1:
+
+    # TODO(mierdin): Provide this via the Syringe API
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-12/stage1/guide.md
+
+    # If sharedTopology is enabled, this is ignored.
+    configs:
+      vqfx1: stage1/configs/vqfx1.txt
+      vqfx2: stage1/configs/vqfx2.txt
+      vqfx3: stage1/configs/vqfx3.txt
+
+    # Optional. If set, a jupyter instance will be spun up when this stage is set. Must be located at lesson-<lesson #>/stage<stage #>/notebook.ipynb
+    notebook: yes
+  2:
+
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-12/stage2/guide.md
+
+    # If sharedTopology is enabled, this is ignored.
+    configs:
+      vqfx1: stage2/configs/vqfx1.txt
+      vqfx2: stage2/configs/vqfx2.txt
+      vqfx3: stage2/configs/vqfx3.txt
+
+    # Optional. If set, a jupyter instance will be spun up when this stage is set. Must be located at lesson-<lesson #>/stage<stage #>/notebook.ipynb
+    notebook: yes

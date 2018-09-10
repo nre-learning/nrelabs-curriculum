@@ -38,7 +38,6 @@ We can also use a loop to iterate through this dictionary, and print out each ke
 ```
 for key, value in yamlDict.items():
     print("The key %s is of type %s and its value %s is of type %s" % (key, type(key), value, type(value)))
-
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 3)">Run this snippet</button>
 
@@ -56,6 +55,5 @@ yamlFile = open('complexdict.yaml', 'r')
 yamlDict = yaml.load(yamlFile)
 for key, value in yamlDict.items():
     print("The key %s is of type %s and its value %s is of type %s" % (key, type(key), value, type(value)))
-
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 5)">Run this snippet</button>
