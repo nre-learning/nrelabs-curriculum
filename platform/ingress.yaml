@@ -1,0 +1,38 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    # ingress.kubernetes.io/ingress.class: "nginx"
+    # ingress.kubernetes.io/ssl-services: "syringe"
+    # ingress.kubernetes.io/ssl-redirect: "false"
+    # ingress.kubernetes.io/force-ssl-redirect: "false"
+    kubernetes.io/ingress.global-static-ip-name: "nrefrontend"
+    # ingress.kubernetes.io/rewrite-target: "/"
+    # nginx.ingress.kubernetes.io/rewrite-target: "/"
+    # ingress.kubernetes.io/limit-connections
+    # ingress.kubernetes.io/limit-rps
+  name: master-antidote-ingress
+  namespace: default
+spec:
+  tls:
+    - hosts:
+      - labs.networkreliability.engineering
+      secretName: tls-certificate
+
+  backend:
+    serviceName: antidote-web
+    servicePort: 8080
+  rules:
+  - http:
+      # GCE Ingress controller needs both mappings explicitly
+      # https://medium.com/google-cloud/global-ingress-in-practice-on-google-container-engine-part-1-discussion-ccc1e5b27bd0    
+      paths:
+      - path: /syringe
+        backend:
+          serviceName: syringe
+          servicePort: 8086
+      - path: /syringe/*
+        backend:
+          serviceName: syringe
+          servicePort: 8086

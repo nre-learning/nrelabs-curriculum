@@ -27,6 +27,7 @@ public class GuacamoleTunnelServlet
 
         Logger log = Logger.getLogger("com.antidote.servlet");
 
+        String deviceIP = "";
         String devicePort = "";
         Integer width = 0;
         Integer height = 0;
@@ -39,10 +40,11 @@ public class GuacamoleTunnelServlet
 
             String data[]= connectData.split(";");
 
-            devicePort = data[0];
-            width = Integer.parseInt(data[1]);
-            height = Integer.parseInt(data[2]);
-            password = data[3];
+            deviceIP = data[0];
+            devicePort = data[1];
+            width = Integer.parseInt(data[2]);
+            height = Integer.parseInt(data[3]);
+            password = data[4];
 
             reader.close();
         } catch (IOException e) {
@@ -55,7 +57,7 @@ public class GuacamoleTunnelServlet
         GuacamoleConfiguration guacConfig = new GuacamoleConfiguration();
         log.info("Incoming device port: " + devicePort);
         guacConfig.setProtocol("ssh");
-        guacConfig.setParameter("hostname", "vip.labs.networkreliability.engineering");
+        guacConfig.setParameter("hostname", deviceIP);
         guacConfig.setParameter("port", devicePort);
         guacConfig.setParameter("username", "root");
         guacConfig.setParameter("password", password);

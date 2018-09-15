@@ -102,6 +102,7 @@ spec:
   containers:
   - name: syringe
     image: antidotelabs/syringe:latest
+    # image: antidotelabs/nginxtest:latest
     imagePullPolicy: Always
     env:
     - name: SYRINGE_LESSONS
@@ -109,6 +110,10 @@ spec:
     ports:
     - containerPort: 50099  # GRPC
     - containerPort: 8086   # REST/HTTP
+    readinessProbe:
+      httpGet:
+        path: /syringe
+        port: 8086
     volumeMounts:
       - mountPath: /antidote
         name: git-volume
@@ -130,7 +135,7 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: syringe-service
+  name: syringe
   namespace: default
 spec:
   selector:
@@ -139,39 +144,40 @@ spec:
     - name: grpc
       port: 50099
       targetPort: 50099
-      nodePort: 30010
+      # nodePort: 30010
     - name: http
       port: 8086
       targetPort: 8086
-      nodePort: 30011
+      # nodePort: 30011
+  # type: NodePort
   type: NodePort
 
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  annotations:
-    ingress.kubernetes.io/ingress.class: "nginx"
-    ingress.kubernetes.io/ssl-services: "syringe-service"
-    ingress.kubernetes.io/ssl-redirect: "false"
-    ingress.kubernetes.io/force-ssl-redirect: "false"
-    ingress.kubernetes.io/rewrite-target: "/"
-    nginx.ingress.kubernetes.io/rewrite-target: "/"
-    # ingress.kubernetes.io/limit-connections
-    # ingress.kubernetes.io/limit-rps
-  name: syringe-ingress
-  namespace: default
-spec:
-  tls:
-    - hosts:
-      - labs.networkreliability.engineering
-      secretName: tls-certificate
-  rules:
-  - host: labs.networkreliability.engineering
-    http:
-      paths:
-      - path: "/syringe"
-        backend:
-          serviceName: syringe-service
-          servicePort: 8086
+# ---
+# apiVersion: extensions/v1beta1
+# kind: Ingress
+# metadata:
+#   annotations:
+#     ingress.kubernetes.io/ingress.class: "nginx"
+#     ingress.kubernetes.io/ssl-services: "syringe-service"
+#     ingress.kubernetes.io/ssl-redirect: "false"
+#     ingress.kubernetes.io/force-ssl-redirect: "false"
+#     ingress.kubernetes.io/rewrite-target: "/"
+#     nginx.ingress.kubernetes.io/rewrite-target: "/"
+#     # ingress.kubernetes.io/limit-connections
+#     # ingress.kubernetes.io/limit-rps
+#   name: syringe-ingress
+#   namespace: default
+# spec:
+#   tls:
+#     - hosts:
+#       - labs.networkreliability.engineering
+#       secretName: tls-certificate
+#   rules:
+#   - host: labs.networkreliability.engineering
+#     http:
+#       paths:
+#       - path: "/syringe"
+#         backend:
+#           serviceName: syringe-service
+#           servicePort: 8086
 

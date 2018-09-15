@@ -2,6 +2,14 @@ variable "zone" {
   default = "us-west1-a" # Oregon
 }
 
+variable "zone2" {
+  default = "us-west1-a" # Oregon
+}
+
+variable "zone3" {
+  default = "us-west1-a" # Oregon
+}
+
 variable "region" {
   default = "us-west1" # Oregon
 }
@@ -21,4 +29,8 @@ variable "project" {
   default = "networkreliabilityengineering"
 
   # default = "${google_project_services.project.project}"
+}
+
+variable "k8s_master_password" {
+  default = ""
 }

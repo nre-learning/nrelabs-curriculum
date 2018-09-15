@@ -150,25 +150,50 @@ function renderLessonStages() {
         var lessonDefResponse = JSON.parse(reqLessonDef.responseText);
     }
 
-    var stages = parseInt(lessonDefResponse.Stages)
+    // var stages = parseInt(lessonDefResponse.Stages)
 
-    for (i = 1; i <= stages; i++) {
+    // for (var stageId in lessonDefResponse.Stages) {
+    for (var i = 0; i < lessonDefResponse.Stages.length; i++) {
 
-        var stageEntry = document.createElement('li');
-        stageEntry.classList.add('page-item');
+        stageId = i+1
 
-        if (i == getLessonStage()) {
-            stageEntry.classList.add('active');
+        var sel = document.getElementById("lessonStagesDropdown");
+
+        var stageEntry = document.createElement('option');
+        stageEntry.innerText = stageId + " - " + lessonDefResponse.Stages[i].Description
+
+        console.log("FOOPPEEEEEEEEEE");
+        console.log(stageId);
+        console.log(getLessonStage());
+
+        if (stageId == getLessonStage()) {
+            // stageEntry.classList.add('active');
+            console.log("eEEEEFDOIFJDOFIDJSOFIJ");
+            console.log(i)
         }
 
-        var stageLink = document.createElement('a');
-        stageLink.appendChild(document.createTextNode(i));
-        stageLink.classList.add('page-link');
-        stageLink.href = ".?lessonId=" + getLessonId() + "&lessonStage=" + i;
-        stageEntry.appendChild(stageLink);
-
-        document.getElementById("lessonStagesPagination").appendChild(stageEntry);
+        sel.appendChild(stageEntry);
     }
+
+    document.getElementById("lessonStagesDropdown").selectedIndex = getLessonStage() - 1;
+
+    // for (i = 1; i <= stages; i++) {
+
+    //     var stageEntry = document.createElement('li');
+    //     stageEntry.classList.add('page-item');
+
+    //     if (i == getLessonStage()) {
+    //         stageEntry.classList.add('active');
+    //     }
+
+    //     var stageLink = document.createElement('a');
+    //     stageLink.appendChild(document.createTextNode(i));
+    //     stageLink.classList.add('page-link');
+    //     stageLink.href = ".?lessonId=" + getLessonId() + "&lessonStage=" + i;
+    //     stageEntry.appendChild(stageLink);
+
+    //     document.getElementById("lessonStagesPagination").appendChild(stageEntry);
+    // }
 
 
 
@@ -176,6 +201,13 @@ function renderLessonStages() {
     //     <a class="page-link" href="#">1</a>
     // </li>
 
+}
+
+function stageChange() {
+    // var sel = document.getElementById("lessonStagesDropdown").value = "poop";
+    // alert("poop");
+    var newStage = parseInt(document.getElementById("lessonStagesDropdown").selectedIndex) + 1;
+    window.location.href = ".?lessonId=" + getLessonId() + "&lessonStage=" + newStage;
 }
 
 async function requestLesson() {
@@ -462,7 +494,7 @@ function guacInit(endpoints) {
                 password = "antidotepassword"
             }
 
-            connectData = endpoints[i].Port + ";" + String(document.getElementById("tabPane").offsetWidth) + ";" + String(document.getElementById("tabPane").offsetHeight - 42) + ";" + password;
+            connectData = endpoints[i].Host + ";" + endpoints[i].Port + ";" + String(document.getElementById("tabPane").offsetWidth) + ";" + String(document.getElementById("tabPane").offsetHeight - 42) + ";" + password;
             thisTerminal.guac.connect(connectData);
 
             thisTerminal.display.appendChild(thisTerminal.guac.getDisplay().getElement());

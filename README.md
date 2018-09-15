@@ -154,3 +154,34 @@ You can also poke around the on-screen terminal - this is our vMX image - it's t
 ## Cleaning Up
 
 As expected, clean up with `terraform destroy`
+
+
+
+
+
+
+
+## GKE new stuff
+
+After running terraform, configure kubectl with:
+
+```
+gcloud container clusters get-credentials antidote-cluster --zone us-west1-a --project networkreliabilityengineering
+```
+
+```
+kubectl get cs
+kubectl get nodes
+```
+
+
+<!-- https://github.com/coreos/prometheus-operator/issues/357 -->
+```
+kubectl create clusterrolebinding mierdin-admin-binding --clusterrole=cluster-admin --user=Mierdin@gmail.com
+```
+
+```
+cd platform/
+./start.sh
+```
+

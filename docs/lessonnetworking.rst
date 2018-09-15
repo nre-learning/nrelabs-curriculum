@@ -365,7 +365,11 @@ DNS
 
 DNS in Antidote is done the typical Kubernetes way, outlined in https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/.
 
-Each pod in a lab, whether a
+So, if you want to reach vqfx1, simply query for `vqfx1`. You will be directed to the correponding service in your namespace.
+
+You can specify the namespace, to access things in other namespaces, such as the default namespace:
+
+vqfx1.default.svc.cluster.local
 
 
 in-pod

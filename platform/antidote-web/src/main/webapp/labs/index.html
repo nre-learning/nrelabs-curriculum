@@ -54,7 +54,7 @@
     <div class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
             <a href="https://labs.networkreliability.engineering" class="navbar-brand">
-                <img src="../images/nrelabs.png" style="width:48px;height:48px"> NRE Labs</a>
+                <img src="../images/nrelabs_new.png" style="width:48px;height:48px"> NRE Labs</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -128,15 +128,10 @@
 
     <div style="padding: 10px;">
         <div style="width: 50%; float: left;">
-            <p style="float: left;padding-right: 10px;padding-top: 2px;">Select lesson stage: </p>
-            <ul id="lessonStagesPagination" class="pagination pagination-sm"></ul>
-            <!-- <select style="float: right;" class="form-control" id="exampleSelect1">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-            </select> -->
+            <!-- <p style="float: left;padding-right: 10px;padding-top: 2px;">Select lesson stage: </p>
+            <ul id="lessonStagesPagination" class="pagination pagination-sm"></ul> -->
+            <select onchange="stageChange()" style="width: 50%; float: left;" class="form-control" id="lessonStagesDropdown">
+            </select>
         </div>
         <div style="width: 50%; float: right;">
             <p style="float: center; color: #FF7133;">NRE Labs is in early alpha status. Please bear with us as we
@@ -189,12 +184,12 @@
             <div id="tabPane" class="bs-component">
                 <ul id="tabHeaders" class="nav nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link active show" data-toggle="tab" href="#start">Select "Request Lab"</a>
+                        <a class="nav-link active show" data-toggle="tab" href="#start"></a>
                     </li>
                 </ul>
                 <div id="myTabContent" class="tab-content">
                     <div class="tab-pane fade active show" id="start" style="height: 100%;">
-                        <p>Select "request lab" to the left to start this lab</p>
+                        <!-- <p>Select "request lab" to the left to start this lab</p> -->
                         <img class="imgcenter" src="https://labs.networkreliability.engineering/images/nrelabs.png" />
                     </div>
                 </div>

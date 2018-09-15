@@ -1,5 +1,9 @@
 ---
-
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: nginxsa
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -30,6 +34,7 @@ rules:
   - events
   verbs:
   - create
+  - patch
 - apiGroups:
   - "extensions"
   resources:
@@ -92,7 +97,6 @@ subjects:
   - kind: ServiceAccount
     name: default
     namespace: default
-
 ---
 
 apiVersion: extensions/v1beta1
@@ -107,10 +111,11 @@ spec:
       labels: 
         k8s-app: nginx-ingress-lb
     spec: 
+      serviceAccount: default
       containers: 
         - args: 
             - /nginx-ingress-controller
-            - "--default-backend-service=$(POD_NAMESPACE)/antidote-web-service"
+            - "--default-backend-service=$(POD_NAMESPACE)/antidote-web"
             - "--default-ssl-certificate=$(POD_NAMESPACE)/tls-certificate"
           env: 
             - name: POD_NAME
@@ -146,21 +151,24 @@ spec:
         - name: tls-dhparam-vol
           secret: 
             secretName: tls-dhparam
+
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: nginx-ingress
 spec:
-  type: NodePort
+  # type: NodePort
+  type: LoadBalancer
   ports:
   - name: http
-    port: 30001
-    nodePort: 30001
+    port: 80
+    # nodePort: 30001
     targetPort: http
   - name: https
-    port: 30002
-    nodePort: 30002
+    port: 443
+    # nodePort: 30002
     targetPort: https
   selector:
     k8s-app: nginx-ingress-lb

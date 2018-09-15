@@ -49,8 +49,11 @@ Now let's overview the tiers that make up Antidote:
 
 Antidote provisions and manages Kubernetes as opposed to using a hosted, managed solution like GKE because:
 
-- It needs a custom CNI plugin (multus), which GKE and alternatives don't allow.
-- It's desirable to be portable, so we could replace the NRE Labs GCP infrastructure layer with another cloud
-  provider, or perhaps an on-premises solution, and not have to do a lot of work to make it happen.
-- Antidote required nested virtualization in some cases. For example, a lab with a vMX VM in a container/pod.
-  In GCP or in any on-premises hypervisor, this is done at the image layer. With GKE, this wouldn't be possible.
+- It needs a custom CNI plugin (multus). GKE doesn't support CNI except for very tightly controlled deployments.
+  This means that we can't have multiple interfaces per pod. We tried our best to think of alternatives but the
+  tradeoffs were not great. Using multus is really our only option, which means the K8s deployment we're using
+  must support CNI.
+- Keeping things simple, and using only IaaS makes antidote more portable. You could deploy onto any cloud provider,
+  or even on-premises. Initially, antidote was developed on top of GKE and in addition to the other constraints, it wasn't
+  possible to keep GKE-specifics from leaking into the logic of the application. So, we're keeping things generic at the infrastructure
+  layer, allowing others to pick the foundation that works for them more easily.
