@@ -1,0 +1,23 @@
+---
+lessonName: Introduction to Junos
+lessonID: 20
+category: introductory
+
+topologyType: custom
+
+devices:
+- name: vqfx1
+  image: antidotelabs/vr-vqfx:15.1X53-D60
+
+# connections:
+# - a: todd1
+#   b: vqfx1
+#   subnet: 10.12.0.0/24
+# - a: vqfx1
+#   b: web1
+#   subnet: 10.23.0.0/24
+
+stages:
+  1:
+    description: Your First API Call
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-19/stage1/guide.md

@@ -1,6 +1,3 @@
-variable "project_name" {
-  default = "nre-learning"
-}
 
 # Provided at runtime
 variable "billing_account" {}

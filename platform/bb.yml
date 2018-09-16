@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bb
+spec:  # specification of the pod's contents
+  containers:
+  - name: bb
+    image: kroniak/ssh-client
+    command: ["top"]
+    stdin: true
+    tty: true

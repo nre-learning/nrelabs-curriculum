@@ -1,11 +1,11 @@
-resource "google_service_account" "ansible" {
-  account_id   = "ansible"
-  display_name = "ansible"
+resource "google_service_account" "ansiblesa" {
+  account_id   = "ansiblesa"
+  display_name = "ansiblesa"
   project      = "${var.project}"
 }
 
 resource "google_service_account_key" "ansible-key" {
-  service_account_id = "${google_service_account.ansible.name}"
+  service_account_id = "${google_service_account.ansiblesa.name}"
 }
 
 resource "local_file" "ansible-key-file" {
@@ -22,7 +22,7 @@ resource "random_id" "ansible-role-id" {
 // an ID because reasons
 resource "google_project_iam_custom_role" "ansible" {
   role_id     = "${random_id.ansible-role-id.hex}"
-  title       = "Ansible Role"
+  title       = "Ansible Dynamic Inventory Role"
   description = "Role for ansible dynamic inventory"
   project     = "${var.project}"
 
@@ -38,9 +38,9 @@ resource "google_project_iam_custom_role" "ansible" {
 
 resource "google_project_iam_binding" "admin-account-iam" {
   project = "${var.project}"
-  role    = "projects/networkreliabilityengineering/roles/${google_project_iam_custom_role.ansible.role_id}"
+  role    = "projects/${var.project_name}/roles/${google_project_iam_custom_role.ansible.role_id}"
 
   members = [
-    "serviceAccount:ansible@networkreliabilityengineering.iam.gserviceaccount.com",
+    "serviceAccount:ansiblesa@${var.project_name}.iam.gserviceaccount.com",
   ]
 }

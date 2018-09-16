@@ -1,0 +1,15 @@
+---
+lessonName: Interacting with Network APIs using Python
+lessonID: 19
+category: introductory
+
+topologyType: none
+
+utilities:
+- name: linux1
+  image: antidotelabs/utility
+
+stages:
+  1:
+    description: Your First API Call
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-19/stage1/guide.md

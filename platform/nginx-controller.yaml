@@ -159,16 +159,15 @@ kind: Service
 metadata:
   name: nginx-ingress
 spec:
-  # type: NodePort
-  type: LoadBalancer
+  type: NodePort
   ports:
   - name: http
     port: 80
-    # nodePort: 30001
+    nodePort: 30001
     targetPort: http
   - name: https
     port: 443
-    # nodePort: 30002
+    nodePort: 30002
     targetPort: https
   selector:
     k8s-app: nginx-ingress-lb

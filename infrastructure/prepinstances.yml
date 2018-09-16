@@ -60,15 +60,13 @@
 
     # TODO NOT currently persistent across reboots. Need to do this.
     # echo "loop" | sudo tee /etc/modules-load.d/loop.conf   -----maybe?
-    - name: Set up hugepages
-      shell: sysctl vm.nr_hugepages=1024
+    # - name: Set up hugepages
+    #   shell: sysctl vm.nr_hugepages=1024
 
-    # TODO Doesn't seem to be working. Still have to run this myself. Also should make this persistent too.
-    - name: Load loop kernel module
-      shell: modprobe loop
+    # # TODO Doesn't seem to be working. Still have to run this myself. Also should make this persistent too.
+    # - name: Load loop kernel module
+    #   shell: modprobe loop
 
-    - name: Download weave CLI utility
-      shell: curl -L git.io/weave -o /usr/bin/weave && chmod a+x /usr/bin/weave
 
 # https://kubernetes.io/docs/tasks/tools/install-kubeadm/
 # https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/
@@ -77,16 +75,10 @@
   become: yes
   tasks:
 
-    # We're writing a FQDN into the certificate as well, so we can log in via DNS from the internet. Not meant to be highly available,
-    # just a convenience thing.
     - name: Initialize k8s master
       shell: kubeadm init --apiserver-cert-extra-sans k8s.labs.networkreliability.engineering
       register: output_init
       ignore_errors: yes
-
-    # TODO(mierdin): obviously this only works for me right now
-    - name: Copy k8s config
-      shell: mkdir -p /home/mierdin/.kube && sudo cp -u /etc/kubernetes/admin.conf /home/mierdin/.kube/config && sudo chown -R mierdin:mierdin /home/mierdin/.kube
 
     - name: debug output_init
       debug:
@@ -104,31 +96,13 @@
       set_fact:
         mastertoken: "{{ output.stdout }}"
 
-    - name: debug master token
+    - name: show master token
       debug:
         msg: "{{ output }}"
 
-    - name: debug master token
-      debug:
-        msg: "{{ output.stdout }}"
-
-    # - name: Clone multus repo to instance
-    #   git:
-    #     repo: 'https://github.com/intel/multus-cni'
-    #     dest: ~/multus-cni/
-    #     version: v3.0
-    #     force: yes
-    #   ignore_errors: yes
-
-    # - name: Install Multus via DS
-    #   shell: cat ~/multus-cni/images/{multus-daemonset.yml,flannel-daemonset.yml} | kubectl apply -f -
-
     - name: Get kube config file
       fetch:
-        # src: /home/mierdin/.kube/config
-        # dest: ./kubeconfig
-        # mode: 0774
-        src: /home/mierdin/.kube/config
+        src: /etc/kubernetes/admin.conf
         dest: tmp/kubeconfig
         flat: yes
 
@@ -157,32 +131,6 @@
       dest: /etc/kubernetes/node-kubeconfig.yaml
       force: no
 
-  # - name: Clone multus repo to instance
-  #   git:
-  #     repo: 'https://github.com/intel/multus-cni'
-  #     dest: ~/multus-cni/
-  #     version: v3.0
-  #     force: yes
-  #   ignore_errors: yes
-
-  # - name: Compile multus
-  #   shell: cd ~/multus-cni && ./build
-
-  # - name: Install multus
-  #   shell: cp ~/multus-cni/bin/multus /opt/cni/bin
-
-  - name: Create CNI directory
-    file:
-      path: /etc/cni/net.d/
-      state: directory
-
-  # Important that we specify a priority of 1 as most other plugins will try to generate
-  # their own conf files at a priority of 10
-  - name: Install multus CNI config
-    template:
-      src: templates/multus-cni.conf
-      dest:  /etc/cni/net.d/1-multus-cni.conf
-
   - name: enable kubelet service
     systemd:
       name: kubelet
@@ -191,60 +139,13 @@
       enabled: True
 
   - name: join k8s cluster via internal LB DNS name
-    shell: "kubeadm join --token {{ hostvars[groups['tag_kubernetescontrollers'] | first].mastertoken }} --discovery-token-unsafe-skip-ca-verification k8sapi.k8sapi-forwarding-rule.il4.us-west1.lb.networkreliabilityengineering.internal:6443"
+    shell: "kubeadm join --token {{ hostvars[groups['tag_kubernetescontrollers'] | first].mastertoken }} --discovery-token-unsafe-skip-ca-verification k8sapi.k8sapi-forwarding-rule.il4.us-west1.lb.antidote-216521.internal:6443"
     ignore_errors: yes
 
-- name: Antidoty things
+- name: Clone antidote repo
   hosts: tag_kubernetes
-  vars:
-    ansible_ssh_private_key_file: ~/.ssh/google_compute_engine
   gather_facts: no
   tasks:
-
-    - stat: path=~/.ssh/id_rsa.pub
-      register: ssh_key_exists
-
-    - debug:
-        msg: "{{ ssh_key_exists }}"
-
-    # TODO(mierdin): Need to provision an SSH key per lab, but this works for now. 
-    # Will just have to copy this key to the machine you want to SSH to the vmx on for now
-    - name: Copy public SSH key to vMX
-      shell: ssh-keygen -b 2048 -t rsa -f ~/.ssh/id_rsa -q -N ""
-      when: ssh_key_exists.stat.exists == False
-
-    - name: Create directory for vMX files
-      file:
-        path: ~/myfiles
-        state: directory
-        mode: 0755
-
-    - stat: path=~/myfiles/junos-vmx-x86-64-18.1R1.9.qcow2
-      register: image_exists
-
-    - debug:
-        msg: "{{ image_exists }}"
-
-    - name: Download vMX Image
-      shell: curl -o ~/myfiles/junos-vmx-x86-64-18.1R1.9.qcow2 https://storage.googleapis.com/antidote-files/junos-vmx-x86-64-18.1R1.9.qcow2
-      when: image_exists.stat.exists == False
-
-    - stat: path=~/myfiles/id_rsa.pub
-      register: ssh_key_copied
-
-    - debug:
-        msg: "{{ ssh_key_copied }}"
-
-    - name: Copy public SSH key to vMX
-      shell: cp ~/.ssh/id_rsa.pub ~/myfiles/id_rsa.pub
-      when: ssh_key_copied.stat.exists == False
-
-    - name: Download vMX eval
-      shell: curl -o ~/myfiles/license-eval.txt https://www.juniper.net/us/en/dm/free-vmx-trial/E421992502.txt
-
-    - name: Download and load csrx image
-      become: yes  
-      shell: curl -o csrx-18.1R1.9.img.bz2 https://storage.googleapis.com/antidote-files/csrx-18.1R1.9.img.bz2 && docker image load -i csrx-18.1R1.9.img.bz2
 
     - name: Remove antidote repo
       shell: rm -rf ~/antidote
@@ -254,10 +155,6 @@
         repo: 'https://github.com/nre-learning/antidote'
         dest: ~/antidote/
         force: yes
-
-    # TODO(mierdin): Again, we'll have to create an SSH key for each lab instance
-    - name: Copy SSH keys to lessons dir
-      shell: mkdir -p ~/antidote/lessons/ssh && cp ~/.ssh/id_rsa ~/antidote/lessons/ssh/id_rsa && cp -r ~/.ssh/id_rsa.pub ~/antidote/lessons/ssh/id_rsa.pub
 
 - name: Set up weave networking
   hosts: tag_kubernetescontrollers

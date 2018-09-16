@@ -38,13 +38,6 @@ spec:
       httpGet:
         path: /
         port: 8080
-  #   volumeMounts:
-  #     - name: tomcat-users
-  #       mountPath: /usr/local/tomcat/conf/tomcat-users.xml
-  # volumes:
-  #   - name: tomcat-users
-  #     hostPath:
-  #       path: /home/mierdin/antidote/platform/antidote-web/tomcat-users.xml
 
 ---
 kind: Service
@@ -58,36 +51,36 @@ spec:
   ports:
     - port: 8080
       targetPort: 8080
-  type: NodePort
+  type: LoadBalancer
 
-# ---
-# apiVersion: extensions/v1beta1
-# kind: Ingress
-# metadata:
-#   annotations:
-#     ingress.kubernetes.io/ingress.class: "nginx"
-#     ingress.kubernetes.io/ssl-services: "antidote-web-service"
-#     ingress.kubernetes.io/ssl-redirect: "false"
-#     ingress.kubernetes.io/force-ssl-redirect: "false"
-#     ingress.kubernetes.io/rewrite-target: "/antidote-web"
-#     nginx.ingress.kubernetes.io/rewrite-target: "/antidote-web"
-#     # ingress.kubernetes.io/limit-connections
-#     # ingress.kubernetes.io/limit-rps
-#   name: antidote-web-ingress
-#   namespace: default
-# spec:
-#   tls:
-#     - hosts:
-#       - labs.networkreliability.engineering
-#       secretName: tls-certificate
-#   rules:
-#   - host: labs.networkreliability.engineering
-#     http:
-#       paths:
-#       - path: "/"
-#         backend:
-#           serviceName: antidote-web-service
-#           servicePort: 8080
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    ingress.kubernetes.io/ingress.class: "nginx"
+    ingress.kubernetes.io/ssl-services: "antidote-web"
+    ingress.kubernetes.io/ssl-redirect: "false"
+    ingress.kubernetes.io/force-ssl-redirect: "false"
+    # ingress.kubernetes.io/rewrite-target: "/antidote-web"
+    # nginx.ingress.kubernetes.io/rewrite-target: "/antidote-web"
+    # ingress.kubernetes.io/limit-connections
+    # ingress.kubernetes.io/limit-rps
+  name: antidote-web-ingress
+  namespace: default
+spec:
+  tls:
+    - hosts:
+      - labs.networkreliability.engineering
+      secretName: tls-certificate
+  rules:
+  - host: labs.networkreliability.engineering
+    http:
+      paths:
+      - path: "/"
+        backend:
+          serviceName: antidote-web
+          servicePort: 8080
 
 # https://hackernoon.com/setting-up-nginx-ingress-on-kubernetes-2b733d8d2f45
 # https://danielfm.me/posts/painless-nginx-ingress.html

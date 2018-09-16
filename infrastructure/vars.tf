@@ -26,10 +26,15 @@ variable "zone_domain_name" {
 }
 
 variable "project" {
-  default = "networkreliabilityengineering"
+  default = "antidote-216521"
 
   # default = "${google_project_services.project.project}"
 }
+
+variable "project_name" {
+  default = "antidote-216521"
+}
+
 
 variable "k8s_master_password" {
   default = ""

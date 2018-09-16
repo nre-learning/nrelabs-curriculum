@@ -65,37 +65,49 @@ metadata:
     tier: node
     app: multus
 data:
+
   70-multus.conf: |
     {
-      "name": "multus-cni-network",
-      "type": "multus",
-      "logFile": "/var/log/multus.log",
-      "logLevel": "debug",
-      "delegates": [
-        {
-          "cniVersion": "0.3.0",
-          "type": "bridge",
-          "isDefaultGateway": true,
-          "bridge": "default-br0",
-          "ipam": {
-            "type": "host-local",
-            "subnet": "192.168.1.0/24",
-            "rangeStart": "192.168.1.200",
-            "rangeEnd": "192.168.1.216",
-            "routes": [
-              { "dst": "0.0.0.0/0" }
-            ],
-            "gateway": "192.168.1.1"
-          },
-          "dns": {
-            "nameservers": [
-              "10.96.0.10"
-            ]
-          }
-        }
-      ],
-      "kubeconfig": "/etc/cni/net.d/multus.d/multus.kubeconfig"
+        "name": "node-cni-network",
+        "type": "multus",
+        "kubeconfig": "/etc/cni/net.d/multus.d/multus.kubeconfig",
+        "delegates": [{
+            "type": "weave-net",
+            "hairpinMode": true,
+            "masterplugin": true
+        }]
     }
+  # 70-multusbridge.conf: |
+  #   {
+  #     "name": "multus-cni-network",
+  #     "type": "multus",
+  #     "logFile": "/var/log/multus.log",
+  #     "logLevel": "debug",
+  #     "delegates": [
+  #       {
+  #         "cniVersion": "0.3.0",
+  #         "type": "bridge",
+  #         "isDefaultGateway": true,
+  #         "bridge": "default-br0",
+  #         "ipam": {
+  #           "type": "host-local",
+  #           "subnet": "192.168.1.0/24",
+  #           "rangeStart": "192.168.1.200",
+  #           "rangeEnd": "192.168.1.216",
+  #           "routes": [
+  #             { "dst": "0.0.0.0/0" }
+  #           ],
+  #           "gateway": "192.168.1.1"
+  #         },
+  #         "dns": {
+  #           "nameservers": [
+  #             "10.96.0.10"
+  #           ]
+  #         }
+  #       }
+  #     ],
+  #     "kubeconfig": "/etc/cni/net.d/multus.d/multus.kubeconfig"
+  #   }
 ---
 apiVersion: extensions/v1beta1
 kind: DaemonSet

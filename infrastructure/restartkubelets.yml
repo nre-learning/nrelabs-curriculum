@@ -1,0 +1,13 @@
+
+- name: Restart kubelets
+  hosts: tag_kubernetes
+  gather_facts: no
+  become: yes
+  tasks:
+
+  - name: Restart kubelet service
+    systemd:
+      name: kubelet
+      state: restarted
+      daemon_reload: yes
+      enabled: True

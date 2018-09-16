@@ -1,22 +1,8 @@
-# NRE Learning
+# Antidote
 
 This is a starting point for a set of learning labs for NRE skills.
 
 For ease of use, all of this is built with Terraform and Docker, on top of Google Cloud Platform (since they offer native hardware virtualization extensions).
-
-## Download vMX image
-
-Before launching a vMX, you need an official vmx-bundle tar file from Junos 17.3 or newer.
-
-There is a free trial version available at [https://www.juniper.net/us/en/dm/free-vmx-trial/](https://www.juniper.net/us/en/dm/free-vmx-trial/) (not yet updated with 17.3,  currently in beta). **Start this now** as the bundle is quite large and will take some time to download.
-
-Once downloaded, extract the junos-*.qcow2 VCP VM image from the tar file. We'll use this in a later step.
-
-```
-tar zxf vmx-bundle-17.3R1.10.tgz
-mv vmx/images/junos-vmx-x86-64-17.3R1.10.qcow2 .
-rm -rf vmx
-```
 
 ## Prerequisites
 
@@ -31,7 +17,7 @@ Follow [the instructions for installing the Google Cloud SDK](https://cloud.goog
 ```
 gcloud auth login
 gcloud auth application-default login
-gcloud config set compute/zone us-west1-a
+gcloud config set compute/zone us-west1-b
 gcloud config set compute/region us-west1
 ```
 
@@ -59,7 +45,7 @@ Do this before moving on. Eventually this will be replaced with a proper load ba
 Now, it's time to run our ansible playbook.
 
 ```
-gcloud config set core/project networkreliabilityengineering && gcloud compute config-ssh
+gcloud config set core/project antidote-216521 && gcloud compute config-ssh
 virtualenv -p python3 venv && source venv/bin/activate
 pip3 install -r requirements.txt
 ansible-playbook -i inventory/ prepinstances.yml
