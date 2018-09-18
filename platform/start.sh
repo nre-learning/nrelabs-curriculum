@@ -12,6 +12,7 @@ kubectl create -f nginx-controller.yaml
 # kubectl create -f sharedlab/lab0.yaml
 kubectl create -f syringek8s.yaml
 kubectl create -f antidote-web/antidote-web.yaml
-kubectl create -f ingress.yaml
+# kubectl create -f ingress.yaml
+kubectl create -f influxdb.yaml
 
 cd ../infrastructure && ansible-playbook -i inventory/ restartkubelets.yml && cd ../platform

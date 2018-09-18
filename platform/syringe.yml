@@ -112,7 +112,7 @@ spec:
     - containerPort: 8086   # REST/HTTP
     readinessProbe:
       httpGet:
-        path: /syringe
+        path: /
         port: 8086
     volumeMounts:
       - mountPath: /antidote
@@ -161,8 +161,8 @@ metadata:
     ingress.kubernetes.io/ssl-services: "syringe"
     ingress.kubernetes.io/ssl-redirect: "false"
     ingress.kubernetes.io/force-ssl-redirect: "false"
-    # ingress.kubernetes.io/rewrite-target: "/"
-    # nginx.ingress.kubernetes.io/rewrite-target: "/"
+    ingress.kubernetes.io/rewrite-target: "/"
+    nginx.ingress.kubernetes.io/rewrite-target: "/"
     # ingress.kubernetes.io/limit-connections
     # ingress.kubernetes.io/limit-rps
   name: syringe-ingress

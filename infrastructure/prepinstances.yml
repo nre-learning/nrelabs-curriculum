@@ -15,6 +15,8 @@
         state: latest
       with_items:
         - epel-release
+        - nfs-utils
+        - nfs-utils-lib
         - python-pip
         - git
         - lsof

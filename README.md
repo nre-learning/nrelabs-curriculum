@@ -78,8 +78,16 @@ cd ../platform/
 ./start.sh
 ```
 
+> NOTE need to add the following command to create the filestore, then update all kubernetes manifests with the right IP, and THEN make sure all subdirectories are created (like `influxdata`)
 
-
+```
+gcloud beta filestore instances create nfs-server \
+    --project=[PROJECT_ID] \
+    --location=us-central1-c \
+    --tier=STANDARD \
+    --file-share=name="vol1",capacity=1TB \
+    --network=name="default"
+```
 
 
 

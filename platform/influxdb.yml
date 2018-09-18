@@ -1,0 +1,71 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: influxdb
+  labels:
+    app: influxdb
+    antidote_role: infra
+spec:
+  containers:
+  - name: influxdb
+    image: influxdb:latest
+    imagePullPolicy: Always
+    ports:
+    - containerPort: 8086
+    - containerPort: 8083
+    volumeMounts:
+    - mountPath: "/var/lib/influxdb"
+      name: influxdata
+  volumes:
+    - name: influxdata
+      persistentVolumeClaim:
+        claimName: influxdb-pvc
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: influxdb
+  namespace: default
+spec:
+  selector:
+    app: influxdb
+  ports:
+    - name: httpapi
+      port: 8086
+      targetPort: 8086
+  type: ClusterIP
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: influxdb-pv
+  labels:
+    app: influxdb
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteMany
+  nfs: 
+    path: /antidotepersist/influxdata
+    server: "10.55.112.186"
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: influxdb-pvc
+  labels:
+    app: influxdb
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: "" # the storageClassName has to be specified
+  resources:
+    requests:
+      storage: 2Gi
+  selector:
+    matchLabels:
+      app: influxdb

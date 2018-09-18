@@ -144,7 +144,7 @@ function renderLessonStages() {
     if (reqLessonDef.status != 200) {
         console.log("Unable to get lesson def")
     } else {
-        console.log("Received lesson def from syringe:")
+        console.log("Received stage information from syringe:")
         console.log(JSON.parse(reqLessonDef.responseText));
 
         var lessonDefResponse = JSON.parse(reqLessonDef.responseText);

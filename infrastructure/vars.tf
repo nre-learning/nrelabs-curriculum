@@ -3,11 +3,11 @@ variable "zone" {
 }
 
 variable "zone2" {
-  default = "us-west1-a" # Oregon
+  default = "us-west1-b" # Oregon
 }
 
 variable "zone3" {
-  default = "us-west1-a" # Oregon
+  default = "us-west1-c" # Oregon
 }
 
 variable "region" {
