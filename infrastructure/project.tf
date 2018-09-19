@@ -26,17 +26,29 @@ resource "random_id" "id" {
 #   billing_account = "${var.billing_account}"
 # }
 
-resource "google_project_services" "project" {
-  project = "${var.project}"
+# resource "google_project_services" "project" {
+#   project = "${var.project}"
 
-  disable_on_destroy = false
+#   disable_on_destroy = false
 
-  // Services to allow in this project. These are the APIs that are enabled for this project.
-  services = [
-    "compute.googleapis.com",
-    # "filestore.googleapis.com",
-    "oslogin.googleapis.com",
-    "iam.googleapis.com",
-    "dns.googleapis.com",
-  ]
-}
+#   // Services to allow in this project. These are the APIs that are enabled for this project.
+#   services = [
+#     "compute.googleapis.com",
+#     "filestore.googleapis.com",
+#     "resourceviews.googleapis.com",
+#     "oslogin.googleapis.com",
+#     "iam.googleapis.com",
+#     "dns.googleapis.com",
+#     "pubsub.googleapis.com",
+#     "containerregistry.googleapis.com",
+#     "container.googleapis.com",
+#     "bigquery-json.googleapis.com",
+#     "storage-api.googleapis.com",
+#     "replicapool.googleapis.com",
+#     "replicapoolupdater.googleapis.com",
+#     "file.googleapis.com",
+#     "deploymentmanager.googleapis.com",
+    
+    
+#   ]
+# }

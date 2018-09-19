@@ -16,7 +16,7 @@
       with_items:
         - epel-release
         - nfs-utils
-        - nfs-utils-lib
+        # - nfs-utils-lib
         - python-pip
         - git
         - lsof
@@ -69,6 +69,8 @@
     # - name: Load loop kernel module
     #   shell: modprobe loop
 
+    - name: Download weave CLI utility
+      shell: curl -L git.io/weave -o /usr/bin/weave && chmod a+x /usr/bin/weave
 
 # https://kubernetes.io/docs/tasks/tools/install-kubeadm/
 # https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/
@@ -158,9 +160,9 @@
         dest: ~/antidote/
         force: yes
 
-- name: Set up weave networking
-  hosts: tag_kubernetescontrollers
-  tasks:
+# - name: Set up weave networking
+#   hosts: tag_kubernetescontrollers
+#   tasks:
 
-  - name: installweave via vendored manifest
-    shell: kubectl apply -f ~/antidote/platform/weaveinstall.yml
+#   - name: installweave via vendored manifest
+#     shell: kubectl apply -f ~/antidote/platform/weaveinstall.yml

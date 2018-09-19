@@ -10,7 +10,7 @@ resource "google_compute_disk" "centos7_disk" {
 
   size = 350
 
-  depends_on = [
-    "google_project_services.project",
-  ]
+  # depends_on = [
+  #   "google_project_services.project",
+  # ]
 }

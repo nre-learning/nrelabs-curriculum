@@ -66,10 +66,60 @@ metadata:
     app: multus
 data:
 
+    # Kinda works
+    # {
+    #   "name": "node-cni-network",
+    #   "type": "multus",
+    #   "logFile": "/var/log/multus.log",
+    #   "logLevel": "debug",
+    #   "kubeconfig": "/etc/cni/net.d/multus.d/multus.kubeconfig",
+    #   "delegates": [
+    #     {
+    #       "name": "mynet",
+    #       "type": "ptp",
+    #       "ipMasq": true,
+    #       "ipam": {
+    #         "type": "host-local",
+    #         "subnet": "10.1.1.0/24"
+    #       },
+    #       "dns": {
+    #         "nameservers": [ "10.96.0.10", "8.8.8.8" ]
+    #       }
+    #     }
+    #   ]
+    # }
+
+  # 70-multus.conf: |
+  #   {
+  #     "name": "node-cni-network",
+  #     "type": "multus",
+  #     "logFile": "/var/log/multus.log",
+  #     "logLevel": "debug",
+  #     "kubeconfig": "/etc/cni/net.d/multus.d/multus.kubeconfig",
+  #     "delegates": [
+  #       {
+  #         "name": "mynet",
+  #         "type": "bridge",
+  #         "bridge": "mynet0",
+  #         "isDefaultGateway": true,
+  #         "forceAddress": false,
+  #         "ipMasq": true,
+  #         "hairpinMode": true,
+  #         "ipam": {
+  #           "type": "host-local",
+  #           "subnet": "10.10.0.0/16"
+  #         }
+  #       }
+  #     ]
+  #   }
+
+
   70-multus.conf: |
     {
         "name": "node-cni-network",
         "type": "multus",
+        "logFile": "/var/log/multus.log",
+        "logLevel": "debug",
         "kubeconfig": "/etc/cni/net.d/multus.d/multus.kubeconfig",
         "delegates": [{
             "type": "weave-net",

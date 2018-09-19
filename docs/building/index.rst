@@ -1,4 +1,5 @@
 .. toctree::
    :maxdepth: 2
 
-   antidoteweb.rst
+   production.rst
+   images.rst

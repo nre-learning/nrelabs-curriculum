@@ -86,7 +86,7 @@ resource "google_compute_instance_template" "controllers" {
   machine_type = "n1-standard-2"
 
   depends_on = [
-    "google_project_services.project",
+    # "google_project_services.project",
     "google_compute_image.nested-vm-image",
   ]
 
@@ -120,7 +120,7 @@ resource "google_compute_instance_template" "workers" {
   machine_type = "n1-standard-16"
 
   depends_on = [
-    "google_project_services.project",
+    # "google_project_services.project",
     "google_compute_image.nested-vm-image",
   ]
 

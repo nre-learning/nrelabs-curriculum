@@ -49,8 +49,8 @@ spec:
   accessModes:
     - ReadWriteMany
   nfs: 
-    path: /antidotepersist/influxdata
-    server: "10.55.112.186"
+    path: /asdf/influxdata
+    server: "10.231.239.202"
 
 ---
 apiVersion: v1

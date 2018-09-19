@@ -19,7 +19,7 @@ spec:
       name: grafanadata
     env:
 
-    # Grafana is kind of a pain in the ass when you change this. It doesn't work for all paths. So you have to do this and still
+    # Grafana is kind of a pain in the ass when you change the root URL. It doesn't work for all paths. So you have to do this and still
     # rewrite to "/" in the ingress.
     - name: GF_SERVER_ROOT_URL
       value: "https://labs.networkreliability.engineering/grafana"
@@ -27,6 +27,10 @@ spec:
       value: "mierdin"
     - name: GF_SECURITY_ADMIN_PASSWORD
       value: "nrelabs"
+    - name: GF_AUTH_ANONYMOUS_ENABLED
+      value: "true"
+    - name: GF_AUTH_ANONYMOUS_ORG_ROLE
+      value: Viewer
   volumes:
     - name: grafanadata
       persistentVolumeClaim:
@@ -60,8 +64,8 @@ spec:
   accessModes:
     - ReadWriteMany
   nfs: 
-    path: /antidotepersist/grafanadata
-    server: "10.55.112.186"
+    path: /asdf/grafanadata
+    server: "10.231.239.202"
 
 ---
 apiVersion: v1
