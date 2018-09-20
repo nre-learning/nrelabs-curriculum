@@ -14,9 +14,6 @@ spec:
     imagePullPolicy: Always
     ports:
     - containerPort: 3000
-    volumeMounts:
-    - mountPath: "/var/lib/grafana"
-      name: grafanadata
     env:
 
     # Grafana is kind of a pain in the ass when you change the root URL. It doesn't work for all paths. So you have to do this and still
@@ -31,10 +28,6 @@ spec:
       value: "true"
     - name: GF_AUTH_ANONYMOUS_ORG_ROLE
       value: Viewer
-  volumes:
-    - name: grafanadata
-      persistentVolumeClaim:
-        claimName: grafana-pvc
 
 ---
 kind: Service
@@ -50,40 +43,6 @@ spec:
       port: 3000
       targetPort: 3000
   type: LoadBalancer
-
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: grafana-pv
-  labels:
-    app: grafana
-spec:
-  capacity:
-    storage: 2Gi
-  accessModes:
-    - ReadWriteMany
-  nfs: 
-    path: /asdf/grafanadata
-    server: "10.231.239.202"
-
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: grafana-pvc
-  labels:
-    app: grafana
-spec:
-  accessModes:
-    - ReadWriteMany
-  storageClassName: "" # the storageClassName has to be specified
-  resources:
-    requests:
-      storage: 2Gi
-  selector:
-    matchLabels:
-      app: grafana
 
 ---
 apiVersion: extensions/v1beta1

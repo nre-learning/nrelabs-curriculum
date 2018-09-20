@@ -49,8 +49,8 @@ spec:
   accessModes:
     - ReadWriteMany
   nfs: 
-    path: /asdf/influxdata
-    server: "10.231.239.202"
+    path: /influxdata
+    server: "10.240.18.26"
 
 ---
 apiVersion: v1

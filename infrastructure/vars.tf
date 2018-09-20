@@ -34,8 +34,3 @@ variable "project" {
 variable "project_name" {
   default = "antidote-216521"
 }
-
-
-variable "k8s_master_password" {
-  default = ""
-}

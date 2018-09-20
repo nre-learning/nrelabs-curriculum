@@ -37,34 +37,23 @@ cd infrastructure/
 terraform apply
 ```
 
-Once terraform creates all of the necessary resources, we first need to do a little manual work. We need to create an A record in the GCE dashboard for `vip.labs.networkreliability.engineering`, and add all of the provisioned NAT IPs (external) for each of the instances in the `workers` instance group.
-
-Do this before moving on. Eventually this will be replaced with a proper load balancing setup.
-
-Now, it's time to run our ansible playbook.
+The google provider for terraform doesn't **quite** (https://github.com/terraform-providers/terraform-provider-google/issues/1774#issuecomment-422507130) have the filestore APIs yet, so we'll have to do this to get our NFS server online:
 
 ```
-gcloud config set core/project antidote-216521 && gcloud compute config-ssh
-virtualenv -p python3 venv && source venv/bin/activate
-pip3 install -r requirements.txt
-ansible-playbook -i inventory/ prepinstances.yml
+gcloud beta filestore instances create nfs-server --location=us-west1-b --tier=STANDARD --file-share=name="influxdata",capacity=1TB --network=name="default-internal"
+gcloud dns record-sets transaction add -z=nre --name="nfs.labs.networkreliability.engineering." --type=A --ttl=300 "$(gcloud beta filestore instances list | grep nfs-server | awk '{print $6}')"
+gcloud dns record-sets transaction execute -z=nre
+```
+
+Next, bootstrap the cluster:
+
+```
+./bootstrapcluster.sh
 ```
 
 ## Platform Setup
 
-Next we need to start the services that will power Antidote. In order to do that, we need to configure kubectl. There's a file `kubeconfig` located in the `tmp/` directory alongside the playbook we just ran. Edit that file to point to `k8s.labs.networkreliability.engineering` instead of the internal IP that's currently there. Then, copy it to `~/.kube/config` on your system.
-
-Finally, look up the external IP address for the first controller, and add an entry for `k8s.labs.networkreliability.engineering` to point to this address.
-
-```
-sudo cp tmp/kubeconfig ~/.kube/config
-sudo vi ~/.kube/config
-sudo vi /etc/hosts
-```
-
-There are reasons why this is necessary right now but it shouldn't be in the future.
-
-You should now be able to run kubectl commands. Verify with:
+Next we need to start the services that will power Antidote. At this point, you should now be able to run kubectl commands. Verify with:
 
 ```
 kubectl get nodes
@@ -74,7 +63,7 @@ Enter the `platform` directory and execute the shell script to upload all of the
 
 ```
 cd ../platform/
-./start.sh
+./bootstrapplatform.sh
 ```
 
 > NOTE may need to restart the coredns pods
@@ -83,11 +72,10 @@ cd ../platform/
 
 ```
 gcloud beta filestore instances create nfs-server \
-    --project=[PROJECT_ID] \
-    --location=us-central1-c \
+    --location=us-west1-b \
     --tier=STANDARD \
-    --file-share=name="vol1",capacity=1TB \
-    --network=name="default"
+    --file-share=name="influxdata",capacity=1TB \
+    --network=name="default-internal"
 ```
 
 

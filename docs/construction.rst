@@ -1,1 +1,0 @@
-Need two docs. How to build prod, and how to build a minikube version for local testing. Warn in the former that this is not the guide for local testing.

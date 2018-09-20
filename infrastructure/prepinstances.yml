@@ -1,6 +1,7 @@
 ---
 - name: Prep instances (sudo)
   hosts: tag_kubernetes
+  gather_facts: no
   become: yes
   tasks:
 
@@ -23,8 +24,8 @@
         - htop
         - bridge-utils
         - docker
-        - kubelet
-        - kubeadm
+        - kubelet-1.11.3
+        - kubeadm-1.11.3
         - kubectl
         - go
 
@@ -37,17 +38,21 @@
       with_items:
         - kubelet
         - docker
+        - firewalld
 
-    - name: Enable and restart services
-      systemd:
-        name: firewalld
-        state: stopped
-        enabled: False
-      with_items:
-        - kubelet
-        - docker
+    - name: Create directory for stackdriver creds
+      shell: mkdir -p /etc/google/auth/
 
-    - name: Configure kubernetes repo
+    - name: Upload stackdriver creds
+      copy:
+        src: tmp/stackdriversakey.json
+        dest: /etc/google/auth/application_default_credentials.json
+        force: no
+
+    - name: install stackdriver agent
+      shell: "curl -sSO https://dl.google.com/cloudagents/install-monitoring-agent.sh && bash install-monitoring-agent.sh"
+
+    - name: Configure kernel options
       template:
         src: templates/sysctl-k8s.conf
         dest:  /etc/sysctl.d/k8s.conf
@@ -57,30 +62,19 @@
       with_items:
         - setenforce 0
         - sysctl --system
-        # - usermod -aG docker $USER
         - iptables -F
-
-    # TODO NOT currently persistent across reboots. Need to do this.
-    # echo "loop" | sudo tee /etc/modules-load.d/loop.conf   -----maybe?
-    # - name: Set up hugepages
-    #   shell: sysctl vm.nr_hugepages=1024
-
-    # # TODO Doesn't seem to be working. Still have to run this myself. Also should make this persistent too.
-    # - name: Load loop kernel module
-    #   shell: modprobe loop
 
     - name: Download weave CLI utility
       shell: curl -L git.io/weave -o /usr/bin/weave && chmod a+x /usr/bin/weave
 
-# https://kubernetes.io/docs/tasks/tools/install-kubeadm/
-# https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/
 - name: Set up K8S Master
   hosts: tag_kubernetescontrollers
+  gather_facts: no
   become: yes
   tasks:
 
     - name: Initialize k8s master
-      shell: kubeadm init --apiserver-cert-extra-sans k8s.labs.networkreliability.engineering
+      shell: kubeadm init --kubernetes-version stable-1.11 --apiserver-cert-extra-sans k8s.networkreliability.engineering
       register: output_init
       ignore_errors: yes
 
@@ -110,8 +104,17 @@
         dest: tmp/kubeconfig
         flat: yes
 
+# - name: Initialize NFS share
+#   hosts: tag_kubernetesworkers[0]
+#   gather_facts: no
+#   become: yes
+#   tasks:
+#   - name: Initialize NFS share
+#     shell: mkdir -p /mnt/nfs/home && mount nfs.labs.networkreliability.engineering:/influxdata /mnt/nfs/home && chmod 777 /mnt/nfs/home && umount /mnt/nfs/home
+
 - name: Set up K8S Workers
   hosts: tag_kubernetesworkers
+  gather_facts: no
   become: yes
   tasks:
 
@@ -135,6 +138,18 @@
       dest: /etc/kubernetes/node-kubeconfig.yaml
       force: no
 
+  - name: Create CNI directory	
+    file:	
+      path: /etc/cni/net.d/	
+      state: directory	
+  
+  # Important that we specify a priority of 1 as most other plugins will try to generate	
+  # their own conf files at a priority of 10	
+  - name: Install multus CNI config	
+    template:	
+      src: templates/multus-cni.conf	
+      dest:  /etc/cni/net.d/1-multus-cni.conf
+
   - name: enable kubelet service
     systemd:
       name: kubelet
@@ -142,8 +157,8 @@
       daemon_reload: yes
       enabled: True
 
-  - name: join k8s cluster via internal LB DNS name
-    shell: "kubeadm join --token {{ hostvars[groups['tag_kubernetescontrollers'] | first].mastertoken }} --discovery-token-unsafe-skip-ca-verification k8sapi.k8sapi-forwarding-rule.il4.us-west1.lb.antidote-216521.internal:6443"
+  - name: join k8s cluster via LB DNS name
+    shell: "kubeadm join --token {{ hostvars[groups['tag_kubernetescontrollers'] | first].mastertoken }} --discovery-token-unsafe-skip-ca-verification k8s.networkreliability.engineering:443"
     ignore_errors: yes
 
 - name: Clone antidote repo
@@ -160,9 +175,19 @@
         dest: ~/antidote/
         force: yes
 
-# - name: Set up weave networking
-#   hosts: tag_kubernetescontrollers
-#   tasks:
+- name: Make local changes
+  hosts: 127.0.0.1
+  connection: local
+  gather_facts: no
+  tasks:
 
-#   - name: installweave via vendored manifest
-#     shell: kubectl apply -f ~/antidote/platform/weaveinstall.yml
+  - name: Check that mastertoken.txt exists
+    stat:
+      path: tmp/mastertoken.txt
+    register: stat_result
+
+  - copy: content="{{ hostvars[groups['tag_kubernetescontrollers'] | first].mastertoken }}" dest=tmp/mastertoken.txt
+    when: stat_result.stat.exists == False
+
+  - name: moving kubeconfig
+    shell: cp tmp/kubeconfig ~/.kube/config

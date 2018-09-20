@@ -9,8 +9,4 @@ resource "google_compute_disk" "centos7_disk" {
   image = "${var.os["centos-7"]}"
 
   size = 350
-
-  # depends_on = [
-  #   "google_project_services.project",
-  # ]
 }
