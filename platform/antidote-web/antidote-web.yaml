@@ -21,15 +21,13 @@ spec:
     - name: GUACD_PORT
       value: "4822"
     - name: POSTGRES_HOSTNAME
-      value: "db0.labs.networkreliability.engineering"
-    # - name: POSTGRES_PORT
-    #   value: "5432"
+      value: "na"
     - name: POSTGRES_DATABASE
-      value: "guacamole_db"
+      value: "na"
     - name: POSTGRES_USER
-      value: "guac_user"
+      value: "na"
     - name: POSTGRES_PASSWORD
-      value: "guac"
+      value: "na"
     ports:
     - containerPort: 8080
     readinessProbe:
