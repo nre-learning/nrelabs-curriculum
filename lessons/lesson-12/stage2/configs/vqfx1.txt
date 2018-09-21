@@ -78,7 +78,7 @@
                 </providers>
             </extensions>
         </system>
-        <interfaces operation="replace">
+        <interfaces operation="merge">
             <interface>
                 <name>em0</name>
                 <unit>
