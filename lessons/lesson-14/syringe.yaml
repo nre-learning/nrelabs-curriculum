@@ -12,7 +12,6 @@ utilities:
 stages:
   1:
     description: Lists
-    # TODO(mierdin): Provide this via the Syringe API
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-14/stage1/guide.md
   2:
     description: Dictionaries (key/value pairs)

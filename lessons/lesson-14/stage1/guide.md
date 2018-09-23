@@ -1,7 +1,17 @@
 # Introduction to YAML
 ## Part 1 - Lists
 
-lists are cool
+Welcome to this introduction to YAML! From the very first moment you started looking into network automation, chances are you keep
+hearing about YAML. The reason for this is that YAML is a simple way to describe common data structures in a format that's both
+easily understood by humans, as well as easily parseable by machines. As a result, it powers a large number of automation tools,
+both inside and outside of networking.
+
+To prepare you for more advanced lessons that might use YAML, we want to spend some time covering the basics, so you're able to
+look at an existing YAML document and understand it, or even create your own. This will allow you to do things like write Ansible playbooks,
+JSNAPy tests, and much more.
+
+As mentioned, YAML lets us represent simple data structures in a text format. One such data structure is the `list`. Most of YAML's capabilities
+closely mirror Python's data structures, and the `list` is a prime example. Let's take a look at a sample YAML list:
 
 ```
 cd /antidote/lessons/lesson-14/stage1/
