@@ -442,7 +442,8 @@ function provisionLesson() {
     modal.removeChild(modal.firstChild);
     var modalMessage = document.createTextNode(getRandomModalMessage());
     modal.appendChild(modalMessage);
-    $("#exampleModal").modal("show");
+    // $("#exampleModal").modal("show");
+    $('#exampleModal').modal({backdrop: 'static', keyboard: false})  
 
     requestLesson();
 
