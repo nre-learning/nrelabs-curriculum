@@ -8,13 +8,13 @@ Welcome to Antidote's documentation!
    :caption: Contents:
 
    intro.rst
-   building/index.rst
-   infrastructure.rst
-   lessonnetworking.rst
-   labscheduling.rst
+   architecture/architecture.rst
+   building/building.rst
+   syringe/syringe.rst
+   contributing/contributing.rst
    roadmap.rst
-   contributing.rst
-   contact.rst
+   nrelabs.rst
+   community.rst
 
 Indices and tables
 ==================

@@ -20,7 +20,7 @@ granular network topologies between our Pods.
 To put this under a nice umbrella term so we can more readily refer to these resources as a single cohesive unit that serves a given exercise, we're simply calling this
 a "lab".
 
-.. image:: images/labexample.png
+.. image:: /images/labexample.png
 
 Note that this is what's required for a single user to use a single lab. If multiple users are using this lab, then multiple instances of this same topology will be spun up in parallel,
 in isolation from each other. In addition, this is just the lab layout for this particular exercise. Other exercises will leverage a slightly different lab definition, and will likely

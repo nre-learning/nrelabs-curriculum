@@ -1,1 +1,0 @@
-Explain the use of cookies and why we're doing it

@@ -1,7 +1,15 @@
-.. infrastructure:
+.. architecture:
 
-Infrastructure
+Antidote Architecture
 ================================
+
+.. toctree::
+   :maxdepth: 1
+
+   infrastructure.rst
+   lessonnetworking.rst
+   lessonscheduling.rst
+
 
 Antidote has multiple layers that build up a cluster, and multiple tools that run or setup each layer.
 
@@ -9,7 +17,7 @@ In general, the Antidote cluster can be thought of like a Kubernetes cluster run
 
 The NRE Labs runtime of Antidote runs on Google Cloud Platform, so we'll use this as a example to illustrate the cluster and stack at a glance.
 
-.. image:: images/infralayers.png
+.. image:: /images/infralayers.png
 
 Now let's overview the tiers that make up Antidote:
 
@@ -23,7 +31,7 @@ Now let's overview the tiers that make up Antidote:
 |                      |              | a cloud DSL, if you want to host Antidote on another cloud, you only     |
 |                      |              | need to change the Terraform layer, made simple by Terraform Providers.  |
 +----------------------+--------------+--------------------------------------------------------------------------+
-| VM Configuration     | Ansible      | Once Terraform provisions the cloud VM Linux instances, they need        |
+| Instance Config      | Ansible      | Once Terraform provisions the cloud VM Linux instances, they need        |
 |                      |              | to be configured, such as having dependencies installed, configuration   |
 |                      |              | files written, processes restarted, etc. We use an Ansible playbook to   |
 |                      |              | initially configure all VM instances, including those that are added to  |
@@ -33,7 +41,7 @@ Now let's overview the tiers that make up Antidote:
 |                      |              | want to provision a resource as part of a lab, we do this by interacting |
 |                      |              | with Kubernetes API.                                                     |
 +----------------------+--------------+--------------------------------------------------------------------------+
-| Lab Provisioning     | Syringe      | Kubernetes is still fairly low-level for our purposes, and we don't want |
+| Lesson Provisioning  | Syringe      | Kubernetes is still fairly low-level for our purposes, and we don't want |
 |                      |              | to place the burden on the lab contributor to know how Kubernetes works. |
 |                      |              | So we developed a tool called Syringe that ingests a very simple lab     |
 |                      |              | definition, and creates the necessary resources in the cluster. It also  |

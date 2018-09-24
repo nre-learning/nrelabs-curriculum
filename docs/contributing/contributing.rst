@@ -1,7 +1,14 @@
 .. _contrib:
 
+.. toctree::
+   :maxdepth: 1
 
-Contributing
+   contributelesson.rst
+
+Please use the menu above to get to the relevant instructions for how you're trying to build Antidote.
+
+
+Contributing to Antidote
 ================================
 
 In general, there are two area in which to contribute: Antidote infrastructure
@@ -21,17 +28,12 @@ about the user experience desired if you wish to have your work considered to
 be published there. Furthermore, you should read about the
 project's curriculum :ref:`taxonomy <nrelabs>`. And in order to test your
 contributions before submitting a pull request to the project, it is helpful to
-run an instance of Antidote yourself and test your changes. See the
-:ref:`Antidote ops guide <operating>` for more details.
+run an instance of Antidote yourself and test your changes. 
 
-**TODO** clean this section up and complete it.
-
-The best way to get started building lessons is to get an instance of Antidote
-running on your own laptop. Ironing out all of the bugs before you submit a pull
-request makes the review process much smoother. For more info, see the
-:ref:`local build <buildlocal>` documentation.
-
-Below are some prerequisite considerations for contributions.
+This document is meant to convey the spirit of the ideal contribution to Antidote.
+Please read on, as it will make the review process much easier. When you're ready
+to begin working on a lesson, go on to :ref:`Contributing a Lesson <contriblesson>`
+for the technical details.
 
 Lessons Should Demonstrate Something Useful
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -90,7 +92,9 @@ build time.
 
 .. _contrib-code:
 
-Contributing to Antidote Code
------------------------------
+Contributing to Antidote Member Projects
+----------------------------------------
 
-TODO
+If you want to propose a change to Antidote, Syringe, Antidote-web, or any other member project,
+contributions are welcome! Just be patient, as these components are still not considered quite stable, so you
+should reach out to the maintainers before getting too deep into the weeds on a change, so you don't waste your time.

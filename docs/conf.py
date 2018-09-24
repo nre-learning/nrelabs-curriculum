@@ -22,6 +22,7 @@
 project = 'antidote'
 copyright = '2018, Matt Oswalt'
 author = 'Matt Oswalt'
+# exclude_patterns = ['*DESCRIPTION.rst']
 
 # The short X.Y version
 version = ''

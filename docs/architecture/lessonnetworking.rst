@@ -9,7 +9,7 @@ In order to connect
   Another user will have a different lesson instance even if it's from the exact same lesson ID/definition.
 - Use simple linux bridges to connect pods within a lesson to each other.
 
-.. image:: images/lessonsnetworking.png
+.. image:: /images/lessonsnetworking.png
 
 TODO
 - How does DNS work?
