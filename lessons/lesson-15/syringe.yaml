@@ -11,11 +11,11 @@ utilities:
 
 devices:
 - name: vqfx1
-  image: antidotelabs/vr-vqfx:15.1X53-D60-speedy
+  image: antidotelabs/vqfxspeedy
 - name: vqfx2
-  image: antidotelabs/vr-vqfx:15.1X53-D60-speedy
+  image: antidotelabs/vqfxspeedy
 - name: vqfx3
-  image: antidotelabs/vr-vqfx:15.1X53-D60-speedy
+  image: antidotelabs/vqfxspeedy
 
 connections:
 - a: vqfx1

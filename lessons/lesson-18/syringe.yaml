@@ -13,7 +13,7 @@ utilities:
 
 devices:
 - name: vqfx1
-  image: antidotelabs/vr-vqfx:15.1X53-D60-speedy
+  image: antidotelabs/vqfxspeedy
 
 connections:
 - a: todd1
