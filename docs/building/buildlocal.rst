@@ -3,10 +3,9 @@
 Build and Run Antidote Locally
 ================================
 
-Because Antidote only needs Kubernetes and CNI to run, we don't have to spin up a whole bunch of expensive cloud resources in order to run it on our laptop, either for demonstration or testing purposes.
+If you want to contribute some lessons, you'll probably want to find a way to run them locally yourself before opening a pull request. Or maybe you're looking to show some automation demos in an environment that doesn't have internet access (hello federal folks). If any of this describes you, you've come to the right place.
 
-
-For instance, if you want to contribute some lessons, you'll probably want to iterate on them yourself before opening a pull request. Or maybe you're looking to show some automation demos in an environment that doesn't have internet access (hello federal folks). If any of this describes you, you've come to the right place.
+Because Antidote only needs Kubernetes and CNI to run, we don't have to spin up a whole bunch of expensive cloud resources in order to run it on our laptop, either for demonstration or testing purposes. `minikube` is a simple application for running a single-node installation of Kubernetes, pretty much anywhere. With this, and a few scripts, we can get the whole thing running fairly quickly.
 
 .. note::  Currently, the scripts for running Antidote on minikube are Mac or Linux only. However, minikube does support Windows, so it shouldn't take too much work to get it working. PRs welcome!
 
