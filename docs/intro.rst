@@ -10,6 +10,16 @@ more accessible with fast, easy and fun learning. It teaches from-scratch
 network automation skills for network reliability engineers (NREs) and other
 NetOps pros or amateurs.
 
+Antidote isn't just one application, but rather, a set of smaller applications
+that work together to provide this learning experience. 
+The `antidote-selfmedicate <https://github.com/nre-learning/antidote-selfmedicate>`_ repository is the simplest way to get this going, as it's,
+designed to allow you to run everything on your laptop, using `minikube`. This is very useful if you're looking to develop some lessons
+and need an easy way to test them out without a lot of setup. See the :ref:`build local <buildlocal>` instructions for more info on that.
+
+In case you're looking to run Antidote in more of a public-facing, production capacity, the main `Antidote
+repository <https://github.com/nre-learning/antidote>`_ contains terraform configurations, kubernetes manifests,
+and scripts necessary for running all of Antidote's components in the cloud. More information for spinning this up can be found in the :ref:`production <production>` guide.
+
 In fact, the reference runtime and use case for Antidote is
 :ref:`NRE Labs <nrelabs>` and Antidote is the project behind it. NRE Labs is
 a free site and training service on the web sponsored by Juniper Networks, but

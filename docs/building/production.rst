@@ -1,3 +1,5 @@
+.. _production:
+
 Deploying Antidote into Production
 ================================
 

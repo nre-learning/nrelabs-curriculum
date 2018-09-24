@@ -8,7 +8,9 @@ Welcome to Antidote's documentation!
    :caption: Contents:
 
    intro.rst
-   nrelabs.rst
+   building/buildlocal.rst
+   building/production.rst
+   building/images.rst
    infrastructure.rst
    lessonnetworking.rst
    labscheduling.rst

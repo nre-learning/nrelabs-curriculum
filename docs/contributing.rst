@@ -26,6 +26,11 @@ run an instance of Antidote yourself and test your changes. See the
 
 **TODO** clean this section up and complete it.
 
+The best way to get started building lessons is to get an instance of Antidote
+running on your own laptop. Ironing out all of the bugs before you submit a pull
+request makes the review process much smoother. For more info, see the
+:ref:`local build <buildlocal>` documentation.
+
 Below are some prerequisite considerations for contributions.
 
 Lessons Should Demonstrate Something Useful
