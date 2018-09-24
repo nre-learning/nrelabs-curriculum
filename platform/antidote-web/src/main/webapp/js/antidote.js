@@ -1,3 +1,6 @@
+// Will be overridden on page load
+var urlRoot = "https://labs.networkreliability.engineering"
+
 // This function generates a unique session ID so we can make sure you consistently connect to your lab resources on the back-end.
 // We're not doing anything nefarious with this ID - this is just to make sure you have a good experience on the front-end.
 function getSession() {
@@ -107,7 +110,7 @@ function renderLessonCategories() {
             };
             var json = JSON.stringify(data);
             var xhttp = new XMLHttpRequest();
-            xhttp.open("POST", "https://labs.networkreliability.engineering/syringe/exp/lessondef", false);
+            xhttp.open("POST", urlRoot + "/syringe/exp/lessondef", false);
             xhttp.setRequestHeader('Content-type', 'application/json; charset=utf-8');
             xhttp.send(json);
             response = JSON.parse(xhttp.responseText);
@@ -137,7 +140,7 @@ function renderLessonStages() {
     // TODO(mierdin): This is the first call to syringe, you should either here or elasewhere, handle errors and notify user.
 
     // Doing synchronous calls for now, need to convert to asynchronous
-    reqLessonDef.open("GET", "https://labs.networkreliability.engineering/syringe/exp/lessondef/" + getLessonId(), false);
+    reqLessonDef.open("GET", urlRoot + "/syringe/exp/lessondef/" + getLessonId(), false);
     reqLessonDef.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     reqLessonDef.send();
 
@@ -242,7 +245,7 @@ async function requestLesson() {
         var xhttp = new XMLHttpRequest();
 
         // Doing synchronous calls for now, need to convert to asynchronous
-        xhttp.open("POST", "https://labs.networkreliability.engineering/syringe/exp/livelesson", false);
+        xhttp.open("POST", urlRoot + "/syringe/exp/livelesson", false);
         xhttp.setRequestHeader('Content-type', 'application/json; charset=utf-8');
         xhttp.send(json);
 
@@ -263,7 +266,7 @@ async function requestLesson() {
 
         // Here we go get the livelesson we requested, verify it's ready, and once it is, start wiring up endpoints.
         var xhttp2 = new XMLHttpRequest();
-        xhttp2.open("GET", "https://labs.networkreliability.engineering/syringe/exp/livelesson/" + response.id, false);
+        xhttp2.open("GET", urlRoot + "/syringe/exp/livelesson/" + response.id, false);
         xhttp2.setRequestHeader('Content-type', 'application/json; charset=utf-8');
         xhttp2.send();
 
@@ -553,6 +556,8 @@ function guacInit(endpoints) {
 
 // Run all this once the DOM is fully rendered so we can get a handle on the DIVs
 document.addEventListener('DOMContentLoaded', function () {
+
+    urlRoot = window.location.href.split('/').slice(0, 3).join('/');
 
     renderLessonCategories()
 
