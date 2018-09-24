@@ -4,13 +4,11 @@ Welcome to Antidote's documentation!
 ====================================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Contents:
 
    intro.rst
-   building/buildlocal.rst
-   building/production.rst
-   building/images.rst
+   building/index.rst
    infrastructure.rst
    lessonnetworking.rst
    labscheduling.rst
