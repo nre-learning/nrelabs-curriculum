@@ -52,18 +52,6 @@
     - name: install stackdriver agent
       shell: "curl -sSO https://dl.google.com/cloudagents/install-monitoring-agent.sh && bash install-monitoring-agent.sh"
 
-    - name: Configure kernel options
-      template:
-        src: templates/sysctl-k8s.conf
-        dest:  /etc/sysctl.d/k8s.conf
-
-    - name: Finishing up
-      shell: "{{ item }}"
-      with_items:
-        - setenforce 0
-        - sysctl --system
-        - iptables -F
-
     - name: Download weave CLI utility
       shell: curl -L git.io/weave -o /usr/bin/weave && chmod a+x /usr/bin/weave
 
