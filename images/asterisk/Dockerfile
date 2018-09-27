@@ -21,6 +21,8 @@ RUN yum install -y iproute epel-release \
 COPY ./asterisk_configs /etc/asterisk
 COPY launch.sh /root/launch.sh
 
+EXPOSE 22 8088
+
 CMD ["/bin/bash","/root/launch.sh"]
 
 

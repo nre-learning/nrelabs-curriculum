@@ -15,4 +15,6 @@ RUN yum install -y gcc gcc-c++ make epel-release bzip2 iproute \
 
 COPY launch.sh /root/launch.sh
 
+EXPOSE 22
+
 CMD ["/bin/bash","/root/launch.sh"]
