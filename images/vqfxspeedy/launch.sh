@@ -60,28 +60,28 @@ screen -d -m socat TCP-LISTEN:830,fork TCP:127.0.0.1:2830
  -device \
  e1000,netdev=p02,mac=52:54:00:86:b3:02,bus=pci.1,addr=0x3 \
  -netdev \
- tap,id=p02,ifname=tap1,script=no,downscript=no
-# -device \
-# e1000,netdev=p03,mac=52:54:00:86:b3:03,bus=pci.1,addr=0x4 \
-# -netdev \
-# tap,id=p03,ifname=tap2,script=no,downscript=no \
-# -device \
-# e1000,netdev=p04,mac=52:54:00:86:b3:04,bus=pci.1,addr=0x5 \
-# -netdev \
-# tap,id=p04,ifname=tap3,script=no,downscript=no \
-# -device \
-# e1000,netdev=p05,mac=52:54:00:86:b3:05,bus=pci.1,addr=0x6 \
-# -netdev \
-# tap,id=p05,ifname=tap4,script=no,downscript=no \
-# -device \
-# e1000,netdev=p06,mac=52:54:00:86:b3:06,bus=pci.1,addr=0x7 \
-# -netdev \
-# tap,id=p06,ifname=tap5,script=no,downscript=no \
-# -device \
-# e1000,netdev=p07,mac=52:54:00:86:b3:07,bus=pci.1,addr=0x8 \
-# -netdev \
-# tap,id=p07,ifname=tap6,script=no,downscript=no \
-# -device \
-# e1000,netdev=p08,mac=52:54:00:86:b3:08,bus=pci.1,addr=0x9 \
-# -netdev \
-# tap,id=p08,ifname=tap7,script=no,downscript=no
+ tap,id=p02,ifname=tap1,script=no,downscript=no \
+ -device \
+ e1000,netdev=p03,mac=52:54:00:86:b3:03,bus=pci.1,addr=0x4 \
+ -netdev \
+ tap,id=p03,ifname=tap2,script=no,downscript=no \
+ -device \
+ e1000,netdev=p04,mac=52:54:00:86:b3:04,bus=pci.1,addr=0x5 \
+ -netdev \
+ tap,id=p04,ifname=tap3,script=no,downscript=no \
+ -device \
+ e1000,netdev=p05,mac=52:54:00:86:b3:05,bus=pci.1,addr=0x6 \
+ -netdev \
+ tap,id=p05,ifname=tap4,script=no,downscript=no \
+ -device \
+ e1000,netdev=p06,mac=52:54:00:86:b3:06,bus=pci.1,addr=0x7 \
+ -netdev \
+ tap,id=p06,ifname=tap5,script=no,downscript=no \
+ -device \
+ e1000,netdev=p07,mac=52:54:00:86:b3:07,bus=pci.1,addr=0x8 \
+ -netdev \
+ tap,id=p07,ifname=tap6,script=no,downscript=no \
+ -device \
+ e1000,netdev=p08,mac=52:54:00:86:b3:08,bus=pci.1,addr=0x9 \
+ -netdev \
+ tap,id=p08,ifname=tap7,script=no,downscript=no
