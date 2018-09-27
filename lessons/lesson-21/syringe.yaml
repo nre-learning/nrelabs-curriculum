@@ -41,16 +41,4 @@ stages:
 
     # Optional. If set, a jupyter instance will be spun up when this stage is set. Must be located at lesson-<lesson #>/stage<stage #>/notebook.ipynb
     notebook: no
-  2:
 
-    description: Get connected interface via ARP
-
-    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-12/stage2/guide.md
-
-    # If sharedTopology is enabled, this is ignored.
-    configs:
-      vqfx1: stage2/configs/vqfx1.txt
-      vqfx2: stage2/configs/vqfx2.txt
-
-    # Optional. If set, a jupyter instance will be spun up when this stage is set. Must be located at lesson-<lesson #>/stage<stage #>/notebook.ipynb
-    notebook: no
