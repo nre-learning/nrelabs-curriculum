@@ -1,0 +1,61 @@
+---
+lessonName: Troubleshooting Workflow
+lessonID: 21
+category: troubleshooting
+lessondiagram: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-12/lessondiagram.png
+
+
+topologyType: custom
+
+# TODO(mierdin): What about IP addressing for utilities?
+
+utilities:
+- name: asterisk
+  image: antidotelabs/asterisk
+- name: pjsua-lindsey
+  image: antidotelabs/pjsua-lindsey
+
+devices:
+- name: vqfx1
+  image: antidotelabs/vqfxspeedy
+- name: vqfx2
+  image: antidotelabs/vqfxspeedy
+
+connections:
+- a: vqfx1
+  b: vqfx2
+  subnet: 10.0.10.0/24
+- a: vqfx1
+  b: asterisk
+  subnet: 10.10.100.0/24
+- a: vqfx2
+  b: pjsua-lindsey
+  subnet: 10.10.200.0/24
+
+stages:
+  1:
+    description: Get IP for phone extension
+
+    # TODO(mierdin): Provide this via the Syringe API
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-12/stage1/guide.md
+
+    # If sharedTopology is enabled, this is ignored.
+    configs:
+      vqfx1: stage1/configs/vqfx1.txt
+      vqfx2: stage1/configs/vqfx2.txt
+
+    # Optional. If set, a jupyter instance will be spun up when this stage is set. Must be located at lesson-<lesson #>/stage<stage #>/notebook.ipynb
+    notebook: no
+  2:
+
+    description: Get connected interface via ARP
+
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-12/stage2/guide.md
+
+    # If sharedTopology is enabled, this is ignored.
+    configs:
+      vqfx1: stage2/configs/vqfx1.txt
+      vqfx2: stage2/configs/vqfx2.txt
+
+    # Optional. If set, a jupyter instance will be spun up when this stage is set. Must be located at lesson-<lesson #>/stage<stage #>/notebook.ipynb
+    notebook: no
