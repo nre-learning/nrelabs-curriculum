@@ -13,6 +13,10 @@ topologyType: custom
 #- name: asterisk
 #  image: antidotelabs/asterisk
 
+utilities:
+- name: asterisk
+  image: antidotelabs/asterisk
+
 devices:
 - name: vqfx1
   image: antidotelabs/vqfxspeedy
@@ -23,6 +27,10 @@ connections:
 - a: vqfx1
   b: vqfx2
   subnet: 10.0.10.0/24
+- a: vqfx1
+  b: asterisk
+  subnet: 10.10.100.0/24
+
 #- a: vqfx1
 #  b: asterisk
 #  subnet: 10.10.100.0/24
