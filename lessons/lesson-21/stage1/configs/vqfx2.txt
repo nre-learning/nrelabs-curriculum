@@ -93,7 +93,7 @@
                 </unit>
             </interface>
             <interface>
-                <name>em3</name>
+                <name>xe-0/0/0</name>
                 <unit>
                     <name>0</name>
                     <family>
@@ -106,7 +106,7 @@
                 </unit>
             </interface>
             <interface>
-                <name>em4</name>
+                <name>xe-0/0/1</name>
                 <unit>
                     <name>0</name>
                     <family>
