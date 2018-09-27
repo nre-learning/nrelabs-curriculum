@@ -6,7 +6,7 @@
 
 FROM centos
 
-RUN yum install -y iproute epel-release \
+RUN yum install -y iproute epel-release qemu-guest-agent lshw \
     && yum install -y wget \
     && wget -P /etc/yum.repos.d/ https://ast.tucny.com/repo/tucny-asterisk.repo \
     && sed -i '/^\[asterisk-common]/,/^\[/{s/^enabled[[:space:]]*=.*/enabled=1/}' /etc/yum.repos.d/tucny-asterisk.repo \
