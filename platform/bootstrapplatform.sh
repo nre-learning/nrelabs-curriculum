@@ -19,7 +19,7 @@ cd ../infrastructure && ansible-playbook -i inventory/ restartkubelets.yml && cd
 kubectl create -f nginx-controller.yaml
 # # kubectl create -f sharedlab/lab0.yaml
 kubectl create -f syringe.yml
-kubectl create -f antidote-web/antidote-web.yaml
+kubectl create -f antidote-web.yaml
 # # kubectl create -f ingress.yaml
 kubectl create -f influxdb.yml
 kubectl create -f grafana.yml

@@ -17,6 +17,13 @@ resource "google_compute_global_forwarding_rule" "nrehttps" {
   port_range = "443"
 }
 
+resource "google_compute_global_forwarding_rule" "nrehttp" {
+  name       = "nrehttp"
+  project    = "${var.project}"
+  ip_address = "${google_compute_global_address.nrefrontend.address}"
+  target     = "${google_compute_target_http_proxy.nrehttpproxy.self_link}"
+  port_range = "80"
+}
 
 resource "google_compute_global_forwarding_rule" "k8shttps" {
   name       = "k8shttps"
@@ -36,7 +43,13 @@ resource "google_compute_target_https_proxy" "nrehttpsproxy" {
   name             = "nrehttpsproxy"
   project          = "${var.project}"
   ssl_certificates = ["labs-letsencrypt"]
-  url_map          = "${google_compute_url_map.default.self_link}"
+  url_map          = "${google_compute_url_map.https-url-map.self_link}"
+}
+
+resource "google_compute_target_http_proxy" "nrehttpproxy" {
+  name             = "nrehttpproxy"
+  project          = "${var.project}"
+  url_map          = "${google_compute_url_map.http-url-map.self_link}"
 }
 
 resource "google_compute_target_https_proxy" "k8shttpsproxy" {
@@ -46,8 +59,30 @@ resource "google_compute_target_https_proxy" "k8shttpsproxy" {
   url_map          = "${google_compute_url_map.k8s.self_link}"
 }
 
-resource "google_compute_url_map" "default" {
-  name    = "url-map"
+resource "google_compute_url_map" "https-url-map" {
+  name    = "https-url-map"
+  project = "${var.project}"
+
+  host_rule {
+    hosts        = ["networkreliability.engineering"]
+    path_matcher = "allpaths"
+  }
+
+  path_matcher {
+    name            = "allpaths"
+    default_service = "${google_compute_backend_service.httpsbackend.self_link}"
+
+    path_rule {
+      paths   = ["/*"]
+      service = "${google_compute_backend_service.httpsbackend.self_link}"
+    }
+  }
+
+  default_service = "${google_compute_backend_service.httpsbackend.self_link}"
+}
+
+resource "google_compute_url_map" "http-url-map" {
+  name    = "http-url-map"
   project = "${var.project}"
 
   host_rule {
@@ -89,6 +124,32 @@ resource "google_compute_url_map" "k8s" {
 
   default_service = "${google_compute_backend_service.controllers.self_link}"
 }
+
+
+resource "google_compute_backend_service" "httpsbackend" {
+  name        = "httpsbackend"
+  project     = "${var.project}"
+
+  port_name = "nrehttps"
+  protocol  = "HTTPS"
+
+  timeout_sec = 10
+
+  enable_cdn = false
+
+  backend {
+    group = "${data.google_compute_region_instance_group.workers.self_link}"
+  }
+
+  depends_on = [
+    "google_compute_health_check.httpshealth",
+  ]
+
+  health_checks = [
+    "${google_compute_health_check.httpshealth.self_link}",
+  ]
+}
+
 
 resource "google_compute_backend_service" "httpbackend" {
   name        = "httpbackend"
@@ -139,30 +200,7 @@ resource "google_compute_backend_service" "controllers" {
 }
 
 
-resource "google_compute_backend_service" "httpsbackend" {
-  name        = "httpsbackend"
-  project     = "${var.project}"
-  description = "Our company website"
 
-  port_name = "nrehttps"
-  protocol  = "HTTPS"
-
-  timeout_sec = 10
-
-  enable_cdn = false
-
-  backend {
-    group = "${data.google_compute_region_instance_group.workers.self_link}"
-  }
-
-  depends_on = [
-    "google_compute_health_check.httpshealth",
-  ]
-
-  health_checks = [
-    "${google_compute_health_check.httpshealth.self_link}",
-  ]
-}
 
 resource "google_compute_health_check" "httphealth" {
   name    = "httphealth"
@@ -184,7 +222,7 @@ resource "google_compute_health_check" "httpshealth" {
   check_interval_sec = 3
 
   tcp_health_check {
-    port = "30001"
+    port = "30002"
   }
 }
 

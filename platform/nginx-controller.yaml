@@ -140,7 +140,7 @@ spec:
             - containerPort: 80
               name: http
               protocol: TCP
-            - containerPort: 443
+            - containerPort: 442
               name: https
               protocol: TCP
           volumeMounts: 
@@ -166,7 +166,7 @@ spec:
     nodePort: 30001
     targetPort: http
   - name: https
-    port: 443
+    port: 442
     nodePort: 30002
     targetPort: https
   selector:

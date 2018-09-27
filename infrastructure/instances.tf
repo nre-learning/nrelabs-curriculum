@@ -38,7 +38,7 @@ resource "google_compute_region_instance_group_manager" "workers" {
   }
 
   named_port {
-    name = "https"
+    name = "nrehttps"
     port = 30002
   }
 }

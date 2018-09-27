@@ -49,9 +49,15 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   annotations:
+    # https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/
     ingress.kubernetes.io/ingress.class: "nginx"
+    ingress.kubernetes.io/ssl-services: "grafana"
+    ingress.kubernetes.io/ssl-redirect: "true"
+    ingress.kubernetes.io/force-ssl-redirect: "true"
     ingress.kubernetes.io/rewrite-target: "/"
     nginx.ingress.kubernetes.io/rewrite-target: "/"
+    # ingress.kubernetes.io/limit-connections
+    # ingress.kubernetes.io/limit-rps
   name: grafana
   namespace: default
 spec:
