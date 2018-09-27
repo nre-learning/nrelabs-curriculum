@@ -12,8 +12,6 @@ topologyType: custom
 utilities:
 - name: asterisk
   image: antidotelabs/asterisk
-- name: pjsua-lindsey
-  image: antidotelabs/pjsua-lindsey
 
 devices:
 - name: vqfx1
@@ -28,9 +26,6 @@ connections:
 - a: vqfx1
   b: asterisk
   subnet: 10.10.100.0/24
-- a: vqfx2
-  b: pjsua-lindsey
-  subnet: 10.10.200.0/24
 
 stages:
   1:
