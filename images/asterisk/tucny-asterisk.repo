@@ -1,0 +1,60 @@
+# tucny-asterisk.repo
+# 
+# This repo file contains 4 repositories, all disabled by default.
+# If you want to use any of the Asterisk release, you should enable
+# the repository for that version and the asterisk-common repository
+# by setting enabled=1.
+#
+# All packages are signed, so it is recommended to manually import
+# the key prior to enabling the repositorys, this can by done by
+# running:
+# rpm --import https://ast.tucny.com/repo/RPM-GPG-KEY-dtucny
+#
+
+[asterisk-common]
+name=Asterisk Common Requirement Packages @ tucny.com
+#baseurl=https://ast.tucny.com/repo/asterisk-common/el$releasever/$basearch/
+mirrorlist=https://ast.tucny.com/mirrorlist.php?release=$releasever&arch=$basearch&repo=asterisk-common
+enabled=1
+gpgcheck=1
+gpgkey=https://ast.tucny.com/repo/RPM-GPG-KEY-dtucny
+
+[asterisk-1.8]
+name=Asterisk 1.8 (LTS) Packages @ tucny.com
+#baseurl=https://ast.tucny.com/repo/asterisk-1.8/el$releasever/$basearch/
+mirrorlist=https://ast.tucny.com/mirrorlist.php?release=$releasever&arch=$basearch&repo=asterisk-1.8
+enabled=0
+gpgcheck=1
+gpgkey=https://ast.tucny.com/repo/RPM-GPG-KEY-dtucny
+
+[asterisk-11]
+name=Asterisk 11 (LTS) Packages @ tucny.com
+#baseurl=https://ast.tucny.com/repo/asterisk-11/el$releasever/$basearch/
+mirrorlist=https://ast.tucny.com/mirrorlist.php?release=$releasever&arch=$basearch&repo=asterisk-11
+enabled=0
+gpgcheck=1
+gpgkey=https://ast.tucny.com/repo/RPM-GPG-KEY-dtucny
+
+[asterisk-13]
+name=Asterisk 13 (LTS) Packages @ tucny.com 
+#baseurl=https://ast.tucny.com/repo/asterisk-13/el$releasever/$basearch/
+mirrorlist=https://ast.tucny.com/mirrorlist.php?release=$releasever&arch=$basearch&repo=asterisk-13
+enabled=1
+gpgcheck=1
+gpgkey=https://ast.tucny.com/repo/RPM-GPG-KEY-dtucny
+
+[asterisk-14]
+name=Asterisk 14 Packages @ tucny.com 
+#baseurl=https://ast.tucny.com/repo/asterisk-14/el$releasever/$basearch/
+mirrorlist=https://ast.tucny.com/mirrorlist.php?release=$releasever&arch=$basearch&repo=asterisk-14
+enabled=0
+gpgcheck=1
+gpgkey=https://ast.tucny.com/repo/RPM-GPG-KEY-dtucny
+
+[asterisk-15]
+name=Asterisk 15 Packages @ tucny.com 
+#baseurl=https://ast.tucny.com/repo/asterisk-15/el$releasever/$basearch/
+mirrorlist=https://ast.tucny.com/mirrorlist.php?release=$releasever&arch=$basearch&repo=asterisk-15
+enabled=0
+gpgcheck=1
+gpgkey=https://ast.tucny.com/repo/RPM-GPG-KEY-dtucny
