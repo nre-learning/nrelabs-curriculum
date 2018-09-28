@@ -3,10 +3,15 @@
 Placeholder...
 
 ```
-cli
-show arp
+cd /antidote/lessons/lesson-21/
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 0)">Run this snippet</button>
+
+...
 
 
+```
+cd /antidote/lessons/lesson-21/
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 1)">Run this snippet</button>
 
