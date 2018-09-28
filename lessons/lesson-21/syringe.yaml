@@ -33,6 +33,9 @@ connections:
 - a: vqfx1
   b: asterisk
   subnet: 10.10.100.0/24
+- a: vqfx2
+  b: linux1
+  subnet: 10.10.200.0/24
 
 stages:
   1:
