@@ -1,0 +1,25 @@
+---
+lessonName: Python for Network Engineers
+lessonID: 22
+category: introductory
+topologyType: custom
+lessondiagram: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-22/lessondiagram.png
+
+utilities:
+- name: linux1
+  image: antidotelabs/utility
+  sshuser: root
+  sshpassword: antidotepassword
+
+stages:
+  1:
+    description: Running Python for the First Time
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-22/stage1/guide.md
+
+  2:
+    description: Basic Python Data Types
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-22/stage2/guide.md
+
+  3:
+    description: Making Python Code More Re-usable
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-22/stage3/guide.md

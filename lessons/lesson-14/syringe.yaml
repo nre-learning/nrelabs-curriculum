@@ -18,3 +18,6 @@ stages:
   2:
     description: Dictionaries (key/value pairs)
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-14/stage2/guide.md
+  # 3:
+  #   description: What about JSON?
+  #   labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-14/stage3/guide.md
