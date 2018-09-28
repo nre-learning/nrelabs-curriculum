@@ -8,12 +8,18 @@ topologyType: custom
 utilities:
 - name: todd1
   image: toddproject/todd
+  sshuser: root
+  sshpassword: antidotepassword
 - name: web1
   image: nginx
+  sshuser: root
+  sshpassword: antidotepassword
 
 devices:
 - name: vqfx1
   image: antidotelabs/vqfxspeedy
+  sshuser: root
+  sshpassword: VR-netlab9
 
 connections:
 - a: todd1

@@ -8,6 +8,8 @@ topologyType: none
 utilities:
 - name: linux1
   image: antidotelabs/utility
+  sshuser: root
+  sshpassword: antidotepassword
 
 stages:
   1:

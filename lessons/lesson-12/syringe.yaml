@@ -12,14 +12,22 @@ topologyType: custom
 utilities:
 - name: linux1
   image: antidotelabs/utility
+  sshuser: root
+  sshpassword: antidotepassword
 
 devices:
 - name: vqfx1
   image: antidotelabs/vqfxspeedy
+  sshuser: root
+  sshpassword: VR-netlab9
 - name: vqfx2
   image: antidotelabs/vqfxspeedy
+  sshuser: root
+  sshpassword: VR-netlab9
 - name: vqfx3
   image: antidotelabs/vqfxspeedy
+  sshuser: root
+  sshpassword: VR-netlab9
 
 connections:
 - a: vqfx1
