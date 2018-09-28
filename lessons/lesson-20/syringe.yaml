@@ -8,6 +8,8 @@ topologyType: custom
 devices:
 - name: vqfx1
   image: antidotelabs/vqfxspeedy
+  sshuser: root
+  sshpassword: VR-netlab9
 
 stages:
   1:
