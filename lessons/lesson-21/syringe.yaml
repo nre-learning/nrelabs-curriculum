@@ -11,6 +11,7 @@ blackboxes:
   ports: [8088]
 - name: sipphone
   image: antidotelabs/pjsua-lindsey
+  ports: [22]
 
 utilities:
 - name: linux1
