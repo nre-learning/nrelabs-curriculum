@@ -6,7 +6,7 @@
 
 FROM centos
 
-RUN yum install -y iproute epel-release qemu-guest-agent lshw \
+RUN yum install -y iproute epel-release lshw openssh-server \
     && yum install -y wget \
     && wget -P /etc/yum.repos.d/ https://ast.tucny.com/repo/tucny-asterisk.repo \
     && sed -i '/^\[asterisk-common]/,/^\[/{s/^enabled[[:space:]]*=.*/enabled=1/}' /etc/yum.repos.d/tucny-asterisk.repo \
@@ -16,7 +16,10 @@ RUN yum install -y iproute epel-release qemu-guest-agent lshw \
     && mkdir -p /etc/asterisk/samples \
     && mv /etc/asterisk/*.* /etc/asterisk/samples \
     && yum -y erase wget epel-release \
-    && yum -y autoremove
+    && yum -y autoremove \
+    && mkdir /var/run/sshd \
+    && echo 'root:antidotepassword' | chpasswd \
+    && sed -i 's/#PermitRootLogin yes/PermitRootLogin yes/' /etc/ssh/sshd_config
 
 COPY ./asterisk_configs /etc/asterisk
 COPY launch.sh /root/launch.sh
