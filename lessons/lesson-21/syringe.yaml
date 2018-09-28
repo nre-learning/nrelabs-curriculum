@@ -10,7 +10,7 @@ blackboxes:
   image: antidotelabs/asterisk
   ports: [8088]
 - name: sipphone
-  image: pjsua-lindsey
+  image: antidotelabs/pjsua-lindsey
 
 utilities:
 - name: linux1
