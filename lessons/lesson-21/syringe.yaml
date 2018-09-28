@@ -11,9 +11,6 @@ blackboxes:
   ports: [8088]
 - name: sipphone
   image: pjsua-lindsey
-  ports: [25]   # TODO(mierdin): since blackboxes have no implicit ports added, we have to add one here or the service creation will break. Should
-                # make it so that syringe doesn't require services are created. Should skip this for black boxes, and also make sure it's not required during
-                # livelab conversion.
 
 utilities:
 - name: linux1
