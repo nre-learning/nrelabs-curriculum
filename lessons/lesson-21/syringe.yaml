@@ -9,6 +9,9 @@ blackboxes:
 - name: asterisk
   image: antidotelabs/asterisk
   ports: [8088]
+- name: sipphone
+  image: pjsua-lindsey
+  ports: []
 
 utilities:
 - name: linux1
@@ -25,17 +28,27 @@ devices:
   image: antidotelabs/vqfxspeedy
   sshuser: root
   sshpassword: VR-netlab9
+- name: vqfx2
+  image: antidotelabs/vqfxspeedy
+  sshuser: root
+  sshpassword: VR-netlab9
 
 connections:
 - a: vqfx1
   b: vqfx2
   subnet: 10.0.10.0/24
+- a: vqfx2
+  b: vqfx3
+  subnet: 10.23.0.0/24
+- a: vqfx3
+  b: vqfx1
+  subnet: 10.31.0.0/24
+- a: vqfx2
+  b: pjsua-lindsey
+  subnet: 10.10.200.0/24
 - a: vqfx1
   b: asterisk
   subnet: 10.10.100.0/24
-- a: vqfx2
-  b: linux1
-  subnet: 10.10.200.0/24
 
 stages:
   1:
@@ -44,5 +57,3 @@ stages:
     configs:
       vqfx1: stage1/configs/vqfx1.txt
       vqfx2: stage1/configs/vqfx2.txt
-
-

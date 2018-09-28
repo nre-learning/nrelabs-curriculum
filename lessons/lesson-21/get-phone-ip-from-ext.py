@@ -21,7 +21,7 @@ def myfunc(*args):
     secret = args[0]["password"][0]
     phone = args[0]["phone"][0]
 
-    baseurl = "http://" + host + ":" + port + "/asterisk/mxml"
+    baseurl = "http://" + host + ":" + port + "/mxml"
 
     params = {"action": "login", "username": username, "secret": secret}
 
