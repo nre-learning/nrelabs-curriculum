@@ -44,7 +44,7 @@ connections:
   b: vqfx1
   subnet: 10.31.0.0/24
 - a: vqfx2
-  b: pjsua-lindsey
+  b: sipphone
   subnet: 10.10.200.0/24
 - a: vqfx1
   b: asterisk
