@@ -28,7 +28,7 @@ devices:
   image: antidotelabs/vqfxspeedy
   sshuser: root
   sshpassword: VR-netlab9
-- name: vqfx2
+- name: vqfx3
   image: antidotelabs/vqfxspeedy
   sshuser: root
   sshpassword: VR-netlab9
