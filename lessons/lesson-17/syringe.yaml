@@ -2,6 +2,7 @@
 lessonName: Version Control with Git
 lessonID: 17
 category: introductory
+disabled: true
 
 topologyType: none
 
