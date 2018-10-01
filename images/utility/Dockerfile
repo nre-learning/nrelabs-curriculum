@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
 
-RUN apt-get update && apt-get install -y openssh-server python python-pip dnsutils iputils-ping git vim
+RUN apt-get update && apt-get install -y openssh-server python python-pip dnsutils iputils-ping git vim curl
 RUN mkdir /var/run/sshd
 RUN echo 'root:antidotepassword' | chpasswd
 RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
@@ -16,4 +16,3 @@ RUN pip install -r /requirements.txt
 
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]
-
