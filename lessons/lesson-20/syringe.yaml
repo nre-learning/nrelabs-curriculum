@@ -2,8 +2,8 @@
 lessonName: Introduction to Junos
 lessonID: 20
 category: introductory
-
 topologyType: custom
+disabled: true
 
 devices:
 - name: vqfx1
