@@ -34,7 +34,6 @@ random_mac () {
     echo 52:54:00$end
 }
 
-#  -loadvm speedy \
 
 /usr/bin/qemu-system-x86_64 \
  -display \
@@ -49,6 +48,7 @@ random_mac () {
  telnet:0.0.0.0:5000,server,nowait \
  -drive \
  if=ide,file=/vqfx.qcow2,index=0 \
+ -loadvm speedy \
  -device \
  pci-bridge,chassis_nr=1,id=pci.1 \
  -device \
