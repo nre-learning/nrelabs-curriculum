@@ -1,6 +1,6 @@
 # Multi-Vendor Network Automation with NAPALM
 ## Part 1 - Get Device Facts
 
-https://github.com/napalm-automation/napalm
+In this lesson, a Jupyter notebook will take the place of this lab guide. Please click the button below to go there.
 
-(See jupyter notebook)
+<button type="button" class="btn btn-primary btn-sm" onclick="gotoTab('linux1')">Go To Jupyter Notebook</button>
