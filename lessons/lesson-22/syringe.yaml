@@ -4,6 +4,7 @@ lessonID: 22
 category: introductory
 topologyType: custom
 lessondiagram: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-22/lessondiagram.png
+disabled: true
 
 utilities:
 - name: linux1
