@@ -13,6 +13,9 @@ blackboxes:
 - name: sipphone
   image: antidotelabs/pjsua-lindsey
   ports: [22]
+- name: netbox
+  image: antidotelabs/netbox
+  ports: [8080]
 
 utilities:
 - name: linux1
@@ -50,6 +53,9 @@ connections:
 - a: vqfx1
   b: asterisk
   subnet: 10.10.100.0/24
+- a: vqfx1
+  b: netbox
+  subnet: 10.10.50.0/24
 
 stages:
   1:
