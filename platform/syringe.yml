@@ -149,7 +149,7 @@ spec:
       port: 8086
       targetPort: 8086
       # nodePort: 30011
-  type: LoadBalancer
+  type: ClusterIP
   # type: NodePort
 
 ---
