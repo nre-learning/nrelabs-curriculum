@@ -118,6 +118,19 @@
                     </family>
                 </unit>
             </interface>
+            <interface>
+                <name>em5</name>
+                <unit>
+                    <name>0</name>
+                    <family>
+                        <inet>
+                            <address>
+                                <name>10.10.50.1/24</name>
+                            </address>
+                        </inet>
+                    </family>
+                </unit>
+            </interface>
         </interfaces>
         <forwarding-options>
             <storm-control-profiles>
