@@ -37,11 +37,9 @@ All of Antidotes infrastructure is defined in Terraform configurations. So we ju
     cd infrastructure/
     terraform apply
 
-The google provider for terraform `**JUST** <https://github.com/terraform-providers/terraform-provider-google/issues/1774#issuecomment-422507130>`_ received support for filestore APIs, but it hasn't made it into a release yet, so for now, we'll have to do this to get our NFS server online::
-
-    gcloud beta filestore instances create nfs-server --location=us-west1-b --tier=STANDARD --file-share=name="influxdata",capacity=1TB --network=name="default-internal"
-    gcloud dns record-sets transaction add -z=nre --name="nfs.labs.networkreliability.engineering." --type=A --ttl=300 "$(gcloud beta filestore instances list | grep nfs-server | awk '{print $6}')"
-    gcloud dns record-sets transaction execute -z=nre
+Once terraform creates all of the necessary resources, we first need to do a little manual work. We need to create an A record in
+the GCE dashboard for `vip.labs.networkreliability.engineering`, and add all of the provisioned NAT IPs (external) for each of the
+instances in the `workers` instance group. Do this before moving on. Eventually this will be replaced with a proper load balancing setup.
 
 Next, bootstrap the cluster::
 

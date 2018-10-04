@@ -382,29 +382,6 @@ nrlab, talk about how the bridges are built
 
 
 
-
-
-
-
-set interfaces em3 unit 0 family inet address 10.10.31.11/24
-set interfaces em4 unit 0 family inet address 10.10.12.11/24
-
-set interfaces em3 unit 0 family inet address 10.10.12.12/24
-set interfaces em4 unit 0 family inet address 10.10.23.12/24
-
-set interfaces em3 unit 0 family inet address 10.10.23.13/24
-set interfaces em4 unit 0 family inet address 10.10.31.13/24
-
-
-
-
-
-https://wiki.libvirt.org/page/Net.bridge.bridge-nf-call_and_sysctl.conf
-(However, doing this makes DNS not work. So, the fix for now is to just make sure the addresses you're assigning on the VMs matches what kubernetes has set up for the link)
-sudo sysctl -w net.bridge.bridge-nf-call-iptables=0
-sudo sysctl -w net.bridge.bridge-nf-call-ip6tables=0
-sudo sysctl -w net.bridge.bridge-nf-call-arptables=0
-
 https://thenetworkway.wordpress.com/2016/01/04/lldp-traffic-and-linux-bridges/
 cat /proc/mounts | grep sysfs
 mount /sys -o remount,rw
