@@ -6,21 +6,39 @@ metadata:
   labels:
     app: influxdb
     antidote_role: infra
+
+# batch-size = 5000 # will flush if this many points get buffered
+# batch-timeout = "1s" # will flush at least this often even if the batch-size is not reached
+# batch-pending = 10 # number of batches that may be pending in memory
+# read-buffer = 0 # UDP read buffer, 0 means to use OS default
+
 spec:
+  nodeSelector:
+    monitoringpin: "yes"
   containers:
   - name: influxdb
     image: influxdb:latest
     imagePullPolicy: Always
     ports:
     - containerPort: 8086
-    - containerPort: 8083
+    - containerPort: 8089
+      protocol: UDP
+    env:
+    - name: INFLUXDB_UDP_ENABLED
+      value: "true"
+    - name: INFLUXDB_UDP_BIND_ADDRESS
+      value: ":8089"
+    - name: INFLUXDB_UDP_DATABASE
+      value: "syringe_metrics"
     volumeMounts:
     - mountPath: "/var/lib/influxdb"
       name: influxdata
+
+  # TODO Get https://kubernetes.io/docs/concepts/storage/volumes/#gcepersistentdisk working
   volumes:
     - name: influxdata
-      persistentVolumeClaim:
-        claimName: influxdb-pvc
+      hostPath:
+        path: /influxdata
 ---
 kind: Service
 apiVersion: v1
@@ -34,38 +52,46 @@ spec:
     - name: httpapi
       port: 8086
       targetPort: 8086
+    - name: udp
+      port: 8089
+      targetPort: 8089
+      protocol: UDP
   type: ClusterIP
 
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: influxdb-pv
-  labels:
-    app: influxdb
-spec:
-  capacity:
-    storage: 2Gi
-  accessModes:
-    - ReadWriteMany
-  nfs: 
-    path: /influxdata
-    server: "10.240.18.26"
+# https://kubernetes.io/docs/concepts/storage/volumes/#gcepersistentdisk
+# https://blog.jetstack.io/blog/volume-snapshotting/
 
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: influxdb-pvc
-  labels:
-    app: influxdb
-spec:
-  accessModes:
-    - ReadWriteMany
-  storageClassName: "" # the storageClassName has to be specified
-  resources:
-    requests:
-      storage: 2Gi
-  selector:
-    matchLabels:
-      app: influxdb
+# ---
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: influxdb-pv
+#   labels:
+#     app: influxdb
+# spec:
+#   persistentVolumeReclaimPolicy: Retain
+#   capacity:
+#     storage: 200Gi
+#   accessModes:
+#     - ReadWriteOnce
+#   gcePersistentDisk:
+#     pdName: influxdb-disk
+#     fsType: ext4
+
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: influxdb-pvc
+#   labels:
+#     app: influxdb
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   storageClassName: "fast" # the storageClassName has to be specified
+#   resources:
+#     requests:
+#       storage: 200Gi
+#   selector:
+#     matchLabels:
+#       app: influxdb
