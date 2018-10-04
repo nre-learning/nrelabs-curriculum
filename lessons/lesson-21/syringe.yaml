@@ -49,7 +49,7 @@ connections:
   subnet: 10.10.30.0/24
 - a: vqfx2
   b: sipphone
-  subnet: 10.10.300.0/24
+  subnet: 10.10.150.0/24
 - a: vqfx1
   b: netbox
   subnet: 10.10.100.0/24
