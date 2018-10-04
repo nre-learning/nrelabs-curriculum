@@ -7,8 +7,8 @@ kubectl create secret tls tls-certificate --key letsencrypt/etc/live/networkreli
 
 echo "Creating platform services"
 
+kubectl label nodes $(kubectl get nodes | grep worker | head -n 1 | awk '{print $1}') monitoringpin=yes
 
-# TODO(mierdin): Need to look into helm
 kubectl create -f weaveinstall.yml
 kubectl create -f multusinstall.yml
 
