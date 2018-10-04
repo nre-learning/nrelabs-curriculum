@@ -102,6 +102,7 @@ resource "google_compute_instance_template" "controllers" {
     source_image = "${google_compute_image.nested-vm-image.name}"
     auto_delete  = true
     boot         = true
+    disk_type = "pd-ssd"
   }
   network_interface {
     network       = "${google_compute_network.default-internal.name}"
@@ -136,6 +137,7 @@ resource "google_compute_instance_template" "workers" {
     source_image = "${google_compute_image.nested-vm-image.name}"
     auto_delete  = true
     boot         = true
+    disk_type = "pd-ssd"
   }
   network_interface {
     network       = "${google_compute_network.default-internal.name}"

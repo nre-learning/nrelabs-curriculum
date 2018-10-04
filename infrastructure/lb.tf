@@ -3,12 +3,6 @@ resource "google_compute_global_address" "nrefrontend" {
   project = "${var.project}"
 }
 
-resource "google_compute_global_address" "k8s" {
-  name    = "k8s"
-  project = "${var.project}"
-}
-
-
 resource "google_compute_global_forwarding_rule" "nrehttps" {
   name       = "nrehttps"
   project    = "${var.project}"
@@ -25,20 +19,6 @@ resource "google_compute_global_forwarding_rule" "nrehttp" {
   port_range = "80"
 }
 
-resource "google_compute_global_forwarding_rule" "k8shttps" {
-  name       = "k8shttps"
-  project    = "${var.project}"
-  ip_address = "${google_compute_global_address.k8s.address}"
-  target     = "${google_compute_target_https_proxy.k8shttpsproxy.self_link}"
-  port_range = "443"
-}
-
-# resource "google_compute_target_http_proxy" "nreproxy" {
-#   name    = "test-proxy"
-#   project = "${var.project}"
-#   url_map = "${google_compute_url_map.default.self_link}"
-# }
-
 resource "google_compute_target_https_proxy" "nrehttpsproxy" {
   name             = "nrehttpsproxy"
   project          = "${var.project}"
@@ -50,13 +30,6 @@ resource "google_compute_target_http_proxy" "nrehttpproxy" {
   name             = "nrehttpproxy"
   project          = "${var.project}"
   url_map          = "${google_compute_url_map.http-url-map.self_link}"
-}
-
-resource "google_compute_target_https_proxy" "k8shttpsproxy" {
-  name             = "k8shttpsproxy"
-  project          = "${var.project}"
-  ssl_certificates = ["labs-letsencrypt"]
-  url_map          = "${google_compute_url_map.k8s.self_link}"
 }
 
 resource "google_compute_url_map" "https-url-map" {
@@ -102,29 +75,6 @@ resource "google_compute_url_map" "http-url-map" {
 
   default_service = "${google_compute_backend_service.httpbackend.self_link}"
 }
-
-resource "google_compute_url_map" "k8s" {
-  name    = "k8s-url-map"
-  project = "${var.project}"
-
-  host_rule {
-    hosts        = ["k8s.labs.networkreliability.engineering"]
-    path_matcher = "allpaths"
-  }
-
-  path_matcher {
-    name            = "allpaths"
-    default_service = "${google_compute_backend_service.controllers.self_link}"
-
-    path_rule {
-      paths   = ["/*"]
-      service = "${google_compute_backend_service.controllers.self_link}"
-    }
-  }
-
-  default_service = "${google_compute_backend_service.controllers.self_link}"
-}
-
 
 resource "google_compute_backend_service" "httpsbackend" {
   name        = "httpsbackend"
@@ -175,33 +125,6 @@ resource "google_compute_backend_service" "httpbackend" {
   ]
 }
 
-resource "google_compute_backend_service" "controllers" {
-  name        = "controllers"
-  project     = "${var.project}"
-
-  port_name = "k8sapi"
-  protocol  = "HTTPS"
-
-  timeout_sec = 10
-
-  enable_cdn = false
-
-  backend {
-    group = "${data.google_compute_region_instance_group.controllers.self_link}"
-  }
-
-  depends_on = [
-    "google_compute_health_check.k8shealth",
-  ]
-
-  health_checks = [
-    "${google_compute_health_check.k8shealth.self_link}",
-  ]
-}
-
-
-
-
 resource "google_compute_health_check" "httphealth" {
   name    = "httphealth"
   project = "${var.project}"
@@ -226,22 +149,13 @@ resource "google_compute_health_check" "httpshealth" {
   }
 }
 
-resource "google_compute_health_check" "k8shealth" {
-  name    = "k8shealth"
-  project = "${var.project}"
-
-  timeout_sec        = 1
-  check_interval_sec = 3
-
-  tcp_health_check {
-    port = "6443"
-  }
-}
-
 
 # #####
 # # Primary entry into Antidote
 # #####
+
+# TODO: I couldn't quite getting this working, so for now, the instructions have the admin doing DNS LB to all of the worker external IPs. Works fine for now.
+# This is only for services that don't go through NGINX, like jupyter notebooks.
 
 # resource "google_compute_global_address" "nrefrontend" {
 #   name    = "nrefrontend"
@@ -372,50 +286,50 @@ resource "google_compute_health_check" "k8shealth" {
 # INTERNAL - for k8s API
 ###
 
-# resource "google_compute_forwarding_rule" "k8sapi" {
-#   name    = "k8sapi-forwarding-rule"
-#   project = "${var.project}"
+resource "google_compute_forwarding_rule" "k8sapi" {
+  name    = "k8sapi-forwarding-rule"
+  project = "${var.project}"
 
-#   ip_address = "10.138.0.254"
+  ip_address = "10.138.0.254"
 
-#   ports                 = ["6443"]
-#   load_balancing_scheme = "INTERNAL"
-#   backend_service       = "${google_compute_region_backend_service.k8sapi.self_link}"
-#   service_label         = "k8sapi"
-#   network               = "${google_compute_network.default-internal.name}"
-# }
+  ports                 = ["6443"]
+  load_balancing_scheme = "INTERNAL"
+  backend_service       = "${google_compute_region_backend_service.k8sapi.self_link}"
+  service_label         = "k8sapi"
+  network               = "${google_compute_network.default-internal.name}"
+}
 
-# resource "google_compute_region_backend_service" "k8sapi" {
-#   name        = "k8sapi"
-#   project     = "${var.project}"
-#   description = "k8sapi"
+resource "google_compute_region_backend_service" "k8sapi" {
+  name        = "k8sapi"
+  project     = "${var.project}"
+  description = "k8sapi"
 
-#   # port_name = "k8sapi"
-#   protocol = "TCP"
+  # port_name = "k8sapi"
+  protocol = "TCP"
 
-#   timeout_sec = 10
+  timeout_sec = 10
 
-#   # enable_cdn = false
+  # enable_cdn = false
 
-#   backend {
-#     group = "${data.google_compute_region_instance_group.controllers.self_link}"
-#   }
-#   depends_on = [
-#     "google_compute_health_check.k8sapi",
-#   ]
-#   health_checks = [
-#     "${google_compute_health_check.k8sapi.self_link}",
-#   ]
-# }
+  backend {
+    group = "${data.google_compute_region_instance_group.controllers.self_link}"
+  }
+  depends_on = [
+    "google_compute_health_check.k8sapi",
+  ]
+  health_checks = [
+    "${google_compute_health_check.k8sapi.self_link}",
+  ]
+}
 
-# resource "google_compute_health_check" "k8sapi" {
-#   name    = "k8sapi"
-#   project = "${var.project}"
+resource "google_compute_health_check" "k8sapi" {
+  name    = "k8sapi"
+  project = "${var.project}"
 
-#   timeout_sec        = 1
-#   check_interval_sec = 3
+  timeout_sec        = 1
+  check_interval_sec = 3
 
-#   tcp_health_check {
-#     port = "6443"
-#   }
-# }
+  tcp_health_check {
+    port = "6443"
+  }
+}

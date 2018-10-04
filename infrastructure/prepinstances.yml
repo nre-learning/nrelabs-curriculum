@@ -38,7 +38,13 @@
       with_items:
         - kubelet
         - docker
-        - firewalld
+
+    - name: Disable firewall
+      systemd:
+        name: firewalld
+        state: stopped
+        daemon_reload: yes
+        enabled: false
 
     - name: Create directory for stackdriver creds
       shell: mkdir -p /etc/google/auth/
@@ -51,6 +57,23 @@
 
     - name: install stackdriver agent
       shell: "curl -sSO https://dl.google.com/cloudagents/install-monitoring-agent.sh && bash install-monitoring-agent.sh"
+
+    - name: Configure kernel options
+      template:
+        src: templates/sysctl-k8s.conf
+        dest:  /etc/sysctl.d/k8s.conf
+
+    - name: Finishing up
+      shell: "{{ item }}"
+      with_items:
+      - setenforce 0
+      - sysctl --system
+      - iptables -F
+
+    - name: Finishing up
+      shell: "{{ item }}"
+      with_items:
+        - setenforce 0
 
     - name: Download weave CLI utility
       shell: curl -L git.io/weave -o /usr/bin/weave && chmod a+x /usr/bin/weave
@@ -145,8 +168,9 @@
       daemon_reload: yes
       enabled: True
 
-  - name: join k8s cluster via LB DNS name
-    shell: "kubeadm join --token {{ hostvars[groups['tag_kubernetescontrollers'] | first].mastertoken }} --discovery-token-unsafe-skip-ca-verification k8s.networkreliability.engineering:443"
+  # IP is internal TCP LB
+  - name: join k8s cluster
+    shell: "kubeadm join --token {{ hostvars[groups['tag_kubernetescontrollers'] | first].mastertoken }} --discovery-token-unsafe-skip-ca-verification 10.138.0.254:6443"
     ignore_errors: yes
 
 - name: Clone antidote repo
@@ -179,3 +203,4 @@
 
   - name: moving kubeconfig
     shell: cp tmp/kubeconfig ~/.kube/config
+
