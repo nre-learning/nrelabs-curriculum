@@ -15,7 +15,7 @@ blackboxes:
 #  ports: [22]
 - name: netbox
   image: antidotelabs/netbox
-  ports: [8080]
+  ports: [8000]
 
 devices:
 - name: vqfx1
