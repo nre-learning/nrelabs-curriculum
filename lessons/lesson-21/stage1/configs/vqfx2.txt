@@ -93,7 +93,7 @@
                 </unit>
             </interface>
             <interface>
-                <name>em3</name>
+                <name>em2</name>
                 <unit>
                     <name>0</name>
                     <family>
@@ -106,7 +106,7 @@
                 </unit>
             </interface>
             <interface>
-                <name>em4</name>
+                <name>em3</name>
                 <unit>
                     <name>0</name>
                     <family>
@@ -119,7 +119,7 @@
                 </unit>
             </interface>
             <interface>
-                <name>em5</name>
+                <name>em4</name>
                 <unit>
                     <name>0</name>
                     <family>
