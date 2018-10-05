@@ -60,4 +60,3 @@ stages:
       vqfx1: stage1/configs/vqfx1.txt
       vqfx2: stage1/configs/vqfx2.txt
       vqfx3: stage1/configs/vqfx3.txt
-
