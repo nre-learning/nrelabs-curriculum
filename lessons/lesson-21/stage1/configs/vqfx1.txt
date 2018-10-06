@@ -99,7 +99,7 @@
                     <family>
                         <inet>
                             <address>
-                                <name>10.0.10.1/24</name>
+                                <name>10.10.10.1/24</name>
                             </address>
                         </inet>
                     </family>
@@ -112,7 +112,46 @@
                     <family>
                         <inet>
                             <address>
+                                <name>10.10.30.2/24</name>
+                            </address>
+                        </inet>
+                    </family>
+                </unit>
+            </interface>
+            <interface>
+                <name>em5</name>
+                <unit>
+                    <name>0</name>
+                    <family>
+                        <inet>
+                            <address>
                                 <name>10.10.100.1/24</name>
+                            </address>
+                        </inet>
+                    </family>
+                </unit>
+            </interface>
+            <interface>
+                <name>em6</name>
+                <unit>
+                    <name>0</name>
+                    <family>
+                        <inet>
+                            <address>
+                                <name>10.10.200.1/24</name>
+                            </address>
+                        </inet>
+                    </family>
+                </unit>
+            </interface>
+            <interface>
+                <name>lo0</name>
+                <unit>
+                    <name>0</name>
+                    <family>
+                        <inet>
+                            <address>
+                                <name>10.10.1.1/32</name>
                             </address>
                         </inet>
                     </family>

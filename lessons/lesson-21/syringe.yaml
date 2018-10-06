@@ -13,12 +13,9 @@ blackboxes:
 - name: sipphone
   image: antidotelabs/pjsua-lindsey
   ports: [22]
-
-utilities:
-- name: linux1
-  image: antidotelabs/utility
-  sshuser: root
-  sshpassword: antidotepassword
+- name: netbox
+  image: antidotelabs/netbox
+  ports: [8000]
 
 devices:
 - name: vqfx1
@@ -37,19 +34,23 @@ devices:
 connections:
 - a: vqfx1
   b: vqfx2
-  subnet: 10.0.10.0/24
+  subnet: 10.10.10.0/24
 - a: vqfx2
   b: vqfx3
-  subnet: 10.23.0.0/24
+  subnet: 10.10.20.0/24
 - a: vqfx3
   b: vqfx1
-  subnet: 10.31.0.0/24
+  subnet: 10.10.30.0/24
 - a: vqfx2
   b: sipphone
-  subnet: 10.10.200.0/24
+  subnet: 10.10.150.0/24
+- a: vqfx1
+  b: netbox
+  subnet: 10.10.100.0/24
 - a: vqfx1
   b: asterisk
-  subnet: 10.10.100.0/24
+  subnet: 10.10.200.0/24
+
 
 stages:
   1:
@@ -58,3 +59,4 @@ stages:
     configs:
       vqfx1: stage1/configs/vqfx1.txt
       vqfx2: stage1/configs/vqfx2.txt
+      vqfx3: stage1/configs/vqfx3.txt

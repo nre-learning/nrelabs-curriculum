@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
+
+
+ip address flush dev net1
+ip address add 10.10.150.10/24 dev net1
+ip route add 10.10.0.0/16 via 10.10.150.1 dev net1
+
+echo "10.10.200.10  asterisk" >> /etc/hosts
+
 /usr/bin/ssh-keygen -A
-/usr/sbin/sshd
-
-# if [ -d "/sys/devices/virtual/net/net1" ]; then
-
-# fi
-
-# sleep 1000
-
-ip route add 10.0.0.0/8 via 10.10.200.1 dev net1
-/root/pjproject-2.8/pjsip-apps/bin/pjsua-x86_64-unknown-linux-gnu --id sip:1107@10.10.100.20 --registrar sip:10.10.100.20 --realm * --username 0019159BF771 --password 4webrEtHupHewu4
+/usr/sbin/sshd -D
+#/root/pjproject-2.8/pjsip-apps/bin/pjsua-x86_64-unknown-linux-gnu --id sip:1107@asterisk --registrar sip:asterisk --realm * --username 0019159BF771 --password 4webrEtHupHewu4
