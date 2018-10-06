@@ -8,7 +8,7 @@ lessondiagram: https://raw.githubusercontent.com/nre-learning/antidote/master/le
 utilities:
 - name: linux1
   image: antidotelabs/utility
-  sshuser: root
+  sshuser: antidote
   sshpassword: antidotepassword
 
 devices:

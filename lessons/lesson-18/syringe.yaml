@@ -8,11 +8,11 @@ disabled: true
 utilities:
 - name: todd1
   image: toddproject/todd
-  sshuser: root
+  sshuser: antidote
   sshpassword: antidotepassword
 - name: web1
   image: nginx
-  sshuser: root
+  sshuser: antidote
   sshpassword: antidotepassword
 
 devices:

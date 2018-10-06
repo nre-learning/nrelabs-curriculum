@@ -9,7 +9,7 @@ topologyType: none
 utilities:
 - name: linux1
   image: antidotelabs/utility
-  sshuser: root
+  sshuser: antidote
   sshpassword: antidotepassword
 
 stages:

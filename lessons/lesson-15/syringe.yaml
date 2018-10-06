@@ -9,7 +9,7 @@ topologyType: custom
 utilities:
 - name: st2
   image: antidotelabs/stackstorm
-  sshuser: root
+  sshuser: antidote
   sshpassword: antidotepassword
 
 devices:
