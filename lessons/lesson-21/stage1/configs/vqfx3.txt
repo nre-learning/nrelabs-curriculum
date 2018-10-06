@@ -139,18 +139,45 @@
                 </all>
             </storm-control-profiles>
         </forwarding-options>
-        <routing-options>
-            <autonomous-system>
-                <as-number>64003</as-number>
-            </autonomous-system>
-        </routing-options>
-        <protocols>
-            <igmp-snooping>
-                <vlan>
-                    <name>default</name>
-                </vlan>
-            </igmp-snooping>
-        </protocols>
+          <routing-options>
+                <autonomous-system>
+                    <as-number>65503</as-number>
+                </autonomous-system>
+            </routing-options>
+            <protocols>
+                <bgp>
+                    <group>
+                        <name>EXTERNAL</name>
+                        <type>external</type>
+                        <export>DIRECT</export>
+                        <neighbor>
+                            <name>10.10.20.1</name>
+                            <peer-as>65502</peer-as>
+                        </neighbor>
+                        <neighbor>
+                            <name>10.10.30.2</name>
+                            <peer-as>65501</peer-as>
+                        </neighbor>
+                    </group>
+                </bgp>
+                <igmp-snooping>
+                    <vlan>
+                        <name>default</name>
+                    </vlan>
+                </igmp-snooping>
+            </protocols>
+            <policy-options>
+                <policy-statement>
+                    <name>DIRECT</name>
+                    <from>
+                        <protocol>direct</protocol>
+                    </from>
+                    <then>
+                        <accept/>
+                    </then>
+                </policy-statement>
+            </policy-options>
+
         <vlans>
             <vlan>
                 <name>default</name>
