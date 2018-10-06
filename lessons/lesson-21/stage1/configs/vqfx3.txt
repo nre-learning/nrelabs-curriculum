@@ -146,9 +146,10 @@
             </routing-options>
             <protocols>
                 <bgp>
-                    <import>DIRECT</import>
                     <group>
                         <name>EXTERNAL</name>
+                        <type>external</type>
+                        <export>DIRECT</export>
                         <neighbor>
                             <name>10.10.20.1</name>
                             <peer-as>65502</peer-as>
