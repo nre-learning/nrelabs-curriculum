@@ -13,17 +13,17 @@ utilities:
 
 devices:
 - name: vqfx1
-  image: antidotelabs/vqfxspeedy
+  image: antidotelabs/vqfxspeedy:snap1
   sshuser: root
   sshpassword: VR-netlab9
   ports: [8080]
 - name: vqfx2
-  image: antidotelabs/vqfxspeedy
+  image: antidotelabs/vqfxspeedy:snap2
   sshuser: root
   sshpassword: VR-netlab9
   ports: [8080]
 - name: vqfx3
-  image: antidotelabs/vqfxspeedy
+  image: antidotelabs/vqfxspeedy:snap3
   sshuser: root
   sshpassword: VR-netlab9
   ports: [8080]

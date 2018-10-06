@@ -95,3 +95,6 @@ random_mac () {
  e1000,netdev=p08,mac=$(random_mac),bus=pci.1,addr=0x9 \
  -netdev \
  tap,id=p08,ifname=tap7,script=no,downscript=no
+
+
+sleep 1000
