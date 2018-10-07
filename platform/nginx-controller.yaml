@@ -104,7 +104,7 @@ kind: Deployment
 metadata: 
   name: nginx-ingress-controller
 spec: 
-  replicas: 3
+  replicas: 1
   revisionHistoryLimit: 3
   template: 
     metadata: 
