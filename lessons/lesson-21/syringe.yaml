@@ -30,6 +30,12 @@ devices:
   image: antidotelabs/vqfxspeedy:snap3
   sshuser: root
   sshpassword: VR-netlab9
+  
+utilities:
+- name: linux1
+  image: antidotelabs/utility
+  sshuser: antidote
+  sshpassword: antidotepassword
 
 connections:
 - a: vqfx1
