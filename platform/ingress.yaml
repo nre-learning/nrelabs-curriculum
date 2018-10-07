@@ -5,8 +5,8 @@ metadata:
   annotations:
     ingress.kubernetes.io/ingress.class: "nginx"
     ingress.kubernetes.io/ssl-services: "antidote-web"
-    ingress.kubernetes.io/ssl-redirect: "false"
-    ingress.kubernetes.io/force-ssl-redirect: "false"
+    ingress.kubernetes.io/ssl-redirect: "true"
+    ingress.kubernetes.io/force-ssl-redirect: "true"
     # ingress.kubernetes.io/rewrite-target: "/antidote-web"
     # nginx.ingress.kubernetes.io/rewrite-target: "/antidote-web"
     # kubernetes.io/ingress.global-static-ip-name: "nrefrontend"

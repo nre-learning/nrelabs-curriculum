@@ -73,57 +73,64 @@ subjects:
     name: syringesa
     namespace: default
 
----
-apiVersion: v1
-kind: Pod
-metadata:
-  name: syringe
-  labels:
-    app: syringe
-    antidote_role: infra
-spec:
-  initContainers:
-  - name: git-clone
-    image: alpine/git # Any image with git will do
-    command:
-    - /usr/local/git/git-clone.sh
-    args:
-    - "https://github.com/nre-learning/antidote.git"
-    - "master"
-    - "/antidote"
-    volumeMounts:
-    - name: git-clone
-      mountPath: /usr/local/git
-    - name: git-volume  #?
-      mountPath: /antidote
 
-  # Might need an admission controller for this
-  serviceAccount: syringesa
-  containers:
-  - name: syringe
-    image: antidotelabs/syringe:latest
-    # image: antidotelabs/nginxtest:latest
-    imagePullPolicy: Always
-    env:
-    - name: SYRINGE_LESSONS
-      value: "/antidote/lessons"
-    ports:
-    - containerPort: 50099  # GRPC
-    - containerPort: 8086   # REST/HTTP
-    readinessProbe:
-      httpGet:
-        path: /
-        port: 8086
-    volumeMounts:
-      - mountPath: /antidote
-        name: git-volume
-  volumes:
-    - name: git-volume
-      emptyDir: {}
-    - name: git-clone
-      configMap:
-        name: git-clone
-        defaultMode: 0755
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata: 
+  name: syringe
+spec: 
+  replicas: 1
+  revisionHistoryLimit: 3
+  template: 
+    metadata:
+      name: syringe
+      labels:
+        app: syringe
+        antidote_role: infra
+    spec:
+      initContainers:
+      - name: git-clone
+        image: alpine/git # Any image with git will do
+        command:
+        - /usr/local/git/git-clone.sh
+        args:
+        - "https://github.com/nre-learning/antidote.git"
+        - "master"
+        - "/antidote"
+        volumeMounts:
+        - name: git-clone
+          mountPath: /usr/local/git
+        - name: git-volume  #?
+          mountPath: /antidote
+
+      # Might need an admission controller for this
+      serviceAccount: syringesa
+      containers:
+      - name: syringe
+        image: antidotelabs/syringe:latest
+        # image: antidotelabs/nginxtest:latest
+        imagePullPolicy: Always
+        env:
+        - name: SYRINGE_LESSONS
+          value: "/antidote/lessons"
+        ports:
+        - containerPort: 50099  # GRPC
+        - containerPort: 8086   # REST/HTTP
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8086
+        volumeMounts:
+          - mountPath: /antidote
+            name: git-volume
+      volumes:
+        - name: git-volume
+          emptyDir: {}
+        - name: git-clone
+          configMap:
+            name: git-clone
+            defaultMode: 0755
 
 # /var/run/secrets/kubernetes.io/serviceaccount
 
@@ -164,9 +171,9 @@ metadata:
     ingress.kubernetes.io/force-ssl-redirect: "true"
     ingress.kubernetes.io/rewrite-target: "/"
     nginx.ingress.kubernetes.io/rewrite-target: "/"
-    # ingress.kubernetes.io/limit-connections
-    # ingress.kubernetes.io/limit-rps
-  name: syringe-ingress
+    nginx.ingress.kubernetes.io/limit-connections: "10"
+    nginx.ingress.kubernetes.io/limit-rps: "5"
+  name: syringe
   namespace: default
 spec:
   tls:
