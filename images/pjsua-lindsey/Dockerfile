@@ -17,7 +17,8 @@ RUN yum install -y gcc gcc-c++ make epel-release bzip2 iproute openssh-server \
     && echo antidotepassword | passwd --stdin antidote
 
 COPY launch.sh /root/launch.sh
-COPY phone.sh /home/antidote/phone.sh
+COPY --chown=antidote:antidote phone.sh /home/antidote/phone.sh
+
 EXPOSE 22
 
 CMD ["/root/launch.sh"]
