@@ -13,11 +13,11 @@ RUN yum install -y gcc gcc-c++ make epel-release bzip2 iproute openssh-server \
     && yum erase -y gcc gcc-c++ make epel-release bzip2 wget \
     && yum -y autoremove \
     && mkdir /var/run/sshd \
-    && echo 'root:antidotepassword' | chpasswd \
-    && sed -i 's/#PermitRootLogin yes/PermitRootLogin yes/' /etc/ssh/sshd_config
+    && useradd antidote -d /home/antidote -m \
+    && echo antidotepassword | passwd antidote --stdin \
 
 COPY launch.sh /root/launch.sh
-
+COPY phone.sh /home/antidote/phone.sh
 EXPOSE 22
 
 CMD ["/bin/bash","/root/launch.sh"]

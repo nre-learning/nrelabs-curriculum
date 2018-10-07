@@ -10,9 +10,6 @@ blackboxes:
 - name: asterisk
   image: antidotelabs/asterisk
   ports: [8088]
-- name: sipphone
-  image: antidotelabs/pjsua-lindsey
-  ports: [22]
 - name: netbox
   image: antidotelabs/netbox
   ports: [8000]
@@ -36,6 +33,11 @@ utilities:
   image: antidotelabs/utility
   sshuser: antidote
   sshpassword: antidotepassword
+- name: sipphone
+  image: antidotelabs/pjsua-lindsey
+  sshuser: antidote
+  sshpassword: antidotepassword
+  ports: [22]
 
 connections:
 - a: vqfx1
