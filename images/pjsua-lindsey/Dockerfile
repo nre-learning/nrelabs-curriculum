@@ -14,10 +14,10 @@ RUN yum install -y gcc gcc-c++ make epel-release bzip2 iproute openssh-server \
     && yum -y autoremove \
     && mkdir /var/run/sshd \
     && useradd antidote -d /home/antidote -m \
-    && echo antidotepassword | passwd antidote --stdin \
+    && echo antidotepassword | passwd --stdin antidote
 
 COPY launch.sh /root/launch.sh
 COPY phone.sh /home/antidote/phone.sh
 EXPOSE 22
 
-CMD ["/bin/bash","/root/launch.sh"]
+CMD ["/root/launch.sh"]
