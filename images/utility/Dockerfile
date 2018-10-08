@@ -27,5 +27,9 @@ RUN echo "export VISIBLE=now" >> /etc/profile
 ADD requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt
 
+COPY get-interface-from-arp-ip.py /usr/local/bin/get-interface-from-arp-ip
+COPY get-phone-ip-from-ext.py /usr/local/bin/get-phone-ip-from-ext
+
+
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]
