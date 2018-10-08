@@ -59,10 +59,10 @@ stages:
       vqfx2: stage2/configs/vqfx2.txt
       vqfx3: stage2/configs/vqfx3.txt
 
-  # 3:
-  #   description: Diving Deep into an API
-  #   labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-19/stage3/guide.md
-  #   configs:
-  #     vqfx1: stage3/configs/vqfx1.txt
-  #     vqfx2: stage3/configs/vqfx2.txt
-  #     vqfx3: stage3/configs/vqfx3.txt
+  3:
+    description: Diving Deep into an API
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-19/stage3/guide.md
+    configs:
+      vqfx1: stage3/configs/vqfx1.txt
+      vqfx2: stage3/configs/vqfx2.txt
+      vqfx3: stage3/configs/vqfx3.txt
