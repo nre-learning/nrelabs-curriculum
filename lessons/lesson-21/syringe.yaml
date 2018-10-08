@@ -4,7 +4,7 @@ lessonID: 21
 category: troubleshooting
 lessondiagram: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-21/lessondiagram.png
 topologyType: custom
-disabled: true
+# disabled: true
 
 blackboxes:
 - name: asterisk
