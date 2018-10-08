@@ -84,4 +84,4 @@ The latter, `..`, is super useful for being able to just "go up a directory", wi
 cd ..
 ll
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 7)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 8)">Run this snippet</button>
