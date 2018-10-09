@@ -18,9 +18,9 @@ If you've ever worked on a Linux system, or maybe an Apple computer, you might h
 ```
 curl https://google.com
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 0)">Run this snippet</button>
+<!-- <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 0)">Run this snippet</button> -->
 
-What we've just done is effectively the same as what your browser would do if you were to navigate to Google there - it requests a resource from the remote server, and the server responds with the HTML you see in your terminal. Of course, the intention is that the browser would then render this HTML into something we can look at. `curl` performs no such function, so we just get the raw HTML.
+This is effectively the same as what your browser would do if you were to navigate to Google there - it requests a resource from the remote server, and the server responds with the HTML you see in your terminal. Of course, the intention is that the browser would then render this HTML into something we can look at. `curl` performs no such function, so we just get the raw HTML.
 
 What if, instead, we were to query a resource somewhere that wasn't even intended to be rendered visually in a browser? Remember, machines don't care what things "look" like, they just need the information in as efficient a manner as possible. If we add a few parameters, and change the URL, we can query a resource from one of our vQFX switches that fits this description:
 
