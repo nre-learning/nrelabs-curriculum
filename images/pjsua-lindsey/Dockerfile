@@ -24,7 +24,6 @@ RUN yum erase -y gcc gcc-c++ make epel-release bzip2 wget \
     && rm -rf /var/cache/yum
 
 COPY launch.sh /root/launch.sh
-COPY --chown=antidote:antidote phone.sh /home/antidote/phone.sh
 
 EXPOSE 22
 
