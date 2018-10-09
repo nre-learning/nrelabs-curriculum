@@ -3,7 +3,7 @@ FROM centos
 RUN yum install -y https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/pgdg-centos96-9.6-3.noarch.rpm \
     && yum install -y postgresql96 postgresql96-server postgresql96-devel \
     && yum install -y epel-release \
-    && yum install -y ipoute gcc python34 python34-devel python34-setuptools libxml2-devel libxslt-devel libffi-devel graphviz openssl-devel redhat-rpm-config wget \
+    && yum install -y iproute gcc python34 python34-devel python34-setuptools libxml2-devel libxslt-devel libffi-devel graphviz openssl-devel redhat-rpm-config wget \
     && easy_install-3.4 pip \
     && wget https://github.com/digitalocean/netbox/archive/v2.4.5.tar.gz \
     && tar -xzf v2.4.5.tar.gz -C /opt \
