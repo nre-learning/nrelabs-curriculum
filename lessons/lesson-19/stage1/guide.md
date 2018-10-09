@@ -1,9 +1,9 @@
 # Working with Network APIs
 ## Part 1 - Your First API Call
 
-<div class="alert alert-warning" role="alert">
+<!-- <div class="alert alert-warning" role="alert">
   This course comes with a video, and it's highly recommended that you watch this first. Click the "Lesson Video" button above to watch!
-</div>
+</div> -->
 
 You've undoubtedly heard a lot about APIs in recent years. But what are they all about? And why should you as, a network engineer, care?
 
