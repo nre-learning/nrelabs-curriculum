@@ -11,7 +11,7 @@ resource "google_compute_firewall" "restrict-external" {
     # 3001 = nginx http nodeport
     # 3002 = nginx https nodeport
     # 6443 = k8s API
-    ports    = ["30001", "30002", "6443"]
+    ports    = ["22", "30001", "30002", "6443"]
   }
 
   # source_tags = []

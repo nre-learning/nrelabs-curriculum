@@ -60,15 +60,6 @@ Enter the `platform` directory and execute the shell script to upload all of the
 
 .. note::  may need to restart the coredns pods
 
-.. note::  need to add the following command to create the filestore, then update all kubernetes manifests with the right IP, and THEN make sure all subdirectories are created (like `influxdata`)
-
-.. code-block:: text
-
-    gcloud beta filestore instances create nfs-server \
-        --location=us-west1-b \
-        --tier=STANDARD \
-        --file-share=name="influxdata",capacity=1TB \
-        --network=name="default-internal"
 
 Cleaning Up
 ----------------------------------

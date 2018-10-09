@@ -68,7 +68,7 @@ resource "google_compute_region_autoscaler" "workers-scaler" {
 
   autoscaling_policy = {
     max_replicas    = 4
-    min_replicas    = 3
+    min_replicas    = 4
     cooldown_period = 60
 
     cpu_utilization {
@@ -102,7 +102,7 @@ resource "google_compute_instance_template" "controllers" {
     source_image = "${google_compute_image.nested-vm-image.name}"
     auto_delete  = true
     boot         = true
-    disk_type = "pd-ssd"
+    # disk_type = "pd-ssd"
   }
   network_interface {
     network       = "${google_compute_network.default-internal.name}"
@@ -137,7 +137,7 @@ resource "google_compute_instance_template" "workers" {
     source_image = "${google_compute_image.nested-vm-image.name}"
     auto_delete  = true
     boot         = true
-    disk_type = "pd-ssd"
+    # disk_type = "pd-ssd"
   }
   network_interface {
     network       = "${google_compute_network.default-internal.name}"

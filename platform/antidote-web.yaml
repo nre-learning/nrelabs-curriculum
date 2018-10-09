@@ -4,7 +4,7 @@ kind: Deployment
 metadata: 
   name: antidote-web
 spec: 
-  replicas: 3
+  replicas: 1
   revisionHistoryLimit: 3
   template: 
     metadata:
