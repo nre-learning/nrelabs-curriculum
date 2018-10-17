@@ -108,8 +108,7 @@ spec:
       serviceAccount: syringesa
       containers:
       - name: syringe
-        image: antidotelabs/syringe:latest
-        # image: antidotelabs/nginxtest:latest
+        image: antidotelabs/syringe:v0.1.0
         imagePullPolicy: Always
         env:
         - name: SYRINGE_LESSONS
