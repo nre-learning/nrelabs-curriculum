@@ -8,6 +8,7 @@ Contributing to Antidote
 
    general.rst
    lessondetails.rst
+   ptr.rst
 
 In general, there are two area in which to contribute: Antidote infrastructure
 and into the curriculum of Lessons. Lessons contributions are expected to be
