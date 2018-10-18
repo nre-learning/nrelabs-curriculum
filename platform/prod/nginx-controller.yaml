@@ -82,7 +82,7 @@ roleRef:
   name: ingress-ns
 subjects:
   - kind: ServiceAccount
-    name: default
+    name: nginxsa
     namespace: default
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -95,7 +95,7 @@ roleRef:
   name: ingress
 subjects:
   - kind: ServiceAccount
-    name: default
+    name: nginxsa
     namespace: default
 ---
 
@@ -111,7 +111,7 @@ spec:
       labels: 
         k8s-app: nginx-ingress-lb
     spec: 
-      serviceAccount: default
+      serviceAccount: nginxsa
       containers: 
         - args: 
             - /nginx-ingress-controller
