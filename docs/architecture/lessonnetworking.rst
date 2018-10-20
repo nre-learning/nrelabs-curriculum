@@ -1,27 +1,28 @@
 .. networking:
 
-Lab Networking
+Lesson Networking
 ================================
 
-In order to connect
+In order to connect entities within a lesson to each other, we go with a slightly unorthodox approach.
+Part of this design was due to constrains within the operating environment, and others are temporary solutions
+that will be deprecated as the solution matures. For now, here's how it works.
 
-- Use affinity rules to place pods within the same lesson instance all on the same host. Note that a lesson instance is specific to a user's session.
-  Another user will have a different lesson instance even if it's from the exact same lesson ID/definition.
-- Use simple linux bridges to connect pods within a lesson to each other.
+The TL;DR is as follows:
+- Every Kubernetes pod is connected to the "main" network via its ``eth0`` interface. However, because we're using
+  Multus (https://github.com/intel/multus-cni), we can provision multiple networks for a pod. More on that in a bit.
+- When we schedule lesson resources, we use affinity rules to ensure all of a lessons' resources are scheduled
+  onto the same host.
+- Depending on the resource type, and the connections described in the :ref:`lesson definition <syringefile>`,
+  we may also connect additional interfaces to a pod, connected to other networks.
+- Since all pods are on the same host, if we need to connect pods together directly, such as in a specified
+  network topology, we can simply create a linux bridge and add the relevant interfaces. In the future, we will do away
+  with affinity rules and use overlay networking instead of the simple linux bridge.
 
 .. image:: /images/lessonsnetworking.png
 
-TODO
-- How does DNS work?
-- namespace impact on bridge isolation and DNS?
-- do we need a separate mgmt network per lesson?
-
-Using v3.0 of multus
-https://github.com/intel/multus-cni
-
-
-We use a default network configuration in `/etc/cni/net.d/1-multus-cni.conf` which specifies a CNI plugin that will be used by default, such as Weave.
-This means that all pods are configured this way for their `eth0` interface. All future networks we attach to a pod start with `net1` and so forth.
+We use a default network configuration in ``/etc/cni/net.d/1-multus-cni.conf`` which specifies a CNI plugin
+that will be used by default, such as Weave. This means that all pods are configured this way for their `eth0`
+interface. All future networks we attach to a pod start with `net1` and so forth.
 
 .. code:: json
 

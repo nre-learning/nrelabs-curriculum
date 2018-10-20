@@ -33,6 +33,10 @@ simple lesson in two parts, with a single linux container for interactivity:
       labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-14/stage2/guide.md
 
 
+A more complicated example adds network devices to the mix. This not only adds images to the file, but
+we also need to add a list of connections for Syringe to place between our network devices, as well as
+configurations to apply to each device at each lesson stage:
+
 .. code:: yaml
 
   ---
@@ -40,11 +44,7 @@ simple lesson in two parts, with a single linux container for interactivity:
   lessonID: 12
   category: verification
   lessondiagram: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-12/lessondiagram.png
-
-
   topologyType: custom
-
-  # TODO(mierdin): What about IP addressing for utilities?
 
   utilities:
   - name: linux1
