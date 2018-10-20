@@ -1,4 +1,6 @@
-Syringe - Antidote's Brains
+.. _syringe:
+
+Syringe - Antidote's "Brains"
 ================================
 
 .. toctree::
@@ -6,4 +8,5 @@ Syringe - Antidote's Brains
 
    syringefile.rst
 
-Please use the menu above to get to the relevant instructions for how you're trying to build Antidote.
+Syringe is where the real work gets done in the Antidote project. It's responsible for taking in lesson definitions
+via :ref:`a YAML file <syringefile>`, and any configs, scripts, etc used in the lesson, and providing them to the 
