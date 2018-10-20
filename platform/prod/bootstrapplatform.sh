@@ -3,7 +3,8 @@ echo "Creating letsencrypt secrets. Comment these out if you're not Matt - only 
 
 # openssl dhparam -out letsencrypt/dhparam.pem 2048
 kubectl create secret generic tls-dhparam --from-file=../letsencrypt/dhparam.pem
-kubectl create secret tls tls-certificate10172018 \
+kubectl delete secret tls-certificate
+kubectl create secret tls tls-certificate \
     --key ../letsencrypt/etc/live/networkreliability.engineering-0001/privkey.pem \
     --cert ../letsencrypt/etc/live/networkreliability.engineering-0001/cert.pem
 
