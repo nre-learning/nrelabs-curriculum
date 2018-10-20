@@ -1,12 +1,7 @@
 .. infrastructure:
 
-Antidote Infrastructure
+Infrastructure
 ================================
-
-
-
-
-
 
 
 # Load Balancer

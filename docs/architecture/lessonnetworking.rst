@@ -8,13 +8,14 @@ Part of this design was due to constrains within the operating environment, and 
 that will be deprecated as the solution matures. For now, here's how it works.
 
 The TL;DR is as follows:
-- Every Kubernetes pod is connected to the "main" network via its ``eth0`` interface. However, because we're using
-  Multus (https://github.com/intel/multus-cni), we can provision multiple networks for a pod. More on that in a bit.
-- When we schedule lesson resources, we use affinity rules to ensure all of a lessons' resources are scheduled
+
+* Every Kubernetes pod is connected to the "main" network via its ``eth0`` interface. However, because we're using
+  `Multus <https://github.com/intel/multus-cni>`_, we can provision multiple networks for a pod. More on that in a bit.
+* When we schedule lesson resources, we use affinity rules to ensure all of a lessons' resources are scheduled
   onto the same host.
-- Depending on the resource type, and the connections described in the :ref:`lesson definition <syringefile>`,
+* Depending on the resource type, and the connections described in the :ref:`lesson definition <syringefile>`,
   we may also connect additional interfaces to a pod, connected to other networks.
-- Since all pods are on the same host, if we need to connect pods together directly, such as in a specified
+* Since all pods are on the same host, if we need to connect pods together directly, such as in a specified
   network topology, we can simply create a linux bridge and add the relevant interfaces. In the future, we will do away
   with affinity rules and use overlay networking instead of the simple linux bridge.
 
@@ -364,32 +365,7 @@ We can, of course, ping bb2 and bb3 from bb1 using the addresses shown above:
 DNS
 ---
 
-DNS in Antidote is done the typical Kubernetes way, outlined in https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/.
-
-So, if you want to reach vqfx1, simply query for `vqfx1`. You will be directed to the correponding service in your namespace.
-
-You can specify the namespace, to access things in other namespaces, such as the default namespace:
-
-vqfx1.default.svc.cluster.local
-
-
-in-pod
----
-
-nrlab, talk about how the bridges are built
-
-
-
-
-
-
-https://thenetworkway.wordpress.com/2016/01/04/lldp-traffic-and-linux-bridges/
-cat /proc/mounts | grep sysfs
-mount /sys -o remount,rw
-echo 16384 > /sys/class/net/net1_tap0/bridge/group_fwd_mask
-echo 16384 > /sys/class/net/net2_tap1/bridge/group_fwd_mask
-
-On host:
-echo 16384 > /sys/class/net/12-bridge/bridge/group_fwd_mask
-echo 16384 > /sys/class/net/23-bridge/bridge/group_fwd_mask
-echo 16384 > /sys/class/net/31-bridge/bridge/group_fwd_mask
+DNS in Antidote is `provided by Kubernetes <https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/>`_.
+So, if you want to reach vqfx1, simply query for `vqfx1`. You will be directed to the
+correponding service in your namespace. Note that each lesson + session combination gets its own namespace, which means
+``vqfx1`` is locally significant to your lesson specifically.
