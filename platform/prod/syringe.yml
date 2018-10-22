@@ -3,12 +3,14 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: syringesa
+  namespace: prod
 
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: git-clone
+  namespace: prod
 data:
   git-clone.sh: |
     #!/bin/sh -e
@@ -71,7 +73,7 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: syringesa
-    namespace: default
+    namespace: prod
 
 
 ---
@@ -79,6 +81,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata: 
   name: syringe
+  namespace: prod
 spec: 
   replicas: 1
   revisionHistoryLimit: 3
@@ -144,7 +147,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: syringe
-  namespace: default
+  namespace: prod
 spec:
   selector:
     app: syringe
@@ -175,7 +178,7 @@ metadata:
     nginx.ingress.kubernetes.io/limit-connections: "10"
     nginx.ingress.kubernetes.io/limit-rps: "5"
   name: syringe
-  namespace: default
+  namespace: prod
 spec:
   tls:
     - hosts:

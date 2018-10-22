@@ -1,10 +1,12 @@
 
 echo "Creating letsencrypt secrets. Comment these out if you're not Matt - only he has the certs right now"
 
+kubectl create ns prod
+
 # openssl dhparam -out letsencrypt/dhparam.pem 2048
-kubectl create secret generic tls-dhparam --from-file=../letsencrypt/dhparam.pem
-kubectl delete secret tls-certificate
-kubectl create secret tls tls-certificate \
+kubectl create secret -n=prod generic tls-dhparam --from-file=../letsencrypt/dhparam.pem
+kubectl delete secret -n=prod tls-certificate
+kubectl create secret -n=prod tls tls-certificate \
     --key ../letsencrypt/etc/live/networkreliability.engineering-0001/privkey.pem \
     --cert ../letsencrypt/etc/live/networkreliability.engineering-0001/cert.pem
 
@@ -18,6 +20,7 @@ kubectl create -f multusinstall.yml
 sleep 10
 
 cd ../infrastructure && ansible-playbook -i inventory/ restartkubelets.yml && cd ../platform
+
 
 kubectl create -f nginx-controller.yaml
 kubectl create -f syringe.yml

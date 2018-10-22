@@ -3,6 +3,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: grafana
+  namespace: prod
   labels:
     app: grafana
     antidote_role: infra
@@ -44,7 +45,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: grafana
-  namespace: default
+  namespace: prod
 spec:
   selector:
     app: grafana
@@ -69,7 +70,7 @@ metadata:
     # ingress.kubernetes.io/limit-connections
     # ingress.kubernetes.io/limit-rps
   name: grafana
-  namespace: default
+  namespace: prod
 spec:
   tls:
     - hosts:
