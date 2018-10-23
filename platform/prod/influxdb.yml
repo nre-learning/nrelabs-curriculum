@@ -3,6 +3,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: influxdb
+  namespace: prod
   labels:
     app: influxdb
     antidote_role: infra
@@ -44,7 +45,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: influxdb
-  namespace: default
+  namespace: prod
 spec:
   selector:
     app: influxdb

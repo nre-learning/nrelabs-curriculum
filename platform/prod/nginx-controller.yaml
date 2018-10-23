@@ -3,6 +3,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: nginxsa
+  namespace: prod
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -46,7 +47,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: ingress-ns
-  namespace: default
+  namespace: prod
 rules:
 - apiGroups:
   - ""
@@ -75,15 +76,15 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: ingress-ns-binding
-  namespace: default
+  namespace: prod
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: ingress-ns
 subjects:
   - kind: ServiceAccount
-    name: default
-    namespace: default
+    name: nginxsa
+    namespace: prod
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -95,14 +96,15 @@ roleRef:
   name: ingress
 subjects:
   - kind: ServiceAccount
-    name: default
-    namespace: default
+    name: nginxsa
+    namespace: prod
 ---
 
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata: 
   name: nginx-ingress-controller
+  namespace: prod
 spec: 
   replicas: 1
   revisionHistoryLimit: 3
@@ -111,7 +113,7 @@ spec:
       labels: 
         k8s-app: nginx-ingress-lb
     spec: 
-      serviceAccount: default
+      serviceAccount: nginxsa
       containers: 
         - args: 
             - /nginx-ingress-controller
@@ -158,6 +160,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: nginx-ingress
+  namespace: prod
 spec:
   type: NodePort
   ports:

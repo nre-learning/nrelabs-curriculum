@@ -3,6 +3,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata: 
   name: antidote-web
+  namespace: prod
 spec: 
   replicas: 1
   revisionHistoryLimit: 3
@@ -46,7 +47,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: antidote-web
-  namespace: default
+  namespace: prod
 spec:
   selector:
     app: antidote-web
@@ -71,7 +72,7 @@ metadata:
     nginx.ingress.kubernetes.io/limit-connections: "10"
     nginx.ingress.kubernetes.io/limit-rps: "5"
   name: antidote-web
-  namespace: default
+  namespace: prod
 spec:
   tls:
     - hosts:

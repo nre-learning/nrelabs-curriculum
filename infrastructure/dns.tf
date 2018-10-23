@@ -14,3 +14,14 @@ resource "google_dns_record_set" "labs" {
     "${google_compute_global_address.nrefrontend.address}",
   ]
 }
+
+resource "google_dns_record_set" "ptr" {
+  name = "ptr.labs.networkreliability.engineering."
+  type = "A"
+  ttl  = 300
+  project = "${var.project}"
+  managed_zone = "nre"
+  rrdatas = [
+    "${google_compute_global_address.nrefrontend.address}",
+  ]
+}
