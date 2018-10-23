@@ -1,5 +1,5 @@
 ---
-vendor: Juniper
-family: QFX
-model: 10k
-osversion: 15.1X53-D60.4
+- Juniper QFX
+- Juniper MX
+- Juniper EX
+- Juniper SRX
