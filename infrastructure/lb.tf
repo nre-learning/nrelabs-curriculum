@@ -22,7 +22,7 @@ resource "google_compute_global_forwarding_rule" "nrehttp" {
 resource "google_compute_target_https_proxy" "nrehttpsproxy" {
   name             = "nrehttpsproxy"
   project          = "${var.project}"
-  ssl_certificates = ["labs-letsencrypt"]
+  ssl_certificates = ["nre-10172018"]
   url_map          = "${google_compute_url_map.https-url-map.self_link}"
 }
 

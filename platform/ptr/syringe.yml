@@ -2,13 +2,15 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: syringesa
+  name: syringesaptr
+  namespace: ptr
 
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: git-clone
+  namespace: ptr
 data:
   git-clone.sh: |
     #!/bin/sh -e
@@ -29,7 +31,7 @@ data:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: syringerole
+  name: syringeroleptr
 # rules:
 # - apiGroups:
 #   - ""
@@ -63,22 +65,22 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: syringe-binding
+  name: syringe-binding-ptr
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: syringerole
+  name: syringeroleptr
 subjects:
   - kind: ServiceAccount
-    name: syringesa
-    namespace: default
-
+    name: syringesaptr
+    namespace: ptr
 
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata: 
   name: syringe
+  namespace: ptr
 spec: 
   replicas: 1
   revisionHistoryLimit: 3
@@ -105,14 +107,18 @@ spec:
           mountPath: /antidote
 
       # Might need an admission controller for this
-      serviceAccount: syringesa
+      serviceAccount: syringesaptr
       containers:
       - name: syringe
-        image: antidotelabs/syringe:v0.1.0
+        image: antidotelabs/syringe:latest
         imagePullPolicy: Always
         env:
         - name: SYRINGE_LESSONS
           value: "/antidote/lessons"
+        - name: SYRINGE_IGNORE_DISABLED
+          value: "true"
+        - name: SYRINGE_TIER
+          value: "ptr"
         ports:
         - containerPort: 50099  # GRPC
         - containerPort: 8086   # REST/HTTP
@@ -130,19 +136,12 @@ spec:
           configMap:
             name: git-clone
             defaultMode: 0755
-
-# /var/run/secrets/kubernetes.io/serviceaccount
-
-# kubectl create serviceaccount syringesa
-# kubectl describe serviceaccount syringesa
-# kubectl get secret syringesa-token-hjdjv -oyaml
-
 ---
 kind: Service
 apiVersion: v1
 metadata:
   name: syringe
-  namespace: default
+  namespace: ptr
 spec:
   selector:
     app: syringe
@@ -150,13 +149,10 @@ spec:
     - name: grpc
       port: 50099
       targetPort: 50099
-      # nodePort: 30010
     - name: http
       port: 8086
       targetPort: 8086
-      # nodePort: 30011
   type: ClusterIP
-  # type: NodePort
 
 ---
 apiVersion: extensions/v1beta1
@@ -173,18 +169,17 @@ metadata:
     nginx.ingress.kubernetes.io/limit-connections: "10"
     nginx.ingress.kubernetes.io/limit-rps: "5"
   name: syringe
-  namespace: default
+  namespace: ptr
 spec:
   tls:
     - hosts:
-      - labs.networkreliability.engineering
+      - ptr.labs.networkreliability.engineering
       secretName: tls-certificate
   rules:
-  - host: labs.networkreliability.engineering
+  - host: ptr.labs.networkreliability.engineering
     http:
       paths:
       - path: "/syringe"
         backend:
           serviceName: syringe
           servicePort: 8086
-
