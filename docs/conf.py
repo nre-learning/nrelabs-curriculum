@@ -20,8 +20,8 @@
 # -- Project information -----------------------------------------------------
 
 project = 'antidote'
-copyright = '2018, Matt Oswalt'
-author = 'Matt Oswalt'
+copyright = '2018, Juniper Networks'
+author = 'Juniper Networks'
 # exclude_patterns = ['*DESCRIPTION.rst']
 
 # The short X.Y version
