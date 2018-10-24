@@ -1,5 +1,7 @@
 # Antidote
 
+[![Build Status](https://travis-ci.org/nre-learning/antidote.svg?branch=master)](https://travis-ci.org/nre-learning/antidote)
+
 Antidote is a project for making learning automation easier, by providing a fully in-browser learning experience, highly extensible lesson model, all back-ended by real, non simulated endpoints like network devices and servers.
 
 The [Antidote documentation](https://antidoteproject.readthedocs.io/en/latest/) is your one-stop shop for details about Antidote. However, it's helpful to know at a high-level that Antidote isn't just one application, but a series of applications designed to work together to provide this learning experience. Here are a few other repositories you might be interested in:
