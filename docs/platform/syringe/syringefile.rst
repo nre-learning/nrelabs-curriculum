@@ -7,6 +7,10 @@ Syringe uses a totally file-driven approach to lesson definitions. This allows u
 within a Git repository, rather than maintain a database of lesson state all the time. When syringe starts,
 it looks for lesson definitions within a directory, loads them into memory, and serves them directly via its API.
 
+.. note::
+    The way that ``syringe.yaml`` files are put together is still a work-in-progress. Be prepared for changes to
+    the below information, as we improve Syringe and make it (hopefully) easier to put these lesson files together.
+
 These lesson definitions are written in YAML. A very simple example is shown below. This file describes a very
 simple lesson in two parts, with a single linux container for interactivity:
 
