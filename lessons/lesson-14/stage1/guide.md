@@ -30,7 +30,7 @@ yamlList = yaml.load(yamlFile)
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 1)">Run this snippet</button>
 
-At this point, `yamlDict` is a Python dictionary that contains the key-value pairs that were in our YAML file. We can start by checking this dictionary's length:
+At this point, `yamlList` is a Python list that contains values (in this case, strings) that were in our YAML file. We can start by checking this list's length:
 
 ```
 print("There are %d values in this YAML file" % len(yamlList))
