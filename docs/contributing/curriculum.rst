@@ -73,7 +73,7 @@ easily replicate what is shown in the lesson.
 
 
 Lesson Details
-=================================
+^^^^^^^^^^^^^^^^^^^^^^
 
 The best way to get started building lessons is to get an instance of Antidote
 running on your own laptop. Ironing out all of the bugs before you submit a pull
