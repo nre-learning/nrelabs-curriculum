@@ -23,7 +23,7 @@ gives you an opportunity to combine forces with these existing efforts if they e
 Once you feel like you've gotten good feedback, and you have a good plan in place, read the following section for some
 guidelines on how to write a really awesome lesson.
 
-Lessons Should Demonstrate Something Useful
+Step 2 - Plan It Out
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Lessons in NRE Labs should demonstrate something useful to a network engineer.
@@ -33,13 +33,11 @@ collects system information about a target device.
 If a user can easily replicate what is shown in the lab so that it can help
 them in production, then this would be even better.
 
-Planning Lessons
-^^^^^^^^^^^^^^^^^^^^^^
+There are multiple ways to build lessons in Antidote.  
 
 **One-off**
 
-There are multiple ways to build lessons in NRElabs.  The simplest method is
-to have single one-off lessons that do not have any direct relationship to
+The simplest method is to have single one-off lessons that do not have any direct relationship to
 other lessons.
 
 **Repeat**
@@ -66,9 +64,8 @@ leveraged to build a lesson.  Consider using open-source tools for the lessons,
 or tools that are at least free.  This helps ensure that a user could more
 easily replicate what is shown in the lesson.
 
-
-Lesson Details
-^^^^^^^^^^^^^^^^^^^^^^
+Step 3 - Put It Together
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 Okay. You've determined that you have a good idea for a lesson, and no one else is working on it.
 Let's get you started!
@@ -94,14 +91,15 @@ Take a look at the `existing lessons <https://github.com/nre-learning/antidote/t
 how those lessons are laid out. What you'll need in your lesson directory will vary wildly, depending on the
 contents of your ``syringe.yaml`` file.
 
-Once you've got your changes together, and pushed to a branch of your own (i.e. in a fork of the Antidote repo),
-open a pull request.
+Step 4 - Get It Reviewed
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-For Reviewers
-^^^^^^^^^^^^^
+Once you've got your changes together, and pushed to a branch of your own (i.e. in a fork of the Antidote repo),
+`open a pull request <https://github.com/nre-learning/antidote/pull/new>`_.
 
 Here are a few things that reviewers should be on the lookout for when reviewing new contributions to the
-curriculum, either for new or existing lessons:
+curriculum, either for new or existing lessons. If you're contributing to the curriculum, you should be aware
+of these guidelines, to make the review process much smoother.
 
 - Does the new or changed lesson adhere to the spirit of Antidote lessons laid out in this document?
 - For new lessons, does the lesson guide (or jupyter notebook if applicable) look nice? Does the author attribute themselves?
