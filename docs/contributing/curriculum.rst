@@ -3,27 +3,25 @@
 Contributing to the Curriculum
 ==============================
 
-Thanks for contributing to the Antidote curriculum. Before starting, please read this document in its entirety,
-so your work has the maximum impact and your time is best spent.
+Thanks for contributing to the Antidote curriculum. Before starting your work, please read this
+document in its entirety, so your work has the maximum impact and your time is best spent.
 
-Look at existing or in-progress content
+Step 1 - Ask Around!
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. Read this document in its entirety
+Antidote is still in tech preview, so there is a lot of work going on all the time. Before you get
+started, make sure you don’t conflict with any existing or current work! 
 
-After you have used NRE Labs, know the spirit of it’s break down of workflows as lessons with many quick stages/labs
-to progress through, and after you’ve read the quick contributing guide above, then it’s time to dirty your hands.
+The first step is to peruse the `existing curriculum
+issues <https://github.com/nre-learning/antidote/issues?q=is%3Aopen+is%3Aissue+label%3Acurriculum>`_.
+If someone's already working on something related to the curriculum, there's a good chance that
+there will be an issue there. If not, please first `open an issue <https://github.com/nre-learning/antidote/issues/new>`_
+so the community can have a chance to provide feedback on your idea before you spend time building it. There's a chance
+that something already exists, or maybe someone else is planning to work on it, and evangelizing your idea first
+gives you an opportunity to combine forces with these existing efforts if they exist.
 
-4. Make a contribution goal for yourself (or anyone else) to fulfill by opening up a new issue with the “curriculum”
-label. Make sure you don’t conflict with an existing issue that is open and in progress. If you do conflict, then
-simply consider working together.  Here are those existing issues: https://github.com/nre-learning/antidote/issues?q=is%3Aopen+is%3Aissue+label%3Acurriculum
-Also make sure you don’t conflict with an existing lesson here: https://github.com/nre-learning/antidote/tree/master/lessons (also look
-here to see example of how other lessons are implmented until docs are better)
-5. Set off working.
-
-
-
-
+Once you feel like you've gotten good feedback, and you have a good plan in place, read the following section for some
+guidelines on how to write a really awesome lesson.
 
 Lessons Should Demonstrate Something Useful
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -69,29 +67,45 @@ or tools that are at least free.  This helps ensure that a user could more
 easily replicate what is shown in the lesson.
 
 
-
-
-
 Lesson Details
 ^^^^^^^^^^^^^^^^^^^^^^
 
-The best way to get started building lessons is to get an instance of Antidote
-running on your own laptop. Ironing out all of the bugs before you submit a pull
+Okay. You've determined that you have a good idea for a lesson, and no one else is working on it.
+Let's get you started!
+
+The best ally to have when buliding lessons is a local instance of Antidote
+running on your own laptop. Ironing out all of the bugs locally before you submit a pull
 request makes the review process much smoother. For more info, see the
 :ref:`local build <buildlocal>` documentation.
 
-You'll also want to get familiar with the :ref:`syringe file <syringefile>` documentation.
+Once you're ready to start building a lesson, you'll need to create a :ref:`syringe.yaml file<syringefile>`.
+This is the primary metadata file for a lesson, and it's here where we declare the attributes (such as the
+name of the lesson and what course it belongs to), what resources the lesson needs, and how they connect to
+each other (if applicable).
 
-**Required lab components**
+.. note::
+    It's very important to get the ``syringe.yaml`` file right, because it's so central to the
+    definition of a lesson. Please refer to the :ref:`syringe.yaml docs <syringefile>` for detailed
+    documentation on this file.
 
-syringe file
-readme for the lab
-html layout
-Default configs
+This is really the only "required" file for a lesson, but in order to be useful, the ``syringe.yaml`` file will
+need to refer to other files like configs, markdown files, and more, in order to be useful. 
+Take a look at the `existing lessons <https://github.com/nre-learning/antidote/tree/master/lessons>`_ and see
+how those lessons are laid out. What you'll need in your lesson directory will vary wildly, depending on the
+contents of your ``syringe.yaml`` file.
 
-tabs will be determined via syringefile and rendered from jinja2 template at
-build time.
+Once you've got your changes together, and pushed to a branch of your own (i.e. in a fork of the Antidote repo),
+open a pull request.
 
-The :ref:`Syringe YAML file <syringefile>` is the main descriptor of a lesson. It is here
-that a lesson is defined, it's properties and stages declared, and resources like configs,
-scripts, and playbooks referenced.
+For Reviewers
+^^^^^^^^^^^^^
+
+Here are a few things that reviewers should be on the lookout for when reviewing new contributions to the
+curriculum, either for new or existing lessons:
+
+- Does the new or changed lesson adhere to the spirit of Antidote lessons laid out in this document?
+- For new lessons, does the lesson guide (or jupyter notebook if applicable) look nice? Does the author attribute themselves?
+- Is the lesson guide(s) easy to follow?
+- Are any documentation updates also needed?
+- Is the CHANGELOG updated properly?
+- Can we show this in NRE labs? Usage rights?
