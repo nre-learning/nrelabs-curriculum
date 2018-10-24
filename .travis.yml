@@ -1,0 +1,6 @@
+language: generic
+notifications:
+  email: false
+install:
+  - check-changelog.sh
+sudo: false
