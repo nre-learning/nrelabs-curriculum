@@ -1,25 +1,14 @@
 .. architecture:
 
-Antidote Architecture
+Architecture
 ================================
-
-.. toctree::
-   :maxdepth: 1
-
-   infrastructure.rst
-   lessonnetworking.rst
-   lessonscheduling.rst
-
 
 Antidote has multiple layers that build up a cluster, and multiple tools that run or setup each layer.
 
-In general, the Antidote cluster can be thought of like a Kubernetes cluster running many services. This cluster is designed to run atop any cloud IaaS with very few services outside of the cluster (e.g. ingress load balancing). Because we're not using hosted Kubernetes (e.g. GKE), we need to setup the group of virtual machines on which to install Kubernetes before we can even begin. To automate this task and make it multicloud portable, we are using general infrastructure-as-code tooling.
-
-The NRE Labs runtime of Antidote runs on Google Cloud Platform, so we'll use this as a example to illustrate the cluster and stack at a glance.
-
 .. image:: /images/infralayers.png
 
-Now let's overview the tiers that make up Antidote:
+Now let's overview the tiers that make up Antidote. The NRE Labs runtime of Antidote runs on Google Cloud Platform,
+so we'll use this as a example to illustrate the cluster and stack at a glance.
 
 +----------------------+--------------+--------------------------------------------------------------------------+
 | Infrastructure Tier  | Tool Used    |                              Explanation                                 |
@@ -55,7 +44,11 @@ Now let's overview the tiers that make up Antidote:
 |                      |              | the lab exercise steps.                                                  |
 +----------------------+--------------+--------------------------------------------------------------------------+
 
-Antidote provisions and manages Kubernetes as opposed to using a hosted, managed solution like GKE because:
+The first three layers are Antidote's "infrastructure". This means we are using existing tools and software to
+get to a working Kubernetes cluster. The final two components make up the :ref:`Antidote Platform <platform>`, which
+is the bulk of the custom software developed for the Antidote project.
+
+Antidote's infrastructure scripts provision and manages Kubernetes as opposed to using a hosted, managed solution like GKE because:
 
 - It needs a custom CNI plugin (multus). GKE doesn't support CNI except for very tightly controlled deployments.
   This means that we can't have multiple interfaces per pod. We tried our best to think of alternatives but the
