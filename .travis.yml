@@ -2,5 +2,5 @@ language: generic
 notifications:
   email: false
 install:
-  - check-changelog.sh
+  - ./check-changelog.sh
 sudo: false
