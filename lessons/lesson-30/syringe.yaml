@@ -1,0 +1,44 @@
+---
+lessonName: Working with SaltStack
+lessonID: 30
+category: introductory
+topologyType: custom
+lessondiagram: https://raw.githubusercontent.com/Sudhishna/nre-salt-2/master/lessons/lesson-30/Saltstack.png
+
+utilities:
+- name: saltstack1
+  image: sudhishna/saltstack
+  sshuser: antidote
+  sshpassword: antidotepassword
+
+devices:
+- name: vqfx1
+  image: antidotelabs/vqfxspeedy:snap1
+  sshuser: root
+  sshpassword: VR-netlab9
+  ports: [8080]
+
+connections:
+- a: vqfx1
+  b: saltstack1
+  subnet: 10.1.0.0/24
+
+stages:
+  1:
+    description: Salt Stack Master and Minion
+    labguide: https://raw.githubusercontent.com/Sudhishna/nre-salt-2/master/lessons/lesson-30/stage1/guide.md
+    configs:
+      vqfx1: stage1/configs/vqfx1.txt
+
+  2:
+    description: Junos Proxy Minions
+    labguide: https://raw.githubusercontent.com/Sudhishna/nre-salt-2/master/lessons/lesson-30/stage2/guide.md
+    configs:
+      vqfx1: stage1/configs/vqfx1.txt
+
+  3:
+    description: Executing Junos commands in Salt Stack
+    labguide: https://raw.githubusercontent.com/Sudhishna/nre-salt-2/master/lessons/lesson-30/stage3/guide.md
+    configs:
+      vqfx1: stage1/configs/vqfx1.txt
+
