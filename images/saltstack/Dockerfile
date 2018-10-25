@@ -23,14 +23,14 @@ RUN rm -f /etc/legal
 ADD motd.sh /etc/update-motd.d/00-antidote-motd
 
 # Disable root Login
-RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
-RUN sed -i 's/PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config
+# RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
+# RUN sed -i 's/PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config
 
 # SSH login fix. Otherwise user is kicked off after login
 RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
 
 # Disable su for everyone not in the wheel group (no one is in the wheel group)
-RUN echo "auth required pam_wheel.so use_uid" >> /etc/pam.d/su
+# RUN echo "auth required pam_wheel.so use_uid" >> /etc/pam.d/su
 
 ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
