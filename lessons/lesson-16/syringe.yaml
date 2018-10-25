@@ -1,8 +1,7 @@
 ---
-lessonName: Using Jinja for Configuration Templates
+lessonName: Introduction to Jinja2 Templates
 lessonID: 16
 category: introductory
-disabled: true
 
 topologyType: none
 
@@ -14,5 +13,5 @@ utilities:
 
 stages:
   1:
-    description: Basic variable replacement
+    description: Variable Substitutio
     labguide: https://raw.githubusercontent.com/ShrutiVPawaskar/antidote/master/lessons/lesson-16/stage1/guide.md
