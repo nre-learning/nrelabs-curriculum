@@ -17,28 +17,28 @@ Now let's start the Salt Master.
 ```
 service salt-master restart
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('saltstack1', 1)">Run this snippet</button>
 
 Next let's start the Salt Minion.
 
 ```
 service salt-minion restart
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 2)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('saltstack1', 2)">Run this snippet</button>
 
 Once the Salt minion is running, it will send its public key to the Salt Master. We can view the key's status by executing,
 
 ```
 salt-key -L
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 3)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('saltstack1', 3)">Run this snippet</button>
 
 Let's accept the Salt Minion's public key using the command
 
 ```
 salt-key --accept=“minion1”
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 4)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('saltstack1', 4)">Run this snippet</button>
 
 Once this is done, the Salt Master will be able to communicate with the Salt Minion and issue remote commands.
 
@@ -47,12 +47,12 @@ Next, we will run the test.ping command to ensure that the Salt Minion is connec
 ```
 salt '*' test.ping
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 5)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('saltstack1', 5)">Run this snippet</button>
 
 We can use the cmd.run execution module to run a remote command on the Salt Minion. In this case, we're checking what version of python is running on the Salt Minion.
 
 ```
 salt minion* cmd.run 'python -V'
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 6)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('saltstack1', 6)">Run this snippet</button>
 
