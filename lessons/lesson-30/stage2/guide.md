@@ -10,9 +10,9 @@ Now let's configure the Proxy Minions. To do this, we must define the IP address
 antidote@saltstack1:~$ cat /srv/pillar/vqfx1.sls
 proxy:
   proxytype: junos
-  host: 5.5.5.5
+  host: 10.0.0.15
   username: root
-  password: juniper1
+  password: VR-netlab9
 ```
 
 At this point we have to write the top.sls file whoch maps the Proxy Minion to the [pillar](https://docs.saltstack.com/en/latest/topics/pillar/) file that contains its corresponding details (vqfx1.sls)
