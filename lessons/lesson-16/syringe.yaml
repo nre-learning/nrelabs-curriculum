@@ -21,3 +21,6 @@ stages:
   3: 
     description: Let try the if and set statements!
     labguide: https://raw.githubusercontent.com/ShrutiVPawaskar/antidote/master/lessons/lesson-16/stage3/guide.md
+  4: 
+    description: Jinja2 with YAML
+    labguide: https://raw.githubusercontent.com/ShrutiVPawaskar/antidote/master/lessons/lesson-16/stage4/guide.md
