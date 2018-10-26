@@ -25,7 +25,7 @@ connections:
 stages:
   1:
     description: Introduction to Robot Framework
-    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-29/stage1/guide.md
+    labguide: https://raw.githubusercontent.com/lara29/antidote/master/lessons/lesson-29/stage1/guide.md
   2:
     description: Testing Junos Device using Robot framework
     labguide: https://raw.githubusercontent.com/lara29/antidote/master/lessons/lesson-29/stage2/guide.md
