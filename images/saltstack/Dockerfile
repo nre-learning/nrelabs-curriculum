@@ -15,7 +15,7 @@ RUN useradd antidote -p antidotepassword
 RUN chown antidote:antidote /home/antidote
 RUN chsh antidote --shell=/bin/bash
 RUN echo 'antidote:antidotepassword' | chpasswd
-RUN echo 'root:$(uuidgen)' | chpasswd
+RUN echo 'root:rootpassword' | chpasswd
 
 # Adjust MOTD
 RUN rm -f /etc/update-motd.d/*
