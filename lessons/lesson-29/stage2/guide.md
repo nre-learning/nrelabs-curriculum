@@ -22,6 +22,8 @@ Execute the below command to open the file *JunosDevice.py*
 ```
 cat JunosDevice.py
 ```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 0)">Run this snippet</button>
+
 
 Let's examine the file *JunosDevice.py* and understand the different functions. The main functions we will use are the below:
 
@@ -48,6 +50,7 @@ Let's examine our Robot test-case file `chapter2_eg1.robot`. Execute the below c
 ```
 cat chapter2_eg1.robot
 ```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 1)">Run this snippet</button>
 
 In the `Settings` table, we define our private custom library *JunosDevice.py*.
 
@@ -91,8 +94,9 @@ The IP address of the vSRX, the username and password for login, are provided to
 
 Execute this script by running the below command (note the command line variables passed using the flag --variable)
 ```
-robot --variable HOST:172.16.158.31 --variable USER:root --variable PASSWORD:juniper1 chapter2_eg1.robot
+robot --variable HOST:10.1.0.15 --variable USER:root --variable PASSWORD:VR-netlab9 chapter2_eg1.robot
 ```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 3)">Run this snippet</button>
 
 If both the test-cases succeed, the entire test-suite passes. If any of them fails, then the corresponding test-case raises an Exception which displays why the test-case failed.
 
