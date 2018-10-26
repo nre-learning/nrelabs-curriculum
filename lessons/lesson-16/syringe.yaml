@@ -16,7 +16,7 @@ stages:
     description: Introduction
     labguide: https://raw.githubusercontent.com/ShrutiVPawaskar/antidote/master/lessons/lesson-16/stage1/guide.md
   2: 
-    description: Let try the if and set statements!
+    description: For Loops
     labguide: https://raw.githubusercontent.com/ShrutiVPawaskar/antidote/master/lessons/lesson-16/stage2/guide.md
   3: 
     description: Let try the if and set statements!
