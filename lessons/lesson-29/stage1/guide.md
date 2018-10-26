@@ -17,12 +17,12 @@ Let's move on to the various concepts used in Robot Framework
 A typical Robot file is shown below:
 >```
 >*** Settings ***
->Library myLibrary.py
+>Library    myLibrary.py
 >
 >*** Variables ***
->${name1}=  Jane
->${name2}=  Jane Smith
->@{namelist}=   Steve   Walt    Craig   Zac
+>${name1}=    Jane
+>${name2}=    Jane Smith
+>@{namelist}=    Steve   Walt    Craig   Zac
 >&{namedict}=   
 > 
 >*** Keywords ***
@@ -38,13 +38,38 @@ The different sections `Settings`, `Variables`, `Keywords`, and `Testcases` are 
 
 Let's delve into the different components in detail.
 ### Settings
-This section is used to import external libraries. Suppose we have written a python or java file, and would like to test the functions, then this file would be declared under Settings.
+This section is used to import external libraries, resource files, and specify the Setup/Teardown keywords(described later)
+
+### Variables
+This section defines the variables used in test-cases
 
 ### Keywords
-Keywords refer to the functions supplied by a library or a test tool. The libraries can be external libraries(user-defined python or java files). Built-in is a standard library which is part of the Robot framework, and they supply a list of useful functionalities like string compare.
+Keywords refer to the functions supplied by a library or a test tool. 
 
-A few example of keywords are:
-```
-*** Keywords ***
+A few example of keywords are -
++ Built-in
+>```
+>Should Be Equal    Jane    John
+>```
+This built-in keyword `Should Be Equal` will check if the next two arguments are the same, and will throw an Exception if they are unequal. Built-in is a standard library which is part of the Robot framework, and they supply a list of useful functionalities for string comparison, logging, etc.
 
++ User-defined
+>```
+>*** Keywords ***
+>Print Log
+>   Log ${name}
+>```
+
+Print Log is a user-defined keyword, which internally uses the keyword *Log* to print the variable *name*. In order to use this keyword inside test-cases, this has to be defined inside the Keyword table explicitly.
+
++ External library
+
+Suppose we have a custom Python file, which contains the below function -
 ```
+def is_a_substring(str1,str2)
+```
+This function maps into the keyword `Is A Substring` automatically, and can be invoked in Robot test-cases as below -
+```
+Is A Substring    Jane    Janet
+```
+
