@@ -3,8 +3,7 @@
 
 I am sure at some point you might have heard the word “Jinja2”. So, what is Jinja2?? Why do you need to invest your time in learning Jinja2 and go through these lessons? We will answer all your questions in this lesson!  
   
-Let’s start with  
-What are Templates?  
+Let’s start with what are Templates?  
 * A template is a text document where some or all of the content is automatically generated.  
 * Data is automatically loaded to the templates with the help of template variables. You can also say that the templates are reusable text files.  
   
