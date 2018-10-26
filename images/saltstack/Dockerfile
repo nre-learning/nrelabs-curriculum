@@ -8,6 +8,9 @@ RUN wget -O - https://repo.saltstack.com/apt/ubuntu/16.04/amd64/archive/2018.3.2
     echo "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/archive/2018.3.2 xenial main" >> /etc/apt/sources.list && \
     apt-get update
 
+RUN apt-get --auto-remove --yes remove python-openssl
+RUN pip install pyOpenSSL
+
 RUN apt-get install -y salt-master
 RUN service salt-master restart
 
@@ -15,9 +18,9 @@ RUN apt-get install -y salt-minion
 RUN service salt-minion restart
 
 RUN touch /etc/salt/proxy
-#RUN echo "master: $(ip route get 1| awk '{print $NF;exit}')" > /etc/salt/minion
-RUN echo "master: $(ip route get 1| awk '{print $NF;exit}')" > /etc/salt/proxy
-#RUN echo "id: minion" >> /etc/salt/minion
+RUN echo "master: saltstack1" > /etc/salt/minion
+RUN echo "id: minion" >> /etc/salt/minion
+RUN echo "master: saltstack1" > /etc/salt/proxy
 
 # Antidote user
 RUN mkdir -p /home/antidote
@@ -31,6 +34,7 @@ RUN chown antidote:antidote /var/run/
 RUN chsh antidote --shell=/bin/bash
 RUN echo 'antidote:antidotepassword' | chpasswd
 RUN echo 'root:rootpassword' | chpasswd
+RUN echo "antidote ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # Adjust MOTD
 RUN rm -f /etc/update-motd.d/*

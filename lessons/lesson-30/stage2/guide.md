@@ -10,7 +10,7 @@ Now let's configure the Proxy Minions. To do this, we must define the IP address
 antidote@saltstack1:~$ cat /srv/pillar/vqfx1.sls
 proxy:
   proxytype: junos
-  host: 10.0.0.15
+  host: vqfx1
   username: root
   password: VR-netlab9
 ```
@@ -27,20 +27,20 @@ base:
 We also have to configure the /etc/salt/proxy file to point to the Salt Master
 
 ```
-master: 172.17.0.2
+master: saltstack1
 ```
 
 The Proxy Minion is now configured and is ready to start. 
 
 ```
-salt-proxy --proxyid=vqfx1 -d
+sudo salt-proxy --proxyid=vqfx1 -d
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('saltstack1', 3)">Run this snippet</button>
 
 Let's accept the Salt Proxy Minion's public key using the command
 
 ```
-salt-key --accept=“vqfx1”
+sudo salt-key --accept="vqfx1" -y
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('saltstack1', 4)">Run this snippet</button>
 
@@ -49,7 +49,7 @@ Once this is done, the Salt Master will be able to communicate with the Salt Pro
 Next, let's retrieve the device facts using the junos.facts execution module to verify that the device is connected to the Salt Master.
 
 ```
-salt 'vqfx1' junos.facts
+sudo salt 'vqfx1' junos.facts
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('saltstack1', 5)">Run this snippet</button>
 
