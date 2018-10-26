@@ -40,8 +40,8 @@ Run the below snippet to see the if condition in action.
 
 ipaddr_template = Template('''
 {% for item in interfaces %}
+{%- if item.interface == 'fxp0' %}
 interfaces {
-    {%- if item.interface == 'fxp0' %}
     {{ item.interface }} {
         unit 0 {
             family inet {
@@ -49,8 +49,8 @@ interfaces {
             }
         }
     }
-    {% endif %}
 }
+{% endif %}
 {% endfor %}''')
 
 render_1 = ipaddr_template.render(interfaces=interfaces)
@@ -73,8 +73,8 @@ Run the snippet below to understand the use of set statements.
 
 set_temp = '''{% set mgmt_interface = 'ge-0/0/0' %}
 {% for item in interfaces %}
+{%- if item.interface == mgmt_interface %}
 interfaces {
-    {%- if item.interface == mgmt_interface %}
     {{ item.interface }} {
         unit 0 {
             family inet {
@@ -82,8 +82,8 @@ interfaces {
             }
         }
     }
-    {% endif %}
 }
+{% endif %}
 {% endfor %}'''
 
 int_template = Template(set_temp)
