@@ -17,13 +17,22 @@ devices:
   sshuser: root
   sshpassword: VR-netlab9
 
+connections:
+- a: vqfx1
+  b: linux1
+  subnet: 10.1.0.0/24
+
 stages:
   1:
     description: Lists
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-14/stage1/guide.md
   2:
-    description: Dictionaries (key/value pairs)
-    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-14/stage2/guide.md
-  # 3:
-  #   description: What about JSON?
-  #   labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-14/stage3/guide.md
+    description: Testing Junos Device using Robot framework
+    labguide: https://raw.githubusercontent.com/lara29/antidote/master/lessons/lesson-29/stage2/chapter2.md
+    configs: 
+      vqfx1: stage1/configs/vqfx1.txt
+  3:
+    description: What about JSON?
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-14/stage3/guide.md
+    configs: 
+      vqfx1: stage1/configs/vqfx1.txt
