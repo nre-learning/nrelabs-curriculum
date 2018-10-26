@@ -1,7 +1,7 @@
 # Using Jinja for Configuration Templates
 ## Part 3 - Let try the if and set statements!
 
-Now that you have tried the for loop, lets up-level. In this part we will try if and set statement along with for loops.
+Now that you have tried the "for" loop, lets up-level. In this part we will try "if" and "set" statement along with "for" loops.
 
 
 
@@ -13,7 +13,7 @@ from jinja2 import Template
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 0)">Run this snippet</button>
 
-Similar to Part2, lets define a list of dictionary with interface and ip_address as the keys.
+Here we are redefining "interface", the list of dictionaries we defined in part 2.
 
 
 ```
@@ -24,9 +24,7 @@ interfaces = [{'interface': 'ge-0/0/0', 'ip_address': '192.168.1.1'},
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 1)">Run this snippet</button>
 
-Unlike Part2, we dont want to generate configurations for all interfaces. We only want to generate configuration for the management IP address. 
-For this we can use the if condition, if the interface value matches the our management interface (fxp0) 
-then only generate the config. 
+In Part2, generated configurations for all interfaces in the list. But what if you are only interested in generating the  configuration for the management IP address? That is when we use the JInja2 fileters. For this particular example we will be using the  if condition. It is similar to the python if condition, exceot for the syntax.   
 
 Jinja2 if statement for checking conditions:  
   *Syntax:*   
@@ -34,7 +32,8 @@ Jinja2 if statement for checking conditions:
   *...*  
   *{% endif %}*  
 
-Run the below snippet to see the if condition in action.
+In the following snippet we have used the "for" loop like in previous stages, but instead of directly printing out all the interfaces here we are checking if the interface value matches our management interface (fxp0). If it does match, we substitute  its value and the value of the corresponding ip address in the template using template.render(). 
+
 
 ```
 
@@ -60,14 +59,21 @@ print(str(render_1))
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 2)">Run this snippet</button>
 
 
-This is good. But what if we decide to change the management interface to ge-0/0/0. One approch is to change the 'fxp0' by 'ge-0/0/0' in the if statement.
+The output shows that it just printed the entry of the management interface. Thus we learnt the power of "if" statements to filter out our data based on certain conditions.  
+
+Now, what if we decide to change the management interface to ge-0/0/0. One approch is to change the 'fxp0' by 'ge-0/0/0' in the if statement.
 A better approch is to define a variable called mgmt_interface and, change the value of this variable when we decide to change the management interface.
 
-Jinja2 uses set statement to define variable which can be used within the template.
+Jinja2 uses set statement to define variable which can be used within the template. Below is its syntax:  
+
   *Syntax:*   
   *{% set variable_name: variable_value %}*
 
-Run the snippet below to understand the use of set statements.
+In the snippet below:  
+*set_temp = '''{% set mgmt_interface = 'ge-0/0/0' %}* declares a variable "mgmt_interface" and sets its value to "ge-0/0/0".  
+*{%- if item.interface == mgmt_interface %}* checks if the item in the for loop has a key interface whose value is same as the value that we set for "mgmt_interface".  
+
+If the value is same, it loads the template with the corresponding data, if not it skips that element of list "interfaces" and moves on to the next.  
 
 ```
 
