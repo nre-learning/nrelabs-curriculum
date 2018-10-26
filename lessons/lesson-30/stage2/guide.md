@@ -35,14 +35,14 @@ The Proxy Minion is now configured and is ready to start.
 ```
 salt-proxy --proxyid=vqfx1 -d
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 4)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('saltstack1', 4)">Run this snippet</button>
 
 Let's accept the Salt Proxy Minion's public key using the command
 
 ```
 salt-key --accept=“vqfx1”
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 5)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('saltstack1', 5)">Run this snippet</button>
 
 Once this is done, the Salt Master will be able to communicate with the Salt Proxy Minion
 
@@ -51,6 +51,6 @@ Next, let's retrieve the device facts using the junos.facts execution module to 
 ```
 salt 'vqfx1' junos.facts
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 6)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('saltstack1', 6)">Run this snippet</button>
 
 Now that the SaltStack Environment is setup, let's dive deeper into the world of Salt!
