@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.0.4 (Python 3.7.0 on darwin)" generated="20181024 17:59:25.337">
+<suite id="s1" name="Chapter3 Eg2" source="/Users/lrajan/Projects/NRE-LABS/robot_automation_framework/lessons/chapter3_eg2.robot">
+<test id="s1-t1" name="Verify Facts">
+<kw name="Setup Actions" library="chapter3_resource" type="setup">
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>Setup Actions done here</arg>
+</arguments>
+<msg timestamp="20181024 17:59:25.555" level="INFO">Setup Actions done here</msg>
+<status status="PASS" starttime="20181024 17:59:25.554" endtime="20181024 17:59:25.555"></status>
+</kw>
+<kw name="Connect Device" library="JunosDevice">
+<arguments>
+<arg>host=${host}</arg>
+<arg>user=${user}</arg>
+<arg>password=${password}</arg>
+</arguments>
+<msg timestamp="20181024 17:59:25.889" level="INFO">[host 172.16.158.31 session-id 10202] initialized: session-id=10202 | server_capabilities=&lt;dict_keyiterator object at 0x10ec9d9f8&gt;</msg>
+<status status="PASS" starttime="20181024 17:59:25.555" endtime="20181024 17:59:25.889"></status>
+</kw>
+<status status="PASS" starttime="20181024 17:59:25.554" endtime="20181024 17:59:25.890"></status>
+</kw>
+<kw name="Validate Facts" library="chapter3_resource">
+<kw name="Gather Device Info" library="JunosDevice">
+<assign>
+<var>&amp;{facts}</var>
+</assign>
+<msg timestamp="20181024 17:59:25.891" level="INFO">[host 172.16.158.31 session-id 10202] Requesting 'ExecuteRpc'</msg>
+<msg timestamp="20181024 17:59:25.993" level="INFO">[host 172.16.158.31 session-id 10202] Requesting 'ExecuteRpc'</msg>
+<msg timestamp="20181024 17:59:26.130" level="INFO">[host 172.16.158.31 session-id 10202] Requesting 'ExecuteRpc'</msg>
+<msg timestamp="20181024 17:59:26.507" level="INFO">[host 172.16.158.31 session-id 10202] Requesting 'ExecuteRpc'</msg>
+<msg timestamp="20181024 17:59:26.625" level="INFO">[host 172.16.158.31 session-id 10202] Requesting 'ExecuteRpc'</msg>
+<msg timestamp="20181024 17:59:26.731" level="INFO">[host 172.16.158.31 session-id 10202] Requesting 'ExecuteRpc'</msg>
+<msg timestamp="20181024 17:59:26.940" level="INFO">[host 172.16.158.31 session-id 10202] Requesting 'ExecuteRpc'</msg>
+<msg timestamp="20181024 17:59:27.042" level="INFO">[host 172.16.158.31 session-id 10202] Requesting 'ExecuteRpc'</msg>
+<msg timestamp="20181024 17:59:27.144" level="INFO">[host 172.16.158.31 session-id 10202] Requesting 'ExecuteRpc'</msg>
+<msg timestamp="20181024 17:59:27.267" level="INFO">[host 172.16.158.31 session-id 10202] Requesting 'ExecuteRpc'</msg>
+<msg timestamp="20181024 17:59:27.372" level="INFO">[host 172.16.158.31 session-id 10202] Requesting 'ExecuteRpc'</msg>
+<msg timestamp="20181024 17:59:27.480" level="INFO">[host 172.16.158.31 session-id 10202] Requesting 'ExecuteRpc'</msg>
+<msg timestamp="20181024 17:59:27.586" level="INFO">[host 172.16.158.31 session-id 10202] Requesting 'ExecuteRpc'</msg>
+<msg timestamp="20181024 17:59:27.689" level="INFO">&amp;{facts} = { os_version=18.2R1.9 | serialnumber=1ff2bd57ca5d | model=VSRX | hostname=vsrx-robot }</msg>
+<status status="PASS" starttime="20181024 17:59:25.890" endtime="20181024 17:59:27.690"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${facts["hostname"]}</arg>
+<arg>${hostname}</arg>
+</arguments>
+<status status="PASS" starttime="20181024 17:59:27.690" endtime="20181024 17:59:27.690"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${facts["model"]}</arg>
+<arg>${model}</arg>
+</arguments>
+<status status="PASS" starttime="20181024 17:59:27.690" endtime="20181024 17:59:27.690"></status>
+</kw>
+<status status="PASS" starttime="20181024 17:59:25.890" endtime="20181024 17:59:27.691"></status>
+</kw>
+<kw name="Teardown Actions" library="chapter3_resource" type="teardown">
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>Teardown Actions done here</arg>
+</arguments>
+<msg timestamp="20181024 17:59:27.691" level="INFO">Teardown Actions done here</msg>
+<status status="PASS" starttime="20181024 17:59:27.691" endtime="20181024 17:59:27.691"></status>
+</kw>
+<kw name="Close Device" library="JunosDevice">
+<msg timestamp="20181024 17:59:27.692" level="INFO">[host 172.16.158.31 session-id 10202] Requesting 'CloseSession'</msg>
+<status status="PASS" starttime="20181024 17:59:27.691" endtime="20181024 17:59:27.797"></status>
+</kw>
+<status status="PASS" starttime="20181024 17:59:27.691" endtime="20181024 17:59:27.797"></status>
+</kw>
+<status status="PASS" starttime="20181024 17:59:25.553" endtime="20181024 17:59:27.797" critical="yes"></status>
+</test>
+<status status="PASS" starttime="20181024 17:59:25.339" endtime="20181024 17:59:27.798"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0">Critical Tests</stat>
+<stat pass="1" fail="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" id="s1" name="Chapter3 Eg2">Chapter3 Eg2</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
