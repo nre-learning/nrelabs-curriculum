@@ -1,6 +1,6 @@
 from ubuntu:16.04
 
-RUN apt-get update && apt-get install -y net-tools salt-master salt-minion openssh-server python python-pip dnsutils iputils-ping git vim curl util-linux
+RUN apt-get update && apt-get install -y sudo net-tools salt-master salt-minion openssh-server python python-pip dnsutils iputils-ping git vim curl util-linux
 
 RUN mkdir /var/run/sshd
 

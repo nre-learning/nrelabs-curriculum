@@ -8,8 +8,8 @@ lessondiagram: https://raw.githubusercontent.com/Sudhishna/antidote/master/lesso
 utilities:
 - name: saltstack1
   image: sudhishna/saltstack
-  sshuser: antidote
-  sshpassword: antidotepassword
+  sshuser: root
+  sshpassword: rootpassword
 
 devices:
 - name: vqfx1
