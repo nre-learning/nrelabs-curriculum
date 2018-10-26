@@ -1,18 +1,33 @@
 from ubuntu:16.04
 
-RUN apt-get update && apt-get install -y sudo net-tools salt-master salt-minion openssh-server python python-pip dnsutils iputils-ping git vim curl util-linux
+RUN apt-get update && apt-get install -y sudo net-tools openssh-server python python-pip dnsutils iputils-ping git vim curl util-linux
 
 RUN mkdir /var/run/sshd
 
+RUN wget -O - https://repo.saltstack.com/apt/ubuntu/16.04/amd64/archive/2018.3.2/SALTSTACK-GPG-KEY.pub | apt-key add - && \
+    echo "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/archive/2018.3.2 xenial main" >> /etc/apt/sources.list && \
+    apt-get update
+
+#RUN apt-get install -y salt-master
+#service salt-master restart
+
+RUN apt-get install -y salt-minion
+RUN service salt-minion restart
+
 RUN touch /etc/salt/proxy
-RUN echo "master: $(ip route get 1| awk '{print $NF;exit}')" > /etc/salt/minion
+#RUN echo "master: $(ip route get 1| awk '{print $NF;exit}')" > /etc/salt/minion
 RUN echo "master: $(ip route get 1| awk '{print $NF;exit}')" > /etc/salt/proxy
-RUN echo "id: minion" >> /etc/salt/minion
+#RUN echo "id: minion" >> /etc/salt/minion
 
 # Antidote user
 RUN mkdir -p /home/antidote
 RUN useradd antidote -p antidotepassword
 RUN chown antidote:antidote /home/antidote
+RUN chown antidote:antidote /etc/salt
+RUN chown antidote:antidote /var/cache/salt
+RUN chown antidote:antidote /var/run
+RUN chown antidote:antidote /var/run/
+
 RUN chsh antidote --shell=/bin/bash
 RUN echo 'antidote:antidotepassword' | chpasswd
 RUN echo 'root:rootpassword' | chpasswd

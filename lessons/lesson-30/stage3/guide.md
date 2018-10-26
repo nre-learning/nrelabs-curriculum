@@ -9,7 +9,7 @@ The junos.cli execution module allows the Salt Master to run cli commands on the
 ```
 salt 'device_name' junos.cli 'show interfaces terse' format=xml
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('saltstack1', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('saltmaster1', 0)">Run this snippet</button>
 
 The junos.rpc execution module runs RPC's on the Juniper device and returns the output on the terminal. 
 In order to get the the RPC command equivalent for a CLI command , we use 'display xml rpc' after the pipe symbol ( | )
@@ -33,4 +33,4 @@ Let us now run the junos.rpc command. We can specify a destination file where th
 ```
 salt 'vqfx1' junos.rpc get-route-information /var/tmp/route.xml terse=True
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('saltstack1', 2)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('saltmaster1', 2)">Run this snippet</button>
