@@ -1,10 +1,8 @@
-<!--Place holder.....substitute with Part2-->
-# Using Jinja for Configuration Templates
-## Part 3 - Let try the if and set statements!
-
-Now that you have tried the for loop, lets up-level. In this part we will try if and set statement along with for loops.
-
-
+# Using Jinja for Configuration Templates  
+## Part 2 – For Loops 
+ 
+Now that you know what is a template and how it works, let’s dive deep into using *for* loops for variable assignment.  
+For loops are very useful if you have your data in the form of a list/dictionary or the combination of both. In this part we will take an example which has data stored as a list of dictionaries.  
 
 First, we want to start the Python interpreter and import Template module from Jinja2 library:
 
@@ -14,9 +12,17 @@ from jinja2 import Template
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 0)">Run this snippet</button>
 
-Similar to Part2, lets define a list of dictionary with interface and ip_address as the keys.
+In case you haven’t worked with python lists and dictionaries, below is the syntax for them:  
+     LIST                             DICTIONARY  
+SYNTAX: [a,b,c]                  SYNTAX: {x:a,y:b,z:c}  
+Where “a”,”b”,”c” are            where “x”,”y”,”z” are the keys and 
+the elements of the list        “a”,”b”,”c” are the values of the keys
 
+In our example “interface” and “ip_address” are the keys and ge-0/0/0 and 192.168.1.1 are the values of those keys. All these key value pairs are the list elements of the list “interfaces”.  
 
+Run the below snippet to define “interfaces” which will later be used to populate our template.  
+
+Example: 1  
 ```
 interfaces = [{'interface': 'ge-0/0/0', 'ip_address': '192.168.1.1'},
               {'interface': 'ge-0/0/1', 'ip_address': '10.10.1.1'},
@@ -25,73 +31,76 @@ interfaces = [{'interface': 'ge-0/0/0', 'ip_address': '192.168.1.1'},
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 1)">Run this snippet</button>
 
-Unlike Part2, we dont want to generate configurations for all interfaces. We only want to generate configuration for the management IP address. 
-For this we can use the if condition, if the interface value matches the our management interface (fxp0) 
-then only generate the config. 
+Now once we have our data, we will use *for loop* to iterate through our list of dictionary and populate the template. Below is the syntax of “for” loop:
 
-Jinja2 if statement for checking conditions:  
-  *Syntax:*   
-  *{% if condition %}*  
-  *...*  
-  *{% endif %}*  
+*Syntax:*   
+{% for condition %}
+*…*
+{% endfor %}
 
-Run the below snippet to see the if condition in action.
+
+Now when you see the for loop in below snippet, 
+{% for item in interfaces -%} means iterate through each dictionary of the (list) interfaces. The “–“ in front of the % is optional and is used to strip out the extra new line characters between the consecutive iterations. 
+{{ item.interface }} has IP address {{ item.ip_address }} means replace the template variable “interface” with the value for the key “interface”  and replace “ip_address” with the item’s value for the key ip_address.  
+
+*{% endfor %}* ends the for loop
 
 ```
 
 ipaddr_template = Template('''
-{% for item in interfaces %}
-interfaces {
-    {%- if item.interface == 'fxp0' %}
-    {{ item.interface }} {
-        unit 0 {
-            family inet {
-                address {{item.ip_address}};
-            }
-        }
-    }
-    {% endif %}
-}
+{% for item in interfaces -%}
+{{ item.interface }} has IP address {{ item.ip_address }}
 {% endfor %}''')
-
 render_1 = ipaddr_template.render(interfaces=interfaces)
 print(str(render_1))
-
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 2)">Run this snippet</button>
 
 
-This is good. But what if we decide to change the management interface to ge-0/0/0. One approch is to change the 'fxp0' by 'ge-0/0/0' in the if statement.
-A better approch is to define a variable called mgmt_interface and, change the value of this variable when we decide to change the management interface.
+Now let us define one more list of dictionaries for vlans.  
 
-Jinja2 uses set statement to define variable which can be used within the template.
-  *Syntax:*   
-  *{% set variable_name: variable_value %}*
-
-Run the snippet below to understand the use of set statements.
+Example: 2  
 
 ```
-
-set_temp = '''{% set mgmt_interface = 'ge-0/0/0' %}
-{% for item in interfaces %}
-interfaces {
-    {%- if item.interface == mgmt_interface %}
-    {{ item.interface }} {
-        unit 0 {
-            family inet {
-                address {{item.ip_address}};
-            }
-        }
-    }
-    {% endif %}
-}
-{% endfor %}'''
-
-int_template = Template(set_temp)
-render_2 = int_template.render(interfaces=interfaces)
-
-print(str(render_2))
+vlans = [{'vlan': 'VLAN10', 'vlan_id': 10},
+         {'vlan': 'VLAN20', 'vlan_id': 20},
+         {'vlan': 'VLAN30', 'vlan_id': 20}]
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 3)">Run this snippet</button>
 
-In the next stage, we'll dive a little deeper into using YAML files for defining variables for Jinja2 templates.
+Now we will learn how to use the for loop to format the template like a Junos CLI configuration. Below is our sample output:
+
+*Output:
+vlans {
+    VLAN12 {
+        vlan-id 12;
+        l3-interface irb.12;
+    }
+}*
+
+```
+vlan_config = Template('''
+vlans {
+{%- for item in vlans %}
+    {{ item.vlan }} {
+        vlan-id {{ item.vlan_id }};
+        l3-interface irb.{{item.vlan_id}};
+    }
+{%- endfor %}
+}
+''')
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 4)">Run this snippet</button>
+
+After creating the template, lets supply the vlans data and see how it looks!
+```
+vlan_config = str(vlan_config.render(vlans=vlans))
+print(vlan_config)
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 5)">Run this snippet</button>
+
+Note: With the help of PyEZ(refer lesson: Intro to PyEZ), you can connect to a remote device and use the above template to directly push your output as a configuration to the device.
+
+So far, we have been loading all the available data to the template.  
+What if you don’t want to load everything and are only interested in loading a part of the data? That’s when template filters come in, check it out in next part!
+
