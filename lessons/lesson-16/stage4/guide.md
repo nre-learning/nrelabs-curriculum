@@ -1,22 +1,22 @@
 # Using Jinja for Configuration Templates
 ## Part 4 - Jinja2 with YAML 
 
-In this part we will give go over how you can import data from a YAML file and render Jinja2 tempate.
+In this part we will go over how you can import data from a YAML file and render Jinja2 tempate.
 
-In the previous parts we have used a list of dictionaries and generating configs for multiple interfaces.
+In the previous parts we have used a list of dictionaries for generating configs for multiple interfaces.
 This is a very cumbersome way of modeling your data. Is there a better way for data serialiation?
 
-Yes!!! YAML provides a humman readable way for data serialization.
+Yes, YAML!!! YAML provides a humman readable way for data serialization.
 YAML provides a easy way of defining list and dictionaries. 
 
-Lets start off by taking a look at the YAML file. 
+Lets start by taking a look at the YAML file. 
 ```
 cd /antidote/lessons/lesson-16/stage4/
 cat part4.yml
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 0)">Run this snippet</button>
 
-Next, like previous parts, we want to start the Python interpreter and import Template module from Jinja2 library.
+Next, like the previous parts, we will start the Python interpreter and import Template module from Jinja2 library.
 We are also import the yaml library and pprint for pretty printing our output.
 
 ```
@@ -40,7 +40,7 @@ pprint(all_devices)
 
 Does this output look familier to you. Its a dictionay containing a list of dictionary.
 
-We are now going to define a config template using the jinja2 Template module to set the system hostname and obtain the interface config.
+We are now going to define a config template using the jinja2 Template to set the system hostname and obtain the interface config.
 
 ```
 
@@ -66,7 +66,7 @@ interfaces {
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 3)">Run this snippet</button>
 
 We will render the config tempelate for each device specefied in the YAML file.
-Python enumerate function keeps a count of loop index so that we can print the loop index.
+Python enumerate function keeps a count of loop index so that we can print the number of device we are looping over.
 
 ```
 
