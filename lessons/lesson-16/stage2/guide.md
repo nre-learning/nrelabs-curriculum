@@ -72,7 +72,7 @@ vlans = [{'vlan': 'VLAN10', 'vlan_id': 10},
 
 Now we will learn how to use the for loop to format the template like a Junos CLI configuration. Below is our sample output:
 
-
+<pre>
 Output:  
 vlans {  
      VLAN12 {  
@@ -81,7 +81,7 @@ vlans {
              }  
           }
  
-
+</pre>
 ```
 vlan_config = Template('''
 vlans {
