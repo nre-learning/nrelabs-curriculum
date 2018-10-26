@@ -13,10 +13,13 @@ from jinja2 import Template
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 0)">Run this snippet</button>
 
 In case you haven’t worked with python lists and dictionaries, below is the syntax for them:  
-     LIST                             DICTIONARY  
-SYNTAX: [a,b,c]                  SYNTAX: {x:a,y:b,z:c}  
-Where “a”,”b”,”c” are            where “x”,”y”,”z” are the keys and 
-the elements of the list        “a”,”b”,”c” are the values of the keys
+LIST  
+SYNTAX: [a,b,c]  
+Where “a”,”b”,”c” are the elements of the list  
+
+DICTIONARY  
+SYNTAX: {x:a,y:b,z:c}  
+where “x”,”y”,”z” are the keys and “a”,”b”,”c” are the values of the keys
 
 In our example “interface” and “ip_address” are the keys and ge-0/0/0 and 192.168.1.1 are the values of those keys. All these key value pairs are the list elements of the list “interfaces”.  
 
@@ -33,16 +36,15 @@ interfaces = [{'interface': 'ge-0/0/0', 'ip_address': '192.168.1.1'},
 
 Now once we have our data, we will use *for loop* to iterate through our list of dictionary and populate the template. Below is the syntax of “for” loop:
 
-*Syntax:*   
-{% for condition %}
-*…*
+*Syntax:*  
+{% for condition %}  
+*...*  
 {% endfor %}
 
 
-Now when you see the for loop in below snippet, 
-{% for item in interfaces -%} means iterate through each dictionary of the (list) interfaces. The “–“ in front of the % is optional and is used to strip out the extra new line characters between the consecutive iterations. 
-{{ item.interface }} has IP address {{ item.ip_address }} means replace the template variable “interface” with the value for the key “interface”  and replace “ip_address” with the item’s value for the key ip_address.  
-
+Now when you see the for loop in below snippet,  
+*{% for item in interfaces -%}* means iterate through each dictionary of the (list) interfaces. The “–“ in front of the % is optional and is used to strip out the extra new line characters between the consecutive iterations.  
+*{{ item.interface }}* has IP address {{ item.ip_address }} means replace the template variable “interface” with the value for the key “interface”  and replace “ip_address” with the item’s value for the key ip_address.  
 *{% endfor %}* ends the for loop
 
 ```
