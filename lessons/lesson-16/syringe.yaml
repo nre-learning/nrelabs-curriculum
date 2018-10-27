@@ -3,6 +3,7 @@ lessonName: Using Jinja for Configuration Templates
 lessonID: 16
 category: introductory
 disabled: true
+tier: local
 
 topologyType: none
 

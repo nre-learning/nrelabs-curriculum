@@ -9,6 +9,7 @@
 ### Other
 
 - Significant restructuring of docs, and large improvements to contribution pages [#108](https://github.com/nre-learning/antidote/pull/108)
+- Added "tier" field to all syringe files [#116](https://github.com/nre-learning/antidote/pull/116)
 
 ## v0.1.0
 

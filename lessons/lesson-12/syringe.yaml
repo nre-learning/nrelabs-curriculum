@@ -3,11 +3,8 @@ lessonName: Network Unit Testing with JSNAPY
 lessonID: 12
 category: verification
 lessondiagram: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-12/lessondiagram.png
-
-
 topologyType: custom
-
-# TODO(mierdin): What about IP addressing for utilities?
+tier: prod
 
 utilities:
 - name: linux1
