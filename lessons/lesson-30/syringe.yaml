@@ -17,7 +17,7 @@ devices:
   image: antidotelabs/vqfxspeedy:snap1
   sshuser: root
   sshpassword: VR-netlab9
-  ports: [8080]
+  ports: [830]
 
 connections:
 - a: vqfx1
