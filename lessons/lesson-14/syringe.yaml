@@ -2,8 +2,8 @@
 lessonName: Introduction to YAML
 lessonID: 14
 category: introductory
-
 topologyType: none
+tier: prod
 
 utilities:
 - name: linux1

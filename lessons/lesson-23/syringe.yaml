@@ -2,8 +2,8 @@
 lessonName: Linux Basics
 lessonID: 23
 category: introductory
-
 topologyType: none
+tier: prod
 
 utilities:
 - name: linux1
