@@ -7,7 +7,7 @@ lessondiagram: https://raw.githubusercontent.com/Sudhishna/antidote/master/lesso
 
 utilities:
 - name: saltstack1
-  image: sudhishna/saltstack-1
+  image: sudhishna/saltstack
   sshuser: antidote
   sshpassword: antidotepassword
   ports: [22]

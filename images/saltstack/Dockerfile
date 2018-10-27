@@ -17,10 +17,26 @@ RUN service salt-master restart
 RUN apt-get install -y salt-minion
 RUN service salt-minion restart
 
+# configure minion and proxy
 RUN touch /etc/salt/proxy
 RUN echo "master: saltstack1" > /etc/salt/minion
 RUN echo "id: minion" >> /etc/salt/minion
 RUN echo "master: saltstack1" > /etc/salt/proxy
+
+# Add pillar file for vqfx1
+RUN mkdir /srv/pillar
+RUN touch /srv/pillar/vqfx1.sls
+RUN echo "proxy:" > /srv/pillar/vqfx1.sls
+RUN echo "  proxytype: junos" >> /srv/pillar/vqfx1.sls
+RUN echo "  host: vqfx1" >> /srv/pillar/vqfx1.sls
+RUN echo "  username: root" >> /srv/pillar/vqfx1.sls
+RUN echo "  password: VR-netlab9" >> /srv/pillar/vqfx1.sls
+
+# Add pillar file for top
+RUN touch /srv/pillar/top.sls
+RUN echo "base:" > /srv/pillar/top.sls
+RUN echo "  'vqfx1':" >> /srv/pillar/top.sls
+RUN echo "    - vqfx1" >> /srv/pillar/top.sls
 
 # Antidote user
 RUN mkdir -p /home/antidote
