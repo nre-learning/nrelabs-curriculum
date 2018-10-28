@@ -36,15 +36,47 @@ A typical Robot file is shown below:
 
 The different sections `Settings`, `Variables`, `Keywords`, and `Testcases` are called tables. They are a way to arrange the different components of Robot in a neat, orderly manner.
 
+### Syntax Rules
+1. Spaces and underscores are ignored
+2. Case insensitive
+3. There should be a minimum of two spaces, or a tab
+
 Let's delve into the different components in detail.
 ### Settings
 This section is used to import external libraries, resource files, and specify the Setup/Teardown keywords(described later)
 
 ### Variables
-This section defines the variables used in test-cases
+This section defines the variables used in the test-cases. There are three types of variables:
+
+* *Scalar variable*: A scalar varibale is replaced by its value in test-cases. They are mostly used to hold strings, but they can also hold objects like lists. They are represented using the variable identifier `$`. Eg:
+>```
+>*** Variables ***
+>${NAME}         Jake Doyle
+>```
+
+* *List variables*: Used to store lists (Eg: Python lists). The list variables can be used to reference the whole list, or can be used to access individual list elements using the index. They are represented using the variable identifier `@`. Eg:
+>```
+>*** Variables ***
+>@{NAMES}         Jake    Tinny    Des
+>```
+
+*   *Dictionary variables*: Used to dictionary like objects (like, Python dict()), and they are referenced using the identifier `&`. Eg:
+
+>```
+>*** Variables ***
+>&{Employees}         firstname=Jake    lastname=Doyle
+>```
+
+* *Environment variables*: Used to store string environment variables, and are referenced using the identifier `%`. Eg:
+>```
+>*** Test Cases ***
+>Log    %{HOME}
+>```
+
 
 ### Keywords
 Keywords refer to the functions supplied by a library or a test tool. 
+
 
 A few example of keywords are -
 + Built-in
