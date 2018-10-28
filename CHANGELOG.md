@@ -4,6 +4,13 @@
 
 ### Curriculum
 
+### Other
+
+
+## 0.1.1 - October 28, 2018
+
+### Curriculum
+
 - Fixed typos in YAML lesson (change) - [#109](https://github.com/nre-learning/antidote/pull/109) (contributed by pklimai)
 
 ### Other
