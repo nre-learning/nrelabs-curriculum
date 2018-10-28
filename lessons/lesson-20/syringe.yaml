@@ -3,7 +3,7 @@ lessonName: Introduction to Junos
 lessonID: 20
 category: introductory
 topologyType: custom
-disabled: true
+tier: ptr
 
 devices:
 - name: vqfx1

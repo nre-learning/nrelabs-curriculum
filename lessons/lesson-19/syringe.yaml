@@ -4,6 +4,7 @@ lessonID: 19
 category: introductory
 topologyType: custom
 lessondiagram: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-19/lessondiagram.png
+tier: prod
 
 utilities:
 - name: linux1
