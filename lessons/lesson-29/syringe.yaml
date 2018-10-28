@@ -1,7 +1,8 @@
 ---
 lessonName: Introduction to Robot Framework for Automation Testing
 lessonID: 29
-category: verification
+category: introductory
+tier: prod
 
 topologyType: custom
 
