@@ -20,7 +20,7 @@ Similar to the example in our previous chapter, we will create a python file, wh
 
 Execute the below command to open the file *JunosDevice.py*
 ```
-cat JunosDevice.py
+cat /antidote/lessons/lesson-29/stage2/JunosDevice.py
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 0)">Run this snippet</button>
 
@@ -48,7 +48,7 @@ Okay, let's start developing our test cases! We will write two test cases, one f
 
 Let's examine our Robot test-case file `chapter2_eg1.robot`. Execute the below command to open the file *chapter2_eg1.robot*
 ```
-cat chapter2_eg1.robot
+cat /antidote/lessons/lesson-29/stage2/chapter2_eg1.robot
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 1)">Run this snippet</button>
 
@@ -94,7 +94,7 @@ The IP address of the vSRX, the username and password for login, are provided to
 
 Execute this script by running the below command (note the command line variables passed using the flag --variable)
 ```
-robot --variable HOST:10.1.0.15 --variable USER:root --variable PASSWORD:VR-netlab9 chapter2_eg1.robot
+robot --variable HOST:10.1.0.15 --variable USER:root --variable PASSWORD:VR-netlab9 /antidote/lessons/lesson-29/stage2/chapter2_eg1.robot
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 3)">Run this snippet</button>
 
