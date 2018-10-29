@@ -8,7 +8,7 @@ topologyType: custom
 
 utilities:
 - name: linux1
-  image: antidotelabs/utility
+  image: la29ra/utility
   sshuser: antidote
   sshpassword: antidotepassword
 
