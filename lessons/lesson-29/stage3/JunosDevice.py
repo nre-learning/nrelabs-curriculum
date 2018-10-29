@@ -29,4 +29,3 @@ class JunosDevice(object):
     def get_model(self):
         facts = self.gather_device_info()
         return facts["model"]
-    

@@ -1,15 +1,15 @@
-## Chapter 2 - Testing Junos Device using Robot framework
+# Chapter 2 - Developing Testcases using Robot framework - Part 1
 
 Now that we have covered how to write a simple test case using Robot framework, let's use our knowledge to form testcases that verify the state of Juniper devices.
 
-### Learning Objectives
+## Learning Objectives
 1.  Understand the environment used for communicating with Junos devices
 2.  Use keywords from junos private library
 3.  Passing command line arguments to robot, and accessing them from inside the test case
 3.  Passing arguments for private functions/keywords
 
 -----
-### Topology & Environment
+## Topology & Environment
 For our next example, we have a vSRX (virtual SRX) which is our state-of-the-art firewall, connected to a linux machine. We will run our test-cases using Robot on the linux machine, and talk to the vSRX to fetch information like its modelname, OS verison, hostname, and serial number.
 
 ![Topology](https://github.com/lara29/antidote/blob/master/lessons/lesson-29/stage2/chapter2.png)
@@ -42,7 +42,7 @@ If you don't understand the implementation of these functions, do not worry! You
 ***We also have a PyEZ primer tutorial on NRE-Labs which you can refer, in case you would like to learn more about the awesome PyEZ library.*
 
 ----
-### Developing test-cases
+## Test Case using Junos Device
 
 Okay, let's start developing our test cases! We will write two test cases, one for fetching and verifying the hostname, and another for the device model. We will use the functions from our custom *JunosDevice.py* file to achieve this.
 

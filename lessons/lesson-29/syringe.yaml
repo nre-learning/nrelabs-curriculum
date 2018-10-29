@@ -1,5 +1,5 @@
 ---
-lessonName: Introduction to Robot Framework for Automation Testing
+lessonName: Robot Framework for Automation Testing
 lessonID: 29
 category: introductory
 tier: prod
@@ -28,12 +28,12 @@ stages:
     description: Introduction to Robot Framework
     labguide: https://raw.githubusercontent.com/lara29/antidote/master/lessons/lesson-29/stage1/guide.md
   2:
-    description: Testing Junos Device using Robot framework
+    description: Developing Testcases using Robot framework - Part 1
     labguide: https://raw.githubusercontent.com/lara29/antidote/master/lessons/lesson-29/stage2/guide.md
     configs: 
       vqfx1: stage1/configs/vqfx1.txt
   3:
-    description: What about JSON?
-    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-14/stage3/guide.md
+    description: Developing Testcases using Robot framework - Part 2
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-29/stage3/guide.md
     configs: 
       vqfx1: stage1/configs/vqfx1.txt
