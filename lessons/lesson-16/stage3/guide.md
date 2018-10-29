@@ -38,7 +38,7 @@ In the following snippet we have used the "for" loop like in previous stages, bu
 ```
 
 ipaddr_template = Template('''
-{% for item in interfaces %}
+{%- for item in interfaces -%}
 {%- if item.interface == 'fxp0' %}
 interfaces {
     {{ item.interface }} {
@@ -49,8 +49,8 @@ interfaces {
         }
     }
 }
-{% endif %}
-{% endfor %}''')
+{%- endif -%}
+{%- endfor -%}''')
 
 render_1 = ipaddr_template.render(interfaces=interfaces)
 print(str(render_1))
