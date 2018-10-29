@@ -78,7 +78,7 @@ If the value is same, it loads the template with the corresponding data, if not 
 ```
 
 set_temp = '''{% set mgmt_interface = 'ge-0/0/0' %}
-{% for item in interfaces %}
+{%- for item in interfaces -%}
 {%- if item.interface == mgmt_interface %}
 interfaces {
     {{ item.interface }} {
@@ -89,8 +89,8 @@ interfaces {
         }
     }
 }
-{% endif %}
-{% endfor %}'''
+{%- endif -%}
+{%- endfor -%}'''
 
 int_template = Template(set_temp)
 render_2 = int_template.render(interfaces=interfaces)
