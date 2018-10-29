@@ -68,6 +68,8 @@ Python enumerate function keeps a count of loop index so that we can print the n
 %s in the first print statement will take the value of device_number for the devices in all_devices.
 In case you are wondering what is *print('-'*30)*, it is just to make the output more presenatable, you will see when you run the below snippet!!
 
+P.S. press "Enter" to exit out of the python "for" loop and see your results.
+
 ```
 
 for dev_number, device in enumerate(all_devices['devices'], 1):
