@@ -4,10 +4,8 @@ Robot Framework is a Python based test automation framework, which is extensivel
 
 Robot is a `keyword`-driven testing framework, where keywords refer to the functions defined in any library or software that is being tested. The libaries can be written in Python or Java, but is not limited to these two.
 
-A generic architecture of the Robot framework is show below:
+A generic architecture of the Robot framework is show in the lesson diagram.
 
-
-![RobotFramework]()
 
 *Reference: http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#id413* 
 

@@ -12,7 +12,7 @@ Now that we have covered how to write a simple test case using Robot framework, 
 ## Topology & Environment
 For our next example, we have a vSRX (virtual SRX) which is our state-of-the-art firewall, connected to a linux machine. We will run our test-cases using Robot on the linux machine, and talk to the vSRX to fetch information like its modelname, OS verison, hostname, and serial number.
 
-![Topology](https://github.com/lara29/antidote/blob/master/lessons/lesson-29/stage2/chapter2.png)
+The topology can be viewed in the lesson diagram above.
 
 The Robot framework will use the PyEZ library to communicate with Junos devices. The PyEZ library is a wrapper written in Python, and has APIs that can be used to communicate with devices running Junos. PyEZ can be installed on Linux based machines using the command  `pip install junos-eznc`
 
