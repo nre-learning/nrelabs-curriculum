@@ -75,6 +75,7 @@ for dev_number, device in enumerate(all_devices['devices'], 1):
     print('Configuration for Device %s' % (dev_number))
     print('-'*30)
     print(str(render_1))
+    
 
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 4)">Run this snippet</button>
