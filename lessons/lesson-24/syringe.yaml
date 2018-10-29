@@ -1,0 +1,53 @@
+---
+lessonName: Junos Automation with PyEZ
+lessonID: 24
+category: introductory
+tier: local
+topologyType: custom
+
+utilities:
+- name: linux1
+  image: raylam/utility
+  sshuser: antidote
+  sshpassword: antidotepassword
+
+devices:
+- name: vqfx1
+  image: raylam/vqfxspeedy:snap1
+  sshuser: root
+  sshpassword: VR-netlab9
+  ports: [830]
+
+connections:
+- a: vqfx1
+  b: linux1
+  subnet: 10.1.0.0/24
+
+stages:
+  1:
+    description: Introduction
+    labguide: https://raw.githubusercontent.com/jnpr-raylam/antidote/lesson-24/lessons/lesson-24/stage1/guide.md
+    configs:
+      vqfx1: stage1/configs/vqfx1.txt
+    notebook: no
+
+  2:
+    description: Collect and Parse information from Junos Devices
+    labguide: https://raw.githubusercontent.com/jnpr-raylam/antidote/lesson-24/lessons/lesson-24/stage2/guide.md
+    configs:
+      vqfx1: stage2/configs/vqfx1.txt
+    notebook: no
+
+  3:
+    description: Configuration Management
+    labguide: https://raw.githubusercontent.com/jnpr-raylam/antidote/lesson-24/lessons/lesson-24/stage3/guide.md
+    configs:
+      vqfx1: stage3/configs/vqfx1.txt
+    notebook: no
+
+  4:
+    description: PyEZ Tables and Views
+    labguide: https://raw.githubusercontent.com/jnpr-raylam/antidote/lesson-24/lessons/lesson-24/stage4/guide.md
+    configs:
+      vqfx1: stage4/configs/vqfx1.txt
+    notebook: no
