@@ -61,6 +61,13 @@ print(str(render_2))
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 4)">Run this snippet</button>
 
+Let us quit the interactive python for our next example.
+
+```
+quit()
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 5)">Run this snippet</button>
+
 You might be wondering that the template creation and loading the data is cool but what if you want to use the same template for multiple scripts? In that  case you might store a template in a .j2 file and then import that file in your script.  
 Let us see the below example:
 
@@ -71,15 +78,16 @@ cd /antidote/lessons/lesson-16/stage1/
 cat route.j2
 
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 5)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 6)">Run this snippet</button>
 
-Now we would like to import the "FileLoader" and "Environment" for loading the jinja2 template in our script. You can use the "env" now to use your external jinja2 template.
+Now we would like to start the interactive python and import the "FileLoader" and "Environment" for loading the jinja2 template in our script. You can use the "env" now to use your external jinja2 template.
 ```
+python
 from jinja2 import Environment, FileSystemLoader
 loader = FileSystemLoader('.')
 env = Environment(loader=loader)
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 6)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 7)">Run this snippet</button>
 
 We will now store our template in "route_template" and provide our variables to it. Run the below snippet to see how it looks.
 ```
@@ -90,7 +98,7 @@ render_3 = route_template.render(route='172.28.0.0/16',
 print(str(render_3))
 
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 7)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 8)">Run this snippet</button>
 
 
 That’s all for stage-1, in coming lessons we will look into how to use a list or dictionary of variables to populate the template. But before that we expect you to have the following take away from stage-1.  
