@@ -4,9 +4,12 @@
 NRE Labs
 ================================
 
-NRE Labs is the flagship and reference deployment of Antidote.
+`NRE Labs <https://labs.networkreliability.engineering/>`_ is the flagship
+and reference deployment of Antidote.
 
 .. image:: images/NRELabs-Large-onBlack.png
+   :scale: 20 %
+   :align: center
 
 While NRE Labs aims to be intuitive to use without documentation, lab
 contributors and Antidote developers should familiarize themselves with
@@ -15,7 +18,7 @@ concepts of the learning curriculum and in the future, gamification.
 Taxonomy
 ---------------
 
-In the NRE Labs curriculum there are many courses. A course is a theme and
+In the NRE Labs curriculum there are several courses. A course is a theme and
 grouping of many related lessons. A lesson is a common task or workflow of
 many small steps. A lab is one small step or several that can be explained
 easily so that a user can understand and accomplish the labs in a matter of
@@ -27,7 +30,7 @@ Here is the hierarchy overview:
 * Course: Like a category or topic of study
 * Lessons: A set of exercises that make sense together to teach something with
   a common set of resources. Usually a NetOps task.
-* Labs - A set of related steps forming a workflow in a Lesson
+* Labs (also known as stages): A set of related steps forming a workflow in a Lesson
 
 Lesson and Lab Relationship
 ------------------------------

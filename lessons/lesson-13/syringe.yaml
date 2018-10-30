@@ -3,6 +3,7 @@ lessonName: Multi-Vendor Network Automation with NAPALM
 lessonID: 13
 category: configuration
 topologyType: custom
+tier: prod
 
 
 utilities:

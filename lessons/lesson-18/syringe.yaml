@@ -3,7 +3,7 @@ lessonName: End-to-End Network Testing with ToDD
 lessonID: 18
 category: verification
 topologyType: custom
-disabled: true
+tier: ptr
 
 utilities:
 - name: todd1

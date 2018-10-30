@@ -1,6 +1,0 @@
-.. antidoteweb:
-
-Antidote-Web
-================================
-
-TBD
