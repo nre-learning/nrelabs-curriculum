@@ -4,18 +4,13 @@
 
 ### Curriculum
 
-<<<<<<< HEAD
 ### Other
-
-=======
-### Other  
 
 ## 0.1.3 - October 30, 2018
 
 ### Curriculum
 
 ### Adding Lesson-16 Jinja2 Templates
->>>>>>> 181c7505ac4926e6f45c059aaefc326ca2cb9be8
 
 ## 0.1.2 - October 29, 2018
 
