@@ -25,7 +25,7 @@ In our example `interface` and `ip_address` are the keys and `ge-0/0/0` and `192
 
 Run the below snippet to define `interfaces` which will later be used to populate our template.  
 
-Example: 1  
+### Example: 1  
 ```
 interfaces = [{'interface': 'ge-0/0/0', 'ip_address': '192.168.1.1'},
               {'interface': 'ge-0/0/1', 'ip_address': '10.10.1.1'},
@@ -59,7 +59,7 @@ print(str(render_1))
 
 Now let us define one more list of dictionaries for vlans.  
 
-Example: 2  
+### Example: 2  
 ```
 vlans = [{'vlan': 'VLAN10', 'vlan_id': 10},
          {'vlan': 'VLAN20', 'vlan_id': 20},
