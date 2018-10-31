@@ -1,5 +1,6 @@
 *** Settings ***
-Library	JunosDevice.py
+Documentation  This is a resource file
+Library	 JunosDevice.py
 
 *** Variables ***
 ${host}=    172.16.158.31
