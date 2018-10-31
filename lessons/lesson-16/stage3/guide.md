@@ -24,7 +24,7 @@ interfaces = [{'interface': 'ge-0/0/0', 'ip_address': '192.168.1.1'},
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 1)">Run this snippet</button>
 
-In Part2, generated configurations for all interfaces in the list. But what if you are only interested in generating the  configuration for the management IP address? That is when we use the JInja2 fileters. For this particular example we will be using the  if condition. It is similar to the python if condition, exceot for the syntax.   
+In Part2, generated configurations for all interfaces in the list. But what if you are only interested in generating the  configuration for the management IP address? That is when we use the JInja2 fileters. For this particular example we will be using the  if condition. It is similar to the python if condition, except for the syntax.   
 
 Jinja2 if statement for checking conditions:  
   *Syntax:*   
