@@ -4,7 +4,7 @@
 
 ### Curriculum
 
-- [Junos Automation with PyEZ (jnpr-raylam)](https://github.com/jnpr-raylam/antidote/tree/lesson-24/lessons/lesson-24)
+- [Junos Automation with PyEZ (jnpr-raylam)](https://github.com/nre-learning/antidote/tree/master/lessons/lesson-24)
 
 ### Other
 

@@ -1,53 +1,60 @@
 ---
 lessonName: Junos Automation with PyEZ
 lessonID: 24
-category: introductory
+category: configuration
 tier: local
 topologyType: custom
 
 utilities:
-- name: linux1
+- name: linux
   image: raylam/utility
   sshuser: antidote
   sshpassword: antidotepassword
 
 devices:
-- name: vqfx1
+- name: vqfx
   image: raylam/vqfxspeedy:snap1
   sshuser: root
   sshpassword: VR-netlab9
   ports: [830]
 
 connections:
-- a: vqfx1
-  b: linux1
+- a: vqfx
+  b: linux
   subnet: 10.1.0.0/24
 
 stages:
   1:
     description: Introduction
-    labguide: https://raw.githubusercontent.com/jnpr-raylam/antidote/lesson-24/lessons/lesson-24/stage1/guide.md
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-24/stage1/guide.md
     configs:
-      vqfx1: stage1/configs/vqfx1.txt
+      vqfx: stage1/configs/vqfx.txt
     notebook: no
 
   2:
-    description: Collect and Parse information from Junos Devices
-    labguide: https://raw.githubusercontent.com/jnpr-raylam/antidote/lesson-24/lessons/lesson-24/stage2/guide.md
+    description: Collect data from Junos Devices
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-24/stage2/guide.md
     configs:
-      vqfx1: stage2/configs/vqfx1.txt
+      vqfx: stage2/configs/vqfx.txt
     notebook: no
 
   3:
-    description: Configuration Management
-    labguide: https://raw.githubusercontent.com/jnpr-raylam/antidote/lesson-24/lessons/lesson-24/stage3/guide.md
+    description: Parse information
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-24/stage3/guide.md
     configs:
-      vqfx1: stage3/configs/vqfx1.txt
+      vqfx: stage3/configs/vqfx.txt
     notebook: no
 
   4:
-    description: PyEZ Tables and Views
-    labguide: https://raw.githubusercontent.com/jnpr-raylam/antidote/lesson-24/lessons/lesson-24/stage4/guide.md
+    description: Configuration Management
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-24/stage4/guide.md
     configs:
-      vqfx1: stage4/configs/vqfx1.txt
+      vqfx: stage4/configs/vqfx.txt
+    notebook: no
+
+  5:
+    description: PyEZ Tables and Views
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-24/stage5/guide.md
+    configs:
+      vqfx: stage5/configs/vqfx.txt
     notebook: no
