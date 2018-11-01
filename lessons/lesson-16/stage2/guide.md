@@ -35,10 +35,11 @@ interfaces = [{'interface': 'ge-0/0/0', 'ip_address': '192.168.1.1'},
 
 Now once we have our data, we will use `for` loop to iterate through our list of dictionary and populate the template. Below is the syntax of `for` loop:
 
-`{% for condition %}  
- ...  
-{% endfor %}`
-
+```
+{% for condition %}   
+ ...   
+{% endfor %}
+```
 
 Now when you see the for loop in below snippet,  
 `{% for item in interfaces -%}` means iterate through each dictionary of the (list) interfaces. The `–` in front of the % is optional and is used to strip out the extra new line characters between the consecutive iterations.  
@@ -54,7 +55,7 @@ ipaddr_template = Template('''
 render_1 = ipaddr_template.render(interfaces=interfaces)
 print(str(render_1))
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 2)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 3)">Run this snippet</button>
 
 
 Now let us define one more list of dictionaries for vlans.  
@@ -65,7 +66,7 @@ vlans = [{'vlan': 'VLAN10', 'vlan_id': 10},
          {'vlan': 'VLAN20', 'vlan_id': 20},
          {'vlan': 'VLAN30', 'vlan_id': 20}]
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 3)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 4)">Run this snippet</button>
 
 Now we will learn how to use the for loop to format the template like a Junos CLI configuration. 
 
@@ -81,14 +82,14 @@ vlans {
 }
 ''')
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 4)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 5)">Run this snippet</button>
 
 After creating the template, lets supply the vlans data and see how it looks!
 ```
 vlan_config = str(vlan_config.render(vlans=vlans))
 print(vlan_config)
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 5)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 6)">Run this snippet</button>
 
 Note: With the help of PyEZ(Intro to PyEZ lesson coming soon!), you can connect to a remote device and use the above template to directly push your output as a configuration to the device.
 

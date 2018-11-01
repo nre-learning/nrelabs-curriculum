@@ -1,4 +1,4 @@
-# Using Jinja2 for Configuration Templates  
+# Using Jinja for Configuration Templates  
 **Contributed by: @ShrutiVPawaskar and @shahbhoomi**
 ## Part 1 - Introduction to Jinja2 
 
@@ -28,8 +28,11 @@ print('ge-0/0/0 has IP address 192.168.1.1')
 ```  
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 1)">Run this snippet</button>  
 
-### Template Syntax:  
-`template_name = Template('some_text {{template_variable1}} some_text')`  
+### Template Syntax:
+
+```
+template_name = Template('some_text {{template_variable1}} some_text')
+```   
 where `{{template_variable1}}` is the template variable and template_name is the name of the template. `Template()` function converts your text into a reusable Jinja2 template.  
 
 Let us look at Example 1 to learn how to use these templates. Here `ipaddr_template` is the Jinja2 Template and `{{interface}}` and `{{ip_address}}` are the template variables.  
@@ -38,7 +41,7 @@ Let us look at Example 1 to learn how to use these templates. Here `ipaddr_templ
 ```
 ipaddr_template = Template('{{interface}} has IP address {{ip_address}}')
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 2)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 3)">Run this snippet</button>
 
 Now that our template is ready, we want to load the data in it. This can be done with the help of the `template.render()` function. `template.render()` will take the data you supply to the template variables and load it to the template. Check that out by running the below snippet.  
 
@@ -48,7 +51,7 @@ interface_1 = ipaddr_template.render(interface='ge-0/0/0',
 print(str(interface_1))
 ```
 
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 3)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 4)">Run this snippet</button>
 
 let’s look at Example 2 and supply the different variable values to our Jinaj2 template aka "Resuable Text File".  
 
@@ -59,14 +62,14 @@ render_2 = ipaddr_template.render(interface='ge-0/0/1',
                                   ip_address='10.10.1.1')
 print(str(render_2))
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 4)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 5)">Run this snippet</button>
 
 Let us quit the interactive python for our next example.
 
 ```
 quit()
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 5)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 6)">Run this snippet</button>
 
 You might be wondering that the template creation and loading the data is cool but what if you want to use the same template for multiple scripts? In that case you might store a template in a .j2 file and then import that file in your script.  
 Let us see the below example:
@@ -79,7 +82,7 @@ We have already created a sample template file for our use. Run the below snippe
 cd /antidote/lessons/lesson-16/stage1/
 cat route.j2
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 6)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 7)">Run this snippet</button>
 
 Now we would like to start the interactive python and import the `FileLoader` and `Environment` for loading the Jinja2 template in our script. You can use the "env" now to use your external Jinja2 template.
 ```
@@ -88,7 +91,7 @@ from jinja2 import Environment, FileSystemLoader
 loader = FileSystemLoader('.')
 env = Environment(loader=loader)
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 7)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 8)">Run this snippet</button>
 
 We will now store our template in `route_template` and provide our variables to it. Run the below snippet to see how it looks.
 ```
@@ -99,7 +102,7 @@ render_3 = route_template.render(route='172.28.0.0/16',
 print(str(render_3))
 
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 8)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 9)">Run this snippet</button>
 
 
 That’s all for stage-1, in coming lessons we will look into how to use a list or dictionary of variables to populate the template. But before that we expect you to have the following take away from stage-1.  
