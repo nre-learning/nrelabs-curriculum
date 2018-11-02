@@ -75,5 +75,4 @@ for dev_number, device in enumerate(all_devices['devices'], 1):
 
 P.S. press `Enter` to exit out of the python `for` loop and see your results.
 
-Good Job! You are now ready to render your first network configuration template!  
-If you would like to provide Jinja2 tempalates and variables to PyEz and push these configs on to a remote Junos device, checkout out Intro to PyEZ lesson(coming soon)!
+So now in the next stage we will learn how to import multiple Jinja2 templates from different directories and use it in your script. We will also see how to `include` those imported templates in one main template which can then be used to configure the device. 
