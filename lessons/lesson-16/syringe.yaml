@@ -26,3 +26,6 @@ stages:
   4: 
     description: Jinja2 with YAML
     labguide: https://raw.githubusercontent.com/ShrutiVPawaskar/antidote/master/lessons/lesson-16/stage4/guide.md
+  5: 
+    description: Jinja2 templates as external files
+    labguide: https://raw.githubusercontent.com/ShrutiVPawaskar/antidote/master/lessons/lesson-16/stage5/guide.md
