@@ -3,11 +3,11 @@
 
 Now that you have tried the `for` loop, lets up-level. In this part we will try `if` and `set` statement along with `for` loops.
 
-First, we want to start the Python interpreter and import `Template` module from Jinja2 library:
+First, we want to start the Python interpreter and import `Environment` module from Jinja2 library:
 
 ```
 python
-from jinja2 import Template
+from jinja2 import Environment
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 0)">Run this snippet</button>
 
@@ -29,12 +29,13 @@ Below is the Jinja2 syntax for `if statement` for checking conditions:
  ... 
 {% endif %}
 ```
-In the following snippet we have used the `for` loop like in previous stages, but instead of directly printing out all the interfaces here we are checking if the interface value matches our management interface `fxp0`. If it does match, we substitute its value and the value of the corresponding ip address in the template using `template.render()`. 
+In the following snippet we have used the `for` loop like in previous stages, but instead of directly printing out all the interfaces here we are checking if the interface value matches our management interface `fxp0`. If it does match, we substitute its value and the value of the corresponding ip address in the template using `render()`. 
 
 ```
-ipaddr_template = Template('''
-{%- for item in interfaces -%}
-{%- if item.interface == 'fxp0' %}
+env = Environment(trim_blocks=True, lstrip_blocks=True)
+ipaddr_template = env.from_string('''
+{% for item in interfaces %}
+{% if item.interface == 'fxp0' %}
 interfaces {
     {{ item.interface }} {
         unit 0 {
@@ -44,8 +45,8 @@ interfaces {
         }
     }
 }
-{%- endif -%}
-{%- endfor -%}''')
+{% endif %}
+{% endfor %}''')
 
 render_1 = ipaddr_template.render(interfaces=interfaces)
 print(str(render_1))
@@ -67,14 +68,14 @@ Jinja2 uses set statement to define variable which can be used within the templa
 
 In the snippet below:  
 `set_temp = '''{% set mgmt_interface = 'ge-0/0/0' %}` declares a variable `mgmt_interface` and sets its value to `ge-0/0/0`.  
-`{%- if item.interface == mgmt_interface %}` checks if the item in the for loop has a key interface whose value is same as the value that we set for `mgmt_interface`.  
+`{% if item.interface == mgmt_interface %}` checks if the item in the for loop has a key interface whose value is same as the value that we set for `mgmt_interface`.  
 
 If the value is same, it loads the template with the corresponding data, if not, it skips that element of list `interfaces` and moves on to the next.  
 
 ```
 set_temp = '''{% set mgmt_interface = 'ge-0/0/0' %}
-{%- for item in interfaces -%}
-{%- if item.interface == mgmt_interface %}
+{% for item in interfaces %}
+{% if item.interface == mgmt_interface %}
 interfaces {
     {{ item.interface }} {
         unit 0 {
@@ -84,10 +85,10 @@ interfaces {
         }
     }
 }
-{%- endif -%}
-{%- endfor -%}'''
+{% endif %}
+{% endfor %}'''
 
-int_template = Template(set_temp)
+int_template = env.from_string(set_temp)
 render_2 = int_template.render(interfaces=interfaces)
 
 print(str(render_2))
