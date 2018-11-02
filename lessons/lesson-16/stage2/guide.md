@@ -4,11 +4,11 @@
 Now that you know what is a template and how it works, let’s dive deep into using `for` loops for variable assignment.  
 For loops are very useful if you have your data in the form of a list/dictionary or the combination of both. In this part we will take an example which has data stored as a list of dictionaries.  
 
-First, we want to start the Python interpreter and import `Template` module from Jinja2 library:
+First, we want to start the Python interpreter and import `Environment` module from Jinja2 library.  
 
 ```
 python
-from jinja2 import Template
+from jinja2 import Environment
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 0)">Run this snippet</button>
 
@@ -42,14 +42,14 @@ Now once we have our data, we will use `for` loop to iterate through our list of
 ```
 
 Now when you see the for loop in below snippet,  
-`{% for item in interfaces -%}` means iterate through each dictionary of the (list) interfaces. The `–` in front of the % is optional and is used to strip out the extra new line characters between the consecutive iterations.  
+`{% for item in interfaces %}` means iterate through each dictionary of the (list) interfaces. The `trim_blocks=True` and `lstrip_blocks=True` is optional and is used to strip out the extra new line characters between the consecutive iterations. we are using `env.from_string` here to use the string supplied to it as  `ipaddr_template`
 `{{ item.interface }}` has IP address `{{ item.ip_address }}` means replace the template variable `interface` with the value for the key `interface`  and replace `ip_address` with the item’s value for the key `ip_address`.  
 `{% endfor %}` ends the `for` loop
 
 ```
-
-ipaddr_template = Template('''
-{% for item in interfaces -%}
+env = Environment(trim_blocks=True, lstrip_blocks=True)
+ipaddr_template = env.from_string('''
+{% for item in interfaces %}
 {{ item.interface }} has IP address {{ item.ip_address }}
 {% endfor %}''')
 render_1 = ipaddr_template.render(interfaces=interfaces)
@@ -71,16 +71,16 @@ vlans = [{'vlan': 'VLAN10', 'vlan_id': 10},
 Now we will learn how to use the for loop to format the template like a Junos CLI configuration. 
 
 ```
-vlan_config = Template('''
+vlan_config = env.from_string('''
 vlans {
-{%- for item in vlans %}
+{% for item in vlans %}
     {{ item.vlan }} {
         vlan-id {{ item.vlan_id }};
         l3-interface irb.{{item.vlan_id}};
     }
-{%- endfor %}
-}
-''')
+{% endfor %}
+}''')
+
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 5)">Run this snippet</button>
 
