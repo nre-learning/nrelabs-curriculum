@@ -41,10 +41,12 @@ Now once we have our data, we will use `for` loop to iterate through our list of
 {% endfor %}
 ```
 
-Now when you see the for loop in below snippet,  
-`{% for item in interfaces %}` means iterate through each dictionary of the (list) interfaces. The `trim_blocks=True` and `lstrip_blocks=True` is optional and is used to strip out the extra new line characters between the consecutive iterations. we are using `env.from_string` here to use the string supplied to it as  `ipaddr_template`
-`{{ item.interface }}` has IP address `{{ item.ip_address }}` means replace the template variable `interface` with the value for the key `interface`  and replace `ip_address` with the item’s value for the key `ip_address`.  
-`{% endfor %}` ends the `for` loop
+Lets analyze the `for` loop in the snippet below,  
+`{% for item in interfaces %}` iterates over each dictionary in the list `interfaces`.  
+The `trim_blocks` is a optional Enviroment parameters, and is used to trim an extra new line characters between consecutive iterations.
+Similarly, `lstrip_block` is a optional Enviroment parameter for striping an extra space/tab before a block.
+We are using `env.from_string` which accepts a template in form of a string.
+`{{ item.interface }} has IP address {{ item.ip_address }}` replaces the template variable `interface` with the value for the key `interface` and replace `ip_address` with the item’s value for the key `ip_address`.
 
 ```
 env = Environment(trim_blocks=True, lstrip_blocks=True)
@@ -68,7 +70,7 @@ vlans = [{'vlan': 'VLAN10', 'vlan_id': 10},
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 4)">Run this snippet</button>
 
-Now we will learn how to use the for loop to format the template like a Junos CLI configuration. 
+Now we will learn how to use the `for` loop to format the template like a Junos CLI configuration. 
 
 ```
 vlan_config = env.from_string('''
@@ -90,8 +92,6 @@ vlan_config = str(vlan_config.render(vlans=vlans))
 print(vlan_config)
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 6)">Run this snippet</button>
-
-Note: With the help of PyEZ(Intro to PyEZ lesson coming soon!), you can connect to a remote device and use the above template to directly push your output as a configuration to the device.
 
 So far, we have been loading all the available data to the template.  
 What if you don’t want to load everything and are only interested in loading a part of the data? That’s when template filters come in, check it out in next part!
