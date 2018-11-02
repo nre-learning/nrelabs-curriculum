@@ -16,12 +16,12 @@ cat part4.yml
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 0)">Run this snippet</button>
 
 It is so much easy to read our data now! Now lets start with our lesson then!   
-As you already know by now, our first step is to start the Python interpreter and import `Template` module from Jinja2 library.
+As you already know by now, our first step is to start the Python interpreter and import `Environment` module from Jinja2 library.
 We will also import the `yaml` library and `pprint` for pretty printing our output.
 
 ```
 python
-from jinja2 import Template
+from jinja2 import Environment
 import yaml
 from pprint import pprint
 ```
@@ -39,7 +39,8 @@ pprint(all_devices)
 Does this output look familier to you. Its a dictionary containing a list of dictionaries, same as what we were using in previous lessons! You already know what to do now! we start by creating a config template to set the `system hostname` and obtain the interface config.
 
 ```
-config_temp = Template("""
+env = Environment(trim_blocks=True, lstrip_blocks=True)
+config_temp = env.from_string('''
 system {
     host-name {{ device.hostname }};
 }
@@ -54,7 +55,7 @@ interfaces {
     }
 }
 {% endfor %}
-""")
+''')
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 3)">Run this snippet</button>
 
