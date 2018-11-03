@@ -74,8 +74,6 @@ render_device = device_template.render(route='172.28.0.0/16',
                                        ip_address='10.13.106.2',
                                        hostname='qfx1')
 
-print('Device Config')
-print('-'*30) 
 print(str(render_device))
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 7)">Run this snippet</button>
