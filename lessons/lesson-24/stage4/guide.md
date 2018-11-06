@@ -114,3 +114,5 @@ cli
 show configuration |compare rollback 1
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 10)">Run this snippet</button>
+
+By now, you should know all the common operations on Junos automation by PyEZ. In next section, I will introduce one more tool - PyEZ Tables and Views.
