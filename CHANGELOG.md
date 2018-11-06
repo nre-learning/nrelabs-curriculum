@@ -6,6 +6,7 @@
 
 - Adding Lesson-30 Working with Salt [#114](https://github.com/nre-learning/antidote/pull/114)
 - Adding Lesson-16 Jinja2 Templates [#121](https://github.com/nre-learning/antidote/pull/121)
+- Adding Lesson-15 Event-Driven Automation with StackStorm [#126](https://github.com/nre-learning/antidote/pull/126)
 
 ### Other
 
