@@ -1,5 +1,5 @@
 # Using Jinja for Configuration Templates  
-**Contributed by: @ShrutiVPawaskar and @shahbhoomi**
+**Contributed by: [@ShrutiVPawaskar](https://github.com/ShrutiVPawaskar) and [@shahbhoomi](https://github.com/shahbhoomi)**
 ## Part 1 - Introduction to Jinja2 
 
 I am sure at some point you might have heard the word “Jinja2”. So, what is Jinja2?? Why do you need to invest your time in learning Jinja2 and go through these lessons? We will answer all your questions in this lesson!  
