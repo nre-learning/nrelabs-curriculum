@@ -7,13 +7,13 @@ topologyType: custom
 
 utilities:
 - name: linux
-  image: raylam/utility
+  image: untidotelabs/tility
   sshuser: antidote
   sshpassword: antidotepassword
 
 devices:
 - name: vqfx
-  image: raylam/vqfxspeedy:snap1
+  image: antidotelabs/vqfxspeedy:snap1
   sshuser: root
   sshpassword: VR-netlab9
   ports: [830]
@@ -52,9 +52,3 @@ stages:
       vqfx: stage4/configs/vqfx.txt
     notebook: no
 
-  5:
-    description: PyEZ Tables and Views
-    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-24/stage5/guide.md
-    configs:
-      vqfx: stage5/configs/vqfx.txt
-    notebook: no

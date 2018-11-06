@@ -1,7 +1,7 @@
 <configuration operation="replace">
         <version>15.1X53-D60.4</version>
         <system>
-            <host-name>vqfx1</host-name>
+            <host-name>vqfx</host-name>
             <root-authentication>
                 <encrypted-password>$1$E./KlYWD$4IB3UHD/TK0rVbXchd0ex0</encrypted-password>
                 <ssh-rsa>
