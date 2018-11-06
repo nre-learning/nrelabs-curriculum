@@ -1,4 +1,4 @@
-# Chapter 3 - Developing Test cases using Robot framework
+# Chapter 3 - Robot Framework - Best Practices
 
 Now that we have covered how to write robot files which verify the state of Juniper devices, let's delve into more advanced concepts and discuss some best practices.
 
