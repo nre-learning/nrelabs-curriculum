@@ -12,6 +12,7 @@ Reference: [Robot Framework User Guide](http://robotframework.org/robotframework
 
 Let's move on to the various concepts used in Robot Framework
 
+
 ---
 
 ## Anatomy of a Robot file
@@ -110,6 +111,7 @@ In the below example, `Check Name` is the name of the test case, which uses the 
 >   Should Be Equal ${name1}    Jane 
 >```
 
+
 ### General Syntax rules
 
 1. There should be atleast two spaces between the following:
@@ -117,6 +119,7 @@ In the below example, `Check Name` is the name of the test case, which uses the 
     - Keywords and Arguments
     - Arguments and Arguments
 2. Keywords and variables are case-insensitive
+
 
 ---
 
@@ -142,10 +145,12 @@ Under the Settings, we import our python file `substring.py` as a Library.
 
 We have five test-cases in total, and these will be executed one after the other. The first three test cases perform string comparison, while the last two execute the substring function.
 
-We'll go ahead and start our test-cases - 
+We'll go ahead and start our test-cases:
+
 ```
 robot /antidote/lessons/lesson-29/stage1/chapter1_eg1.robot
 ```
+
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 11)">Run this snippet</button>
 
 As expected, test-cases `Check Equal1`, `Check Equal2`, `Check Substring2` fails, and `Check Equal1`, `Check Substring1` passes. Since all the test-cases did not pass, the test-suite result is "Fail".
