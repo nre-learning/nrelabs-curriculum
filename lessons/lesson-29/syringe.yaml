@@ -1,0 +1,41 @@
+---
+lessonName: Robot Framework for Automation Testing
+lessonID: 29
+category: introductory
+lessondiagram: https://raw.githubusercontent.com/lara29/antidote/master/lessons/lesson-29/lessondiagram.png
+tier: prod
+
+topologyType: custom
+
+utilities:
+- name: linux1
+  image: antidotelabs/utility
+  sshuser: antidote
+  sshpassword: antidotepassword
+
+devices:
+- name: vqfx1
+  image: antidotelabs/vqfxspeedy:snap1
+  sshuser: root
+  sshpassword: VR-netlab9
+
+connections:
+- a: vqfx1
+  b: linux1
+  subnet: 10.1.0.0/24
+
+stages:
+  1:
+    description: Introduction to Robot Framework
+    labguide: https://raw.githubusercontent.com/lara29/antidote/master/lessons/lesson-29/stage1/guide.md
+
+  2:
+    description: Writing Testcases for Junos Devices
+    labguide: https://raw.githubusercontent.com/lara29/antidote/master/lessons/lesson-29/stage2/guide.md
+    configs: 
+      vqfx1: stage2/configs/vqfx1.txt
+  3:
+    description: Developing Testcases using Robot framework
+    labguide: https://raw.githubusercontent.com/lara29/antidote/master/lessons/lesson-29/stage3/guide.md
+    configs: 
+      vqfx1: stage3/configs/vqfx1.txt

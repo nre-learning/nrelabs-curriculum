@@ -2,3 +2,5 @@ napalm
 netmiko
 jsnapy
 junos-eznc
+robotframework
+jinja2

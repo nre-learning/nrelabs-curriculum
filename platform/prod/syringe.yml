@@ -79,10 +79,10 @@ subjects:
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
-metadata: 
+metadata:
   name: syringe
   namespace: prod
-spec: 
+spec:
   replicas: 1
   revisionHistoryLimit: 3
   template: 
