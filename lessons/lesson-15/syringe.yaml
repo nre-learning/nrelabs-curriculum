@@ -2,8 +2,7 @@
 lessonName: Event-Driven Network Automation with StackStorm
 lessonID: 15
 category: configuration
-tier: ptr
-
+tier: local
 topologyType: custom
 
 utilities:
