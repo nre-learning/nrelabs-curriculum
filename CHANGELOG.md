@@ -4,6 +4,7 @@
 
 ### Curriculum
 
+- Adding Lesson-30 Working with Salt [#114](https://github.com/nre-learning/antidote/pull/114)
 - Adding Lesson-16 Jinja2 Templates [#121](https://github.com/nre-learning/antidote/pull/121)
 
 ### Other
@@ -13,7 +14,6 @@
 ### Curriculum
 
 ### Other
-
 
 ## 0.1.1 - October 28, 2018
 
