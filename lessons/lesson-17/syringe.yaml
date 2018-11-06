@@ -2,8 +2,8 @@
 lessonName: Version Control with Git
 lessonID: 17
 category: introductory
-
 topologyType: none
+tier: prod
 
 utilities:
 - name: linux1

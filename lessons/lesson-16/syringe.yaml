@@ -3,6 +3,7 @@ lessonName: Using Jinja for Configuration Templates
 lessonID: 16
 category: introductory
 disabled: true
+tier: local
 
 topologyType: none
 
@@ -14,5 +15,17 @@ utilities:
 
 stages:
   1:
-    description: Basic variable replacement
-    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-16/stage1/guide.md
+    description: Introduction
+    labguide: https://raw.githubusercontent.com/ShrutiVPawaskar/antidote/master/lessons/lesson-16/stage1/guide.md
+  2: 
+    description: For Loops
+    labguide: https://raw.githubusercontent.com/ShrutiVPawaskar/antidote/master/lessons/lesson-16/stage2/guide.md
+  3: 
+    description: Let try the if and set statements!
+    labguide: https://raw.githubusercontent.com/ShrutiVPawaskar/antidote/master/lessons/lesson-16/stage3/guide.md
+  4: 
+    description: Jinja2 with YAML
+    labguide: https://raw.githubusercontent.com/ShrutiVPawaskar/antidote/master/lessons/lesson-16/stage4/guide.md
+  5: 
+    description: Jinja2 templates as external files
+    labguide: https://raw.githubusercontent.com/ShrutiVPawaskar/antidote/master/lessons/lesson-16/stage5/guide.md

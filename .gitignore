@@ -7,6 +7,7 @@
 *.retry
 hosts
 venv/
+*.pyc
 
 # This is where I placed my updated gcp provider
 terraform.d/
