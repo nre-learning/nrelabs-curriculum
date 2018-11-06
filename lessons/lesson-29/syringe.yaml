@@ -35,7 +35,7 @@ stages:
     configs: 
       vqfx1: stage2/configs/vqfx1.txt
   3:
-    description: Developing Testcases using Robot framework
+    description: Robot Framework - Best Practices
     labguide: https://raw.githubusercontent.com/lara29/antidote/master/lessons/lesson-29/stage3/guide.md
     configs: 
       vqfx1: stage3/configs/vqfx1.txt
