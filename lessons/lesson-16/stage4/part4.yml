@@ -1,0 +1,19 @@
+---
+devices:
+  - hostname: QFX1
+    interface:
+      - name: ge-0/0/1
+        unit: 0
+        ip_address: 192.168.1.1
+      - name: ge-0/0/2
+        unit: 0
+        ip_address: 10.10.1.1
+
+  - hostname: QFX2
+    interface:
+      - name: ge-0/0/1
+        unit: 0
+        ip_address: 192.168.1.2
+      - name: ge-0/0/2
+        unit: 0
+        ip_address: 10.10.1.2

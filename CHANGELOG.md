@@ -4,8 +4,9 @@
 
 ### Curriculum
 
-### Other
+- Adding Lesson-16 Jinja2 Templates [#121](https://github.com/nre-learning/antidote/pull/121)
 
+### Other
 
 ## 0.1.2 - October 29, 2018
 
