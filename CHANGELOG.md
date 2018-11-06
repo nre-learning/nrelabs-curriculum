@@ -4,17 +4,21 @@
 
 ### Curriculum
 
-- [Junos Automation with PyEZ (jnpr-raylam)](https://github.com/nre-learning/antidote/tree/master/lessons/lesson-24)
+- Adding Lesson-24 Junos Automation with PyEZ (jnpr-raylam)[#24](https://github.com/nre-learning/antidote/pull/117)
+- Adding Lesson-30 Working with Salt [#114](https://github.com/nre-learning/antidote/pull/114)
+- Adding Lesson-16 Jinja2 Templates [#121](https://github.com/nre-learning/antidote/pull/121)
 
 ### Other
+=======
 
+
+### Other
 
 ## 0.1.2 - October 29, 2018
 
 ### Curriculum
 
 ### Other
-
 
 ## 0.1.1 - October 28, 2018
 

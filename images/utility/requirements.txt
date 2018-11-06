@@ -2,3 +2,4 @@ napalm
 netmiko
 jsnapy
 junos-eznc
+jinja2

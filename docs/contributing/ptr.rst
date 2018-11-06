@@ -12,12 +12,11 @@ However, there's a version of NRE Labs that is deployed every time a change to `
 on one of Antidote's repositories, called the "public test realm". It's located at:
 `https://ptr.labs.networkreliability.engineering/ <https://ptr.labs.networkreliability.engineering/>`_.
 
-
 The NRE Labs PTR will be quite similar to the "production" copy, but there are a few
 important differences to discuss:
 
-* Everything is deployed via ``master``, and is inherently unstable. We will try to keep things working,
-  but it **is** a test realm. There be dragons here.
+* Everything is deployed via ``master`` or the current release branch, and is inherently unstable.
+  We will try to keep things working, but it **is** a test realm. There be dragons here.
 * All lessons in the ``antidote`` repository are shown, despite the `disabled` property in the
   syringe file.
 * A black bar with the latest commit ID for all three projects (``antidote``, ``antidote-web``, 

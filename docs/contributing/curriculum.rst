@@ -101,9 +101,33 @@ Here are a few things that reviewers should be on the lookout for when reviewing
 curriculum, either for new or existing lessons. If you're contributing to the curriculum, you should be aware
 of these guidelines, to make the review process much smoother.
 
+- Can a user get through a lesson stage quickly? Are we letting them get to a quick win as soon as practical while still teaching quality content?
 - Does the new or changed lesson adhere to the spirit of Antidote lessons laid out in this document?
 - For new lessons, does the lesson guide (or jupyter notebook if applicable) look nice? Does the author attribute themselves?
 - Is the lesson guide(s) easy to follow?
 - Are any documentation updates also needed?
 - Is the CHANGELOG updated properly?
 - Can we show this in NRE labs? Usage rights?
+- Is the business benefit clear from this lesson? How easy is it for people to link this content with their day-to-day?
+
+Appendix - Lesson Contribution FAQ
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**NAPALM Can't Find My Configs.**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+This is likely due to the way you've deployed syringe.
+
+In the selfmedicate repo, there are a number of kubernetes manifests useful for running antidote locally.
+However, there are some defaults here you'll likely want to change. In particular, if you're making lesson
+changes in a branch or fork (which is ideal if you want to open a PR) you will want to make sure you update
+the syringe deployment in two places:
+
+- The init-container definition, where the ``antidote`` repo
+  is cloned into the syringe pod
+- Syringe's ``SYRINGE_LESSON_REPO_REMOTE`` and ``SYRINGE_LESSON_REPO_BRANCH``
+  environment variables.
+
+Be sure to re-deploy syringe using ``kubectl apply -f syringe.yaml`` once you've made the appropriate changes.
+If you've already made these changes and it still doesn't work, make sure syringe is using the latest copy
+of your repo by deleting the syringe pod. The Syringe deployment will re-deploy a new pod with a freshly-cloned
+version of your lesson repo.
