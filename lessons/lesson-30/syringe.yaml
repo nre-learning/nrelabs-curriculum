@@ -9,7 +9,6 @@ tier: local
 utilities:
 - name: salt1
   image: sudhishna/salt
-  
   sshuser: antidote
   sshpassword: antidotepassword
   ports: [22]

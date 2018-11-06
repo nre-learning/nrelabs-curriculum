@@ -16,22 +16,10 @@ In order to get the the RPC command equivalent for a CLI command , we use 'displ
 For example,
 
 ```
-root@vqfx-re> show route | display xml rpc
-<rpc-reply xmlns:junos="http://xml.juniper.net/junos/15.1X53/junos">
-    <rpc>
-        <get-route-information>
-        </get-route-information>
-    </rpc>
-    <cli>
-        <banner>{master:0}</banner>
-    </cli>
-</rpc-reply>
-```
-```
 cli
 show route | display xml rpc
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 2)">Verify Output (Optional)</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 1)">Verify Output (Optional)</button>
 
 From the above snippet, the RPC command equivalent for the 'show route' CLI command is 'get-route-information'
 Let us now run the junos.rpc command. We can specify a destination file where the output is directed to. The 'terse' keyword allows you to obtain a summary output.
@@ -39,7 +27,7 @@ Let us now run the junos.rpc command. We can specify a destination file where th
 ```
 salt 'vqfx1' junos.rpc get-route-information /var/tmp/route.xml terse=True
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('salt1', 3)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('salt1', 2)">Run this snippet</button>
 
 To verify that the output was written to the '/var/tmp/route.xml', execute:
 ```
