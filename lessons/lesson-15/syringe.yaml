@@ -46,7 +46,7 @@ stages:
       vqfx3: stage1/configs/vqfx3.txt
 
     iframeresource:
-      name: StackStorm
+      name: stackstorm
       image: antidotelabs/stackstorm
       protocol: https
       uri: "/"
