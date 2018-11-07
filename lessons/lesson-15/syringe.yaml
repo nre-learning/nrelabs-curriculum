@@ -5,6 +5,13 @@ category: configuration
 tier: local
 topologyType: custom
 
+iframeresources:
+- name: nginx
+  image: nginx
+  protocol: http
+  uri: "/"
+  port: 80
+
 utilities:
 - name: st2
   image: antidotelabs/stackstorm
@@ -44,13 +51,6 @@ stages:
       vqfx1: stage1/configs/vqfx1.txt
       vqfx2: stage1/configs/vqfx2.txt
       vqfx3: stage1/configs/vqfx3.txt
-
-    iframeresource:
-      name: stackstorm
-      image: antidotelabs/stackstorm
-      protocol: https
-      uri: "/"
-      port: 443
 
   2:
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-15/stage1/guide.md
