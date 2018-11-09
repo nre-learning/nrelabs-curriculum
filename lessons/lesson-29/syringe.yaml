@@ -28,6 +28,8 @@ stages:
   1:
     description: Introduction to Robot Framework
     labguide: https://raw.githubusercontent.com/lara29/antidote/master/lessons/lesson-29/stage1/guide.md
+    configs: 
+      vqfx1: stage1/configs/vqfx1.txt
 
   2:
     description: Writing Testcases for Junos Devices
