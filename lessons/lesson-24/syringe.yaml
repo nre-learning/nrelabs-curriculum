@@ -6,7 +6,7 @@ tier: ptr
 
 utilities:
 - name: linux
-  image: untidotelabs/tility
+  image: antidotelabs/utility
   sshuser: antidote
   sshpassword: antidotepassword
 
