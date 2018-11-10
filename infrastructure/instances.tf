@@ -144,3 +144,27 @@ resource "google_compute_instance_template" "workers" {
     access_config = {}
   }
 }
+
+
+resource "google_compute_instance" "abathur" {
+  name        = "abathur"
+  zone        = "${var.zone}"
+  project     = "${var.project}"
+  description = "Antidote automation server"
+
+  tags = []
+
+  # 2 vCPUs, 7.5GB RAM
+  machine_type = "n1-standard-2"
+
+  boot_disk {
+    initialize_params {
+    image = "${var.os["centos-7"]}"
+    }
+  }
+
+  network_interface {
+    network       = "${google_compute_network.default-internal.name}"
+    access_config = {}
+  }
+}
