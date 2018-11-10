@@ -2,10 +2,7 @@
 lessonName: Event-Driven Network Automation with StackStorm
 lessonID: 15
 category: configuration
-disabled: true
 tier: ptr
-
-topologyType: custom
 
 utilities:
 - name: st2
@@ -42,7 +39,3 @@ stages:
   1:
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-15/stage1/guide.md
     description: Actions
-    configs:
-      vqfx1: stage1/configs/vqfx1.txt
-      vqfx2: stage1/configs/vqfx2.txt
-      vqfx3: stage1/configs/vqfx3.txt
