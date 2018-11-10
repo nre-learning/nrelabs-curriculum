@@ -24,7 +24,7 @@ data:
     fi
     git clone $REPO $DIR
     cd $DIR
-    git reset --hard $REF
+    git checkout --force $REF
 
 ---
 # TODO(mierdin): This could probably use some pruning
@@ -115,10 +115,14 @@ spec:
         env:
         - name: SYRINGE_LESSONS
           value: "/antidote/lessons"
-        - name: SYRINGE_IGNORE_DISABLED
-          value: "true"
         - name: SYRINGE_TIER
-          value: "ptr"
+          value: "local"
+        - name: SYRINGE_LESSON_REPO_REMOTE
+          value: "https://github.com/nre-learning/antidote.git"
+        - name: SYRINGE_LESSON_REPO_BRANCH
+          value: "master"
+        - name: SYRINGE_LESSON_REPO_DIR
+          value: "/antidote"
         ports:
         - containerPort: 50099  # GRPC
         - containerPort: 8086   # REST/HTTP

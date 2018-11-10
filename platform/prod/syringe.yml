@@ -99,7 +99,7 @@ spec:
         - /usr/local/git/git-clone.sh
         args:
         - "https://github.com/nre-learning/antidote.git"
-        - "master"
+        - "v0.1.0"
         - "/antidote"
         volumeMounts:
         - name: git-clone
@@ -118,6 +118,12 @@ spec:
           value: "/antidote/lessons"
         - name: SYRINGE_TIER
           value: "prod"
+        - name: SYRINGE_LESSON_REPO_REMOTE
+          value: "https://github.com/nre-learning/antidote.git"
+        - name: SYRINGE_LESSON_REPO_BRANCH
+          value: "master"
+        - name: SYRINGE_LESSON_REPO_DIR
+          value: "/antidote"
         ports:
         - containerPort: 50099  # GRPC
         - containerPort: 8086   # REST/HTTP
