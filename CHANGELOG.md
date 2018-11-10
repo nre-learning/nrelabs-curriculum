@@ -9,18 +9,9 @@
 - Adding Lesson-16 Jinja2 Templates [#121](https://github.com/nre-learning/antidote/pull/121)
 - Adding Lesson-29 Robot Framework [#125](https://github.com/nre-learning/antidote/pull/125)
 
-
-### Other
-=======
-
-
 ### Other
 
-## 0.1.2 - October 29, 2018
-
-### Curriculum
-
-### Other
+- Tidied up lesson definitions based on recent syringe changes [#129](https://github.com/nre-learning/antidote/pull/129)
 
 ## 0.1.1 - October 28, 2018
 
