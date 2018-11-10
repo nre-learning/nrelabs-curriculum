@@ -42,31 +42,9 @@ connections:
 
 stages:
   1:
-
     description: No BGP config - tests fail
-
-    # TODO(mierdin): Provide this via the Syringe API
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-12/stage1/guide.md
 
-    # If sharedTopology is enabled, this is ignored.
-    configs:
-      vqfx1: stage1/configs/vqfx1.txt
-      vqfx2: stage1/configs/vqfx2.txt
-      vqfx3: stage1/configs/vqfx3.txt
-
-    # Optional. If set, a jupyter instance will be spun up when this stage is set. Must be located at lesson-<lesson #>/stage<stage #>/notebook.ipynb
-    notebook: no
   2:
-
     description: Correct BGP config - tests pass
-
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-12/stage2/guide.md
-
-    # If sharedTopology is enabled, this is ignored.
-    configs:
-      vqfx1: stage2/configs/vqfx1.txt
-      vqfx2: stage2/configs/vqfx2.txt
-      vqfx3: stage2/configs/vqfx3.txt
-
-    # Optional. If set, a jupyter instance will be spun up when this stage is set. Must be located at lesson-<lesson #>/stage<stage #>/notebook.ipynb
-    notebook: no

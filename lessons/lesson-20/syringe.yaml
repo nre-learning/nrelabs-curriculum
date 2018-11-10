@@ -2,7 +2,6 @@
 lessonName: Introduction to Junos
 lessonID: 20
 category: introductory
-topologyType: custom
 tier: ptr
 
 devices:

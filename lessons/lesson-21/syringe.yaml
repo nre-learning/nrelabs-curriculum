@@ -3,7 +3,6 @@ lessonName: Automating the Troubleshooting Chain
 lessonID: 21
 category: troubleshooting
 lessondiagram: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-21/lessondiagram.png
-topologyType: custom
 tier: prod
 
 blackboxes:
@@ -64,7 +63,3 @@ stages:
   1:
     description: Get the IP Address for a Phone Extension
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-21/stage1/guide.md
-    configs:
-      vqfx1: stage1/configs/vqfx1.txt
-      vqfx2: stage1/configs/vqfx2.txt
-      vqfx3: stage1/configs/vqfx3.txt
