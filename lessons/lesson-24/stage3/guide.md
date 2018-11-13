@@ -1,4 +1,3 @@
-</style>
 ## Junos Automation with PyEZ
 
 **Contributed by: [@jnpr-raylam](https://github.com/jnpr-raylam)**

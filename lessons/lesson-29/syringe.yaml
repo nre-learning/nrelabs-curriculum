@@ -2,7 +2,7 @@
 lessonName: Robot Framework for Automation Testing
 lessonID: 29
 category: verification
-lessondiagram: https://raw.githubusercontent.com/lara29/antidote/master/lessons/lesson-29/lessondiagram.png
+lessondiagram: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-29/lessondiagram.png
 tier: ptr
 
 utilities:
@@ -25,17 +25,12 @@ connections:
 stages:
   1:
     description: Introduction to Robot Framework
-    labguide: https://raw.githubusercontent.com/lara29/antidote/master/lessons/lesson-29/stage1/guide.md
-    configs: 
-      vqfx1: stage1/configs/vqfx1.txt
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-29/stage1/guide.md
 
   2:
     description: Writing Testcases for Junos Devices
-    labguide: https://raw.githubusercontent.com/lara29/antidote/master/lessons/lesson-29/stage2/guide.md
-    configs: 
-      vqfx1: stage2/configs/vqfx1.txt
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-29/stage2/guide.md
+
   3:
     description: Robot Framework - Best Practices
-    labguide: https://raw.githubusercontent.com/lara29/antidote/master/lessons/lesson-29/stage3/guide.md
-    configs: 
-      vqfx1: stage3/configs/vqfx1.txt
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-29/stage3/guide.md
