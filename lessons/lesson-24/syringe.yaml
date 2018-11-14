@@ -28,11 +28,11 @@ stages:
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-24/stage1/guide.md
 
   2:
-    description: Collect data from Junos Devices
+    description: Collect Data from Junos Devices
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-24/stage2/guide.md
 
   3:
-    description: Parse information
+    description: Parse Information
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-24/stage3/guide.md
 
   4:

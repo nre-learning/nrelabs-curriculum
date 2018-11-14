@@ -18,34 +18,29 @@ dev.open()
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 0)">Run this snippet</button>
 
-We use `get_config()` function to get Junos configuration, it accepts two parameters, first is `options` argument to request different config version, e.g., candidate vs committed, default vs inherit
+We use the `get_config()` function to get Junos configuration. The optional `options` argument
+allows us to provide some additional detail for the kind of configuration we're requesting, such as candidate vs committed, default vs inherit, etc.
+By default, `get_config()` returns the non-inherit candidate configuration.
 
-```
-options={'database':'committed|candidate',
-         'inherit':'inherit',
-         'format':'text|set'}
-```
-
-By default, without the options arguments, it returns non-inherit candidate configuration.
-
-For example, use below function to get inherited and committed configuration.
+Let's use the `get_config()` function below and provide options to get the inherited and committed configuration:
 
 ```
 config = dev.rpc.get_config(
     options={'database':'committed', 'inherit':'inherit'})
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 2)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 1)">Run this snippet</button>
 
-And then use `findtext()` function to get Junos device's host name:
+Now that the configuration is stored in the `config` variable, we can use the `findtext()` function to get our device's host name:
 
 ```
 config.findtext('system/host-name')
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 3)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 2)">Run this snippet</button>
 
-Second acceptable argument for `get_config()` is `filter_xml`, it is used to limit the returned configuration hierarchy. The required type of `filter_xml` object is XML etree. To build the etree object, we use lxml builder `E()` function.
+We can also provide another optional argument for `get_config()` called `filter_xml`. This is used to limit the returned configuration hierarchy. This parameter requires us to pass
+in an XML `etree` object, so to build this, we use the `lxml` package we used previously. This package's `E()` function can be supplied inline to get us an `etree` object to provide to `filter_xml`.
 
-For example, use below function call to get and display **committed** Junos config with only `system` and `protocols bgp` hierarchy in **set** format:
+For example, the below function call retrieves and displays the **committed** Junos config with only the `system` and `protocols bgp` hierarchy in the **set** format:
 
 ```
 from lxml.builder import E
@@ -60,21 +55,21 @@ config = dev.rpc.get_config(
 )
 print(config.text)
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 4)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 3)">Run this snippet</button>
 
-`filter_xml` argument is useful when the Junos device contains a huge config, gathering of a huge config takes a long time and is CPU intensive. Best practice is don't collect anything you don't need.
+The `filter_xml` argument is useful when the Junos device contains a huge config; the retrieval of a very large config can take a long time and is CPU intensive. With this filter, we can retrieve only what we need.
 
 #### Provision Junos configuration
 
-To work with Junos configuration, first import `Config` module from `jnpr.junos.utils.config`, and then use `bind()` function to create association with existing Device.
+To work with a Junos configuration, first import `Config` module from `jnpr.junos.utils.config`, and then use the `bind()` function to create association with existing Device.
 
 ```
 from jnpr.junos.utils.config import Config
 dev.bind(cu=Config)
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 5)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 4)">Run this snippet</button>
 
-After that, use `load()` function to load target config, it supports both text and set format. Below two snippets product the same result - set Junos device's host name to 'vqfx_new'.
+After that, use the `load()` function to load target config; it supports both text and set format. In the below example, we're providing a config snippet to set Junos device's host name to 'vqfx_new':
 
 ```
 config_text = '''
@@ -83,36 +78,33 @@ system {
 }'''
 dev.cu.load(config_text, format='text')
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 6)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 5)">Run this snippet</button>
 
-```
-config_set = 'set system host-name vqfx_new'
-dev.cu.load(config_set, format='set')
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 7)">Run this snippet</button>
+In this example, we provided the configuration as a multi-line string literal, stored in `config_text`. You can (and should) use <a href="/labs/?lessonId=16&lessonStage=1" target="_blank">Jinja.</a> to create configuration snippets from a template, and pass the result into `dev.cu.load`, but this is sufficient for a quick example.
 
 ##### Commit Junos configuration
 
-After loading the config, you can do the `show | compare` by calling the `pdiff()` function.
+After loading the config, you can see the current candidate changes (similar to how you would use `show | compare` on the command-line) by calling the `pdiff()` function.
 
 ```
 dev.cu.pdiff()
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 8)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 7)">Run this snippet</button>
 
-Next, same as Junos CLI, perform config commit.
+
+Loading the configuration is only part of the story. Just like on the CLI, when we make a change to the config, we have to commit it to make those changes take effect:
 
 ```
 dev.cu.commit()
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 9)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 8)">Run this snippet</button>
 
-And then verify the change has been applied to vQFX.
+Finally, we can go to our Junos CLI to verify the last configuration change:
 
 ```
 cli
-show configuration |compare rollback 1
+show configuration | compare rollback 1
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 10)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 9)">Run this snippet</button>
 
-By now, you should know all the common operations on Junos automation by PyEZ. In next section, I will introduce one more tool - PyEZ Tables and Views.
+By now, you should know all the common operations on Junos automation in PyEZ. In the next section, we'll look at one more tool in the PyEZ arsenal - Tables and Views.
