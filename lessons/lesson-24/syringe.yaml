@@ -2,7 +2,7 @@
 lessonName: Junos Automation with PyEZ
 lessonID: 24
 category: configuration
-tier: ptr
+tier: prod
 
 utilities:
 - name: linux
@@ -25,20 +25,20 @@ connections:
 stages:
   1:
     description: Introduction
-    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-24/stage1/guide.md
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/minor-fixes/lessons/lesson-24/stage1/guide.md
 
   2:
-    description: Collect data from Junos Devices
-    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-24/stage2/guide.md
+    description: Collect Data from Junos Devices
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/minor-fixes/lessons/lesson-24/stage2/guide.md
 
   3:
-    description: Parse information
-    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-24/stage3/guide.md
+    description: Parse Information
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/minor-fixes/lessons/lesson-24/stage3/guide.md
 
   4:
     description: Configuration Management
-    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-24/stage4/guide.md
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/minor-fixes/lessons/lesson-24/stage4/guide.md
 
   5:
     description: PyEZ Tables and Views
-    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-24/stage5/guide.md
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/minor-fixes/lessons/lesson-24/stage5/guide.md

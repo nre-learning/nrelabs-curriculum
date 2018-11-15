@@ -18,13 +18,13 @@ The PyEZ framework is another NETCONF client, it inherits same capabilities and 
 
 #### What is XML/Netconf?
 
-So, if these are all NETCONF clients, what is NETCONF? In short, NETCONF is a standards-based transport protocol for managing network configurations, defined in [RFC6241](https://tools.ietf.org/html/rfc6241). The relationship between NETCONF and 
+So, if these are all NETCONF clients, what is NETCONF? In short, NETCONF is a standards-based transport protocol for managing network configurations, defined in [RFC6241](https://tools.ietf.org/html/rfc6241).
 
-If you still can't get it, you may think the relationship between HTTP and HTML - HTTP is a communication protocol to transfer web page; and HTML is a markup language to present web page content.
+The relationship between NETCONF and XML is similar to the relationship between HTTP and HTML. The former is a transport protocol, and the latter is the format that the transport protocol carries between the sender and the receiver to communicate data.
 
-Similarly, NETCONF is used to transfer RPC requests and responses between NETCONF client (CLI, PyEZ program) and NETCONF server (Junos); and XML is a markup language to present requests (show, request, clear, configure) and responses (system uptime, interfaces statistics, etc.)
+Just like HTTP is used to carry HTML content from a web server to your web browser, NETCONF is used to transfer RPC requests and responses between NETCONF client (CLI, PyEZ program) and NETCONF server (Junos); and XML is a markup language to present requests (show, request, clear, configure) and responses (system uptime, interfaces statistics, etc.)
 
-In Junos (as well as most other implementations), NETCONF is run over SSH protocol. To get an idea of what's happening in a NETCONF session, let's go to Linux terminal and SSH to vQFX, use `-s` parameter to invoke the NETCONF subsystem. 
+In Junos (as well as most other implementations), NETCONF is run over the Secure Shell (SSH) protocol, to take advantage of the built-in security model of SSH. To get an idea of what's happening in a NETCONF session, let's go to Linux terminal and SSH to vQFX, use `-s` parameter to invoke the NETCONF subsystem. 
 
 ```
 sshpass -p VR-netlab9 \
@@ -54,4 +54,4 @@ Finally, to close the session, use `<close-session>` tag.
 
 This section gives you an initial idea on how XML data is exchanged in Netconf session, and how to use RPC request/response to get a Junos device's uptime.
 
-PyEZ is designed to manage and automate Junos devices easily without Netconf knowledge. In next few sections, you will learn how to collect and parse information, as well as how to apply configuration changes on Junos devices.
+However, as mentioned before, PyEZ is designed to manage and automate Junos devices more easily, so you don't have to deal directly with NETCONF like this. In the next few sections, you will learn how to collect and parse information, as well as how to apply configuration changes on Junos devices.

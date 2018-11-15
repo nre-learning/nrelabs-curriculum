@@ -1,9 +1,11 @@
 ---
-lessonName: Robot Framework for Automation Testing
+lessonName: Using Robot Framework for Automated Testing
 lessonID: 29
 category: verification
 lessondiagram: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-29/lessondiagram.png
-tier: ptr
+tier: prod
+prereqs:
+  - 24  # PyEZ
 
 utilities:
 - name: linux1
@@ -25,12 +27,12 @@ connections:
 stages:
   1:
     description: Introduction to Robot Framework
-    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-29/stage1/guide.md
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/minor-fixes/lessons/lesson-29/stage1/guide.md
 
   2:
     description: Writing Testcases for Junos Devices
-    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-29/stage2/guide.md
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/minor-fixes/lessons/lesson-29/stage2/guide.md
 
   3:
     description: Robot Framework - Best Practices
-    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-29/stage3/guide.md
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/minor-fixes/lessons/lesson-29/stage3/guide.md

@@ -1,90 +1,94 @@
-# Chapter 2 - Writing Testcases for Junos Devices
+## Using Robot Framework for Automated Testing
+
+**Contributed by: [@saimkhan92](https://github.com/saimkhan92) and [@lara29](https://github.com/lara29)**
+
+---
+
+### Chapter 2 - Writing Test Cases for Junos Devices
 
 Now that we have covered how to write a simple test case using Robot framework, let's use our knowledge to form test cases that verify the state of Juniper devices.
 
-## Learning Objectives
-1.  Understand the environment used for communicating with Junos devices
-2.  Use keywords from Junos private library
-3.  Pass command line arguments to Robot, and access them from inside the test case
-3.  Pass arguments for private functions/keywords
+In this section, we'll:
 
------
-## Topology & Environment
-For our next example, we have a vQFX (virtual QFX) which is firewall, connected to a Linux machine. We will run our test-cases using Robot on the Linux machine, and talk to the vQFX to fetch information like its model name, OS version, hostname, and serial number.
+1. Understand the environment used for communicating with Junos devices
+2. Use keywords from Junos private library
+3. Pass command line arguments to Robot, and access them from inside the test case
+4. Pass arguments for private functions/keywords
 
-The Robot framework will use the PyEZ library to communicate with Junos devices. The PyEZ library is a netconf wrapper written in Python and can be used to communicate with devices running Junos. PyEZ can be installed on Linux based machines using the command  `pip install junos-eznc`
+For our next example, we have a vQFX (virtual QFX) device `vqfx1` connected to a Linux machine. We will run our test-cases using Robot on the Linux machine, and talk to the vQFX via NETCONF to fetch information like its model name, OS version, hostname, and serial number.
 
-Similar to the example in our previous chapter, we will create a python file(Robot private library), where we will define functions that use PyEZ library to open a connection to our device, fetch the necessary information, and close the connection to our device.
+For simplicity, Robot framework will use the PyEZ library to communicate with Junos devices. PyEZ is a NETCONF library written in Python and can be used to communicate with devices running Junos. We cover PyEZ in <a href="/labs/?lessonId=16&lessonStage=1" target="_blank">it's own lesson</a> - check it out!
 
-Execute the below command to open the file *JunosDevice.py*
+PyEZ can be installed on Linux based machines using the command  `pip install junos-eznc`. We've already done this in this lesson environment.
+
+Similar to the example in the previous chapter, we will create a python file (Robot private library), where we will define functions that use the PyEZ library to open a connection to our device, fetch the necessary information, and close the connection to our device.
+
+Let's examine the file `JunosDevice.py` and understand the different functions.:
 ```
 cat /antidote/lessons/lesson-29/stage2/JunosDevice.py
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 0)">Run this snippet</button>
 
+Here's some detail around the functions we'll be using in our Robot tests from this library:
 
-Let's examine the file *JunosDevice.py* and understand the different functions. The main functions we will use are the below:
-
+---
 
 <table style="width:100%">
   <tr>
     <th>Function</th>
-    <th>Description</th> 
+    <th>Description</th>
     <th>Keyword in Robot</th>
   </tr>
   <tr>
     <td>connect_device</td>
-    <td>Initiates a connection to the Juniper device</td> 
+    <td>Initiates a connection to the Juniper device</td>
     <td>Connect Device</td>
   </tr>
   <tr>
     <td>gather_device_info</td>
-    <td>Fetches device facts from the Juniper</td> 
+    <td>Fetches device facts from the Juniper</td>
     <td>Gather Device Info</td>
   </tr>
   <tr>
     <td>close_device</td>
-    <td>Gracefully closes the PyEZ connection, once an operation is completed</td> 
+    <td>Gracefully closes the PyEZ connection, once an operation is completed</td>
     <td>Close Device</td>
   </tr>
   <tr>
     <td>get_hostname</td>
-    <td>Fetch hostname from the device</td> 
+    <td>Fetch hostname from the device</td>
     <td>Get Hostname</td>
   </tr>
   <tr>
     <td>get_model</td>
-    <td>Fetch model name from the device</td> 
+    <td>Fetch model name from the device</td>
     <td>Get Model</td>
   </tr>
 </table>
 
-------
+---
 
-Observe that the python functions are exposed as Robot keywords inside the Robot files. Also note that the robot keywords, unlike the python functions, don't contain the underscore and are case insensitive. If you don't understand the implementation of these functions, do not worry! You only need to understand the functionality to use them in the Robot Framework. 
+Observe that theses python functions are exposed as Robot keywords inside the Robot files. Also note that the robot keywords, unlike the python functions, don't contain the underscore and are case insensitive. If you don't understand the implementation of these functions, do not worry! You only need to understand the functionality to use them in the Robot Framework.
 
-*We also have a PyEZ primer tutorial on NRE-Labs which you can refer, in case you would like to learn more about the awesome PyEZ library.*
+Okay, let's start developing our test cases! We will write two test cases, one for fetching and verifying the hostname, and another for the device model. We will use the keywords from our private library, `JunosDevice.py`, to achieve this.
 
-----
-## Test Case using Junos Device
+Let's examine our Robot test-case file `chapter2_eg1.robot`:
 
-Okay, let's start developing our test cases! We will write two test cases, one for fetching and verifying the hostname, and another for the device model. We will use the keywords from our private library, *JunosDevice.py*, to achieve this.
-
-Let's examine our Robot test-case file `chapter2_eg1.robot`. Execute the below command to open the file *chapter2_eg1.robot*
 ```
 cat /antidote/lessons/lesson-29/stage2/chapter2_eg1.robot
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 1)">Run this snippet</button>
 
-In the `Settings` table, we define our private custom library *JunosDevice.py*.
+In the `Settings` table, we define our private custom library `JunosDevice.py`:
 
 >```
 >*** Settings ***
 >Library    JunosDevice.py
 >```
 
-
 In the `Test Cases` table, we have the `Check Hostname` and `Check Model` test cases.
+
+The `Check Hostname` test-case verifies if the hostname of the device is 'vqfx1':
 
 >```
 >Check Hostname
@@ -93,7 +97,8 @@ In the `Test Cases` table, we have the `Check Hostname` and `Check Model` test c
 >    Should Be Equal As Strings    ${hostname}    vqfx1
 >    Close Device
 >```
-*The Check Hostname test-case verifies if the hostname of the device is 'vqfx1'.*
+
+The `Check Model` test-case verifies if the device model name is `VQFX-10000`:
 
 >```
 >Check Model
@@ -102,21 +107,21 @@ In the `Test Cases` table, we have the `Check Hostname` and `Check Model` test c
 >    Should Be Equal As Strings    ${model}    VQFX-10000
 >    Close Device
 >```
-*The Check Model test-case verifies if the device model name is VQFX-10000.*
 
 Here, each test case consists of four keywords - `Connect Device`, `Get Hostname`, `Should Be Equal As Strings`, and `Close Device`
 
-`Connect Device`, `Get Hostname`, and `Close Device` are keywords which are picked from our private Library *JunosDevice.py*.
+`Connect Device`, `Get Hostname`, and `Close Device` are keywords which are picked from our private Library `JunosDevice.py`.
 
-The keyword `Should Be Equal As Strings` is a "built-in" keyword that can be used in any Robot test cases, and does not explicitly require any library to be imported. This keyword checks if two strings variables passed to it are the same.
+The keyword `Should Be Equal As Strings` is a "built-in" keyword that can be used in any Robot test case, and does not require any library to be imported. This keyword checks if two strings variables passed to it are the same.
 
-The IP address of the vQFX, the username, and password for login, are provided to Robot by passing as command line arguments. These arguments can be accessed within the .robot file by referencing them using their names, as shown below.
+The IP address of the vQFX, the username, and password for login, are provided to Robot by passing as command line arguments. These arguments can be accessed within the .robot file by referencing them using their names, as shown below:
 
 >```
 >Connect Device    host=${HOST}    user=${USER}    password=${PASSWORD}
 >```
 
-Execute this script by running the below command (note the command line variables passed using the flag --variable)
+Execute this test suite by running the below command (note the command line variables passed using the flag --variable)
+
 ```
 robot --variable HOST:vqfx1 --variable USER:root --variable PASSWORD:VR-netlab9 /antidote/lessons/lesson-29/stage2/chapter2_eg1.robot
 ```
