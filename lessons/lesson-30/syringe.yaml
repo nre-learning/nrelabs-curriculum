@@ -1,13 +1,13 @@
 ---
-lessonName: Working with Salt
+lessonName: Network Automation with Salt
 lessonID: 30
 category: configuration
 lessondiagram: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-30/salt.png
-tier: ptr
+tier: prod
 
 utilities:
 - name: salt1
-  image: sudhishna/salt
+  image: antidotelabs/salt
   sshuser: antidote
   sshpassword: antidotepassword
   ports: [22]
