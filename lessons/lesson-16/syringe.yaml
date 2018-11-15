@@ -2,7 +2,9 @@
 lessonName: Using Jinja for Configuration Templates
 lessonID: 16
 category: introductory
-tier: ptr
+tier: prod
+prereqs:
+  - 14  # YAML
 
 utilities:
 - name: linux1
@@ -18,11 +20,11 @@ stages:
     description: For Loops
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-16/stage2/guide.md
   3: 
-    description: Let try the if and set statements!
+    description: "If" and "Set" Statements
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-16/stage3/guide.md
   4: 
-    description: Jinja2 with YAML
+    description: Passing Data into a Template From YAML
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-16/stage4/guide.md
   5: 
-    description: Jinja2 templates as external files
+    description: Importing a Jinja Template from a File
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-16/stage5/guide.md
