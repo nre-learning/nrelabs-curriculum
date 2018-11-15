@@ -113,6 +113,8 @@ spec:
         image: antidotelabs/syringe:latest
         imagePullPolicy: Always
         env:
+        - name: SYRINGE_DOMAIN
+          value: ptr.labs.networkreliability.engineering
         - name: SYRINGE_LESSONS
           value: "/antidote/lessons"
         - name: SYRINGE_TIER
