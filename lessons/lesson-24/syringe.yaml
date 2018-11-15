@@ -2,7 +2,7 @@
 lessonName: Junos Automation with PyEZ
 lessonID: 24
 category: configuration
-tier: ptr
+tier: prod
 
 utilities:
 - name: linux
