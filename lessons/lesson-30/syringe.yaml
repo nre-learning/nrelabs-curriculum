@@ -27,12 +27,12 @@ connections:
 stages:
   1:
     description: Salt Master and Minion
-    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-30/stage1/guide.md
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/minor-fixes/lessons/lesson-30/stage1/guide.md
 
   2:
     description: Junos Proxy Minions
-    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-30/stage2/guide.md
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/minor-fixes/lessons/lesson-30/stage2/guide.md
 
   3:
     description: Executing Junos commands in Salt
-    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-30/stage3/guide.md
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/minor-fixes/lessons/lesson-30/stage3/guide.md
