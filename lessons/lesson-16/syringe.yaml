@@ -20,9 +20,9 @@ stages:
     description: For Loops
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/minor-fixes/lessons/lesson-16/stage2/guide.md
   3: 
-    description: "If" and "Set" Statements
+    description: '"If" and "Set" Statements'
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/minor-fixes/lessons/lesson-16/stage3/guide.md
-  4: 
+  4:
     description: Passing Data into a Template From YAML
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/minor-fixes/lessons/lesson-16/stage4/guide.md
   5: 
