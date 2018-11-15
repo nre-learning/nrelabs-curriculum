@@ -14,8 +14,8 @@ Salt has a server-agent architecture where the Salt Master is the server and the
 The Salt Master and the Salt Minion can run on seprate machines or can run on the same machine itself. In our case, the Salt Master and Minion are running on the same machine. We'll begin by making sure the `salt-minion` and `salt-master` services are started:
 
 ```
-service salt-minion start
-service salt-minion start
+service salt-master restart
+service salt-minion restart
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('salt1', 0)">Run this snippet</button>
 
