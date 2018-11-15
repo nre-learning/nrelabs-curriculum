@@ -89,7 +89,7 @@ After loading the config, you can see the current candidate changes (similar to 
 ```
 dev.cu.pdiff()
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 7)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 6)">Run this snippet</button>
 
 
 Loading the configuration is only part of the story. Just like on the CLI, when we make a change to the config, we have to commit it to make those changes take effect:
@@ -97,7 +97,7 @@ Loading the configuration is only part of the story. Just like on the CLI, when 
 ```
 dev.cu.commit()
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 8)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 7)">Run this snippet</button>
 
 Finally, we can go to our Junos CLI to verify the last configuration change:
 
@@ -105,6 +105,6 @@ Finally, we can go to our Junos CLI to verify the last configuration change:
 cli
 show configuration | compare rollback 1
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 9)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 8)">Run this snippet</button>
 
 By now, you should know all the common operations on Junos automation in PyEZ. In the next section, we'll look at one more tool in the PyEZ arsenal - Tables and Views.

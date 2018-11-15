@@ -4,7 +4,7 @@
 
 ---
 
-# Chapter 2 - Writing Test Cases for Junos Devices
+### Chapter 2 - Writing Test Cases for Junos Devices
 
 Now that we have covered how to write a simple test case using Robot framework, let's use our knowledge to form test cases that verify the state of Juniper devices.
 
@@ -31,6 +31,7 @@ cat /antidote/lessons/lesson-29/stage2/JunosDevice.py
 
 Here's some detail around the functions we'll be using in our Robot tests from this library:
 
+---
 
 <table style="width:100%">
   <tr>
@@ -64,6 +65,8 @@ Here's some detail around the functions we'll be using in our Robot tests from t
     <td>Get Model</td>
   </tr>
 </table>
+
+---
 
 Observe that theses python functions are exposed as Robot keywords inside the Robot files. Also note that the robot keywords, unlike the python functions, don't contain the underscore and are case insensitive. If you don't understand the implementation of these functions, do not worry! You only need to understand the functionality to use them in the Robot Framework.
 

@@ -4,17 +4,17 @@
 
 ---
 
-# Chapter 3 - Robot Framework - Best Practices
+### Chapter 3 - Robot Framework - Best Practices
 
 Now that we have covered how to write robot files which verify the state of Juniper devices, let's delve into more advanced concepts and discuss some best practices.
 
-## Defining User Keywords
+### Defining User Keywords
 
 While writing more complex network validation robot files, you'll soon realize that you end up repeating and rewriting some fixed series of keywords and logical statements over and over again. These are usually common across all the test cases.
 
 To avoid doing this and also to decrease the overall length of the robot file, we define *user keywords*.  User keywords are new, high-level keywords which club together multiple preexisting keywords and logical statements. In a robot file, the user keywords are defined under the *Keywords* table. The use of user keywords will be demonstrated below.
 
-## Using Resource Files
+### Using Resource Files
 
 All the *variables* and *user keywords* defined inside a robot file can only be used within the file in which they were created. In order to reuse these variables and keywords across multiple robot files, we create "resource files".
 
@@ -22,11 +22,11 @@ Resource files have the same syntax as robot files, the only difference being, t
 
 This approach helps in keeping the test cases file uncluttered and better organized, with only the relevant test cases being a part of it. Resource files can be imported by the other robot files inside the *Settings* table using the *resource* setting.
 
-## Variable Files
+### Variable Files
 
 Variable files, like resource files, can be used to share variables across multiple test case robot files. Variable files are implemented as a Python module. All the variables declared inside a Python module can be directly imported by a robot file, under the settings table with the variable keyword. Refer to the [Robot Documentation](http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#variable-files) for more info on Variable files.
 
-## Setup and Teardown
+### Setup and Teardown
 
 The Robot framework supports two types of setup and teardown functions - "Test Setup", "Test Teardown" and "Suite Setup", "Suite Teardown". The keywords defined under the *Test* Setup and Teardown settings are run before and after every test case. The keywords defined under the *Suite* Setup and Teardown settings are run before and after every test suite(multiple test cases).
 
@@ -34,7 +34,7 @@ Consider a scenario where NETCONF/SSH connection is initialized and terminated, 
 
 Now it's time to roll up your sleeves and jump on to tackling the final two test cases of this tutorial. Are you as thrilled as I am? Let's roll!
 
-## Test Case 1
+### Test Case 1
 
 Let's examine our Robot test-case file `chapter3_eg1.robot`:
 
@@ -88,7 +88,7 @@ robot --variable HOST:vqfx1 --variable USER:root --variable PASSWORD:VR-netlab9 
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 4)">Run this snippet</button>
 
-## Test Case 2
+### Test Case 2
 
 Let's examine our Robot test-case file `chapter3_eg2.robot`:
 

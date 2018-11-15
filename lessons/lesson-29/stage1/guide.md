@@ -4,7 +4,7 @@
 
 ---
 
-## Chapter 1 - Introduction to Robot Framework
+### Chapter 1 - Introduction to Robot Framework
 
 Robot Framework is a Python based test automation framework, which is extensively used by the mobile, web, and embedded systems industry to perform acceptance testing. It provides a simple interface to write test-cases that can be arranged into a test-suite and is easy to implement.
 
