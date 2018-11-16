@@ -1,49 +1,50 @@
-# Using Jinja for Configuration Templates  
-**Contributed by: [@ShrutiVPawaskar](https://github.com/ShrutiVPawaskar) and [@shahbhoomi](https://github.com/shahbhoomi)**
-## Part 1 - Introduction to Jinja2 
+## Using Jinja for Configuration Templates
 
-I am sure at some point you might have heard the word “Jinja2”. So, what is Jinja2?? Why do you need to invest your time in learning Jinja2 and go through these lessons? We will answer all your questions in this lesson!  
-  
-### What are Templates?
-* A template is a text document where some or all of the content is dynamically generated.  
-* Data is automatically loaded to the templates with the help of template variables. You can also say that the templates are reusable text files.  
-  
-### What is Jinja2? Why do we use it?
-* Jinja2 is a modern and designer-friendly templating language for Python.  It is prevalent in the DevOps/NetOps community.  
-* It has gained a lot of popularity as it has a lot of information published and is supported by tools like Ansible, StackStorm, and Salt.  
-* Template Inheritance: It allows you to build a base “skeleton” template that contains all the common elements of your site and defines blocks that child templates can override.  
-  
-So, let’s begin with our first example and get you started with your Jinja2 Adventure!!  
-  
-First, we need to install Jinja2 using `pip install jinja2`(it is preinstalled for these lessons). Next, open an interactive python shell by running the snippet below and import the template module from Jinja2.  
+**Contributed by: [@ShrutiVPawaskar](https://github.com/ShrutiVPawaskar) and [@shahbhoomi](https://github.com/shahbhoomi)**
+
+---
+
+## Part 1 - Introduction to Jinja
+
+I am sure at some point you might have heard the word “Jinja”, or specifically "Jinja2" (the newest version of Jinja). So, what is Jinja? Why do you need to invest your time in learning Jinja and go through these lessons? We will attempt to answer these questions in this lesson.
+
+First, let's talk about templates in general. A template in this context is a text document where some or all of the content is dynamically generated. Data is automatically loaded to the templates with the help of template variables. You could also say that the templates are reusable text files.
+
+So what is Jinja, and why are we using it for templating in the world of network automation?
+
+* Jinja is a modern and designer-friendly templating language for Python.  It is prevalent in the DevOps/NetOps community.
+* Jinja has gained a lot of popularity as it has a lot of information published and is supported by tools like Ansible, StackStorm, and Salt.
+* Template Inheritance: Jinja allows you to build a base “skeleton” template that contains all the common elements of your site and defines blocks that child templates can override.
+
+So, let’s begin with our first example and get you started with your Jinja Adventure!
+
+First, we need to install Jinja using `pip install jinja2`(it is preinstalled for these lessons). Next, open an interactive python shell by running the snippet below and import the template module from Jinja.
+
 ```
 python
 from jinja2 import Template
-```  
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 0)">Run this snippet</button>  
-  
-Run the below snippet to see the sample output we plan on achieving using our Jinja2 Template.  
 ```
-print('ge-0/0/0 has IP address 192.168.1.1')
-```  
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 1)">Run this snippet</button>  
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 0)">Run this snippet</button>
 
-### Template Syntax:
+As our first example, let's try to print the text `ge-0/0/0 has IP address 192.168.1.1`, but instead of simply printing this string,
+let's make the interface name and IP address more dynamic, by making them Jinja template variables.
+
+Jinja uses double curly braces (`{{` and `}}`) to indicate a portion of the template that should be replaced with a variable. The text we want to print
+will look like this after we've substituted in our variables:
 
 ```
-template_name = Template('some_text {{template_variable1}} some_text')
-```   
-where `{{template_variable1}}` is the template variable and template_name is the name of the template. `Template()` function converts your text into a reusable Jinja2 template.  
+{{interface}} has IP address {{ip_address}}
+```
 
-Let us look at Example 1 to learn how to use these templates. Here `ipaddr_template` is the Jinja2 Template and `{{interface}}` and `{{ip_address}}` are the template variables.  
+In one of the following sections, we'll cover how to import templates from a file - for now, we'll use string variables to store our templates. Let's pass a string
+variable into the `Template()` function to create our template object:
 
-### Example: 1  
 ```
 ipaddr_template = Template('{{interface}} has IP address {{ip_address}}')
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 3)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 2)">Run this snippet</button>
 
-Now that our template is ready, we want to load the data in it. This can be done with the help of the `template.render()` function. `template.render()` will take the data you supply to the template variables and load it to the template. Check that out by running the below snippet.  
+Now that our template is ready, we want to load the data in it. This can be done with the help of the `template.render()` function. `template.render()` will take the data you supply to the template variables and load it to the template. Check that out by running the below snippet.
 
 ```
 interface_1 = ipaddr_template.render(interface='ge-0/0/0',
@@ -51,27 +52,22 @@ interface_1 = ipaddr_template.render(interface='ge-0/0/0',
 print(str(interface_1))
 ```
 
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 4)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 3)">Run this snippet</button>
 
-let’s look at Example 2 and supply the different variable values to our Jinaj2 template aka "Resuable Text File".  
-
-### Example: 2  
+Since we've parameterized this template, we can put any values we want:
 
 ```
 render_2 = ipaddr_template.render(interface='ge-0/0/1',
                                   ip_address='10.10.1.1')
 print(str(render_2))
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 5)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 4)">Run this snippet</button>
 
-That’s all for stage-1, in coming lessons we will look into how to use a list or dictionary of variables to populate the template. But before that we expect you to have the following take away from stage-1.  
-  
-### Take-away from Stage 1:
-* Jinja2 is a templating tool  
-* Jinja2 templates are the text files that sets the format of your output  
-* `{{}}` shows the template variables and can be loaded to the template using the `render()` function.  
-* As seen from example 1 and 2, Jinja2 templates can be “reused” with a different set of variables.     
+So, in summary:
 
-That’s all for now; next, we will look into how to use a list or dictionary of variables to populate the template.
+* Jinja is a templating tool
+* Jinja templates are the text files that set the format of your output
+* `{{}}` shows the template variables and can be loaded to the template using the `render()` function.
+* Jinja templates can be “reused” with a different set of variables.
 
-Hope you enjoyed it!! See you in stage-2!
+Next, we will look into how to use a list or dictionary of variables to populate the template.

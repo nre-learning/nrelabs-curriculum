@@ -1,0 +1,44 @@
+---
+lessonName: Junos Automation with PyEZ
+lessonID: 24
+category: configuration
+tier: prod
+
+utilities:
+- name: linux
+  image: antidotelabs/utility
+  sshuser: antidote
+  sshpassword: antidotepassword
+
+devices:
+- name: vqfx
+  image: antidotelabs/vqfxspeedy:snap1
+  sshuser: root
+  sshpassword: VR-netlab9
+  ports: [830]
+
+connections:
+- a: vqfx
+  b: linux
+  subnet: 10.1.0.0/24
+
+stages:
+  1:
+    description: Introduction
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-24/stage1/guide.md
+
+  2:
+    description: Collect Data from Junos Devices
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-24/stage2/guide.md
+
+  3:
+    description: Parse Information
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-24/stage3/guide.md
+
+  4:
+    description: Configuration Management
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-24/stage4/guide.md
+
+  5:
+    description: PyEZ Tables and Views
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-24/stage5/guide.md

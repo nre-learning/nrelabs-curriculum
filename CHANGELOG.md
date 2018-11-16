@@ -4,17 +4,21 @@
 
 ### Curriculum
 
-- Adding Lesson-30 Working with Salt [#114](https://github.com/nre-learning/antidote/pull/114)
-- Adding Lesson-16 Jinja2 Templates [#121](https://github.com/nre-learning/antidote/pull/121)
-- Adding Lesson-15 Event-Driven Automation with StackStorm [#126](https://github.com/nre-learning/antidote/pull/126)
-
 ### Other
 
-## 0.1.2 - October 29, 2018
+
+## 0.1.3 - November 15, 2018
 
 ### Curriculum
 
+- Adding Lesson-24 Junos Automation with PyEZ (jnpr-raylam)[#24](https://github.com/nre-learning/antidote/pull/117)
+- Adding Lesson-30 Working with Salt [#114](https://github.com/nre-learning/antidote/pull/114)
+- Adding Lesson-16 Jinja2 Templates [#121](https://github.com/nre-learning/antidote/pull/121)
+- Adding Lesson-29 Robot Framework [#125](https://github.com/nre-learning/antidote/pull/125)
+
 ### Other
+
+- Tidied up lesson definitions based on recent syringe changes [#129](https://github.com/nre-learning/antidote/pull/129)
 
 ## 0.1.1 - October 28, 2018
 

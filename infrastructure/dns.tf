@@ -25,3 +25,14 @@ resource "google_dns_record_set" "ptr" {
     "${google_compute_global_address.nrefrontend.address}",
   ]
 }
+
+resource "google_dns_record_set" "abathur" {
+  name = "abathur.networkreliability.engineering."
+  type = "A"
+  ttl  = 300
+  project = "${var.project}"
+  managed_zone = "nre"
+  rrdatas = [
+    "${google_compute_instance.abathur.network_interface.0.access_config.0.nat_ip}",
+  ]
+}

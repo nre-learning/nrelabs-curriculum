@@ -1,16 +1,21 @@
-# Working with Salt
+## Network Automation with Salt
+
+**Contributed by: [Sudhishna Sendhilvelan](https://github.com/Sudhishna) and [Vinayak Iyer](https://github.com/vinayak-skywalker)**
+
+---
+
 ## Part 2 - Junos Proxy Minions
 
-To manage a Junos device, we do not run an on box Salt Minion. Instead we make use of a [Proxy Minion](https://docs.saltstack.com/en/latest/topics/proxyminion/index.html). A Proxy minion can be run on the Salt Master or the Salt Minion. 
+To manage a Junos device, we do not run an on box Salt Minion. Instead we make use of a [Proxy Minion](https://docs.saltstack.com/en/latest/topics/proxyminion/index.html). A Proxy minion can be run on the Salt Master or the Salt Minion.
 
-Now let's configure the Proxy Minions. To do this, we must define the IP address, username, password and the proxy type which in our case is junos. All of these details are part of the vqfx1.sls . An SLS file is a Salt State file which can be in various formats. The simplest case is YAML, or it can be YAML+Jinja in case we require a templating language.
+Now let's configure the Proxy Minions. To do this, we must define the IP address, username, password and the proxy type which in our case is `junos`. All of these details are part of the vqfx1.sls. An SLS file is a Salt State file which can be in various formats. The simplest case is YAML, or it can be YAML+Jinja in case we require a templating language.
 ```
 cat /srv/pillar/vqfx1.sls
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('salt1', 0)">Verify Output (Optional)</button>
 
 
-At this point we have to write the top.sls file which maps the Proxy Minion to the [pillar](https://docs.saltstack.com/en/latest/topics/pillar/) file that contains its corresponding details (vqfx1.sls)
+At this point we have to write the top.sls file which maps the Proxy Minion to the [pillar](https://docs.saltstack.com/en/latest/topics/pillar/) file that contains its corresponding details (`vqfx1.sls`)
 ```
 cat /srv/pillar/top.sls
 ```
@@ -44,7 +49,7 @@ salt-key --accept="vqfx1" -y
 Once this is done, the Salt Master will be able to communicate with the Salt Proxy Minion
 
 Next, let's retrieve the device facts using the junos.facts execution module to verify that the device is connected to the Salt Master.
-(Note: give a few seconds for the keys to sync, before trying this command) 
+(Note: give a few seconds for the keys to sync, before trying this command)
 ```
 salt 'vqfx1' junos.facts
 ```

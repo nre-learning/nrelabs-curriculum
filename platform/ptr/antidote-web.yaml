@@ -77,7 +77,7 @@ spec:
   tls:
     - hosts:
       - ptr.labs.networkreliability.engineering
-      secretName: tls-certificate10172018
+      secretName: tls-certificate
   rules:
   - host: ptr.labs.networkreliability.engineering
     http:

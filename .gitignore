@@ -40,3 +40,5 @@ _old_contrail/
 *ansiblekey.json
 
 platform/antidote-web/target/
+
+__pycache__

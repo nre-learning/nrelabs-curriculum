@@ -1,14 +1,13 @@
 ---
-lessonName: Working with Salt
+lessonName: Network Automation with Salt
 lessonID: 30
-category: introductory
-topologyType: custom
-lessondiagram: https://raw.githubusercontent.com/sudhiram9/antidote/master/lessons/lesson-30/salt.png
-tier: local
+category: configuration
+lessondiagram: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-30/salt.png
+tier: prod
 
 utilities:
 - name: salt1
-  image: sudhishna/salt
+  image: antidotelabs/salt
   sshuser: antidote
   sshpassword: antidotepassword
   ports: [22]
@@ -28,19 +27,12 @@ connections:
 stages:
   1:
     description: Salt Master and Minion
-    labguide: https://raw.githubusercontent.com/sudhiram9/antidote/master/lessons/lesson-30/stage1/guide.md
-    configs:
-      vqfx1: https://raw.githubusercontent.com/sudhiram9/antidote/master/lessons/lesson-30/stage1/configs/vqfx1.txt
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-30/stage1/guide.md
 
   2:
     description: Junos Proxy Minions
-    labguide: https://raw.githubusercontent.com/sudhiram9/antidote/master/lessons/lesson-30/stage2/guide.md
-    configs:
-      vqfx1: https://raw.githubusercontent.com/sudhiram9/antidote/master/lessons/lesson-30/stage2/configs/vqfx1.txt
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-30/stage2/guide.md
 
   3:
     description: Executing Junos commands in Salt
-    labguide: https://raw.githubusercontent.com/sudhiram9/antidote/master/lessons/lesson-30/stage3/guide.md
-    configs:
-      vqfx1: https://raw.githubusercontent.com/sudhiram9/antidote/master/lessons/lesson-30/stage3/configs/vqfx1.txt
-
+    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-30/stage3/guide.md
