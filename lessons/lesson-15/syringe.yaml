@@ -46,39 +46,18 @@ stages:
   1:
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-15/stage1/guide.md
     description: Actions
-<<<<<<< HEAD
-    configs:
-      vqfx1: stage1/configs/vqfx1.txt
-      vqfx2: stage1/configs/vqfx2.txt
-      vqfx3: stage1/configs/vqfx3.txt
 
   2:
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-15/stage1/guide.md
     description: Workflows
-    configs:
-      vqfx1: stage1/configs/vqfx1.txt
-      vqfx2: stage1/configs/vqfx2.txt
-      vqfx3: stage1/configs/vqfx3.txt
   3:
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-15/stage1/guide.md
     description: Sensors and Triggers
-    configs:
-      vqfx1: stage1/configs/vqfx1.txt
-      vqfx2: stage1/configs/vqfx2.txt
-      vqfx3: stage1/configs/vqfx3.txt
+
   4:
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-15/stage1/guide.md
     description: Rules
-    configs:
-      vqfx1: stage1/configs/vqfx1.txt
-      vqfx2: stage1/configs/vqfx2.txt
-      vqfx3: stage1/configs/vqfx3.txt
+
   5:
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-15/stage1/guide.md
     description: Using EDI for Self-Service Automation
-    configs:
-      vqfx1: stage1/configs/vqfx1.txt
-      vqfx2: stage1/configs/vqfx2.txt
-      vqfx3: stage1/configs/vqfx3.txt
-=======
->>>>>>> master
