@@ -1,6 +1,6 @@
 ---
 lessonName: Introduction to YAML
-lessonID: 14
+lessonId: 14
 category: introductory
 tier: prod
 
@@ -12,9 +12,11 @@ utilities:
 
 stages:
   1:
+    id: 1
     description: Lists
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-14/stage1/guide.md
   2:
+    id: 2
     description: Dictionaries (key/value pairs)
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-14/stage2/guide.md
   # 3:

@@ -1,6 +1,6 @@
 ---
 lessonName: Python for Network Engineers
-lessonID: 22
+lessonId: 22
 category: introductory
 lessondiagram: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-22/lessondiagram.png
 tier: ptr
@@ -13,13 +13,16 @@ utilities:
 
 stages:
   1:
+    id: 1
     description: Running Python for the First Time
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-22/stage1/guide.md
 
   2:
+    id: 2
     description: Basic Python Data Types
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-22/stage2/guide.md
 
   3:
+    id: 3
     description: Making Python Code More Re-usable
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-22/stage3/guide.md
