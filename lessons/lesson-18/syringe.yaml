@@ -32,4 +32,4 @@ stages:
   1:
     id: 1
     description: ToDD Basics
-    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-18/stage1/guide.md
+    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-18/stage1/guide.md
