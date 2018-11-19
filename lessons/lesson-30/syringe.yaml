@@ -1,6 +1,6 @@
 ---
 lessonName: Network Automation with Salt
-lessonID: 30
+lessonId: 30
 category: configuration
 lessondiagram: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-30/salt.png
 tier: prod
@@ -26,13 +26,16 @@ connections:
 
 stages:
   1:
+    id: 1
     description: Salt Master and Minion
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-30/stage1/guide.md
 
   2:
+    id: 2
     description: Junos Proxy Minions
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-30/stage2/guide.md
 
   3:
+    id: 3
     description: Executing Junos commands in Salt
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-30/stage3/guide.md

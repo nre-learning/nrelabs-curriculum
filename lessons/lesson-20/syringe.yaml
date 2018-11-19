@@ -1,6 +1,6 @@
 ---
 lessonName: Introduction to Junos
-lessonID: 20
+lessonId: 20
 category: introductory
 tier: ptr
 
@@ -12,5 +12,6 @@ devices:
 
 stages:
   1:
+    id: 1
     description: Your First Config Commit
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-19/stage1/guide.md

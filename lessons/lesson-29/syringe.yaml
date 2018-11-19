@@ -1,6 +1,6 @@
 ---
 lessonName: Using Robot Framework for Automated Testing
-lessonID: 29
+lessonId: 29
 category: verification
 lessondiagram: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-29/lessondiagram.png
 tier: prod
@@ -26,13 +26,16 @@ connections:
 
 stages:
   1:
+    id: 1
     description: Introduction to Robot Framework
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-29/stage1/guide.md
 
   2:
+    id: 2
     description: Writing Testcases for Junos Devices
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-29/stage2/guide.md
 
   3:
+    id: 3
     description: Robot Framework - Best Practices
     labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-29/stage3/guide.md
