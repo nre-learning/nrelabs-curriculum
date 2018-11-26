@@ -8,7 +8,7 @@ Contributing to Antidote
 
    curriculum.rst
    platform.rst
-   ptr.rst
+   releases.rst
 
 In general, there are two area in which to contribute to Antidote:
 
