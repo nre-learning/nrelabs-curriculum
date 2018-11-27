@@ -6,7 +6,7 @@ tier: prod
 
 iframeResources:
 - ref: jupyter
-  protocol: https
+  protocol: http
   path: "/notebooks/lesson-13/stage1/notebook.ipynb"
   port: 8888
 
