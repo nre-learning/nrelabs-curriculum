@@ -12,8 +12,11 @@ StackStorm is a powerful event-driven automation framework that is built from in
 to be extensible at every layer.
 
 In this lesson, we'll be mostly working with the StackStorm command-line utility `st2`, so in this first lab, we'll take a moment to overview this, as well
-
 as how StackStorm integrates with other systems through something called `packs`.
+
+Note that in many places in this lesson, we'll be linking to the [StackStorm docs](https://docs.stackstorm.com/).
+This is definitely the best place to go for more technical information on how StackStorm is installed, configured,
+and operated. This lesson will instead focus on the basic concepts to get you started.
 
 
 #### Command-Line Help

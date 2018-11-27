@@ -8,6 +8,12 @@ TBD
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 0)">Run this snippet</button>
 
+
+Just like real "tasks" performed manually, or via another tool, StackStorm Actions almost never run in isolation. They're usually run in parallel with each other, or in sequence. They're usually run based off a decision that was made from information made available by an event, or another action's output.
+
+In StackStorm, we call these complex logical structures "Workflows". There are a few options for accomplishing this in StackStorm, but in short, Workflows allow us to create a logical decision path where we chain actions together to accomplish a broader objective, rather than simply "running a command" or "executing a script". We can use Workflows to commit our tribal knowledge about how we go about solving problems into an executable format that everyone can use.
+
+
 ### What about other tools?
 
 You might be asking - why not use other tools like Ansible, Puppet, or Chef for running workflows? In short, you can, but they're not recognized formally as a workflow by StackStorm. Let's use Ansible an an example:
