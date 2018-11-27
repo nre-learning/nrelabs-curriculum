@@ -36,7 +36,6 @@ connections:
   subnet: 10.31.0.0/24
 
 stages:
-  1:
-    id: 1
+  - id: 1
     labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-15/stage1/guide.md
     description: Actions
