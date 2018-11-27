@@ -1,6 +1,6 @@
 ---
 lessonName: Event-Driven Network Automation with StackStorm
-lessonID: 15
+lessonId: 15
 category: configuration
 tier: ptr
 
@@ -44,7 +44,8 @@ connections:
 
 stages:
   1:
-    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-15/stage1/guide.md
+    id: 1
+    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-15/stage1/guide.md
     description: Actions
 
   2:

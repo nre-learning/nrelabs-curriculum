@@ -1,2 +1,2 @@
-docker build -t antidotelabs/jupyter -f Dockerfile ../..
+docker build -t antidotelabs/jupyter .
 docker push antidotelabs/jupyter

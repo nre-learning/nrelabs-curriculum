@@ -1,15 +1,19 @@
 ---
 lessonName: Multi-Vendor Network Automation with NAPALM
-lessonID: 13
+lessonId: 13
 category: configuration
 tier: prod
 
-iframeresources:
+iframeResources:
+- ref: jupyter
+  protocol: http
+  path: "/notebooks/lesson-13/stage1/notebook.ipynb"
+  port: 8888
+
+blackboxes:
 - name: jupyter
   image: antidotelabs/jupyter
-  protocol: https
-  uri: "/notebooks/lesson-13/stage1/notebook.ipynb"
-  port: 8888
+  ports: [8888]
 
 utilities:
 - name: linux1
@@ -47,5 +51,6 @@ connections:
 
 stages:
   1:
+    id: 1
     description: Get device facts
-    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-13/stage1/guide.md
+    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-13/stage1/guide.md

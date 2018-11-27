@@ -1,6 +1,6 @@
 ---
 lessonName: End-to-End Network Testing with ToDD
-lessonID: 18
+lessonId: 18
 category: verification
 tier: ptr
 
@@ -30,8 +30,6 @@ connections:
 
 stages:
   1:
+    id: 1
     description: ToDD Basics
-    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-18/stage1/guide.md
-
-    configs:
-      vqfx1: stage1/configs/vqfx1.txt
+    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-18/stage1/guide.md

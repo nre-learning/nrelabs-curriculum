@@ -1,6 +1,6 @@
 ---
 lessonName: Version Control with Git
-lessonID: 17
+lessonId: 17
 category: introductory
 tier: prod
 
@@ -12,8 +12,9 @@ utilities:
 
 stages:
   1:
+    id: 1
     description: Your first commit
-    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-17/stage1/guide.md
+    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-17/stage1/guide.md
 
   # 2:
   #   What about Github? (a.k.a. Git remotes)
