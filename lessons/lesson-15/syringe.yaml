@@ -3,13 +3,14 @@ lessonName: Event-Driven Network Automation with StackStorm
 lessonId: 15
 category: configuration
 tier: ptr
+lessonDiagram: https://raw.githubusercontent.com/nre-learning/antidote/st2-lesson/lessons/lesson-19/lessondiagram.png
+lessonVideo: https://www.youtube.com/watch?v=YhbWBX71yGQ
 
-iframeresources:
-- name: nginx
-  image: nginx
-  protocol: http
-  uri: "/"
-  port: 80
+iframeResources:
+- ref: st2
+  protocol: https
+  path: "/"
+  port: 443
 
 utilities:
 - name: st2
@@ -45,20 +46,30 @@ connections:
 stages:
   1:
     id: 1
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-15/stage1/guide.md
-    description: Actions
+    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/st2-lesson/lessons/lesson-15/stage1/guide.md
+    description: StackStorm CLI and Basic Concepts
 
   2:
-    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-15/stage1/guide.md
-    description: Workflows
+    id: 2
+    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/st2-lesson/lessons/lesson-15/stage2/guide.md
+    description: Actions
+
   3:
-    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-15/stage1/guide.md
-    description: Sensors and Triggers
+    id: 3
+    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/st2-lesson/lessons/lesson-15/stage3/guide.md
+    description: Workflows
 
   4:
-    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-15/stage1/guide.md
-    description: Rules
+    id: 4
+    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/st2-lesson/lessons/lesson-15/stage4/guide.md
+    description: Sensors and Triggers
 
   5:
-    labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-15/stage1/guide.md
+    id: 5
+    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/st2-lesson/lessons/lesson-15/stage5/guide.md
+    description: Rules
+
+  6:
+    id: 6
+    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/st2-lesson/lessons/lesson-15/stage6/guide.md
     description: Using EDI for Self-Service Automation
