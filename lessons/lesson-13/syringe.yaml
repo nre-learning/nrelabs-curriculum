@@ -4,11 +4,15 @@ lessonId: 13
 category: configuration
 tier: prod
 
-iframeresources:
+iframeResources:
+- ref: jupyter
+  protocol: https
+  path: "/notebooks/lesson-13/stage1/notebook.ipynb"
+  port: 8888
+
+blackboxes:
 - name: jupyter
   image: antidotelabs/jupyter
-  protocol: https
-  uri: "/notebooks/lesson-13/stage1/notebook.ipynb"
   port: 8888
 
 utilities:
