@@ -11,8 +11,7 @@ utilities:
   sshpassword: antidotepassword
 
 stages:
-  1:
-    id: 1
+  - id: 1
     description: Your first commit
     labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-17/stage1/guide.md
 

@@ -29,7 +29,6 @@ connections:
   subnet: 10.23.0.0/24
 
 stages:
-  1:
-    id: 1
+  - id: 1
     description: ToDD Basics
     labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-18/stage1/guide.md

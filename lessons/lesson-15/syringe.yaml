@@ -44,32 +44,26 @@ connections:
   subnet: 10.31.0.0/24
 
 stages:
-  1:
-    id: 1
+  - id: 1
     labGuide: https://raw.githubusercontent.com/nre-learning/antidote/st2-lesson/lessons/lesson-15/stage1/guide.md
     description: StackStorm CLI and Basic Concepts
 
-  2:
-    id: 2
+  - id: 2
     labGuide: https://raw.githubusercontent.com/nre-learning/antidote/st2-lesson/lessons/lesson-15/stage2/guide.md
     description: Actions
 
-  3:
-    id: 3
+  - id: 3
     labGuide: https://raw.githubusercontent.com/nre-learning/antidote/st2-lesson/lessons/lesson-15/stage3/guide.md
     description: Workflows
 
-  4:
-    id: 4
+  - id: 4
     labGuide: https://raw.githubusercontent.com/nre-learning/antidote/st2-lesson/lessons/lesson-15/stage4/guide.md
     description: Sensors and Triggers
 
-  5:
-    id: 5
+  - id: 5
     labGuide: https://raw.githubusercontent.com/nre-learning/antidote/st2-lesson/lessons/lesson-15/stage5/guide.md
     description: Rules
 
-  6:
-    id: 6
+  - id: 6
     labGuide: https://raw.githubusercontent.com/nre-learning/antidote/st2-lesson/lessons/lesson-15/stage6/guide.md
     description: Using EDI for Self-Service Automation

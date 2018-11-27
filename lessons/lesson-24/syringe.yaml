@@ -23,27 +23,22 @@ connections:
   subnet: 10.1.0.0/24
 
 stages:
-  1:
-    id: 1
+  - id: 1
     description: Introduction
     labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-24/stage1/guide.md
 
-  2:
-    id: 2
+  - id: 2
     description: Collect Data from Junos Devices
     labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-24/stage2/guide.md
 
-  3:
-    id: 3
+  - id: 3
     description: Parse Information
     labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-24/stage3/guide.md
 
-  4:
-    id: 4
+  - id: 4
     description: Configuration Management
     labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-24/stage4/guide.md
 
-  5:
-    id: 5
+  - id: 5
     description: PyEZ Tables and Views
     labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-24/stage5/guide.md

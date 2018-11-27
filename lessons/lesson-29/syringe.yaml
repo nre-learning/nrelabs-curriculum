@@ -25,17 +25,14 @@ connections:
   subnet: 10.1.0.0/24
 
 stages:
-  1:
-    id: 1
+  - id: 1
     description: Introduction to Robot Framework
     labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-29/stage1/guide.md
 
-  2:
-    id: 2
+  - id: 2
     description: Writing Testcases for Junos Devices
     labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-29/stage2/guide.md
 
-  3:
-    id: 3
+  - id: 3
     description: Robot Framework - Best Practices
     labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-29/stage3/guide.md

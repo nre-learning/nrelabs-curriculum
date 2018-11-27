@@ -50,7 +50,6 @@ connections:
   subnet: 10.1.0.0/24
 
 stages:
-  1:
-    id: 1
+  - id: 1
     description: Get device facts
     labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-13/stage1/guide.md

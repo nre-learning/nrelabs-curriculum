@@ -11,7 +11,6 @@ devices:
   sshpassword: VR-netlab9
 
 stages:
-  1:
-    id: 1
+  - id: 1
     description: Your First Config Commit
     labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-19/stage1/guide.md
