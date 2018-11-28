@@ -54,7 +54,7 @@ If you already know you want to run an action, but you want to know the proper s
 ```
 st2 run -h
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 2)">Run this snippet</button>
 
 
 #### StackStorm Packs
