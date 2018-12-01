@@ -4,6 +4,8 @@
 
 ### Curriculum
 
+- Adding Lesson-15 Event-Driven Network Automation with StackStorm [#126](https://github.com/nre-learning/antidote/pull/126)
+
 ### Other
 
 
@@ -11,7 +13,7 @@
 
 ### Curriculum
 
-- Adding Lesson-24 Junos Automation with PyEZ (jnpr-raylam)[#24](https://github.com/nre-learning/antidote/pull/117)
+- Adding Lesson-24 Junos Automation with PyEZ (jnpr-raylam)[#117](https://github.com/nre-learning/antidote/pull/117)
 - Adding Lesson-30 Working with Salt [#114](https://github.com/nre-learning/antidote/pull/114)
 - Adding Lesson-16 Jinja2 Templates [#121](https://github.com/nre-learning/antidote/pull/121)
 - Adding Lesson-29 Robot Framework [#125](https://github.com/nre-learning/antidote/pull/125)
