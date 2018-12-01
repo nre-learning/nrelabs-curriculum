@@ -1,0 +1,22 @@
+---
+html_table_class: napalm
+config_repo: https://github.com/StackStorm/vsrx-configs.git
+
+credentials:
+  junosdevices:
+    username: root
+    password: VR-netlab9
+
+devices:
+- hostname: vqfx1
+  port: 22
+  driver: junos
+  credentials: junosdevices
+- hostname: vqfx2
+  port: 22
+  driver: junos
+  credentials: junosdevices
+- hostname: vqfx3
+  port: 22
+  driver: junos
+  credentials: junosdevices
