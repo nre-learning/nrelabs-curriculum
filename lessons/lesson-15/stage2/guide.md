@@ -85,3 +85,40 @@ st2 run napalm.get_facts hostname=vqfx1
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 6)">Run this snippet</button>
 
+At this point, you might be asking "Where did we pass in the credentials for vqfx1"? Like many packs, these details are captured in the pack configuration:
+
+```
+cat /opt/stackstorm/configs/napalm.yaml
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 7)">Run this snippet</button>
+
+This configuration is specific to the `napalm` pack, and consists of two main parts. A list of devices, which we referred to by name with the `hostname` parameter, and a list
+of credentials, which each device entry references in order to specify which credential set to use.
+
+Getting facts is kind of cool - but what about something a little more specific? How about the current BGP peers?
+
+```
+st2 run napalm.get_bgp_neighbors hostname=vqfx1
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 8)">Run this snippet</button>
+
+Finally, it would be really great if we could actually push a config change with StackStorm. Here's a very simple example of pushing a config change with the `config_text` parameter, which lets us push a config change right inline:
+
+```
+st2 run napalm.loadconfig hostname=vqfx1 config_text="system { host-name VQFX1-CHANGED; }"
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 9)">Run this snippet</button>
+
+> We'll do some more advanced configuration changes in the next lab when we look at Workflows.
+
+Check out the new prompt Junos gives us now that the hostname is changed:
+
+```
+cli
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 10)">Run this snippet</button>
+
+This was a brief look at StackStorm actions, using the `napalm` pack as an example, since it's extremely useful for our purposes here, learning event-driven network automation. However, there are **many** more actions inside many more packs available on the [StackStorm Exchange](https://exchange.stackstorm.org/), and you should definitely check those out as well.
+
+In the next lab, we'll learn how to link actions together in a workflow, using the data we've retrieved in some of these actions to drive more complex decision-making.
+

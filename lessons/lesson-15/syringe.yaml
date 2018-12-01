@@ -5,6 +5,8 @@ category: configuration
 tier: ptr
 lessonDiagram: https://raw.githubusercontent.com/nre-learning/antidote/st2-lesson/lessons/lesson-15/lessondiagram.png
 lessonVideo: https://www.youtube.com/watch?v=YhbWBX71yGQ
+prereqs:
+  - 14  # YAML
 
 iframeResources:
 - ref: selfservice
