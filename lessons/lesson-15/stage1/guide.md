@@ -2,10 +2,6 @@
 
 ---
 
-<div class="alert alert-warning" role="alert">
-  This lesson comes with a video, and it's highly recommended that you watch this first. Click the "Lesson Video" button above to watch!
-</div>
-
 ### Part 1 - StackStorm CLI and Packs
 
 <div style="text-align:center;"><img src="https://raw.githubusercontent.com/nre-learning/antidote/st2-lesson/lessons/lesson-15/st2.jpeg" width="100"></div>
