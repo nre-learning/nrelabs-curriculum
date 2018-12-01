@@ -8,8 +8,7 @@
 
 ### Part 1 - StackStorm CLI and Packs
 
-StackStorm is a powerful event-driven automation framework that is built from infrastructure-as-code principles and designed
-to be extensible at every layer.
+![](https://raw.githubusercontent.com/nre-learning/antidote/st2-lesson/lessons/lesson-15/st2.jpeg) StackStorm is a powerful event-driven automation framework that is built from infrastructure-as-code principles and designed to be extensible at every layer.
 
 In this lesson, we'll be mostly working with the StackStorm command-line utility `st2`, so in this first lab, we'll take a moment to overview this, as well
 as how StackStorm integrates with other systems through something called `packs`.

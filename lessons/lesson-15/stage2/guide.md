@@ -47,7 +47,9 @@ You can see that the `cmd` parameter is required, and is what we supplied in dou
 
 In StackStorm, the term "execution" is used to describe an instance of a running action. Each time you run an action, it's given an execution ID, which is a unique identifier of that exact instance where that action was run. Note the ID in the output of the command you just ran. You can use this ID to retrieve this same detail at any time:
 
-    st2 execution get < EXECUTION ID >
+```
+st2 execution get < EXECUTION ID >
+```
 
 This is useful because, as we'll see in the next few labs, we don't always run actions on the command-line directly like this. Sometimes it's done for us by a rule, or a workflow. In those cases, retrieving execution details using `st2 execution get` is often the only way to know how an action performed. We can see a list of recent executions as well:
 
