@@ -45,18 +45,30 @@ st2 run core.local -h
 
 You can see that the `cmd` parameter is required, and is what we supplied in double quotes - the command to run on the bash shell.
 
-In StackStorm, the term "execution" is used to describe an instance of a running action. Each time you run an action, it's given an execution ID, which is a unique identifier of that exact instance where that action was run. Note the ID in the output of the command you just ran. You can use this ID to retrieve this same detail at any time:
+The `echo` command usually takes a split second to execute. However, some actions can take much longer: minutes, hours, even more.
+While it's usually the case that these Actions are executed via Triggers (which we'll get to in a later lab), it may be necessary to
+start, or re-run them on the command-line as well. The `-a` flag allows us to execute an action in the same way, but we won't have to
+wait for the Action to complete in order to get our terminal back - the `st2` command will return an execution ID for us right away:
+
+```
+st2 run -a core.local "sleep 300"
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 3)">Run this snippet</button>
+
+You may notice that the output contains a reference to another StackStorm command we haven't seen yet:
 
 ```
 st2 execution get < EXECUTION ID >
 ```
 
-This is useful because, as we'll see in the next few labs, we don't always run actions on the command-line directly like this. Sometimes it's done for us by a rule, or a workflow. In those cases, retrieving execution details using `st2 execution get` is often the only way to know how an action performed. We can see a list of recent executions as well:
+In StackStorm, the term "execution" is used to describe an instance of a running action. Each time you run an action, it's given an execution ID, which is a unique identifier of that exact instance where that action was run. Since we told `st2` to run this Action asynchronously, it make sure the Action execution was scheduled, retrieved its ID, and returned it to us immediately, so we can use `st2 execution get` to retrieve status at any time, rather than waiting for it to finish.
+
+This is also useful because, as we'll see in the next few labs, we don't always run actions on the command-line directly like this. Sometimes it's done for us by a rule, or a workflow. In those cases, retrieving execution details using `st2 execution get` is often the only way to know how an action performed. We can see a list of recent executions as well:
 
 ```
 st2 execution list
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 4)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 5)">Run this snippet</button>
 
 Now, this is a simple example, and there's way more to get into in the `core` pack, such as executing remote commands or scripts, calling REST APIs, and more. However,
 this is a network automation lesson, and there's way too much value in using a tool like StackStorm for event-driven network automation, so let's get
@@ -75,7 +87,7 @@ You might have noticed earlier that this pack is already installed, and the acti
 ```
 st2 action list --pack=napalm
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 5)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 6)">Run this snippet</button>
 
 
 The `get_facts` action in this pack is a great place to get started. Like we saw in the NAPALM lesson, this action gathers some basic information about a network device, like the serial number and hostname:
@@ -83,14 +95,14 @@ The `get_facts` action in this pack is a great place to get started. Like we saw
 ```
 st2 run napalm.get_facts hostname=vqfx1
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 6)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 7)">Run this snippet</button>
 
 At this point, you might be asking "Where did we pass in the credentials for vqfx1"? Like many packs, these details are captured in the pack configuration:
 
 ```
 cat /opt/stackstorm/configs/napalm.yaml
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 7)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 8)">Run this snippet</button>
 
 This configuration is specific to the `napalm` pack, and consists of two main parts. A list of devices, which we referred to by name with the `hostname` parameter, and a list
 of credentials, which each device entry references in order to specify which credential set to use.
@@ -100,14 +112,14 @@ Getting facts is kind of cool - but what about something a little more specific?
 ```
 st2 run napalm.get_bgp_neighbors hostname=vqfx1
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 8)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 9)">Run this snippet</button>
 
 Finally, it would be really great if we could actually push a config change with StackStorm. Here's a very simple example of pushing a config change with the `config_text` parameter, which lets us push a config change right inline:
 
 ```
 st2 run napalm.loadconfig hostname=vqfx1 config_text="system { host-name VQFX1-CHANGED; }"
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 9)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 10)">Run this snippet</button>
 
 > We'll do some more advanced configuration changes in the next lab when we look at Workflows.
 
@@ -116,7 +128,7 @@ Check out the new prompt Junos gives us now that the hostname is changed:
 ```
 cli
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 10)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 11)">Run this snippet</button>
 
 This was a brief look at StackStorm actions, using the `napalm` pack as an example, since it's extremely useful for our purposes here, learning event-driven network automation. However, there are **many** more actions inside many more packs available on the [StackStorm Exchange](https://exchange.stackstorm.org/), and you should definitely check those out as well.
 
