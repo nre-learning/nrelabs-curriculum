@@ -1,4 +1,4 @@
-<configuration operation="replace">
+<configuration>
         <version>15.1X53-D60.4</version>
         <system>
             <host-name>vqfx3</host-name>
@@ -78,7 +78,7 @@
                 </providers>
             </extensions>
         </system>
-        <interfaces operation="replace">
+        <interfaces>
             <interface>
                 <name>em0</name>
                 <unit>
@@ -93,7 +93,7 @@
                 </unit>
             </interface>
             <interface>
-                <name>em1</name>
+                <name>em3</name>
                 <unit>
                     <name>0</name>
                     <family>
@@ -106,7 +106,7 @@
                 </unit>
             </interface>
             <interface>
-                <name>em2</name>
+                <name>em4</name>
                 <unit>
                     <name>0</name>
                     <family>
@@ -132,20 +132,6 @@
             </autonomous-system>
         </routing-options>
         <protocols>
-            <bgp operation="replace">
-                <group>
-                    <name>PEERS</name>
-                    <type>external</type>
-                    <neighbor>
-                        <name>10.23.0.12</name>
-                        <peer-as>64002</peer-as>
-                    </neighbor>
-                    <neighbor>
-                        <name>10.31.0.11</name>
-                        <peer-as>64001</peer-as>
-                    </neighbor>
-                </group>
-            </bgp>
             <igmp-snooping>
                 <vlan>
                     <name>default</name>
