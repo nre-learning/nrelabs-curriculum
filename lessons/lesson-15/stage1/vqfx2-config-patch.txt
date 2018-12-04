@@ -1,0 +1,19 @@
+<configuration>
+        <routing-options>
+            <autonomous-system>
+                <as-number>64002</as-number>
+            </autonomous-system>
+        </routing-options>
+        <protocols>
+            <bgp>
+                <group>
+                    <name>PEERS</name>
+                    <type>external</type>
+                    <neighbor>
+                        <name>10.12.0.11</name>
+                        <peer-as>64001</peer-as>
+                    </neighbor>
+                </group>
+            </bgp>
+        </protocols>
+</configuration>

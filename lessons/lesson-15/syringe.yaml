@@ -6,7 +6,9 @@ tier: ptr
 lessonDiagram: https://raw.githubusercontent.com/nre-learning/antidote/st2-lesson/lessons/lesson-15/lessondiagram.png
 lessonVideo: https://www.youtube.com/embed/WhfAqnn2HMM
 prereqs:
+  - 13  # NAPALM
   - 14  # YAML
+  - 16  # Jinja
 
 iframeResources:
 - ref: selfservice
