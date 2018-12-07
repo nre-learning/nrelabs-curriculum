@@ -130,6 +130,15 @@ cli
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 11)">Run this snippet</button>
 
+```
+cli
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 12)">Run this snippet</button>
+
+st2 run napalm.get_bgp_neighbors hostname=vqfx1
+st2 run napalm.get_bgp_neighbors hostname=vqfx2
+st2 run napalm.get_bgp_neighbors hostname=vqfx3
+
 This was a brief look at StackStorm actions, using the `napalm` pack as an example, since it's extremely useful for our purposes here, learning event-driven network automation. However, there are **many** more actions inside many more packs available on the [StackStorm Exchange](https://exchange.stackstorm.org/), and you should definitely check those out as well.
 
 In the next lab, we'll learn how to link actions together in a workflow, using the data we've retrieved in some of these actions to drive more complex decision-making.
