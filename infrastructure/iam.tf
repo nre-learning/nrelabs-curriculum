@@ -32,34 +32,34 @@ resource "google_project_iam_binding" "ansible-bind" {
 # Stackdriver #
 ###############
 
-resource "google_service_account" "stackdriversa" {
-  account_id   = "stackdriversa"
-  display_name = "stackdriversa"
-  project      = "${var.project}"
-}
-resource "google_project_iam_binding" "stackdriversa-bind-metrics" {
-  project = "${var.project}"
-  role    = "roles/monitoring.metricWriter"
+# resource "google_service_account" "stackdriversa" {
+#   account_id   = "stackdriversa"
+#   display_name = "stackdriversa"
+#   project      = "${var.project}"
+# }
+# resource "google_project_iam_binding" "stackdriversa-bind-metrics" {
+#   project = "${var.project}"
+#   role    = "roles/monitoring.metricWriter"
 
-  members = [
-    "serviceAccount:stackdriversa@${var.project_name}.iam.gserviceaccount.com",
-  ]
-}
+#   members = [
+#     "serviceAccount:stackdriversa@${var.project_name}.iam.gserviceaccount.com",
+#   ]
+# }
 
-resource "google_project_iam_binding" "stackdriversa-bind-logs" {
-  project = "${var.project}"
-  role    = "roles/logging.logWriter"
+# resource "google_project_iam_binding" "stackdriversa-bind-logs" {
+#   project = "${var.project}"
+#   role    = "roles/logging.logWriter"
 
-  members = [
-    "serviceAccount:stackdriversa@${var.project_name}.iam.gserviceaccount.com",
-  ]
-}
+#   members = [
+#     "serviceAccount:stackdriversa@${var.project_name}.iam.gserviceaccount.com",
+#   ]
+# }
 
-resource "google_service_account_key" "stackdriversa-key" {
-  service_account_id = "${google_service_account.stackdriversa.name}"
-}
+# resource "google_service_account_key" "stackdriversa-key" {
+#   service_account_id = "${google_service_account.stackdriversa.name}"
+# }
 
-resource "local_file" "stackdriversa-key-file" {
-  content  = "${base64decode(google_service_account_key.stackdriversa-key.private_key)}"
-  filename = "${path.module}/tmp/stackdriversakey.json"
-}
+# resource "local_file" "stackdriversa-key-file" {
+#   content  = "${base64decode(google_service_account_key.stackdriversa-key.private_key)}"
+#   filename = "${path.module}/tmp/stackdriversakey.json"
+# }

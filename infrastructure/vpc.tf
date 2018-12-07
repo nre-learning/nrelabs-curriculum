@@ -8,8 +8,9 @@ resource "google_compute_firewall" "restrict-external" {
   allow {
     protocol = "tcp"
 
-    # 3001 = nginx http nodeport
-    # 3002 = nginx https nodeport
+    # 22 = ssh to nodes
+    # 30001 = nginx http nodeport
+    # 30002 = nginx https nodeport
     # 6443 = k8s API
     # 30000-32767 = nodeport range
     ports    = ["22", "30001", "30002", "6443", "30000-32767"]
