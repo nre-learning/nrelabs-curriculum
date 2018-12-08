@@ -114,30 +114,29 @@ st2 run napalm.get_bgp_neighbors hostname=vqfx1
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 9)">Run this snippet</button>
 
-Finally, it would be really great if we could actually push a config change with StackStorm. Here's a very simple example of pushing a config change with the `config_text` parameter, which lets us push a config change right inline:
+Finally, it would be really great if we could actually push a config change with StackStorm.  If you pay attention to the output retrieved in the previous command, you may have noticed that one of our configured BGP peers is inactive. Upon further inspection, we see that the BGP configuration on vqfx1 is using the wrong `peer-as` attribute.
+
+As part of this lesson, we've included a configuration snippet that will replace only the relevant configuration with the corrected `peer-as` attribute:
 
 ```
-st2 run napalm.loadconfig hostname=vqfx1 config_text="system { host-name VQFX1-CHANGED; }"
+cat /antidote/lessons/lesson-15/stage2/vqfx1-config-patch.txt
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 10)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 10)">Run this snippet</button>
 
-> We'll do some more advanced configuration changes in the next lab when we look at Workflows.
+The `loadconfig` action can accept this path as a parameter, and will perform a merge between this configuration, and the existing configuration:
 
-Check out the new prompt Junos gives us now that the hostname is changed:
+```
+st2 run napalm.loadconfig hostname=vqfx1 config_file="/antidote/lessons/lesson-15/stage2/vqfx1-config-patch.txt"
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 11)">Run this snippet</button>
+
+If we go to vqfx1 now, we'll see that both BGP peers are active:
 
 ```
 cli
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 11)">Run this snippet</button>
-
-```
-cli
+show bgp summary
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 12)">Run this snippet</button>
-
-st2 run napalm.get_bgp_neighbors hostname=vqfx1
-st2 run napalm.get_bgp_neighbors hostname=vqfx2
-st2 run napalm.get_bgp_neighbors hostname=vqfx3
 
 This was a brief look at StackStorm actions, using the `napalm` pack as an example, since it's extremely useful for our purposes here, learning event-driven network automation. However, there are **many** more actions inside many more packs available on the [StackStorm Exchange](https://exchange.stackstorm.org/), and you should definitely check those out as well.
 
