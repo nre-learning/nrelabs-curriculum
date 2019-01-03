@@ -34,7 +34,6 @@ random_mac () {
     echo 52:54:00$end
 }
 
-
 /usr/bin/qemu-system-x86_64 \
  -display \
  none \
@@ -47,10 +46,5 @@ random_mac () {
  -serial \
  telnet:0.0.0.0:5000,server,nowait \
  -hda /ubuntu.img -hdb /user-data.img \
- -device \
- pci-bridge,chassis_nr=1,id=pci.1 \
- -device \
- e1000,netdev=p00,mac=$(random_mac) \
- -netdev \
- user,id=p00,net=10.0.0.0/24,tftp=/tftpboot,hostfwd=tcp::2022-10.0.0.15:22,hostfwd=udp::2161-10.0.0.15:161,hostfwd=tcp::2830-10.0.0.15:830,hostfwd=tcp::2880-10.0.0.15:8080 \
-
+ -device e1000,netdev=net0 \
+ -netdev user,id=net0,hostfwd=tcp::2022-:22

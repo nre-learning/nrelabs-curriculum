@@ -17,10 +17,13 @@ RUN apt-get update -qy \
     telnet \
     vim \
     procps \
+    openssh-client \
     cloud-image-utils \
  && rm -rf /var/lib/apt/lists/*
 
-RUN curl -o /ubuntu.img https://cloud-images.ubuntu.com/minimal/releases/xenial/release-20181120/ubuntu-16.04-minimal-cloudimg-amd64-disk1.img
+RUN curl -o /ubuntu.img https://cloud-images.ubuntu.com/xenial/20190101/xenial-server-cloudimg-amd64-disk1.img
+
+RUN apt-get install -y openssh-client
 
 COPY cloud-config.yaml /cloud-config.yaml
 

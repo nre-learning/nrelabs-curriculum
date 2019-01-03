@@ -1,6 +1,6 @@
 #cloud-config
 hostname: utility-vm
-password: foo
+password: antidotepassword
 debug: True
 chpasswd: { expire: False }
 ssh_pwauth: True
@@ -9,7 +9,11 @@ users:
   - name: antidote
     groups: sudo
     sudo: ALL=(ALL) NOPASSWD:ALL
-    plain_text_passwd: foo
+    plain_text_passwd: antidotepassword
     lock_passwd: false
     ssh_pwauth: true
+    shell: /bin/bash
     chpasswd: { expire: false }
+runcmd:
+ - [ sh, -c, "rm -f /etc/update-motd.d/*" ]
+ - [ sh, -c, "rm -f /etc/legal" ]
