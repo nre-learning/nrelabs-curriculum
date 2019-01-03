@@ -1,0 +1,15 @@
+#cloud-config
+hostname: utility-vm
+password: foo
+debug: True
+chpasswd: { expire: False }
+ssh_pwauth: True
+users:
+  - default
+  - name: antidote
+    groups: sudo
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    plain_text_passwd: foo
+    lock_passwd: false
+    ssh_pwauth: true
+    chpasswd: { expire: false }
