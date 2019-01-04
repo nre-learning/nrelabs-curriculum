@@ -24,6 +24,8 @@ random_mac () {
  512 \
  -serial \
  telnet:0.0.0.0:5000,server,nowait \
- -hda /ubuntu.img -hdb /user-data.img \
+ -hda /image/utility-vm -hdb /user-data.img \
  -device e1000,netdev=net0 \
- -netdev user,id=net0,hostfwd=tcp::2022-:22
+ -netdev user,id=net0,hostfwd=tcp::2022-:22 \
+ -fsdev local,security_model=passthrough,id=fsdev0,path=/antidote \
+ -device virtio-9p-pci,id=fs0,fsdev=fsdev0,mount_tag=hostshare

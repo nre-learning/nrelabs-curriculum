@@ -32,6 +32,7 @@ RUN unzip -b -qq packer_1.3.3_linux_amd64.zip -d /usr/local/bin
 COPY cloud-config.yaml /cloud-config.yaml
 RUN cloud-localds /user-data.img /cloud-config.yaml
 
+COPY provision.sh /
 COPY packer.json /
 RUN packer build /packer.json
 

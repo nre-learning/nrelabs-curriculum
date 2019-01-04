@@ -1,4 +1,10 @@
 {
+    "provisioners": [
+        {
+            "type": "shell",
+            "script": "/provision.sh"
+        }
+    ],
     "builders":
     [
       {
