@@ -6,6 +6,8 @@
 
 ### Other
 
+- Added new image `utility-vm`, which provides a VM for the few lessons that require it (i.e. Docker) [#142](https://github.com/nre-learning/antidote/pull/142)
+
 
 ## 0.1.3 - November 15, 2018
 
