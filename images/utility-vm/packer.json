@@ -1,0 +1,35 @@
+{
+    "builders":
+    [
+      {
+        "type": "qemu",
+        "iso_url": "/ubuntu-base.img",
+        "iso_checksum": "9d3a3e4697433a3743c5b6d7281afc8d41f72c90ea5a4dd96e5abb6b556ceb3f",
+        "iso_checksum_type": "sha256",
+        "disk_image": true,
+        "use_backing_file": true,
+        "output_directory": "image",
+        "disk_size": 5000,
+        "headless": true,
+        "accelerator": "none",
+        "format": "qcow2",
+        "ssh_username": "antidote",
+        "ssh_password": "antidotepassword",
+        "ssh_timeout": "20m",
+        "vm_name": "utility-vm",
+        "net_device": "virtio-net",
+        "disk_interface": "virtio",
+        "use_default_display": true,
+        "skip_compaction": true,
+        "vnc_port_min": 5900,
+        "vnc_port_max": 5900,
+        "vnc_bind_address": "0.0.0.0",
+        "qemuargs": [
+          ["-m", "1024"],
+          ["-hda", "image/utility-vm"],
+          ["-hdb", "/user-data.img"],
+          ["-display", "none"]
+        ]
+      }
+    ]
+  }

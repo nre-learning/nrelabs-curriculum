@@ -1,26 +1,5 @@
 #!/bin/bash
 
-# COUNTER=0
-# while [  $COUNTER -lt 1 ]; do
-
-#     let COUNTER1=COUNTER+1
-
-#     net="net$COUNTER1"
-#     tap="tap$COUNTER"
-#     bridge=br$net$tap
-
-#     ip link add bridge0 type bridge
-#     ip addr flush dev $net
-#     ip link set $net master $bridge
-#     ip tuntap add dev $tap mode tap
-#     ip link set $tap master $bridge
-#     ip link set $bridge up
-#     ip link set $tap up
-
-#     let COUNTER=COUNTER+1 
-# done
-
-
 screen -d -m socat TCP-LISTEN:22,fork TCP:127.0.0.1:2022
 screen -d -m socat UDP-LISTEN:161,fork UDP:127.0.0.1:2161
 screen -d -m socat TCP-LISTEN:830,fork TCP:127.0.0.1:2830

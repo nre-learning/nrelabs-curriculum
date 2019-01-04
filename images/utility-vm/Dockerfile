@@ -1,6 +1,7 @@
 FROM debian:stable
 
 ENV DEBIAN_FRONTEND=noninteractive
+ENV PACKER_LOG=1
 
 RUN apt-get update -qy \
  && apt-get upgrade -qy \
@@ -10,6 +11,7 @@ RUN apt-get update -qy \
     python3-ipy \
     tcpdump \
     htop \
+    unzip \
     curl \
     socat \
     screen \
@@ -21,16 +23,20 @@ RUN apt-get update -qy \
     cloud-image-utils \
  && rm -rf /var/lib/apt/lists/*
 
-RUN curl -o /ubuntu.img https://cloud-images.ubuntu.com/xenial/20190101/xenial-server-cloudimg-amd64-disk1.img
+# We want to curl the image first so we can cache it inside Docker's FS instead of Packer pulling it on each build
+RUN curl -o /ubuntu-base.img https://cloud-images.ubuntu.com/xenial/20181223/xenial-server-cloudimg-amd64-disk1.img
 
-RUN apt-get install -y openssh-client
+RUN wget -nv https://releases.hashicorp.com/packer/1.3.3/packer_1.3.3_linux_amd64.zip
+RUN unzip -b -qq packer_1.3.3_linux_amd64.zip -d /usr/local/bin
 
 COPY cloud-config.yaml /cloud-config.yaml
-
 RUN cloud-localds /user-data.img /cloud-config.yaml
 
-# COPY vqfx-snap1.qcow2 /vqfx.qcow2
+COPY packer.json /
+RUN packer build /packer.json
+
 COPY launch.sh /
 
 EXPOSE 22 161/udp 830 5000 10000-10099
+
 ENTRYPOINT ["/launch.sh"]
