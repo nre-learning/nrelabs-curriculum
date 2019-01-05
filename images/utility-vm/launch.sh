@@ -21,10 +21,10 @@ random_mac () {
  -monitor \
  tcp:0.0.0.0:4000,server,nowait \
  -m \
- 512 \
+ 1024 \
  -serial \
  telnet:0.0.0.0:5000,server,nowait \
- -hda /image/utility-vm -hdb /user-data.img \
+ -hda /utility-vm.img -hdb /user-data.img \
  -device e1000,netdev=net0 \
  -netdev user,id=net0,hostfwd=tcp::2022-:22 \
  -fsdev local,security_model=passthrough,id=fsdev0,path=/antidote \

@@ -7,6 +7,6 @@ echo "hostshare /antidote  9p trans=virtio,version=9p2000.L,nobootwait,rw,_netde
 sudo apt-get update -qy \
  && sudo apt-get upgrade -qy \
  && sudo apt-get install -y \
-    docker python python-pip dnsutils iputils-ping git vim curl util-linux sshpass
+    docker.io python python-pip dnsutils iputils-ping git vim curl util-linux sshpass
 
 sudo pip install napalm netmiko jsnapy junos-eznc robotframework jinja2

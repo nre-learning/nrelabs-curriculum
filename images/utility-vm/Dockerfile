@@ -1,4 +1,4 @@
-FROM debian:stable
+FROM debian:stable as build-env
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PACKER_LOG=1
@@ -35,6 +35,35 @@ RUN cloud-localds /user-data.img /cloud-config.yaml
 COPY provision.sh /
 COPY packer.json /
 RUN packer build /packer.json
+
+
+
+# Runtime container
+FROM debian:stable
+
+RUN apt-get update -qy \
+ && apt-get upgrade -qy \
+ && apt-get install -y \
+    bridge-utils \
+    iproute2 \
+    python3-ipy \
+    tcpdump \
+    htop \
+    unzip \
+    curl \
+    socat \
+    screen \
+    qemu-kvm \
+    telnet \
+    vim \
+    procps \
+    openssh-client \
+    cloud-image-utils \
+ && rm -rf /var/lib/apt/lists/*
+
+COPY --from=build-env /image/utility-vm /utility-vm.img
+COPY --from=build-env /user-data.img /user-data.img
+COPY --from=build-env /ubuntu-base.img /ubuntu-base.img
 
 COPY launch.sh /
 
