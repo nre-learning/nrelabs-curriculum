@@ -7,18 +7,12 @@ tier: ptr
 utilities:
 - name: todd1
   image: toddproject/todd
-  sshuser: antidote
-  sshpassword: antidotepassword
 - name: web1
   image: nginx
-  sshuser: antidote
-  sshpassword: antidotepassword
 
 devices:
 - name: vqfx1
   image: antidotelabs/vqfxspeedy:snap1
-  sshuser: root
-  sshpassword: VR-netlab9
 
 connections:
 - a: todd1

@@ -7,8 +7,6 @@ tier: ptr
 devices:
 - name: vqfx1
   image: antidotelabs/vqfxspeedy:snap1
-  sshuser: root
-  sshpassword: VR-netlab9
 
 stages:
   - id: 1

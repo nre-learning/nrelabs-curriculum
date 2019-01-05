@@ -7,14 +7,10 @@ tier: prod
 utilities:
 - name: linux
   image: antidotelabs/utility
-  sshuser: antidote
-  sshpassword: antidotepassword
 
 devices:
 - name: vqfx
   image: antidotelabs/vqfxspeedy:snap1
-  sshuser: root
-  sshpassword: VR-netlab9
   ports: [830]
 
 connections:

@@ -8,15 +8,11 @@ tier: prod
 utilities:
 - name: salt1
   image: antidotelabs/salt
-  sshuser: antidote
-  sshpassword: antidotepassword
   ports: [22]
 
 devices:
 - name: vqfx1
   image: antidotelabs/vqfxspeedy:snap1
-  sshuser: root
-  sshpassword: VR-netlab9
   ports: [8080, 830]
 
 connections:

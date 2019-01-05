@@ -8,8 +8,6 @@ tier: ptr
 utilities:
 - name: linux1
   image: antidotelabs/utility
-  sshuser: antidote
-  sshpassword: antidotepassword
 
 stages:
   - id: 1

@@ -10,14 +10,10 @@ prereqs:
 utilities:
 - name: linux1
   image: antidotelabs/utility
-  sshuser: antidote
-  sshpassword: antidotepassword
 
 devices:
 - name: vqfx1
   image: antidotelabs/vqfxspeedy:snap1
-  sshuser: root
-  sshpassword: VR-netlab9
 
 connections:
 - a: vqfx1
