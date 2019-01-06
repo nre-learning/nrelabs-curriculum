@@ -1,3 +1,12 @@
+variable "prodstate" {
+
+  # This variable controlls the "production state" for antidote.
+  #
+  # Setting to "maintenance" will direct traffic to a static page hosted in a public read-only bucket instructing users of the downtime.
+  # Setting to "production" will direct traffic to the appropriate HTTP(s) backend service to the Antidote platform.
+  default = "production"
+}
+
 variable "zone" {
   default = "us-west1-a" # Oregon
 }
