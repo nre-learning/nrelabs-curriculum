@@ -4,6 +4,13 @@
 
 ### Curriculum
 
+### Other
+
+
+## 0.1.4 - January 08, 2019
+
+### Curriculum
+
 - Re-open the NAPALM lesson, now that iframes are working properly [#141](https://github.com/nre-learning/antidote/pull/141)
 
 ### Other
