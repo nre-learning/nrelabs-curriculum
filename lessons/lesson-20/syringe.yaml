@@ -6,7 +6,7 @@ tier: ptr
 
 devices:
 - name: vqfx1
-  image: antidotelabs/vqfxspeedy:snap1
+  image: antidotelabs/vqfx:snap1
 
 stages:
   - id: 1

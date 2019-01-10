@@ -10,11 +10,11 @@ utilities:
 
 devices:
 - name: vqfx1
-  image: antidotelabs/vqfxspeedy:snap1
+  image: antidotelabs/vqfx:snap1
 - name: vqfx2
-  image: antidotelabs/vqfxspeedy:snap2
+  image: antidotelabs/vqfx:snap2
 - name: vqfx3
-  image: antidotelabs/vqfxspeedy:snap3
+  image: antidotelabs/vqfx:snap3
 
 connections:
 - a: vqfx1

@@ -11,13 +11,13 @@ utilities:
 
 devices:
 - name: vqfx1
-  image: antidotelabs/vqfxspeedy:snap1
+  image: antidotelabs/vqfx:snap1
   ports: [8080]
 - name: vqfx2
-  image: antidotelabs/vqfxspeedy:snap2
+  image: antidotelabs/vqfx:snap2
   ports: [8080]
 - name: vqfx3
-  image: antidotelabs/vqfxspeedy:snap3
+  image: antidotelabs/vqfx:snap3
   ports: [8080]
 
 connections:

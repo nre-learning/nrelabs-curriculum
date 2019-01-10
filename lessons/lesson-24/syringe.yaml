@@ -10,7 +10,7 @@ utilities:
 
 devices:
 - name: vqfx
-  image: antidotelabs/vqfxspeedy:snap1
+  image: antidotelabs/vqfx:snap1
   ports: [830]
 
 connections:
