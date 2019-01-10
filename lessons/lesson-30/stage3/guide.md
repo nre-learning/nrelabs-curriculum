@@ -20,7 +20,6 @@ In order to get the the RPC command equivalent for a CLI command , we use 'displ
 For example,
 
 ```
-cli
 show route | display xml rpc
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 1)">Verify Output (Optional)</button>

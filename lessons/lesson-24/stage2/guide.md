@@ -54,7 +54,6 @@ In previous section, we manually typed the RPC tag `<get-system-uptime-informati
 In the case of Junos, you can just add the pipe ` | display xml rpc` to the `show` command:
 
 ```
-cli
 show system uptime | display xml rpc
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 3)">Run this snippet</button>
