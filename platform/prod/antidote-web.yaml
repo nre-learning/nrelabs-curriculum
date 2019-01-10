@@ -77,9 +77,17 @@ spec:
   tls:
     - hosts:
       - labs.networkreliability.engineering
+      - maintbypass.labs.networkreliability.engineering
       secretName: tls-certificate
   rules:
   - host: labs.networkreliability.engineering
+    http:
+      paths:
+      - path: "/"
+        backend:
+          serviceName: antidote-web
+          servicePort: 8080
+  - host: maintbypass.labs.networkreliability.engineering
     http:
       paths:
       - path: "/"

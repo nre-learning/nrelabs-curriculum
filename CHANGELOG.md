@@ -4,10 +4,18 @@
 
 ### Curriculum
 
+### Other
+
+
+## 0.1.4 - January 08, 2019
+
+### Curriculum
+
 - Re-open the NAPALM lesson, now that iframes are working properly [#141](https://github.com/nre-learning/antidote/pull/141)
 
 ### Other
 
+- Added maintenance mode for antidote. Directs to a static page hosted on GCP bucket. [#144](https://github.com/nre-learning/antidote/pull/144)
 - Added new image `utility-vm`, which provides a VM for the few lessons that require it (i.e. Docker) [#142](https://github.com/nre-learning/antidote/pull/142)
 
 ## 0.1.3 - November 15, 2018
