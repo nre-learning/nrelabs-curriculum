@@ -108,6 +108,7 @@ of these guidelines, to make the review process much smoother.
 - Are any documentation updates also needed?
 - Is the CHANGELOG updated properly?
 - Can we show this in NRE labs? Usage rights?
+- Does this follow the :ref:`Lesson Image Requirements <lessonimages>`?
 - Is the business benefit clear from this lesson? How easy is it for people to link this content with their day-to-day?
 
 Appendix - Lesson Contribution FAQ

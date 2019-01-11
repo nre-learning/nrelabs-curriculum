@@ -15,27 +15,17 @@ blackboxes:
 
 devices:
 - name: vqfx1
-  image: antidotelabs/vqfxspeedy:snap1
-  sshuser: root
-  sshpassword: VR-netlab9
+  image: antidotelabs/vqfx:snap1
 - name: vqfx2
-  image: antidotelabs/vqfxspeedy:snap2
-  sshuser: root
-  sshpassword: VR-netlab9
+  image: antidotelabs/vqfx:snap2
 - name: vqfx3
-  image: antidotelabs/vqfxspeedy:snap3
-  sshuser: root
-  sshpassword: VR-netlab9
+  image: antidotelabs/vqfx:snap3
   
 utilities:
 - name: linux1
   image: antidotelabs/utility
-  sshuser: antidote
-  sshpassword: antidotepassword
 - name: sipphone
   image: antidotelabs/pjsua-lindsey
-  sshuser: antidote
-  sshpassword: antidotepassword
   ports: [22]
 
 connections:

@@ -146,7 +146,6 @@ dev.route.set()
 This performs a configuration commit on our device and applies the changes to the running configuration. Again, we can verify new config is applied on the Junos CLI:
 
 ```
-cli
 show configuration |compare rollback 1
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 15)">Run this snippet</button>

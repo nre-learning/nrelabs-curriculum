@@ -9,6 +9,7 @@ Contributing to Antidote
    curriculum.rst
    platform.rst
    releases.rst
+   images.rst
 
 In general, there are two area in which to contribute to Antidote:
 

@@ -6,7 +6,6 @@ In this lesson, we're going to talk about running tests against our network with
 First, let's take a peek at our network configuration by going to `vqfx1`. We can see that no BGP peers have been configured:
 
 ```
-cli
 show bgp summary
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 0)">Run this snippet</button>
