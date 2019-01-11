@@ -2,7 +2,7 @@
 lessonName: Automating the Troubleshooting Chain
 lessonId: 21
 category: troubleshooting
-lessondiagram: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-21/lessondiagram.png
+lessondiagram: https://raw.githubusercontent.com/nre-learning/antidote/release-v0.1.4/lessons/lesson-21/lessondiagram.png
 tier: prod
 
 blackboxes:
@@ -62,4 +62,4 @@ connections:
 stages:
   - id: 1
     description: Get the IP Address for a Phone Extension
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-21/stage1/guide.md
+    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/release-v0.1.4/lessons/lesson-21/stage1/guide.md

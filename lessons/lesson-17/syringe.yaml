@@ -13,7 +13,7 @@ utilities:
 stages:
   - id: 1
     description: Your first commit
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-17/stage1/guide.md
+    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/release-v0.1.4/lessons/lesson-17/stage1/guide.md
 
   # 2:
   #   What about Github? (a.k.a. Git remotes)

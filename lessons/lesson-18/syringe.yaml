@@ -31,4 +31,4 @@ connections:
 stages:
   - id: 1
     description: ToDD Basics
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-18/stage1/guide.md
+    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/release-v0.1.4/lessons/lesson-18/stage1/guide.md

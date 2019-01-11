@@ -13,10 +13,10 @@ utilities:
 stages:
   - id: 1
     description: Lists
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-14/stage1/guide.md
+    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/release-v0.1.4/lessons/lesson-14/stage1/guide.md
   - id: 2
     description: Dictionaries (key/value pairs)
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-14/stage2/guide.md
+    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/release-v0.1.4/lessons/lesson-14/stage2/guide.md
   # 3:
   #   description: What about JSON?
-  #   labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-14/stage3/guide.md
+  #   labGuide: https://raw.githubusercontent.com/nre-learning/antidote/release-v0.1.4/lessons/lesson-14/stage3/guide.md

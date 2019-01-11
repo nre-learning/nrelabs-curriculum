@@ -25,20 +25,20 @@ connections:
 stages:
   - id: 1
     description: Introduction
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-24/stage1/guide.md
+    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/release-v0.1.4/lessons/lesson-24/stage1/guide.md
 
   - id: 2
     description: Collect Data from Junos Devices
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-24/stage2/guide.md
+    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/release-v0.1.4/lessons/lesson-24/stage2/guide.md
 
   - id: 3
     description: Parse Information
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-24/stage3/guide.md
+    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/release-v0.1.4/lessons/lesson-24/stage3/guide.md
 
   - id: 4
     description: Configuration Management
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-24/stage4/guide.md
+    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/release-v0.1.4/lessons/lesson-24/stage4/guide.md
 
   - id: 5
     description: PyEZ Tables and Views
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-24/stage5/guide.md
+    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/release-v0.1.4/lessons/lesson-24/stage5/guide.md

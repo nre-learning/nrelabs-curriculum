@@ -15,16 +15,16 @@ utilities:
 stages:
   - id: 1
     description: Introduction
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-16/stage1/guide.md
+    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/release-v0.1.4/lessons/lesson-16/stage1/guide.md
   - id: 2
     description: For Loops
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-16/stage2/guide.md
+    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/release-v0.1.4/lessons/lesson-16/stage2/guide.md
   - id: 3
     description: '"If" and "Set" Statements'
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-16/stage3/guide.md
+    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/release-v0.1.4/lessons/lesson-16/stage3/guide.md
   - id: 4
     description: Passing Data into a Template From YAML
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-16/stage4/guide.md
+    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/release-v0.1.4/lessons/lesson-16/stage4/guide.md
   - id: 5
     description: Importing a Jinja Template from a File
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-16/stage5/guide.md
+    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/release-v0.1.4/lessons/lesson-16/stage5/guide.md

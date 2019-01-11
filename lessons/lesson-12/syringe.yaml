@@ -2,7 +2,7 @@
 lessonName: Network Unit Testing with JSNAPY
 lessonId: 12
 category: verification
-lessondiagram: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-12/lessondiagram.png
+lessondiagram: https://raw.githubusercontent.com/nre-learning/antidote/release-v0.1.4/lessons/lesson-12/lessondiagram.png
 topologyType: custom
 tier: prod
 
@@ -43,8 +43,8 @@ connections:
 stages:
   - id: 1
     description: No BGP config - tests fail
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-12/stage1/guide.md
+    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/release-v0.1.4/lessons/lesson-12/stage1/guide.md
 
   - id: 2
     description: Correct BGP config - tests pass
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-12/stage2/guide.md
+    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/release-v0.1.4/lessons/lesson-12/stage2/guide.md
