@@ -11,4 +11,3 @@ devices:
 stages:
   - id: 1
     description: Your First Config Commit
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-19/stage1/guide.md

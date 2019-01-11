@@ -52,4 +52,3 @@ connections:
 stages:
   - id: 1
     description: Get the IP Address for a Phone Extension
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-21/stage1/guide.md

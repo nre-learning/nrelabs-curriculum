@@ -11,4 +11,3 @@ utilities:
 stages:
   - id: 1
     description: Using the Bash Shell
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-23/stage1/guide.md
