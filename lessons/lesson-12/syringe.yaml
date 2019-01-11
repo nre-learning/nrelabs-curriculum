@@ -35,8 +35,6 @@ connections:
 stages:
   - id: 1
     description: No BGP config - tests fail
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-12/stage1/guide.md
 
   - id: 2
     description: Correct BGP config - tests pass
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-12/stage2/guide.md

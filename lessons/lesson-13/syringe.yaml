@@ -44,4 +44,3 @@ connections:
 stages:
   - id: 1
     description: Get device facts
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-13/stage1/guide.md
