@@ -7,6 +7,7 @@
 ### Other
 
 - Simplified authentication by using consistent credentials, statically [#143](https://github.com/nre-learning/antidote/pull/143)
+- Remove lab guide from lesson definitions [#146](https://github.com/nre-learning/antidote/pull/146)
 
 ## 0.1.4 - January 08, 2019
 
