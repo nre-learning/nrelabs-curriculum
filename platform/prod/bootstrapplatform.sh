@@ -19,7 +19,7 @@ kubectl create -f multusinstall.yml
 
 sleep 10
 
-cd ../infrastructure && ansible-playbook -i inventory/ restartkubelets.yml && cd ../platform
+cd ../../infrastructure && source venv/bin/activate && ansible-playbook -i inventory/ restartkubelets.yml && cd ../platform/prod
 
 
 kubectl create -f nginx-controller.yaml

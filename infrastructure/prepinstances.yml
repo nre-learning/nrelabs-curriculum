@@ -57,6 +57,9 @@
       - sysctl --system
       - iptables -F
 
+    # TODO THIS NEEDS TO BE PERSISTENT
+    # This bit you again after a reboot
+    # https://forum.level1techs.com/t/kubeadm-for-kubernetes-chicken-and-egg-problem-during-setup-what-am-i-doing-wrong/129086
     - name: Finishing up
       shell: "{{ item }}"
       with_items:
@@ -72,7 +75,7 @@
   tasks:
 
     - name: Initialize k8s master
-      shell: kubeadm init --kubernetes-version=1.12.3 --apiserver-cert-extra-sans k8s.networkreliability.engineering
+      shell: kubeadm init --kubernetes-version=1.13.1 --apiserver-cert-extra-sans k8s.networkreliability.engineering
       register: output_init
       ignore_errors: yes
 
@@ -151,6 +154,9 @@
   - name: join k8s cluster
     shell: "kubeadm join --token {{ hostvars[groups['tag_kubernetescontrollers'] | first].mastertoken }} --discovery-token-unsafe-skip-ca-verification 10.138.0.254:6443"
     ignore_errors: yes
+
+  # - name: Download forked bridge plugin
+  #   shell: curl -L https://github.com/nre-learning/plugins/blob/master/bin/bridge?raw=true -o /opt/cni/bin/bridge && chmod a+x /opt/cni/bin/bridge
 
 - name: Clone antidote repo
   hosts: tag_kubernetes
