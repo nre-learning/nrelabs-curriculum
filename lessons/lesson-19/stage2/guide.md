@@ -25,7 +25,7 @@ The best Python library to query a REST API is `requests`. In the following snip
 ```
 import requests
 headers = {'Accept': 'application/json'}
-resp = requests.get('http://vqfx1:8080/rpc/get-interface-information', headers=headers, auth=('root', 'VR-netlab9'))
+resp = requests.get('http://vqfx1:8080/rpc/get-interface-information', headers=headers, auth=('antidote', 'antidotepassword'))
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 1)">Run this snippet</button>
 
