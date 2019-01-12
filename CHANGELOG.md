@@ -4,6 +4,8 @@
 
 ### Curriculum
 
+- Clarify internet access restrictions in REST API lesson and docs [#148](https://github.com/nre-learning/antidote/pull/148)
+
 ### Other
 
 - Simplified authentication by using consistent credentials, statically [#143](https://github.com/nre-learning/antidote/pull/143)
