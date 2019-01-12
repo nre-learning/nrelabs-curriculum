@@ -15,7 +15,9 @@ In this lesson we'll start actually working with REST APIs, so we can better und
 
 For this exercise, we'll be working with the [Junos REST API](https://www.juniper.net/documentation/en_US/junos/topics/concept/rest-api-overview.html), but it should be noted that nearly every network operating system these days has their own REST API. The kind of information you have to put into them, as well as what you get out of them, won't all be the same, but they'll follow the same general ideas we'll explore here.
 
-If you've ever worked on a Linux system, or maybe an Apple computer, you might have run into a command called `curl`. This is a simple tool for fetching the contents of a web page. A simple example would be to request the front page of `google.com`:
+If you've ever worked on a Linux system, or maybe an Apple computer, you might have run into a command called `curl`. This is a simple tool for fetching the contents of a web page. A simple example would be to request the front page of `google.com`.
+
+**NOTE**: For security purposes, we don't allow access to the internet from our lesson, and as a result, the following command won't actually work. Don't worry though, we have other resources in this lesson you can query.
 
 ```
 curl https://google.com
@@ -28,7 +30,7 @@ What if, instead, we were to query a resource somewhere that wasn't even intende
 
 ```
 curl \
-    -u "root:VR-netlab9" \
+    -u "antidote:antidotepassword" \
     http://vqfx1:8080/rpc/get-interface-information \
     --header "Accept: application/json"
 ```

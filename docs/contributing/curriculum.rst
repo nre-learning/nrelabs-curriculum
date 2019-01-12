@@ -64,6 +64,11 @@ leveraged to build a lesson.  Consider using open-source tools for the lessons,
 or tools that are at least free.  This helps ensure that a user could more
 easily replicate what is shown in the lesson.
 
+.. note::
+    For security reasons, internet access will not be enabled for labs hosted within :ref:`NRE Labs <nrelabs>`.
+    All lessons should be totally self-contained and not rely on external resources to properly function
+    when the lesson is being run.
+
 Step 3 - Put It Together
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
