@@ -11,6 +11,7 @@
 - Simplified authentication by using consistent credentials, statically [#143](https://github.com/nre-learning/antidote/pull/143)
 - Remove lab guide from lesson definitions [#146](https://github.com/nre-learning/antidote/pull/146)
 - Cleaned up and enabled LLDP within the `vqfx` image [#147](https://github.com/nre-learning/antidote/pull/147)
+- Enable LLDP end-to-end [#150](https://github.com/nre-learning/antidote/pull/150)
 
 ## 0.1.4 - January 08, 2019
 
