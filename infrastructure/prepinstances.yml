@@ -143,6 +143,9 @@
       src: templates/multus-cni.conf	
       dest:  /etc/cni/net.d/1-multus-cni.conf
 
+ - name: Download antibridge plugin
+    shell: curl -L https://github.com/nre-learning/plugins/blob/master/bin/antibridge?raw=true -o /opt/cni/bin/antibridge && chmod a+x /opt/cni/bin/antibridge
+
   - name: enable kubelet service
     systemd:
       name: kubelet
@@ -154,9 +157,6 @@
   - name: join k8s cluster
     shell: "kubeadm join --token {{ hostvars[groups['tag_kubernetescontrollers'] | first].mastertoken }} --discovery-token-unsafe-skip-ca-verification 10.138.0.254:6443"
     ignore_errors: yes
-
-  # - name: Download forked bridge plugin
-  #   shell: curl -L https://github.com/nre-learning/plugins/blob/master/bin/bridge?raw=true -o /opt/cni/bin/bridge && chmod a+x /opt/cni/bin/bridge
 
 - name: Clone antidote repo
   hosts: tag_kubernetes
