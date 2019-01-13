@@ -5,12 +5,6 @@
   become: yes
   tasks:
 
-  # - name: Download forked bridge plugin
-  #   shell: curl -L https://github.com/nre-learning/plugins/blob/master/bin/bridge?raw=true -o /opt/cni/bin/bridge && chmod a+x /opt/cni/bin/bridge
-
-  # - name: Download main bridge plugin
-  #   shell: mkdir /plugins && curl -L  https://github.com/containernetworking/cni/releases/download/v0.4.0/cni-v0.4.0.tgz -o /plugins/cni.tgz && cd /plugins/ && tar xvzf cni.tgz && cp bridge /opt/cni/bin && chmod a+x /opt/cni/bin/bridge
-
   - name: Restart kubelet service
     systemd:
       name: kubelet
