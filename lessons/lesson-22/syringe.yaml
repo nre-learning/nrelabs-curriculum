@@ -8,18 +8,13 @@ tier: ptr
 utilities:
 - name: linux1
   image: antidotelabs/utility
-  sshuser: antidote
-  sshpassword: antidotepassword
 
 stages:
   - id: 1
     description: Running Python for the First Time
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-22/stage1/guide.md
 
   - id: 2
     description: Basic Python Data Types
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-22/stage2/guide.md
 
   - id: 3
     description: Making Python Code More Re-usable
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-22/stage3/guide.md

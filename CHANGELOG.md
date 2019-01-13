@@ -5,9 +5,25 @@
 ### Curriculum
 
 - Adding Lesson-15 Event-Driven Network Automation with StackStorm [#126](https://github.com/nre-learning/antidote/pull/126)
+- Clarify internet access restrictions in REST API lesson and docs [#148](https://github.com/nre-learning/antidote/pull/148)
 
 ### Other
 
+- Simplified authentication by using consistent credentials, statically [#143](https://github.com/nre-learning/antidote/pull/143)
+- Remove lab guide from lesson definitions [#146](https://github.com/nre-learning/antidote/pull/146)
+- Cleaned up and enabled LLDP within the `vqfx` image [#147](https://github.com/nre-learning/antidote/pull/147)
+- Enable LLDP end-to-end [#150](https://github.com/nre-learning/antidote/pull/150)
+
+## 0.1.4 - January 08, 2019
+
+### Curriculum
+
+- Re-open the NAPALM lesson, now that iframes are working properly [#141](https://github.com/nre-learning/antidote/pull/141)
+
+### Other
+
+- Added maintenance mode for antidote. Directs to a static page hosted on GCP bucket. [#144](https://github.com/nre-learning/antidote/pull/144)
+- Added new image `utility-vm`, which provides a VM for the few lessons that require it (i.e. Docker) [#142](https://github.com/nre-learning/antidote/pull/142)
 
 ## 0.1.3 - November 15, 2018
 

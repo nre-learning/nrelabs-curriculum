@@ -3,20 +3,23 @@
         <system>
             <host-name>vqfx1</host-name>
             <root-authentication>
-                <encrypted-password>$1$E./KlYWD$4IB3UHD/TK0rVbXchd0ex0</encrypted-password>
+                <encrypted-password>$1$mlo32jo6$BOMVhmtORai2Kr24wRCCv1</encrypted-password>
                 <ssh-rsa>
                     <name>ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key</name>
                 </ssh-rsa>
             </root-authentication>
             <login>
                 <user>
-                    <name>vrnetlab</name>
-                    <uid>2001</uid>
+                    <name>antidote</name>
                     <class>super-user</class>
                     <authentication>
-                        <encrypted-password>$1$PvaswVKY$Nz5ELIzEL9M21FxSWAKdd1</encrypted-password>
+                        <encrypted-password>$1$iH4TNedH$3RKJbtDRO.N4Ua8B6LL/v/</encrypted-password>
                     </authentication>
                 </user>
+                <password>
+                    <change-type>set-transitions</change-type>
+                    <minimum-changes>0</minimum-changes>
+                </password>
             </login>
             <services>
                 <ssh>
@@ -151,6 +154,13 @@
                     <name>default</name>
                 </vlan>
             </igmp-snooping>
+            <lldp>
+                <advertisement-interval>5</advertisement-interval>
+                <hold-multiplier>2</hold-multiplier>
+                <interface>
+                    <name>all</name>
+                </interface>
+            </lldp>
         </protocols>
         <vlans>
             <vlan>

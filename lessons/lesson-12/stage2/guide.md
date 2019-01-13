@@ -18,7 +18,6 @@ To review, these tests assert:
 In this part (Part 2), our routers have been configured with the correct BGP peers. We can verify this by checking on the current BGP summary:
 
 ```
-cli
 show bgp summary
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 1)">Run this snippet</button>

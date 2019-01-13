@@ -67,8 +67,8 @@ resource "google_compute_region_autoscaler" "workers-scaler" {
   target  = "${google_compute_region_instance_group_manager.workers.self_link}"
 
   autoscaling_policy = {
-    max_replicas    = 4
-    min_replicas    = 4
+    max_replicas    = 3
+    min_replicas    = 3
     cooldown_period = 60
 
     cpu_utilization {

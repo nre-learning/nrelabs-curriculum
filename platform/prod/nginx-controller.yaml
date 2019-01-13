@@ -21,6 +21,7 @@ rules:
   - ingresses
   - nodes
   verbs:
+  - get
   - list
   - watch
 - apiGroups:
@@ -69,6 +70,13 @@ rules:
   - endpoints
   verbs:
   - get
+  - create
+  - update
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
   - create
   - update
 ---
@@ -128,7 +136,9 @@ spec:
               valueFrom: 
                 fieldRef: 
                   fieldPath: metadata.namespace
+          # https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md
           image: "gcr.io/google_containers/nginx-ingress-controller:0.9.0-beta.5"
+          # image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.20.0
           imagePullPolicy: Always
           livenessProbe: 
             httpGet: 

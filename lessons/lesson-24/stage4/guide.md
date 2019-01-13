@@ -102,7 +102,6 @@ dev.cu.commit()
 Finally, we can go to our Junos CLI to verify the last configuration change:
 
 ```
-cli
 show configuration | compare rollback 1
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 8)">Run this snippet</button>

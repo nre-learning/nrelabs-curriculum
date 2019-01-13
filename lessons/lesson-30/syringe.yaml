@@ -8,15 +8,11 @@ tier: prod
 utilities:
 - name: salt1
   image: antidotelabs/salt
-  sshuser: antidote
-  sshpassword: antidotepassword
   ports: [22]
 
 devices:
 - name: vqfx1
-  image: antidotelabs/vqfxspeedy:snap1
-  sshuser: root
-  sshpassword: VR-netlab9
+  image: antidotelabs/vqfx:snap1
   ports: [8080, 830]
 
 connections:
@@ -27,12 +23,9 @@ connections:
 stages:
   - id: 1
     description: Salt Master and Minion
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-30/stage1/guide.md
 
   - id: 2
     description: Junos Proxy Minions
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-30/stage2/guide.md
 
   - id: 3
     description: Executing Junos commands in Salt
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-30/stage3/guide.md

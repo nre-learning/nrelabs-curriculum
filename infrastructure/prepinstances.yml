@@ -24,10 +24,9 @@
         - htop
         - bridge-utils
         - docker
-        - kubelet-1.11.3
-        - kubeadm-1.11.3
+        - kubelet-1.12.3
+        - kubeadm-1.12.3
         - kubectl
-        - go
 
     - name: Enable and restart services
       systemd:
@@ -46,18 +45,6 @@
         daemon_reload: yes
         enabled: false
 
-    - name: Create directory for stackdriver creds
-      shell: mkdir -p /etc/google/auth/
-
-    - name: Upload stackdriver creds
-      copy:
-        src: tmp/stackdriversakey.json
-        dest: /etc/google/auth/application_default_credentials.json
-        force: no
-
-    - name: install stackdriver agent
-      shell: "curl -sSO https://dl.google.com/cloudagents/install-monitoring-agent.sh && bash install-monitoring-agent.sh"
-
     - name: Configure kernel options
       template:
         src: templates/sysctl-k8s.conf
@@ -70,6 +57,9 @@
       - sysctl --system
       - iptables -F
 
+    # TODO THIS NEEDS TO BE PERSISTENT
+    # This bit you again after a reboot
+    # https://forum.level1techs.com/t/kubeadm-for-kubernetes-chicken-and-egg-problem-during-setup-what-am-i-doing-wrong/129086
     - name: Finishing up
       shell: "{{ item }}"
       with_items:
@@ -85,7 +75,7 @@
   tasks:
 
     - name: Initialize k8s master
-      shell: kubeadm init --kubernetes-version stable-1.11 --apiserver-cert-extra-sans k8s.networkreliability.engineering
+      shell: kubeadm init --kubernetes-version=1.13.1 --apiserver-cert-extra-sans k8s.networkreliability.engineering
       register: output_init
       ignore_errors: yes
 
@@ -114,14 +104,6 @@
         src: /etc/kubernetes/admin.conf
         dest: tmp/kubeconfig
         flat: yes
-
-# - name: Initialize NFS share
-#   hosts: tag_kubernetesworkers[0]
-#   gather_facts: no
-#   become: yes
-#   tasks:
-#   - name: Initialize NFS share
-#     shell: mkdir -p /mnt/nfs/home && mount nfs.labs.networkreliability.engineering:/influxdata /mnt/nfs/home && chmod 777 /mnt/nfs/home && umount /mnt/nfs/home
 
 - name: Set up K8S Workers
   hosts: tag_kubernetesworkers
@@ -160,6 +142,9 @@
     template:	
       src: templates/multus-cni.conf	
       dest:  /etc/cni/net.d/1-multus-cni.conf
+
+ - name: Download antibridge plugin
+    shell: curl -L https://github.com/nre-learning/plugins/blob/master/bin/antibridge?raw=true -o /opt/cni/bin/antibridge && chmod a+x /opt/cni/bin/antibridge
 
   - name: enable kubelet service
     systemd:

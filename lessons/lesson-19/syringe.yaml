@@ -8,24 +8,16 @@ tier: prod
 utilities:
 - name: linux1
   image: antidotelabs/utility
-  sshuser: antidote
-  sshpassword: antidotepassword
 
 devices:
 - name: vqfx1
-  image: antidotelabs/vqfxspeedy:snap1
-  sshuser: root
-  sshpassword: VR-netlab9
+  image: antidotelabs/vqfx:snap1
   ports: [8080]
 - name: vqfx2
-  image: antidotelabs/vqfxspeedy:snap2
-  sshuser: root
-  sshpassword: VR-netlab9
+  image: antidotelabs/vqfx:snap2
   ports: [8080]
 - name: vqfx3
-  image: antidotelabs/vqfxspeedy:snap3
-  sshuser: root
-  sshpassword: VR-netlab9
+  image: antidotelabs/vqfx:snap3
   ports: [8080]
 
 connections:
@@ -45,11 +37,8 @@ connections:
 stages:
   - id: 1
     description: Your First API Call
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-19/stage1/guide.md
 
   - id: 2
     description: Let's do it with Python!
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-19/stage2/guide.md
   # 3:
   #   description: Diving Deep into an API
-  #   labguide: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-19/stage3/guide.md

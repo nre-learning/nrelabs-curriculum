@@ -22,7 +22,7 @@ resource "google_compute_global_forwarding_rule" "nrehttp" {
 resource "google_compute_target_https_proxy" "nrehttpsproxy" {
   name             = "nrehttpsproxy"
   project          = "${var.project}"
-  ssl_certificates = ["nre-10172018"]
+  ssl_certificates = ["nre-01112019"]
   url_map          = "${google_compute_url_map.https-url-map.self_link}"
 }
 
@@ -35,23 +35,43 @@ resource "google_compute_target_http_proxy" "nrehttpproxy" {
 resource "google_compute_url_map" "https-url-map" {
   name    = "https-url-map"
   project = "${var.project}"
+ 
+  host_rule {
+    hosts        = [
+      "labs.networkreliability.engineering",
+      "ptr.labs.networkreliability.engineering"
+    ]
+
+    path_matcher = "${var.prodstate}"
+  }
 
   host_rule {
-    hosts        = ["networkreliability.engineering"]
-    path_matcher = "allpaths"
+    hosts        = [
+      "maintbypass.labs.networkreliability.engineering"
+    ]
+    path_matcher = "production"
+  }
+
+  # Terraform throws an error if we don't use all path_matchers, so let's use
+  # this dummy domain to reference the maintenance path_matcher when it's not being used.
+  host_rule {
+    hosts        = [
+      "maint.labs.networkreliability.engineering"
+    ]
+    path_matcher = "maintenance"
   }
 
   path_matcher {
-    name            = "allpaths"
+    name            = "production"
     default_service = "${google_compute_backend_service.httpsbackend.self_link}"
-
-    path_rule {
-      paths   = ["/*"]
-      service = "${google_compute_backend_service.httpsbackend.self_link}"
-    }
   }
 
-  default_service = "${google_compute_backend_service.httpsbackend.self_link}"
+  path_matcher {
+    name            = "maintenance"
+    default_service = "${google_compute_backend_bucket.maintenance.self_link}"
+  }
+
+  default_service = "${google_compute_backend_bucket.maintenance.self_link}"
 }
 
 resource "google_compute_url_map" "http-url-map" {
@@ -59,21 +79,42 @@ resource "google_compute_url_map" "http-url-map" {
   project = "${var.project}"
 
   host_rule {
-    hosts        = ["networkreliability.engineering"]
-    path_matcher = "allpaths"
+    hosts        = [
+      "labs.networkreliability.engineering",
+      "ptr.labs.networkreliability.engineering"
+    ]
+
+    path_matcher = "${var.prodstate}"
+  }
+
+  host_rule {
+    hosts        = [
+      "maintbypass.labs.networkreliability.engineering"
+    ]
+    path_matcher = "production"
+  }
+
+
+  # Terraform throws an error if we don't use all path_matchers, so let's use
+  # this dummy domain to reference the maintenance path_matcher when it's not being used.
+  host_rule {
+    hosts        = [
+      "maint.labs.networkreliability.engineering"
+    ]
+    path_matcher = "maintenance"
   }
 
   path_matcher {
-    name            = "allpaths"
+    name            = "production"
     default_service = "${google_compute_backend_service.httpbackend.self_link}"
-
-    path_rule {
-      paths   = ["/*"]
-      service = "${google_compute_backend_service.httpbackend.self_link}"
-    }
   }
 
-  default_service = "${google_compute_backend_service.httpbackend.self_link}"
+  path_matcher {
+    name            = "maintenance"
+    default_service = "${google_compute_backend_bucket.maintenance.self_link}"
+  }
+
+  default_service = "${google_compute_backend_bucket.maintenance.self_link}"
 }
 
 resource "google_compute_backend_service" "httpsbackend" {
@@ -147,6 +188,13 @@ resource "google_compute_health_check" "httpshealth" {
   tcp_health_check {
     port = "30002"
   }
+}
+
+resource "google_compute_backend_bucket" "maintenance" {
+  name        = "maintenance"
+  project = "${var.project}"
+  bucket_name = "${google_storage_bucket.maintenance-page.name}"
+  enable_cdn  = true
 }
 
 
@@ -295,7 +343,6 @@ resource "google_compute_forwarding_rule" "k8sapi" {
   ports                 = ["6443"]
   load_balancing_scheme = "INTERNAL"
   backend_service       = "${google_compute_region_backend_service.k8sapi.self_link}"
-  service_label         = "k8sapi"
   network               = "${google_compute_network.default-internal.name}"
 }
 
