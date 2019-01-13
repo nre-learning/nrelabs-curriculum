@@ -19,8 +19,6 @@ iframeResources:
 blackboxes:
 - name: selfservice
   image: antidotelabs/selfservice-flask-app
-  sshuser: antidote
-  sshpassword: antidotepassword
   ports: [5000]
 
 utilities:
@@ -48,25 +46,19 @@ connections:
 
 stages:
   - id: 1
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/st2-lesson/lessons/lesson-15/stage1/guide.md
     description: StackStorm CLI and Basic Concepts
 
   - id: 2
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/st2-lesson/lessons/lesson-15/stage2/guide.md
     description: Actions
 
   - id: 3
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/st2-lesson/lessons/lesson-15/stage3/guide.md
     description: Workflows
 
   - id: 4
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/st2-lesson/lessons/lesson-15/stage4/guide.md
     description: Sensors and Triggers
 
   - id: 5
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/st2-lesson/lessons/lesson-15/stage5/guide.md
     description: Rules
 
   - id: 6
-    labGuide: https://raw.githubusercontent.com/nre-learning/antidote/st2-lesson/lessons/lesson-15/stage6/guide.md
     description: Using EDI for Self-Service Automation
