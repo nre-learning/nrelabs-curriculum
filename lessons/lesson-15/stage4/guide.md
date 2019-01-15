@@ -1,5 +1,8 @@
-# Event-Driven Network Automation with StackStorm
-## Part 1 - Actions
+## Event-Driven Network Automation with StackStorm
+
+---
+
+### Part 4 - Sensors and Triggers
 
 https://github.com/StackStorm/st2
 
