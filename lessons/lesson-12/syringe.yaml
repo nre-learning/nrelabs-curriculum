@@ -2,9 +2,9 @@
 lessonName: Network Unit Testing with JSNAPY
 lessonId: 12
 category: verification
-lessondiagram: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-12/lessondiagram.png
-topologyType: custom
+lessonDiagram: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-12/lessondiagram.png
 tier: prod
+juniperSpecific: true
 
 utilities:
 - name: linux1
