@@ -35,10 +35,11 @@ We can also use a loop to iterate through this dictionary, and print out each ke
 
 > This example uses strings for all keys and values but both YAML and Python are quite flexible, and can use a variety of other data types as values and even keys, including integers, lists, dictionaries, and more.
 
-```
+<pre>
 for key, value in yamlDict.items():
     print("The key %s is of type %s and its value %s is of type %s" % (key, type(key), value, type(value)))
-```
+
+</pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 3)">Run this snippet</button>
 
 As mentioned before, dictionaries are useful for looking up a specific value if you know the key, rather than having to know which item in a list that value is found in. In this case, we can simply look up the SNMP community string by referencing the key `snmpcommunity`:
