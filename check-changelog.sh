@@ -1,4 +1,14 @@
 git fetch origin master
+
+echo $(git branch)
+echo $(cat .git/HEAD)
+
+# Exit if the master branch is detected. This isn't a pull request
+# and we don't need a CHANGELOG update
+if [[ $(git branch | grep master) ]]; then
+    exit 0
+fi
+
 if echo $(git diff --name-only $(git rev-parse FETCH_HEAD)) | grep -w CHANGELOG.md > /dev/null; then
     echo "Thanks for making a CHANGELOG update!"
     exit 0
