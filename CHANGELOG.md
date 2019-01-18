@@ -5,6 +5,7 @@
 ### Curriculum
 
 - Clarify internet access restrictions in REST API lesson and docs [#148](https://github.com/nre-learning/antidote/pull/148)
+- Updated YAML lesson to be less of a Juniper commercial [#161](https://github.com/nre-learning/antidote/pull/161)
 
 ### Other
 
