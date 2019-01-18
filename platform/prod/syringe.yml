@@ -6,27 +6,6 @@ metadata:
   namespace: prod
 
 ---
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: git-clone
-  namespace: prod
-data:
-  git-clone.sh: |
-    #!/bin/sh -e
-    REPO=$1
-    REF=$2
-    DIR=$3
-    # Init Containers will re-run on Pod restart. Remove the directory's contents
-    # and reprovision when this happens.
-    if [ -d "$DIR" ]; then
-        rm -rf $( find $DIR -mindepth 1 )
-    fi
-    git clone $REPO $DIR
-    cd $DIR
-    git reset --hard $REF
-
----
 # TODO(mierdin): This could probably use some pruning
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -94,16 +73,12 @@ spec:
     spec:
       initContainers:
       - name: git-clone
-        image: alpine/git # Any image with git will do
-        command:
-        - /usr/local/git/git-clone.sh
+        image: antidotelabs/githelper
         args:
         - "https://github.com/nre-learning/antidote.git"
-        - "v0.1.4"
+        - "v0.1.4"  #revme
         - "/antidote"
         volumeMounts:
-        - name: git-clone
-          mountPath: /usr/local/git
         - name: git-volume  #?
           mountPath: /antidote
 
@@ -111,7 +86,7 @@ spec:
       serviceAccount: syringesa
       containers:
       - name: syringe
-        image: antidotelabs/syringe:release-v0.1.4
+        image: antidotelabs/syringe:release-v0.1.4  #revme
         imagePullPolicy: Always
         env:
         - name: SYRINGE_DOMAIN
@@ -123,11 +98,12 @@ spec:
         - name: SYRINGE_LESSON_REPO_REMOTE
           value: "https://github.com/nre-learning/antidote.git"
         - name: SYRINGE_LESSON_REPO_BRANCH
-          value: "v0.1.4"
+          value: "v0.1.4"  #revme
         - name: SYRINGE_LESSON_REPO_DIR
           value: "/antidote"
         ports:
-        - containerPort: 50099  # GRPC
+        # Only accessible from within the container
+        # - containerPort: 50099  # GRPC
         - containerPort: 8086   # REST/HTTP
         readinessProbe:
           httpGet:
@@ -139,10 +115,6 @@ spec:
       volumes:
         - name: git-volume
           emptyDir: {}
-        - name: git-clone
-          configMap:
-            name: git-clone
-            defaultMode: 0755
 
 # /var/run/secrets/kubernetes.io/serviceaccount
 
@@ -160,10 +132,11 @@ spec:
   selector:
     app: syringe
   ports:
-    - name: grpc
-      port: 50099
-      targetPort: 50099
-      # nodePort: 30010
+    # # Only accessible from within the container
+    # - name: grpc
+    #   port: 50099
+    #   targetPort: 50099
+    #   # nodePort: 30010
     - name: http
       port: 8086
       targetPort: 8086
