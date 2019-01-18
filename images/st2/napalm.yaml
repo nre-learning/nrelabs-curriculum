@@ -4,8 +4,8 @@ config_repo: https://github.com/StackStorm/vsrx-configs.git
 
 credentials:
   junosdevices:
-    username: root
-    password: VR-netlab9
+    username: antidote
+    password: antidotepassword
 
 devices:
 - hostname: vqfx1
