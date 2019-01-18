@@ -1,4 +1,12 @@
 ---
-vlans: [10, 20, 30]
-hostname: vqfx1
+hostname: sw01
 interfaces: 48
+vlans:
+- id: 10
+  name: management
+- id: 20
+  name: servers
+- id: 30
+  name: storage
+- id: 40
+  name: wireless

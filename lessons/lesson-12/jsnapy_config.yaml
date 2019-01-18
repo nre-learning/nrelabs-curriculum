@@ -1,16 +1,16 @@
 ---
 hosts:
   - device: vqfx1
-    username : root
-    passwd: VR-netlab9
+    username : antidote
+    passwd: antidotelabs
     port: 22
   - device: vqfx2
-    username : root
-    passwd: VR-netlab9
+    username : antidote
+    passwd: antidotelabs
     port: 22
   - device: vqfx3
-    username : root
-    passwd: VR-netlab9
+    username : antidote
+    passwd: antidotelabs
     port: 22
 tests:
     - jsnapy_tests.yaml

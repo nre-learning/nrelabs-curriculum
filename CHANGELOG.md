@@ -6,6 +6,7 @@
 
 - Adding Lesson-15 Event-Driven Network Automation with StackStorm [#126](https://github.com/nre-learning/antidote/pull/126)
 - Clarify internet access restrictions in REST API lesson and docs [#148](https://github.com/nre-learning/antidote/pull/148)
+- Updated YAML lesson to be less of a Juniper commercial [#161](https://github.com/nre-learning/antidote/pull/161)
 
 ### Other
 
@@ -13,6 +14,7 @@
 - Remove lab guide from lesson definitions [#146](https://github.com/nre-learning/antidote/pull/146)
 - Cleaned up and enabled LLDP within the `vqfx` image [#147](https://github.com/nre-learning/antidote/pull/147)
 - Enable LLDP end-to-end [#150](https://github.com/nre-learning/antidote/pull/150)
+- Added better docs for Syringe environment variables [#160](https://github.com/nre-learning/antidote/pull/160)
 
 ## 0.1.4 - January 08, 2019
 
