@@ -4,7 +4,7 @@ FROM ubuntu:xenial
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-ARG ST2_VERSION=2.9.1
+ARG ST2_VERSION=2.10.1
 RUN : "${ST2_VERSION:?Docker build argument needs to be set and non-empty.}"
 
 ENV container docker
@@ -67,7 +67,7 @@ RUN cp -r /usr/share/doc/st2/examples/ /opt/stackstorm/packs/
 RUN screen -d -m /start_st2_services.sh && sleep 15 \
     && st2ctl reload --register-all \
     && st2 run packs.setup_virtualenv packs=examples \ 
-    && st2 pack install napalm
+    && st2 pack remove napalm && st2 pack install https://github.com/nre-learning/stackstorm-napalm.git
 
 #####################################################################################################
 ## Security options (copied from Utility)      
