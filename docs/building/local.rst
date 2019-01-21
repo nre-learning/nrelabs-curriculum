@@ -38,7 +38,7 @@ A few notes on the above:
 1. This script will ask you for your `sudo` password. There's nothing sinister here, and you can (should) inspect the script to see that all its doing is making sure there's an entry in your `/etc/hosts` file to point to the minikube IP with the expected hostname.
 2. This may take a few minutes, so be patient. However, you should only need to do this once.
 
-You can check the spin up status at anytime using `kubectl get pod`:
+You can check the spin up status at anytime using `kubectl get pod`::
 
     ~$ kubectl get pod
 
@@ -47,7 +47,7 @@ You can check the spin up status at anytime using `kubectl get pod`:
     nginx-ingress-controller-6f575d4f84-j8n9k   0/1       ContainerCreating   0          46s
     syringe-785f64bbbd-5f6d2                    0/1       Init:0/1            0          45s
 
-... wait a few minutes ...
+... wait a few minutes ...::
 
     ~$ kubectl get pod
 
