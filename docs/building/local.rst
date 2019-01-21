@@ -47,7 +47,7 @@ You can check the spin up status at anytime using `kubectl get pod`::
     nginx-ingress-controller-6f575d4f84-j8n9k   0/1       ContainerCreating   0          46s
     syringe-785f64bbbd-5f6d2                    0/1       Init:0/1            0          45s
 
-... wait a few minutes ...::
+... wait a few minutes, then check again, until all pods are running::
 
     ~$ kubectl get pod
 
