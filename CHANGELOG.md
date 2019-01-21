@@ -6,6 +6,7 @@
 
 - Clarify internet access restrictions in REST API lesson and docs [#148](https://github.com/nre-learning/antidote/pull/148)
 - Updated YAML lesson to be less of a Juniper commercial [#161](https://github.com/nre-learning/antidote/pull/161)
+- Document howto check spin up progress and find the UI URL [#166](https://github.com/nre-learning/antidote/pull/166)
 
 ### Other
 
