@@ -56,6 +56,24 @@ You can check the spin up status at anytime using `kubectl get pod`::
     nginx-ingress-controller-6f575d4f84-j8n9k   1/1       Running   0          7m
     syringe-785f64bbbd-5f6d2                    1/1       Running   0          7m
 
+Now you can use minikube commands to list the services and get its URL::
+
+    ~$ minikube service list
+
+    |-------------|---------------|-----------------------------|
+    |  NAMESPACE  |     NAME      |             URL             |
+    |-------------|---------------|-----------------------------|
+    | default     | antidote-web  | No node port                |
+    | default     | kubernetes    | No node port                |
+    | default     | nginx-ingress | http://192.168.99.101:30002 |
+    | default     | syringe       | No node port                |
+    | kube-system | kube-dns      | No node port                |
+    |-------------|---------------|-----------------------------|
+
+Replace http with https in the URL for nginx-ingress and point your browser to it. For above output,
+use https://192.168.99.101:30002 or https://antidote-local:30002 (host entry added to /etc/hosts during spin up).
+You'll need to allow an exception for this URL (This connection is Not Private ...) to access.
+
 Iterating on Lessons
 --------------------
 
