@@ -64,10 +64,13 @@ ADD start_st2_services.sh /
 RUN apt-get update && apt-get install -y openssh-server python git vim screen
 ADD napalm.yaml /opt/stackstorm/configs
 RUN cp -r /usr/share/doc/st2/examples/ /opt/stackstorm/packs/
+ARG CACHEBUST=1
 RUN screen -d -m /start_st2_services.sh && sleep 15 \
     && st2ctl reload --register-all \
     && st2 run packs.setup_virtualenv packs=examples \ 
     && st2 pack remove napalm && st2 pack install https://github.com/nre-learning/stackstorm-napalm.git
+RUN /opt/stackstorm/virtualenvs/napalm/bin/pip install ncclient==0.6.0
+ARG CACHEBUST=0
 
 #####################################################################################################
 ## Security options (copied from Utility)      

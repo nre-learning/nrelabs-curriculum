@@ -3,6 +3,7 @@
 
 screen -d -t mongodb -m /usr/bin/mongod
 screen -d -t rabbitmq -m rabbitmq-server
+sleep 10
 screen -d -t st2actionrunner -m /opt/stackstorm/st2/bin/st2actionrunner --config-file=/etc/st2/st2.conf
 screen -d -t st2api -m /opt/stackstorm/st2/bin/st2api --config-file=/etc/st2/st2.conf
 screen -d -t st2auth -m /opt/stackstorm/st2/bin/st2auth --config-file=/etc/st2/st2.conf
