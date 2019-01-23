@@ -4,3 +4,6 @@ jsnapy
 junos-eznc
 robotframework
 jinja2
+paho-mqtt
+grpcio
+grpcio-tools
