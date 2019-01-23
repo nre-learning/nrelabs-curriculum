@@ -109,3 +109,12 @@ or perhaps the output of one or more of that workflow's tasks, shows a certain v
 
 [Orquesta](https://docs.stackstorm.com/orquesta.html) is the new kid on the block - released recently, and currently a "beta" workflow
 option in StackStorm, it combines the advantage of ActionChain's "built-in" nature with the robustness and flexibility of Mistral.
+
+As a result, Orquesta workflows are very similar in syntax to Mistral workflows, so for the purposes of this lesson, there's not a lot more to cover on this front. We can see the contents of an example Orquesta workflow look quite familiar:
+
+```
+cat /opt/stackstorm/packs/examples/actions/workflows/orquesta-basic.yaml
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 5)">Run this snippet</button>
+
+See the [Orquesta](https://docs.stackstorm.com/orquesta.html) for more details on how to write these types of Workflows.
