@@ -94,7 +94,7 @@ so you may have to run the following command a few times before it shows up:
 ```
 st2 trigger-instance list --trigger=napalm.InterfaceDown
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 8)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 8)">Run this snippet</button>
 
 Once we see a trigger-instance show up in the list, we can use the command `st2 trigger-instance get <trigger-instance-id>` (similar to what we did in a previous lesson with execution IDs) to view details about this trigger instance.
 Or if you're feeling lucky, you could use the below command with some bash-fu to get it for you :)
@@ -102,6 +102,6 @@ Or if you're feeling lucky, you could use the below command with some bash-fu to
 ```
 st2 trigger-instance get $(st2 trigger-instance list --trigger=napalm.InterfaceDown | grep napalm | head -1 | awk '{ print $2}')
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 9)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 9)">Run this snippet</button>
 
 Remember those fields from earlier - `device` and `interface`? Those are filled out now, with the device and interface that we changed to create the event. These fields can now be passed on to other entities in StackStorm, like Rules, to drive very powerful, autonomous decision-making. Check out the next lab in this lesson for more on that!
