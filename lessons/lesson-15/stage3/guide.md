@@ -6,7 +6,11 @@
 
 Just like real "tasks" performed manually, or via another tool, StackStorm Actions almost never run in isolation. They're usually run in parallel with each other, or in sequence. They're usually run based off a decision that was made from information made available by an event, or another action's output.
 
-In StackStorm, we call these complex logical structures ["Workflows"](https://docs.stackstorm.com/workflows.html). There are a few options for accomplishing this in StackStorm:
+In StackStorm, we call these complex logical structures ["Workflows"](https://docs.stackstorm.com/workflows.html).
+
+<div style="text-align:center;"><img src="https://raw.githubusercontent.com/nre-learning/antidote/st2-lesson/lessons/lesson-15/workflows.png" width="100"></div>
+
+There are a few options for accomplishing this in StackStorm:
 
 - [ActionChain](https://docs.stackstorm.com/actionchain.html)
 - [Mistral](https://docs.stackstorm.com/mistral.html)

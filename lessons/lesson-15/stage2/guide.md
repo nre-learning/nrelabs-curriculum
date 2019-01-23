@@ -12,7 +12,9 @@ Though it's important to understand that StackStorm is all about event-driven au
 - Bounce a switchport
 - Send a message to Slack
 
-There are many others - and the list is growing all the time in the StackStorm [Exchange](https://exchange.stackstorm.org/). In short, Actions can be thought of simply as neatly contained bits of code to perform a task. They accept input, do work, and usually provide some output.
+There are many others - and the list is growing all the time in the StackStorm [Exchange](https://exchange.stackstorm.org/). In short, Actions can be thought of simply as neatly contained bits of code to perform a task. They accept input, do work, and usually provide some output. They're the very last piece in the chain we'll be building to create an end-to-end event-driven automation solution in this lesson.
+
+<div style="text-align:center;"><img src="https://raw.githubusercontent.com/nre-learning/antidote/st2-lesson/lessons/lesson-15/actions.png" width="100"></div>
 
 Many of the `st2` subcommands we saw in the previous lab use verbs like `get`, `create`, `delete`, `list` for their corresponding resources.
 For instance, to list the available actions that are currently present on our system, we can run:
