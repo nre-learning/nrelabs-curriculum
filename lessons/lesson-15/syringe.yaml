@@ -10,16 +10,16 @@ prereqs:
   - 14  # YAML
   - 16  # Jinja
 
-iframeResources:
-- ref: selfservice
-  protocol: http
-  path: "/"
-  port: 5000
+# iframeResources:
+# - ref: selfservice
+#   protocol: http
+#   path: "/"
+#   port: 5000
 
-blackboxes:
-- name: selfservice
-  image: antidotelabs/selfservice-flask-app
-  ports: [5000]
+# blackboxes:
+# - name: selfservice
+#   image: antidotelabs/selfservice-flask-app
+#   ports: [5000]
 
 utilities:
 - name: st2
@@ -60,5 +60,8 @@ stages:
   - id: 5
     description: Rules
 
-  - id: 6
-    description: Using EDI for Self-Service Automation
+  # Removing for now, will move to separate lesson once category restructuring is finished
+  # - id: 6
+  #   description: Using EDI for Self-Service Automation
+  # - id: 7
+  #   description: Change approval via Inquiries 
