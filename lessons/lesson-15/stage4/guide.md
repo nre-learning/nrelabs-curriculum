@@ -16,7 +16,7 @@ In order for StackStorm to know when a certain "event" has taken place, it needs
 
 StackStorm uses something called `sensors` to do this. These are little bits of Python code that run as separate processes within StackStorm.
 
-<div style="text-align:center;"><img src="https://raw.githubusercontent.com/nre-learning/antidote/st2-lesson/lessons/lesson-15/sensors.png" width="100"></div>
+<div style="text-align:center;"><img src="https://raw.githubusercontent.com/nre-learning/antidote/st2-lesson/lessons/lesson-15/sensors.png"></div>
 
 As with everything else, Sensors are distributed within Packs. We can run the following command to see the list of sensors in the `napalm` pack:
 
@@ -102,7 +102,7 @@ Once we see a trigger-instance show up in the list, we can use the command `st2 
 Or if you're feeling lucky, you could use the below command with some bash-fu to get it for you :)
 
 ```
-st2 trigger-instance get $(st2 trigger-instance list --trigger=napalm.InterfaceDown | grep napalm | head -1 | awk '{ print $2}')
+st2 trigger-instance get $(st2 trigger-instance list --trigger=napalm.InterfaceDown | grep napalm | tail -1 | awk '{ print $2}')
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 9)">Run this snippet</button>
 

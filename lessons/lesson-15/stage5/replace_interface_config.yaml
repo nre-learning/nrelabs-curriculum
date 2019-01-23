@@ -1,0 +1,16 @@
+---
+name: "replace_interface_config"
+pack: "napalm"
+description: "Watches for interface down events from NAPALM, and sends a configuration snippet to the device to turn the interface back up"
+enabled: true
+
+trigger:
+    type: "napalm.InterfaceDown"
+
+criteria: {}
+
+action:
+    ref: "napalm.loadconfig"
+    parameters:
+        hostname: "{{ trigger.device }}"
+        config_file: "/antidote/lessons/lesson-15/stage5/interface-up-config.xml"
