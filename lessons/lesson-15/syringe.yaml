@@ -2,7 +2,7 @@
 lessonName: Event-Driven Network Automation with StackStorm
 lessonId: 15
 category: configuration
-tier: ptr
+tier: prod
 lessonDiagram: https://raw.githubusercontent.com/nre-learning/antidote/st2-lesson/lessons/lesson-15/lessondiagram.png
 lessonVideo: https://www.youtube.com/embed/WhfAqnn2HMM
 prereqs:
