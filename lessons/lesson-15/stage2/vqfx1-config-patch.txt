@@ -1,0 +1,14 @@
+<configuration>
+        <protocols>
+            <bgp>
+                <group>
+                    <name>PEERS</name>
+                    <type>external</type>
+                    <neighbor>
+                        <name>10.12.0.12</name>
+                        <peer-as>64002</peer-as>
+                    </neighbor>
+                </group>
+            </bgp>
+        </protocols>
+</configuration>

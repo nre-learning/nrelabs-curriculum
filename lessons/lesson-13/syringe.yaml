@@ -9,6 +9,7 @@ iframeResources:
   protocol: http
   path: "/notebooks/lesson-13/stage1/notebook.ipynb"
   port: 8888
+  rewriteDestination: "/tree"
 
 blackboxes:
 - name: jupyter

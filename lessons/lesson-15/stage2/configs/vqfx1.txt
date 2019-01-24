@@ -145,7 +145,7 @@
                     </neighbor>
                     <neighbor>
                         <name>10.12.0.12</name>
-                        <peer-as>64002</peer-as>
+                        <peer-as>64123</peer-as>
                     </neighbor>
                 </group>
             </bgp>

@@ -1,0 +1,8 @@
+<configuration>
+    <interfaces>
+        <interface>
+            <name>em4</name>
+            <disable operation="delete"/>
+        </interface>
+    </interfaces>
+</configuration>
