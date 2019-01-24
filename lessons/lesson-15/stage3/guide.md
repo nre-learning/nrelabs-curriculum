@@ -90,8 +90,30 @@ Let's give this a try:
 
 ```
 st2 run examples.mistral-jinja-branching which=a
+..
+id: 5c490330e47a91335192263a
+action.ref: examples.mistral-jinja-branching
+parameters:
+  which: a
+status: succeeded
+result_task: a
+result:
+  failed: false
+  return_code: 0
+  stderr: ''
+  stdout: Took path A.
+  succeeded: true
+start_timestamp: Thu, 24 Jan 2019 00:13:36 UTC
+end_timestamp: Thu, 24 Jan 2019 00:13:40 UTC
++--------------------------+------------------------+------+------------+-------------------------------+
+| id                       | status                 | task | action     | start_timestamp               |
++--------------------------+------------------------+------+------------+-------------------------------+
+| 5c490331e47a91335192263d | succeeded (1s elapsed) | t1   | core.local | Thu, 24 Jan 2019 00:13:37 UTC |
+| 5c490332e47a91335192263f | succeeded (1s elapsed) | a    | core.local | Thu, 24 Jan 2019 00:13:38 UTC |
++--------------------------+------------------------+------+------------+-------------------------------+
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 4)">Run this snippet</button>
+
+(Mistral isn't installed in this version of the StackStorm lesson. We are planning to expand this lesson in the near future, diving deeper into these workflow options.)
 
 The output is similar to what we saw with ActionChains - because Mistral is also a Workflow option in StackStorm, we see a table of all our subexecutions. However, we
 only see two subexecutions, while we saw four tasks in the Mistral workflow: `t1`, `a`, `b`, and `c`.
