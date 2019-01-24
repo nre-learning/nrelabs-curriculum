@@ -40,7 +40,7 @@ Next, create a Table instance and use the device's `bind()` function to associat
 
 ```
 from jnpr.junos import Device
-dev = Device('vqfx', user='root', password='VR-netlab9')
+dev = Device('vqfx', user='antidote', password='antidotepassword')
 dev.open()
 dev.bind(routes=RouteTable)
 ```
@@ -106,7 +106,7 @@ Next, create a Table instance and use the `bind()` function to associate with th
 
 ```
 from jnpr.junos import Device
-dev = Device('vqfx', user='root', password='VR-netlab9')
+dev = Device('vqfx', user='antidote', password='antidotepassword')
 dev.open()
 dev.bind(route=StaticRouteTable)
 ```

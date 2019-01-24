@@ -26,7 +26,7 @@ What if, instead, we were to query a resource somewhere that wasn't even intende
 
 ```
 curl \
-    -u "root:VR-netlab9" \
+    -u "antidote:antidotepassword" \
     http://vqfx1:8080/rpc/get-interface-information \
     --header "Accept: application/json"
 ```

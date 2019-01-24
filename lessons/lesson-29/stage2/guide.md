@@ -123,7 +123,7 @@ The IP address of the vQFX, the username, and password for login, are provided t
 Execute this test suite by running the below command (note the command line variables passed using the flag --variable)
 
 ```
-robot --variable HOST:vqfx1 --variable USER:root --variable PASSWORD:VR-netlab9 /antidote/lessons/lesson-29/stage2/chapter2_eg1.robot
+robot --variable HOST:vqfx1 --variable USER:antidote --variable PASSWORD:antidotepassword /antidote/lessons/lesson-29/stage2/chapter2_eg1.robot
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 6)">Run this snippet</button>
 

@@ -26,7 +26,7 @@ from jnpr.junos import Device
 After that, create a Device object by providing hostname, username and password for authenticating to vQFX device, and then call the `open()` function to make a NETCONF connection.
 
 ```
-dev = Device('vqfx', user='root', password='VR-netlab9')
+dev = Device('vqfx', user='antidote', password='antidotepassword')
 dev.open()
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 1)">Run this snippet</button>

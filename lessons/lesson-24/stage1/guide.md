@@ -27,8 +27,8 @@ Just like HTTP is used to carry HTML content from a web server to your web brows
 In Junos (as well as most other implementations), NETCONF is run over the Secure Shell (SSH) protocol, to take advantage of the built-in security model of SSH. To get an idea of what's happening in a NETCONF session, let's go to Linux terminal and SSH to vQFX, use `-s` parameter to invoke the NETCONF subsystem. 
 
 ```
-sshpass -p VR-netlab9 \
-ssh -o StrictHostKeyChecking=no root@vqfx -s netconf
+sshpass -p antidotepassword \
+ssh -o StrictHostKeyChecking=no antidote@vqfx -s netconf
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 0)">Run this snippet</button>
 

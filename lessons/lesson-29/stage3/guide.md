@@ -84,7 +84,7 @@ Let's now have a look at the test cases:
 
 Notice that both of the test cases are using the previously defined user keywords from the Keywords section of the robot file. Execute these test cases by running the robot script using the following command (note the command line variables passed using the flag --variable)
 ```
-robot --variable HOST:vqfx1 --variable USER:root --variable PASSWORD:VR-netlab9 /antidote/lessons/lesson-29/stage3/chapter3_eg1.robot
+robot --variable HOST:vqfx1 --variable USER:antidote --variable PASSWORD:antidotepassword /antidote/lessons/lesson-29/stage3/chapter3_eg1.robot
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 4)">Run this snippet</button>
 

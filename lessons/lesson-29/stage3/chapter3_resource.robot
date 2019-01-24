@@ -4,8 +4,8 @@ Library	 JunosDevice.py
 
 *** Variables ***
 ${host}=    vqfx1
-${user}=    root
-${password}=    VR-netlab9
+${user}=    antidote
+${password}=    antidotepassword
 ${hostname}=    vqfx1
 ${model}=   VQFX-10000
 

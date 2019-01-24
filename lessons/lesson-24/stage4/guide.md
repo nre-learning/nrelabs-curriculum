@@ -13,7 +13,7 @@ Before starting this section, let's apply the boilerplate code to import PyEZ mo
 ```
 python
 from jnpr.junos import Device
-dev = Device('vqfx', user='root', password='VR-netlab9')
+dev = Device('vqfx', user='antidote', password='antidotepassword')
 dev.open()
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 0)">Run this snippet</button>

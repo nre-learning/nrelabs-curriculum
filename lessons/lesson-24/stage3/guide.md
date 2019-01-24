@@ -15,7 +15,7 @@ Let's quickly connect to Junos device again and re-assign this variable.
 ```
 python
 from jnpr.junos import Device
-dev = Device('vqfx', user='root', password='VR-netlab9', normalize=True)
+dev = Device('vqfx', user='antidote', password='antidotepassword', normalize=True)
 dev.open()
 intf = dev.rpc.get_interface_information()
 ```
