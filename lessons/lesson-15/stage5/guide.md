@@ -56,7 +56,7 @@ Note that we're making use of the `device` field from the trigger payload in a J
 Normally, rules would be located in the `rules/` directory of a pack, but we can also create a rule directly from the command line using our YAML file.
 
 ```
-st2 rule create replace_interface_config.yaml
+st2 rule create /antidote/lessons/lesson-15/stage5/replace_interface_config.yaml
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 5)">Run this snippet</button>
 
@@ -93,7 +93,7 @@ st2 execution get $(st2 execution list --action=napalm.loadconfig | grep napalm 
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 9)">Run this snippet</button>
 
-Looks like our `loadconfig` action executed successfully - we can verify this at the CLI of `vqfx2`:
+Looks like our `loadconfig` action executed successfully - we can verify this at the CLI of `vqfx2` and see the interface that we just disabled, is back up and running:
 
 ```
 show interfaces em4
