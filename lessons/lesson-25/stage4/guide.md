@@ -6,9 +6,11 @@
 
 ### Chapter 4 - JET Firewall API to create/update firewall filter
 
-In this stage, to demonstrate additional JET API capability, we will use JET firewall API to insert a new firewall filter to vQFX.
+In this stage, we demonstrate additional JET API capability by using JET firewall API to insert a new firewall filter to vQFX.
 
-First, we repeat what we have done in previous stage - compile the IDL package, go to Python interactive prompt, import the JET GPRC module, and then login to the vQFX.
+
+#### Preperation
+Firstly, we repeat what we have done in previous stage - compile the IDL package, go to Python interactive prompt, import the JET GPRC module, and then login to the vQFX.
 
 ```
 cd /antidote/lessons/lesson-25
@@ -35,14 +37,15 @@ response = auth_stub.LoginCheck(
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 0)">Run this snippet</button>
 
-A new routing instance is created in the vQFX to simulate a neighboring device. Interface xe-0/0/1 and xe-0/0/2 is bridged together, so on vQFX we can ping to 192.168.10.2, which is the IP address in the routing instance "VR". Let's verify it.
+We simulate a neighboring device by creating a new routing instance in the vQFX. Interface xe-0/0/1 and xe-0/0/2 is connected together, so on vQFX we can ping from the master routing instance to 192.168.10.2, which is the IP address in the routing instance "VR". Let's try to verify it:
 
 ```
 ping 192.168.10.2 count 3
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 1)">Run this snippet</button>
 
-Now, we use the JET firewall API to create a new firewall filter call "filter-by-jet". The filter contains two terms, the first is to log and permit ICMP traffic, and the last explicit term is to log and discard all traffic.
+#### Create ACL via JET
+Now, we use the JET firewall API to create a new firewall filter call "filter-by-jet". This filter contains two terms, the first one is to log and permit ICMP traffic, and the last one is to log and discard all traffic.
 
 ```
 fw_stub = firewall_service_pb2_grpc.AclServiceStub(channel)
@@ -85,7 +88,8 @@ request pfe execute target fpc0 timeout 0 command "show firewall" | no-more
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 3)">Run this snippet</button>
 
-Next, apply the firewall filter to interface xe-0/0/0.
+#### Apply ACL to interface via JET
+Now, we apply the firewall filter to interface xe-0/0/0.
 
 ```
 result = fw_stub.AccessListBindAdd(
@@ -100,7 +104,10 @@ result = fw_stub.AccessListBindAdd(
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 4)">Run this snippet</button>
 
-To verify, it, we can ping 192.168.10.2 again and then check the firewall log.
+
+#### Verify the ACL
+
+To verify the firewall ACL is being applied, we ping 192.168.10.2 again and then check the firewall log.
 
 ```
 ping 192.168.10.2 count 3
@@ -108,7 +115,7 @@ show firewall log
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 5)">Run this snippet</button>
 
-And then try to SSH to 192.168.10.2, it should fail.
+Then try to SSH to 192.168.10.2, it should fail.
 
 ```
 ssh 192.168.10.2
@@ -121,3 +128,5 @@ Press `Ctrl-C` now to stop the SSH, and the check the firewall log again.
 show firewall log
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 7)">Run this snippet</button>
+
+This concludes ourJunos JET gRPC demostration. In the next lesson are we going explore closed loop automation by employing both JET Notification Service and JET RPC.

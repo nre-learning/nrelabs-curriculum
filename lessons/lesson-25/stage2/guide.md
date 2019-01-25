@@ -5,14 +5,27 @@
 ---
 
 ### Chapter 2 - Receive events from notification service using MQTT client
+#### Message Broker and PUB-SUB model
+Before we deep dive into notification service, let's get an introduction on message broker and publish-subscribe (PUB-SUB) model.
 
-[Placeholder to explain how to subscribe JET notification events]
+![JET System Archtecture](https://www.juniper.net/documentation/images/g043543.png)
 
-[JET Notification API document](https://www.juniper.net/documentation/en_US/jet17.4/topics/concept/jet-notification-api-overview.html)
 
-We're going to use Python MQTT client to subscribe the JET notification events.
+A message broker system is hub and spoke based model where
+- Broker accepts messages from clients and delivers to other interested clients
+- Client either publish an message with a topic, or subscribe to a topic or both
+-  Topic is a namespace on the broker. Client subscribes or publish to a topics
+- Publish: a Client sending a message to a Broker with a topic
+- Subscribe: a Client requesting broker what topic it is interested.The broker will deliver messages to this client based on the topic it subscribed.
 
-First, go to the Python interactive prompt and import the MQTT module.
+#### JET Notification Service
+Juniper JET notification service is a message broker system based on [MQTT](http://mqtt.org/) protocol to deliver system events. Junos system daemons such as RPD will generate messages and publish them to the JET message broker thru eventd with specific topics. For example, interface events (link up/down)  will have topic ```/junos/events/kernel/interfaces``` while route table related event will have topic ```/junos/events/kernel/route-table```. The list of topic available can be found [here](https://www.juniper.net/documentation/en_US/jet17.4/topics/concept/jet-notification-api-overview.html).
+
+
+#### Creating a Python MQTT Client
+We're going to create a Python MQTT client to collect JET notification events.
+
+First of all, go to the Python interactive prompt and import the MQTT module.
 
 ```
 python
@@ -20,7 +33,8 @@ import paho.mqtt.client as mqtt
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 0)">Run this snippet</button>
 
-After that, create a MQTT client, define the `on_connect` callback function to subscribe the event. Here, we will subscribe `/junos/events/kernel/interfaces/ifa/add` topic to get notification if any interface address is added.
+After that, create a MQTT client object. Then define the `on_connect` callback function, which is triggered once the client connects to the JET MQTT broker, to subscribe the event. Here, we will subscribe to the topic `/junos/events/kernel/interfaces/ifa/add` which includes all new interfaces adress events.
+At last we bind the on_connect function to the client object.
 
 ```
 client = mqtt.Client()
@@ -32,7 +46,7 @@ client.on_connect = on_connect
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 1)">Run this snippet</button>
 
-Next, define `on_message` callback function to print the notification message payload.
+Next, define `on_message` callback function, which is triggered whatever a message is received, to print the notification message payload. Then we bind the on_message function to the client object.
 
 ```
 def on_message(client, userdata, msg):
@@ -42,7 +56,7 @@ client.on_message = on_message
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 2)">Run this snippet</button>
 
-Finally, connect to vQFX tcp 1883 we configured in previous stage, and then call the `loop_forever()` function to wait for events.
+Finally, instruct the client to connect to vQFX tcp 1883 we configured in previous stage, and start the main event loop function `loop_forever()`  to wait for events.
 
 ```
 client.connect('vqfx', 1883, 60)
@@ -50,7 +64,12 @@ client.loop_forever()
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 3)">Run this snippet</button>
 
-Now, create an new interface on vQFX.
+The client is now ready to received JET notification event.
+
+
+#### Triggering a event
+
+Now, we try to trigger a new interface address event by create an new interface on vQFX.
 
 ```
 configure
@@ -59,29 +78,33 @@ commit and-quit
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 4)">Run this snippet</button>
 
-Change to `linux` terminal, you should be able to see the `KERNEL_EVENT_IFA_ADD` event.
+Once the commit is completed, Eventd will receive the new IFA event and deliver it all clients who subscribed the IFA topic.
+
+Now change to `linux` terminal, you should be able to see the `KERNEL_EVENT_IFA_ADD` event.
 
 Press `Ctrl-C` to exit the loop.
 
-> Expected output (remove later)
->
-> /junos/events/kernel/interfaces/ifa/add/xe-0/0/1.0/inet/192.168.20.1/32 {
->     "jet-event": {
->         "event-id": "KERNEL_EVENT_IFA_ADD",
->         "hostname": "vqfx",
->         "time": "2019-01-22-14:59:06",
->         "severity": "INFO",
->         "facility": "KERNEL",
->         "attributes": {
->             "name": "xe-0/0/0",
->             "subunit": 0,
->             "family": "inet",
->             "local-address": "192.168.10.1/32",
->             "destination-address": "192.168.10.0/24",
->             "broadcast-address": "192.168.10.255/32",
->             "generation-number": 144,
->             "flags": 192
->         }
->     }
-> }
+Here's a sample output of the message:
+```
+ /junos/events/kernel/interfaces/ifa/add/xe-0/0/1.0/inet/192.168.20.1/32 {
+     "jet-event": {
+         "event-id": "KERNEL_EVENT_IFA_ADD",
+         "hostname": "vqfx",
+         "time": "2019-01-22-14:59:06",
+         "severity": "INFO",
+         "facility": "KERNEL",
+         "attributes": {
+             "name": "xe-0/0/0",
+             "subunit": 0,
+             "family": "inet",
+             "local-address": "192.168.10.1/32",
+             "destination-address": "192.168.10.0/24",
+             "broadcast-address": "192.168.10.255/32",
+             "generation-number": 144,
+             "flags": 192
+         }
+     }
+ }
+```
 
+In the next chapter we are going to explore JET request-response calls.
