@@ -1,11 +1,18 @@
 ---
 lessonName: Using Robot Framework for Automated Testing
 lessonId: 29
-category: verification
+category: tools
 lessondiagram: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-29/lessondiagram.png
 tier: prod
 prereqs:
   - 24  # PyEZ
+description: |
+  Robot is a popular testing framework, allowing users to define testing workflows with plain language and keywords.
+  In this lesson we'll cover an introduction to Robot as well as how to write test cases for Junos network devices.
+slug: Robot Framework
+tags:
+- robot
+- testing
 
 utilities:
 - name: linux1

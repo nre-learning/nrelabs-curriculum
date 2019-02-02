@@ -1,9 +1,19 @@
 ---
-lessonName: Python for Network Engineers
+lessonName: Introduction to Python
 lessonId: 22
-category: introductory
+category: fundamentals
 lessondiagram: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-22/lessondiagram.png
 tier: ptr
+prereqs:
+  - 23  # Linux
+description: |
+  Python is THE langage to learn when it comes to network automation. In this lesson, you'll get a basic introduction to Python,
+  an exploration of common Python libraries related to networking and network automation, and prepare to dive deeper in follow-up
+  lessons on using Python for advanced automation.
+slug: Python
+tags:
+- python
+- programming
 
 utilities:
 - name: linux1
@@ -13,8 +23,8 @@ stages:
   - id: 1
     description: Running Python for the First Time
 
-  - id: 2
-    description: Basic Python Data Types
+  # - id: 2
+  #   description: Basic Python Data Types
 
-  - id: 3
-    description: Making Python Code More Re-usable
+  # - id: 3
+  #   description: Making Python Code More Re-usable
