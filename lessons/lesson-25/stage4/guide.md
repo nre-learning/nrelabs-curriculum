@@ -37,7 +37,7 @@ response = auth_stub.LoginCheck(
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 0)">Run this snippet</button>
 
-We simulate a neighboring device by creating a new routing instance in the vQFX. Interface xe-0/0/1 and xe-0/0/2 is connected together, so on vQFX we can ping from the master routing instance to 192.168.10.2, which is the IP address in the routing instance "VR". Let's try to verify it:
+We simulate a neighboring device by creating a new routing instance in the vQFX. Interface xe-0/0/0 and xe-0/0/1 is connected together, so on vQFX we can ping from the master routing instance to 192.168.10.2, which is the IP address in the routing instance "VR". Let's try to verify it:
 
 ```
 ping 192.168.10.2 count 3
@@ -45,7 +45,7 @@ ping 192.168.10.2 count 3
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 1)">Run this snippet</button>
 
 #### Create ACL via JET
-Now, we use the JET firewall API to create a new firewall filter call "filter-by-jet". This filter contains two terms, the first one is to log and permit ICMP traffic, and the last one is to log and discard all traffic.
+Now, we use the JET firewall API to create a new firewall filter call `filter-by-jet`. This filter contains two terms, the first one is to log and permit ICMP traffic, and the last one is to log and discard all traffic.
 
 ```
 fw_stub = firewall_service_pb2_grpc.AclServiceStub(channel)
@@ -129,4 +129,4 @@ show firewall log
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 7)">Run this snippet</button>
 
-This concludes ourJunos JET gRPC demostration. In the next lesson are we going explore closed loop automation by employing both JET Notification Service and JET RPC.
+This concludes our Junos JET gRPC demostration. In the next lesson are we going explore closed loop automation by employing both JET Notification Service and JET RPC.

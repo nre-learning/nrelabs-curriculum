@@ -75,6 +75,13 @@ interfaces {
             }
         }
     }
+    xe-0/0/3 {
+        unit 0 {
+            family inet {
+                address 20.1.1.2/24;
+            }
+        }
+    }
     em0 {
         unit 0 {
             family inet {
@@ -94,5 +101,9 @@ routing-instances {
     VR {
         instance-type virtual-router;
         interface xe-0/0/1.0;
+    }
+    VR2 {
+        instance-type virtual-router;
+        interface xe-0/0/3.0;
     }
 }

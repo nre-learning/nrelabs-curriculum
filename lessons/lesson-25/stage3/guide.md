@@ -8,21 +8,21 @@
 
 #### Junos JET, gRPC and IDL
 
-Juniper JET uses [gRPC](http://www.grpc.io/), a remote procedure call (RPC) framework, for cross-language services as a mechanism to enable request-response service. gRPC provides an interface definition language (IDL) that enables you to define APIs. These IDL files (with .proto as the file extension) are compiled using the protoc compiler to generate source code to be used for the server and client applications. The gRPC server is part of the JET service process (jsd), which runs on Junos OS.
+Juniper JET uses <a href="http://www.grpc.io/" target="_blank">gRPC</a>, a remote procedure call (RPC) framework, for cross-language services as a mechanism to enable request-response service. gRPC provides an interface definition language (IDL) that enables you to define APIs. These IDL files (with .proto as the file extension) are compiled using the protoc compiler to generate source code to be used for the server and client applications. The gRPC server is part of the JET service process (jsd), which runs on Junos OS.
 
 ![JET System Archtecture](https://www.juniper.net/documentation/images/g043543.png)
 
 
 #### Compiling Junos IDL into python library
-Junos IDL file can be downloaded from Juniper support webpage. For details on downloading and compiling the IDL please refer [here](https://www.juniper.net/documentation/en_US/jet1.0/topics/task/jet-complie-idl-using-thrift.html)
+For details on downloading and compiling the IDL please refer <a href="https://www.juniper.net/documentation/en_US/jet1.0/topics/task/jet-complie-idl-using-thrift.html" target="_blank">here</a>
 
-For those who wants more details about gRPC in Python, there's a [quick start guide](https://grpc.io/docs/quickstart/python.html) grom grpc.io.
+For those who wants more details about gRPC in Python, there's a <a href="https://grpc.io/docs/quickstart/python.html" target="_blank">quick start guide</a> from grpc.io.
 
-We will use the protoc compiler to compile the IDL file. You can download the IDL file from [Juniper support website](https://support.juniper.net/support/downloads/?p=jet).
+We will use the protoc compiler to compile the IDL file. You can download the IDL file from <a href="https://support.juniper.net/support/downloads/?p=jet" target="_blank">Juniper support website</a>.
 
 It's time to start the lab!
 
-To save time, the IDL file is pre-downloaded already alrady. First we need to unarchive it:
+To save time, the IDL file is pre-downloaded already. First we need to unarchive it:
 
 ```
 cd /antidote/lessons/lesson-25
@@ -49,11 +49,7 @@ The python stub class is now ready, the next step we will use it to perform gRPC
 #### Python gRPC Client
 In this exercise  we are going to create a simple python gRPC client to manipulate the Junos routing table.
 
-
-First, go to Python interactive prompt and import the required modules.
-
-`authentication_service_pb2` for the Junos Authentication
-`rib_service_pb2` is the Junos JET RIB gRPC service.
+First, go to Python interactive prompt and import the required modules - `authentication_service_pb2` for the Junos Authentication and `rib_service_pb2` is the Junos JET RIB gRPC service.
 
 ```
 python
@@ -67,7 +63,7 @@ import rib_service_pb2_grpc
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 3)">Run this snippet</button>
 
-Now we create a gRPC tcp connection to the vQFX and perform the authentication.
+Now we create a gRPC connection to the vQFX and perform the authentication.
 
 ```
 channel = grpc.insecure_channel('vqfx:32767')
@@ -90,7 +86,7 @@ print(response.result)
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 5)">Run this snippet</button>
 
-Now, we can call the Route Add API to insert a static route dynamically.
+Now, we can call the Route Add API to insert a static route 192.168.20.0/24 with next-hop 192.168.10.2 dynamically.
 
 ```
 rib_stub = rib_service_pb2_grpc.RibStub(channel)
@@ -126,4 +122,4 @@ show route table inet.0
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 8)">Run this snippet</button>
 
-Easy isn't it? With Juniper JET you can dynamically manage device configuration and runtime status such as route tables, ACL , interface status, etc without touching the CLI at all. This API interfaces open a whole new world for network applications. For more information about the API, please refer to the [JET Service APIs guide](https://www.juniper.net/documentation/en_US/jet18.2/topics/concept/jet-service-apis-overview.html)
+Easy isn't it? With Juniper JET you can dynamically manage device configuration and runtime status such as route tables, ACL, interface status, etc without touching the CLI at all. This API interfaces open a whole new world for network applications. For more information about the API, please refer to the <a href="https://www.juniper.net/documentation/en_US/jet18.2/topics/concept/jet-service-apis-overview.html" target="_blank">JET Service APIs guide</a>

@@ -16,20 +16,19 @@ JET supports the following:
 * An event notification method that enables the applications to respond to selected system events
 
 There are two types of services JET provides:
-* Request-response - An application can issue a request and wait for the response from Junos OS. (RPC model, GRPC based)
+* Request-response - An application can issue a request and wait for the response from Junos OS. (RPC model, gRPC based)
 * Notification - An application can receive asynchronous notification of events happening on Junos OS. (publish-subscribe model. MQTT based)
 
-For more informations about the JET can be found [here](https://www.juniper.net/documentation/en_US/jet18.4/topics/concept/jet-architecture.html).
+For more informations about the JET can be found <a href="https://www.juniper.net/documentation/en_US/jet18.4/topics/concept/jet-architecture.html" target="_blank">here</a>.
 
-In this lab we are going to explore a off-box python JET applications.
+In this lab we are going to explore a off-box python JET application.
 
 #### Config the Junos device for JET
 First of all, to run an off-box JET application, we need to enable the request-response configuration on the Junos OS device.
 
-The gRPC can be run in clear-text mode _(insecure! that's why it is hidden and for lab test only
-!)_ or SSL encrypted mode for enhanced security. For simpilicity we'll go with clear-text in the lab. More information about gRPC over SSL can be found [here](https://www.juniper.net/documentation/en_US/jet18.4/topics/topic-map/jet-off-box-apps.html).
+The gRPC can be run in clear-text mode _(insecure! that's why it is hidden and for lab test only!)_ or SSL encrypted mode for enhanced security. For simpilicity we'll go with clear-text in the lab. More information about gRPC over SSL can be found <a href="https://www.juniper.net/documentation/en_US/jet18.4/topics/topic-map/jet-off-box-apps.html" target="_blank">here</a>.
 
-Apply below configuration to enable notification and GRPC request-response service on vQFX.
+Apply below configuration to enable notification and gRPC request-response service on vQFX.
 
 ```
 configure
@@ -39,16 +38,11 @@ commit and-quit
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 0)">Run this snippet</button>
 
-We can check the listening port to verify the rpc and notification service are enabled.
+We can check the listening port to verify the notification and gRPC service are enabled.
 
 ```
 show system connections | match LISTEN | match "\.1883|\.32767"
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 1)">Run this snippet</button>
 
-Expected output
-```
-> tcp4       0      0  *.1883                                        *.*                                           LISTEN
-> tcp46      0      0  *.32767                                       *.*                                           LISTEN
-```
-Now the Junos OS Device is ready for off-box JET applications and it's time to get some action!  In the next chapter, we'll go through the notifiaction mechanism and collect some events from the MQTT event bus.
+Now the Junos OS device is ready for off-box JET applications and it's time to get some action!  In the next chapter, we'll go through the notifiaction mechanism and collect some events from the MQTT event bus.

@@ -18,7 +18,7 @@ system {
         }
     }
     services {
-        ssh {                           
+        ssh {
             root-login allow;
         }
         netconf {
@@ -41,7 +41,7 @@ system {
             authorization info;
         }
         file interactive-commands {
-            interactive-commands any;   
+            interactive-commands any;
         }
     }
 }

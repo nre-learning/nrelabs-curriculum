@@ -14,12 +14,12 @@ Before we deep dive into notification service, let's get an introduction on mess
 A message broker system is hub and spoke based model where
 - Broker accepts messages from clients and delivers to other interested clients
 - Client either publish an message with a topic, or subscribe to a topic or both
--  Topic is a namespace on the broker. Client subscribes or publish to a topics
+- Topic is a namespace on the broker. Client subscribes or publish to a topics
 - Publish: a Client sending a message to a Broker with a topic
 - Subscribe: a Client requesting broker what topic it is interested.The broker will deliver messages to this client based on the topic it subscribed.
 
 #### JET Notification Service
-Juniper JET notification service is a message broker system based on [MQTT](http://mqtt.org/) protocol to deliver system events. Junos system daemons such as RPD will generate messages and publish them to the JET message broker thru eventd with specific topics. For example, interface events (link up/down)  will have topic ```/junos/events/kernel/interfaces``` while route table related event will have topic ```/junos/events/kernel/route-table```. The list of topic available can be found [here](https://www.juniper.net/documentation/en_US/jet17.4/topics/concept/jet-notification-api-overview.html).
+Juniper JET notification service is a message broker system based on <a href="http://mqtt.org/" target="_blank">MQTT</a> protocol to deliver system events. Junos system daemons such as RPD will generate messages and publish them to the JET message broker through eventd with specific topics. For example, interface events (link up/down) will have topic `/junos/events/kernel/interfaces` while route table related event will have topic `/junos/events/kernel/route-table`. The list of topic available can be found <a href="https://www.juniper.net/documentation/en_US/jet17.4/topics/concept/jet-notification-api-overview.html" target="_blank">here</a>.
 
 
 #### Creating a Python MQTT Client
@@ -33,7 +33,7 @@ import paho.mqtt.client as mqtt
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 0)">Run this snippet</button>
 
-After that, create a MQTT client object. Then define the `on_connect` callback function, which is triggered once the client connects to the JET MQTT broker, to subscribe the event. Here, we will subscribe to the topic `/junos/events/kernel/interfaces/ifa/add` which includes all new interfaces adress events.
+After that, create a MQTT client object. Then define the `on_connect` callback function, which is triggered once the client connects to the JET MQTT broker, to subscribe the event. Here, we will subscribe to the topic `/junos/events/kernel/interfaces/ifa/add` which includes all new interfaces address events.
 At last we bind the on_connect function to the client object.
 
 ```
@@ -56,7 +56,7 @@ client.on_message = on_message
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 2)">Run this snippet</button>
 
-Finally, instruct the client to connect to vQFX tcp 1883 we configured in previous stage, and start the main event loop function `loop_forever()`  to wait for events.
+Finally, instruct the client to connect to vQFX TCP port 1883 we configured in previous stage, and start the main event loop function `loop_forever()`  to wait for events.
 
 ```
 client.connect('vqfx', 1883, 60)
@@ -78,33 +78,10 @@ commit and-quit
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 4)">Run this snippet</button>
 
-Once the commit is completed, Eventd will receive the new IFA event and deliver it all clients who subscribed the IFA topic.
+Once the commit is completed, Eventd will receive the new IFA event and deliver it to all clients who subscribed the IFA topic.
 
 Now change to `linux` terminal, you should be able to see the `KERNEL_EVENT_IFA_ADD` event.
 
 Press `Ctrl-C` to exit the loop.
-
-Here's a sample output of the message:
-```
- /junos/events/kernel/interfaces/ifa/add/xe-0/0/1.0/inet/192.168.20.1/32 {
-     "jet-event": {
-         "event-id": "KERNEL_EVENT_IFA_ADD",
-         "hostname": "vqfx",
-         "time": "2019-01-22-14:59:06",
-         "severity": "INFO",
-         "facility": "KERNEL",
-         "attributes": {
-             "name": "xe-0/0/0",
-             "subunit": 0,
-             "family": "inet",
-             "local-address": "192.168.10.1/32",
-             "destination-address": "192.168.10.0/24",
-             "broadcast-address": "192.168.10.255/32",
-             "generation-number": 144,
-             "flags": 192
-         }
-     }
- }
-```
 
 In the next chapter we are going to explore JET request-response calls.
