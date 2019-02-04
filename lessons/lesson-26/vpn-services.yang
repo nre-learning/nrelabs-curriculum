@@ -1,0 +1,68 @@
+module vpn-services {
+    yang-version "1";
+    namespace "http://yang.juniper.net/customyang/vpn";
+    prefix "vpn";
+    organization "Juniper Networks";
+    description "Custom Yang module for VPN services";
+    revision "2019-02-10";
+
+    container vpn-services {
+        description "VPN services configuration";
+        list l3vpn {
+            description "L3VPN configuration";
+            key name;
+            leaf name {
+                description "Customer Name";
+                type string;
+            }
+            leaf interface {
+                description "Access interface for the L3VPN customer";
+                type string;
+                mandatory true;
+            }
+            leaf vlan-id {
+                description "VLAN identifier for the L3VPN customer";
+                type int32 {
+                    range "0 .. 4094";
+                }
+                mandatory true;
+            }
+            leaf ip-address {
+                description "IPv4 address for access interface";
+                type string;
+                mandatory true;
+            }
+            leaf route-distinguisher {
+                description "Route distinguisher for L3VPN instance";
+                type string;
+                mandatory true;
+            }
+            leaf vrf-target {
+                description "VRF target for L3VPN instance";
+                type string;
+                mandatory true;
+            }
+            container static-route {
+                description "IPv4 static route";
+                list route {
+                    key name;
+                    ordered-by user;
+                    leaf name {
+                        description "Destination";
+                        type string;
+                    }
+                    choice route-next-hop {
+                        leaf next-hop {
+                            description "Next hop to destination";
+                            type string;
+                        }
+                        leaf discard {
+                            description "Drop packets to destination";
+                            type empty;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

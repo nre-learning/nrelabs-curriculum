@@ -1,0 +1,34 @@
+---
+lessonName: Automating with Openconfig
+lessonId: 26
+category: configuration
+tier: local
+juniperSpecific: true
+
+utilities:
+- name: linux
+  image: raylam/utility
+
+devices:
+- name: vqfx
+  image: raylam/vqfx-full-17.4:190204
+  ports:
+  - 830
+
+connections:
+- a: vqfx
+  b: linux
+  subnet: 10.1.0.0/24
+
+stages:
+  - id: 1
+    description: Install Openconfig Yang module on Junos box
+
+  - id: 2
+    description: Provision Openconfig using CLI and Netconf
+
+  - id: 3
+    description: Custom Yang modules and custom Yang translator
+
+  - id: 4
+    description: Custom Yang config provisioning using CLI and Netconf
