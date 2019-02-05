@@ -1,10 +1,19 @@
 ---
 lessonName: Network Unit Testing with JSNAPY
 lessonId: 12
-category: verification
+category: tools
 lessonDiagram: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-12/lessondiagram.png
 tier: prod
-juniperSpecific: true
+prereqs:
+  - 14  # YAML
+  - 23  # Linux
+description: Unit testing your network devices is one of the fundamental building blocks to CI/CD for networking. In this lesson, we'll explore the use of an open source tool - JSNAPy - for doing just this with Junos devices.
+slug: JSNAPy
+tags:
+- jsnapy
+- test
+- unit test
+- testing
 
 utilities:
 - name: linux1

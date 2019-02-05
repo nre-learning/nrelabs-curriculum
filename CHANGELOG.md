@@ -4,6 +4,8 @@
 
 ### Curriculum
 
+- Adding more metadata to all lessons for Advisor functionality [#172](https://github.com/nre-learning/antidote/pull/172)
+
 ### Other
 
 

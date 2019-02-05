@@ -1,8 +1,18 @@
 ---
 lessonName: Multi-Vendor Network Automation with NAPALM
 lessonId: 13
-category: configuration
+category: tools
 tier: prod
+prereqs:
+  - 22  # Python
+description: Each vendor has their own APIs for interacting with network devices. In this lesson, you'll learn about a Python library that abstracts all these, and allows you to do basic multivendor network automation.
+slug: NAPALM
+tags:
+- multi-vendor
+- multivendor
+- automation
+- network automation
+- napalm
 
 iframeResources:
 - ref: jupyter
