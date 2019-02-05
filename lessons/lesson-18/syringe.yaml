@@ -8,9 +8,7 @@ prereqs:
 tags:
 - testing
 - todd
-description: |
-  ToDD is a Distributed Network-Service-Level Assertion Engine. In this lesson, we'll learn about how to use ToDD
-  to run distributed data-plane tests and assertions on our network.
+description: ToDD is a Distributed Network-Service-Level Assertion Engine. In this lesson, we'll learn about how to use ToDD to run distributed data-plane tests and assertions on our network.
 slug: ToDD
 
 utilities:

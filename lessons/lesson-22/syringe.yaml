@@ -6,10 +6,7 @@ lessondiagram: https://raw.githubusercontent.com/nre-learning/antidote/master/le
 tier: ptr
 prereqs:
   - 23  # Linux
-description: |
-  Python is THE langage to learn when it comes to network automation. In this lesson, you'll get a basic introduction to Python,
-  an exploration of common Python libraries related to networking and network automation, and prepare to dive deeper in follow-up
-  lessons on using Python for advanced automation.
+description: Python is THE langage to learn when it comes to network automation. In this lesson, you'll get a basic introduction to Python, an exploration of common Python libraries related to networking and network automation, and prepare to dive deeper in follow-up lessons on using Python for advanced automation.
 slug: Python
 tags:
 - python

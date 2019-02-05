@@ -5,9 +5,7 @@ category: fundamentals
 tier: prod
 prereqs:
   - 22  # Python
-description: |
-  YAML is a human friendly data serialization standard. In this lesson, we'll explore the basics of YAML,
-  and prepare for using it in a myriad of automation use cases.
+description: YAML is a human friendly data serialization standard. In this lesson, we'll explore the basics of YAML, and prepare for using it in a myriad of automation use cases.
 slug: YAML
 tags:
 - YAML

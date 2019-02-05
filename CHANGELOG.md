@@ -4,6 +4,15 @@
 
 ### Curriculum
 
+- Adding more metadata to all lessons for Advisor functionality [#172](https://github.com/nre-learning/antidote/pull/172)
+
+### Other
+
+
+## 0.2.0 - January 24, 2019
+
+### Curriculum
+
 - Adding Lesson-15 Event-Driven Network Automation with StackStorm [#126](https://github.com/nre-learning/antidote/pull/126)
 - Clarify internet access restrictions in REST API lesson and docs [#148](https://github.com/nre-learning/antidote/pull/148)
 - Updated YAML lesson to be less of a Juniper commercial [#161](https://github.com/nre-learning/antidote/pull/161)

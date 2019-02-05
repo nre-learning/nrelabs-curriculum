@@ -7,9 +7,7 @@ tier: prod
 prereqs:
   - 22  # Python
   - 23  # Linux
-description: |
-  Salt is a powerful automation platform, and is one of the most popular choices in the world of network automation. We'll
-  cover the basics of Salt in this lesson, and explore how to interact with our network devices using this framework.
+description: Salt is a powerful automation platform, and is one of the most popular choices in the world of network automation. We'll cover the basics of Salt in this lesson, and explore how to interact with our network devices using this framework.
 slug: Salt
 tags:
 - event driven automation

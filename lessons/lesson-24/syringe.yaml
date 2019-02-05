@@ -7,9 +7,7 @@ prereqs:
   - 14  # YAML
   - 22  # Python
   - 23  # Linux
-description: |
-  PyEZ is a powerful Python library for interacting with Junos devices. In this lesson, we'll explore the use of this library
-  to collect and parse information from our Junos-based network, as well as perform configuration management tasks.
+description: PyEZ is a powerful Python library for interacting with Junos devices. In this lesson, we'll explore the use of this library to collect and parse information from our Junos-based network, as well as perform configuration management tasks.
 slug: PyEZ
 tags:
 - pyez

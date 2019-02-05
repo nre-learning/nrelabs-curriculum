@@ -6,9 +6,7 @@ tier: prod
 tags:
 - linux
 - bash
-description: |
-  Being able to work with Linux and the Bash shell is becoming an increasingly important skill in the world of Network Reliability Engineering.
-  In this lesson, we'll cover the basics of a Linux-based system, and get you acquainted with the Bash shell.
+description: Being able to work with Linux and the Bash shell is becoming an increasingly important skill in the world of Network Reliability Engineering. In this lesson, we'll cover the basics of a Linux-based system, and get you acquainted with the Bash shell.
 slug: Linux
 
 utilities:

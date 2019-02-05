@@ -5,9 +5,7 @@ category: fundamentals
 tier: prod
 prereqs:
   - 23  # Linux
-description: |
-  Git is an extremely popular version control system. In this lesson, we'll explore the basics of Git, and prepare for using it in
-  network automation tools and workflows.
+description: Git is an extremely popular version control system. In this lesson, we'll explore the basics of Git, and prepare for using it in network automation tools and workflows.
 slug: Git
 tags:
 - version control
