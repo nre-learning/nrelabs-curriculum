@@ -21,7 +21,6 @@ stages:
     description: Lists
   - id: 2
     description: Dictionaries (key/value pairs)
-    verifyCompleteness: true
 
   # 3:
   #   description: What about JSON?

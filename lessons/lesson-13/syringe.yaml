@@ -36,3 +36,5 @@ stages:
   - id: 4
     description: Make configuration changes with NAPALM
     jupyterLabGuide: true
+    verifyCompleteness: true
+    verifyObjective: "Make the configuration changes in the Jupyter notebook"
