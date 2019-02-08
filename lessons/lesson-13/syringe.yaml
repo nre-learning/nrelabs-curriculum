@@ -36,3 +36,5 @@ stages:
   - id: 4
     description: Make configuration changes with NAPALM
     jupyterLabGuide: true
+    verifyCompleteness: true
+    verifyObjective: "Modify and re-execute the code in the Jupyter notebook so that the description for em1.0 exactly reads: 'Hello, World!'"
