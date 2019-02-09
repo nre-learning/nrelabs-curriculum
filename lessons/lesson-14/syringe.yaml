@@ -1,8 +1,16 @@
 ---
 lessonName: Introduction to YAML
 lessonId: 14
-category: introductory
+category: fundamentals
 tier: prod
+prereqs:
+  - 22  # Python
+description: YAML is a human friendly data serialization standard. In this lesson, we'll explore the basics of YAML, and prepare for using it in a myriad of automation use cases.
+slug: YAML
+tags:
+- YAML
+- data modeling
+- data model
 
 utilities:
 - name: linux1
@@ -13,5 +21,6 @@ stages:
     description: Lists
   - id: 2
     description: Dictionaries (key/value pairs)
+
   # 3:
   #   description: What about JSON?
