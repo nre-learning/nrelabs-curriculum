@@ -1,7 +1,7 @@
 <configuration operation="replace">
         <version>15.1X53-D60.4</version>
         <system>
-            <host-name>vqfx3</host-name>
+            <host-name>vqfx1</host-name>
             <root-authentication>
                 <encrypted-password>$1$mlo32jo6$BOMVhmtORai2Kr24wRCCv1</encrypted-password>
                 <ssh-rsa>
@@ -102,7 +102,7 @@
                     <family>
                         <inet>
                             <address>
-                                <name>10.23.0.13/24</name>
+                                <name>10.31.0.11/24</name>
                             </address>
                         </inet>
                     </family>
@@ -115,7 +115,7 @@
                     <family>
                         <inet>
                             <address>
-                                <name>10.31.0.13/24</name>
+                                <name>10.12.0.11/24</name>
                             </address>
                         </inet>
                     </family>
@@ -131,7 +131,7 @@
         </forwarding-options>
         <routing-options>
             <autonomous-system>
-                <as-number>64003</as-number>
+                <as-number>64001</as-number>
             </autonomous-system>
         </routing-options>
         <protocols>

@@ -4,6 +4,10 @@
 
 ### Curriculum
 
+- Adding more metadata to all lessons for Advisor functionality [#172](https://github.com/nre-learning/antidote/pull/172)
+- Greatly improve and expand the NAPALM lesson [#175](https://github.com/nre-learning/antidote/pull/175)
+- Modify NAPALM lesson to use new verification capabilities [#178](https://github.com/nre-learning/antidote/pull/178)
+
 ### Other
 
 

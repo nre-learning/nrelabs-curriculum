@@ -4,3 +4,6 @@ jsnapy
 junos-eznc
 robotframework
 jinja2
+
+# https://github.com/paramiko/paramiko/issues/1369
+cryptography==2.4.2

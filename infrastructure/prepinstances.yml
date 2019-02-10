@@ -144,7 +144,7 @@
       dest:  /etc/cni/net.d/1-multus-cni.conf
 
  - name: Download antibridge plugin
-    shell: curl -L https://github.com/nre-learning/plugins/blob/master/bin/antibridge?raw=true -o /opt/cni/bin/antibridge && chmod a+x /opt/cni/bin/antibridge
+   shell: curl -L https://github.com/nre-learning/plugins/blob/master/bin/antibridge?raw=true -o /opt/cni/bin/antibridge && chmod a+x /opt/cni/bin/antibridge
 
   - name: enable kubelet service
     systemd:

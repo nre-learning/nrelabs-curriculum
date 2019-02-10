@@ -1,6 +1,3 @@
-
-kubectl create ns ptr
-
 echo "Creating letsencrypt secrets. Comment these out if you're not Matt - only he has the certs right now"
 
 # openssl dhparam -out letsencrypt/dhparam.pem 2048
