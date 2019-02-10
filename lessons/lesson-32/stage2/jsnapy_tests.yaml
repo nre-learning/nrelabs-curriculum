@@ -1,0 +1,17 @@
+---
+test_rpc_bgp:
+  - rpc: get-bgp-summary-information
+  - item:
+      xpath: '//bgp-information'
+      tests:
+        - is-equal: group-count, 1
+          err: "Test Failed!! BGP group count is <{{post['group-count']}}>"
+          info: "Test succeeded!! BGP group count is: <{{post['group-count']}}>"
+
+        - is-equal: peer-count, 2
+          err: "Test Failed!! BGP group configured peer count is <{{post['peer-count']}}>"
+          info: "Test succeeded!! BGP group configured peer count is: <{{post['peer-count']}}>"
+
+        - is-equal: down-peer-count, 0
+          err: "Test Failed!! BGP down peer count is <{{post['down-peer-count']}}>"
+          info: "Test succeeded!! BGP down peer count is: <{{post['down-peer-count']}}>"
