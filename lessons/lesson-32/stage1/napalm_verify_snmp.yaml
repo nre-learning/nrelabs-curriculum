@@ -1,12 +1,6 @@
 ---
-
-# V-3969
+# V-3969 - RO community strings only
 - get_snmp_information:
     community:
       antidote:
-        _mode: strict
-        mode: rw
-        acl: ""
-
-# V-31285
-
+        mode: ro

@@ -1,0 +1,9 @@
+---
+# V-31285 - all BGP peers must be configured with authentication
+- get_bgp_config:
+    PEERS:
+      neighbors:
+        10.12.0.12:
+          authentication_key: ".+"
+        10.31.0.13:
+          authentication_key: ".+"
