@@ -15,6 +15,6 @@ test_v-31285_bgp_authentication:
   - item:
       xpath: '//bgp-peer'
       tests:
-        - exists: authentication-configured 
+        - exists: bgp-option-information/authentication-configured 
           err: "Test Failed!! <{{post['peer-address']}}> does not have BGP authentication configured."
           info: "Test succeeded!!  <{{post['peer-address']}}> is configured to use authentication"

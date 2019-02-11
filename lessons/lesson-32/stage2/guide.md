@@ -56,7 +56,7 @@ However, a byproduct of also including our V-31285 test which asserts the BGP co
 Let's take a look at the BGP neighbor information:
 
 ```
-show bgp neighbor | display xml
+show bgp neighbor | display xml | no-more
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 5)">Run this snippet</button>
 
@@ -76,7 +76,7 @@ cat jsnapy_tests.yaml
 
 Another advantage of using JSNAPy is, due to the fact that it uses XPath to locate data in the XML hierarchy, we can make assertions on all child elements of a node, or a specific one. This means we can write one test to assert that any and all BGP peers are configured with authentication.
 
-The XPath expression `//bgp-peer` matches all BGP peers configured on the device. Once these are located, the actual test being run is that the node `authentication-configured` exists. This is what Junos places in the body of the response to the RPC `get-bgp-neighbor-information` when a certain peer is configured with authentication.
+The XPath expression `//bgp-peer` matches all BGP peers configured on the device. Once these are located, the actual test being run is that the node `bgp-option-information/authentication-configured` exists. This is what Junos places in the body of the response to the RPC `get-bgp-neighbor-information` when a certain peer is configured with authentication.
 
 Since our BGP peers are not configured with authentication, our previous testrun failed. Let's first get our device compliant once more:
 
@@ -98,17 +98,3 @@ jsnapy --snapcheck -f jsnapy_config.yaml -v
 JSNAPy was designed from the beginning for multiple tests across multiple devices. You can maintain your tests in the way you want, either in separate files, or grouped according to functionality, other guidelines, etc. If we wanted to run the same tests across more than just this one `vqfx1` device, we would only need to add them to the inventory in the JSNAPy config file.
 
 These examples should get you started - consider writing more tests for other findings!
-
-
-
-
-It *looks* good, but as they say, "successful tests or it didn't happen". Let's re-run JSNAPy to make sure our tests are passing with the new configuration:
-
-```
-jsnapy --snapcheck -f jsnapy_config.yaml -v
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 2)">Run this snippet</button>
-
-This time, our network is behaving the way we've declared in the tests, so they pass. It's important to note that our tests not only assert that the right configuration exists, but that the operational state of each router's BGP peer status is correct. This is a nice feature of JSNAPy - it can make assertions over anything in the entire Junos data model.
-
-This was a lightning-quick introduction to JSNAPy. Please see the [wiki](https://github.com/Juniper/jsnapy/wiki) for more details - there's a lot more capability than we covered here.
