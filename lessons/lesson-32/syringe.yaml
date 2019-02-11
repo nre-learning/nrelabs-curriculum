@@ -40,6 +40,6 @@ connections:
 stages:
   - id: 1
     description: STIG Compliance Validation with NAPALM
-Security Technical Implementation Guides (STIGs) are the configuration standards for DOD IA and IA-enabled devices/systems
+    jupyterLabGuide: true
   - id: 2
     description: STIG Compliance Validation with JSNAPy
