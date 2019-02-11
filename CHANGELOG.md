@@ -10,6 +10,7 @@
 
 ### Other
 
+- Remove LLDP configurations globally for now [#182](https://github.com/nre-learning/antidote/pull/182)
 
 ## 0.2.0 - January 24, 2019
 
