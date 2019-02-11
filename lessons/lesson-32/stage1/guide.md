@@ -1,4 +1,4 @@
-# STIG Compliance Validation
+# Automated STIG Compliance Validation
 ## Part 1  - STIG Compliance Validation with NAPALM
 
 Anyone who's worked on United States military networks and systems has had to go through the experience of making sure that everything is compliant with the [Security Technical Implementation Guides](https://iase.disa.mil/stigs/Pages/index.aspx), or STIGs. These are a set of guidelines that serve as the minimum standard for locking down and reducing the attack surface for IT infrastructure within the US Department of Defense. Other countries have equivalent guides and standards as well.
@@ -36,6 +36,11 @@ We've intentionally configured `vqfx1` ahead of time to have a read-write string
 napalm --user=antidote --password=antidotepassword --vendor=junos vqfx1 validate napalm_verify_snmp.yaml
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 2)">Run this snippet</button>
+
+There's a lot to go through in the resulting JSON output, but the important thing is the high-level key "complies" has a value of `false`.
+This means that the test we wrote to assert that the SNMP community string adheres to V-3969 is showing noncompliance on this device.
+
+We can get this test to pass by reconfiguring `vqfx1` to comply with V-3969 by setting the community string to read only:
 
 ```
 configure
@@ -80,8 +85,10 @@ Now, we should again see all tests pass:
 ```
 napalm --user=antidote --password=antidotepassword --vendor=junos vqfx1 validate napalm_verify_bgp.yaml
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 8)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 8)">Run this snippet</button>
 
 This lab has intentionally left a few things out:
 - It doesn't ensure compliance. It just detects noncompliance in an automated way. This is very valuable, but even more valuable is the ability to couple these tests with something like a Python script or Ansible playbook to perform the necessary compliance changes automatically when a violation is detected.
 - Obviously, there are many other findings you can write tests for that we haven't included here. You should [take a look](https://stigviewer.com/stig/infrastructure_router__juniper/) at the other findings, and consider writing a test for them here as practice.
+
+In the next lab, we'll look at doing the same thing with another tool we've looked at before - JSNAPy.

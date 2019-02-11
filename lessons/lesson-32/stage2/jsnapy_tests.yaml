@@ -1,17 +1,20 @@
 ---
-test_rpc_bgp:
-  - rpc: get-bgp-summary-information
+# V-3969
+test_v-3969_snmp_readonly:
+  - rpc: get-config
   - item:
-      xpath: '//bgp-information'
+      xpath: 'snmp/community'
       tests:
-        - is-equal: group-count, 1
-          err: "Test Failed!! BGP group count is <{{post['group-count']}}>"
-          info: "Test succeeded!! BGP group count is: <{{post['group-count']}}>"
+        - is-equal: authorization, read-only
+          err: "Test Failed!! SNMP community strings must be set to read-only"
+          info: "Test succeeded!! SNMP community string is read-only"
 
-        - is-equal: peer-count, 2
-          err: "Test Failed!! BGP group configured peer count is <{{post['peer-count']}}>"
-          info: "Test succeeded!! BGP group configured peer count is: <{{post['peer-count']}}>"
-
-        - is-equal: down-peer-count, 0
-          err: "Test Failed!! BGP down peer count is <{{post['down-peer-count']}}>"
-          info: "Test succeeded!! BGP down peer count is: <{{post['down-peer-count']}}>"
+# V-31285
+test_v-31285_bgp_authentication:
+  - rpc: get-bgp-neighbor-information
+  - item:
+      xpath: '//bgp-peer'
+      tests:
+        - exists: authentication-configured 
+          err: "Test Failed!! <{{post['peer-address']}}> does not have BGP authentication configured."
+          info: "Test succeeded!!  <{{post['peer-address']}}> is configured to use authentication"
