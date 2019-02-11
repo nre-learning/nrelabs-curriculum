@@ -122,6 +122,14 @@
                 </unit>
             </interface>
         </interfaces>
+        <snmp>
+            <location>123 Datacenter Way</location>
+            <contact>nre-learning@networkreliability.engineering</contact>
+            <community>
+                <name>antidote</name>
+                <authorization>read-write</authorization>
+            </community>
+        </snmp>
         <forwarding-options>
             <storm-control-profiles>
                 <name>default</name>

@@ -1,7 +1,12 @@
 ---
-- get_snmp_information
+
+# V-3969
+- get_snmp_information:
     community:
       antidote:
         _mode: strict
         mode: rw
+        acl: ""
+
+# V-31285
 
