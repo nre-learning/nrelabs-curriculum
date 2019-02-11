@@ -1,0 +1,7 @@
+---
+- get_snmp_information
+    community:
+      antidote:
+        _mode: strict
+        mode: rw
+

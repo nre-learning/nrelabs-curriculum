@@ -1,5 +1,5 @@
 ---
-lessonName: STIG Compliance Validation
+lessonName: Automated STIG Compliance Validation
 lessonId: 32
 category: workflows
 lessonDiagram: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-32/lessondiagram.png
@@ -40,6 +40,5 @@ connections:
 stages:
   - id: 1
     description: STIG Compliance Validation with NAPALM
-    jupyterLabGuide: true
   - id: 2
     description: STIG Compliance Validation with JSNAPy
