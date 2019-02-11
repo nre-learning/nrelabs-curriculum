@@ -1,0 +1,6 @@
+---
+# V-3969 - RO community strings only
+- get_snmp_information:
+    community:
+      antidote:
+        mode: ro
