@@ -154,13 +154,7 @@
                     <name>default</name>
                 </vlan>
             </igmp-snooping>
-            <lldp>
-                <advertisement-interval>5</advertisement-interval>
-                <hold-multiplier>2</hold-multiplier>
-                <interface>
-                    <name>all</name>
-                </interface>
-            </lldp>
+
         </protocols>
         <vlans>
             <vlan>
