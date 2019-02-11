@@ -1,6 +1,6 @@
 ---
 lessonName: STIG Compliance Validation
-lessonId: 12
+lessonId: 32
 category: workflows
 lessonDiagram: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-32/lessondiagram.png
 tier: prod
