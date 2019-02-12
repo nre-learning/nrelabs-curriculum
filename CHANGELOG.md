@@ -4,12 +4,21 @@
 
 ### Curriculum
 
+### Other
+
+
+## v0.3.0 - February 11, 2019
+
+### Curriculum
+
 - Adding more metadata to all lessons for Advisor functionality [#172](https://github.com/nre-learning/antidote/pull/172)
 - Greatly improve and expand the NAPALM lesson [#175](https://github.com/nre-learning/antidote/pull/175)
 - Modify NAPALM lesson to use new verification capabilities [#178](https://github.com/nre-learning/antidote/pull/178)
+- Add lesson for STIG validation using JSNAPY and NAPALM [#181](https://github.com/nre-learning/antidote/pull/181)
 
 ### Other
 
+- Remove LLDP configurations globally for now [#182](https://github.com/nre-learning/antidote/pull/182)
 
 ## 0.2.0 - January 24, 2019
 

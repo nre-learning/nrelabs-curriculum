@@ -14,7 +14,7 @@ terraform.d/
 
 # This is where ansible places files for copying between instances
 tmp/
-
+*.swp
 csrx-18.1R1.9.img.bz2
 
 infra/antidote-web/target/
