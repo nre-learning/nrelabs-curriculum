@@ -1,9 +1,16 @@
 ---
 lessonName: Terraform & Junos
 lessonId: 31
-category: configuration
-lessonDiagram: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-12/lessondiagram.png
+category: tools
+lessonDiagram: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-31/lessondiagram.png
+description: Terraform provides a declarative way of managing resources and now you can experiment with controlling Junos resources through this exciting lesson! 
 tier: prod
+slug: Terraform
+tags:
+  - terraform
+  - declarative
+  - junos
+
 juniperSpecific: true
 
 utilities:
