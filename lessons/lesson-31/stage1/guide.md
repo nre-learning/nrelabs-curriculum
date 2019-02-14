@@ -3,9 +3,9 @@
 
 In this lesson, we will introduce Terraform, what it is and show you how it works.
 
-Terraform enables you to easily and predictably plan, create, update and destroy infrastructure resources in a graph based and CLI free way. The strange thing for Terraform is it's mostly thought as of an application or cloud provisioner and not really focussed on the networking space. You'll see that thought is just not true!
+Terraform enables you to easily and predictably plan, create, update and destroy infrastructure resources in a graph based and network CLI free way. The strange thing for Terraform is it's mostly thought as of an application or cloud provisioner and not really focussed on the networking space. You'll see that thought is just not true!
 
-Infrastructure-as-Code Terraform resources are declarative versions of the networking resources and can be version controlled and passed about without other system resources. With Terraform, you can stop thinking about how things are built and just worry about the what.
+Infrastructure-as-Code Terraform resources are declarative versions of the networking resources and can be version controlled and passed about without other system resources. With Terraform, you can stop thinking about how things are built and just worry about the what. All Terraform configurations are expressed in [Hashicorp Configuration Language](https://www.terraform.io/docs/configuration/syntax.html) (HCL) which in itself is very powerful.
 
 ![Terraform](https://s3-us-west-1.amazonaws.com/nrelearning/terraformbasics.png)
 
