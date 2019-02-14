@@ -3,10 +3,10 @@
             <name>vqfx_em3_0</name>
             <interfaces>
                 <interface>
-                    <name>em3</name>
+                    <name>em4</name>
                     <unit>
                         <name>0</name>
-                        <description>L3 iface for em3 on vQFX01</description>
+                        <description>L3 iface for em4 on vQFX01</description>
                         <family>
                             <inet>
                                 <address>
@@ -135,7 +135,7 @@
                 </unit>
             </interface>
             <interface>
-                <name>em4</name>
+                <name>em3</name>
                 <unit>
                     <name>0</name>
                     <family>

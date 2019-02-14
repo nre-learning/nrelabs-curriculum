@@ -7,5 +7,5 @@ resource "junos-qfx_native_bgp_peer" "vqfx01_peer1" {
         bgp_peer_as = "64003"
 
         # Explicit dependency
-        depends_on = ["junos-qfx_inet-iface.vqfx_em3"]
+        depends_on = ["junos-qfx_inet-iface.vqfx_em4"]
 }
