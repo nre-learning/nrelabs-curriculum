@@ -1,0 +1,7 @@
+2018-12-21_03:37:13.89440 time="2018-12-21T03:37:13Z" level=info msg="Established new database connection." source="postgres_exporter.go:995"
+2018-12-21_03:37:13.90583 time="2018-12-21T03:37:13Z" level=info msg="Semantic Version Changed: 0.0.0 -> 9.6.8" source="postgres_exporter.go:925"
+2018-12-21_03:37:13.90638 time="2018-12-21T03:37:13Z" level=error msg="Failed to reload user queries: /var/opt/gitlab/postgres-exporter/queries.yaml open /var/opt/gitlab/postgres-exporter/queries.yaml: no such file or directory" source="postgres_exporter.go:949"
+2018-12-21_03:37:13.98474 time="2018-12-21T03:37:13Z" level=info msg="Starting Server: localhost:9187" source="postgres_exporter.go:1137"
+2018-12-21_03:37:39.13306 time="2018-12-21T03:37:39Z" level=info msg="Established new database connection." source="postgres_exporter.go:995"
+2018-12-21_03:37:39.15478 time="2018-12-21T03:37:39Z" level=info msg="Semantic Version Changed: 0.0.0 -> 9.6.8" source="postgres_exporter.go:925"
+2018-12-21_03:37:39.26200 time="2018-12-21T03:37:39Z" level=info msg="Starting Server: localhost:9187" source="postgres_exporter.go:1137"

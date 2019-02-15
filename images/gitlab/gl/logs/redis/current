@@ -1,0 +1,5 @@
+2018-12-21_03:40:37.01194 717:M 21 Dec 03:40:37.011 * 10 changes in 300 seconds. Saving...
+2018-12-21_03:40:37.01750 717:M 21 Dec 03:40:37.017 * Background saving started by pid 2182
+2018-12-21_03:40:37.03092 2182:C 21 Dec 03:40:37.030 * DB saved on disk
+2018-12-21_03:40:37.03132 2182:C 21 Dec 03:40:37.031 * RDB: 0 MB of memory used by copy-on-write
+2018-12-21_03:40:37.11867 717:M 21 Dec 03:40:37.118 * Background saving terminated with success
