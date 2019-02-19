@@ -7,6 +7,7 @@ from lxml import etree
 from lxml.builder import E, ElementMaker
 import jcs
 
+### code for logging ###
 handler = RotatingFileHandler('/var/log/yang-vpn-services.log', maxBytes=1048576, backupCount=5)
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 handler.setFormatter(formatter)
@@ -15,6 +16,7 @@ logger.setLevel(logging.INFO)
 logger.addHandler(handler)
 # logger.info('Translation script started')
 
+### Here we start with creating a new routing-instances and interfaces configuration ###
 ns= 'http://yang.juniper.net/customyang/vpn'
 ns_dict = dict(namespaces=dict(vpn=ns))
 E_ns = ElementMaker(namespace=ns, nsmap={None: ns})
@@ -25,6 +27,7 @@ instances = E('routing-instances')
 
 operation = Junos_Configuration.get('operation')
 
+### iterate each custom YANG l3vpn leaf and create/delete corresponding junos config###
 for vpn in Junos_Configuration.xpath('vpn:vpn-services/vpn:l3vpn', **ns_dict):
     name = vpn.find('vpn:name', **ns_dict)
     intf = vpn.find('vpn:interface', **ns_dict)
@@ -167,5 +170,7 @@ for vpn in Junos_Configuration.xpath('vpn:vpn-services/vpn:l3vpn', **ns_dict):
 # logger.info('\n' + etree.tostring(interfaces, pretty_print=True))
 # logger.info('\n' + etree.tostring(instances, pretty_print=True))
 # jcs.emit_change('<interfaces operation="delete"/><routing-instances operation="delete"/>', 'transient-change', 'xml')
+
+### Commit the junos config changes ###
 jcs.emit_change(etree.tostring(interfaces), 'transient-change', 'xml')
 jcs.emit_change(etree.tostring(instances), 'transient-change', 'xml')

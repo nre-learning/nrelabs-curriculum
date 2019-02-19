@@ -5,4 +5,3 @@
 ---
 
 ### Chapter 5 - Verification and Troubleshooting
-

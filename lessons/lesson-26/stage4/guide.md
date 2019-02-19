@@ -4,11 +4,12 @@
 
 ---
 
-### Chapter 4 - Custom Yang config provisioning using CLI and Netconf
+### Chapter 4 - Custom YANG config provisioning using CLI and NETCONF
 
-In this stage, we will configure the L3VPN services using the `vpn-services` config knob defined by custom Yang.
+In this stage, we will configure the L3VPN services using the `vpn-services` config knob defined by our custom YANG model.
 
-First, we repeat what we have done in previous stage - copy both yang model and translation script to vQFX, and then install it.
+#### Preparation
+Firstly, we repeat what we have done in previous stage - copy both YANG model and translation script to vQFX, and then install it.
 
 ```
 cd /antidote/lessons/lesson-26
@@ -23,7 +24,10 @@ request system yang add package vpn-services module vpn-services.yang translatio
 
 Same as before, press `ENTER` when you're asked to restart the `cli`
 
-Now, configure a new L3VPN instance using CLI.
+
+#### Config using custom YANG
+As you would expect, config using custom YANG is exactly the same way as in OpenConfig and native Junos config.
+Now, we configure a new L3VPN instance using CLI, notice the our custom vpn-service:vpn-service stanza:
 
 ```
 configure
@@ -36,7 +40,8 @@ commit and-quit
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 2)">Run this snippet</button>
 
-Verify the translated configuration.
+#### Config verification
+We can also check the translated configuration:
 
 ```
 show configuration | display translation-script translated-config | no-more
@@ -50,7 +55,8 @@ show route table CustomerA.inet.0
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 4)">Run this snippet</button>
 
-Now, let's try to create another L3VPN instance using Netconf. First, go to Python interactive prompt, load PyEZ module and create a Junos device object.
+#### config custom YANG configration using NETCONF
+Now, let's try to create another L3VPN instance using NETCONF. Firstly, go to Python interactive prompt, load PyEZ module and create a Junos device object:
 
 ```
 python
@@ -62,7 +68,7 @@ dev.open()
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 5)">Run this snippet</button>
 
-Next, load the configuration, print the diff, and then commit.
+Then we load the configuration, print the diff, and commit:
 
 ```
 dev.cu.load(path='vpn-services.conf', format='text')
@@ -71,11 +77,13 @@ dev.cu.commit(timeout=600)
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 6)">Run this snippet</button>
 
-Show the translated config again.
+Verify the translated config:
 
 ```
 show configuration | display translation-script translated-config | no-more
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 7)">Run this snippet</button>
 
-Now, you can try to modify the configuration by yourself and see how the translation script helps you to provision the corresponding Junos configuration.
+To conclude we demostrated how to provision Junos device using custom YANG modules via CLI and NETCONF. Custom YANG modules is flexible that it can be used to define custom service oriented configration models to suit your business needs. Please feel free to to modify the configuration by yourself and see how the translation script helps you to provision the corresponding Junos configuration.
+
+For further information about custom YANG on Junos please visit Juniper TechLibrary "[Understanding the Management of Nonnative YANG Modules on Devices Running Junos OS](https://www.juniper.net/documentation/en_US/junos/topics/concept/netconf-yang-modules-custom-managing-overview.html)"
