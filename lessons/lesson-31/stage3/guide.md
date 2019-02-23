@@ -27,17 +27,25 @@ terraform apply -auto-approve
 
 When this completes, not only are the resources created on Junos but also Terraform creates a state file which can be inspected really easily.
 
+We can check on Junos that both the BGP peer is established and the interface is configured correctly.
+
+```
+show interfaces em4
+show bgp summary
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 2)">Run this snippet</button>
+
 ```
 cat terraform.tfstate
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 2)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 3)">Run this snippet</button>
 
 At this point we can also check to make sure that the cache reflects the plan:
 
 ```
 terraform plan
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 3)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 4)">Run this snippet</button>
 
 You've just created some resources on Junos using Terraform! How cool is this? There are two view points here worth a brief discussion on (don't fear, it will be super brief so you can get back at it!). 
 
@@ -50,7 +58,7 @@ You can check the resources created by Terraform by checking the current content
 ```
 show configuration groups
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 4)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 5)">Run this snippet</button>
 
 Like container and cloud approaches to applications, the ideas is we can just destroy the resources when we don't need them, without having to figure out dependencies like we traditionally would.
 
@@ -63,14 +71,14 @@ This is a user exercise and you're next challenge is to change the IP address on
 ```
 vim bgp_peer_1.tf
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 5)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 6)">Run this snippet</button>
 
 Once you've done this, run terraform plan again!
 
 ```
 terraform plan
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 6)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 7)">Run this snippet</button>
 
 Here's an example of what you should be seeing.
 
@@ -97,7 +105,7 @@ Let's go ahead and apply the change.
 ```
 terraform apply -auto-approve
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 7)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 8)">Run this snippet</button>
 
 Now the BGP session remote peer address has been changed and you're free to check the configuration group configuration entry on `vqfx` to gain evidence of this wizardy.
 
@@ -106,7 +114,7 @@ Peaking under the hood, the Junos Terraform provider destroys the group by NETCO
 ```
 show configuration groups
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 8)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 9)">Run this snippet</button>
 
 __Idempotency__
 
