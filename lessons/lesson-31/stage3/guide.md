@@ -48,7 +48,7 @@ Terraform allows us to create resources that can be destroyed cleanly when we're
 You can check the resources created by Terraform by checking the current contents of the configuration group stanza on `vqfx1`.
 
 ```
-show groups
+show configuration groups
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 4)">Run this snippet</button>
 
@@ -104,7 +104,7 @@ Now the BGP session remote peer address has been changed and you're free to chec
 Peaking under the hood, the Junos Terraform provider destroys the group by NETCONF then re-creates it with the same ID. In the grand scheme of things, it looks like an edit, but it's actually a full resource re-build.
 
 ```
-show groups
+show configuration groups
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 8)">Run this snippet</button>
 

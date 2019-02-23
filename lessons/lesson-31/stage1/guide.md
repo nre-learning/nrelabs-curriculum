@@ -7,6 +7,8 @@ Terraform enables you to easily and predictably plan, create, update and destroy
 
 Infrastructure-as-Code Terraform resources are declarative versions of the networking resources and can be version controlled and passed about without other system resources. With Terraform, you can stop thinking about how things are built and just worry about the what. All Terraform configurations are expressed in [Hashicorp Configuration Language](https://www.terraform.io/docs/configuration/syntax.html) (HCL) which in itself is very powerful.
 
+Don't forget your network chops in this lesson. You'll configure an interface, a BGP peer, a VLAN and a L3 interface for the VLAN. You can exercise your networking powers here and validate what Terraform does as it does it on `vqfx1`.
+
 ![Terraform](https://s3-us-west-1.amazonaws.com/nrelearning/terraformbasics.png)
 
 *Image borrowed from the Terraform website*
