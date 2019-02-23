@@ -27,11 +27,12 @@ terraform apply -auto-approve
 
 When this completes, not only are the resources created on Junos but also Terraform creates a state file which can be inspected really easily.
 
-We can check on Junos that both the BGP peer is established and the interface is configured correctly.
+We can check on Junos that both the BGP peer is established and the interface is configured correctly. Don't forget to stop the ping with `ctrl+c`!
 
 ```
 show interfaces em4
 show bgp summary
+ping 10.31.0.13
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 2)">Run this snippet</button>
 
