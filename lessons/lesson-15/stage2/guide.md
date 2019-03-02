@@ -123,7 +123,7 @@ As part of this lesson, we've included a configuration snippet that will replace
 ```
 cat /antidote/lessons/lesson-15/stage2/vqfx1-config-patch.txt
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 10)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 10)">Run this snippet</button>
 
 The `loadconfig` action can accept this path as a parameter, and will perform a merge between this configuration, and the existing configuration:
 
