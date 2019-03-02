@@ -24,8 +24,8 @@
         - htop
         - bridge-utils
         - docker
-        - kubelet-1.12.3
-        - kubeadm-1.12.3
+        - kubelet-1.13.1
+        - kubeadm-1.13.1
         - kubectl
 
     - name: Enable and restart services
