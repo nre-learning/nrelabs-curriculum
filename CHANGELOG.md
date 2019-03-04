@@ -4,6 +4,8 @@
 
 ### Curriculum
 
+- Adding Lesson-26 Automating with Openconfig
+
 ### Other
 
 
