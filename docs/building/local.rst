@@ -18,11 +18,17 @@ offline, or use this as your development environment for building new lessons.
 The `selfmedicate <https://github.com/nre-learning/antidote-selfmedicate>`_ tool is a set of scripts
 that use minikube to deploy a full functioning Antidote deployment on your local machine.
 
-.. warning::  Currently, selfmedicate only supports mac and linux. If you want to run this on Windows, we
-        recommend executing these scripts from within a linux virtual machine, or within 
-        `Windows WSL <https://docs.microsoft.com/en-us/windows/wsl/faq>`_.
+.. warning::
+    Currently, selfmedicate only supports mac and linux. If you want to run this on Windows, we
+    recommend executing these scripts from within a linux virtual machine, or within 
+    `Windows WSL <https://docs.microsoft.com/en-us/windows/wsl/faq>`_.
 
-< INSERT A DIAGRAM ILLUSTRATING PRODUCTION THEN ANOTHER ILLUSTRATING A MINIKUBE DEPLOYMENT>
+.. warning::
+
+    The ``selfmedicate`` script is designed to make it easy to configure a local minikube environment
+    with everything related to Antidote installed on top. However, you'll always be well-served by
+    becoming familiar with ``minikube`` itself so that you are more able to troubleshoot the environment
+    when things go wrong. Keep a bookmark to the `minikube docs <https://kubernetes.io/docs/setup/minikube/>`_ handy, just in case.
 
 Install and Configure Dependencies
 ----------------------------------
@@ -33,7 +39,13 @@ as well as the automation we'll use to get everything spun up on top of it.
 
 Next, you'll need minikube. This is by far the easiest way to get a working instance of Kubernetes
 running on your laptop. Follow the `installation instructions <https://kubernetes.io/docs/tasks/tools/install-minikube/>`_
-to install, but do not start minikube. 
+to install, but do not start minikube.
+
+.. note:: 
+
+    The ``selfmedicate`` script starts a minikube VM with 8GB of RAM and 4 vCPUs by default. While this isn't a strict
+    requirement, it's a highly advised minimum. Depending on the lessons you start, it can require quite a bit of system
+    resources, especially if you start multiple lessons in parallel.
 
 Starting the Environment
 ------------------------
@@ -92,10 +104,10 @@ by the ``selfmedicate`` script in this stage is as follows:
     Also note that if you destroy your minikube instance, you'll need to redo all of the above. If you want to just
     temporarily pause your environment, see the section below on the ``stop`` and ``resume`` subcommands.
 
-The below video shows this command in action, for your reference. You should see more or less the same thing
+The below screenshot shows this command in action, for your reference. You should see more or less the same thing
 on your environment.
 
-VIDEO
+.. image:: /images/selfmedicate.png
 
 Once this is done, the environment should be ready to access at the URL shown by the script.
 
@@ -172,18 +184,26 @@ It's likely that the pods for running the Antidote platform aren't running yet. 
 You should see something similar to the above. The exact pod names will be different, but you should see the same numbers under
 the ``READY`` column, and all entries under the ``STATUS`` column should read ``Running`` as above.
 
-If this is not the case, it's likely that the images for each pod is still being downloaded to your machine. You can verify this by "describing"
-the pod that's not Ready yet:
+
+In some cases the ``STATUS`` column may read ``ContainerCreating``. In this case, it's likely that the images for each pod
+is still being downloaded to your machine. You can verify this by "describing" the pod that's not ``Ready`` yet:
 
 .. code::
 
-    kubectl describe pod < TODO INSERT EXAMPLE >
+    kubectl describe pods -n=kube-system kube-multus-ds-amd64-ddxqc
+    Name:               kube-multus-ds-amd64-ddxqc
+    ....truncated....
+    Events:
+    Type    Reason     Age   From               Message
+    ----    ------     ----  ----               -------
+    Normal  Scheduled  19s   default-scheduler  Successfully assigned kube-system/kube-multus-ds-amd64-ddxqc to minikube
+    Normal  Pulling    17s   kubelet, minikube  pulling image "nfvpe/multus:latest"
 
-In this example, we're still waiting for the image to download. The ``selfmedicate.sh`` script has some built-in logic to wait
-for these downloads to finish before moving to the next step, but in case that doesn't work, this can help you understand
-what's going on behind the scenes.
+In this example, we're still waiting for the image to download - the most recent event indicates that the image is being pulled.
+The ``selfmedicate.sh`` script has some built-in logic to wait for these downloads to finish before moving to the next step,
+but in case that doesn't work, this can help you understand what's going on behind the scenes.
 
-If this isn't the error message you're seeing, it's likely that something is truly broken, and you won't be able to get the environment
+If you're seeing something else, it's likely that something is truly broken, and you likely won't be able to get the environment
 working without some kind of intervention. Please `open an issue on the antidote-selfmedicate repository <https://github.com/nre-learning/antidote-selfmedicate/issues/new>`_
 with a full description of what you're seeing.
 
@@ -199,23 +219,14 @@ the configured timeout window. This isn't totally uncommon, since the images ten
 connections, this can take some time.
 
 - kubectl describe pods can help,
-- docker images list can also help if you know what images you need
-
-Antibridge not found
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-As a temporary measure, we've made some slight modifications to the ``bridge`` CNI plugin to enable things like LLDP on the
-linux bridges that are created for inter-pod communication. This new plugin is called ``antibridge``, and we host a compiled
-binary in Github that the ``selfmedicate`` script is meant to download and install.
-
-If upon inspection of lesson pods, you see messages indicating the ``antibridge`` plugin was not found, there must have been
-a problem downloading it. Fortunately, this is an easy fix - a matter of downloading the plugin manually, and restarting the
-kubelet service.
-
+- docker images list can also help if you know what images you need. Download these using docker directly, and then re-run the lesson
 
 .. note::
-    
-    MORE
+
+  While the ``selfmedicate`` script downloads the most common images in advance to try to reduce the likelihood of this issue, and to
+  generally improve the responsiveness of the local environment. However, it can't do this for all images. If you know you'll use a
+  particular image commonly, consider adding it to the ``selfmedicate`` script, or manually pulling it within the minikube environment
+  ahead of time.
 
 
 Validating Lesson Content
