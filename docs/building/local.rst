@@ -218,15 +218,25 @@ This can have a number of causes, but one of the most common is that the images 
 the configured timeout window. This isn't totally uncommon, since the images tend to be fairly large, and on some internet
 connections, this can take some time.
 
-- kubectl describe pods can help,
-- docker images list can also help if you know what images you need. Download these using docker directly, and then re-run the lesson
+There are a few things you can try. For instance, ``kubectl describe pods <pod name>``, as used in the previous section,
+can tell you if a given pod is still downloading an image.
+
+We can also use the ``minikube ssh`` command to send commands into the minikube VM and see the results. For instance, to
+check the list of docker images that have been successfully pulled:
 
 .. note::
 
-  While the ``selfmedicate`` script downloads the most common images in advance to try to reduce the likelihood of this issue, and to
-  generally improve the responsiveness of the local environment. However, it can't do this for all images. If you know you'll use a
-  particular image commonly, consider adding it to the ``selfmedicate`` script, or manually pulling it within the minikube environment
-  ahead of time.
+    minikube ssh docker image list
+
+This is the same as running ``docker image list``, but it's done from inside the minikube VM for you. Similarly, if you wanted
+to manually pull an image ahead of time, you could run ``minikube ssh docker image pull <image>``.
+
+.. note::
+
+  The ``selfmedicate`` script downloads the most common images in advance to try to reduce the likelihood of this issue, and to
+  generally improve the responsiveness of the local environment. However, it can't do this for all possible images you might want
+  to use. If you know you'll use a particular image commonly, consider adding it to the ``selfmedicate`` script, or manually
+  pulling it within the minikube environment ahead of time.
 
 
 Validating Lesson Content
