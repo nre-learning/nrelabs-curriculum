@@ -1,8 +1,15 @@
-## Automating with Openconfig
+## Vendor neutral configuration provisioning using YANG and OpenConfig
 
 **Contributed by: [@valjeanchan](https://github.com/valjeanchan) and [@jnpr-raylam](https://github.com/jnpr-raylam)**
 
 ---
+### Preface
+Also manyu of the IP network runs on industry standard protocols such as OSPF / BGP,
+network device provisioning across multiple vendors' device is still challenging
+as configuration syntax and methods are different across vendors. Industry once tried
+to solve this problem using snmp (remember SNMP set?) with much succeess, a more
+flexible approach on data schema is required to solve this problem. Here come
+YANG and OpenConfig.
 
 ### Chapter 1 - Install OpenConfig Yang module on Junos box
 
