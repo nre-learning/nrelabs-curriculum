@@ -10,15 +10,15 @@ if [ -z "$PUBLICKEY" ]; then
 fi
 
 if [ ! -f "/u/$PUBLICKEY" ]; then
-  >&2 echo "WARNING: Can't read ssh public key file $PUBLICKEY. Creating user 'lab' with same password as root"
-  SSHUSER="lab"
+  >&2 echo "WARNING: Can't read ssh public key file $PUBLICKEY. Creating user 'antidote' with same password as root"
+  SSHUSER="antidote"
 else
   SSHUSER=$(cat /u/$PUBLICKEY | cut -d' ' -f3 | cut -d'@' -f1)
   SSHPUBLIC="ssh-rsa \"$(cat /u/$PUBLICKEY)\""
-  if [ "root" == $SSHUSER ]; then
-    SSHUSER="lab"
-    >&2 echo "Creating user 'lab' with same password as root and ssh public key"
-  fi
+#  if [ "root" == $SSHUSER ]; then
+    SSHUSER="antidote"
+    >&2 echo "Creating user 'antidote' with same password as root and ssh public key"
+#  fi
 fi
 
 >&2 echo "default route:"
