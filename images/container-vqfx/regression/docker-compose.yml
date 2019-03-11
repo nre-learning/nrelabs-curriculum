@@ -1,0 +1,271 @@
+# Copyright (c) 2017, Juniper Networks, Inc.
+# # All rights reserved.
+#
+version: "2.2"
+
+services:
+
+  vqfx1:
+    image: juniper/container-vqfx:latest
+    hostname: vqfx1
+    privileged: true
+    tty: true
+    stdin_open: true
+    environment:
+      - ID=vqfx1
+      - IMAGE=jinstall-vqfx-10-f-17.3R3-S2.2.img
+      - PUBLICKEY=id_rsa.pub
+      - CONFIG=regression/vqfx1.conf
+      - WAITFOR=eth7
+    volumes:
+      - $PWD:/u:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      mgmt:
+
+  alpine1a:
+    build: client
+    privileged: true
+    tty: true
+    stdin_open: true
+    environment:
+      - LOCAL_IP=192.168.99.1
+      - MTU=9000
+      - WAITFOR=eth1
+    volumes:
+      - $PWD:/u:ro
+    networks:
+      mgmt:
+
+  alpine1b:
+    build: client
+    privileged: true
+    tty: true
+    stdin_open: true
+    environment:
+      - LOCAL_IP=192.168.99.2
+      - MTU=9000
+      - WAITFOR=eth1
+    volumes:
+      - $PWD:/u:ro
+    networks:
+      mgmt:
+
+  alpine1c:
+    build: client
+    privileged: true
+    tty: true
+    stdin_open: true
+    environment:
+      - LOCAL_IP=192.168.99.3
+      - MTU=9000
+      - WAITFOR=eth1
+    volumes:
+      - $PWD:/u:ro
+    networks:
+      mgmt:
+
+  alpine1d:
+    build: client
+    privileged: true
+    tty: true
+    stdin_open: true
+    environment:
+      - LOCAL_IP=192.168.99.4
+      - MTU=9000
+      - WAITFOR=eth1
+    volumes:
+      - $PWD:/u:ro
+    networks:
+      mgmt:
+
+  alpine1e:
+    build: client
+    privileged: true
+    tty: true
+    stdin_open: true
+    environment:
+      - LOCAL_IP=192.168.99.5
+      - MTU=9000
+      - WAITFOR=eth1
+    volumes:
+      - $PWD:/u:ro
+    networks:
+      mgmt:
+
+  alpine1f:
+    build: client
+    privileged: true
+    tty: true
+    stdin_open: true
+    environment:
+      - LOCAL_IP=192.168.99.6
+      - MTU=9000
+      - WAITFOR=eth1
+    volumes:
+      - $PWD:/u:ro
+    networks:
+      mgmt:
+
+  dhcptester1:
+    image: marcelwiget/dhcptester
+    privileged: true
+    tty: true
+    stdin_open: true
+    command: -s 10 -c 100 -i eth1 -e 1 -m 99999999
+    volumes:
+      - $PWD:/u:ro
+    networks:
+      mgmt:
+
+  dhcptester2:
+    image: marcelwiget/dhcptester
+    privileged: true
+    tty: true
+    stdin_open: true
+    command: -s 10 -c 200 -i eth1 -e 2 -m 99999999
+    volumes:
+      - $PWD:/u:ro
+    networks:
+      mgmt:
+
+  vqfx2:
+    image: juniper/container-vqfx:latest
+    hostname: vqfx2
+    privileged: true
+    tty: true
+    stdin_open: true
+    environment:
+      - ID=vqfx2
+      - IMAGE=jinstall-vqfx-10-f-18.1R1.9.img
+      - PUBLICKEY=id_rsa.pub
+      - CONFIG=regression/vqfx.conf
+      - WAITFOR=eth2
+    volumes:
+      - $PWD:/u:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      mgmt:
+
+  alpine2a:
+    build: client
+    privileged: true
+    tty: true
+    stdin_open: true
+    environment:
+      - LOCAL_IP=192.168.99.1
+      - MTU=9000
+      - WAITFOR=eth1
+    volumes:
+      - $PWD:/u:ro
+    networks:
+      mgmt:
+
+  alpine2b:
+    build: client
+    privileged: true
+    tty: true
+    stdin_open: true
+    environment:
+      - LOCAL_IP=192.168.99.2
+      - MTU=9000
+      - WAITFOR=eth1
+    volumes:
+      - $PWD:/u:ro
+    networks:
+      mgmt:
+
+  vqfx3:
+    image: juniper/container-vqfx:latest
+    hostname: vqfx3
+    privileged: true
+    tty: true
+    stdin_open: true
+    environment:
+      - ID=vqfx3
+      - IMAGE=jinstall-vqfx-10-f-18.1R3-S2.5.img
+      - PUBLICKEY=id_rsa.pub
+      - CONFIG=regression/vqfx.conf
+      - WAITFOR=eth2
+    volumes:
+      - $PWD:/u:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      mgmt:
+
+  alpine3a:
+    build: client
+    privileged: true
+    tty: true
+    stdin_open: true
+    environment:
+      - LOCAL_IP=192.168.99.1
+      - MTU=9000
+      - WAITFOR=eth1
+    volumes:
+      - $PWD:/u:ro
+    networks:
+      mgmt:
+
+  alpine3b:
+    build: client
+    privileged: true
+    tty: true
+    stdin_open: true
+    environment:
+      - LOCAL_IP=192.168.99.2
+      - MTU=9000
+      - WAITFOR=eth1
+    volumes:
+      - $PWD:/u:ro
+    networks:
+      mgmt:
+
+  vqfx4:
+    image: juniper/container-vqfx:latest
+    hostname: vqfx4
+    privileged: true
+    tty: true
+    stdin_open: true
+    environment:
+      - ID=vqfx4
+      - IMAGE=jinstall-vqfx-10-f-18.4R1.8.img
+      - PUBLICKEY=id_rsa.pub
+      - CONFIG=regression/vqfx.conf
+      - WAITFOR=eth2
+    volumes:
+      - $PWD:/u:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      mgmt:
+
+  alpine4a:
+    build: client
+    privileged: true
+    tty: true
+    stdin_open: true
+    environment:
+      - LOCAL_IP=192.168.99.1
+      - MTU=9000
+      - WAITFOR=eth1
+    volumes:
+      - $PWD:/u:ro
+    networks:
+      mgmt:
+
+  alpine4b:
+    build: client
+    privileged: true
+    tty: true
+    stdin_open: true
+    environment:
+      - LOCAL_IP=192.168.99.2
+      - MTU=9000
+      - WAITFOR=eth1
+    volumes:
+      - $PWD:/u:ro
+    networks:
+      mgmt:
+
+networks:
+  mgmt:

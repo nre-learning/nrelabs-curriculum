@@ -1,0 +1,55 @@
+# Copyright (c) 2017, Juniper Networks, Inc.
+# # All rights reserved.
+#
+version: "2.2"
+
+services:
+
+  vqfx1:
+    image: juniper/container-vqfx:latest
+    hostname: vqfx1
+    privileged: true
+    tty: true
+    stdin_open: true
+    environment:
+      - ID=vqfx1
+      - IMAGE=jinstall-vqfx-10-f-18.4R1.8.img
+      - PUBLICKEY=id_rsa.pub
+      - CONFIG=testmtu/vqfx1.conf
+      - WAITFOR=eth2
+    volumes:
+      - $PWD:/u:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      mgmt:
+
+  alpine1a:
+    build: client
+    privileged: true
+    tty: true
+    stdin_open: true
+    environment:
+      - LOCAL_IP=192.168.99.1
+      - MTU=9000
+      - WAITFOR=eth1
+    volumes:
+      - $PWD:/u:ro
+    networks:
+      mgmt:
+
+  alpine1b:
+    build: client
+    privileged: true
+    tty: true
+    stdin_open: true
+    environment:
+      - LOCAL_IP=192.168.99.2
+      - MTU=9000
+      - WAITFOR=eth1
+    volumes:
+      - $PWD:/u:ro
+    networks:
+      mgmt:
+
+networks:
+  mgmt:

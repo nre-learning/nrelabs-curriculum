@@ -1,0 +1,118 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vqfx1
+  labels:
+      antidote_lab: "1"
+      lab_instance: "1"
+      podname: "vqfx1"
+  annotations:
+      k8s.v1.cni.cncf.io/networks: '[
+              { "name": "network1" },
+              { "name": "network2" }
+      ]'
+spec:
+  containers:
+  - name: vqfx
+    image: juniper/vqfx:18.4R1.8
+    imagePullPolicy: Never
+    securityContext:
+      privileged: true
+    env:
+    - name: PASSWORD
+      value: "lab123"
+    - name: WAITFOR
+      value: "net2"
+    ports:
+      - containerPort: 22
+      - containerPort: 830
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: alpine1
+  labels:
+      antidote_lab: "1"
+      lab_instance: "1"
+      podname: "alpine1"
+  annotations:
+      k8s.v1.cni.cncf.io/networks: '[
+              { "name": "network1" }
+      ]'
+spec:
+  containers:
+  - name: alpine1
+    image: alpine
+    securityContext:
+      privileged: true
+    command: ["/bin/sh"]
+    args: ["-c", "ifconfig net1 192.168.99.1; sleep 3600"]
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: alpine2
+  labels:
+      antidote_lab: "1"
+      lab_instance: "1"
+      podname: "alpine2"
+  annotations:
+      k8s.v1.cni.cncf.io/networks: '[
+              { "name": "network2" }
+      ]'
+spec:
+  containers:
+  - name: alpine2
+    image: alpine
+    securityContext:
+      privileged: true
+    command: ["/bin/sh"]
+    args: ["-c", "ifconfig net1 192.168.99.2; sleep 3600"]
+
+---
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+    name: network1
+spec:
+    config: '{
+        "name": "network1",
+        "type": "bridge",
+        "plugin": "bridge",
+        "bridge": "nw1-bridge",
+        "forceAddress": false,
+        "hairpinMode": true,
+        "delegate": {
+                "hairpinMode": true
+        },
+        "ipam": {
+            "type": "host-local",
+            "subnet": "10.11.11.0/24"
+        }
+    }'
+
+---
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+    name: network2
+spec:
+    config: '{
+        "name": "network2",
+        "type": "bridge",
+        "plugin": "bridge",
+        "bridge": "nw2-bridge",
+        "forceAddress": false,
+        "hairpinMode": true,
+        "delegate": {
+                "hairpinMode": true
+        },
+        "ipam": {
+            "type": "host-local",
+            "subnet": "10.11.12.0/24"
+        }
+    }'
+

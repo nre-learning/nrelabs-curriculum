@@ -1,0 +1,59 @@
+# Copyright (c) 2017, Juniper Networks, Inc.
+# # All rights reserved.
+#
+version: "2.2"
+
+services:
+
+  vqfx1:
+    image: juniper/container-vqfx:latest
+    privileged: true
+    tty: true
+    stdin_open: true
+    ports:
+      - "22"
+      - "830"
+    environment:
+      - ID=vqfx1
+      - IMAGE=jinstall-vqfx-10-f-18.1R1.9.img
+#     - PASSWORD=<your top secret root password. If empty, one will be autogeneratee>
+      - PUBLICKEY=id_rsa.pub
+      - CONFIG=vqfx1.conf
+      - WAITFOR=eth1
+    volumes:
+      - $PWD:/u:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      mgmt:
+      net-a:
+
+  vqfx2:
+    image: juniper/container-vqfx:latest
+    privileged: true
+    tty: true
+    stdin_open: true
+    ports:
+      - "22"
+      - "830"
+    environment:
+      - ID=vqfx2
+      - IMAGE=jinstall-vqfx-10-f-18.1R1.9.img
+      - PUBLICKEY=id_rsa.pub
+      - CONFIG=vqfx2.conf
+      - WAITFOR=eth1
+    volumes:
+      - $PWD:/u:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - "vqfx1"
+    networks:
+      mgmt:
+      net-a:
+
+networks:
+  mgmt:
+  net-a:
+    driver_opts:  
+      com.docker.network.driver.mtu: 9000
+    #  net-b:
+    #  net-c:
