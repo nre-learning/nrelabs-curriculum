@@ -1,0 +1,86 @@
+#!/bin/bash -e
+
+if [[ ${DEBUG} -gt 0 ]]; then set -x; fi
+
+exec 3>&1 # make stdout available as fd 3 for the result
+exec &>> /var/log/veth-p2p-plugin.log
+
+IP_STORE=/tmp/reserved_ips # all reserved ips will be stored there
+
+echo "CNI command: $CNI_COMMAND" 
+
+stdin=`cat /dev/stdin`
+echo "stdin: $stdin"
+
+case $CNI_COMMAND in
+  ADD)
+    network=$(echo "$stdin" | jq -r ".network")
+    subnet_mask_size=24
+    container_ip="10.10.12.5"
+
+    mkdir -p /var/run/netns/
+    ln -sfT $CNI_NETNS /var/run/netns/$CNI_CONTAINERID
+
+    #rand=$(tr -dc 'A-F0-9' < /dev/urandom | head -c4)
+    veth1_if_name="veth1$network"
+    veth2_if_name="veth2$network"
+    echo "check if $veth2_if_name exists ..."
+    if ip link show dev $veth2_if_name; then
+      echo "yes"
+      local_if_name=$veth2_if_name
+    else
+      echo "no"
+      ip link add $veth1_if_name type veth peer name $veth2_if_name
+      local_if_name=$veth1_if_name
+      #ip link add $CNI_IFNAME type veth peer name $peer_if_name 
+    fi
+    echo "after if else then"
+
+    ip link set $local_if_name name $CNI_IFNAME netns $CNI_CONTAINERID
+    echo "after ip link"
+    ip netns exec $CNI_CONTAINERID ip link set $CNI_IFNAME up
+    echo "after ip netns"
+    mac=$(ip netns exec $CNI_CONTAINERID ip link show $CNI_IFNAME | awk '/ether/ {print $2}')
+    echo "mac=$mac"
+    echo "{
+    \"cniVersion\": \"0.3.1\",
+    \"interfaces\": [                                            
+    {
+      \"name\": \"$CNI_IFNAME\",
+      \"mac\": \"$mac\",                            
+      \"sandbox\": \"$CNI_NETNS\" 
+    }
+    ],
+    \"ips\": [
+    {
+      \"version\": \"4\",
+      \"address\": \"$container_ip/$subnet_mask_size\",
+      \"interface\": 0 
+    }
+    ]
+  }" >&3
+  echo "all set"
+  ;;
+
+DEL)
+  echo "delete called"
+;;
+
+GET)
+  echo "GET not supported"
+  exit 1
+;;
+
+VERSION)
+  echo '{
+  "cniVersion": "0.3.1", 
+  "supportedVersions": [ "0.3.0", "0.3.1", "0.4.0" ] 
+}' >&3
+;;
+
+*)
+  echo "Unknown cni commandn: $CNI_COMMAND" 
+  exit 1
+  ;;
+
+esac

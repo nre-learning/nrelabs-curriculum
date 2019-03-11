@@ -1,0 +1,25 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+## Generate a unique ID for this project
+UUID = [*('A'..'Z')].sample(6).join
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+    pfe_name = "vqfx-pfe"
+
+    ##############################
+    ## Packet Forwarding Engine ##
+    ##############################
+    config.vm.define pfe_name do |vqfxpfe|
+        vqfxpfe.ssh.insert_key = false
+        vqfxpfe.vm.box = 'juniper/vqfx10k-pfe'
+#        vqfxpfe.vm.box = 'vqfx10k-pfe-virtualbox.box'
+
+        # DO NOT REMOVE / NO VMtools installed
+        vqfxpfe.vm.synced_folder '.', '/vagrant', disabled: true
+        vqfxpfe.vm.network 'private_network', auto_config: false, nic_type: '82540EM', virtualbox__intnet: "#{UUID}_vqfx_internal"
+    end
+end
