@@ -13,14 +13,17 @@ Introduction to Antidote
    contributing/index.rst
    roadmap.rst
    nrelabs.rst
-   resources.rst
+   community.rst
 
-Welcome to Antidote!
+Antidote is a community initiatve to democratize interactive, dependency-free learning.
+With Antidote, you can create compelling, interactive learning experiences by building
+turnkey lesson materials that are fully browser-based, placing minimal burden on the
+learner to come with pre-requisite knowledge or environment configurations.
 
-Antidote is an open-source project aimed at making automated network operations
-more accessible with fast, easy and fun learning. It teaches from-scratch
-network automation skills for network reliability engineers (NREs) and other
-NetOps pros or amateurs.
+Antidote is composed of a set of is an open-source project aimed at making
+automated network operations more accessible with fast, easy and fun learning.
+It teaches from-scratch network automation skills for network reliability engineers
+(NREs) and other NetOps pros or amateurs.
 
 Antidote isn't just one application, but rather, a set of smaller applications
 that work together to provide this learning experience. 
