@@ -39,8 +39,8 @@ until ip link show $WAITFOR; do
   sleep 5
 done
 
-
-rootpassword="${PASSWORD:-$(pwgen 24 1)}"
+#rootpassword="${PASSWORD:-$(pwgen 24 1)}"
+rootpassword="antidotepassword"
 if [ -e /var/run/docker.sock ]; then
   # fix network interface order due to https://github.com/docker/compose/issues/4645
   /fix_network_order.sh
@@ -100,10 +100,13 @@ else
  qemu-img create -f qcow2 $HDDIMAGE 4G >/dev/null
 fi
 
-
 NETDEVS=""
 index=0
+set +e
+echo "checking for eth/net ..."
 ethlist=$(ls /sys/class/net | grep 'eth\|net' |grep -v eth0)
+echo "done"
+set -e
 
 echo "walking the network list $ethlist"
 maxmtu=1500
