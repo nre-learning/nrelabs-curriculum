@@ -27,7 +27,6 @@ devices:
 connections:
 - a: vqfx
   b: linux
-  subnet: 10.1.0.0/24
 
 stages:
   - id: 1
