@@ -7,6 +7,13 @@
 ### Other
 
 
+## v0.3.2 - March 16, 2019
+
+### Curriculum
+
+### Other
+
+
 ## v0.3.1 - March 16, 2019
 
 ### Curriculum
