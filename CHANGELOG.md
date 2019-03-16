@@ -6,6 +6,13 @@
 
 ### Other
 
+
+## v0.3.1 - March 16, 2019
+
+### Curriculum
+
+### Other
+
 - Added new community page, in place of the much lighter 'resources' page [#199](https://github.com/nre-learning/antidote/pull/199)
 - Removed unneeded subnet declarations from connections list [#200](https://github.com/nre-learning/antidote/pull/200)
 
