@@ -1,6 +1,8 @@
 language: generic
 notifications:
   email: false
+before_install:
+  - sudo apt-get install -y jq
 install:
   - ./check-changelog.sh
 sudo: false
