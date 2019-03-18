@@ -13,7 +13,7 @@ tags:
 
 utilities:
 - name: terraform1
-  image: antidotelabs/junos-qfx-terraform:v0.11.11
+  image: antidotelabs/terraform
 
 devices:
 - name: vqfx1
