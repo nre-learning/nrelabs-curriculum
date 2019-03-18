@@ -54,7 +54,7 @@ Plan: 2 to add, 0 to change, 0 to destroy.
 
 ------------------------------------------------------------------------
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 2)">Run this snippet</button>
+
 
 Notice that the VLAN resource is at the top? We can guarantee this order by forming dependencies. Let's take a look at the Terraform configuration files that enabled this graph to be composed.
 
@@ -62,6 +62,7 @@ Notice that the VLAN resource is at the top? We can guarantee this order by form
 cat vlan_42_dt.tf
 cat access_port_dt.tf
 ```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 3)">Run this snippet</button>
 
 You should see variables being used which refers to the resource name and the key within the resource like:
 
@@ -78,7 +79,7 @@ When humans get involved in troubleshooting, we have a tendency to change a bunc
 ```
 terraform refresh
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 3)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 5)">Run this snippet</button>
 
 Refresh performs a read of the resources and updates the state cache. If something has changed and you re-run `terraform plan`, the execution plan will reflect that of the Terraform resources and not the human changes. Great for golden state checking, but not great in what should be a fully automated set of infrastructure.
 
@@ -89,7 +90,7 @@ What happens if you don't want to destroy everything in a set of Terraform confi
 ```
 terraform destroy -h
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 4)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 6)">Run this snippet</button>
 
 See the `-target` argument?
 

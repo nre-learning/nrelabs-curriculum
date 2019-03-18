@@ -9,9 +9,9 @@ Infrastructure-as-Code Terraform resources are declarative versions of the netwo
 
 Don't forget your network chops in this lesson. You'll configure an interface, a BGP peer, a VLAN and a L3 interface for the VLAN. You can exercise your networking powers here and validate what Terraform does as it does it on `vqfx1`.
 
-![Terraform](https://s3-us-west-1.amazonaws.com/nrelearning/terraformbasics.png)
+![Terraform](https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-31/stage1/terraformbasics.png)
 
-*Image borrowed from the Terraform website*
+*Image borrowed from the Terraform website: terraform.io*
 
 Terraform for traditional networking is relatively unchartered ground because we don't think about switches, routers or firewalls as a set of immutable resources, or put in another way, things that can be created and destroyed easily. Imagine cutting out the bits you don't use and soldering them back in? Mentally it feels like a step, but in reality we can deal with this as an abstracted construct. This makes us think about things tangentially from what we're used to, but with little effort and thanks to NRE Labs, you can get a feel for how this works!
 
@@ -34,7 +34,7 @@ ls -la
 
 What you can see are several Terraform resources which are configuration text files with the extension `.tf`. These configuration files make use of Terraform providers and in our case, these providers reside in the binary file `terraform-provider-junos-qfx`. This binary file contains an experimental and limited set of implementations focussed on the Juniper QFX switch. We'll cover the contents of the Terraform resource files in the next lesson.
 
-* Please note, do not use this provider in production. Only use release grade software!!! *
+We just want you to know that the Terraform provider isn't ready yet for production and you're getting an early sneaky peak in this lesson! It will be very soon so keep an eye out for release information.
 
 Terraform needs to be initialized still, so let's go ahead and do that now. As you would expect, this is idempotent and can be done multiple times and safely.
 

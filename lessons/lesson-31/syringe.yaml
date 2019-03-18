@@ -11,8 +11,6 @@ tags:
   - declarative
   - junos
 
-juniperSpecific: true
-
 utilities:
 - name: terraform1
   image: davidjohngee/junos-qfx-terraform:v0.11.11
