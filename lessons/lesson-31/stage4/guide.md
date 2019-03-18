@@ -15,7 +15,7 @@ cd /antidote/lessons/lesson-31/terraform/
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 0)">Run this snippet</button>
 
 ```
-show groups
+show configuration groups
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 1)">Run this snippet</button>
 
