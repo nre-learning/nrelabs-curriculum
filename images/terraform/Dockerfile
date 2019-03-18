@@ -7,4 +7,7 @@ RUN wget --quiet https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11
   && mv terraform /usr/bin \
   && rm terraform_0.11.11_linux_amd64.zip
 
-WORKDIR /jtfa
+RUN mkdir -p /home/antidote/.terraform.d/plugins/linux_amd64/
+COPY terraform-provider-junos-qfx /home/antidote/.terraform.d/plugins/linux_amd64/
+
+# WORKDIR /jtfa
