@@ -1,4 +1,4 @@
-## Automating with Openconfig
+## Vendor neutral configuration provisioning using YANG and OpenConfig
 
 **Contributed by: [@valjeanchan](https://github.com/valjeanchan) and [@jnpr-raylam](https://github.com/jnpr-raylam)**
 

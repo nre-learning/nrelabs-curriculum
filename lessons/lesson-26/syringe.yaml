@@ -1,5 +1,5 @@
 ---
-lessonName: Automating with Openconfig
+lessonName: Vendor neutral configuration provisioning using YANG and OpenConfig
 lessonId: 26
 category: configuration
 tier: local
