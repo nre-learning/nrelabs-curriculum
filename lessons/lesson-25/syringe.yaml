@@ -1,9 +1,8 @@
 ---
-lessonName: Automating with Junos Extension Toolkit (JET)
+lessonName: Juniper Extension Toolkit (JET)
 lessonId: 25
 category: configuration
 tier: local
-juniperSpecific: true
 
 utilities:
 - name: linux

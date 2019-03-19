@@ -1,4 +1,4 @@
-## Automating with JET
+## Juniper Extension Toolkit (JET)
 
 **Contributed by: [@valjeanchan](https://github.com/valjeanchan) and [@jnpr-raylam](https://github.com/jnpr-raylam)**
 
@@ -26,7 +26,7 @@ In this lab we are going to explore a off-box python JET application.
 #### Config the Junos device for JET
 First of all, to run an off-box JET application, we need to enable the request-response configuration on the Junos OS device.
 
-The gRPC can be run in clear-text mode _(insecure! that's why it is hidden and for lab test only!)_ or SSL encrypted mode for enhanced security. For simpilicity we'll go with clear-text in the lab. More information about gRPC over SSL can be found <a href="https://www.juniper.net/documentation/en_US/jet18.4/topics/topic-map/jet-off-box-apps.html" target="_blank">here</a>.
+The gRPC can be run in clear-text mode _(insecure! that's why it is hidden and for lab test only!)_ or SSL encrypted mode for enhanced security. For simplicity we'll go with clear-text in the lab. More information about gRPC over SSL can be found <a href="https://www.juniper.net/documentation/en_US/jet18.4/topics/topic-map/jet-off-box-apps.html" target="_blank">here</a>.
 
 Apply below configuration to enable notification and gRPC request-response service on vQFX.
 
