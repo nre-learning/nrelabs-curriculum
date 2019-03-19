@@ -1,4 +1,4 @@
-## Vendor neutral configuration provisioning using YANG and OpenConfig
+## Vendor-Neutral Network Configuration with OpenConfig
 
 **Contributed by: [@valjeanchan](https://github.com/valjeanchan) and [@jnpr-raylam](https://github.com/jnpr-raylam)**
 
@@ -87,6 +87,6 @@ show configuration | display translation-scripts translated-config | no-more
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 7)">Run this snippet</button>
 
-Now you can see the OpenConfig is vendor-neutral and therefore this exercise can be applied to other 3rd party vendor as well (_by using a vendor neutral NetConf Client_).
+Now you can see that OpenConfig is vendor-neutral and therefore this exercise can be applied to any other vendor that also supports OpenConfig (_by using a vendor neutral NetConf Client_).
 
 In the next chapter we will explore custom yang modules where you may define custom data schema for different business needs.

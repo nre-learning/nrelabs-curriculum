@@ -4,7 +4,7 @@
 
 ### Curriculum
 
-- Adding Lesson-26 Automating with Openconfig
+- Adding Lesson-26 Vendor-Neutral Network Configuration with OpenConfig [#191](https://github.com/nre-learning/antidote/pull/191)
 
 ### Other
 

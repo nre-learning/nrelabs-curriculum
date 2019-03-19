@@ -1,4 +1,4 @@
-## Vendor neutral configuration provisioning using YANG and OpenConfig
+## Vendor-Neutral Network Configuration with OpenConfig
 
 **Contributed by: [@valjeanchan](https://github.com/valjeanchan) and [@jnpr-raylam](https://github.com/jnpr-raylam)**
 
@@ -6,13 +6,11 @@
 
 ### Chapter 3 - Custom YANG modules and custom Yang translator
 #### Custom YANG modules and Translation Script
-While OpenConfig supports many data models including BGP, interfaces, routing, MPLS, etc.  Sometimes we might want to define custom configuration hierarchy to simplify device configurations or standardize configuration across multi-vendor devices.
+OpenConfig supports a variety of data models including BGP, interfaces, routing, MPLS, etc.  Sometimes, however, we might want to define a custom configuration hierarchy to simplify device configurations or standardize configuration across multi-vendor devices.
 
-Yang is a data modeling language for Netconf protocol. For information about Yang, see [RFC 6020](https://tools.ietf.org/html/rfc6020).
+Yang is a data modeling language for the Netconf protocol. For information about Yang, see [RFC 6020](https://tools.ietf.org/html/rfc6020).
 
-[Placeholder to add custom YANG mechanism, difference between OpenConfig, etc.]
-As discussed in the beginning of the course, YANG configuraiton will be converted to device specific configuration
-via a translation mechanism. In Junos this translation mechansim is implemented by translation scripts.
+As discussed in the beginning of the course, the YANG configuration will be converted to device specific configuration via a translation mechanism. In Junos this translation mechansim is implemented by translation scripts.
 
 #### Custom YANG Modules with Junos
 Juniper offers OpenConfig translation scripts to convert OpenConfig based configuration data into Junos.
@@ -24,7 +22,7 @@ To use custom YANG modules, you will need to define the following items:
 
 In this lesson, we're going to define a custom YANG module to create new config stanza, and a custom YANG translation script to translate custom defined configuration to Junos config.
 
-#### Loading custom YANG modules
+#### Loading Custom YANG Modules
 Here we created a custom YANG module called `vpn-services` which helps to configure L3VPN in a service oriented way.
 It groups all the L3VPN related parameters (e.g., interfaces, VLAN Id, IP address, RD, RT, etc) into a single place.
 Let's take a look on the YANG file first.

@@ -1,5 +1,5 @@
 ---
-lessonName: Vendor neutral configuration provisioning using YANG and OpenConfig
+lessonName: Vendor-Neutral Network Configuration with OpenConfig
 lessonId: 26
 category: configuration
 tier: local
@@ -18,7 +18,6 @@ devices:
 connections:
 - a: vqfx
   b: linux
-  subnet: 10.1.0.0/24
 
 stages:
   - id: 1

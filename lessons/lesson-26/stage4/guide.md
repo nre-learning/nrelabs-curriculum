@@ -1,4 +1,4 @@
-## Vendor neutral configuration provisioning using YANG and OpenConfig
+## Vendor-Neutral Network Configuration with OpenConfig
 
 **Contributed by: [@valjeanchan](https://github.com/valjeanchan) and [@jnpr-raylam](https://github.com/jnpr-raylam)**
 
@@ -6,7 +6,7 @@
 
 ### Chapter 4 - Custom YANG config provisioning using CLI and NETCONF
 
-In this stage, we will configure the L3VPN services using the `vpn-services` config knob defined by our custom YANG model.
+In this chapter, we will configure the L3VPN services using the `vpn-services` config knob defined by our custom YANG model.
 
 #### Preparation
 Firstly, we repeat what we have done in previous stage - copy both YANG model and translation script to vQFX, and then install it.
@@ -25,7 +25,7 @@ request system yang add package vpn-services module vpn-services.yang translatio
 Same as before, press `ENTER` when you're asked to restart the `cli`
 
 
-#### Config using custom YANG
+#### Configuration Using Custom YANG
 As you would expect, config using custom YANG is exactly the same way as in OpenConfig and native Junos config.
 Now, we configure a new L3VPN instance using CLI, notice the our custom vpn-service:vpn-service stanza:
 
@@ -40,7 +40,7 @@ commit and-quit
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 2)">Run this snippet</button>
 
-#### Config verification
+#### Config Verification
 We can also check the translated configuration:
 
 ```
@@ -55,7 +55,7 @@ show route table CustomerA.inet.0
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 4)">Run this snippet</button>
 
-#### config custom YANG configration using NETCONF
+#### Config Custom YANG Configuration using NETCONF
 Now, let's try to create another L3VPN instance using NETCONF. Firstly, go to Python interactive prompt, load PyEZ module and create a Junos device object:
 
 ```
