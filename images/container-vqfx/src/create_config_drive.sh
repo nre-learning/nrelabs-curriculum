@@ -118,8 +118,8 @@ cd ..
 
 # Create our own metadrive image, so we can use a junos config file
 # 50MB should be enough.
-dd if=/dev/zero of=metadata.img  bs=1M count=50 >/dev/null 2>&1
-mkfs.vfat metadata.img >/dev/null
+dd if=/dev/zero of=metadata.img  bs=1M count=50
+mkfs.vfat metadata.img
 mount -o loop metadata.img /mnt
 cp config_drive/vmm-config.tgz /mnt
 umount /mnt
