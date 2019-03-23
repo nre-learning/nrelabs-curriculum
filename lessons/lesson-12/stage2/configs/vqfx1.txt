@@ -83,6 +83,19 @@
         </system>
         <interfaces operation="merge">
             <interface>
+                <name>em0</name>
+                <unit>
+                    <name>0</name>
+                    <family>
+                        <inet>
+                            <address>
+                                <name>{{ mgmt_addr }}</name>
+                            </address>
+                        </inet>
+                    </family>
+                </unit>
+            </interface>
+            <interface>
                 <name>em3</name>
                 <unit>
                     <name>0</name>
