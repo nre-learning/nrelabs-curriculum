@@ -42,3 +42,6 @@ _old_contrail/
 platform/antidote-web/target/
 
 __pycache__
+
+*.img
+*.tgz
