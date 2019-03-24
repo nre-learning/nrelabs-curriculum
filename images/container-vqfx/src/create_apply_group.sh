@@ -64,6 +64,7 @@ groups {
         }
         netconf {
           ssh;
+          rfc-compliant;
         }
       }
       syslog {

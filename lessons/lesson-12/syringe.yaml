@@ -21,11 +21,11 @@ utilities:
 
 devices:
 - name: vqfx1
-  image: antidotelabs/vqfx:snap1
+  image: antidotelabs/vqfx-full
 - name: vqfx2
-  image: antidotelabs/vqfx:snap2
+  image: antidotelabs/vqfx-full
 - name: vqfx3
-  image: antidotelabs/vqfx:snap3
+  image: antidotelabs/vqfx-full
 
 connections:
 - a: vqfx1
@@ -41,3 +41,4 @@ stages:
 
   - id: 2
     description: Correct BGP config - tests pass
+
