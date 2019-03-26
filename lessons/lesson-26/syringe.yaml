@@ -11,7 +11,7 @@ utilities:
 
 devices:
 - name: vqfx
-  image: raylam/vqfx-full-17.4:190204
+  image: antidotelabs/vqfx-full:18.1R1.9
   ports:
   - 830
 
