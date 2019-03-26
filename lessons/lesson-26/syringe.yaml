@@ -3,7 +3,7 @@ lessonName: Vendor-Neutral Network Configuration with OpenConfig
 lessonId: 26
 category: tools
 tier: prod
-
+description: "In this lesson, we'll explore OpenConfig - an industry effort to standardize network configuration and telemetry models"
 utilities:
 - name: linux
   image: antidotelabs/utility
