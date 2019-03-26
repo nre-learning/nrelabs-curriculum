@@ -1,7 +1,11 @@
 language: generic
 notifications:
   email: false
+services:
+  - docker
 before_install:
+  - docker pull antidotelabs/syringe:latest
+  - docker run -v $(pwd):/antidote antidotelabs/syringe syrctl validate /antidote
   - sudo apt-get install -y jq
 install:
   - ./check-changelog.sh
