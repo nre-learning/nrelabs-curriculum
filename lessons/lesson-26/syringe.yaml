@@ -7,7 +7,7 @@ juniperSpecific: true
 
 utilities:
 - name: linux
-  image: raylam/utility
+  image: antidotelabs/utility
 
 devices:
 - name: vqfx
