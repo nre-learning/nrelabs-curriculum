@@ -1,3 +1,4 @@
-ARG image
 FROM container-vqfx
-ADD $image /u
+ARG image
+ARG ocpkg
+COPY $image $ocpkg /u/

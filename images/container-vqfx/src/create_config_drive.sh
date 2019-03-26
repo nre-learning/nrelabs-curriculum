@@ -88,7 +88,7 @@ EOF
   ls $DEST
 fi
 
-junospkg=$(ls /u/junos-*-x86-*tgz 2>/dev/null)
+junospkg=$(ls /u/junos-*-*tgz 2>/dev/null)
 if [ ! -z "$junospkg" ]; then
   echo "adding $junospkg"
   filebase=$(basename $junospkg)
