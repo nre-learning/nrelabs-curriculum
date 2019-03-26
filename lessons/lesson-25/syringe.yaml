@@ -1,16 +1,16 @@
 ---
 lessonName: Juniper Extension Toolkit (JET)
 lessonId: 25
-category: configuration
-tier: local
+category: tools
+tier: prod
 
 utilities:
 - name: linux
-  image: raylam/utility
+  image: antidotelabs/utility
 
 devices:
 - name: vqfx
-  image: raylam/vqfx-full-17.4:190123
+  image: antidotelabs/vqfx-full
   ports:
   - 830
   - 1883
@@ -19,7 +19,6 @@ devices:
 connections:
 - a: vqfx
   b: linux
-  subnet: 10.1.0.0/24
 
 stages:
   - id: 1
