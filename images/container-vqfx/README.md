@@ -5,9 +5,11 @@ This project aims to run vQFX10K with the cosim based PFE in a Docker Container,
 Requires file cosim.tgz in src directory and a valid junos vqfx qcow2 image in the root directory:
 
 ```
-$ ls -l *img src/cosim.tgz
+$ ls -l *img src/cosim.tgz *tgz
 -rw-r--r-- 1 mwiget mwiget 549584896 Mar 11 16:24 jinstall-vqfx-10-f-18.4R1.8.img
+-rw-r--r-- 1 mwiget mwiget 570097664 Mar 26 19:59 jinstall-vqfx-10-f-18.1R1.9.img
 -rw-r--r-- 1 mwiget mwiget 134064658 Mar 11 16:22 src/cosim.tgz
+-rw-r--r-- 1 mwiget mwiget   3142047 Mar 26 19:31 junos-openconfig-0.0.0.10-1-signed.tgz
 ```
 
 Then build the image by running ./build.sh:
@@ -46,16 +48,37 @@ Step 10/11 : EXPOSE 830
 Step 11/11 : ENTRYPOINT ["/launch.sh"]
  ---> Using cache
  ---> 7170ee88f43e
-Successfully built 7170ee88f43e
+Successfully built ccf3a561f40c
 Successfully tagged container-vqfx:latest
-Building container antidote/vqfx:18.4R1.8 ...
-Sending build context to Docker daemon  1.077GB
-Step 1/3 : ARG image
-Step 2/3 : FROM container-vqfx
- ---> 7170ee88f43e
-Step 3/3 : ADD $image /u
- ---> 7e3ca2c51e06
-Successfully built 7e3ca2c51e06
+Building container antidote/vqfx:18.1R1.9 ... 
+Sending build context to Docker daemon   1.65GB
+Step 1/4 : FROM container-vqfx
+ ---> ccf3a561f40c
+Step 2/4 : ARG image
+ ---> Using cache
+ ---> f0efae4e82d9
+Step 3/4 : ARG ocpkg
+ ---> Using cache
+ ---> f6a626e29968
+Step 4/4 : COPY $image $ocpkg /u/
+ ---> Using cache
+ ---> b2459ee98508
+Successfully built b2459ee98508
+Successfully tagged antidote/vqfx:18.1R1.9
+Building container antidote/vqfx:18.4R1.8 ... 
+Sending build context to Docker daemon   1.65GB
+Step 1/4 : FROM container-vqfx
+ ---> ccf3a561f40c
+Step 2/4 : ARG image
+ ---> Using cache
+ ---> f0efae4e82d9
+Step 3/4 : ARG ocpkg
+ ---> Using cache
+ ---> f6a626e29968
+Step 4/4 : COPY $image $ocpkg /u/
+ ---> Using cache
+ ---> b746283db2e4
+Successfully built b746283db2e4
 Successfully tagged antidote/vqfx:18.4R1.8
 ```
 
@@ -63,10 +86,11 @@ List images:
 
 ```
 $ docker images |head
-REPOSITORY                                  TAG                 IMAGE ID            CREATED             SIZE
-antidote/vqfx                               18.4R1.8            7e3ca2c51e06        6 seconds ago       1.76GB
-<none>                                      <none>              0b2ade9871a0        4 minutes ago       1.76GB
-container-vqfx                              latest              7170ee88f43e        4 minutes ago       685MB
+REPOSITORY                                                   TAG                 IMAGE ID            CREATED             SIZE
+antidote/vqfx                                                18.4R1.8            b746283db2e4        19 minutes ago      1.28GB
+antidote/vqfx                                                18.1R1.9            b2459ee98508        19 minutes ago      1.3GB
+container-vqfx                                               latest              ccf3a561f40c        19 minutes ago      723MB
+<none>                                                       <none>              caa698cbe391        24 minutes ago      1.28GB
 ```
 
 Run it without attached network interfaces to test the user account (antidote/antidotepassword):
@@ -131,4 +155,39 @@ Hit ^P^Q to exit the console, then shutdown the container with
 ```
 docker kill vqfx
 ```
+
+## Openconfig
+
+Openconfig package can be added to the vqfx container images by placing in the current folder before building the containers.
+So far the pacakge doesn't get automatically loaded at runtime. 
+
+To load and activate OpenConfig in a running container, execute 
+the following command:
+
+```
+master:0}
+root@223bde03203e> request system software add /var/db/vmm/junos-openconfig-0.0.0.10-1-signed.tgz no-validate        
+Verified junos-openconfig-0.0.0.10-1.tgz signed by PackageProductionEc_2018 method ECDSA256+SHA256
+Adding junos-openconfig...
+Mounted junos-openconfig package on /dev/md13...
+Verified manifest signed by PackageProductionEc_2018 method ECDSA256+SHA256
+Executing /packages/mnt/junos-openconfig-0.0.0.10-1/mount.post..
+TLV generation: START
+TLV generation: SUCCESS
+Building schema and reloading /config/juniper.conf.gz ...
+mgd: commit complete
+Restarting mgd ...
+Saving package file in /var/sw/pkg/junos-openconfig-0.0.0.10-1-signed.tgz ...
+Saving state for rollback ...
+
+WARNING: cli has been replaced by an updated version:
+CLI release 18.1R1.9 built by builder on 2018-03-23 22:24:48 UTC
+Restart cli using the new version ? [yes,no] (yes) 
+
+Restarting cli ...
+{master:0}
+root@223bde03203e> 
+```
+
+The openconfg package is currently not compatible to 18.4R1. 
 
