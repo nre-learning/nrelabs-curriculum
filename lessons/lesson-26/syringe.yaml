@@ -1,7 +1,7 @@
 ---
 lessonName: Vendor-Neutral Network Configuration with OpenConfig
 lessonId: 26
-category: configuration
+category: tools
 tier: local
 juniperSpecific: true
 
