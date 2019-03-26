@@ -4,7 +4,7 @@
 #
 echo "Juniper Networks vQFX Docker Light Container"
 
-VCPMEM="${VCPMEM:-1024}"  # default memory for VCP: 1024MB
+VCPMEM="${VCPMEM:-2048}"  # default memory for VCP: 1024MB (UPDATED)
 VCPU="${VCPU:-1}"         # default # of cpus for VCP: 1
 WAITFOR="${WAITFOR:-eth0}"
 
@@ -165,6 +165,8 @@ cd /tmp/
 eval exec qemu-system-x86_64 -M pc --enable-kvm -cpu host  -smp 1 -m $VCPMEM \
   -no-user-config \
   -no-shutdown \
+  -monitor tcp:0.0.0.0:4000,server,nowait \
+  -serial telnet:0.0.0.0:5000,server,nowait \
   -smbios type=0,vendor=Juniper \
   -drive if=ide,file=$VCPIMAGE -drive if=ide,file=$HDDIMAGE -drive if=ide,file=$CFGDRIVE \
   -netdev tap,fd=7,id=tc0,vhost=on 7<>/dev/em0 -device virtio-net-pci,netdev=tc0,mac=$mymac \

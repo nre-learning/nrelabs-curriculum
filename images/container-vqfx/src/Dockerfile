@@ -8,7 +8,7 @@ RUN rm -f /root/pecosim/*.tgz
 FROM ubuntu:18.04
 
 RUN export DEBIAN_FRONTEND=noninteractive \
-    && apt-get update && apt-get install -y -q qemu-kvm qemu-utils dosfstools pwgen \
+    && apt-get update && apt-get install -y -q qemu-kvm qemu-utils dosfstools pwgen telnet \
         ca-certificates netbase libpcap0.8 \
         tcpdump macchanger gettext-base net-tools ethtool\
         file iproute2 docker.io \

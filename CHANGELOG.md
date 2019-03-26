@@ -4,10 +4,14 @@
 
 ### Curriculum
 
+- New "Terraform and Junos" Lesson [#184](https://github.com/nre-learning/antidote/pull/184)
+- New "Juniper Extension Toolkit (JET)" Lesson [#173])(https://github.com/nre-learning/antidote/pull/173)
+
 ### Other
 
 - Added new community page, in place of the much lighter 'resources' page [#199](https://github.com/nre-learning/antidote/pull/199)
 - Removed unneeded subnet declarations from connections list [#200](https://github.com/nre-learning/antidote/pull/200)
+- Introduce new "configurator" for configuring devices, and templatize mgmt interface configuration  [#207](https://github.com/nre-learning/antidote/pull/207)
 
 ## v0.3.0 - February 11, 2019
 

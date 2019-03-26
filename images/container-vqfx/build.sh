@@ -1,6 +1,6 @@
 #!/bin/bash
 
-target=antidote/vqfx
+target=antidotelabs/vqfx-full
 ocpkg=$(ls junos-openconfig-*.tgz)
 
 docker build -f src/Dockerfile -t container-vqfx src
