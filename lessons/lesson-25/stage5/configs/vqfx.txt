@@ -1,0 +1,109 @@
+version 17.4R1.16;
+system {
+    host-name vqfx;
+    root-authentication {
+        encrypted-password "$6$yGARIqqs$.pxKXsYWySQy8BzpcuynxpBzXd7Z2tjqHlCR9wIS/MkEl1NrAsV/ZwNrJCtCrWQOovlmEgPvWXRzcPAykvCY8/"; ## SECRET-DATA
+    }
+    login {
+        user antidote {
+            uid 2000;
+            class super-user;
+            authentication {
+                encrypted-password "$6$L1CNVBaS$lxgFvGaqn5ixBoCNfNod44gQ26.3IYI.hurq/pL0a9Gqq8837HfP0iMZ7SKpzTF34wNmbK4axz4EIijAtLHRl0"; ## SECRET-DATA
+            }
+        }
+        password {
+            change-type set-transitions;
+            minimum-changes 0;
+        }
+    }
+    services {
+        ssh {
+            root-login allow;
+        }
+        extension-service {
+            request-response {
+                grpc {
+                    clear-text {
+                        port 32767;
+                    }
+                }
+            }
+            notification {
+                port 1883;
+                allow-clients {
+                    address 0.0.0.0/0;
+                }
+            }
+        }
+        netconf {
+            ssh;
+            rfc-compliant;
+        }
+        rest {
+            http {
+                port 8080;
+            }
+            enable-explorer;
+        }
+    }
+    syslog {
+        user * {
+            any emergency;
+        }
+        file messages {
+            any notice;
+            authorization info;
+        }
+        file interactive-commands {
+            interactive-commands any;
+        }
+    }
+}
+interfaces {
+    xe-0/0/0 {
+        unit 0 {
+            family inet {
+                address 192.168.10.1/24;
+            }
+        }
+    }
+    xe-0/0/1 {
+        unit 0 {
+            family inet {
+                address 192.168.10.2/24;
+            }
+        }
+    }
+    xe-0/0/3 {
+        unit 0 {
+            family inet {
+                address 20.1.1.2/24;
+            }
+        }
+    }
+    em0 {
+        unit 0 {
+            family inet {
+                address 10.0.0.15/24;
+            }
+        }
+    }
+    em1 {
+        unit 0 {
+            family inet {
+                address 169.254.0.2/24;
+            }
+        }
+    }
+}
+routing-instances {
+    VR {
+        instance-type virtual-router;
+        interface xe-0/0/1.0;
+    }
+    VR2 {
+        instance-type virtual-router;
+        interface xe-0/0/3.0;
+    }
+}

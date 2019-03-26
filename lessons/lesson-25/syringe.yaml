@@ -1,0 +1,38 @@
+---
+lessonName: Juniper Extension Toolkit (JET)
+lessonId: 25
+category: configuration
+tier: local
+
+utilities:
+- name: linux
+  image: raylam/utility
+
+devices:
+- name: vqfx
+  image: raylam/vqfx-full-17.4:190123
+  ports:
+  - 830
+  - 1883
+  - 32767
+
+connections:
+- a: vqfx
+  b: linux
+  subnet: 10.1.0.0/24
+
+stages:
+  - id: 1
+    description: JET rpc/notification configuration
+
+  - id: 2
+    description: Receive events from notification service using MQTT client
+
+  - id: 3
+    description: IDL compilation and basic GRPC JET testing
+
+  - id: 4
+    description: JET Firewall API to create/update firewall filter
+
+  - id: 5
+    description: Closed loop automation with JET
