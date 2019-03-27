@@ -12,7 +12,7 @@ utilities:
 
 devices:
 - name: vqfx
-  image: antidotelabs/vqfx-full
+  image: antidotelabs/vqfx-full:18.1R1.9
   ports:
   - 830
   - 1883

@@ -66,12 +66,4 @@ show system yang package vpn-services
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 4)">Run this snippet</button>
 
-Now, the Junos device is ready to be provisioned using  the custom yang module. You can go to the `vpn-services` configuration hierarchy, use the `set` and `?` to navigate the config tree.
-
-```
-configure
-edit vpn-services:vpn-services
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 5)">Run this snippet</button>
-
-In next lesson, we will configure some L3VPN services using the new `vpn-services` config knob.
+Now, the Junos device is ready to be provisioned using the custom yang module. In next lesson, we will configure some L3VPN services using the new `vpn-services` config knob.
