@@ -21,27 +21,30 @@ Junos OS supports the YANG data models configuration by importing a third-party 
 #### Junos Openconfig package
 To use OpenConfig to provision configurations, we have to install the OpenConfig package. Firstly, download the OpenConfig package from [Juniper support website](https://support.juniper.net/support/downloads/?p=openconfig).
 
+The OpenConfig package has already been uploaded to our virtual QFX image, so we just need to install it:
+
+```
+request system software add /var/db/vmm/junos-openconfig-0.0.0.10-1-signed.tgz no-validate
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 0)">Run this snippet</button>
+
 _Starting in Junos 18.3R1, the OpenConfig package is bundled with Junos image and therefore you do not need to install it separately._
 
-After that, copy the file to the Junos device and install the package using the following command:
+> **Note:** This will take a few minutes. **BE PATIENT**
 
-```request system software add junos-openconfig-XX.YY.ZZ.JJ-signed.tgz no-validate```
-
-> **Note:** Normally it takes less than a minute to complete the installation with physical or virtual Junos devices.  However, in NRE Labs, the vQFX run over container with limited virtualization capability, so it will take additional time to install. **Therefore, we prepared an vQFX image with OpenConfig package pre-installed.**
-
-You can verify it with the `show version` command.
+Once the installation has completed, you can verify it with the `show version` command.
 
 ```
 show version
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 1)">Run this snippet</button>
 
 After installing the OpenConfig package, a few config stanzas with prefix `openconfig-` are added automatically. Let's take a look on the new config knob:
 
 ```
 show configuration openconfig-
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 2)">Run this snippet</button>
 
 This verifies the OpenConfig package is installed properly.
 
