@@ -64,8 +64,7 @@ client.loop_forever()
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 3)">Run this snippet</button>
 
-The client is now ready to received JET notification event.
-
+The client is now ready to received JET notification event. It's normal that you don't see a prompt back - this command runs endlessly until stopped.
 
 #### Triggering a event
 
