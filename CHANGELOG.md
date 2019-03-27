@@ -4,6 +4,7 @@
 
 ### Curriculum
 
+- Adding Lesson-26 Vendor-Neutral Network Configuration with OpenConfig [#191](https://github.com/nre-learning/antidote/pull/191)
 - New "Terraform and Junos" Lesson [#184](https://github.com/nre-learning/antidote/pull/184)
 - New "Juniper Extension Toolkit (JET)" Lesson [#173])(https://github.com/nre-learning/antidote/pull/173)
 

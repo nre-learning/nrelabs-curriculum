@@ -1,0 +1,34 @@
+---
+lessonName: Vendor-Neutral Network Configuration with OpenConfig
+lessonId: 26
+category: tools
+tier: prod
+description: "In this lesson, we'll explore OpenConfig - an industry effort to standardize network configuration and telemetry models"
+slug: openconfig
+
+utilities:
+- name: linux
+  image: antidotelabs/utility
+
+devices:
+- name: vqfx
+  image: antidotelabs/vqfx-full:18.1R1.9
+  ports:
+  - 830
+
+connections:
+- a: vqfx
+  b: linux
+
+stages:
+  - id: 1
+    description: Install Openconfig Yang module on Junos box
+
+  - id: 2
+    description: Provision Openconfig using CLI and Netconf
+
+  - id: 3
+    description: Custom Yang modules and custom Yang translator
+
+  - id: 4
+    description: Custom Yang config provisioning using CLI and Netconf
