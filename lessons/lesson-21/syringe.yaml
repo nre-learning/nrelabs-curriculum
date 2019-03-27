@@ -1,9 +1,17 @@
 ---
 lessonName: Automating the Troubleshooting Chain
 lessonId: 21
-category: troubleshooting
+category: workflows
 lessondiagram: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-21/lessondiagram.png
 tier: prod
+prereqs:
+  - 22  # Python
+  - 23  # Linux
+description: In this lesson, we'll explore the use of some custom Python scripts for doing some automated troubleshooting.
+slug: Derick's Troubleshooting Wizardry
+tags:
+- troubleshooting
+- tshoot
 
 blackboxes:
 - name: asterisk
@@ -31,22 +39,16 @@ utilities:
 connections:
 - a: vqfx1
   b: vqfx2
-  subnet: 10.10.10.0/24
 - a: vqfx2
   b: vqfx3
-  subnet: 10.10.20.0/24
 - a: vqfx3
   b: vqfx1
-  subnet: 10.10.30.0/24
 - a: vqfx2
   b: sipphone
-  subnet: 10.10.150.0/24
 - a: vqfx1
   b: netbox
-  subnet: 10.10.100.0/24
 - a: vqfx1
   b: asterisk
-  subnet: 10.10.200.0/24
 
 
 stages:

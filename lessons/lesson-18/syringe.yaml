@@ -1,8 +1,15 @@
 ---
 lessonName: End-to-End Network Testing with ToDD
 lessonId: 18
-category: verification
+category: tools
 tier: ptr
+prereqs:
+  - 23  # Linux
+tags:
+- testing
+- todd
+description: ToDD is a Distributed Network-Service-Level Assertion Engine. In this lesson, we'll learn about how to use ToDD to run distributed data-plane tests and assertions on our network.
+slug: ToDD
 
 utilities:
 - name: todd1
@@ -17,10 +24,8 @@ devices:
 connections:
 - a: todd1
   b: vqfx1
-  subnet: 10.12.0.0/24
 - a: vqfx1
   b: web1
-  subnet: 10.23.0.0/24
 
 stages:
   - id: 1

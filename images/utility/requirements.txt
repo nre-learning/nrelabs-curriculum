@@ -4,3 +4,8 @@ jsnapy
 junos-eznc
 robotframework
 jinja2
+paho-mqtt
+grpcio
+grpcio-tools
+# https://github.com/paramiko/paramiko/issues/1369
+cryptography==2.4.2

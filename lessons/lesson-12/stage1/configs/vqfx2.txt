@@ -89,7 +89,7 @@
                     <family>
                         <inet>
                             <address>
-                                <name>10.0.0.15/24</name>
+                                <name>{{ mgmt_addr }}</name>
                             </address>
                         </inet>
                     </family>
@@ -140,13 +140,7 @@
                     <name>default</name>
                 </vlan>
             </igmp-snooping>
-            <lldp>
-                <advertisement-interval>5</advertisement-interval>
-                <hold-multiplier>2</hold-multiplier>
-                <interface>
-                    <name>all</name>
-                </interface>
-            </lldp>
+
         </protocols>
         <vlans>
             <vlan>

@@ -76,7 +76,7 @@ spec:
         image: antidotelabs/githelper
         args:
         - "https://github.com/nre-learning/antidote.git"
-        - "v0.1.4"  #revme
+        - "v0.3.0"  #revme
         - "/antidote"
         volumeMounts:
         - name: git-volume  #?
@@ -86,7 +86,7 @@ spec:
       serviceAccount: syringesa
       containers:
       - name: syringe
-        image: antidotelabs/syringe:release-v0.1.4  #revme
+        image: antidotelabs/syringe:release-v0.3.0  #revme
         imagePullPolicy: Always
         env:
         - name: SYRINGE_DOMAIN
@@ -98,7 +98,7 @@ spec:
         - name: SYRINGE_LESSON_REPO_REMOTE
           value: "https://github.com/nre-learning/antidote.git"
         - name: SYRINGE_LESSON_REPO_BRANCH
-          value: "v0.1.4"  #revme
+          value: "v0.3.0"  #revme
         - name: SYRINGE_LESSON_REPO_DIR
           value: "/antidote"
         ports:

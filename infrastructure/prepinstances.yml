@@ -24,8 +24,8 @@
         - htop
         - bridge-utils
         - docker
-        - kubelet-1.12.3
-        - kubeadm-1.12.3
+        - kubelet-1.13.1
+        - kubeadm-1.13.1
         - kubectl
 
     - name: Enable and restart services
@@ -144,7 +144,7 @@
       dest:  /etc/cni/net.d/1-multus-cni.conf
 
  - name: Download antibridge plugin
-    shell: curl -L https://github.com/nre-learning/plugins/blob/master/bin/antibridge?raw=true -o /opt/cni/bin/antibridge && chmod a+x /opt/cni/bin/antibridge
+   shell: curl -L https://github.com/nre-learning/plugins/blob/master/bin/antibridge?raw=true -o /opt/cni/bin/antibridge && chmod a+x /opt/cni/bin/antibridge
 
   - name: enable kubelet service
     systemd:

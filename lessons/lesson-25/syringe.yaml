@@ -1,0 +1,39 @@
+---
+lessonName: Juniper Extension Toolkit (JET)
+lessonId: 25
+category: tools
+description: "In this lesson, we'll explore the Juniper Extension Toolkit (JET), which is a powerful set of tools for building applications that work with Junos."
+tier: prod
+slug: jet
+
+utilities:
+- name: linux
+  image: antidotelabs/utility
+
+devices:
+- name: vqfx
+  image: antidotelabs/vqfx-full
+  ports:
+  - 830
+  - 1883
+  - 32767
+
+connections:
+- a: vqfx
+  b: linux
+
+stages:
+  - id: 1
+    description: JET rpc/notification configuration
+
+  - id: 2
+    description: Receive events from notification service using MQTT client
+
+  - id: 3
+    description: IDL compilation and basic GRPC JET testing
+
+  - id: 4
+    description: JET Firewall API to create/update firewall filter
+
+  - id: 5
+    description: Closed loop automation with JET

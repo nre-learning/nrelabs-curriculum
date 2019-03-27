@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    name: prod
+  name: prod
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    name: ptr
+  name: ptr

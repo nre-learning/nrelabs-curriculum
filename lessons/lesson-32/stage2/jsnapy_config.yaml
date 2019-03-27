@@ -1,0 +1,8 @@
+---
+hosts:
+  - device: vqfx1
+    username : antidote
+    passwd: antidotepassword
+    port: 22
+tests:
+    - jsnapy_tests.yaml

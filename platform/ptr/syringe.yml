@@ -75,7 +75,7 @@ spec:
         image: antidotelabs/githelper
         args:
         - "https://github.com/nre-learning/antidote.git"
-        - "st2-lesson"
+        - "master"
         - "/antidote"
         volumeMounts:
         - name: git-volume
@@ -97,7 +97,7 @@ spec:
         - name: SYRINGE_LESSON_REPO_REMOTE
           value: "https://github.com/nre-learning/antidote.git"
         - name: SYRINGE_LESSON_REPO_BRANCH
-          value: "st2-lesson"
+          value: "master"
         - name: SYRINGE_LESSON_REPO_DIR
           value: "/antidote"
         ports:

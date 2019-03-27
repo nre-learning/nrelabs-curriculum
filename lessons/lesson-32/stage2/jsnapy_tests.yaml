@@ -1,0 +1,20 @@
+---
+# V-3969
+test_v-3969_snmp_readonly:
+  - rpc: get-config
+  - item:
+      xpath: 'snmp/community'
+      tests:
+        - is-equal: authorization, read-only
+          err: "Test Failed!! SNMP community strings must be set to read-only"
+          info: "Test succeeded!! SNMP community string is read-only"
+
+# V-31285
+test_v-31285_bgp_authentication:
+  - rpc: get-bgp-neighbor-information
+  - item:
+      xpath: '//bgp-peer'
+      tests:
+        - exists: bgp-option-information/authentication-configured 
+          err: "Test Failed!! <{{post['peer-address']}}> does not have BGP authentication configured."
+          info: "Test succeeded!!  <{{post['peer-address']}}> is configured to use authentication"
