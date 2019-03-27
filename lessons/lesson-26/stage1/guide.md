@@ -23,9 +23,10 @@ To use OpenConfig to provision configurations, we have to install the OpenConfig
 
 The OpenConfig package has already been uploaded to our virtual QFX image, so we just need to install it:
 
-```
+<pre>
 request system software add /var/db/vmm/junos-openconfig-0.0.0.10-1-signed.tgz no-validate
-```
+yes
+</pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 0)">Run this snippet</button>
 
 _Starting in Junos 18.3R1, the OpenConfig package is bundled with Junos image and therefore you do not need to install it separately._

@@ -48,7 +48,7 @@ system {
         }
     }
     syslog {
-        user * {
+        inactive: user * {
             any emergency;
         }
         file messages {
@@ -85,7 +85,7 @@ interfaces {
     em0 {
         unit 0 {
             family inet {
-                address 10.0.0.15/24;
+                address {{ mgmt_addr }};
             }
         }
     }

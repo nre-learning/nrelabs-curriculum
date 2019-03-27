@@ -5,11 +5,12 @@
 ---
 
 ### Chapter 2 - Receive events from notification service using MQTT client
-#### Message Broker and PUB-SUB model
+
 Before we deep dive into notification service, let's get an introduction on message broker and publish-subscribe (PUB-SUB) model.
 
-![JET System Archtecture](https://www.juniper.net/documentation/images/g043543.png)
+#### Message Broker and PUB-SUB model
 
+![JET System Archtecture](https://www.juniper.net/documentation/images/g043543.png)
 
 A message broker system is hub and spoke based model where
 - Broker accepts messages from clients and delivers to other interested clients
@@ -20,7 +21,6 @@ A message broker system is hub and spoke based model where
 
 #### JET Notification Service
 Juniper JET notification service is a message broker system based on <a href="http://mqtt.org/" target="_blank">MQTT</a> protocol to deliver system events. Junos system daemons such as RPD will generate messages and publish them to the JET message broker through eventd with specific topics. For example, interface events (link up/down) will have topic `/junos/events/kernel/interfaces` while route table related event will have topic `/junos/events/kernel/route-table`. The list of topic available can be found <a href="https://www.juniper.net/documentation/en_US/jet17.4/topics/concept/jet-notification-api-overview.html" target="_blank">here</a>.
-
 
 #### Creating a Python MQTT Client
 We're going to create a Python MQTT client to collect JET notification events.

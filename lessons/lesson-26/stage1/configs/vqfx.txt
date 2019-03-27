@@ -33,7 +33,7 @@ system {
         }
     }
     syslog {
-        user * {
+        inactive: user * {
             any emergency;
         }
         file messages {
