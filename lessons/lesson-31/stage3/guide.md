@@ -106,7 +106,7 @@ Let's go ahead and apply the change.
 ```
 terraform apply -auto-approve
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 8)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 9)">Run this snippet</button>
 
 Now the BGP session remote peer address has been changed and you're free to check the configuration group configuration entry on `vqfx` to gain evidence of this wizardy.
 
@@ -115,7 +115,7 @@ Peaking under the hood, the Junos Terraform provider destroys the group by NETCO
 ```
 show configuration groups
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 9)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 10)">Run this snippet</button>
 
 __Idempotency__
 

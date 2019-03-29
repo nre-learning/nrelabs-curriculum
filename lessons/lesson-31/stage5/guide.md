@@ -79,9 +79,10 @@ When humans get involved in troubleshooting, we have a tendency to change a bunc
 ```
 terraform refresh
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 5)">Run this snippet</button>
 
 Refresh performs a read of the resources and updates the state cache. If something has changed and you re-run `terraform plan`, the execution plan will reflect that of the Terraform resources and not the human changes. Great for golden state checking, but not great in what should be a fully automated set of infrastructure.
+
+The Junos provider doesn't quite support this, yet, but will soon!
 
 __Partial Delete__
 
@@ -90,7 +91,7 @@ What happens if you don't want to destroy everything in a set of Terraform confi
 ```
 terraform destroy -h
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 6)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 5)">Run this snippet</button>
 
 See the `-target` argument?
 
