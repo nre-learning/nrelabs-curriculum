@@ -1,3 +1,10 @@
 junos-eznc
 netmiko
 napalm
+
+# https://blog.jupyter.org/open-redirect-vulnerability-in-jupyter-jupyterhub-adf43583f1e4
+notebook>=5.7.7
+
+# https://github.com/paramiko/paramiko/issues/1369 - needed until a new paramiko release fixes this
+# or else we'll get nasty deprecation warnings that bubble up to the user.
+cryptography==2.4.2
