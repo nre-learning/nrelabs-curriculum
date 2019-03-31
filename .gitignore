@@ -35,6 +35,7 @@ docs/local/
 docs/virtualenv/
 
 *billing_override.tf*
+*.tfvars
 
 _old_contrail/
 *ansiblekey.json
@@ -45,3 +46,5 @@ __pycache__
 
 *.img
 *.tgz
+
+RANDOM.md
