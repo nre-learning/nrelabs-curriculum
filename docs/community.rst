@@ -6,6 +6,23 @@ Community Resources
 We're truly interested in building a community around both the Antidote platform, as well as the NRE Labs curriculum.
 To that end, we've created several diverse resources for getting involved with the project.
 
+A quick summary of communication methods is here, but will be explained in more detail below;
+
+- Mailing List - use this if you need help with a problem, such as writing a lesson or setting up a development environment
+- Github - use this if you want to file a bug or feature request, or otherwise participate in the code side of the project.
+- Discord CHannel - use this for more informal, real-time communcation with project members, such as during events or livestreams.
+
+
+Mailing List
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+For help related to setting up a development environment, working on a lesson, or really general
+support of most kinds, the `mailing list <https://groups.google.com/forum/#!forum/antidote-developers>`_
+is the place to be.
+
+We'll also send out periodic release updates via this channel, so if you want to get involved
+in new releases of the platform and of the NRE Labs curriculum, subscribe to this mailing
+list to be included.
+
 Github
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Everything we produce in the Antidote project is on Github underneath the `nre-learning <https://github.com/nre-learning>`_
@@ -23,9 +40,8 @@ while we're working on a release, we'll open up a new project for that release, 
 release can be found within that project. So, if you're looking for a status on current development efforts,
 this is where you want to go.
 
-Twitter
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Follow `@NRELabs <https://twitter.com/nrelabs>`_ on twitter for periodic updates on NRE Labs and the underlying platform.
+
+
 
 Discord Channel
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -35,12 +51,9 @@ bit better. :)
 
 Join our Discord channel via `this link <https://discord.gg/fRuSUyD>`_.
 
-Mailing List
+Twitter
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-For those that prefer email for communication, we have two mailing lists:
-
-- `Developers <https://groups.google.com/forum/#!forum/nre-labs-developers>`_
-- `Users <https://groups.google.com/forum/#!forum/nre-labs-users>`_
+Follow `@NRELabs <https://twitter.com/nrelabs>`_ on twitter for periodic updates on NRE Labs and the underlying platform.
 
 Weekly Livestreams and Other Videos
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
