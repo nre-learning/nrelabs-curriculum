@@ -20,7 +20,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'antidote'
-copyright = '2018, Juniper Networks'
+copyright = '2019, Juniper Networks'
 author = 'Juniper Networks'
 # exclude_patterns = ['*DESCRIPTION.rst']
 
@@ -88,7 +88,10 @@ html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-# html_theme_options = {}
+# https://sphinx-rtd-theme.readthedocs.io/en/latest/configuring.html
+html_theme_options = {
+    'titles_only': True
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
