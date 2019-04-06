@@ -12,6 +12,7 @@ Starting from the top down:
 Curriculum
 ^^^^^^^^^^
 
+
 All of the lessons and labs are defined as a standalone curriculum. The platform underneath is built to
 treat this as a modular component. For instance, the :ref:`NRE Labs curriculum <contrib-curriculum>` is certainly the most
 popular curriculum currently available, and it's what we are serving via the `NRE Labs <https://labs.networkreliability.engineering>`_

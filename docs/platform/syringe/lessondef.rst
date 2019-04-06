@@ -1,6 +1,6 @@
-.. _syringefile:
+.. _lessondef:
 
-The ``syringe.yaml`` File
+Lesson Definitions
 ================================
 
 Syringe uses a totally file-driven approach to lesson definitions. This allows us to store all lessons as "code"
