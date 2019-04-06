@@ -1,3 +1,0 @@
-apache-libcloud
-ansible
-pycrypto
