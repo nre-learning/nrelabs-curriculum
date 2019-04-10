@@ -1,0 +1,27 @@
+---
+lessonName: Device Specific Template Generation
+lessonId: 35
+category: workflows
+tier: prod
+prereqs:
+  - 23  # Linux
+  - 14  # Yaml
+  - 16  # Jinja2
+description: Having the ability to generate device specific configurations from an approved device template can be beneficial especially for new deployments. 
+slug: TEMPLATEGEN
+tags:
+- pyez
+- yaml
+- jinja2
+
+utilities:
+- name: linux
+  image: antidotelabs/utility
+
+stages:
+  - id: 1
+    description: Skills Review
+  - id: 2
+    description: Multiple Devices
+  - id: 3
+    description: Multiple Devices w/ Uplinks
