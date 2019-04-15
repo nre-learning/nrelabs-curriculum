@@ -2,7 +2,7 @@
 lessonName: Network Automation with Salt
 lessonId: 30
 category: tools
-lessondiagram: https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-30/salt.png
+lessondiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/lesson-30/salt.png
 tier: prod
 prereqs:
   - 22  # Python
