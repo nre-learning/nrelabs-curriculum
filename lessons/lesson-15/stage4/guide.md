@@ -16,7 +16,7 @@ In order for StackStorm to know when a certain "event" has taken place, it needs
 
 StackStorm uses something called `sensors` to do this. These are little bits of Python code that run as separate processes within StackStorm.
 
-<div style="text-align:center;"><img src="https://raw.githubusercontent.com/nre-learning/antidote/master/lessons/lesson-15/sensors.png"></div>
+<div style="text-align:center;"><img src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/lesson-15/sensors.png"></div>
 
 As with everything else, Sensors are distributed within Packs. We can run the following command to see the list of sensors in the `napalm` pack:
 
