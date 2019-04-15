@@ -1,6 +1,7 @@
 ---
 lessonName: Device Specific Template Generation
 lessonId: 35
+lessonDiagram: lessondiagram.png
 category: workflows
 tier: prod
 prereqs:
@@ -18,6 +19,14 @@ utilities:
 - name: linux
   image: antidotelabs/utility
 
+devices:
+- name: vqfx1
+  image: antidotelabs/vqfx:snap1
+  ports: [830]
+- name: vqfx2
+  image: antidotelabs/vqfx:snap2
+  ports: [830]
+
 stages:
   - id: 1
     description: Skills Review
@@ -25,3 +34,5 @@ stages:
     description: Multiple Devices
   - id: 3
     description: Multiple Devices w/ Uplinks
+  - id: 4
+    description: Push Generated Configs

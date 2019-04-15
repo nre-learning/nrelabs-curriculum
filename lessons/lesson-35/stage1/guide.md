@@ -5,7 +5,7 @@ Having the ability to easily generate a device specific configuration from an ap
 
 In this section, we will do a quick review of the key concepts required to accomplish this task; specificially YAML and Jinja2. For a complete review of [YAML](https://labs.networkreliability.engineering/labs/?lessonId=14&lessonStage=1) and [Jinja2](https://labs.networkreliability.engineering/labs/?lessonId=16&lessonStage=1) please go through those lessons in NRE Labs.
 
-#### Device Template
+#### Device Template File
 The most important part of the template generation process is to have a device template with a known good configuration. The configuration in this template usually has to be approved by a configuration control board and the security team. The approved template is then modified to include variables using  Jinja syntax so the substitions can be done by the script.
 
 Lets take a look at our sample configuration template that has already had the Jinja syntax added.

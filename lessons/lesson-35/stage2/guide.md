@@ -5,7 +5,7 @@ The examples in the previous lesson were purposefully simple so the basic concep
 
 The sample project we will use is deploying a large number of access switches. When deploying devices it is common for them to have a base configuration to include hostname, management IP address and a default gateway.
 
-#### Device Template
+#### Device Template File
 In this section we will use the same template file that we used in the previous lesson. Look for the template variables in all captial letters surrounded by double curly brackets, for example **{{ HOSTNAME }}**. Pay attention to these variables because they will be set to specific values in the next section using YAML.
 <pre>
 cd /antidote/lessons/lesson-35/stage2

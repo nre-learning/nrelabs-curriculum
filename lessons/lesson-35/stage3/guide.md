@@ -17,7 +17,7 @@ head -12 variables.yml
 
 There are two uplinks, one that will connect to `distro1` and the other that will connect to `distro2`. For each connection you specify the **INTERFACE** and **DESCRIPTION** keys with their corresponding values.
 
-#### Device Template
+#### Device Template File
 In order to create the multiple uplink ports we will need to modify the Jinja2 template to include a `for` loop so it can loop through all of the data in the **UPLINKS** dictionary. Lets look at the new template.
 <pre>
 cd /antidote/lessons/lesson-35/stage3
