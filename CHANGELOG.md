@@ -6,6 +6,13 @@
 
 ### Other
 
+## v0.3.2 - April 16, 2019
+
+### Curriculum
+- Three new lessons [#217] (https://github.com/nre-learning/nrelabs-curriculum/pull/217)
+  - Added new "Automated Device Inventory" Lesson-33. Use PyEz & YAML to automate device inventory.
+  - Added new "Automatede Configuration Backup" Lesson-34. Use PyEz & YAML to automate conifguration backups.
+  - Added new "Device Specific Template Generation" Lesson-35. Use PyEz, Jinja2 & YAML to generate and push templates.
 
 ## v0.3.1 - March 27, 2019
 
