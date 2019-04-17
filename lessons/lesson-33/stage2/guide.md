@@ -54,7 +54,7 @@ for device in deviceList:
 
 Then we `print` the specific keys from the facts dictionary on the same line separated by a semicolon. Thats it and all that is left is to `close` the connection to the device.
 <pre>
-	print dev.facts['hostname'] + ";" + dev.facts['model'] + ";" + dev.facts['serialnumber'] + ";" + dev.facts['version']
+	print(dev.facts['hostname'] + ";" + dev.facts['model'] + ";" + dev.facts['serialnumber'] + ";" + dev.facts['version'])
 	dev.close()
 
 </pre>
