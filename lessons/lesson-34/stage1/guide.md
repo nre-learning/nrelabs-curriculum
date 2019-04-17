@@ -7,7 +7,6 @@ First we will start the Python interactive shell, load the PyEz module so we can
 python
 from jnpr.junos import Device
 from lxml import etree
-
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 0)">Run this snippet</button>
 
