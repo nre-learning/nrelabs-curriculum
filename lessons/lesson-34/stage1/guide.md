@@ -29,7 +29,6 @@ Then we will use the `rpc.get_config` function to pull the device configuration 
 config = dev.rpc.get_config(options={'format':'set'})
 outfile.write(etree.tostring(config))
 outfile.close()
-
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 3)">Run this snippet</button>
 
