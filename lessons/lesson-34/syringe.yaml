@@ -1,0 +1,33 @@
+---
+lessonName: Automated Device Configuration Backup
+lessonId: 34
+category: workflows
+lessonDiagram: 
+tier: prod
+prereqs:
+  - 24  # PyEz
+  - 14  # YAML
+description: Having an up to date device configuration is essential for disater recovery in the event of device failure or natural disaster. Being able to automate backup configurations makes recovery of the device that much easier (especially if it's a mission critical device). In this lesson, we'll backup the configuration using PyEZ. We will demostrate pulling configurations in the standard Junos format and display set formats with static and manual pasword entry. 
+slug: INVENTORY
+tags:
+- pyez
+- facts
+- yaml
+
+utilities:
+- name: linux1
+  image: antidotelabs/utility
+
+devices:
+- name: vqfx1
+  image: antidotelabs/vqfx:snap1
+  ports: [830]
+- name: vqfx2
+  image: antidotelabs/vqfx:snap2
+  ports: [830]
+
+stages:
+  - id: 1
+    description: Single Device Backup
+  - id: 2
+    description: Multiple Device Backup

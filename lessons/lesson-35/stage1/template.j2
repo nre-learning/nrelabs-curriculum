@@ -1,0 +1,18 @@
+system {
+    host-name {{ HOSTNAME }};
+}
+interfaces {
+    me0 {
+        unit 0 {
+            family inet {
+                address {{ MGMT_IP }};
+            }
+        }
+    }
+   
+}
+routing-options {
+    static {
+        route 0.0.0.0/0 next-hop {{ DEFAULT_GW }};
+    }                                   
+}                                       
