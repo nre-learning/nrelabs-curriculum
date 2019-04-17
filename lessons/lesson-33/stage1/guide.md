@@ -1,4 +1,6 @@
-# Automated Device Inventory
+# Quick and Easy Device Inventory
+**Contributed by: [@jweidley](https://github.com/jweidley) and [@mayeates](https://github.com/mayeates)**
+---
 ## Part 1  - Single Device Inventory
 
 Whether inventorying newly deployed or operational devices the task can be very time consuming and tedious. In this lesson, we'll review a tool we learned about in a previous lesson - PyEz. As a refresher, PyEZ is a micro-framework for Python that enables you to manage and automate Junos devices. It provides the capabilities that a user would have on the Junos OS command-line interface (CLI) in an environment built for automation tasks.

@@ -1,4 +1,6 @@
 # Automated Device Configuration Backup
+**Contributed by: [@mayeates](https://github.com/mayeates) and [@jweidley](https://github.com/jweidley)**
+---
 ## Part 1  - Single Device Backup
 Having an up to date device configuration is essential for disater recovery in the event of device failure or natural disaster. Being able to automate backup configurations makes recovery of the device that much easier (especially if it's a mission critical device). In this lesson we will pull the configuration from a single device and store it in **"display set"** format. 
 

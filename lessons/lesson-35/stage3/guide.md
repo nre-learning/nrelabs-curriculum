@@ -1,4 +1,6 @@
 # Device Specific Template Generation
+**Contributed by: [@jweidley](https://github.com/jweidley)**
+---
 ## Part 3  - Multiple Devices w/ Uplinks
 
 The examples in the previous lesson were a little more realistic and in this section we'll take it to the next level. 

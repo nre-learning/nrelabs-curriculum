@@ -1,7 +1,7 @@
 ---
 lessonName: Device Specific Template Generation
 lessonId: 35
-lessonDiagram: lessondiagram.png
+lessonDiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/lesson-35/lessondiagram.png
 category: workflows
 tier: prod
 prereqs:

@@ -1,4 +1,6 @@
 # Automated Device Configuration Backup
+**Contributed by: [@mayeates](https://github.com/mayeates) and [@jweidley](https://github.com/jweidley)**
+---
 ## Part 2  - Multiple Device Backup 
 
 In this lesson we will expand on the last lesson and backup the configurations from multiple Junos devices. In this section the configuration will be stored in the native Junos format to a local file on the Linux system.
