@@ -1,0 +1,7 @@
+vlans {
+   {%- for vlan in VLANS %}
+    v{{ vlan['VLAN_ID'] }}.{{ vlan['VLAN_NAME'] }} {
+        vlan-id {{ vlan['VLAN_ID'] }};
+    }
+   {%- endfor %}
+}

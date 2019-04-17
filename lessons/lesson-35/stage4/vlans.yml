@@ -1,0 +1,22 @@
+---
+VLANS:
+  - VLAN_NAME: voip-servers
+    VLAN_ID: 100
+
+  - VLAN_NAME: voip-phones
+    VLAN_ID: 101
+
+  - VLAN_NAME: printers
+    VLAN_ID: 201
+
+  - VLAN_NAME: users
+    VLAN_ID: 301
+
+  - VLAN_NAME: users
+    VLAN_ID: 302
+
+  - VLAN_NAME: mgmt
+    VLAN_ID: 599
+
+  - VLAN_NAME: UNUSED
+    VLAN_ID: 1000
