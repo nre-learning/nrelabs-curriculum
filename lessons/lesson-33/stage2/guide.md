@@ -27,7 +27,6 @@ Next we have to read in the YAML file with the device hostnames/IP addresses. Fi
 <pre>
 deviceFile = open('devices.yml', 'r')
 deviceList = yaml.full_load(deviceFile)
-
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 2)">Run this snippet</button>
 
