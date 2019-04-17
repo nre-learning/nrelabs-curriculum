@@ -19,7 +19,6 @@ Pretty simple, right? New devices can be easily added without tinkering around i
 python
 import yaml
 from jnpr.junos import Device
-
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 1)">Run this snippet</button>
 
