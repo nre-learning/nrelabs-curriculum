@@ -13,7 +13,6 @@ from lxml import etree
 After that, we will create a new text file for the configuration to be saved. The file will be named **vqfx1-backup.txt** and will be in the home directory on the Linux system. 
 <pre>
 outfile = open("vqfx1-backup.txt","w")
-
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 1)">Run this snippet</button>
 
