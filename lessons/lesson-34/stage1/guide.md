@@ -21,7 +21,6 @@ Next we create the `dev` variable that represents the device hostname and login 
 <pre>
 dev = Device(host="vqfx1", user="antidote", password="antidotepassword")
 dev.open()
-   
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 2)">Run this snippet</button>
 
