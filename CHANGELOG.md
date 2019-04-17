@@ -4,6 +4,8 @@
 
 ### Curriculum
 
+- Final adjustments and promotion to prod for JET and OC lessons [#218](https://github.com/nre-learning/nrelabs-curriculum/pull/218)
+
 ### Other
 
 
