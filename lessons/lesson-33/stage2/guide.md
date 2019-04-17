@@ -57,7 +57,6 @@ Then we `print` the specific keys from the facts dictionary on the same line sep
 	print dev.facts['hostname'] + ";" + dev.facts['model'] + ";" + dev.facts['serialnumber'] + ";" + dev.facts['version']
 	dev.close()
 
-
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 6)">Run this snippet</button>
 
