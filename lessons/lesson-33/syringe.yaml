@@ -6,6 +6,7 @@ lessonDiagram:
 tier: prod
 prereqs:
   - 24  # PyEz
+  - 14  # YAML
 description: Having an up to date device inventory serves many operational, asset management & deployment purposes. But being able to automate it reduces human error and allows it to be done more frequently to increase its level of effectiveness. In this lesson, we'll use the PyEz module to pull specific values from one and many devices as well as outputting the data in a common format for easy import into other tools. 
 slug: INVENTORY
 tags:
