@@ -39,7 +39,7 @@ print deviceList
 It would be helpful to have a column header so you can easily know what each field value is. This can be done with a simple `print` statement.
 
 <pre>
-print "HOSTNAME;MODEL;SERIAL-NUMBER;JUNOS-VERSION"
+print("HOSTNAME;MODEL;SERIAL-NUMBER;JUNOS-VERSION")
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 4)">Run this snippet</button>
 
