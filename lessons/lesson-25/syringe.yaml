@@ -17,10 +17,18 @@ devices:
   - 830
   - 1883
   - 32767
+- name: vqfx2
+  image: antidotelabs/vqfx-full:18.1R1.9
+  ports:
+  - 830
+  - 1883
+  - 32767
 
 connections:
 - a: vqfx
   b: linux
+- a: vqfx
+  b: vqfx1
 
 stages:
   - id: 1
