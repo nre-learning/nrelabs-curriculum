@@ -1,7 +1,10 @@
-# Quick and Easy Device Inventory
+## Quick and Easy Device Inventory
+
 **Contributed by: [@jweidley](https://github.com/jweidley) and [@mayeates](https://github.com/mayeates)**
+
 ---
-## Part 2  - Multiple Device Inventory
+
+### Part 2  - Multiple Device Inventory
 
 In the previous section, we reviewed using the PyEz module to obtain facts about a device and how we can print just the keys we want to see. In this section, we will pull together a few simple skills from other NRE Labs lessons to obtain specific facts about a list of network devices.
 

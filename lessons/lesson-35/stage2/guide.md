@@ -1,7 +1,10 @@
-# Device Specific Template Generation
+## Device Specific Template Generation
+
 **Contributed by: [@jweidley](https://github.com/jweidley)**
+
 ---
-## Part 2  - Multiple Devices
+
+### Part 2 - Multiple Devices
 
 The examples in the previous lesson were purposefully simple so the basic concepts could be described in a way that is easy to understand. In this section we will create a template generator that creates device specific configurations for mulitple devices.
 
