@@ -66,7 +66,7 @@ template = Template(template_data)
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 4)">Run this snippet</button>
 
-Next we need to open a new file, called `new-vlans.conf`, to store the generated configuration, render the Jinja2 template from data stored in the YAML file and then close the file. We will also print the generated configuration to the screen so we can see what it looks like.
+Next we need to `open` a new file, called `new-vlans.conf`, to store the generated configuration, `render` the Jinja2 template from data stored in the YAML file and then `close` the file. We will also `print` the generated configuration to the screen so we can see what it looks like.
 <pre>
 outfile = open("new-vlans.conf", "w")
 outfile.write(template.render(my_vars))
@@ -77,7 +77,7 @@ print(template.render(my_vars))
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 5)">Run this snippet</button>
 
 #### Push Configuration to devices
-At this point the new VLANs have been created and written out to a file. Now we need to import the list of devices that the template will be deployed to. The device list is another YAML fall called `devices.yml`.
+At this point the new VLANs have been created and written out to a file. Now we need to `open` and `load` the file that contains the list of devices that the template will be deployed to. The device list is another YAML fall called `devices.yml`.
 <pre>
 deviceFile = open('devices.yml', 'r')
 deviceList = yaml.full_load(deviceFile)
@@ -93,23 +93,18 @@ from jnpr.junos.utils.config import Config
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 7)">Run this snippet</button>
 
-Since we are dealing with multiple device we need to create a loop through all of the devices and push the configuration template.
+Since we are dealing with multiple device we need to create a `for` loop in order to connect to each device and push the configuration template. The `device` variable represents the device hostname and login credentials which are used to `open` a NETCONF connection to the device.
+
+Then we start the process of `load`ing the configuration. We must specify the file with the configuration and the format.
+
+Lastly we check the `commit` status of the configuration push. We will `print` a positive message if the commit was complete and a negative message if the commit fails.
 <pre>
 for device in deviceList:
   device = Device(host=device, username="antidote", password="antidotepassword")
   device.open()
-</pre>
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 8)">Run this snippet</button>
-
-Now we start the process of pushing the configuration. First we specify the file with the configuration and the format.
-<pre>
   cfg=Config(device)
   cfg.load(path='new-vlans.conf', format='text')
-</pre>
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 9)">Run this snippet</button>
 
-Lastly we check the commit status of the configuration push. We will print a positive message if the commit was complete and a negative message if the commit fails.
-<pre>
   if cfg.commit() == True:
      print ('configuration commited on ' + device.facts["hostname"])
   else:
@@ -117,7 +112,7 @@ Lastly we check the commit status of the configuration push. We will print a pos
      device.close()
 
 </pre>
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 10)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 8)">Run this snippet</button>
 
 Watch the output in the linux terminal. You will see the script looping through the QFX switches, pushing the configuration and printing the commit status messages. This may take a couple of minutes so wait until you see the `>>>` prompt.
 
@@ -126,11 +121,11 @@ Now lets check to see if the VLANs were successfully pushed, starting with vqfx1
 set cli screen-length 50
 show configuration vlans
 </pre>
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 9)">Run this snippet</button>
 
 and check vqfx2:
 <pre>
 set cli screen-length 50
 show configuration vlans
 </pre>
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx2', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx2', 10)">Run this snippet</button>

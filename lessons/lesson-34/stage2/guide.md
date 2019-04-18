@@ -40,27 +40,21 @@ print deviceList
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 3)">Run this snippet</button>
 
 We need to create a `for` loop so we can perform a series of actions on each device in the list (i.e. YAML file). The first thing we do is create the `dev` variable that represents the device hostname and login credentials. Then we need to `open` a NETCONF connection to the device.
+
+In order to save the configuration we need to `open` a local file on the Linux system with a unique name. To be descriptive the filename will be the **device**-backup.txt which can be accomplished with the `device` variable.
+
+Then we will use the `rpc.get_config` function to pull the device configuration and store it in a variable called `config`. Next we write the configuration to the local file and finally `close` the local file.
 <pre>
 for device in deviceList:
 	dev = Device(host=device, user="antidote", password="antidotepassword")
 	dev.open()
-</pre>
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 4)">Run this snippet</button>
-
-In order to save the configuration we need to `open` a local file on the Linux system with a unique name. To be descriptive the filename will be the **device**-backup.txt which can be accomplished with the `device` variable.
-<pre>
 	outfile = open(device + "-backup.txt","w")
-</pre>
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 5)">Run this snippet</button>
-
-Then we will use the `rpc.get_config` function to pull the device configuration and store it in a variable called `config`. Next we write the configuration to the local file and finally `close` the local file.
-<pre>
 	config = dev.rpc.get_config(options={'format':'text'})
 	outfile.write(etree.tostring(config))
 	outfile.close()
 
 </pre>
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 6)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 4)">Run this snippet</button>
 
 In the Linux terminal you can see the loop making a connection with each device and saving the configuration. Wait until you see the `>>>`  prompt before running the next snippet. 
 
@@ -68,17 +62,17 @@ In order to verify the backed up configurations we will need to exit the Python 
 <pre>
 exit()
 </pre>
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 7)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 5)">Run this snippet</button>
 
 Lets do a directory listing looking for the backup files.
 <pre>
 ls -l
 </pre>
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 8)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 6)">Run this snippet</button>
 
 View one of the backed up configuration files using the `cat` command. 
 <pre>
 cat vqfx1-backup.txt
 </pre>
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 9)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 7)">Run this snippet</button>
 
