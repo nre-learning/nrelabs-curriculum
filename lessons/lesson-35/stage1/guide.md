@@ -1,7 +1,10 @@
-# Device Specific Template Generation
+## Device Specific Template Generation
+
 **Contributed by: [@jweidley](https://github.com/jweidley)**
+
 ---
-## Part 1  - Skills Review
+
+### Part 1  - Skills Review
 
 Having the ability to easily generate a device specific configuration from an approved template is a **HUGE** time saver and it provides the consistency that you need to avoid common configuration errors.
 

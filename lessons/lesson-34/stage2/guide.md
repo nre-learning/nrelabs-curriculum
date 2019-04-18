@@ -1,7 +1,10 @@
-# Automated Device Configuration Backup
+## Automated Device Configuration Backup
+
 **Contributed by: [@mayeates](https://github.com/mayeates) and [@jweidley](https://github.com/jweidley)**
+
 ---
-## Part 2  - Multiple Device Backup 
+
+### Part 2  - Multiple Device Backup 
 
 In this lesson we will expand on the last lesson and backup the configurations from multiple Junos devices. In this section the configuration will be stored in the native Junos format to a local file on the Linux system.
 
@@ -55,6 +58,7 @@ Then we will use the `rpc.get_config` function to pull the device configuration 
 	config = dev.rpc.get_config(options={'format':'text'})
 	outfile.write(etree.tostring(config))
 	outfile.close()
+
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 6)">Run this snippet</button>
 
