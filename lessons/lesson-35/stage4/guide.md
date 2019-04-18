@@ -104,7 +104,6 @@ for device in deviceList:
   device.open()
   cfg=Config(device)
   cfg.load(path='new-vlans.conf', format='text')
-
   if cfg.commit() == True:
      print ('configuration commited on ' + device.facts["hostname"])
   else:
