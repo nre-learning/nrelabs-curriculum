@@ -47,20 +47,17 @@ print("HOSTNAME;MODEL;SERIAL-NUMBER;JUNOS-VERSION")
 
 Now this is where the magic happens!  We are going to create a `for` loop so we can perform a series of actions on each device in the list (i.e. YAML file). The first thing we do is create the `dev` variable that includes the device hostname and login credentials. Next we `open` a NETCONF connection to the device so we can query the `facts`. 
 
+Then we `print` the specific keys from the facts dictionary on the same line separated by a semicolon. Thats it and all that is left is to `close` the connection to the device.
+
 <pre>
 for device in deviceList:
 	dev = Device(host=device, user="antidote", password="antidotepassword")
 	dev.open()
-</pre>
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 5)">Run this snippet</button>
-
-Then we `print` the specific keys from the facts dictionary on the same line separated by a semicolon. Thats it and all that is left is to `close` the connection to the device.
-<pre>
 	print(dev.facts['hostname'] + ";" + dev.facts['model'] + ";" + dev.facts['serialnumber'] + ";" + dev.facts['version'])
 	dev.close()
 
 </pre>
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 6)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 5)">Run this snippet</button>
 
 In the linux terminal on the right you can see the loop working, accessing each device and printing the facts. In the NRE Labs environment the serial number of the vQFX switches are the same but wont be the case in your production or lab environment.
 
