@@ -53,6 +53,7 @@ Then we install the custom YANG module by `request system yang add` command:
 
 ```
 request system yang add package vpn-services module vpn-services.yang translation-script vpn-services.py
+yes
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 3)">Run this snippet</button>
 

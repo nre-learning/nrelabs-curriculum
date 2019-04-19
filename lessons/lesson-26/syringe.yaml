@@ -2,7 +2,9 @@
 lessonName: Vendor-Neutral Network Configuration with OpenConfig
 lessonId: 26
 category: tools
-tier: ptr
+tier: prod
+prereqs:
+  - 24  # PyEZ
 description: "In this lesson, we'll explore OpenConfig - an industry effort to standardize network configuration and telemetry models"
 slug: openconfig
 

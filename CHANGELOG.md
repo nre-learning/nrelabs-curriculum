@@ -8,6 +8,8 @@
   - Added new "Automated Configuration Backup" Lesson-34. Use PyEz & YAML to automate configuration backups.
   - Added new "Device Specific Template Generation" Lesson-35. Use PyEz, Jinja2 & YAML to generate and push templates.
 
+- Final adjustments and promotion to prod for JET and OC lessons [#218](https://github.com/nre-learning/nrelabs-curriculum/pull/218)
+
 ### Other
 
 

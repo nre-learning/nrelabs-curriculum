@@ -58,7 +58,7 @@ dev.open()
 Then we load the configuration, print the diff, and commit:
 
 ```
-dev.cu.load(path='vpn-services.conf', format='text')
+dev.cu.load(path='/antidote/lessons/lesson-26/vpn-services.conf', format='text')
 dev.cu.pdiff()
 dev.cu.commit(timeout=600)
 ```
