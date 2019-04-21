@@ -28,21 +28,21 @@ To save time, the IDL file is pre-downloaded already. First we need to unarchive
 cd /antidote/lessons/lesson-25
 tar -xzf jet-idl-17.4R1.16.tar.gz
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 Next, compile the protocol buffer into python stub code:
 
 ```
 python -m grpc_tools.protoc -I./proto --python_out=. --grpc_python_out=. ./proto/*.proto
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 Verify the python stub class are generated:
 
 ```
 ls  -l *pb2*
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 2)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 The python stub class is now ready, the next step we will use it to perform gRPC to the Junos device.
 
@@ -61,7 +61,7 @@ import authentication_service_pb2_grpc
 import rib_service_pb2 as rib
 import rib_service_pb2_grpc
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 3)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 Now we create a gRPC connection to the vQFX and perform the authentication.
 
@@ -77,14 +77,14 @@ response = auth_stub.LoginCheck(
     )
 )
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 4)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 Print the response to verify the connection is established.
 
 ```
 print(response.result)
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 5)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 Now, we can call the Route Add API to insert a static route 192.168.20.0/24 with next-hop 192.168.10.2 dynamically.
 
@@ -107,19 +107,19 @@ result = rib_stub.RouteAdd(
     )
 )
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 6)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 Print the response to verify the route add status.
 ```
 print(result)
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 7)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 At last, verify the route is being added by doing CLI command `show route` on the vQFX.
 
 ```
 show route table inet.0
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 8)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
 
 Easy isn't it? With Juniper JET you can dynamically manage device configuration and runtime status such as route tables, ACL, interface status, etc without touching the CLI at all. This API interfaces open a whole new world for network applications. For more information about the API, please refer to the <a href="https://www.juniper.net/documentation/en_US/jet18.2/topics/concept/jet-service-apis-overview.html" target="_blank">JET Service APIs guide</a>

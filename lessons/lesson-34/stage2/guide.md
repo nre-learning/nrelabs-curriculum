@@ -13,7 +13,7 @@ First we need a list of device names or IP addresses that we want to retrieve in
 cd /antidote/lessons/lesson-34/stage2/
 more devices.yml
 </pre>
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 With this method new devices can be easily added without editing in the script.
 
@@ -24,20 +24,20 @@ import yaml
 from jnpr.junos import Device
 from lxml import etree
 </pre>
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 1)">Run this snippet</button> 
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button> 
 
 Next we have to read in the YAML file with the device hostnames. First, open the file as readonly and then use the YAML module to put it into a Python list, like so:
 <pre>
 deviceFile = open('devices.yml', 'r')
 deviceList = yaml.full_load(deviceFile)
 </pre>
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 2)">Run this snippet</button> 
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button> 
 
 To ensure the `devices.yml` file was processed correctly we can print the `deviceList` variable.
 <pre>
 print deviceList
 </pre>
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 3)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 We need to create a `for` loop so we can perform a series of actions on each device in the list (i.e. YAML file). The first thing we do is create the `dev` variable that represents the device hostname and login credentials. Then we need to `open` a NETCONF connection to the device.
 
@@ -54,7 +54,7 @@ for device in deviceList:
 	outfile.close()
 
 </pre>
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 4)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 In the Linux terminal you can see the loop making a connection with each device and saving the configuration. Wait until you see the `>>>`  prompt before running the next snippet. 
 
@@ -62,17 +62,17 @@ In order to verify the backed up configurations we will need to exit the Python 
 <pre>
 exit()
 </pre>
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 5)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 Lets do a directory listing looking for the backup files.
 <pre>
 ls -l
 </pre>
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 6)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 View one of the backed up configuration files using the `cat` command. 
 <pre>
 cat vqfx1-backup.txt
 </pre>
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 7)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 

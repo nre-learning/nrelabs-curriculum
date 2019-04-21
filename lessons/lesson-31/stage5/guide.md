@@ -8,7 +8,7 @@ Before we do any more, let's make sure we're in the correct working directory.
 ```
 cd /antidote/lessons/lesson-31/terraform/bonus/
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', this)">Run this snippet</button>
 
 __Implicit vs Explicit Graph Dependencies__
 
@@ -22,7 +22,7 @@ Let's go ahead and see if we can create an implicit dependency using variables!
 terraform init
 terraform plan
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', this)">Run this snippet</button>
 
 What you should see is a plan that looks like the following:
 
@@ -62,7 +62,7 @@ Notice that the VLAN resource is at the top? We can guarantee this order by form
 cat vlan_42_dt.tf
 cat access_port_dt.tf
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 3)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', this)">Run this snippet</button>
 
 You should see variables being used which refers to the resource name and the key within the resource like:
 
@@ -91,7 +91,7 @@ What happens if you don't want to destroy everything in a set of Terraform confi
 ```
 terraform destroy -h
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 5)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', this)">Run this snippet</button>
 
 See the `-target` argument?
 

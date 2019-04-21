@@ -31,14 +31,14 @@ Let's take a look on the YANG file first.
 cd /antidote/lessons/lesson-26
 cat vpn-services.yang
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 For the translation script, it supports both SLAX and Python language.  We're using Python language in this lesson as it's familiar to most people.  Different with commit script, to improve the efficiency, it processes the delta configuration only and therefore the translation script logic should take care the addition and removal of config knob. Let's take a look on the translation script.
 
 ```
 cat vpn-services.py
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 To install the custom YANG module, we have to copy both `vpn-services.yang` and `vpn-services.py` to vQFX:
 
@@ -47,14 +47,14 @@ To install the custom YANG module, we have to copy both `vpn-services.yang` and 
 ```
 sshpass -p antidotepassword scp -o StrictHostKeyChecking=no vpn-services.* antidote@vqfx:~
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 2)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 Then we install the custom YANG module by `request system yang add` command:
 
 ```
 request system yang add package vpn-services module vpn-services.yang translation-script vpn-services.py
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 3)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
 
 After the installation completed, press `ENTER` key a few times to acknowledge the `cli` process restart request.
 
@@ -64,6 +64,6 @@ Use the following command to verify the YANG package `vpn-services` is installed
 ```
 show system yang package vpn-services
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 4)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
 
 Now, the Junos device is ready to be provisioned using the custom yang module. In next lesson, we will configure some L3VPN services using the new `vpn-services` config knob.

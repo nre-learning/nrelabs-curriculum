@@ -12,17 +12,17 @@ First we need to make sure we're in the correct working directory.
 ```
 cd /antidote/lessons/lesson-31/terraform/
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', this)">Run this snippet</button>
 
 ```
 show configuration groups
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', this)">Run this snippet</button>
 
 ```
 terraform destroy -auto-approve
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 2)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', this)">Run this snippet</button>
 
 What we did here was just remove the resources Terraform has cache data for. You might be thinking how you approach multiple customer data and multiple devices and the answer is through using directories. Each directory contains specific cache data and unless you've built your Terraform configurations to use global data, by design the data is isolated.
 

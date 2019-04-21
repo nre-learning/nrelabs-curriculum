@@ -24,7 +24,7 @@ First, we need to install Jinja using `pip install jinja2`(it is preinstalled fo
 python
 from jinja2 import Template
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 As our first example, let's try to print the text `ge-0/0/0 has IP address 192.168.1.1`, but instead of simply printing this string,
 let's make the interface name and IP address more dynamic, by making them Jinja template variables.
@@ -42,7 +42,7 @@ variable into the `Template()` function to create our template object:
 ```
 ipaddr_template = Template('{{interface}} has IP address {{ip_address}}')
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 2)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 Now that our template is ready, we want to load the data in it. This can be done with the help of the `template.render()` function. `template.render()` will take the data you supply to the template variables and load it to the template. Check that out by running the below snippet.
 
@@ -52,7 +52,7 @@ interface_1 = ipaddr_template.render(interface='ge-0/0/0',
 print(str(interface_1))
 ```
 
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 3)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 Since we've parameterized this template, we can put any values we want:
 
@@ -61,7 +61,7 @@ render_2 = ipaddr_template.render(interface='ge-0/0/1',
                                   ip_address='10.10.1.1')
 print(str(render_2))
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 4)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 So, in summary:
 

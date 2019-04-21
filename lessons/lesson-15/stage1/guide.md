@@ -25,7 +25,7 @@ flag at various levels to get help output. For instance, if you want an overview
 ```
 st2 -h
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
 You'll notice there are several subcommands available to us. Many of these are StackStorm resources that fill specific roles in the event-driven
 automation paradigm, such as `trigger`, `rule`, and `action`. We'll be diving deeper into each of these in the following labs.
@@ -38,7 +38,7 @@ to your favorite command and.....and...... you know what, just run it and see fo
 ```
 st2 --debug run core.local date
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
 Don't worry about the details of the command we just ran, we'll cover that in detail in the next lab.
 
@@ -51,7 +51,7 @@ If you already know you want to run an action, but you want to know the proper s
 ```
 st2 run -h
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 2)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
 
 #### StackStorm Packs

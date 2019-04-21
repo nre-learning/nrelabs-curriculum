@@ -22,7 +22,7 @@ If you've ever worked on a Linux system, or maybe an Apple computer, you might h
 ```
 curl https://google.com
 ```
-<!-- <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 0)">Run this snippet</button> -->
+<!-- <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button> -->
 
 This is effectively the same as what your browser would do if you were to navigate to Google there - it requests a resource from the remote server, and the server responds with the HTML you see in your terminal. Of course, the intention is that the browser would then render this HTML into something we can look at. `curl` performs no such function, so we just get the raw HTML.
 
@@ -34,6 +34,6 @@ curl \
     http://vqfx1:8080/rpc/get-interface-information \
     --header "Accept: application/json"
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 This output is a bit different than the first output. This isn't HTML at all - it's a very efficient format called JSON, or "Javascript Object Notation". It's the de-facto standard for the vast majority of REST APIs.

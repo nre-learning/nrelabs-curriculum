@@ -17,7 +17,7 @@ To save time, we have already put the JET firewall API code we created in stage 
 cd /antidote/lessons/lesson-25
 cat add_firewall_filter.py
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 Again, we repeat what we have done in previous stage - compile the IDL package, go to Python interactive prompt, import the required module.
 
@@ -32,7 +32,7 @@ import paho.mqtt.client as mqtt
 from add_firewall_filter import add_firewall_filter
 
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 Then same as stage 2, we create a MQTT client and define `on_connect` callback function to subscribe to the topic "IFA add events" once the client connect to the JET MQTT broker.
 
@@ -44,7 +44,7 @@ def on_connect(client, userdata, flags, rc):
 
 client.on_connect = on_connect
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 2)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 Next, define `on_message` callback function, to call the `add_firewall_filter` function if the new IP address is in the public range. After that, connect to vQFX and start to wait for event.
 
@@ -65,7 +65,7 @@ client.on_message = on_message
 client.connect('vqfx', 1883, 60)
 client.loop_forever()
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 3)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 #### Testing the close loop automation
 To validate our automation, We simulate another neighboring device by creating one more routing instance in the vQFX. Interface xe-0/0/2 and xe-0/0/3 is connected together, and a public IP address `20.1.1.2/24` is pre-configured on xe-0/0/3 which is in routing instance `VR2`
@@ -77,7 +77,7 @@ configure
 set interfaces xe-0/0/2 unit 0 family inet address 20.1.1.1/24
 commit and-quit
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 4)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
 
 Verify the message `Apply firewall filter ...` is shown in `linux` terminal.
 
@@ -87,7 +87,7 @@ To verify the firewall ACL is being applied, we ping 20.1.1.2 again and then che
 ping 20.1.1.2 count 3
 show firewall log
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 5)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
 
 The firewall log should capture the ping traffic. This verifies a firewall filter can be automatically provisioned to the interface dynamically without modifying the Junos configuration.
 

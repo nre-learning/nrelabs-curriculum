@@ -13,7 +13,7 @@ Before we run this script, we'll have to start the SIP phone software located on
 ```
 ./phone.sh
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('sipphone', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('sipphone', this)">Run this snippet</button>
 
 ...
 
@@ -27,7 +27,7 @@ Now let's get the IP of the phone by querying the SIP PBX.  Click the button bel
 cd /antidote/lessons/lesson-21
 ./get-phone-ip-from-ext.py --host=asterisk --port=8088 --username=admin --password=admin --phone=1107
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 And there it is!  For many enterprise customers, getting the IP address of a software or hardware client such as a phone, a virtual-machine host, a chat client, or a storage element can be difficult and time consuming. Having a script such as this where you can pass in non-network data, such as the extension number, to retrieve network data, such as an IP, can save time and frustration!
 

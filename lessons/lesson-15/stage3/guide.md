@@ -31,7 +31,7 @@ The "hello world" example for ActionChains has to be the "echochain" - in partic
 ```
 cat /opt/stackstorm/packs/examples/actions/chains/echochain_param.yaml
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
 Like many things in StackStorm, ActionChain workflows are defined in YAML, and contain two high-level keys:
 
@@ -45,14 +45,14 @@ Just like we previously saw with Actions, we can see which parameters are requir
 ```
 st2 run examples.echochain-param -h
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
 Again, just like any other Action, we can execute this workflow by passing in the necessary parameters.
 
 ```
 st2 run examples.echochain-param input1="Hello, NRE Labs"
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 2)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
 This output should look mostly familiar, with one big exception; the normal stuff like the execution id, input parameters,
 timestamps, and result values are all there, but there's also a table shown underneath that gives us the ID, status, and
@@ -79,7 +79,7 @@ and ensure StackStorm and Mistral remain in sync with each other regarding workf
 ```
 cat /opt/stackstorm/packs/examples/actions/workflows/mistral-jinja-branching.yaml
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 3)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
 Like ActionChains, Mistral workflows are written in YAML, and they also contain a set of tasks (defined as a YAML dictionary this time) under the `tasks` key.
 Each task refers to an `action`, which in the case of a Mistral+Stackstorm deployment like we have here, refers to a StackStorm action.
@@ -137,6 +137,6 @@ As a result, Orquesta workflows are very similar in syntax to Mistral workflows,
 ```
 cat /opt/stackstorm/packs/examples/actions/workflows/orquesta-basic.yaml
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 5)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
 See the [Orquesta](https://docs.stackstorm.com/orquesta.html) for more details on how to write these types of Workflows.

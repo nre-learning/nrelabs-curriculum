@@ -16,7 +16,7 @@ First, we want to start the Python interpreter:
 ```
 python
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 You'll notice the prompt has changed to `>>>` to indicate that we're no longer in the Bash prompt, but rather in the Python interpreter. From now on, every command we run is valid Python we can also place into a `.py` file and run as a script.
 
@@ -27,7 +27,7 @@ import requests
 headers = {'Accept': 'application/json'}
 resp = requests.get('http://vqfx1:8080/rpc/get-interface-information', headers=headers, auth=('antidote', 'antidotepassword'))
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 That's it - in three lines of Python, you queried the REST API of a network device, and we can now work with the data returned to us.
 
@@ -43,6 +43,6 @@ for interface in interfaces:
 
 print("There are %d interfaces in this device" % len(interfaces))
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 2)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 In the next stage, we'll dive a little deeper into a specific API and figure out what other kinds of information we can send or retrieve.

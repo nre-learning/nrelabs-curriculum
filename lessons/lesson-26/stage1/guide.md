@@ -27,7 +27,7 @@ The OpenConfig package has already been uploaded to our virtual QFX image, so we
 request system software add /var/db/vmm/junos-openconfig-0.0.0.10-1-signed.tgz no-validate
 yes
 </pre>
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
 
 _Starting in Junos 18.3R1, the OpenConfig package is bundled with Junos image and therefore you do not need to install it separately._
 
@@ -38,14 +38,14 @@ Once the installation has completed, you can verify it with the `show version` c
 ```
 show version
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
 
 After installing the OpenConfig package, a few config stanzas with prefix `openconfig-` are added automatically. Let's take a look on the new config knob:
 
 ```
 show configuration openconfig-
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 2)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
 
 This verifies the OpenConfig package is installed properly.
 

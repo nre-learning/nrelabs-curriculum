@@ -14,35 +14,35 @@ We refer to a group of directories and files managed by Git as a "repository" (o
 ```
 mkdir myfirstrepo/ && cd myfirstrepo/
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 Right now, `myfirstrepo` is just a regular directory. We can "initialize" a new git repository in this directory using `git init`:
 
 ```
 git init
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 A Git repository is nothing without some files to manage. Let's create a text file and add some text to it:
 
 ```
 echo "this is some text" > newfile.txt
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 2)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 We can use `git status` to see Git's current view of the repository:
 
 ```
 git status
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 3)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 Note that while the file exists, Git is listing it as "untracked", meaning it's not actually part of the Git repo. In order to formally include a file in a Git repository, we must commit it. In order to commit it, we must first add it to "staging". This is done using `git add`:
 
 ```
 git add newfile.txt
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 4)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 Now that the file is in staging, we can create our first commit! A commit is a way of marking a particular state of a repository, saying "I would like to remember what things were like at this point in time, so I can go back to it if I need to. Often, a commit is made when a developer makes a meaningful change to some code, or an NRE updates a YAML file with a new set of variables for a switch install. No matter the use case, **the commit is king**.
 

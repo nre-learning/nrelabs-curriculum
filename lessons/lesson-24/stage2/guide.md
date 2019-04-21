@@ -21,7 +21,7 @@ We'll enter the python shell, and then import the appropriate module:
 python
 from jnpr.junos import Device
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 After that, create a Device object by providing hostname, username and password for authenticating to vQFX device, and then call the `open()` function to make a NETCONF connection.
 
@@ -29,7 +29,7 @@ After that, create a Device object by providing hostname, username and password 
 dev = Device('vqfx', user='antidote', password='antidotepassword')
 dev.open()
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 This is a much simpler way to accomplish the same thing we did manually in the previous section!
 
@@ -41,7 +41,7 @@ Next, we'll use a special `pprint()` function to print this device's basic infor
 from pprint import pprint
 pprint(dev.facts)
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 2)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 The `dev.facts` dictionary consolidates the output of multiple RPC get requests, e.g. show chassis routing-engine, show version, show virtual-chassis, etc. Under the hood, when you first time access the `dev.facts` attribute, PyEZ will execute corresponding RPC requests to collect information likes host name, software version, serial number, etc. 
 
@@ -56,7 +56,7 @@ In the case of Junos, you can just add the pipe ` | display xml rpc` to the `sho
 ```
 show system uptime | display xml rpc
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 3)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
 
 From the output, we know the XML tag of `show system uptime` command is `<get-system-uptime-information>`.
 
@@ -67,7 +67,7 @@ Finally, use this as the append it to the `dev.rpc` object, it will return XML o
 ```
 uptime = dev.rpc.get_system_uptime_information()
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 4)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 There is no output from above snippet, the code just saves response to `uptime` variable. You will learn how to display and extract useful information from returned variable later.
 
@@ -80,7 +80,7 @@ There is a similar mechanism to specify those arguments in a PyEZ RPC call.  The
 ```
 show interfaces em3 statistics | display xml rpc
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 5)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
 
 From the Junos output, you can see two types of arguments:
   - `<interface-name>em3</interface-name>` key-value pair, key is `interface-name`, and value is the actual name of target interface
@@ -96,6 +96,6 @@ You should now be able to determine the format of RPC call, let's do it:
 intf = dev.rpc.get_interface_information(
     interface_name='em3', statistics=True)
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 6)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 Again, the output is saved to `intf` variable, and there should be no output in the terminal. You'll learn how to extract information in next section.

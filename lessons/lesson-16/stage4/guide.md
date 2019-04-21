@@ -21,7 +21,7 @@ We have a YAML file already stored in the machine for you! Lets start by taking 
 cd /antidote/lessons/lesson-16/stage4/
 cat part4.yml
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 It is so much easier to read our data now! Now lets start with our lesson.
 
@@ -34,7 +34,7 @@ from jinja2 import Environment
 import yaml
 from pprint import pprint
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 The below snippet is used to import the data from the YAML file to our python code. The `open()` function opens our yaml file in the `read` mode and assigns it to the variable `yaml_file`. Just note that here we have only provided the name of our yaml file as it is in the same directory as our python code, in case it is in a different folder then you have to give the exact file path to the `open()`. The data from the YAML file can then be easily imported into Python simply by using `yaml.load()` function.
 
@@ -43,7 +43,7 @@ yaml_file = open('part4.yml', 'r')
 all_devices = yaml.load(yaml_file)
 pprint(all_devices)
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 2)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 Does this output look familiar? Its a list of dictionaries - the same as what we were using in previous sections! You already know what to do now. We start by creating a config template to set the `system hostname` and obtain the interface config:
 
@@ -66,7 +66,7 @@ interfaces {
 {% endfor %}
 ''')
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 3)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 Now that the template is defined we will render the config template for each device specified in the YAML file.
 
@@ -83,6 +83,6 @@ for dev_number, device in enumerate(all_devices, 1):
     print(str(render_1))
 
 </pre>
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 4)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 So now in the next stage we will learn how to import multiple Jinja templates from different directories and use it in your script. We will also see how to `include` those imported templates in one main template which can then be used to configure the device.

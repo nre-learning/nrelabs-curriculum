@@ -17,7 +17,7 @@ closely mirror Python's data structures, and the `list` is a prime example. Let'
 cd /antidote/lessons/lesson-14/stage1/
 cat list.yaml
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 In this lesson, we'll work with this YAML data using the interactive Python shell. Run the below snippet to load up our YAML file in Python:
 
@@ -28,11 +28,11 @@ import sys
 yamlFile = open('list.yaml', 'r')
 yamlList = yaml.load(yamlFile)
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 At this point, `yamlList` is a Python list that contains values (in this case, strings) that were in our YAML file. We can start by checking this list's length:
 
 ```
 print("There are %d values in this YAML file" % len(yamlList))
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 2)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>

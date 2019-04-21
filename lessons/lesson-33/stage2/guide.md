@@ -16,7 +16,7 @@ First we need a list of device names or IP addresses that we want to retrieve in
 cd /antidote/lessons/lesson-33/stage2/
 more devices.yml
 </pre>
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 Pretty simple, right? New devices can be easily added without tinkering around in the script. Now lets start on the script. Start python, import the YAML module and import the Junos PyEz module.
 
@@ -25,7 +25,7 @@ python
 import yaml
 from jnpr.junos import Device
 </pre>
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 Next we have to read in the YAML file with the device hostnames/IP addresses. First, open the `devices.yml` file as readonly and then use the YAML module to put it into a Python list, like so:
 
@@ -33,20 +33,20 @@ Next we have to read in the YAML file with the device hostnames/IP addresses. Fi
 deviceFile = open('devices.yml', 'r')
 deviceList = yaml.full_load(deviceFile)
 </pre>
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 2)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 Lets print the `deviceList` variable to ensure the devices.yml file has been processed correctly.
 <pre>
 print deviceList
 </pre>
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 3)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 It would be helpful to have a column header so you can easily know what each field value is. This can be done with a simple `print` statement.
 
 <pre>
 print("HOSTNAME;MODEL;SERIAL-NUMBER;JUNOS-VERSION")
 </pre>
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 4)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 Now this is where the magic happens!  We are going to create a `for` loop so we can perform a series of actions on each device in the list (i.e. YAML file). The first thing we do is create the `dev` variable that includes the device hostname and login credentials. Next we `open` a NETCONF connection to the device so we can query the `facts`. 
 
@@ -60,7 +60,7 @@ for device in deviceList:
 	dev.close()
 
 </pre>
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 5)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 In the linux terminal on the right you can see the loop working, accessing each device and printing the facts. In the NRE Labs environment the serial number of the vQFX switches are the same but wont be the case in your production or lab environment.
 

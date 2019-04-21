@@ -8,7 +8,7 @@ First, let's take a peek at our network configuration by going to `vqfx1`. We ca
 ```
 show bgp summary
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', this)">Run this snippet</button>
 
 This doesn't seem right. You heard from another engineer that this router should be running BGP, so to see that it has no peers configured is concerning.
 
@@ -20,14 +20,14 @@ We can run the below commands on our Ubuntu host to see the JSNAPy configuration
 cd /antidote/lessons/lesson-12/
 cat jsnapy_config.yaml
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 We see that the configuration specifies the three routers in our topology. We also see that it references a test file. Let's take a look at that now:
 
 ```
 cat jsnapy_tests.yaml
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 2)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 In this test file, you see that three checks are being performed:
 
@@ -40,5 +40,5 @@ This is a nifty way to state what "normal" is, so we don't have to guess. Let's 
 ```
 jsnapy --snapcheck -f jsnapy_config.yaml -v
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 3)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 

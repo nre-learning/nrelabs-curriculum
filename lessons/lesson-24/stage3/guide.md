@@ -19,14 +19,14 @@ dev = Device('vqfx', user='antidote', password='antidotepassword', normalize=Tru
 dev.open()
 intf = dev.rpc.get_interface_information()
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 From the `type()` function output, we know the object type is `lxml.etree._Element`:
 
 ```
 type(intf)
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 To display the `xml.etree` object as XML string, we have to import the `etree` module from the `lxml` library (a popular Python library for dealing with XML),
 and then use the `dump()` function to convert our XML etree object to an XML string.
@@ -35,7 +35,7 @@ and then use the `dump()` function to convert our XML etree object to an XML str
 from lxml import etree
 etree.dump(intf)
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 2)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 #### Extract data
 
@@ -50,7 +50,7 @@ result is a list contains all `<physical-interface>` element nodes.
 ```
 intf.xpath('physical-interface')
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 3)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 ---
 
@@ -61,7 +61,7 @@ To check how many physical interface is in the Junos device, query `len()` of th
 ```
 len(intf.xpath('physical-interface'))
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 4)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 **Result:** 28 physical interfaces
 
@@ -72,7 +72,7 @@ Using the `xpath()` condition feature, we can filter on only physical interfaces
 ```
 len(intf.xpath('physical-interface[mtu="1514"]'))
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 5)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 **Result:** 15 physical interfaces
 
@@ -83,7 +83,7 @@ Out of 15 physical interfaces with an MTU of 1514, how many have been configured
 ```
 len(intf.xpath('physical-interface[mtu="1514"]/logical-interface'))
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 6)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 **Result:** 5 logical interfaces
 
@@ -101,6 +101,6 @@ for ifl in intf.xpath('physical-interface[mtu="1514"]/logical-interface'):
     ))
 
 </pre>
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 7)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 Now that you've learned how to extract the desired information from RPC responses, in the next section we'll talk about configuration provisioning using PyEZ.

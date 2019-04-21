@@ -36,13 +36,13 @@ set system services extension-service notification port 1883 allow-clients addre
 set system services extension-service request-response grpc clear-text port 32767
 commit and-quit
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
 
 We can check the listening port to verify the notification and gRPC service are enabled.
 
 ```
 show system connections | match LISTEN | match "\.1883|\.32767"
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
 
 Now the Junos OS device is ready for off-box JET applications and it's time to get some action!  In the next chapter, we'll go through the notifiaction mechanism and collect some events from the MQTT event bus.
