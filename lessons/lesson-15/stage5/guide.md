@@ -15,7 +15,7 @@ Our finished rule file can be seen here - continue for a walkthrough of each of 
 ```
 cat /antidote/lessons/lesson-15/stage5/replace_interface_config.yaml
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
 The first part of a rule file is very similar to most other forms of YAML-based metadata in StackStorm. We have a few fields that describe the rule itself, such as its name, the pack it's in, etc:
 
@@ -58,7 +58,7 @@ Normally, rules would be located in the `rules/` directory of a pack, but we can
 ```
 st2 rule create /antidote/lessons/lesson-15/stage5/replace_interface_config.yaml
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 5)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
 The tabular output shows us that StackStorm has ingested our new Rule definition and is ready to watch for new trigger-instances. Now that the rule is in place, any new instances of the trigger `napalm.InterfaceDown` will be handled by this rule. In the name of variety, let's trigger an event on `vqfx2`:
 
@@ -68,21 +68,21 @@ set interfaces em4 disable
 commit
 exit
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx2', 6)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx2', this)">Run this snippet</button>
 
 As with before, check the `trigger-instance` list until our new instance comes in. Again, this sensor works on a polling basis, so it may take a few seconds. Also note that if you went through the previous lab, our old trigger-instances will still be there, so pay attention to the timestamps.
 
 ```
 st2 trigger-instance list --trigger=napalm.InterfaceDown
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 7)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
 Similar to the relationship between `actions` and `executions`, as well as between `triggers` and `trigger-instances`, a specific instance of a Rule being matched is known as a `rule-enforcement`. Once we see our new `trigger-instance` appear in the previous command, we can list the `rule-enforcements` to make sure this trigger instance was picked up by our new rule:
 
 ```
 st2 rule-enforcement list
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 8)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
 This is a very handy tool for seeing our new Rule in action. If you look at the output, you'll notice that the field `trigger_instance_id` shows the ID of the trigger-instance that was handled by this rule, as well as the  `execution_id` of the action execution that was created.
 
@@ -91,14 +91,14 @@ Remember how we retrieve execution details? `st2 execution get <execution-id>` w
 ```
 st2 execution get $(st2 execution list --action=napalm.loadconfig | grep napalm | tail -1 | awk '{ print $2}')
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 9)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
 Looks like our `loadconfig` action executed successfully - we can verify this at the CLI of `vqfx2` and see the interface that we just disabled, is back up and running:
 
 ```
 show interfaces em4
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx2', 10)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx2', this)">Run this snippet</button>
 
 That's it for now! To recap:
 

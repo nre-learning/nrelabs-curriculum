@@ -27,7 +27,7 @@ Let's examine the file `JunosDevice.py` and understand the different functions.:
 ```
 cat /antidote/lessons/lesson-29/stage2/JunosDevice.py
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 Here's some detail around the functions we'll be using in our Robot tests from this library:
 
@@ -77,7 +77,7 @@ Let's examine our Robot test-case file `chapter2_eg1.robot`:
 ```
 cat /antidote/lessons/lesson-29/stage2/chapter2_eg1.robot
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 In the `Settings` table, we define our private custom library `JunosDevice.py`:
 
@@ -125,7 +125,7 @@ Execute this test suite by running the below command (note the command line vari
 ```
 robot --variable HOST:vqfx1 --variable USER:antidote --variable PASSWORD:antidotepassword /antidote/lessons/lesson-29/stage2/chapter2_eg1.robot
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 6)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 If both the test-cases succeed, the entire test-suite passes. If any of them fails, then the corresponding test-case raises an Exception which displays why the test case failed.
 

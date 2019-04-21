@@ -31,7 +31,7 @@ First of all, go to the Python interactive prompt and import the MQTT module.
 python
 import paho.mqtt.client as mqtt
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 After that, create a MQTT client object. Then define the `on_connect` callback function, which is triggered once the client connects to the JET MQTT broker, to subscribe the event. Here, we will subscribe to the topic `/junos/events/kernel/interfaces/ifa/add` which includes all new interfaces address events.
 At last we bind the on_connect function to the client object.
@@ -44,7 +44,7 @@ def on_connect(client, userdata, flags, rc):
 
 client.on_connect = on_connect
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 Next, define `on_message` callback function, which is triggered whatever a message is received, to print the notification message payload. Then we bind the on_message function to the client object.
 
@@ -54,7 +54,7 @@ def on_message(client, userdata, msg):
 
 client.on_message = on_message
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 2)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 Finally, instruct the client to connect to vQFX TCP port 1883 we configured in previous stage, and start the main event loop function `loop_forever()`  to wait for events.
 
@@ -62,7 +62,7 @@ Finally, instruct the client to connect to vQFX TCP port 1883 we configured in p
 client.connect('vqfx', 1883, 60)
 client.loop_forever()
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 3)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 The client is now ready to received JET notification event. It's normal that you don't see a prompt back - this command runs endlessly until stopped.
 
@@ -75,7 +75,7 @@ configure
 set interfaces xe-0/0/0 unit 0 family inet address 192.168.10.1/24
 commit and-quit
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 4)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
 
 Once the commit is completed, Eventd will receive the new IFA event and deliver it to all clients who subscribed the IFA topic.
 

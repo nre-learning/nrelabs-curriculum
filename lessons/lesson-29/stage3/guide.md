@@ -41,7 +41,7 @@ Let's examine our Robot test-case file `chapter3_eg1.robot`:
 ```
 cat /antidote/lessons/lesson-29/stage3/chapter3_eg1.robot
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 You must have noticed the new `Keywords` table in our robot file. Inside this table, two new keywords have been defined, Log Facts and Validate Facts. Allow me to explain each of these separately.
 
@@ -86,7 +86,7 @@ Notice that both of the test cases are using the previously defined user keyword
 ```
 robot --variable HOST:vqfx1 --variable USER:antidote --variable PASSWORD:antidotepassword /antidote/lessons/lesson-29/stage3/chapter3_eg1.robot
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 4)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 ### Test Case 2
 
@@ -95,7 +95,7 @@ Let's examine our Robot test-case file `chapter3_eg2.robot`:
 ```
 cat /antidote/lessons/lesson-29/stage3/chapter3_eg2.robot
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 5)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 Note that the robot file only has two sections and inside the `Settings` section, a separate robot file has been imported using the `Resource` setting. This file is called the resource file. Also observe that there are two other settings present inside the `Settings` table, namely "Test Setup" and "Test Teardown". These settings call keywords which have been originally defined in the resource file.
 
@@ -103,7 +103,7 @@ Let's now check out our resource file `chapter3_resource.robot`:
 ```
 cat /antidote/lessons/lesson-29/stage3/chapter3_resource.robot
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 6)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 Notice that this time, we have declared all the required variables in the "Variables" section of the resource file. What this means is that we will no longer have to pass the variable names while running the robot file.
 
@@ -112,6 +112,6 @@ Also, observe that three user keywords have been defined under the "Keywords" se
 ```
 robot /antidote/lessons/lesson-29/stage3/chapter3_eg2.robot
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 7)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 That's it for now - have fun writing tests for your network infrastructure!

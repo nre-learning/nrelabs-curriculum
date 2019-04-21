@@ -15,7 +15,7 @@ First, we want to start the Python interpreter and import `Environment` module f
 python
 from jinja2 import Environment
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 In case you haven’t worked with python lists and dictionaries, here's a quick primer on lists and dictionaries, which we'll be using to populate more advanced
 template examples:
@@ -34,7 +34,7 @@ interfaces = [{'interface': 'ge-0/0/0', 'ip_address': '192.168.1.1'},
               {'interface': 'ge-0/0/1', 'ip_address': '10.10.1.1'},
               {'interface': 'fxp0', 'ip_address': '172.16.1.1'}]
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 Each element in this list contains a dictionary with two keys: `interface` and `ip_address`.
 
@@ -55,7 +55,7 @@ ipaddr_template = env.from_string('''
 {{ item.interface }} has IP address {{ item.ip_address }}
 {% endfor %}''')
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 3)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 Let's talk a little bit about what we just did:
 
@@ -70,7 +70,7 @@ Once we have this template defined, we can render it like we did in previous sec
 render_1 = ipaddr_template.render(interfaces=interfaces)
 print(str(render_1))
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 4)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 Since all of our fields are keys of the dictionary `interfaces`, we only have to pass this in, and our template will access specific keys of that dictionary.
 
@@ -81,7 +81,7 @@ vlans = [{'vlan': 'VLAN10', 'vlan_id': 10},
          {'vlan': 'VLAN20', 'vlan_id': 20},
          {'vlan': 'VLAN30', 'vlan_id': 20}]
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 5)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 Now we will learn how to use the `for` loop to format the template like a Junos CLI configuration.
 
@@ -97,13 +97,13 @@ vlans {
 }''')
 
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 6)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 After creating the template, lets supply the vlans data and see how it looks!
 ```
 vlan_config = str(vlan_config.render(vlans=vlans))
 print(vlan_config)
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 7)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 In the next section, we'll add more decision-making power to our templates by using `if` and `set` statements.

@@ -14,7 +14,7 @@ To keep things easy.
 ```
 cd /antidote/lessons/lesson-31/terraform
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', this)">Run this snippet</button>
 
 ## Planning
 
@@ -25,14 +25,14 @@ Let's go ahead and run Terraform plan and see what's going to happen.
 ```
 terraform plan
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', this)">Run this snippet</button>
 
 What you should see is two resources being described and in what order; an interface inet configuration followed by a BGP peer. There is an explicit dependency made in the file `bgp_peer_1.tf`.
 
 ```
 cat bgp_peer_1.tf
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 2)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', this)">Run this snippet</button>
 
 Cool huh?
 
@@ -43,7 +43,7 @@ Here's an example of the `graphviz dot` output for this Terraform execution plan
 ```
 terraform graph -type=plan
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 3)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', this)">Run this snippet</button>
 
 You can feed the output of this operation to `dot` and generate graphics.
 

@@ -2,6 +2,7 @@
 
 ## In development
 
+- Replaced all individual snippet indices with 'this' keyword [#221](https://github.com/nre-learning/nrelabs-curriculum/pull/221)
 
 ## v0.3.2 - April 19, 2019
 

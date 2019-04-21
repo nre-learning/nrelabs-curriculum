@@ -14,7 +14,7 @@ Again, we want to start the Python interpreter and import `Environment` module f
 python
 from jinja2 import Environment
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 Here we are redefining `interface`, the list of dictionaries we defined in part 2.
 
@@ -24,7 +24,7 @@ interfaces = [{'interface': 'ge-0/0/0', 'ip_address': '192.168.1.1'},
               {'interface': 'fxp0', 'ip_address': '172.16.1.1'}]
 
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 In Part2, we generated configurations for all interfaces that were passed to the template. Wwhat if you are only interested in generating the  configuration for the management interface? For this particular example we will be using the `if` condition. It is similar to the python `if` condition, except for some slight syntax differences:
 
@@ -57,7 +57,7 @@ render_1 = ipaddr_template.render(interfaces=interfaces)
 print(str(render_1))
 
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 3)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 
 The output shows that it just printed the entry of the management interface. Thus we learnt the power of `if` statements to filter out our data based on certain conditions.
@@ -98,6 +98,6 @@ render_2 = int_template.render(interfaces=interfaces)
 
 print(str(render_2))
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 5)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 In the next stage, we'll dive deeper into using YAML files for defining variables for Jinja2 templates.

@@ -17,7 +17,7 @@ configure
 set openconfig-interfaces:interfaces interface xe-0/0/0 subinterfaces subinterface 0 openconfig-if-ip:ipv4 addresses address 192.168.10.1/24
 commit and-quit
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
 
 
 Verify the new interface is created.
@@ -25,14 +25,14 @@ Verify the new interface is created.
 ```
 show interfaces terse xe-0/0/0
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
 
 As discussed in chapter 1, the Junos OpenConfig package contains scripts to translate OpenConfig based configuration into Junos format. We can show the  translated Junos config with the following command:
 
 ```
 show configuration | display translation-scripts translated-config | no-more
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 2)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
 
 As you can see the fundamental data values are the same across OpenConfig and Junos Config, only the schema differs.
 
@@ -44,7 +44,7 @@ Now, let's try to configure a new BGP neighbor with Openconfig using Netconf. Fi
 cd /antidote/lessons/lesson-26
 cat openconfig-bgp.conf
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 3)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 As you can see, the OpenConfig BGP schema contains common data that BGP requires. This configuration should be able to be provisioned to any network devices that support netconf with OpenConfig.
 
@@ -61,7 +61,7 @@ dev = Device('vqfx', user='antidote', password='antidotepassword')
 dev.bind(cu=Config)
 dev.open()
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 4)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 Next, we load the configuration, print the diff, and  commit:
 
@@ -70,7 +70,7 @@ dev.cu.load(path='openconfig-bgp.conf', format='text')
 dev.cu.pdiff()
 dev.cu.commit()
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 5)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 Verify a new BGP neighbor is being created.
 **Note:** _the peering neighbor doesn't exist in the setup, therefore the BGP state is expected to be `Connect` or `Active`_
@@ -78,14 +78,14 @@ Verify a new BGP neighbor is being created.
 ```
 show bgp summary
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 6)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
 
 Again we inspect the translated Junos config:
 
 ```
 show configuration | display translation-scripts translated-config | no-more
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 7)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
 
 Now you can see that OpenConfig is vendor-neutral and therefore this exercise can be applied to any other vendor that also supports OpenConfig (_by using a vendor neutral NetConf Client_).
 

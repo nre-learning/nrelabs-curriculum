@@ -23,7 +23,7 @@ As with everything else, Sensors are distributed within Packs. We can run the fo
 ```
 st2 sensor list --pack=napalm
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
 Of particular interest for this lab is the `napalm.InterfaceSensor`, which as described, is a sensor that polls network devices for interface up/down events. This sounds awesome, but how is it actually *done*?
 
@@ -32,21 +32,21 @@ The following `get` command gives us a clue:
 ```
 st2 sensor get napalm.InterfaceSensor
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
 Here, we see a lot more detail about this sensor, including the field `artifact_uri`, which is an absolute path to the actual Python code running this sensor. The contents of this Sensor is a bit beyond the scope of this lesson, but if you're curious, [the documentation](https://docs.stackstorm.com/sensors.html#creating-a-sensor) on creating a Sensor is really good, and it's a really good idea to have that up in another tab while perusing the contents of the Sensor code provided in the command below:
 
 ```
 cat /opt/stackstorm/packs/napalm/sensors/interface_sensor.py
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 2)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
 How did StackStorm know about this Python code? Every Sensor, like many things in StackStorm, is comprised of two components. A script file - which is what was referenced in the output above - and a metadata YAML file, which describes things like where to find the script file, and other useful metadata:
 
 ```
 cat /opt/stackstorm/packs/napalm/sensors/interface_sensor.yaml
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 3)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
 #### Triggers
 
@@ -61,14 +61,14 @@ Similar to what we did with Sensors, we can list all registered Triggers in the 
 ```
 st2 trigger list --pack=napalm
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 4)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
 In this output, we see that there are two triggers related to interfaces, `napalm.InterfaceDown` and `napalm.InterfaceUp`. Drilling into the `InterfaceDown` trigger specifically:
 
 ```
 st2 trigger get napalm.InterfaceDown
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 5)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
 We can see that triggers have properties. This one has two string properties, `device` and `interface`. We'll see those in action shortly, and especially in the next lab.
 
@@ -79,7 +79,7 @@ We can see the list of `trigger-instances` using the command you have probably a
 ```
 st2 trigger-instance list --trigger=napalm.InterfaceDown
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 6)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
 Huh - an empty list? Well, this makes sense, doesn't it? Our Sensor has been busy collecting data, but that data hasn't shown any changes, and no meaningful event has taken place, deserving of a Trigger. Let's cause one. :)
 
@@ -88,7 +88,7 @@ configure
 set interfaces em4 disable
 commit
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 7)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', this)">Run this snippet</button>
 
 Let's see if we've been able to get a Trigger to fire. Note that this interface data is obtained by polling periodically,
 so you may have to run the following command a few times before it shows up:
@@ -96,7 +96,7 @@ so you may have to run the following command a few times before it shows up:
 ```
 st2 trigger-instance list --trigger=napalm.InterfaceDown
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 8)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
 Once we see a trigger-instance show up in the list, we can use the command `st2 trigger-instance get <trigger-instance-id>` (similar to what we did in a previous lesson with execution IDs) to view details about this trigger instance.
 Or if you're feeling lucky, you could use the below command with some bash-fu to get it for you :)
@@ -104,6 +104,6 @@ Or if you're feeling lucky, you could use the below command with some bash-fu to
 ```
 st2 trigger-instance get $(st2 trigger-instance list --trigger=napalm.InterfaceDown | grep napalm | tail -1 | awk '{ print $2}')
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', 9)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
 Remember those fields from earlier - `device` and `interface`? Those are filled out now, with the device and interface that we changed to create the event. These fields can now be passed on to other entities in StackStorm, like Rules, to drive very powerful, autonomous decision-making. Check out the next lab in this lesson for more on that!

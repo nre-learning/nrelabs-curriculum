@@ -30,7 +30,7 @@ In Junos (as well as most other implementations), NETCONF is run over the Secure
 sshpass -p antidotepassword \
 ssh -o StrictHostKeyChecking=no antidote@vqfx -s netconf
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 > While this isn't how you'd normally use NETCONF in the real world, it does allow us to tinker around with the protocol a bit and see how it works. Normally, you'd use a framework like PyEZ which abstracts these details away.
 
@@ -41,14 +41,14 @@ To get system uptime, use `<get-system-uptime-information>` and embedded it in `
 ```
 <rpc><get-system-uptime-information/></rpc>
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 Finally, to close the session, use `<close-session>` tag.
 
 ```
 <rpc><close-session/></rpc>
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 2)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 #### What's next?
 

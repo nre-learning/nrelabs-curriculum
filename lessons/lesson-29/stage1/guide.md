@@ -121,7 +121,7 @@ Let's examine our python file `substring.py`:
 ```
 cat /antidote/lessons/lesson-29/stage1/substring.py
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 9)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 It contains a single function `is_a_substring` that takes in two string arguments - str1 and str1. It then returns True if str1 is a substring of str2.
 
@@ -129,7 +129,7 @@ Let's check out our Robot file now:
 ```
 cat /antidote/lessons/lesson-29/stage1/chapter1_eg1.robot
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 10)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 Under the Settings, we import our python file `substring.py` as a Library.
 
@@ -141,7 +141,7 @@ We'll go ahead and start our test-cases:
 robot /antidote/lessons/lesson-29/stage1/chapter1_eg1.robot
 ```
 
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 11)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 As expected, test-cases `Check Equal1`, `Check Equal2`, `Check Substring2` fails, and `Check Equal1`, `Check Substring1` pass. Since all the test-cases did not pass, the test-suite result is "Fail".
 

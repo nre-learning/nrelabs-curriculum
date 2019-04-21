@@ -35,14 +35,14 @@ response = auth_stub.LoginCheck(
     )
 )
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 We simulate a neighboring device by creating a new routing instance in the vQFX. Interface xe-0/0/0 and xe-0/0/1 is connected together, so on vQFX we can ping from the master routing instance to 192.168.10.2, which is the IP address in the routing instance "VR". Let's try to verify it:
 
 ```
 ping 192.168.10.2 count 3
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
 
 #### Create ACL via JET
 Now, we use the JET firewall API to create a new firewall filter call `filter-by-jet`. This filter contains two terms, the first one is to log and permit ICMP traffic, and the last one is to log and discard all traffic.
@@ -79,14 +79,14 @@ filter = fw.AccessList(
 )
 result = fw_stub.AccessListAdd(filter)
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 2)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 We can verify the firewall filter is actually added to the data plane by using the PFE command.
 
 ```
 request pfe execute target fpc0 timeout 0 command "show firewall" | no-more
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 3)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
 
 #### Apply ACL to interface via JET
 Now, we apply the firewall filter to interface xe-0/0/0.
@@ -102,7 +102,7 @@ result = fw_stub.AccessListBindAdd(
     )
 )
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', 4)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 
 #### Verify the ACL
@@ -113,20 +113,20 @@ To verify the firewall ACL is being applied, we ping 192.168.10.2 again and then
 ping 192.168.10.2 count 3
 show firewall log
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 5)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
 
 Then try to SSH to 192.168.10.2, it should fail.
 
 ```
 ssh 192.168.10.2
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 6)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
 
 Press `Ctrl-C` now to stop the SSH, and the check the firewall log again.
 
 ```
 show firewall log
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', 7)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
 
 This concludes our Junos JET gRPC demostration. In the next lesson are we going explore closed loop automation by employing both JET Notification Service and JET RPC.

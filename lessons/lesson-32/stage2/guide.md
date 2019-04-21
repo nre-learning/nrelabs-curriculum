@@ -16,7 +16,7 @@ Let's dive into this lab. As with the previous lab, `vqfx1` has been intentional
 ```
 show configuration snmp | display xml
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', this)">Run this snippet</button>
 
 We've built a test file similar to what we saw in the introduction to JSNAPy, but this one captures both of the findings we'll explore in this lab. This is totally based on preference - JSNAPy allows you to place all tests in the same file, or split them up however you want.
 
@@ -24,7 +24,7 @@ We've built a test file similar to what we saw in the introduction to JSNAPy, bu
 cd /antidote/lessons/lesson-32/stage2/
 cat jsnapy_tests.yaml
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 The test `test_v-3969_snmp_readonly` uses the `get-config` RPC to retrieve the configuration from the device. Then, it uses the xpath expression `snmp/community` to narrow down in the configuration to the exact node we want to look at. Finally, it asserts in the test that the node `authorization` is exactly equal to `read-only`.
 
@@ -33,7 +33,7 @@ Since we saw in the previous snippet that this was not true, we can run these te
 ```
 jsnapy --snapcheck -f jsnapy_config.yaml -v
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 2)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 Again, easy fix manually (though again, you should build some kind of automated remediation to findings like this - however, this will suffice for now).
 
@@ -42,14 +42,14 @@ configure
 set snmp community antidote authorization read-only
 commit and-quit
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 3)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', this)">Run this snippet</button>
 
 Running this again shows our SNMP test now passes:
 
 ```
 jsnapy --snapcheck -f jsnapy_config.yaml -v
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 4)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 However, a byproduct of also including our V-31285 test which asserts the BGP configuration uses authentication for all peers, makes our entire test suite fail, even though the SNMP read-only check is passing on its own.
 
@@ -58,21 +58,21 @@ Let's take a look at the BGP neighbor information:
 ```
 show bgp neighbor | display xml | no-more
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 5)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', this)">Run this snippet</button>
 
 One cool trick that most don't know about in Junos is the ability to use the expression `| display xml rpc` to display the name of the RPC call that would retrieve the same information:
 
 ```
 show bgp neighbor | display xml rpc
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 6)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', this)">Run this snippet</button>
 
 If we take another look at the JSNAPy test, we can see this is the RPC we're using in our second test:
 
 ```
 cat jsnapy_tests.yaml
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 7)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 Another advantage of using JSNAPy is, due to the fact that it uses XPath to locate data in the XML hierarchy, we can make assertions on all child elements of a node, or a specific one. This means we can write one test to assert that any and all BGP peers are configured with authentication.
 
@@ -86,14 +86,14 @@ set protocols bgp group PEERS neighbor 10.12.0.12 authentication-key antidote
 set protocols bgp group PEERS neighbor 10.31.0.13 authentication-key antidote
 commit and-quit
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 8)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', this)">Run this snippet</button>
 
 Running our tests once more shows all passing, and we're now fully compliant with the two findings we've been looking at:
 
 ```
 jsnapy --snapcheck -f jsnapy_config.yaml -v
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 9)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 JSNAPy was designed from the beginning for multiple tests across multiple devices. You can maintain your tests in the way you want, either in separate files, or grouped according to functionality, other guidelines, etc. If we wanted to run the same tests across more than just this one `vqfx1` device, we would only need to add them to the inventory in the JSNAPy config file.
 

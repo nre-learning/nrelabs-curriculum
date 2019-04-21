@@ -20,7 +20,7 @@ Before we proceed, we need to move to the right directory. Terraform is ran in a
 ```
 cd /antidote/lessons/lesson-31/terraform/
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', this)">Run this snippet</button>
 
 
 __Terraform Init__
@@ -30,7 +30,7 @@ Terraform's first stage for any roll-out of resources starts with init and befor
 ```
 ls -la
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', this)">Run this snippet</button>
 
 What you can see are several Terraform resources which are configuration text files with the extension `.tf`. These configuration files make use of Terraform providers and in our case, these providers reside in the binary file `terraform-provider-junos-qfx`. This binary file contains an experimental and limited set of implementations focussed on the Juniper QFX switch. We'll cover the contents of the Terraform resource files in the next lesson.
 
@@ -41,7 +41,7 @@ Terraform needs to be initialized still, so let's go ahead and do that now. As y
 ```
 terraform init
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 2)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', this)">Run this snippet</button>
 
 Terraform maintains state files for resource state. This is a source of truth that can inspected and manipulated through the Terraform application. Terraform from a virgin launch, doesn't have any state and by initializing Terraform, these things happen:
 
@@ -54,7 +54,7 @@ The eagle eyed amongst you might have checked the directory content after doing 
 ```bash
 ls -la
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 3)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', this)">Run this snippet</button>
 
 __Bonus material__
 
@@ -63,7 +63,7 @@ If you want to quickly see what's inside the new directory created by Terraform,
 ```
 tree .terraform
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', 4)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', this)">Run this snippet</button>
 
 Terraform is very feature rich and if you're interested in reading more, the documentation is excellent which can be found [here](https://www.terraform.io/docs/index.html).
 

@@ -14,7 +14,7 @@ We have already created a sample template file called `static_route.j2` in the s
 cd /antidote/lessons/lesson-16/stage5/
 cat dir1/static_route.j2
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 0)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 Start the python shell and import the `FileSystemLoader` and `Environment` for loading the Jinja template. The `env` instance allows you to use an external Jinja template using FileSystemLoader:
 
@@ -24,7 +24,7 @@ from jinja2 import FileSystemLoader, Environment
 loader = FileSystemLoader('./dir1')
 env = Environment(loader=loader, trim_blocks=True, lstrip_blocks=True)
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 1)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 We will now store our template in the `route_template` variable and render it with the required values:
 
@@ -34,14 +34,14 @@ render_route = route_template.render(route='172.28.0.0/16',
                                      next_hop='10.13.106.1')
 print(str(render_route))
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 2)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 Quit the interactive python shell to view the other two templates that we are going to use for the next example.
 
 ```
 quit()
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 3)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 ### Example: 2
 Below is the `l3_interface.j2` template stored in dir2 sub-directory.
@@ -49,14 +49,14 @@ Below is the `l3_interface.j2` template stored in dir2 sub-directory.
 ```
 cat dir2/l3_interface.j2
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 4)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 Below is the `device_config.j2` template stored in our local directory. We will treat `device_config.j2` as our main template and include `l3_interface.j2` and `static_route.j2`.
 
 ```
 cat device_config.j2
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 5)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 Notice the keyword `include`, it is used to include the other external template files into a Jinja template. Below is the syntax for `include`:
 
@@ -80,7 +80,7 @@ render_device = device_template.render(route='172.28.0.0/16',
 
 print(str(render_device))
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', 7)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 Good Job! You are now ready to render your own network configuration templates!
 
