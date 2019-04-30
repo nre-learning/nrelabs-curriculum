@@ -6,13 +6,21 @@ website: https://juniper.net
 contactEmail: "support@juniper.net"
 
 # Why should users view your collection?
-briefDescription: These are curriculum resources contributed by Juniper Networks
+briefDescription: Juniper exists to solve the world’s most difficult problems in networking. Today, complexity is at the heart of those problems. Simple is our obsession. And simple always starts with engineering. This collection contains curriculum resources contributed by Juniper, or lessons that deal mostly in Juniper-specific technology.
 
 # Why should users continue and view your lessons?
 longDescription: |
 
-  Hello there!
+  Juniper is responsible for starting the Antidote project and offering the NRE Labs site free of charge to all who wish
+  to learn automation with as few barriers as possible. The original spirit of NRE Labs is to focus on bringing network engineering
+  skillsets into the cloud era, by focusing on individual success, even if it means a multi-vendor approach.
 
-enabled: false
+  There are a number of tools and projects - even open source, that while useful, are mostly usable only within a Juniper context.
+  For instance, the JSNAPy project is an open source tool that allows engineers to write unit tests for their Junos network devices.
+  While this tool is free and open source, it's also Juniper-specific, and we want to be up-front about that.
+
+  To remain loyal to the spirit of NRE Labs, we created this collection so that the learner can be made aware of content that may be
+  either mostly or entirely useful within a Juniper context, on Juniper devices and software.
+
 type: vendor
 tier: prod
