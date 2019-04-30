@@ -1,0 +1,18 @@
+---
+id: 1
+title: Juniper Networks
+image: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/collections/juniper/juniper.png
+website: https://juniper.net
+contactEmail: "support@juniper.net"
+
+# Why should users view your collection?
+briefDescription: These are curriculum resources contributed by Juniper Networks
+
+# Why should users continue and view your lessons?
+longDescription: |
+
+  Hello there!
+
+enabled: false
+type: vendor
+tier: prod
