@@ -8,7 +8,7 @@ Often, being able to represent an ordered list of values isn't enough. Sometimes
 A better option for this problem is a Dictionary. They're similar to lists, but instead of storing an ordered sequence of values, they represent an unordered sequence of key/value pairs:
 
 ```
-cd /antidote/lessons/lesson-14/stage2/
+cd /antidote/lessons/fundamentals/lesson-14-yaml/stage2/
 cat basicdict.yaml
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
