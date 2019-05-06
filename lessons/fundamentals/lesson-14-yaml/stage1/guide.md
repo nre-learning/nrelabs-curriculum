@@ -14,7 +14,7 @@ As mentioned, YAML lets us represent simple data structures in a text format. On
 closely mirror Python's data structures, and the `list` is a prime example. Let's take a look at a sample YAML list:
 
 ```
-cd /antidote/lessons/fundamentals/lesson-14/stage1/
+cd /antidote/lessons/fundamentals/lesson-14-yaml/stage1/
 cat list.yaml
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
