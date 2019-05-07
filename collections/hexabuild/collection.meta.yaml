@@ -6,18 +6,10 @@ website: https://hexabuild.io/
 contactEmail: "info@hexabuild.io"
 
 # Why should users view your collection?
-briefDescription: |
-
-    HexaBuild is an IT professional services consultancy comprised of industry-recognized IT subject matter
-    experts and thought leaders. Our core team has a combined 60+ years of experience, multiple expert-level
-    vendor certifications, and several publications by recognized technology presses.
+briefDescription: HexaBuild is an IT professional services consultancy comprised of industry-recognized IT subject matter experts and thought leaders. Our core team has a combined 60+ years of experience, multiple expert-level vendor certifications, and several publications by recognized technology presses.
 
 # Why should users continue and view your lessons?
-longDescription: |
-
-    HexaBuild is an IT professional services consultancy comprised of industry-recognized IT subject matter
-    experts and thought leaders. Our core team has a combined 60+ years of experience, multiple expert-level
-    vendor certifications, and several publications by recognized technology presses.
+longDescription: HexaBuild is an IT professional services consultancy comprised of industry-recognized IT subject matter experts and thought leaders. Our core team has a combined 60+ years of experience, multiple expert-level vendor certifications, and several publications by recognized technology presses.
 
 type: consultancy
 tier: ptr

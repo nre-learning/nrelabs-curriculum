@@ -8,10 +8,7 @@ website: https://cumulusnetworks.com
 briefDescription: Cumulus Networks is transforming the networking industry by building networking products purely with Linux.
 
 # Why should users continue and view your lessons?
-longDescription: |
-
-  Cumulus Networks builds networking products purely on Linux, and have a rich history of supporting network automation. This collection houses
-  their contribution to the NRE Labs curriculum.
+longDescription: Cumulus Networks builds networking products purely on Linux, and have a rich history of supporting network automation. This collection houses their contributions to the NRE Labs curriculum.
 
 type: vendor
 tier: ptr
