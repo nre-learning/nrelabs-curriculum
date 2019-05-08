@@ -1,0 +1,15 @@
+---
+id: 9
+title: Packet Pushers
+image: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/collections/collections/packetpushers/pp.jpg
+website: https://packetpushers.net/
+contactEmail: "packetpushers@gmail.com"
+
+# Why should users view your collection?
+briefDescription: |
+    A podcast about networking & infrastructure engineering by IT architects. Deeply technical & unabashedly nerdy.
+# Why should users continue and view your lessons?
+longDescription: |
+    The Packet Pushers are awesome-sauce, full stop.
+type: community
+tier: ptr
