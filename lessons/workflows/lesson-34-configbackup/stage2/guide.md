@@ -10,7 +10,7 @@ In this lesson we will expand on the last lesson and backup the configurations f
 
 First we need a list of device names or IP addresses that we want to retrieve information from. We will use a YAML file to store the device list. The YAML file looks like this:
 <pre>
-cd /antidote/lessons/lesson-34/stage2/
+cd /antidote/stage2/
 more devices.yml
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>

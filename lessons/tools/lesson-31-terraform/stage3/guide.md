@@ -14,7 +14,7 @@ What happens we do this is:
 First we need to make sure we're in the correct working directory.
 
 ```
-cd /antidote/lessons/lesson-31/terraform/
+cd /antidote/terraform/
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', this)">Run this snippet</button>
 

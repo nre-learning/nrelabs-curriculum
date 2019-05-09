@@ -21,7 +21,7 @@ show configuration snmp | display xml
 We've built a test file similar to what we saw in the introduction to JSNAPy, but this one captures both of the findings we'll explore in this lab. This is totally based on preference - JSNAPy allows you to place all tests in the same file, or split them up however you want.
 
 ```
-cd /antidote/lessons/lesson-32/stage2/
+cd /antidote/stage2/
 cat jsnapy_tests.yaml
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>

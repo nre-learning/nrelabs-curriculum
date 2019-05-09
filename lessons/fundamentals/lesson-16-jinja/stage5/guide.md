@@ -11,7 +11,7 @@ In the previous section, we loaded data from a YAML file and used that data in o
 We have already created a sample template file called `static_route.j2` in the sub-directory `dir1` for our use. Run the below snippet to view the template file:
 
 ```
-cd /antidote/lessons/lesson-16/stage5/
+cd /antidote/stage5/
 cat dir1/static_route.j2
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>

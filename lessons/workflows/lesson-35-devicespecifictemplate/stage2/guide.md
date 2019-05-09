@@ -13,7 +13,7 @@ The sample project we will use is deploying a large number of access switches. W
 #### Device Template File
 In this section we will use the same template file that we used in the previous lesson. Look for the template variables in all captial letters surrounded by double curly brackets, for example **{{ HOSTNAME }}**. Pay attention to these variables because they will be set to specific values in the next section using YAML.
 <pre>
-cd /antidote/lessons/lesson-35/stage2
+cd /antidote/stage2
 more template.j2
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
@@ -23,7 +23,7 @@ more template.j2
 In this section we will generate configurations for multiple devices. In order to accomplish this the YAML file format will be changed slightly. Since we will be dealing with multiple devices the YAML file will contain three elements with dictionary key/value pairs for each element. Lets look at the new format.
 
 <pre>
-cd /antidote/lessons/lesson-35/stage2
+cd /antidote/stage2
 more variables.yml
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>

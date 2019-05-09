@@ -26,7 +26,7 @@ Notice the only VLAN configured is the default VLAN and a VLAN tag of 1.
 We will use a YAML file to store the specific data for the VLANs we need to create. The sample `vlans.yml` file contains a dictionary with a list of **key/value** pairs that contain the **VLAN\_NAME** and the **VLAN\_ID**. Lets see what the sample YAML file looks like.
 
 <pre>
-cd /antidote/lessons/lesson-35/stage4
+cd /antidote/stage4
 cat vlans.yml
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
@@ -34,7 +34,7 @@ cat vlans.yml
 #### Device Template File
 In order to create multiple VLANs we will need a Jinja2 template with a `for` loop similar to what was done in the previous section. Lets look at the new template.
 <pre>
-cd /antidote/lessons/lesson-35/stage4
+cd /antidote/stage4
 cat template.j2
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
