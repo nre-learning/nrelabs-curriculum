@@ -13,7 +13,7 @@ There are so many uses for a script like this. For instance, you can find out wh
 First we need a list of device names or IP addresses that we want to retrieve information from. We will use a YAML file to store the device list. The YAML file looks like this:
 
 <pre>
-cd /antidote/lessons/lesson-33/stage2/
+cd /antidote/stage2/
 more devices.yml
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>

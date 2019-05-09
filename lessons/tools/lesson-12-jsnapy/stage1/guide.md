@@ -17,7 +17,7 @@ Fortunately, you know that your team uses JSNAPy to describe what "normal" looks
 We can run the below commands on our Ubuntu host to see the JSNAPy configuration file:
 
 ```
-cd /antidote/lessons/lesson-12/
+cd /antidote/
 cat jsnapy_config.yaml
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>

@@ -28,7 +28,7 @@ It groups all the L3VPN related parameters (e.g., interfaces, VLAN Id, IP addres
 Let's take a look on the YANG file first.
 
 ```
-cd /antidote/lessons/lesson-26
+cd /antidote
 cat vpn-services.yang
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>

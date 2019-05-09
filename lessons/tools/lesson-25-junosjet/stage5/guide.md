@@ -14,7 +14,7 @@ The objective of this lesson is to use JET notification services to listen for a
 To save time, we have already put the JET firewall API code we created in stage 4 in a file `add_firewall_filter.py`. Let's take a look on the code:
 
 ```
-cd /antidote/lessons/lesson-25
+cd /antidote
 cat add_firewall_filter.py
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>

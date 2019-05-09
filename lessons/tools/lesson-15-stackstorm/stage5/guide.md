@@ -13,7 +13,7 @@ With Rules, we are declaring to StackStorm what events we care about (in the for
 Our finished rule file can be seen here - continue for a walkthrough of each of the components of this file:
 
 ```
-cat /antidote/lessons/lesson-15/stage5/replace_interface_config.yaml
+cat /antidote/stage5/replace_interface_config.yaml
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
@@ -48,7 +48,7 @@ action:
     ref: "napalm.loadconfig"
     parameters:
         hostname: "{{ trigger.device }}"
-        config_file: "/antidote/lessons/lesson-15/stage5/interface-up-config.xml"
+        config_file: "/antidote/stage5/interface-up-config.xml"
 ```
 
 Note that we're making use of the `device` field from the trigger payload in a Jinja snippet, in order to dynamically populate `napalm.loadconfig`'s `hostname` parameter. The [StackStorm docs](https://docs.stackstorm.com/reference/jinja.html) cover the usage of Jinja in Stackstorm in greater detail.
@@ -56,7 +56,7 @@ Note that we're making use of the `device` field from the trigger payload in a J
 Normally, rules would be located in the `rules/` directory of a pack, but we can also create a rule directly from the command line using our YAML file.
 
 ```
-st2 rule create /antidote/lessons/lesson-15/stage5/replace_interface_config.yaml
+st2 rule create /antidote/stage5/replace_interface_config.yaml
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 

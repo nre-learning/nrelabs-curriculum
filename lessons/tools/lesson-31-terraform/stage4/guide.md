@@ -10,7 +10,7 @@ If you did this using Terraform, you're in luck! It's as easy as destroying the 
 First we need to make sure we're in the correct working directory.
 
 ```
-cd /antidote/lessons/lesson-31/terraform/
+cd /antidote/terraform/
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', this)">Run this snippet</button>
 

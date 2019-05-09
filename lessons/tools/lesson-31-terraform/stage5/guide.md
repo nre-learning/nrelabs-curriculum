@@ -6,7 +6,7 @@ Working declaratively with Terraform is an excellent way to work and can signifi
 Before we do any more, let's make sure we're in the correct working directory.
 
 ```
-cd /antidote/lessons/lesson-31/terraform/bonus/
+cd /antidote/terraform/bonus/
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', this)">Run this snippet</button>
 

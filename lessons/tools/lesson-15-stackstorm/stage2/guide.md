@@ -121,14 +121,14 @@ Finally, it would be really great if we could actually push a config change with
 As part of this lesson, we've included a configuration snippet that will replace only the relevant configuration with the corrected `peer-as` attribute:
 
 ```
-cat /antidote/lessons/lesson-15/stage2/vqfx1-config-patch.txt
+cat /antidote/stage2/vqfx1-config-patch.txt
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
 The `loadconfig` action can accept this path as a parameter, and will perform a merge between this configuration, and the existing configuration:
 
 ```
-st2 run napalm.loadconfig hostname=vqfx1 config_file="/antidote/lessons/lesson-15/stage2/vqfx1-config-patch.txt"
+st2 run napalm.loadconfig hostname=vqfx1 config_file="/antidote/stage2/vqfx1-config-patch.txt"
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
