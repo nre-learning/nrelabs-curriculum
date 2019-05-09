@@ -5,6 +5,7 @@
 - Replaced all individual snippet indices with 'this' keyword [#221](https://github.com/nre-learning/nrelabs-curriculum/pull/221)
 - Rename syringe.yaml to lesson.meta.yaml, and move lessons into descriptive subdirs [#222](https://github.com/nre-learning/nrelabs-curriculum/pull/222)
 - Prepare curriculum for collections [#224](https://github.com/nre-learning/nrelabs-curriculum/pull/224)
+- Update all paths with new lesson directory mount point [#227](https://github.com/nre-learning/nrelabs-curriculum/pull/227)
 
 ## v0.3.2 - April 19, 2019
 
