@@ -29,25 +29,20 @@ RUN echo "auth required pam_wheel.so use_uid" >> /etc/pam.d/su
 ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
 
-#RUN apt-get update && apt-get install -y tigervnc-standalone-server tigervnc-common tini supervisor
-RUN apt-get update && apt-get install -y tigervnc-standalone-server tigervnc-common supervisor
+RUN apt-get update && apt-get install -y tigervnc-standalone-server tigervnc-common supervisor rsyslog sudo
 
 # tini isn't available for debian stretch (but comes in buster)
 ARG TINI_VERSION=v0.18.0
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /bin/tini
 RUN chmod +x /bin/tini
 
+RUN adduser antidote sudo
+
+RUN apt-get install -y fvwm xterm
+
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 COPY start.sh /start.sh
-
-RUN apt-get update && apt-get install -y rsyslog
-
-RUN apt-get install -y sudo
-
-RUN adduser antidote sudo
-
-RUN apt-get install -y xterm
 
 EXPOSE 5900
 EXPOSE 22
