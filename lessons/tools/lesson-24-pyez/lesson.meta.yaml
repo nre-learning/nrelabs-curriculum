@@ -16,14 +16,24 @@ tags:
 - library
 collection: 1
 
-utilities:
-- name: linux
-  image: antidotelabs/utility
+endpoints:
 
-devices:
 - name: vqfx
   image: antidotelabs/vqfx:snap1
-  ports: [830]
+  configurationType: python
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+  ports: [22]
+
+- name: linux
+  image: antidotelabs/utility
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+  ports: [22]
 
 connections:
 - a: vqfx
