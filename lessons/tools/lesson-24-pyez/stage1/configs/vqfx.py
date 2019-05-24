@@ -22,12 +22,11 @@ with driver(hostname=host, username=user, password=password, optional_args={'por
         address_cidr = "%s/%s" % (addr, prefix['prefix_length'])
 
     # Create template configuration with this address
-    loader = FileSystemLoader(["./"])
+    loader = FileSystemLoader([os.path.dirname(os.path.realpath(__file__))])  # Use current directory
     env = Environment(loader=loader, trim_blocks=True, lstrip_blocks=True)
     template_object = env.get_template(template_file)
     rendered_config = template_object.render(mgmt_addr=address_cidr)
 
     # Push rendered config to device
     device.load_replace_candidate(config=rendered_config)
-    device.load
     device.commit_config()
