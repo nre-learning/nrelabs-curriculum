@@ -34,7 +34,7 @@ endpoints:
   - name: cli
     port: 22
     type: ssh
-  - name: cli
+  - name: cli2
     port: 22
     type: ssh
   ports: [22]
