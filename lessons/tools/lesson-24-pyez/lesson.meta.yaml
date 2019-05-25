@@ -29,11 +29,12 @@ endpoints:
 
 - name: linux
   image: antidotelabs/utility
+  configurationType: ansible
   presentations:
-  - name: cli1
+  - name: cli
     port: 22
     type: ssh
-  - name: cli2
+  - name: cli
     port: 22
     type: ssh
   ports: [22]
