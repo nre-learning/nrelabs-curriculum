@@ -14,6 +14,10 @@ tags:
 
 endpoints:
 
+- name: influxdb
+  image: influxdb
+  additionalPorts: [8086]
+
 - name: selfservice
   image: antidotelabs/selfservice-flask-app
   presentations:
@@ -48,16 +52,13 @@ endpoints:
 - name: linux
   image: antidotelabs/utility
   configurationType: ansible
-  presentation1s:
+  presentations:
   - name: cli1
     port: 22
     type: ssh
   - name: cli2
     port: 22
     type: ssh
-
-utilities:
-
 
 connections:
 - a: vqfx1
@@ -71,5 +72,3 @@ stages:
 
   - id: 1
     description: Stage 1
-  # - id: 2
-  #   description: Stage 2 

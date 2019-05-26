@@ -9,7 +9,7 @@ password = "antidotepassword"
 vendor = "junos"
 port = "22"
 host = os.getenv("SYRINGE_TARGET_HOST")
-template_file = "vqfx.txt"
+template_file = "vqfx2.txt"
 
 driver = napalm.get_network_driver(vendor)
 with driver(hostname=host, username=user, password=password, optional_args={'port': port}) as device:
