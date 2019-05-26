@@ -25,27 +25,13 @@ endpoints:
   - name: cli
     port: 22
     type: ssh
-  ports: [22]
 
 - name: linux
   image: antidotelabs/utility
-  configurationType: ansible
   presentations:
   - name: cli
     port: 22
     type: ssh
-  - name: cli2
-    port: 22
-    type: ssh
-  ports: [22]
-
-- name: selfservice
-  image: antidotelabs/selfservice-flask-app
-  presentations:
-  - name: web
-    port: 5000
-    type: http
-  ports: [5000]
 
 connections:
 - a: vqfx
