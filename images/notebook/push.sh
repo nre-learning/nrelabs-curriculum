@@ -1,2 +1,2 @@
-docker build -t antidotelabs/jupyter .
-docker push antidotelabs/jupyter
+docker build -t antidotelabs/jupyter:newpath .
+docker push antidotelabs/jupyter:newpath
