@@ -2,7 +2,7 @@
 lessonName: Working with REST APIs
 lessonId: 19
 category: fundamentals
-lessondiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/lesson-19/lessondiagram.png
+lessondiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-19/lessondiagram.png
 tier: prod
 prereqs:
   - 22  # Python

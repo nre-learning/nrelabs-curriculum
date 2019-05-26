@@ -2,7 +2,7 @@
 lessonName: Automated STIG Compliance Validation
 lessonId: 32
 category: workflows
-lessonDiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/lesson-32/lessondiagram.png
+lessonDiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-32/lessondiagram.png
 tier: prod
 prereqs:
   - 13  # NAPALM

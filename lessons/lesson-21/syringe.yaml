@@ -2,7 +2,7 @@
 lessonName: Automating the Troubleshooting Chain
 lessonId: 21
 category: workflows
-lessondiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/lesson-21/lessondiagram.png
+lessondiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-21/lessondiagram.png
 tier: prod
 prereqs:
   - 22  # Python

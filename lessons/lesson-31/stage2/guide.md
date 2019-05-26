@@ -53,6 +53,6 @@ This next step creates a PNG file containing the output. However, other than cre
 terraform graph -type=plan | dot -Tpng > plan_graph.png
 ```
 
-<div style="text-align:center;"><img src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/lesson-31/stage2/plangraph.png"></div>
+<div style="text-align:center;"><img src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-31/stage2/plangraph.png"></div>
 
 *The Terraform terraform-provider-junos-qfx is covered by a BSD-3-Clause license and copyrighted by Juniper Networks*
