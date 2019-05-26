@@ -71,5 +71,5 @@ stages:
 
   - id: 1
     description: Stage 1
-  - id: 2
-    description: Stage 2 
+  # - id: 2
+  #   description: Stage 2 

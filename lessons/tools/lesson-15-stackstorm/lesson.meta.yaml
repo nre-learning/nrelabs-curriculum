@@ -3,7 +3,7 @@ lessonName: Event-Driven Network Automation with StackStorm
 lessonId: 15
 category: tools
 tier: prod
-lessonDiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/lesson-15/lessondiagram.png
+lessonDiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-15/lessondiagram.png
 lessonVideo: https://www.youtube.com/embed/WhfAqnn2HMM
 prereqs:
   - 13  # NAPALM

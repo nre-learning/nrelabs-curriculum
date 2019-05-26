@@ -8,7 +8,7 @@ Just like real "tasks" performed manually, or via another tool, StackStorm Actio
 
 In StackStorm, we call these complex logical structures ["Workflows"](https://docs.stackstorm.com/workflows.html).
 
-<div style="text-align:center;"><img src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/lesson-15/workflows.png"></div>
+<div style="text-align:center;"><img src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-15/workflows.png"></div>
 
 There are a few options for accomplishing this in StackStorm:
 
