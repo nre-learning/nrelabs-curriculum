@@ -39,7 +39,7 @@ Now it's time to roll up your sleeves and jump on to tackling the final two test
 Let's examine our Robot test-case file `chapter3_eg1.robot`:
 
 ```
-cat /antidote/lessons/lesson-29/stage3/chapter3_eg1.robot
+cat /antidote/stage3/chapter3_eg1.robot
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
@@ -84,7 +84,7 @@ Let's now have a look at the test cases:
 
 Notice that both of the test cases are using the previously defined user keywords from the Keywords section of the robot file. Execute these test cases by running the robot script using the following command (note the command line variables passed using the flag --variable)
 ```
-robot --variable HOST:vqfx1 --variable USER:antidote --variable PASSWORD:antidotepassword /antidote/lessons/lesson-29/stage3/chapter3_eg1.robot
+robot --variable HOST:vqfx1 --variable USER:antidote --variable PASSWORD:antidotepassword /antidote/stage3/chapter3_eg1.robot
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
@@ -93,7 +93,7 @@ robot --variable HOST:vqfx1 --variable USER:antidote --variable PASSWORD:antidot
 Let's examine our Robot test-case file `chapter3_eg2.robot`:
 
 ```
-cat /antidote/lessons/lesson-29/stage3/chapter3_eg2.robot
+cat /antidote/stage3/chapter3_eg2.robot
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
@@ -101,7 +101,7 @@ Note that the robot file only has two sections and inside the `Settings` section
 
 Let's now check out our resource file `chapter3_resource.robot`:
 ```
-cat /antidote/lessons/lesson-29/stage3/chapter3_resource.robot
+cat /antidote/stage3/chapter3_resource.robot
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
@@ -110,7 +110,7 @@ Notice that this time, we have declared all the required variables in the "Varia
 Also, observe that three user keywords have been defined under the "Keywords" section in the resource file. Two of these keywords, "Setup Actions" and "Teardown Actions", have been used by the Setup and Teardown settings of our master robot file. The third keyword, Validate Facts, has been used by a test case inside the robot file. Execute the robot script by running the below command
 
 ```
-robot /antidote/lessons/lesson-29/stage3/chapter3_eg2.robot
+robot /antidote/stage3/chapter3_eg2.robot
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 

@@ -12,7 +12,7 @@ So long as you know what depends on what, Terraform will reflect that knowledge 
 To keep things easy.
 
 ```
-cd /antidote/lessons/lesson-31/terraform
+cd /antidote/terraform
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', this)">Run this snippet</button>
 

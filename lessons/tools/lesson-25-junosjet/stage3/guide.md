@@ -25,7 +25,7 @@ It's time to start the lab!
 To save time, the IDL file is pre-downloaded already. First we need to unarchive it:
 
 ```
-cd /antidote/lessons/lesson-25
+cd /antidote
 tar -xzf jet-idl-17.4R1.16.tar.gz
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>

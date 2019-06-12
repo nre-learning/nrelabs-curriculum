@@ -4,7 +4,7 @@
 In Part 1, we noticed that the router configuration didn't quite match up with what our [JSNAPy](https://github.com/Juniper/jsnapy) tests were stating should be true.
 
 ```
-cd /antidote/lessons/lesson-12/
+cd /antidote/
 cat jsnapy_tests.yaml
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>

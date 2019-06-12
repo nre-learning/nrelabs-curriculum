@@ -25,6 +25,16 @@ COPY ./salt_configs/vqfx1.sls /srv/pillar
 # Add pillar file for top
 COPY ./salt_configs/top.sls /srv/pillar
 
+# Add salt file for infrastructure data
+COPY ./salt_configs/infrastructure_data.sls /srv/pillar
+
+# Add configuration template for vqfx1
+RUN mkdir /srv/salt
+COPY ./salt_configs/infrastructure_config.conf /srv/salt
+
+# Add sls file to provision the configuration
+COPY ./salt_configs/provision_infrastructure.sls /srv/salt
+
 # set user permissions for Antidote user to run Salt
 RUN chown -R antidote:antidote /etc/salt
 RUN chown -R antidote:antidote /var/cache/salt

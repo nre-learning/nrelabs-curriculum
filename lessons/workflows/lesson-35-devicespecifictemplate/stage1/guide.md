@@ -15,7 +15,7 @@ The most important part of the template generation process is to have a device t
 
 Lets take a look at our sample configuration template that has already had the Jinja syntax added.
 <pre>
-cd /antidote/lessons/lesson-35/stage1
+cd /antidote/stage1
 more template.j2
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
@@ -26,7 +26,7 @@ Jinja2 variables can be almost any combinations of numbers or lower case or uppe
 YAML is a human friendly data serialization standard but what does that mean? It means that it is a way to format data so that it is easy for humans to read and edit. The data in the YAML file will be used to make substitutions in the device template. We have a sample YAML file with prepopulated data.
 
 <pre>
-cd /antidote/lessons/lesson-35/stage1
+cd /antidote/stage1
 more variables.yml
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
