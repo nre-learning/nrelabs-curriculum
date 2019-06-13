@@ -18,7 +18,7 @@ Terraform for traditional networking is relatively unchartered ground because we
 Before we proceed, we need to move to the right directory. Terraform is ran in a separate directory so we can move between stages within this lesson and knowledge build.
 
 ```
-cd /antidote/lessons/lesson-31/terraform/
+cd /antidote/terraform/
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', this)">Run this snippet</button>
 

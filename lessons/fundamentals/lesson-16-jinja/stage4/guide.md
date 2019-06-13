@@ -18,7 +18,7 @@ We cover YAML in more detail in <a href="/labs/?lessonId=14&lessonStage=1" targe
 
 We have a YAML file already stored in the machine for you! Lets start by taking a look at it.
 ```
-cd /antidote/lessons/lesson-16/stage4/
+cd /antidote/stage4/
 cat part4.yml
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>

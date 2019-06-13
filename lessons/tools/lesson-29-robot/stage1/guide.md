@@ -119,7 +119,7 @@ In our first example, we have a Robot file `chapter1_eg1.robot`, and a python fi
 Let's examine our python file `substring.py`:
 
 ```
-cat /antidote/lessons/lesson-29/stage1/substring.py
+cat /antidote/stage1/substring.py
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
@@ -127,7 +127,7 @@ It contains a single function `is_a_substring` that takes in two string argument
 
 Let's check out our Robot file now:
 ```
-cat /antidote/lessons/lesson-29/stage1/chapter1_eg1.robot
+cat /antidote/stage1/chapter1_eg1.robot
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
@@ -138,7 +138,7 @@ We have five test-cases in total, and these will be executed one after the other
 We'll go ahead and start our test-cases:
 
 ```
-robot /antidote/lessons/lesson-29/stage1/chapter1_eg1.robot
+robot /antidote/stage1/chapter1_eg1.robot
 ```
 
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>

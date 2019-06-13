@@ -41,7 +41,7 @@ As you can see the fundamental data values are the same across OpenConfig and Ju
 Now, let's try to configure a new BGP neighbor with Openconfig using Netconf. First, take a look on the openconfig-bgp configuration we're going to apply.
 
 ```
-cd /antidote/lessons/lesson-26
+cd /antidote
 cat openconfig-bgp.conf
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>

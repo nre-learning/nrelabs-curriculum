@@ -13,7 +13,7 @@ In this stage, we demonstrate additional JET API capability by using JET firewal
 Firstly, we repeat what we have done in previous stage - compile the IDL package, go to Python interactive prompt, import the JET GPRC module, and then login to the vQFX.
 
 ```
-cd /antidote/lessons/lesson-25
+cd /antidote
 tar -xzf jet-idl-17.4R1.16.tar.gz
 python -m grpc_tools.protoc -I./proto --python_out=. --grpc_python_out=. ./proto/*.proto
 

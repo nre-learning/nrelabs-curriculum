@@ -5,6 +5,7 @@ category: tools
 description: "In this lesson, we'll explore the Juniper Extension Toolkit (JET), which is a powerful set of tools for building applications that work with Junos."
 tier: ptr
 slug: jet
+collection: 1
 
 utilities:
 - name: linux

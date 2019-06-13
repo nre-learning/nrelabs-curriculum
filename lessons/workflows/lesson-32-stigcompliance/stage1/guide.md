@@ -25,7 +25,7 @@ As an example, one of the many potential findings within the STIG for Juniper ne
 Now of course, you're already thinking we can just run this check in a simple script, but this is just one check of many [for Juniper devices alone](https://stigviewer.com/stig/infrastructure_router__juniper/). There exists a better way, to commit the rules involved with STIG compliance as a file that NAPALM can use to verify, while writing as little Python yourself as possible. We can create a simple YAML definition that contains "tests" for specific findings. For instance, in this YAML file, we can tell NAPALM to use `get_snmp_information` to retrieve SNMP information, and then make an assertion that the community string is set to read-only.
 
 ```
-cd /antidote/lessons/lesson-32/stage1/
+cd /antidote/stage1/
 cat napalm_verify_snmp.yaml
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>

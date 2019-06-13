@@ -15,7 +15,7 @@ There are times that you need to be able to create multiples of the same configu
 In order to add the uplink ports we need to add values to the YAML file. We will create another dictionary key named **UPLINKS** and then we will use nested dictionaries with key/value pairs for each distribution switch. This is what the YAML file will look like.
 
 <pre>
-cd /antidote/lessons/lesson-35/stage3
+cd /antidote/stage3
 head -12 variables.yml
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
@@ -25,7 +25,7 @@ There are two uplinks, one that will connect to `distro1` and the other that wil
 #### Device Template File
 In order to create the multiple uplink ports we will need to modify the Jinja2 template to include a `for` loop so it can loop through all of the data in the **UPLINKS** dictionary. Lets look at the new template.
 <pre>
-cd /antidote/lessons/lesson-35/stage3
+cd /antidote/stage3
 head -18 template.j2
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>

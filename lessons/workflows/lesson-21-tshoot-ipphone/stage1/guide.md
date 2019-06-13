@@ -24,7 +24,7 @@ Now let's get the IP of the phone by querying the SIP PBX.  Click the button bel
 
 
 ```
-cd /antidote/lessons/lesson-21
+cd /antidote
 ./get-phone-ip-from-ext.py --host=asterisk --port=8088 --username=admin --password=admin --phone=1107
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>

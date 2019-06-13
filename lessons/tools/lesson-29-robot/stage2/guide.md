@@ -25,7 +25,7 @@ Similar to the example in the previous chapter, we will create a python file (Ro
 
 Let's examine the file `JunosDevice.py` and understand the different functions.:
 ```
-cat /antidote/lessons/lesson-29/stage2/JunosDevice.py
+cat /antidote/stage2/JunosDevice.py
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
@@ -75,7 +75,7 @@ Okay, let's start developing our test cases! We will write two test cases, one f
 Let's examine our Robot test-case file `chapter2_eg1.robot`:
 
 ```
-cat /antidote/lessons/lesson-29/stage2/chapter2_eg1.robot
+cat /antidote/stage2/chapter2_eg1.robot
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
@@ -123,7 +123,7 @@ The IP address of the vQFX, the username, and password for login, are provided t
 Execute this test suite by running the below command (note the command line variables passed using the flag --variable)
 
 ```
-robot --variable HOST:vqfx1 --variable USER:antidote --variable PASSWORD:antidotepassword /antidote/lessons/lesson-29/stage2/chapter2_eg1.robot
+robot --variable HOST:vqfx1 --variable USER:antidote --variable PASSWORD:antidotepassword /antidote/stage2/chapter2_eg1.robot
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
