@@ -15,15 +15,23 @@ tags:
 - salt
 - saltstack
 
-utilities:
+endpoints:
+
 - name: salt1
   image: antidotelabs/salt
-  ports: [22]
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
 
-devices:
 - name: vqfx1
   image: antidotelabs/vqfx:snap1
-  ports: [8080, 830]
+  configurationType: napalm-junos
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+  additionalPorts: [8080, 830]
 
 connections:
 - a: vqfx1

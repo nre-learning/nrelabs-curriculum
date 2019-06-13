@@ -12,13 +12,21 @@ tags:
 - robot
 - testing
 
-utilities:
+endpoints:
 - name: linux1
   image: antidotelabs/utility
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
 
-devices:
 - name: vqfx1
   image: antidotelabs/vqfx:snap1
+  configurationType: napalm-junos
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
 
 connections:
 - a: vqfx1

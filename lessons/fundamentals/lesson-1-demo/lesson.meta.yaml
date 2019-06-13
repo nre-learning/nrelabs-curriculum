@@ -35,7 +35,7 @@ endpoints:
 
 - name: vqfx2
   image: antidotelabs/vqfx:snap2
-  configurationType: python
+  configurationType: napalm-junos
   presentations:
   - name: cli
     port: 22
@@ -43,7 +43,7 @@ endpoints:
 
 - name: vqfx3
   image: antidotelabs/vqfx:snap3
-  configurationType: python
+  configurationType: napalm-junos
   presentations:
   - name: cli
     port: 22

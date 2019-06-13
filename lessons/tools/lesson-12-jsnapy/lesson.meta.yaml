@@ -16,17 +16,37 @@ tags:
 - testing
 collection: 1
 
-utilities:
+endpoints:
 - name: linux1
   image: antidotelabs/utility
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
 
-devices:
 - name: vqfx1
   image: antidotelabs/vqfx:snap1
+  configurationType: napalm-junos
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
 - name: vqfx2
   image: antidotelabs/vqfx:snap2
+  configurationType: napalm-junos
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
 - name: vqfx3
   image: antidotelabs/vqfx:snap3
+  configurationType: napalm-junos
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
 
 connections:
 - a: vqfx1

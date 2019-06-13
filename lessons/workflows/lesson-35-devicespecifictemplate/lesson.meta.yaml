@@ -15,17 +15,32 @@ tags:
 - yaml
 - jinja2
 
-utilities:
-- name: linux
-  image: antidotelabs/utility
+endpoints:
 
-devices:
+- name: linux1
+  image: antidotelabs/utility
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
 - name: vqfx1
   image: antidotelabs/vqfx:snap1
-  ports: [830]
+  configurationType: napalm-junos
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+  additionalPorts: [830]
+
 - name: vqfx2
   image: antidotelabs/vqfx:snap2
-  ports: [830]
+  configurationType: napalm-junos
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+  additionalPorts: [830]
 
 stages:
   - id: 1
