@@ -17,7 +17,7 @@ tags:
 
 utilities:
 - name: salt1
-  image: antidotelabs/salt
+  image: shwetak02/salt
   ports: [22]
 
 devices:
@@ -38,3 +38,6 @@ stages:
 
   - id: 3
     description: Executing Junos commands in Salt
+
+  - id: 4
+    description: Junos Configuration Management with Salt
