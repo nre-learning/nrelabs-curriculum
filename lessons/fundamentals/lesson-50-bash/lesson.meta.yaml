@@ -1,0 +1,27 @@
+---
+lessonName: Introduction to BASH
+lessonId: 50
+category: fundamentals
+tier: prod
+prereqs:
+  - 23  # Linux
+description: In production UNIX systems, BASH is the most common UNIX shell.  In this lesson, you'll learn how to write simple, but functional, BASH scripts. 
+slug: BASH
+tags:
+- BASH
+- scripting
+- linux
+
+utilities:
+- name: linux1
+  image: antidotelabs/utility
+
+stages:
+  - id: 1
+    description: Introduction to Variables
+  - id: 2
+    description: Environment and Shell Variables
+  - id: 3
+    description: Positional Parameters
+#  - id: 3
+#    description: Indexed and Associative Arrays
