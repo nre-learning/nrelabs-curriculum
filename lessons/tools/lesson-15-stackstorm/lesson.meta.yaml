@@ -18,8 +18,8 @@ tags:
 - st2
 
 endpoints:
-- name: linux1
-  image: antidotelabs/utility
+- name: st2
+  image: antidotelabs/stackstorm
   presentations:
   - name: cli
     port: 22
