@@ -25,6 +25,7 @@ endpoints:
   - name: cli
     port: 22
     type: ssh
+  additionalPorts: [830]
 
 - name: linux
   image: antidotelabs/utility
