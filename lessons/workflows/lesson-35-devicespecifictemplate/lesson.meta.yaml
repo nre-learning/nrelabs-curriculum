@@ -17,7 +17,7 @@ tags:
 
 endpoints:
 
-- name: linux1
+- name: linux
   image: antidotelabs/utility
   presentations:
   - name: cli
