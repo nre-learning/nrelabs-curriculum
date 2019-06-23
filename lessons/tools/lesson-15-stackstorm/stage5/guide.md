@@ -6,7 +6,7 @@
 
 And now, all of the concepts we've learned thus far come together. In this lesson we'll explore how *[Rules](https://docs.stackstorm.com/rules.html)* allow us to link the events that are reported to StackStorm via Sensors and Triggers, to the actions we want to take in response to those events in Actions and Workflows. Rules are the missing link in this chain.
 
-<div style="text-align:center;"><img src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/lesson-15/rules.png"></div>
+<div style="text-align:center;"><img src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-15/rules.png"></div>
 
 With Rules, we are declaring to StackStorm what events we care about (in the form of Triggers), and what action we want to take in response to seeing those events. In this lab, we'll create a Rule that responds to the Triggers we saw in the previous lab (`napalm.InterfaceDown`) and replaces the interface configuration on the affected device to turn the interface back up again.
 

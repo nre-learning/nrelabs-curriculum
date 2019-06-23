@@ -6,15 +6,23 @@ tier: ptr
 description: "In this lesson, we'll explore OpenConfig - an industry effort to standardize network configuration and telemetry models"
 slug: openconfig
 
-utilities:
+endpoints:
+
 - name: linux
   image: antidotelabs/utility
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
 
-devices:
 - name: vqfx
   image: antidotelabs/vqfx-full:18.1R1.9
-  ports:
-  - 830
+  configurationType: napalm-junos
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+  additionalPorts: [830]
 
 connections:
 - a: vqfx

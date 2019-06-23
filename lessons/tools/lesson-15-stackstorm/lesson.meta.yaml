@@ -3,7 +3,7 @@ lessonName: Event-Driven Network Automation with StackStorm
 lessonId: 15
 category: tools
 tier: prod
-lessonDiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/lesson-15/lessondiagram.png
+lessonDiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-15/lessondiagram.png
 lessonVideo: https://www.youtube.com/embed/WhfAqnn2HMM
 prereqs:
   - 13  # NAPALM
@@ -17,28 +17,37 @@ tags:
 - stackstorm
 - st2
 
-# iframeResources:
-# - ref: selfservice
-#   protocol: http
-#   path: "/"
-#   port: 5000
-
-# blackboxes:
-# - name: selfservice
-#   image: antidotelabs/selfservice-flask-app
-#   ports: [5000]
-
-utilities:
+endpoints:
 - name: st2
   image: antidotelabs/stackstorm
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
 
-devices:
 - name: vqfx1
   image: antidotelabs/vqfx:snap1
+  configurationType: napalm-junos
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
 - name: vqfx2
   image: antidotelabs/vqfx:snap2
+  configurationType: napalm-junos
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
 - name: vqfx3
   image: antidotelabs/vqfx:snap3
+  configurationType: napalm-junos
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
 
 connections:
 - a: vqfx1

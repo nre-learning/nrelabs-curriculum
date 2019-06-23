@@ -2,7 +2,7 @@
 lessonName: Automated STIG Compliance Validation
 lessonId: 32
 category: workflows
-lessonDiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/lesson-32/lessondiagram.png
+lessonDiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-32/lessondiagram.png
 tier: prod
 prereqs:
   - 13  # NAPALM
@@ -14,13 +14,21 @@ tags:
 - napalm
 - stig
 
-utilities:
+endpoints:
 - name: linux1
   image: antidotelabs/utility
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
 
-devices:
 - name: vqfx1
   image: antidotelabs/vqfx:snap1
+  configurationType: napalm-junos
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
 
 stages:
   - id: 1

@@ -2,7 +2,7 @@
 lessonName: Introduction to Python
 lessonId: 22
 category: fundamentals
-lessondiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/lesson-22/lessondiagram.png
+lessondiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-22/lessondiagram.png
 tier: ptr
 prereqs:
   - 23  # Linux
@@ -12,9 +12,13 @@ tags:
 - python
 - programming
 
-utilities:
+endpoints:
 - name: linux1
   image: antidotelabs/utility
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
 
 stages:
   - id: 1

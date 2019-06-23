@@ -18,8 +18,13 @@ driver = napalm.get_network_driver(vendor)
 with driver(hostname=host, username=user, password=password, optional_args={'port': port}) as device:
 
     # Retrieve management IP address
-    # TODO(mierdin): this is junos-specific. Will need to maintain a list of management interfaces per vendor,
-    # or expose this as a field in the endpoint.
+    #
+    # TODO(mierdin): while this script works for any vendor, the IP address replacement functionality using Jinja
+    # below is specific to Junos. So, any other vendor device must use NAT for now. This should be easy to fix, though.
+    # The best approach will be to provide interface_ip_details to the template, rather than a specific interface. Then,
+    # the underlying config can specify the interface they want. The change here will be simple - the tedious work will
+    # be updating all existing configs to use the new dictionary.
+
     interface_ip_details = device.get_interfaces_ip()['em0.0']
     for addr, prefix in interface_ip_details['ipv4'].items():
         address_cidr = "%s/%s" % (addr, prefix['prefix_length'])

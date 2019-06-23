@@ -2,7 +2,7 @@
 lessonName: Automating the Troubleshooting Chain
 lessonId: 21
 category: workflows
-lessondiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/lesson-21/lessondiagram.png
+lessondiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-21/lessondiagram.png
 tier: prod
 prereqs:
   - 22  # Python
@@ -13,28 +13,53 @@ tags:
 - troubleshooting
 - tshoot
 
-blackboxes:
-- name: asterisk
-  image: antidotelabs/asterisk
-  ports: [8088]
-- name: netbox
-  image: antidotelabs/netbox
-  ports: [8000]
-
-devices:
-- name: vqfx1
-  image: antidotelabs/vqfx:snap1
-- name: vqfx2
-  image: antidotelabs/vqfx:snap2
-- name: vqfx3
-  image: antidotelabs/vqfx:snap3
-  
-utilities:
+endpoints:
 - name: linux1
   image: antidotelabs/utility
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
 - name: sipphone
   image: antidotelabs/pjsua-lindsey
-  ports: [22]
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: vqfx1
+  image: antidotelabs/vqfx:snap1
+  configurationType: napalm-junos
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: vqfx2
+  image: antidotelabs/vqfx:snap2
+  configurationType: napalm-junos
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: vqfx3
+  image: antidotelabs/vqfx:snap3
+  configurationType: napalm-junos
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: asterisk
+  image: antidotelabs/asterisk
+  additionalPorts: [8088]
+
+- name: netbox
+  image: antidotelabs/netbox
+  additionalPorts: [8000]
+
 
 connections:
 - a: vqfx1

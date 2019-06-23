@@ -16,14 +16,23 @@ tags:
 - library
 collection: 1
 
-utilities:
-- name: linux
-  image: antidotelabs/utility
+endpoints:
 
-devices:
 - name: vqfx
   image: antidotelabs/vqfx:snap1
-  ports: [830]
+  configurationType: napalm-junos
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+  additionalPorts: [830]
+
+- name: linux
+  image: antidotelabs/utility
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
 
 connections:
 - a: vqfx
