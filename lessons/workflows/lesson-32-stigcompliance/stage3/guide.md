@@ -3,7 +3,9 @@
 
 In the previous labs, we used NAPALM and JSNAPy to check the [STIG for Juniper devices](https://stigviewer.com/stig/infrastructure_router__juniper/) were found to be in compliance for the V-3969 finding.  NAPALM and JSNAPy are great for many compliance checks like looking for the existence of a configuration setting, but they may fall short when the check requires more detailed analysis of the network devices configuration and operational state or we need some "glue" to bind mutiple compliance checks together or report back findings in a specific manner.  
 
-In this lab, we'll look at what it takes to automate a STIG compliance check using python scripts and leveraging the [PyEZ framework](https://labs.networkreliability.engineering/labs/?lessonId=24&lessonStage=1) and [PyEZ Tables and Views] (https://labs.networkreliability.engineering/labs/?lessonId=24&lessonStage=5). We'll write our own custom table to retrieve specific configuration items to make it easier to deal with XML formatted data.  The tables are written in [YAML](https://labs.networkreliability.engineering/labs/?lessonId=14&lessonStage=1), their usage wth PyEZ is documented [here](https://pyez.readthedocs.io/en/latest/TableView.html).
+In this lab, we'll look at what it takes to automate a STIG compliance check using python scripts and leveraging the [PyEZ framework](https://labs.networkreliability.engineering/labs/?lessonId=24&lessonStage=1) and [PyEZ Tables and Views] (https://labs.networkreliability.engineering/labs/?lessonId=24&lessonStage=5). We'll write our own custom table to retrieve specific configuration items to make it easier to deal with XML formatted data.  
+
+Custom Op and Config tables are written in [YAML](https://labs.networkreliability.engineering/labs/?lessonId=14&lessonStage=1), their usage wth PyEZ is documented [here](https://pyez.readthedocs.io/en/latest/TableView.html).
 
 We'll begin by starting up the python interpretter, defining a PyEZ device and connecting to 'vqfx1'.
 
@@ -18,14 +20,14 @@ dev.open()
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 
-Next, we'll examine the configuration of the SNMP stanza in XML format.   
+Because there isn't an operational Junos command to tell us what SNMP communities are in use on a device, we'll have to examine the configuration to glean this information.  We'll take a look at the SNMP stanza in XML format to examine the elements we need to inspect with our script.   
 
 ```
 show configuration snmp | display xml
 ``` 
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', this)">Run this snippet</button>
 
-Since we are examining the configuration, we need to use a ConfigTable, which maps XML paths, elements and attributes into easier to understand and parse YAML syntax.  We need a list of communities, and their authorization level.  All of the relevant configuration we need to check is located under the XML element <community> with a parent of <snmp>.  We can translate this into an XPATH of snmp/community to use in our queries.  The communities are all listed at the XPATH snmp/community, so we will define a table called `SNMPTable`, and instruct it to fetch the configuration that matches this XPATH statment with a "get" instruction.  This will create a nested dictionary of element names to their values starting at our XPATH.
+Since we are examining the configuration, we need to use a ConfigTable, which maps XML paths, elements and attributes into easier to understand and parse YAML syntax.  We need a list of communities, and their authorization level.  All of the relevant configuration we need to check is located under the XML element `community` with a parent of `snmp`.  We can translate this into an XPATH of `snmp/community` to use in our queries.  The communities are all listed at the XPATH `snmp/community`, so we will define a table called `SNMPTable`, and instruct it to fetch the configuration that matches this XPATH statment with a `get` instruction.  This will create a nested dictionary of element names to their values starting at our XPATH.
 
 We can save this in python to a variable we'll call `SNMPYAML`.
 
@@ -105,7 +107,7 @@ commit and-quit
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', this)">Run this snippet</button>
 
-And rerun our check.  Nothing should be reported back.
+And rerun our check.  Nothing should be reported back if we correctly fixed everything.
 <pre>
 for mydev in SNMPTable(dev).get():
     if mydev.authorization != "read-only":
@@ -297,7 +299,8 @@ And at last we can run our script.
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 
-So let's fix our problems that we introduced, and re-run our script.
+So let's fix our problems that we introduced, and re-run our script.  Note that our script actually told us the commands we 
+need in order to fix the issues that were found.
 ```
 configure
 set snmp community public authorization read-only
@@ -310,4 +313,6 @@ commit and-quit
 ```
 ./V_3969.py
 ```
+
+This check is relatively simple, but can be used as a starting point or a building block to do much more complicated security assessments.
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
