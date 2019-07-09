@@ -2,7 +2,7 @@
 lessonName: Terraform & Junos
 lessonId: 31
 category: tools
-lessonDiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/lesson-31/lessondiagram.png
+lessonDiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-31/lessondiagram.png
 description: Terraform provides a declarative way of managing resources and now you can experiment with controlling Junos resources through this exciting lesson! 
 tier: prod
 slug: Terraform
@@ -11,17 +11,37 @@ tags:
   - declarative
   - junos
 
-utilities:
+endpoints:
 - name: terraform1
   image: antidotelabs/terraform
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
 
-devices:
 - name: vqfx1
   image: antidotelabs/vqfx:snap1
+  configurationType: napalm-junos
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
 - name: vqfx2
   image: antidotelabs/vqfx:snap2
+  configurationType: napalm-junos
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
 - name: vqfx3
   image: antidotelabs/vqfx:snap3
+  configurationType: napalm-junos
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
 
 connections:
 - a: vqfx1

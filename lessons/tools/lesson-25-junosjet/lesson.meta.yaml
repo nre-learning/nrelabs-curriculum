@@ -7,17 +7,23 @@ tier: ptr
 slug: jet
 collection: 1
 
-utilities:
+endpoints:
+
 - name: linux
   image: antidotelabs/utility
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
 
-devices:
 - name: vqfx
   image: antidotelabs/vqfx-full:18.1R1.9
-  ports:
-  - 830
-  - 1883
-  - 32767
+  configurationType: napalm-junos
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+  additionalPorts: [830, 1883, 32767]
 
 connections:
 - a: vqfx

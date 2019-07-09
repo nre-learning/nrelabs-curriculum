@@ -2,7 +2,7 @@
 lessonName: Network Automation with Salt
 lessonId: 30
 category: tools
-lessondiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/lesson-30/salt.png
+lessondiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-30/salt.png
 tier: prod
 prereqs:
   - 22  # Python
@@ -15,15 +15,23 @@ tags:
 - salt
 - saltstack
 
-utilities:
-- name: salt1
-  image: shwetak02/salt
-  ports: [22]
+endpoints:
 
-devices:
+- name: salt1
+  image: antidotelabs/salt
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
 - name: vqfx1
   image: antidotelabs/vqfx:snap1
-  ports: [8080, 830]
+  configurationType: napalm-junos
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+  additionalPorts: [8080, 830]
 
 connections:
 - a: vqfx1

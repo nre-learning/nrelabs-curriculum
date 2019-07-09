@@ -2,7 +2,7 @@
 lessonName: Using Robot Framework for Automated Testing
 lessonId: 29
 category: tools
-lessondiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/lesson-29/lessondiagram.png
+lessondiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-29/lessondiagram.png
 tier: prod
 prereqs:
   - 24  # PyEZ
@@ -12,13 +12,21 @@ tags:
 - robot
 - testing
 
-utilities:
+endpoints:
 - name: linux1
   image: antidotelabs/utility
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
 
-devices:
 - name: vqfx1
   image: antidotelabs/vqfx:snap1
+  configurationType: napalm-junos
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
 
 connections:
 - a: vqfx1

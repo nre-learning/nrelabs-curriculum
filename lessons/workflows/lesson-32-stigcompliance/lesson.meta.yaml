@@ -2,28 +2,41 @@
 lessonName: Automated STIG Compliance Validation
 lessonId: 32
 category: workflows
-lessonDiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/lesson-32/lessondiagram.png
+lessonDiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-32/lessondiagram.png
 tier: prod
 prereqs:
   - 13  # NAPALM
   - 12  # JSNAPy
+  - 24  # PyEZ
 description: Security Technical Implementation Guides (STIGs) are the configuration standards for United States Department of Defense (DoD) infrastructure. Any network engineer that has experience in running any part of these systems has had to spent countless hours going over infrastructure elements and ensuring they're compliant with these standards. In this lesson, we'll explore two appraoches for automating STIG compliance checks, and saving countless hours of manual data-gathering.
 slug: STIG
 tags:
 - jsnapy
 - napalm
 - stig
+- pyez
 
-utilities:
+endpoints:
 - name: linux1
   image: antidotelabs/utility
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
 
-devices:
 - name: vqfx1
   image: antidotelabs/vqfx:snap1
+  configurationType: napalm-junos
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+  additionalPorts: [830]
 
 stages:
   - id: 1
     description: STIG Compliance Validation with NAPALM
   - id: 2
     description: STIG Compliance Validation with JSNAPy
+  - id: 3
+    description: STIG Compliance Validation with custom scripts

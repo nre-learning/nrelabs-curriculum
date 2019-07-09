@@ -11,15 +11,29 @@ tags:
 description: ToDD is a Distributed Network-Service-Level Assertion Engine. In this lesson, we'll learn about how to use ToDD to run distributed data-plane tests and assertions on our network.
 slug: ToDD
 
-utilities:
+endpoints:
 - name: todd1
   image: toddproject/todd
+  presentations:
+  - name: cli
+    port: 80
+    type: ssh
+
 - name: web1
   image: nginx
+  presentations:
+  - name: web
+    port: 80
+    type: http
 
-devices:
 - name: vqfx1
   image: antidotelabs/vqfx:snap1
+  configurationType: napalm-junos
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
 
 connections:
 - a: todd1

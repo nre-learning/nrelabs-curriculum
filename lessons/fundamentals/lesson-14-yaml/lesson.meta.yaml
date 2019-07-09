@@ -12,9 +12,13 @@ tags:
 - data modeling
 - data model
 
-utilities:
+endpoints:
 - name: linux1
   image: antidotelabs/utility
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
 
 stages:
   - id: 1

@@ -1,7 +1,7 @@
 ---
 lessonName: Device Specific Template Generation
 lessonId: 35
-lessonDiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/lesson-35/lessondiagram.png
+lessonDiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-35/lessondiagram.png
 category: workflows
 tier: prod
 prereqs:
@@ -15,17 +15,32 @@ tags:
 - yaml
 - jinja2
 
-utilities:
+endpoints:
+
 - name: linux
   image: antidotelabs/utility
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
 
-devices:
 - name: vqfx1
   image: antidotelabs/vqfx:snap1
-  ports: [830]
+  configurationType: napalm-junos
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+  additionalPorts: [830]
+
 - name: vqfx2
   image: antidotelabs/vqfx:snap2
-  ports: [830]
+  configurationType: napalm-junos
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+  additionalPorts: [830]
 
 stages:
   - id: 1
