@@ -10,7 +10,12 @@
 - Added a new stage to the lesson, "STIG Compliance checking with custom scripts". This lesson goes through building a python script to check the SNMP vulnerabilities that were done with NAPALM and jSNAPY in the to previous stages. [#238](https://github.com/nre-learning/nrelabs-curriculum/pull/238)
 - Added a lesson on BASH [Commit #1fe7b94](https://github.com/nre-learning/nrelabs-curriculum/commit/1fe7b94454e880b1a468b1d1742d2911139359ab)
 
+## v0.3.3 - July 9, 2019
 
+### Curriculum
+
+- Added stage 4 for the "Network Automation with Salt" lesson. This stage will provide with the steps on how to configure Junos devices using Salt [#235](https://github.com/nre-learning/nrelabs-curriculum/pull/235)
+  
 ## v0.3.2 - April 19, 2019
 
 - Three new lessons [#217](https://github.com/nre-learning/nrelabs-curriculum/pull/217)
