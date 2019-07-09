@@ -7,9 +7,12 @@
 - Prepare curriculum for collections [#224](https://github.com/nre-learning/nrelabs-curriculum/pull/224)
 - Update all paths with new lesson directory mount point [#227](https://github.com/nre-learning/nrelabs-curriculum/pull/227)
 - Converting existing lessons to match new endpoint format [#230](https://github.com/nre-learning/nrelabs-curriculum/pull/230)
-- Added a new stage to the lesson, "STIG Compliance checking with custom scripts". This lesson goes through building a python script to check the SNMP vulnerabilities that were done with NAPALM and jSNAPY in the to previous stages. [#238](https://github.com/nre-learning/nrelabs-curriculum/pull/238)
+
 - Added a lesson on BASH [Commit #1fe7b94](https://github.com/nre-learning/nrelabs-curriculum/commit/1fe7b94454e880b1a468b1d1742d2911139359ab)
 
+## v0.3.3 - July 9, 2019
+- Added a new stage to the lesson, "STIG Compliance checking with custom scripts". This lesson goes through building a python script to check the SNMP vulnerabilities that were done with NAPALM and jSNAPY in the to previous stages. [#238](https://github.com/nre-learning/nrelabs-curriculum/pull/238)
+- Corrected Lesson diagram for Lesson-32
 
 ## v0.3.2 - April 19, 2019
 
