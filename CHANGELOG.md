@@ -7,6 +7,7 @@
 - Prepare curriculum for collections [#224](https://github.com/nre-learning/nrelabs-curriculum/pull/224)
 - Update all paths with new lesson directory mount point [#227](https://github.com/nre-learning/nrelabs-curriculum/pull/227)
 - Converting existing lessons to match new endpoint format [#230](https://github.com/nre-learning/nrelabs-curriculum/pull/230)
+- Remove platform images from curriculum [#245](https://github.com/nre-learning/nrelabs-curriculum/pull/245)
 
 ## v0.3.2 - April 19, 2019
 
