@@ -8,7 +8,8 @@ RUN rm -f /root/pecosim/*.tgz
 FROM ubuntu:18.04
 
 RUN export DEBIAN_FRONTEND=noninteractive \
-    && apt-get update && apt-get install -y -q qemu-kvm qemu-utils dosfstools pwgen telnet \
+    && apt-get update && apt-get install -y -q qemu-kvm qemu-utils dosfstools \
+        pwgen telnet screen socat expect vim tcl tclsh \
         ca-certificates netbase libpcap0.8 \
         tcpdump macchanger gettext-base net-tools ethtool\
         file iproute2 docker.io \
@@ -19,7 +20,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 COPY --from=cosim /root/pecosim /root/pecosim
 
 COPY create_config_drive.sh launch.sh \
-  create_apply_group.sh fix_network_order.sh /
+  create_apply_group.sh fix_network_order.sh create_snapshot.expect /
 
 RUN chmod a+rx /*.sh
 
