@@ -10,7 +10,7 @@
 - Added a new stage to the lesson, "STIG Compliance checking with custom scripts". This lesson goes through building a python script to check the SNMP vulnerabilities that were done with NAPALM and jSNAPY in the to previous stages. [#238](https://github.com/nre-learning/nrelabs-curriculum/pull/238)
 - Added a lesson on BASH [Commit #1fe7b94](https://github.com/nre-learning/nrelabs-curriculum/commit/1fe7b94454e880b1a468b1d1742d2911139359ab)
 - Remove platform images from curriculum [#245](https://github.com/nre-learning/nrelabs-curriculum/pull/245)
-
+- Modified images to support a standard build process [#247](https://github.com/nre-learning/nrelabs-curriculum/pull/247)
 
 ## v0.3.2 - April 19, 2019
 
