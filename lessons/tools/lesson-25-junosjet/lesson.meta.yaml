@@ -17,7 +17,7 @@ endpoints:
     type: ssh
 
 - name: vqfx
-  image: antidotelabs/vqfx-full:18.1R1.9
+  image: antidotelabs/container-vqfx
   configurationType: napalm-junos
   presentations:
   - name: cli
