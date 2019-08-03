@@ -18,7 +18,7 @@ RUN apt-get update -qy \
     procps \
  && rm -rf /var/lib/apt/lists/*
 
-COPY vqfx-orig.qcow2 /vqfx.qcow2
+COPY jinstall-vqfx-10-f-18.4R1.8.qcow2 /vqfx.qcow2
 COPY launch.sh /
 
 EXPOSE 22 161/udp 830 5000 10000-10099
