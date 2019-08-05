@@ -14,6 +14,7 @@
 - Added a lesson on BASH [Commit #1fe7b94](https://github.com/nre-learning/nrelabs-curriculum/commit/1fe7b94454e880b1a468b1d1742d2911139359ab)
 - Remove platform images from curriculum [#245](https://github.com/nre-learning/nrelabs-curriculum/pull/245)
 - Modified images to support a standard build process [#247](https://github.com/nre-learning/nrelabs-curriculum/pull/247)
+- Removing tags from curriculum [#248](https://github.com/nre-learning/nrelabs-curriculum/pull/248)
 
 ## v0.3.2 - April 19, 2019
 
