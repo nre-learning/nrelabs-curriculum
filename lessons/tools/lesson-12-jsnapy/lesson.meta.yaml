@@ -25,7 +25,7 @@ endpoints:
     type: ssh
 
 - name: vqfx1
-  image: antidotelabs/vqfx:snap1
+  image: antidotelabs/vqfx-snap1
   configurationType: napalm-junos
   presentations:
   - name: cli
@@ -33,7 +33,7 @@ endpoints:
     type: ssh
 
 - name: vqfx2
-  image: antidotelabs/vqfx:snap2
+  image: antidotelabs/vqfx-snap2
   configurationType: napalm-junos
   presentations:
   - name: cli
@@ -41,7 +41,7 @@ endpoints:
     type: ssh
 
 - name: vqfx3
-  image: antidotelabs/vqfx:snap3
+  image: antidotelabs/vqfx-snap3
   configurationType: napalm-junos
   presentations:
   - name: cli

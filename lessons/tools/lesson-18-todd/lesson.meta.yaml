@@ -27,7 +27,7 @@ endpoints:
     type: http
 
 - name: vqfx1
-  image: antidotelabs/vqfx:snap1
+  image: antidotelabs/vqfx-snap1
   configurationType: napalm-junos
   presentations:
   - name: cli
