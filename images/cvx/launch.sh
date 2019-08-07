@@ -54,7 +54,7 @@ random_mac () {
  -machine pc \
  -m 2048 \
  -serial telnet:0.0.0.0:5000,server,nowait \
- -drive if=ide,file=/cvx.qcow2,index=0 \
+ -drive if=ide,file=/cvx-3.7.6.qcow2,index=0 \
  -net nic,model=virtio-net-pci,macaddr=$(random_mac) \
  -net user,net=10.0.0.0/24,tftp=/tftpboot,hostfwd=tcp::2022-10.0.0.15:22,hostfwd=udp::2161-10.0.0.15:161,hostfwd=tcp::2830-10.0.0.15:830,hostfwd=tcp::2880-10.0.0.15:8080 \
  $NETDEVS
