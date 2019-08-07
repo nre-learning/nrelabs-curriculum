@@ -1,0 +1,69 @@
+---
+lessonName: Cumulus in NRELabs
+lessonId: 90
+category: fundamentals
+lessondiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-99/lessondiagram.png
+tier: ptr
+prereqs:
+  - 22  # Python
+  - 23  # Linux
+description: Cumulus in NRELabs
+slug: Cumulus demo
+tags:
+- troubleshooting
+- tshoot
+
+endpoints:
+- name: linux1
+  image: antidotelabs/utility
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: linux2
+  image: antidotelabs/utility
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: leaf1
+  image: cloudtoad/cvx:3.7.6
+  configurationType: python
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: leaf2
+  image: cloudtoad/cvx:3.7.6
+  configurationType: python
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: spine
+  image: cloudtoad/cvx:3.7.6
+  configurationType: python
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+connections:
+- a: spine
+  b: leaf1
+- a: spine
+  b: leaf2
+- a: leaf1
+  b: linux1
+- a: leaf2
+  b: linux2
+
+
+stages:
+  - id: 1
+    description: Cumulus in NRELabs
+
