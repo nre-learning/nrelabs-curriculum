@@ -1,0 +1,28 @@
+---
+lessonName: Version Control with Git
+lessonId: 17
+category: fundamentals
+tier: prod
+prereqs:
+  - 23  # Linux
+description: Git is an extremely popular version control system. In this lesson, we'll explore the basics of Git, and prepare for using it in network automation tools and workflows.
+slug: Git
+tags:
+- version control
+- versioning
+- git
+
+endpoints:
+- name: linux1
+  image: antidotelabs/utility
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+stages:
+  - id: 1
+    description: Your first commit
+
+  # 2:
+  #   What about Github? (a.k.a. Git remotes)
