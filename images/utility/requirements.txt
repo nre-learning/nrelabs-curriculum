@@ -1,11 +1,11 @@
+# https://github.com/paramiko/paramiko/issues/1369
+# (I think this is fixed now, so commenting this out. I ran into issues with this restriction on)
+# cryptography==2.4.2
 napalm
 netmiko
 jsnapy
-junos-eznc
 robotframework
 jinja2
 paho-mqtt
 grpcio
 grpcio-tools
-# https://github.com/paramiko/paramiko/issues/1369
-cryptography==2.4.2

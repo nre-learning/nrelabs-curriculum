@@ -51,10 +51,11 @@ yamlDict['snmpcommunity']
 
 YAML and Python are quite liberal with the types that can be stored in a dictionary. We have a second YAML file that has a list (Python's version of an array), a string, and an integer, all stored as different values in the same dictionary:
 
-```
+<pre>
 yamlFile = open('complexdict.yaml', 'r')
 yamlDict = yaml.load(yamlFile)
 for key, value in yamlDict.items():
     print("The key %s is of type %s and its value %s is of type %s" % (key, type(key), value, type(value)))
-```
+
+</pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
