@@ -29,7 +29,7 @@ endpoints:
     type: ssh
 
 - name: leaf1
-  image: cloudtoad/cvx:3.7.6
+  image: antidotelabs/cvx-3.7.6
   configurationType: python
   presentations:
   - name: cli
@@ -37,7 +37,7 @@ endpoints:
     type: ssh
 
 - name: leaf2
-  image: cloudtoad/cvx:3.7.6
+  image: antidotelabs/cvx-3.7.6
   configurationType: python
   presentations:
   - name: cli
@@ -45,7 +45,7 @@ endpoints:
     type: ssh
 
 - name: spine
-  image: cloudtoad/cvx:3.7.6
+  image: antidotelabs/cvx-3.7.6
   configurationType: python
   presentations:
   - name: cli
