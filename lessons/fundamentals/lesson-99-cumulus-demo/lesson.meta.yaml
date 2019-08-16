@@ -29,7 +29,7 @@ endpoints:
     type: ssh
 
 - name: leaf1
-  image: antidotelabs/cvx-3.7.6
+  image: antidotelabs/cvx
   configurationType: python
   presentations:
   - name: cli
@@ -37,7 +37,7 @@ endpoints:
     type: ssh
 
 - name: leaf2
-  image: antidotelabs/cvx-3.7.6
+  image: antidotelabs/cvx
   configurationType: python
   presentations:
   - name: cli
@@ -45,7 +45,7 @@ endpoints:
     type: ssh
 
 - name: spine
-  image: antidotelabs/cvx-3.7.6
+  image: antidotelabs/cvx
   configurationType: python
   presentations:
   - name: cli
