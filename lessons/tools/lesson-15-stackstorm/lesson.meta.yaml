@@ -19,7 +19,7 @@ tags:
 
 endpoints:
 - name: st2
-  image: antidotelabs/stackstorm
+  image: cloudtoad/stackstorm
   presentations:
   - name: cli
     port: 22
