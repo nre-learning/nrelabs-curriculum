@@ -18,7 +18,7 @@ RUN apt-get update -qy \
     procps \
  && rm -rf /var/lib/apt/lists/*
 
-COPY cvx-3.7.6.qcow2 /cvxi-3.7.6.qcow2
+COPY cvx.qcow2 /cvx.qcow2
 COPY launch.sh /
 
 EXPOSE 22 161/udp 830 5000 10000-10099

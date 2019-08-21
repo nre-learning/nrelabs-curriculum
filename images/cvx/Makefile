@@ -5,5 +5,7 @@ TARGET_VERSION ?= latest
 all: docker
 
 docker:
-	docker build -t antidotelabs/cvx-3.7.6:$(TARGET_VERSION) .
-	docker push antidotelabs/cvx-3.7.6:$(TARGET_VERSION)
+	gsutil cp "gs://nrelabs-curriculum-base-images/cvx/cvx.qcow2" "./cvx.qcow2"
+	docker build -t antidotelabs/cvx:$(TARGET_VERSION) .
+	docker push antidotelabs/cvx:$(TARGET_VERSION)
+
