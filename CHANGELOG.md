@@ -3,6 +3,10 @@
 ## In development
 
 - Added Cumulus PTR demo [#253](https://github.com/nre-learning/nrelabs-curriculum/pull/253)
+
+## v1.0.0 - August 08, 2019
+
+
 - Replaced all individual snippet indices with 'this' keyword [#221](https://github.com/nre-learning/nrelabs-curriculum/pull/221)
 - Rename syringe.yaml to lesson.meta.yaml, and move lessons into descriptive subdirs [#222](https://github.com/nre-learning/nrelabs-curriculum/pull/222)
 - Prepare curriculum for collections [#224](https://github.com/nre-learning/nrelabs-curriculum/pull/224)
@@ -14,6 +18,7 @@
 - Modified images to support a standard build process [#247](https://github.com/nre-learning/nrelabs-curriculum/pull/247)
 - Removing tags from curriculum [#248](https://github.com/nre-learning/nrelabs-curriculum/pull/248)
 - Promoting initial batch of collections [#252](https://github.com/nre-learning/nrelabs-curriculum/pull/252)
+- Final round of fixes for v1.0.0 based on feedback [#254](https://github.com/nre-learning/nrelabs-curriculum/pull/254)
 
 ## v0.3.2 - April 19, 2019
 
