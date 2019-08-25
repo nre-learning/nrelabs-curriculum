@@ -11,6 +11,7 @@ tags:
 - BASH
 - scripting
 - linux
+collection: 9 # PacketPushers
 
 endpoints:
 - name: linux1
