@@ -2,6 +2,7 @@
 
 ## In development
 
+- Updated collection in BASH lesson file to 9 (PacketPushers)
 
 ## v1.0.0 - August 08, 2019
 
