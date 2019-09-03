@@ -2,6 +2,9 @@
 
 ## In development
 
+
+## master - September 03, 2019
+
 - Added Cumulus PTR demo [#253](https://github.com/nre-learning/nrelabs-curriculum/pull/253)
 - Updated collection in BASH lesson file to 9 (PacketPushers)
 
