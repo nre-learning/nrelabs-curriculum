@@ -14,5 +14,5 @@ for image in *.img; do
   version=$TARGET_VERSION
 
   echo "Building container $target:$version ... "
-  docker build -f Dockerfile.junos --build-arg image=$image --build-arg ocpkg=$ocpkg -t $target:$version .
+  docker build --pull --no-cache -f Dockerfile.junos --build-arg image=$image --build-arg ocpkg=$ocpkg -t $target:$version .
 done
