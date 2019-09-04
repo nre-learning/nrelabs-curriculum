@@ -5,5 +5,5 @@ TARGET_VERSION ?= latest
 all: docker
 
 docker:
-	docker build -t antidotelabs/terraform:$(TARGET_VERSION) .
+	docker build --pull --no-cache -t antidotelabs/terraform:$(TARGET_VERSION) .
 	docker push antidotelabs/terraform:$(TARGET_VERSION)

@@ -3,7 +3,8 @@
 ## In development
 
 - Added Cumulus PTR demo [#253](https://github.com/nre-learning/nrelabs-curriculum/pull/253)
-- Updated collection in BASH lesson file to 9 (PacketPushers)
+- Updated collection in BASH lesson file to 9 (PacketPushers) [#258](https://github.com/nre-learning/nrelabs-curriculum/pull/258)
+- Disable caching for all image builds [#260](https://github.com/nre-learning/nrelabs-curriculum/pull/260)
 
 ## v1.0.0 - August 08, 2019
 

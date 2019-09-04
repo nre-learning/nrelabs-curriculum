@@ -3,7 +3,7 @@
 target=antidotelabs/container-vqfx
 ocpkg=$(ls junos-openconfig-*.tgz)
 
-docker build -f src/Dockerfile -t container-vqfx src
+docker build --pull --no-cache -f src/Dockerfile -t container-vqfx src
 
 for image in *.img; do
 
@@ -14,5 +14,5 @@ for image in *.img; do
   version=$TARGET_VERSION
 
   echo "Building container $target:$version ... "
-  docker build -f Dockerfile.junos --build-arg image=$image --build-arg ocpkg=$ocpkg -t $target:$version .
+  docker build --no-cache -f Dockerfile.junos --build-arg image=$image --build-arg ocpkg=$ocpkg -t $target:$version .
 done
