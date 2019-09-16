@@ -1,0 +1,32 @@
+---
+lessonName: Editing Remote Files with Python
+lessonId: 40
+category: workflows
+tier: ptr
+description: |
+  TBD - TBD - TBD - TBD
+
+slug: editing-remote-files-python
+tags:
+- security
+
+endpoints:
+
+- name: webserver
+  image: antidotelabs/webserver
+  presentations:
+  - name: web
+    port: 8080
+    type: http
+
+- name: linux
+  image: antidotelabs/utility
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+stages:
+
+  - id: 1
+    description: Example Stage

@@ -1,0 +1,42 @@
+---
+lessonName: Ensuring Consistency of ACLs between Firewalls
+lessonId: 39
+category: workflows
+tier: ptr
+description: |
+  TBD - TBD - TBD - TBD
+
+slug: firewall-consistency
+tags:
+- security
+
+endpoints:
+
+- name: vsrx1
+  image: antidotelabs/vsrx
+  presentations:
+  - name: web
+    port: 8080
+    type: http
+
+- name: vsrx2
+  image: antidotelabs/vsrx
+  presentations:
+  - name: web
+    port: 8080
+    type: http
+
+- name: linux
+  image: antidotelabs/utility
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+connections:
+- a: vsrx1
+  b: vsrx2
+
+stages:
+  - id: 1
+    description: Example Stage
