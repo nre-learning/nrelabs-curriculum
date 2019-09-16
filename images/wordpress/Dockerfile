@@ -15,10 +15,13 @@ ADD ports.conf /etc/apache2/ports.conf
 RUN cd /var/www/html \
     && wget -c https://wordpress.org/latest.tar.gz \
     && tar -xzvf latest.tar.gz \
-    && chown -R www-data:www-data /var/www/html/wordpress \
-    && rm -rf /var/www/html/latest.tar.gz
+    && chown -R www-data:www-data /var/www/html \
+    && rm -rf /var/www/html/latest.tar.gz \
+    && mv wordpress/* . \
+    && rm -rf wordpress/ \
+    rm index.html
 
-ADD wp-config.php /var/www/html/wordpress/wp-config.php
+ADD wp-config.php /var/www/html/wp-config.php
 
 # https://wp-cli.org/
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
