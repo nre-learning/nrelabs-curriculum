@@ -1,4 +1,4 @@
-## Editing Remote Files with Python
+## Working with Remote Systems in Python
 
 ---
 

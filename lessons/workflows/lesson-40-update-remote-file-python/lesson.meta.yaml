@@ -1,14 +1,15 @@
 ---
-lessonName: Editing Remote Files with Python
+lessonName: Working with Remote Systems in Python
 lessonId: 40
 category: workflows
 tier: ptr
 description: |
   TBD - TBD - TBD - TBD
 
-slug: editing-remote-files-python
+slug: working-remote-systems-python
 tags:
-- security
+- automation
+- python
 
 endpoints:
 
