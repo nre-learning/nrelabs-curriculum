@@ -36,6 +36,7 @@ RUN echo "export VISIBLE=now" >> /etc/profile
 RUN gem install wpscan
 
 RUN wpscan --update
+RUN su - antidote -c "wpscan --update"
 
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]

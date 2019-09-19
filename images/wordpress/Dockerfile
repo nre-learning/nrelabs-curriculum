@@ -22,12 +22,12 @@ RUN cd /var/www/html \
     rm index.html
 
 ADD wp-config.php /var/www/html/wp-config.php
+ADD functions.php /var/www/html/wp-content/themes/twentynineteen
 
 # https://wp-cli.org/
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
     && chmod +x wp-cli.phar \
     && mv wp-cli.phar /usr/local/bin/wp
-
 
 # Antidote user
 # RUN mkdir -p /home/antidote
@@ -37,8 +37,6 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 # RUN echo 'antidote:antidotepassword' | chpasswd
 # USER antidote
 # WORKDIR /home/antidote
-
-EXPOSE 80
 
 ADD start-wp.sh /home/antidote/start-wp.sh
 CMD ["/home/antidote/start-wp.sh"]

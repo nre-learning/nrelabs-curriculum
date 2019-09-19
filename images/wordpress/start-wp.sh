@@ -17,4 +17,10 @@ wp --allow-root core install \
     --admin_password="Wordpress@2019" \
     --admin_email="wordpress@lab.local"
 
+# SYRINGE_FULL_REF=foobar sed -i "s/{{SYRINGE_FULL_REF}}/${SYRINGE_FULL_REF}/" /var/www/html/wp-content/themes/twentynineteen/functions.php
+
+a2enmod proxy
+a2enmod proxy_http
+a2enmod rewrite
+
 /usr/sbin/apache2ctl -DFOREGROUND
