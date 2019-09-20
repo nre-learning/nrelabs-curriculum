@@ -2,6 +2,13 @@
 
 mount -o rw,remount /sys
 
+random_mac () {
+    hexchars="0123456789abcdef"
+    end=$( for i in {1..6} ; do echo -n ${hexchars:$(( $RANDOM % 16 )):1} ; done | sed -e 's/\(..\)/:\1/g' )
+
+    # QEMU OUI space - important to use this
+    echo 52:54:00$end
+}
 
 ethlist=$(ls /sys/class/net | grep 'net' | grep -v 'eth0')
 
@@ -28,23 +35,23 @@ do
     # Enable LLDP
     echo 16384 > /sys/class/net/$bridge/bridge/group_fwd_mask
 
-    NETDEVS="$NETDEVS -netdev tap,id=dev$COUNTER,ifname=$tap,script=no,downscript=no -device virtio-net-pci,netdev=dev$COUNTER,id=swp$COUNTER1,mac=$(random_mac),multifunction=on,addr=6.$COUNTER"
+    if [ $COUNTER -eq 0 ]; then
+        mf=on
+    else
+        mf=off
+    fi
+
+    NETDEVS="$NETDEVS -netdev tap,id=dev$COUNTER,ifname=$tap,script=no,downscript=no -device virtio-net-pci,netdev=dev$COUNTER,id=swp$COUNTER1,mac=$(random_mac),multifunction=$mf,addr=6.$COUNTER"
     let COUNTER=COUNTER+1 
 done
 
+printf "%s\n" $NETDEVS
 
 screen -d -m socat TCP-LISTEN:22,fork TCP:127.0.0.1:2022
 screen -d -m socat UDP-LISTEN:161,fork UDP:127.0.0.1:2161
 screen -d -m socat TCP-LISTEN:830,fork TCP:127.0.0.1:2830
 screen -d -m socat TCP-LISTEN:8080,fork TCP:127.0.0.1:2880
 
-random_mac () {
-    hexchars="0123456789abcdef"
-    end=$( for i in {1..6} ; do echo -n ${hexchars:$(( $RANDOM % 16 )):1} ; done | sed -e 's/\(..\)/:\1/g' )
-
-    # QEMU OUI space - important to use this
-    echo 52:54:00$end
-}
 
 
 /usr/bin/qemu-system-x86_64 \
