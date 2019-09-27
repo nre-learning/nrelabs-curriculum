@@ -1,0 +1,77 @@
+---
+lessonName: Cumulus in NRELabs
+lessonId: 90
+category: fundamentals
+lessondiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-99/lessondiagram.png
+tier: ptr
+prereqs:
+  - 22  # Python
+  - 23  # Linux
+description: Cumulus in NRELabs
+slug: Cumulus demo
+tags:
+- troubleshooting
+- tshoot
+
+endpoints:
+- name: linux1
+  image: antidotelabs/utility
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: linux2
+  image: antidotelabs/utility
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: linux3
+  image: antidotelabs/utility
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: hub
+  image: antidotelabs/frr
+  configurationType: python
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: branch-1
+  image: antidotelabs/frr
+  configurationType: python
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: branch-2
+  image: antidotelabs/frr
+  configurationType: python
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+connections:
+- a: hub
+  b: branch-1
+- a: hub
+  b: branch-2
+- a: hub
+  b: linux1
+- a: branch-1
+  b: linux2
+- a: branch-2
+  b: linux3
+
+stages:
+  - id: 1
+    description: FRR in NRELabs
+
