@@ -2,6 +2,7 @@
 
 ## In development
 
+- Added FRR PTR demo [#273](https://github.com/nre-learning/nrelabs-curriculum/pull/273)
 - Fixed Cumulus PTR demo [#271](https://github.com/nre-learning/nrelabs-curriculum/pull/271)
 - Added Cumulus PTR demo [#253](https://github.com/nre-learning/nrelabs-curriculum/pull/253)
 - Updated collection in BASH lesson file to 9 (PacketPushers) [#258](https://github.com/nre-learning/nrelabs-curriculum/pull/258)
