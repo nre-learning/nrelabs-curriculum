@@ -1,4 +1,5 @@
 import paramiko
+from glob import glob
 import os
 from scp import SCPClient
 
@@ -21,15 +22,10 @@ ssh.exec_command("sudo printf '%s' 'hub' > /etc/hostname")
 ssh.exec_command("sudo hostname hub")
 
 #Copy configuration files over
-scp.put('/antidote/stage1/configs/hub/interfaces', '/home/antidote/interfaces')
-scp.put('/antidote/stage1/configs/hub/daemons', '/home/antidote/daemons')
-scp.put('/antidote/stage1/configs/hub/*.conf', '/home/antidote/*.conf')
 
-
-ssh.exec_command('sudo cp /home/antidote/interfaces /etc/network/interfaces')
-ssh.exec_command('sudo cp /home/antidote/daemons /etc/frr/daemons')
-ssh.exec_command('sudo cp /home/antidote/*.conf /etc/frr/*.conf')
-
+ssh.exec_command('sudo cp /antidote/stage1/configs/hub/interfaces /etc/network/interfaces')
+ssh.exec_command('sudo cp /antidote/stage1/configs/hub/daemons /etc/frr/daemons')
+ssh.exec_command('sudo cp /antidote/stage1/configs/hub/*.conf /etc/frr')
 
 ssh.exec_command('sudo chown frr:frr /etc/frr/*.conf')
 ssh.exec_command('sudo chown frr:frrvty /etc/frr/vtysh.conf')
@@ -37,7 +33,7 @@ ssh.exec_command('sudo chmod 640 /etc/frr/*.conf')
 
 #Restart FRR and bump interfaces
 ssh.exec_command('sudo systemctl restart frr.service')
-ssh.exec_command('sudo ifreload -a')
+ssh.exec_command('sudo systemctl restart networking -a')
 
 scp.close()
 ssh.close()

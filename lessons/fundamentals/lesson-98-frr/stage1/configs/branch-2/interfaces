@@ -1,23 +1,14 @@
 auto lo
 iface lo inet loopback
+
+auto lo:0
+iface lo:0 inet static
     address 10.1.1.3/32
 
-auto eth0
-iface eth0 inet dhcp
-    vrf mgmt
+auto enp0s3f0 
+iface enp0s3f0 inet dhcp
 
-auto mgmt
-iface mgmt
-    address 127.0.0.1/8
-    vrf-table auto
-
-auto swp1 
-allow-uplink swp1
-iface swp1 inet static
+auto enp0s3f1 
+iface enp0s3f1 inet static
     address 10.10.20.2/30
-
-auto swp2
-allow-uplink swp2
-iface swp2 inet static
-    address 10.10.200.1/30
 

@@ -35,16 +35,12 @@ do
     # Enable LLDP
     echo 16384 > /sys/class/net/$bridge/bridge/group_fwd_mask
 
-    NETDEVS="$NETDEVS -netdev tap,id=dev$COUNTER,ifname=$tap,script=no,downscript=no -device virtio-net-pci,netdev=dev$COUNTER,id=eth$COUNTER1,mac=$(random_mac),addr=1.$COUNTER1"
+    NETDEVS="$NETDEVS -netdev tap,id=dev$COUNTER,ifname=$tap,script=no,downscript=no -device virtio-net-pci,netdev=dev$COUNTER,id=eth$COUNTER1,mac=$(random_mac),multifunction=off,addr=3.$COUNTER1"
     let COUNTER=COUNTER+1 
 done
 
 printf "%s\n" $NETDEVS
 
-screen -d -m socat TCP-LISTEN:22,fork TCP:127.0.0.1:2022
-screen -d -m socat UDP-LISTEN:161,fork UDP:127.0.0.1:2161
-screen -d -m socat TCP-LISTEN:830,fork TCP:127.0.0.1:2830
-screen -d -m socat TCP-LISTEN:8080,fork TCP:127.0.0.1:2880
 
 
 
@@ -52,11 +48,13 @@ screen -d -m socat TCP-LISTEN:8080,fork TCP:127.0.0.1:2880
  --enable-kvm \
  -cpu host \
  -display none \
- -machine pc \
+ -machine q35 \
  -m 2048 \
  -serial telnet:0.0.0.0:5000,server,nowait \
+ -monitor telnet:0.0.0.0:4000,server,nowait \
  -drive if=ide,file=/frr.qcow2,index=0 \
- -net nic,model=virtio-net-pci,macaddr=$(random_mac),addr=1.0 \
- -net user,net=10.0.0.0/24,tftp=/tftpboot,hostfwd=tcp::2022-10.0.0.15:22,hostfwd=udp::2161-10.0.0.15:161,hostfwd=tcp::2830-10.0.0.15:830,hostfwd=tcp::2880-10.0.0.15:8080 \
+ -virtfs local,path=/antidote,security_model=passthrough,mount_tag=antidote \
+ -netdev user,id=user,net=10.0.0.0/24,hostfwd=tcp::22-10.0.0.15:22,hostfwd=tcp::830-10.0.0.15:830 \
+ -device virtio-net-pci,netdev=user,mac=$(random_mac),multifunction=on,addr=3.0 \
  $NETDEVS
 

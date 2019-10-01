@@ -1,15 +1,14 @@
 auto lo
 iface lo inet loopback
+
+auto lo:0
+iface lo:0 inet static
     address 10.1.1.2/32
 
-auto enp1s0
-iface enp1s0 inet dhcp
+auto enp0s3f0
+iface enp0s3f0 inet dhcp
 
-auto enp1s1
-iface enp1s1 inet static
+auto enp0s3f1
+iface enp0s3f1 inet static
     address 10.10.10.2/30
-
-auto enp1s2
-iface enp1s2 inet static
-    address 10.10.100.1/30
 
