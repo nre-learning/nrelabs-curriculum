@@ -1,4 +1,4 @@
-FROM centos
+FROM centos:7
 
 WORKDIR /root
 RUN yum install -y gcc gcc-c++ make epel-release bzip2 iproute openssh-server \
