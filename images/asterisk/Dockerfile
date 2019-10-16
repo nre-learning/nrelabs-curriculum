@@ -4,7 +4,7 @@
 #    Edit the /etc/yum.repos.d/tucny-asterisk.repo and set 'enabled=1' for 'asterisk-common' and the version of asterisk you want to use
 #    Install the packages you want. 'dnf install asterisk' or 'yum install asterisk' can get you started.
 
-FROM centos
+FROM centos:7
 
 RUN yum install -y iproute epel-release lshw openssh-server \
     && yum install -y wget \

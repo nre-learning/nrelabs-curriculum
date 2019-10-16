@@ -1,4 +1,4 @@
-FROM centos
+FROM centos:7
 
 RUN yum install -y https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/pgdg-centos96-9.6-3.noarch.rpm
 RUN yum install -y epel-release
