@@ -2,6 +2,7 @@
 
 ## In development
 
+- Add spelling checks in CI pipeline [#276](https://github.com/nre-learning/nrelabs-curriculum/pull/276)
 - Set tshoot lesson images to use centos7 [#275](https://github.com/nre-learning/nrelabs-curriculum/pull/275)
 - Added FRR PTR demo [#273](https://github.com/nre-learning/nrelabs-curriculum/pull/273)
 - Fixed Cumulus PTR demo [#271](https://github.com/nre-learning/nrelabs-curriculum/pull/271)
