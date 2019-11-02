@@ -91,6 +91,6 @@ show firewall log
 
 The firewall log should capture the ping traffic. This verifies a firewall filter can be automatically provisioned to the interface dynamically without modifying the Junos configuration.
 
-This JET API automation capability opens up a whole new world to design and develop business logics within the network, such as customized traffic engineering, dynamic network protection, and so on.
+This JET API automation capability opens up a whole new world to design and develop business logic within the network, such as customized traffic engineering, dynamic network protection, and so on.
 
 This concludes our introduction to closed-loop automation using JET services and we hope you enjoy this course!

@@ -6,12 +6,12 @@
 
 ### Part 2 - Multiple Devices
 
-The examples in the previous lesson were purposefully simple so the basic concepts could be described in a way that is easy to understand. In this section we will create a template generator that creates device specific configurations for mulitple devices.
+The examples in the previous lesson were purposefully simple so the basic concepts could be described in a way that is easy to understand. In this section we will create a template generator that creates device specific configurations for multiple devices.
 
 The sample project we will use is deploying a large number of access switches. When deploying devices it is common for them to have a base configuration to include hostname, management IP address and a default gateway.
 
 #### Device Template File
-In this section we will use the same template file that we used in the previous lesson. Look for the template variables in all captial letters surrounded by double curly brackets, for example **{{ HOSTNAME }}**. Pay attention to these variables because they will be set to specific values in the next section using YAML.
+In this section we will use the same template file that we used in the previous lesson. Look for the template variables in all capital letters surrounded by double curly brackets, for example **{{ HOSTNAME }}**. Pay attention to these variables because they will be set to specific values in the next section using YAML.
 <pre>
 cd /antidote/stage2
 more template.j2
@@ -69,7 +69,7 @@ template = Template(template_data)
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
-Lastly we will render the template based on the data from the YAML file. Since we are dealing with multiple devices we have to use a loop to process each device defined in the YAML file. The loop will run through the `my_vars` list processing each element one at a time, making the substitutions of the key/value pairs until there arent any elements left.
+Lastly we will render the template based on the data from the YAML file. Since we are dealing with multiple devices we have to use a loop to process each device defined in the YAML file. The loop will run through the `my_vars` list processing each element one at a time, making the substitutions of the key/value pairs until there aren't any elements left.
 
 <pre>
 for device in my_vars:
@@ -115,7 +115,7 @@ cat ex4300-3.conf
 The session is complete but if you want to play around on your own, here are a couple of things to try.
 
 1. Add another device to variables.yml file and regenerate the configuration files
-2. Add a line to the template.j2 file with a new variable, add the coresponding variable to variables.yml and regenerate the configuration files
+2. Add a line to the template.j2 file with a new variable, add the corresponding variable to variables.yml and regenerate the configuration files
 
 Regenerating the configuration files can be done using the `build-configs.py` script.
 <pre>

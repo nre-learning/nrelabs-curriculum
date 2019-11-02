@@ -11,7 +11,7 @@ infrastructure, including networks. Salt is open source and it comes packaged wi
 
 Salt has a server-agent architecture where the Salt Master is the server and the agent is installed in the Salt Minions. The role of the Salt Master is to manage the state of the infrastructure.
 
-The Salt Master and the Salt Minion can run on seprate machines or can run on the same machine itself. In our case, the Salt Master and Minion are running on the same machine. We'll begin by making sure the `salt-minion` and `salt-master` services are started:
+The Salt Master and the Salt Minion can run on separate machines or can run on the same machine itself. In our case, the Salt Master and Minion are running on the same machine. We'll begin by making sure the `salt-minion` and `salt-master` services are started:
 
 ```
 service salt-master restart

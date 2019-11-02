@@ -57,5 +57,5 @@ Now let's run it with just three parameters to see what happens.
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 
-Excellent!  Now let's try another way you can pass parameters to a BASH script with the 'getopts' builtin BASH utility.
+Excellent!  Now let's try another way you can pass parameters to a BASH script with the 'getopts' built-in BASH utility.
 

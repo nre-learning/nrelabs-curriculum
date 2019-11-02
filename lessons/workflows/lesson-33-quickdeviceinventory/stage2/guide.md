@@ -50,7 +50,7 @@ print("HOSTNAME;MODEL;SERIAL-NUMBER;JUNOS-VERSION")
 
 Now this is where the magic happens!  We are going to create a `for` loop so we can perform a series of actions on each device in the list (i.e. YAML file). The first thing we do is create the `dev` variable that includes the device hostname and login credentials. Next we `open` a NETCONF connection to the device so we can query the `facts`. 
 
-Then we `print` the specific keys from the facts dictionary on the same line separated by a semicolon. Thats it and all that is left is to `close` the connection to the device.
+Then we `print` the specific keys from the facts dictionary on the same line separated by a semicolon. That's it and all that is left is to `close` the connection to the device.
 
 <pre>
 for device in deviceList:

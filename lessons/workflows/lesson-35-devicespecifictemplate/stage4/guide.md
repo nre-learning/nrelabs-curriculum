@@ -6,7 +6,7 @@
 
 ### Part 4  - Push Template to Device
 
-After you generate a template configuration the next step is to push the configuration to a device or a series for devices so thats what we will do in this lesson. The sample project we will use is we have to generate a number of VLANs and then push them to a few QFX switches.
+After you generate a template configuration the next step is to push the configuration to a device or a series for devices so that's what we will do in this lesson. The sample project we will use is we have to generate a number of VLANs and then push them to a few QFX switches.
 
 First lets see what VLANs are already configured on the QFX switches, starting with vqfx1:
 <pre>
@@ -105,7 +105,7 @@ for device in deviceList:
   cfg=Config(device)
   cfg.load(path='new-vlans.conf', format='text')
   if cfg.commit() == True:
-     print ('configuration commited on ' + device.facts["hostname"])
+     print ('configuration committed on ' + device.facts["hostname"])
   else:
      print ('commit failed on ' + device.facts["hostname"])
      device.close()

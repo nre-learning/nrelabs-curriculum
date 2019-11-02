@@ -52,7 +52,7 @@ print dev.facts['hostname'] + ";" + dev.facts['model']
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-Thats it....Easy Peasy Lemon squeezy!! :)
+That's it....Easy Peasy Lemon squeezy!! :)
 
 In the next lab, we'll take these same concepts to support gathering information from multiple devices.
 

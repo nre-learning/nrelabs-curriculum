@@ -73,7 +73,7 @@ Now that the template is defined we will render the config template for each dev
 The Python `enumerate()` function keeps a count of loop index so that we can print the number of device we are looping over, so we can keep track of the configs in our output.
 
 `%s` in the first print statement will take the value of `device_number` for the devices in `all_devices`.
-In case you are wondering what is `print('-'*30)`, it is just to make the output more presenatable, you will see when you run the below snippet!!
+In case you are wondering what is `print('-'*30)`, it is just to make the output more presentable, you will see when you run the below snippet!!
 
 <pre>
 for dev_number, device in enumerate(all_devices, 1):

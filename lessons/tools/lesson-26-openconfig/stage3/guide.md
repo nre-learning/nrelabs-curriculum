@@ -10,7 +10,7 @@ OpenConfig supports a variety of data models including BGP, interfaces, routing,
 
 Yang is a data modeling language for the Netconf protocol. For information about Yang, see [RFC 6020](https://tools.ietf.org/html/rfc6020).
 
-As discussed in the beginning of the course, the YANG configuration will be converted to device specific configuration via a translation mechanism. In Junos this translation mechansim is implemented by translation scripts.
+As discussed in the beginning of the course, the YANG configuration will be converted to device specific configuration via a translation mechanism. In Junos this translation mechanism is implemented by translation scripts.
 
 #### Custom YANG Modules with Junos
 Juniper offers OpenConfig translation scripts to convert OpenConfig based configuration data into Junos.

@@ -78,7 +78,7 @@ Another advantage of using JSNAPy is, due to the fact that it uses XPath to loca
 
 The XPath expression `//bgp-peer` matches all BGP peers configured on the device. Once these are located, the actual test being run is that the node `bgp-option-information/authentication-configured` exists. This is what Junos places in the body of the response to the RPC `get-bgp-neighbor-information` when a certain peer is configured with authentication.
 
-Since our BGP peers are not configured with authentication, our previous testrun failed. Let's first get our device compliant once more:
+Since our BGP peers are not configured with authentication, our previous test run failed. Let's first get our device compliant once more:
 
 ```
 configure
