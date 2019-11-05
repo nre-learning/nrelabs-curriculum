@@ -8,6 +8,7 @@ matrix:
           packages:
             - aspell
             - aspell-en
+            - dictionaries-common
       script:
         - ./check-spelling.sh
     
