@@ -1,0 +1,28 @@
+---
+lessonName: Network Validation with Batfish
+lessonId: 60
+category: tools
+lessonDiagram: https://github.com/batfish/pybatfish/blob/master/jupyter_notebooks/networks/example/example-network.png
+lessonVideo: https://www.youtube.com/embed/Ca7kPAtfFqo
+tier: prod
+prereqs:
+  - 22  # Python
+description: Batfish is a powerful network configuration analysis tool, that enables pre-deployment validation for network configuration changes. We'll cover the basics in this lesson.
+collection: 15
+
+slug: Batfish
+tags:
+- network automation
+- batfish
+- network validation
+
+endpoints:
+
+- name: batfish
+  image: batfish/allinone
+  additionalPorts: [9996, 9997]
+
+stages:
+  - id: 1
+    description: Getting Started with Batfish
+    jupyterLabGuide: true
