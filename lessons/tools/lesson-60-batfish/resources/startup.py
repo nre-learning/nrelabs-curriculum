@@ -27,6 +27,7 @@ pd.set_option('display.html.use_mathjax', False)
 # Keeps our notebook HTML deterministic when displaying dataframes
 _STYLE_UUID = "pybfstyle"
 
+bf_session.host = 'batfish'
 
 class MyStyler(Styler):
     """A custom styler for displaying DataFrames in HTML"""
