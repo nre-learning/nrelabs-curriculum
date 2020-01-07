@@ -1,7 +1,7 @@
 FROM kalilinux/kali-linux-docker
 
 RUN apt-get update && apt-get install -y openssh-server \
-    zlib1g-dev libcurl4-openssl-dev libxml2 libxml2-dev libxslt1-dev ruby-dev build-essential
+    zlib1g-dev libcurl4-openssl-dev libxml2 libxml2-dev libxslt1-dev ruby-dev build-essential wordlists
 
 # python \
 #     python-pip dnsutils iputils-ping git vim curl util-linux sshpass nano jq sudo
