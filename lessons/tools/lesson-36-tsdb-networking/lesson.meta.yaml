@@ -1,0 +1,64 @@
+---
+lessonName: Using a Time-Series Database for Network Metrics
+lessonId: 36
+category: tools
+# lessonDiagram: <<<   THIS IS A UNIQUE TOPOLOGY, SO BE SURE TO MAKE THIS   >>>
+prereqs:
+  - 23  # Linux
+description: In this lesson, we'll explore the benefits of using a modern time-series database for storing and analyzing network metrics.
+slug: tsdb-networking
+tags:
+- monitoring
+- metrics
+- tsdb
+- influxdb
+- grafana
+
+endpoints:
+
+- name: influxdb
+  image: antidotelabs/influxdb
+  additionalPorts: [6443]
+
+# grafana?
+
+- name: linux1
+  image: antidotelabs/utility
+  configurationType: ansible
+  configuration:
+    type: none
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: linux2
+  image: antidotelabs/utility
+  configurationType: ansible
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: vqfx1
+  image: antidotelabs/vqfx-snap1
+  configurationType: napalm-junos
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+connections:
+- a: linux1
+  b: vqfx1
+- a: vqfx1
+  b: linux2
+
+stages:  #WIP
+  - id: 1
+    description: Ingesting Network Data with Telegraf
+  - id: 2
+    description: Working with the influxdb client to make queries
+  - id: 3
+    description: Visualizing data with grafana
+
