@@ -23,6 +23,16 @@ git init
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
+Before we go further, we should tell Git some information about us. At a minimum, in order to make commits, we need to provide a username and an email address:
+
+```
+git config --global user.email "jane@labs.networkreliability.engineering"
+git config --global user.name "Jane Doe"
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
+
+The `--global` flag sets this in your Git configuration for the entire machine. You can omit this flag to only set it for this repository. This information is used to identify who has made changes to the files in the repository.
+
 A Git repository is nothing without some files to manage. Let's create a text file and add some text to it:
 
 ```
@@ -51,7 +61,7 @@ Once we've used `git add` to include all the changes we want to commit into stag
 ```
 git commit -m "My first commit!"
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1',5)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 > Note the use of the `-m` flag to specify the commit message inline - you can omit this if you wish, and Git will open a text editor for you to specify your commit message
 

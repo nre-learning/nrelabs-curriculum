@@ -192,7 +192,7 @@ We'll turn the brunt of our code into a Python function for the checking done ab
 
 At the end of our function, we'll return our pass/fail grade.
 
-```
+```python
 cat >> V_3969.py << EOF
 def NET0894(device):
     """
@@ -220,7 +220,7 @@ def NET0894(device):
             print "IS NOT RESTRICTED TO READ-ONLY ACCESS"
 
             # print some informaiton on how to fix the problem
-            print "JUNOS FIX: set snmp community {}".format(mydev.name),
+            print "JUNOS FIX: set snmp community {}".format(mydev.name)
             print "authorization read-only"
             print "\n"
 
@@ -241,7 +241,7 @@ EOF
 
 Then we'll add the main loop.  First it will define our PyEZ Device for `vqfx1`, then call our function using this device as the argument.  Then depending on what we receive back from our function, we'll print an overall pass/fail grade, and finallly nicely close the connection to `vqfx1`.
 
-```
+```python
 cat >> V_3969.py << EOF
 # define a PyEz junos device for vqfx1
 dev = Device(host="vqfx1",
@@ -253,7 +253,7 @@ dev.open()
 
 # Evaluate it and save the results in a variable pass_fail
 pass_fail = NET0894(dev)
-print "VULNERABILITY ASSESSMENT FOR {}".format(dev.hostname),
+print "VULNERABILITY ASSESSMENT FOR {}".format(dev.hostname)
 print "FOR V-3969: ",
 if pass_fail:
     print "PASSED"
@@ -301,6 +301,7 @@ And at last we can run our script.
 
 So let's fix our problems that we introduced, and re-run our script.  Note that our script actually told us the commands we 
 need in order to fix the issues that were found.
+
 ```
 configure
 set snmp community public authorization read-only
@@ -313,6 +314,7 @@ commit and-quit
 ```
 ./V_3969.py
 ```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 This check is relatively simple, but can be used as a starting point or a building block to do much more complicated security assessments.
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
+

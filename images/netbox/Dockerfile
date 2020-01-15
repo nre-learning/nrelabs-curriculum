@@ -1,11 +1,13 @@
-FROM centos
+FROM centos:7
 
-RUN yum install -y https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/pgdg-centos96-9.6-3.noarch.rpm \
-    && yum install -y postgresql96 postgresql96-server postgresql96-devel \
-    && yum install -y epel-release \
-    && yum install -y iproute gcc python34 python34-devel python34-setuptools libxml2-devel libxslt-devel libffi-devel graphviz openssl-devel redhat-rpm-config wget \
-    && easy_install-3.4 pip \
-    && wget https://github.com/digitalocean/netbox/archive/v2.4.5.tar.gz \
+RUN yum install -y https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/pgdg-centos96-9.6-3.noarch.rpm
+RUN yum install -y epel-release
+RUN yum install -y postgresql96 postgresql96-server postgresql96-devel \
+    iproute gcc python36 python36-devel python36-setuptools libxml2-devel \
+    libxslt-devel libffi-devel graphviz openssl-devel redhat-rpm-config wget
+RUN easy_install-3.6 pip
+
+RUN wget https://github.com/digitalocean/netbox/archive/v2.4.5.tar.gz \
     && tar -xzf v2.4.5.tar.gz -C /opt \
     && cd /opt/ \
     && ln -s netbox-2.4.5/ netbox \
@@ -18,8 +20,8 @@ RUN yum install -y https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel
     && sed -i "/PostgreSQL username/s/''/'netbox'/" configuration.py \
     && sed -i "/PostgreSQL password/s/''/'netbox'/" configuration.py \
     && sed -i "/^SECRET_KEY/s/''/'abcdefghijklmnopqrstuvwxyz0123456789ANTIDOTELABS!!'/" configuration.py \
-    && sed -i "/^NAPALM_USERNAME/s/''/'vrnetlab'/" configuration.py \
-    && sed -i "/^NAPALM_PASSWORD/s/''/'VR-netlab9'/" configuration.py \
+    && sed -i "/^NAPALM_USERNAME/s/''/'antidote'/" configuration.py \
+    && sed -i "/^NAPALM_PASSWORD/s/''/'antidotepassword'/" configuration.py \
     && sed -i "/^PREFER_IPV4/s/False/True/" configuration.py \
     && su - postgres -c "/usr/pgsql-9.6/bin/initdb -D /var/lib/pgsql/9.6/data" \
     && su - postgres -c "/usr/pgsql-9.6/bin/pg_ctl start -w -D /var/lib/pgsql/9.6/data" \
@@ -33,7 +35,7 @@ RUN yum install -y https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel
     && python3 manage.py collectstatic --no-input \
     && python3 manage.py loaddata initial_data \
     && su - postgres -c "/usr/pgsql-9.6/bin/pg_ctl stop -D /var/lib/pgsql/9.6/data" \
-    && yum erase -y epel-release postgresql96-devel gcc python34-devel libxml2-devel libxslt-devel openssl-devel redhat-rpm-config wget \
+    && yum erase -y epel-release postgresql96-devel gcc python36-devel libxml2-devel libxslt-devel openssl-devel redhat-rpm-config wget \
     && yum -y autoremove \
     && yum clean all \
     && rm -rf /var/cache/yum
