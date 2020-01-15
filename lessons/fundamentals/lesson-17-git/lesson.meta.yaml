@@ -15,14 +15,25 @@ tags:
 endpoints:
 - name: linux1
   image: antidotelabs/utility
+  configurationType: ansible
   presentations:
   - name: cli
     port: 22
     type: ssh
 
+- name: gitlab
+  image: antidotelabs/utility
+  presentations:
+  - name: web
+    port: 8880
+    type: http
+
 stages:
   - id: 1
-    description: Your first commit
-
-  # 2:
-  #   What about Github? (a.k.a. Git remotes)
+    description: Creating a Repository
+  - id: 2
+    description: Adding and Comitting Files
+  - id: 3
+    description: Parallel Work with Git branches
+  - id: 4
+    description: Collaboration with a Git Remote
