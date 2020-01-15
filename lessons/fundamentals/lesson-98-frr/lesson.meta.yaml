@@ -1,0 +1,50 @@
+---
+lessonName: Introduction to Free-Range Routing (FRR)
+lessonId: 98
+category: fundamentals
+lessondiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-98/lessondiagram.png
+tier: ptr
+prereqs:
+  - 22  # Python
+  - 23  # Linux
+description: FRR in NRELabs
+slug: FRR demo
+tags:
+- troubleshooting
+- tshoot
+
+endpoints:
+- name: hub
+  image: antidotelabs/frr
+  configurationType: python
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: branch-1
+  image: antidotelabs/frr
+  configurationType: python
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: branch-2
+  image: antidotelabs/frr
+  configurationType: python
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+connections:
+- a: hub
+  b: branch-1
+- a: hub
+  b: branch-2
+
+stages:
+  - id: 1
+    description: FRR in NRELabs
+

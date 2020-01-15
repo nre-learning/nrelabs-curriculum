@@ -1,0 +1,14 @@
+---
+id: 3
+title: General Datatech (GDT)
+image: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/collections/gdt/gdt.jpg
+website: https://www.gdt.com/
+
+# Why should users view your collection?
+briefDescription: GDT - Design, Build, Deliver, and Manage IT.
+
+# Why should users continue and view your lessons?
+longDescription: General Datatech (GDT) is an award-winning global IT integrator and solutions provider that aligns itself with industry leaders, including HPE, Cisco, Dell EMC, Juniper Networks, F5 Networks, Pure Networks, VMware, Citrix, AWS, Microsoft Azure, and dozens of others. Our solutions architects and engineers design, build, deliver and manage IT solutions and services for customers of all sizes and from a wide variety of industries. 
+
+type: consultancy
+tier: ptr

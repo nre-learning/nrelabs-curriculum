@@ -1,0 +1,55 @@
+---
+lessonName: Junos Automation with PyEZ
+lessonId: 24
+category: tools
+tier: prod
+prereqs:
+  - 14  # YAML
+  - 22  # Python
+  - 23  # Linux
+description: PyEZ is a powerful Python library for interacting with Junos devices. In this lesson, we'll explore the use of this library to collect and parse information from our Junos-based network, as well as perform configuration management tasks.
+slug: PyEZ
+tags:
+- pyez
+- python
+- junos
+- library
+collection: 1
+
+endpoints:
+
+- name: vqfx
+  image: antidotelabs/vqfx-snap1
+  configurationType: napalm-junos
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+  additionalPorts: [830]
+
+- name: linux
+  image: antidotelabs/utility
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+connections:
+- a: vqfx
+  b: linux
+
+stages:
+  - id: 1
+    description: Introduction
+
+  - id: 2
+    description: Collect Data from Junos Devices
+
+  - id: 3
+    description: Parse Information
+
+  - id: 4
+    description: Configuration Management
+
+  - id: 5
+    description: PyEZ Tables and Views

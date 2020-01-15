@@ -1,6 +1,6 @@
 # docker build -f Dockerfile -t antidotelabs/vqfx .
 
-# docker run -p 2202:22 --privileged --rm --name vqfx -v /Users/mierdin/Code/GO/src/github.com/nre-learning/antidote/images/vqfx:/dockervolume antidotelabs/vqfx
+# docker run -p 2202:22 --privileged --rm --name vqfx -v /Users/mierdin/Code/GO/src/github.com/nre-learning/nrelabs-curriculum/images/vqfx:/dockervolume antidotelabs/vqfx
 
 # docker push antidotelabs/vqfx
 
