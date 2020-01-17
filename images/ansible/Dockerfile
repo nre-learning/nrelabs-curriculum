@@ -2,7 +2,7 @@ FROM centos:8
 
 RUN yum --enablerepo=extras -y install epel-release
 RUN yum update -y
-RUN yum install -y openssh-server git vim nano jq python3-pip
+RUN yum install -y openssh-server git vim nano jq python3-pip sshpass
 RUN mkdir /var/run/sshd
 
 # Antidote user

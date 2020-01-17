@@ -13,6 +13,7 @@ tags:
 - ansible
 - automation
 - configuration
+collection: 7  # RedHat
 
 endpoints:
 - name: ansible

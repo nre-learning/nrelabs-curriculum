@@ -9,6 +9,7 @@
   - name: configure the login banner
     junos_banner:
       banner: login
+      port: 22  # Getting a deprecation warning for this but the docs don't say anything about it
       text: |
         this is my login banner
         that contains a multiline

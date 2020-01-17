@@ -1,3 +1,8 @@
+[all:vars]
+ansible_user=antidote
+ansible_ssh_pass=antidotepassword
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
 [devices]
 cvx1
 vqfx1
