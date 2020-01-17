@@ -2,6 +2,7 @@
 - name: Ansible test within NRE Labs lesson
   hosts: vqfx1
   gather_facts: no
+  connection: local
 
   tasks:
 
