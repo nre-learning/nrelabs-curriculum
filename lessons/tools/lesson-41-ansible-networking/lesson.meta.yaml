@@ -1,6 +1,6 @@
 ---
 lessonName: Ansible for Network Automation
-lessonId: 40
+lessonId: 41
 category: tools
 lessonDiagram: ""
 tier: prod
@@ -29,7 +29,7 @@ endpoints:
     port: 22
     type: ssh
 
-- name: leaf1
+- name: cvx1
   image: antidotelabs/cvx
   configurationType: python
   presentations:
@@ -39,7 +39,7 @@ endpoints:
 
 connections:
 - a: vqfx1
-  b: leaf1
+  b: cvx1
 
 stages:
   - id: 1
