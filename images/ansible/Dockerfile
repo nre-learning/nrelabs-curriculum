@@ -31,7 +31,8 @@ RUN echo "export VISIBLE=now" >> /etc/profile
 ADD requirements.txt /requirements.txt
 RUN pip3 install -r /requirements.txt
 
-COPY ansible.cfg /home/antidote/ansible.cfg
+RUN mkdir /etc/ansible
+COPY ansible.cfg /etc/ansible/ansible.cfg
 
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]
