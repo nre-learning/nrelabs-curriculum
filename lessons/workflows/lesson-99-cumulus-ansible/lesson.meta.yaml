@@ -1,0 +1,50 @@
+---
+lessonName: Automating Cumulus Linux with Ansible 
+lessonId: 90
+category: workflows
+lessondiagram: ""
+tier: prod
+prereqs:
+  - 22  # Python
+  - 23  # Linux
+description: In this lesson, we'll explore the use of Ansible to perform common automation tasks on Cumulus Linux
+slug: cumulus-ansible
+tags:
+- cumulus
+- automation
+- ansible
+lessonId: 8  # Cumulus
+
+endpoints:
+- name: ansible
+  image: antidotelabs/ansible
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: spine01
+  image: antidotelabs/cvx
+  configurationType: python
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: leaf01
+  image: antidotelabs/cvx
+  configurationType: python
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+
+connections:
+- a: spine01
+  b: leaf01
+
+stages:
+  - id: 1
+    description: Running Ansible against Cumulus
+
