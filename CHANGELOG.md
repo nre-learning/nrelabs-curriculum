@@ -10,6 +10,7 @@
 - Disable caching for all image builds [#260](https://github.com/nre-learning/nrelabs-curriculum/pull/260)
 - New Images and PoC Lessons for NXTWORK 2019 Hackathon [#261](https://github.com/nre-learning/nrelabs-curriculum/pull/261)
 - Add wordlist package to Kali image [#272](https://github.com/nre-learning/nrelabs-curriculum/pull/272)
+- Ansible for Networking Lesson and Image [#289](https://github.com/nre-learning/nrelabs-curriculum/pull/289)
 
 ## v1.0.0 - August 08, 2019
 
