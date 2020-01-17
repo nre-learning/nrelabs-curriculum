@@ -1,5 +1,7 @@
 # Automating Cumulus Linux with Ansible
 
+https://cumulusnetworks.com/blog/automating-cumulus-linux-ansible/
+
 ## Part 1 - < INSERT >
 
 Automating your network can seem like a daunting task. But the truth is that automating Cumulus Linux with Ansible can be easier than many of the things you’re probably already automating.
