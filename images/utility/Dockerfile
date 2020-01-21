@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
 RUN apt-get update && apt-get install -y openssh-server python python-pip dnsutils iputils-ping git vim curl util-linux sshpass nano jq
 RUN mkdir /var/run/sshd
@@ -31,12 +31,6 @@ RUN echo "export VISIBLE=now" >> /etc/profile
 
 ADD requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt
-
-# Temporary measure to get the latest yaml fix
-RUN git clone https://github.com/Juniper/jsnapy.git /tmp/jsnapy \
-    && cd /tmp/jsnapy \
-    && git checkout dd0dbb12e47ec5183e9e2ac9cd99195c861c925e \
-    && python setup.py install
 
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]
