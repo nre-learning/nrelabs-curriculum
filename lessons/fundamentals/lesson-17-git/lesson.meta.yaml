@@ -5,7 +5,9 @@ category: fundamentals
 tier: prod
 prereqs:
   - 23  # Linux
-description: Git is an extremely popular version control system. In this lesson, we'll explore the basics of Git, and prepare for using it in network automation tools and workflows.
+description: |
+  Git is an extremely popular version control system. In this lesson, we'll explore the basics of Git,
+  and prepare for using it with network automation tools and workflows.
 slug: Git
 tags:
 - version control
@@ -15,25 +17,22 @@ tags:
 endpoints:
 - name: linux1
   image: antidotelabs/utility
-  configurationType: ansible
+  # configurationType: ansible  # For ensuring each stage is usable on its own
   presentations:
   - name: cli
     port: 22
     type: ssh
 
-- name: gitlab
-  image: antidotelabs/utility
-  presentations:
-  - name: web
-    port: 8880
-    type: http
-
 stages:
   - id: 1
-    description: Creating a Repository
+    description: Your First Git Repository
   - id: 2
     description: Adding and Comitting Files
   - id: 3
-    description: Parallel Work with Git branches
+    description: Parallelizing Your Work With Git Branches
   - id: 4
-    description: Collaboration with a Git Remote
+    description: Oops! I made a mistake.
+  
+  # TODO(mierdin): Future, once the gitlab image is working
+  # - id: 4
+  #   description: Working with Git Remotes
