@@ -32,35 +32,11 @@ endpoints:
   - name: cli
     port: 22
     type: ssh
-  additionalPorts: [8080]
+  - name: explorer
+    port: 8080
+    type: http
 
-- name: vqfx2
-  image: antidotelabs/vqfx-snap2
-  configurationType: napalm-junos
-  presentations:
-  - name: cli
-    port: 22
-    type: ssh
-  additionalPorts: [8080]
-
-- name: vqfx3
-  image: antidotelabs/vqfx-snap3
-  configurationType: napalm-junos
-  presentations:
-  - name: cli
-    port: 22
-    type: ssh
-  additionalPorts: [8080]
-
-connections:
-- a: vqfx1
-  b: vqfx2
-- a: vqfx2
-  b: vqfx3
-- a: vqfx3
-  b: vqfx1
-- a: vqfx1
-  b: linux1
+# TODO(mierdin): Insert generic REST server with tracing enabled
 
 stages:
   - id: 1
