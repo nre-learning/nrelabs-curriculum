@@ -25,10 +25,12 @@ endpoints:
 
 - name: vqfx1
   image: antidotelabs/vqfx-snap1
+  configurationType: napalm-junos
   presentations:
   - name: cli
     port: 22
     type: ssh
+  additionalPorts: [830]
 
 - name: cvx1
   image: antidotelabs/cvx
