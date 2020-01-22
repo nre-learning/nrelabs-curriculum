@@ -46,4 +46,6 @@ connections:
 
 stages:
   - id: 1
-    description: First Playbook Run
+    description: Enable NETCONF
+  - id: 2
+    description: Ansible Facts
