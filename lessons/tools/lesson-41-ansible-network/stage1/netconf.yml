@@ -1,5 +1,5 @@
 ---
-- name: Ansible test within NRE Labs lesson
+- name: Ansible Network Automation Playbook
   hosts: vqfx1
   gather_facts: no
 

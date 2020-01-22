@@ -1,4 +1,4 @@
-# Ansible Network Automation
+# Ansible Network Automation - Enable Netconf
 
 **Contributed by: [Red Hat](https://ansible.com)**
 
@@ -11,7 +11,7 @@ Explore and understand the lab environment. This exercise will cover
 - Determining the Ansible version running on the control node
 - Locating and understanding the Ansible configuration file - (ansible.cfg)
 - Locating and understanding an ini formatted inventory file
-- Running your first Ansible Playbook
+- Running your first Ansible Playbook to turn on netconf
 
 ## Part 1 - Examine Ansible software version
 
@@ -32,11 +32,11 @@ cat hosts
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
 
-In the above output every `[ ]` defines a group. For example `[juniper]` is a group that contains the host vqfx1. Groups can also be nested. The group `[devices]` is a parent group to the group `[juniper]`
+In the output every square bracket (`[ ]`) defines a group. For example `[juniper]` is a group that contains the host vqfx1. Groups can also be nested. The group `[devices]` is a parent group to the group `[juniper]`.  Parent groups are declared using the `children` directive. Having nested groups allows the flexibility of assigning more specific values to variables.
 
-> Parent groups are declared using the children directive. Having nested groups allows the flexibility of assigining more specific values to variables.
+> *Note:* A group called **all** always exists and contains all groups and hosts defined within an inventory.
 
-> Note: A group called **all** always exists and contains all groups and hosts defined within an inventory.
+### Info on variables within an inventory
 
 Group variables groups are declared using the vars directive. Having groups allows the flexibility of assigning common variables to multiple hosts. Multiple group variables can be defined under the `[group_name:vars]` section. For example look at the group `juniper`:
 
@@ -54,9 +54,24 @@ cat ansible.cfg
 
 Note the following parameters within the ansible.cfg file:
 
-- inventory: shows the location of the Ansible Inventory being used
+- `stdout_callback` - this is setting the console output to yaml versus the default to make it more human readable
+- `inventory` - shows the location of the Ansible Inventory being used by Ansible Playbooks
 
-For more information on the ansible.cfg file please check out the [documentation here](https://docs.ansible.com/ansible/latest/installation_guide/intro_configuration.html).
+Configuration files are searched for in the following order:
+
+- ANSIBLE_CONFIG (environment variable if set)
+- ansible.cfg (in the current directory)
+- ~/.ansible.cfg (in the home directory)
+- /etc/ansible/ansible.cfg
+
+Move the Ansible configuration file to the home directory so that all Ansible Playbooks will use it regardless of what directory they are in.
+
+```
+mv ansible.cfg ~/.ansible.cfg
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
+
+For more information on the ansible.cfg file please check out the [documentation here](https://docs.ansible.com/ansible/latest/installation_guide/intro_configuration.html).  There is a full example on [Github here](https://github.com/ansible/ansible/blob/devel/examples/ansible.cfg).
 
 ## Part 4 - Examine Ansible Playbook
 
@@ -94,6 +109,25 @@ We can verify this is done on the vqfx:
 show configuration system services
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', this)">Run this snippet</button>
+
+## Part 6 - Understand idempotency
+
+The junos_netconf module is idempotent. This means, a configuration change is pushed to the device if and only if that configuration does not exist on the end hosts.
+
+> Need help with Ansible Automation terminology? Check out the glossary here for more information on terms like idempotency.
+
+To validate the concept of idempotency, re-run the playbook:
+
+```
+ansible-playbook netconf.yml
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', this)">Run this snippet</button>
+
+> Note: See that the changed parameter in the PLAY RECAP indicates 0 changes.
+
+Re-running the Ansible Playbook multiple times will result in the same exact output, with ok=1 and change=0. Unless another operator or process removes or modifies the existing configuration on the Juniper device, this Ansible Playbook will just keep reporting ok=1 indicating that the configuration already exists and is configured correctly on the network device.
+
+This Ansible Playbook could be scheduled to enforce configuration state with the Red Hat Ansible Automation Platform across hundreds of Juniper devices.
 
 ## Complete
 

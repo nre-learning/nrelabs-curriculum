@@ -1,0 +1,17 @@
+[all:vars]
+ansible_user=antidote
+ansible_ssh_pass=antidotepassword
+
+[cumulus]
+cvx1
+
+[juniper]
+vqfx1
+
+[juniper:vars]
+ansible_network_os=junos
+ansible_connection=netconf
+
+[devices:children]
+cumulus
+juniper
