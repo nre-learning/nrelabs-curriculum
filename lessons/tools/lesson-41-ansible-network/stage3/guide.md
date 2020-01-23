@@ -23,7 +23,7 @@ cd /antidote/stage3
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
 
-## Part 1 - Primer on Resource Modules
+## Part 2 - Primer on Resource Modules
 
 So what exactly is a “resource module?” Sections of a device’s configuration can be thought of as a resources provided by that device. Network resource modules are intentionally scoped to configure a single resource and can be combined as building blocks to configure complex network services.
 
@@ -46,9 +46,9 @@ Every resource module will have corresponding facts integration so that Ansible 
 | `junos_lacp` | `lacp` |
 | `junos_vlans` | `vlans` |
 
-## Part 2 - Examine Ansible Playbook
+## Part 3 - Examine Ansible Playbook
 
-Next, show Ansible Playbook contents:
+Next, display the Ansible Playbook contents:
 
 ```
 cat facts.yml
@@ -65,7 +65,7 @@ Lets examine the Ansible Playbook:
 
 The second task is using the `debug` module to print the facts to the console window.
 
-## Part 3 - Execute the Ansible Playbook
+## Part 4 - Execute the Ansible Playbook
 
 Next, run the Ansible Playbook with the `ansible-playbook` command:
 
@@ -74,20 +74,160 @@ ansible-playbook facts.yml
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
 
---
+The Ansible Playbook output will appear in the console to the right.
 
-## Complete
+### OPTIONAL: Playing with verbosity
 
-Using less than 20 lines of "code" you have just automated version and serial number collection. Imagine if you were running this against your production network! You have actionable data in hand that does not go out of date.
+Instead of using the debug module try deleting the `debug` task.  Use the text editor of your choice and delete the second task.
 
-If you have trouble modifying the Ansbile Playbook try running the pre-populated solution here:
 ```
-ansible-playbook solution.yml
+nano facts.yml
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
 
+Now re-run the `ansible-playbook` command with the verbostiy flag (`-v`).
+```
+ansible-playbook facts.yml -v
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
+
+This can be another way to quickly see what an Ansible Task is doing.
+
+## Part 5 - Variable Primer
+
+Previously in stage1 we talked about variables in inventory.  Variables are pieces of data, in the form of key-value pairs that Ansible can use during play.  When using variables within an inventory it is recommended to only have variables that are used to connect and authenticate **to the device**.  
+
+Examples for inventory variables include:
+- [Connection plugins](https://docs.ansible.com/ansible/latest/plugins/connection.html) (e.g. network_cli, netconf)
+- Usernames
+- [Platform types](https://docs.ansible.com/ansible/latest/network/user_guide/platform_index.html#settings-by-platform) (ansible_network_os)
+
+Variables stored for use to configure resources **on the device** are recommended to be in `group_vars` or `host_vars`.
+
+- **Host** variables apply to the host and override group vars.  These are stored in a directory `host_vars`.
+- **Group** variables apply for all devices in that group.  These are stored in a directory `group_vars`.
+
+Examples for `group_vars` and `host_vars` are:
+- VLANs
+- Routing configuration
+- System services (NTP, DNS, etc)
+
+For a complete guide on Ansible Varaibles please refer to the [documentation](https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html).
+
+## Part 6 - Saving variables to host_vars
+
+For this next part we will use the resource module to save collected facts to a persistent file under the `host_vars` directory.
+
+Display the Ansible Playbook contents:
+
+```
+cat save.yml
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
+
+Lets examine the Ansible Playbook.  There is one new task:
+```
+  - name: push structured data to host vars
+    copy:
+      content: "{{ansible_network_resources | to_nice_yaml}}"
+      dest: "{{playbook_dir}}/host_vars/{{inventory_hostname}}"
+```
+
+- `copy:` - this task uses the [copy module](https://docs.ansible.com/ansible/latest/modules/copy_module.html)
+- `content: "{{ansible_network_resources | to_nice_yaml}}"` - the parameter content will push the variable `ansible_network_resources` that was collected by `junos_facts`.  The filter ` | to_nice_yaml` will convert this to a more human readable format.  This is purely for aesthetics and not required.  To learn more about filters like `to_nice_yaml` please refer to the [documentation](https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html).
+- `dest: "{{playbook_dir}}/host_vars/{{inventory_hostname}}"` - this line will create a file named `vqfx1` since that is the only host in our topology, and dump the contents from the previous line (the `ansible_network_resources` which contains are l3_interfaces variables).  If there was multiple hosts, Ansible would create a separate file for each host in parallel.
+
+## Part 7 - Execute the save playbook
+
+```
+ansible-playbook save.yml
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
+
+Now examine the contents of `host_vars`:
+
+```
+cat host_vars/vqfx1
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
+
+Compare this to the `show configuration interfaces` configuration on the vqfx1 device:
+
+```
+show configuration interfaces
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', this)">Run this snippet</button>
+
+Ansible creates a vendor agnostic representation of layer 3 information using the l3_interfaces resource module.  These variables can be stored into a database, cmdb or git repo to create a SoT (source of truth) for your network devices.
+
+## Part 8 - Examine the l3_interfaces Ansible Playbook
+
+Examine the `l3_interfaces.yml` Ansible Playbook that will use the resource module [`junos_l3_interfaces`](https://docs.ansible.com/ansible/latest/modules/junos_l3_interfaces_module.html) to push the configuration to the device.
+
+```
+cat l3_interfaces.yml
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
+
+There is one task:
+
+```
+      junos_l3_interfaces:
+        config: "{{l3_interfaces}}"
+```
+
+Since our variables are in the `host_vars` directory they are automatically loaded as variables into our Ansible Playbook and available to use.
+
+Run the Ansible Playbook:
+```
+ansible-playbook l3_interfaces.yml
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
+
+Since we have not modified the configuration at all, we are pushing back the exact same configuration that we just saved.  The Ansible Playbook will report green and `changed=0` indicating that the configuration is not modified.  The `junos_l3_interfaces` is idempotent meaning that it is aware of the configuration on the Juniper Junos device and won't modify it unless it has to.
+
+## Part 9 - Modify the configuration
+
+Now that we have our configuration as a flat file we can modify the source of truth and push the configuration.
+
+Use the text editor of your choice and open up the `host_vars` for vqfx1
+
+```
+nano host_vars/vqfx1
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
+
+Change the IP address for **em3** to `10.10.10.1/30`, save the file, and exit the text editor.
+
+Now execute the `l3_interfaces.yml` Ansible Playbook again with the modified `host_vars` file.  Use the verbosity flag (`-v`) to see what commands the module will use
+```
+ansible-playbook l3_interfaces.yml -v
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
+
+Juniper vqfx1 port **em3** is connected to the Cumulus VX device's `swp1`. Look at the table below:
+
+| **Juniper vqfx1** | **interface** | **interface** | **Cumulus VX cvx1** |
+| ------------- |:-------------:|:-------------:|:-------------:|
+| `10.10.10.1/30`  | `em3` | `swp1` | `10.10.10.2/30` |
+
+Perform a ping from the `vqfx1` device to verify we have connectivity after the new configuration has been pushed:
+
+```
+ping 10.10.10.2 count 5
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', this)">Run this snippet</button>
+
+## Complete
 
 You have completed stage 3!
+
+## Takeaways
+- Resource modules and facts have a direct relationship allowing Ansible to read existing brownfield networks and create a source of truth really quickly.
+- The `ansible_network_resources` parameter is used to collect facts around a specific resource such as l3_interfaces.
+- Variables are mostly commonly stored in group_vars and host_vars. This short example only used host_vars.
+
+For more information on why resource modules were developed please refer to [this blog post](https://www.ansible.com/blog/network-features-coming-soon-in-ansible-engine-2.9).
 
 ---
 

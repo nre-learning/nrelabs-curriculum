@@ -56,7 +56,7 @@ Now example the second part here:
       msg: "{{ansible_facts}}"
 ```
 
-This will simply print the ansible_facts for vqfx1 to the console window.  This will be a very long list of facts that will scroll past the window.
+This will simply print the ansible_facts for vqfx1 to the console window.  This will be a very long list of facts that will scroll past the window.  The double curly brackets denoted by `{{` and `}}` are used as a variable lookup.  This is using a very simple Jinja2 template and perform a variable substitution.  More information can be found in the [documentation](https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#defining-variables-in-a-playbook).
 
 ## Part 3 - Execute the Ansible Playbook
 
