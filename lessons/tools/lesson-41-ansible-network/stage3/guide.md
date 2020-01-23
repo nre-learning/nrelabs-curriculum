@@ -223,6 +223,7 @@ ping 10.10.10.2 count 5
 You have completed stage 3!
 
 ## Takeaways
+
 - Resource modules and facts have a direct relationship allowing Ansible to read existing brownfield networks and create a source of truth really quickly.
 - The `ansible_network_resources` parameter is used to collect facts around a specific resource such as l3_interfaces.
 - Variables are mostly commonly stored in group_vars and host_vars. This short example only used host_vars.

@@ -5,6 +5,9 @@ ansible_ssh_pass=antidotepassword
 [cumulus]
 cvx1
 
+[cumulus:vars]
+ansible_network_os=cumulus
+
 [juniper]
 vqfx1
 

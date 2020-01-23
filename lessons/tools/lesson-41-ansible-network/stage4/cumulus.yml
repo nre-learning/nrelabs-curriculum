@@ -1,0 +1,12 @@
+---
+- name: template out cumulus configuration for free range routing
+  become: True
+  template:
+    src: frr.conf
+    dest: /etc/frr/frr.conf
+
+- name: reload frr
+  become: True
+  service:
+    name: frr
+    state: reloaded
