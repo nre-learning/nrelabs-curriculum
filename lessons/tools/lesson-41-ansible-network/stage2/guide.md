@@ -12,10 +12,19 @@ Ansible facts are information derived from speaking to the remote network elemen
 
 This exercise will cover:
 
-- Using the ios_facts module.
+- native fact gathering (using `gather_facts: True`)
 - Using the debug module.
 
-## Part 1 - Examine Ansible Facts Playbook
+## Part 1 - Navigate to stage 2
+
+Navigate to lesson stage directory:
+
+```
+cd /antidote/stage2
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
+
+## Part 2 - Examine Ansible Facts Playbook
 
 Ansible Playbooks are [**YAML** files](https://yaml.org/). YAML is a structured encoding format that is also extremely human readable (unlike it's subset - the JSON format)
 
@@ -49,7 +58,7 @@ Now example the second part here:
 
 This will simply print the ansible_facts for vqfx1 to the console window.  This will be a very long list of facts that will scroll past the window.
 
-## Part 2 - Execute the Ansible Playbook
+## Part 3 - Execute the Ansible Playbook
 
 Run our simple Ansible Playbook to print Ansible facts to the console window.
 
@@ -58,7 +67,7 @@ ansible-playbook facts.yml
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
 
-## Part 3 - Add two additional tasks
+## Part 4 - Add two additional tasks
 
 Use your text editor of choice to add two additional tasks to the Ansible Playbook facts.yml
 
@@ -80,7 +89,7 @@ add the following two tasks:
 
 Save the Ansible Playbook and exit the text editor.
 
-## Part 4 - Re-run the Ansible Playbook
+## Part 5 - Re-run the Ansible Playbook
 
 Run the modified Ansible Playbook to print Ansible facts to the console window.
 
@@ -94,6 +103,12 @@ ansible-playbook facts.yml
 
 Using less than 20 lines of "code" you have just automated version and serial number collection. Imagine if you were running this against your production network! You have actionable data in hand that does not go out of date.
 
+If you have trouble modifying the Ansible Playbook try running the pre-populated solution here:
+```
+ansible-playbook solution.yml
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
+
 
 You have completed stage 2!
 
@@ -101,7 +116,7 @@ You have completed stage 2!
 
 These exercises are made possible by [Juniper Networks](https://juniper.net) and the [Red Hat Ansible Automation Platform](https://www.ansible.com/products/automation-platform)
 
-![red hat ansible automation platform logo](../stage1/rh-ansible-platform.png)
+<img src="https://github.com/Mierdin/nrelabs-curriculum/blob/ansible-networking/lessons/tools/lesson-41-ansible-network/stage1/rh-ansible-platform.png?raw=true"></div>
 
 Check out our free network automation e-books on https://ansible.com:
 - [Part 1: Modernize Your Network with Red Hat](https://www.ansible.com/resources/ebooks/network-automation-for-everyone)

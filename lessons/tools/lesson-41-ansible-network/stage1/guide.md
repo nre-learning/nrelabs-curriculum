@@ -64,14 +64,8 @@ Configuration files are searched for in the following order:
 - ~/.ansible.cfg (in the home directory)
 - /etc/ansible/ansible.cfg
 
-Move the Ansible configuration file to the home directory so that all Ansible Playbooks will use it regardless of what directory they are in.
 
-```
-mv ansible.cfg ~/.ansible.cfg
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
-
-For more information on the ansible.cfg file please check out the [documentation here](https://docs.ansible.com/ansible/latest/installation_guide/intro_configuration.html).  There is a full example on [Github here](https://github.com/ansible/ansible/blob/devel/examples/ansible.cfg).
+There is a full example of a ansible.cfg on [Github here](https://github.com/ansible/ansible/blob/devel/examples/ansible.cfg).
 
 ## Part 4 - Examine Ansible Playbook
 
@@ -114,7 +108,7 @@ show configuration system services
 
 The junos_netconf module is idempotent. This means, a configuration change is pushed to the device if and only if that configuration does not exist on the end hosts.
 
-> Need help with Ansible Automation terminology? Check out the glossary here for more information on terms like idempotency.
+> Need help with Ansible Automation terminology? Check out the [glossary here](https://docs.ansible.com/ansible/latest/reference_appendices/glossary.html) for more information on terms like idempotency.
 
 To validate the concept of idempotency, re-run the playbook:
 
@@ -123,11 +117,7 @@ ansible-playbook netconf.yml
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', this)">Run this snippet</button>
 
-> Note: See that the changed parameter in the PLAY RECAP indicates 0 changes.
-
-Re-running the Ansible Playbook multiple times will result in the same exact output, with ok=1 and change=0. Unless another operator or process removes or modifies the existing configuration on the Juniper device, this Ansible Playbook will just keep reporting ok=1 indicating that the configuration already exists and is configured correctly on the network device.
-
-This Ansible Playbook could be scheduled to enforce configuration state with the Red Hat Ansible Automation Platform across hundreds of Juniper devices.
+Re-running the Ansible Playbook multiple times will result in the same exact output, with ok=1 and change=0. Unless another operator or process removes or modifies the existing configuration on the Juniper device.  This Ansible Playbook could be scheduled to enforce configuration state with the Red Hat Ansible Automation Platform across hundreds of Juniper devices.
 
 ## Complete
 
@@ -137,7 +127,7 @@ You have completed stage 1!
 
 These exercises are made possible by [Juniper Networks](https://juniper.net) and the [Red Hat Ansible Automation Platform](https://www.ansible.com/products/automation-platform)
 
-![red hat ansible automation platform logo](rh-ansible-platform.png)
+<img src="https://github.com/Mierdin/nrelabs-curriculum/blob/ansible-networking/lessons/tools/lesson-41-ansible-network/stage1/rh-ansible-platform.png?raw=true"></div>
 
 Check out our free network automation e-books on https://ansible.com:
 - [Part 1: Modernize Your Network with Red Hat](https://www.ansible.com/resources/ebooks/network-automation-for-everyone)
