@@ -15,21 +15,21 @@ To do this, an SLS file is created in the pillar root directory containing the l
 ```
 cat /srv/pillar/infrastructure_data.sls
 ``` 
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('salt1', 0)">Verify Output (Optional)</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('salt1', this)">Verify Output (Optional)</button>
 
 To allow the Junos proxy minions to use the data defined in the `infrastructure_data.sls` file, we need to edit the top.sls file.
 
 ```
 cat /srv/pillar/top.sls
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('salt1', 1)">Verify Output (Optional)</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('salt1', this)">Verify Output (Optional)</button>
 
 We also have to refresh the pillar data, so our minions can see the new pillar data.
 
 ```
 salt 'vqfx1' saltutil.refresh_pillar
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('salt1', 2)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('salt1', this)">Run this snippet</button>
 
 Now let's create a configuration template - but before that, let's understand the placing of the template.
 
@@ -40,26 +40,26 @@ The template will use Jinja syntax for the conditional loops, and the variables 
 ```
 cat /srv/salt/infrastructure_config.conf
 ``` 
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('salt1', 3)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('salt1', this)">Run this snippet</button>
 
 The next step is to create a salt SLS file, describing the state we want our 'vqfx1' and its configurations to be in. It will reference the [Junos state module] (https://docs.saltstack.com/en/latest/ref/states/all/salt.states.junos.html) to provision the configuration template.
 
 ```
 cat /srv/salt/provision_infrastructure.sls
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('salt1', 4)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('salt1', this)">Run this snippet</button>
 
 To apply the configuration changes, we need to execute a 'state.apply' function.
 
 ```
 salt 'vqfx1' state.apply provision_infrastructure
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('salt1', 5)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('salt1', this)">Run this snippet</button>
 
 Finally, let's check if the configurations were successfully loaded and committed.
 
 ```
 show configuration | compare rollback 1
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 6)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', this)">Run this snippet</button>
 
