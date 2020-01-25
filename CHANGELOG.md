@@ -12,6 +12,7 @@
 - Add wordlist package to Kali image [#272](https://github.com/nre-learning/nrelabs-curriculum/pull/272)
 - Updates to utility image [#285](https://github.com/nre-learning/nrelabs-curriculum/pull/285)
 - Update YAML Loader statements[#292](https://github.com/nre-learning/nrelabs-curriculum/pull/292)
+- Temporarily pin netmiko to 2.4.2 in st2 image [#293](https://github.com/nre-learning/nrelabs-curriculum/pull/293)
 
 ## v1.0.0 - August 08, 2019
 
