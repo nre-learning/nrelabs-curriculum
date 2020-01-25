@@ -63,4 +63,3 @@ show configuration | compare rollback 1
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 6)">Run this snippet</button>
 
-That's it for now - hopefully you enjoyed learning about Salt, and are ready to go automate!

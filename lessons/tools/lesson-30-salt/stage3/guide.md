@@ -39,4 +39,4 @@ cat /var/tmp/route.xml
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('salt1', 3)">Verify Output (Optional)</button>
 
-That's it for now - hopefully you enjoyed learning about Salt, and are ready to go automate!
+See the next part of this lesson to learn how to automate Junos configurations with Salt!
