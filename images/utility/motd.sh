@@ -1,12 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
-printf "\n"
-printf " ###############################################################\n"
-printf " #                     WELCOME TO ANTIDOTE                     #\n"            
-printf " #                                                             #\n"
-printf " # This is the 'utility' container. This is used to run Python #\n"
-printf " # scripts, workflows, tools, commands, etc - anything needed  #\n"
-printf " # to perform automation tasks on our network devices.         #\n"
-printf " #                                                             #\n"
-printf " # Documentation: https://antidoteproject.readthedocs.io       #\n"
-printf " ###############################################################\n"
+printf "Welcome to \u001b[1;38;5;36mNRE Labs\033[1m%s\033[0m! \n"
+printf " * Docs - https://docs.nrelabs.io/\n"
