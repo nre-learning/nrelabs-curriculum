@@ -1,5 +1,9 @@
 FROM antidotelabs/utility
 
+# Because tzdata comes with an interactive installer wizard to configure
+# your timezone
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata
+
 RUN wget -O - https://repo.saltstack.com/apt/ubuntu/16.04/amd64/archive/2018.3.2/SALTSTACK-GPG-KEY.pub | apt-key add - && \
     echo "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/archive/2018.3.2 xenial main" >> /etc/apt/sources.list && \
     apt-get update
