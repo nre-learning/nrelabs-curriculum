@@ -32,5 +32,16 @@ RUN echo "export VISIBLE=now" >> /etc/profile
 ADD requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt
 
+# The latest release of JSNAPy as of now was 1.3.2, released in
+# May of 2018. Since then, there have been many fixes, and the main one we care
+# about is the YAML deprecation notices. I will follow up with them and ask why
+# we haven't done a release in so long with many outstanding fixes already in
+# master, but in the meantime, we will clone and check out a commit manually so
+# we can avoid the YAML deprecation notices 
+RUN git clone https://github.com/Juniper/jsnapy.git /tmp/jsnapy \
+    && cd /tmp/jsnapy \
+    && git checkout bb8e02b1a9bd0e981c7d9a18cd1a08f5596cac65 \
+    && python setup.py install
+
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]
