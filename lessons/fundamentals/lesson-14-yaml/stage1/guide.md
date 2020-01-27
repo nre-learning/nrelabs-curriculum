@@ -26,7 +26,7 @@ python
 import yaml
 import sys
 yamlFile = open('list.yaml', 'r')
-yamlList = yaml.load(yamlFile)
+yamlList = yaml.load(yamlFile, Loader=yaml.FullLoader)
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
