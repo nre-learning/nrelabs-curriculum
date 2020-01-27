@@ -14,10 +14,11 @@ ssh=createSSHClient(host,22,"antidote","antidotepassword")
 
 scp=SCPClient(ssh.get_transport())
 
-scp.put('/antidote/stage1/configs/cvx1/interfaces', '/home/antidote/interfaces')
-scp.put('/antidote/stage1/configs/cvx1/daemons', '/home/antidote/daemons')
-scp.put('/antidote/stage1/configs/cvx1/frr.conf', '/home/antidote/frr.conf')
+this_dir = os.path.dirname(os.path.realpath(__file__))
 
+scp.put('%s/cvx1/interfaces' % this_dir, '/home/antidote/interfaces')
+scp.put('%s/cvx1/daemons' % this_dir, '/home/antidote/daemons')
+scp.put('%s/cvx1/frr.conf' % this_dir, '/home/antidote/frr.conf')
 
 ssh.exec_command('sudo cp /home/antidote/interfaces /etc/network/interfaces')
 ssh.exec_command('sudo cp /home/antidote/daemons /etc/frr/daemons')

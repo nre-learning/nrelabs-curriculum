@@ -15,6 +15,9 @@ RUN echo 'root:$(uuidgen)' | chpasswd
 RUN rm /run/nologin
 RUN ssh-keygen -b 2048 -t rsa -f /etc/ssh/ssh_host_rsa_key -q -N ""
 
+# Adjust MOTD
+ADD motd.sh /etc/profile.d/motd.sh
+
 # Disable root Login
 RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
 RUN sed -i 's/PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config

@@ -6,23 +6,31 @@
 
 ## Objective
 
-Explore and understand the lab environment. This exercise will cover
+This first exercise is mostly about exploring and understanding the lab environment, and the
+various parts that go into successfully running your first Ansible playook. This exercise will cover:
 
 - Determining the Ansible version running on the control node
-- Locating and understanding the Ansible configuration file - (ansible.cfg)
+- Locating and understanding the Ansible configuration file - (`ansible.cfg`)
 - Locating and understanding an ini formatted inventory file
 - Running your first Ansible Playbook to turn on netconf
 
 ## Part 1 - Examine Ansible software version
 
-Run the ansible command with the --version command to look at what is configured:
+Run the ansible command with the `--version` flag to see not only the version of Ansible that's installed,
+but also a few other key details:
 
 ```
 ansible --version
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
 
+This output will become more useful the deeper you get into Ansible.
+
 ## Part 2 - Examine inventory
+
+Ansible works on a concept called "inventory". This is a way of describing the infrastructure elements
+(in our case, network devices) that we'll be automating with Ansible. Ansible offers several options for
+managing inventory, but for now, we'll keep it simple and describe our inventory in a text file.
 
 Navigate to lesson stage directory and show inventory:
 
@@ -34,49 +42,50 @@ cat hosts
 
 In the output every square bracket (`[ ]`) defines a group. For example `[juniper]` is a group that contains the host vqfx1. Groups can also be nested. The group `[devices]` is a parent group to the group `[juniper]`.  Parent groups are declared using the `children` directive. Having nested groups allows the flexibility of assigning more specific values to variables.
 
-> *Note:* A group called **all** always exists and contains all groups and hosts defined within an inventory.
+> **Note:** A group called `all` always exists and contains all groups and hosts defined within an inventory.
 
 ### Info on variables within an inventory
 
 Group variables groups are declared using the vars directive. Having groups allows the flexibility of assigning common variables to multiple hosts. Multiple group variables can be defined under the `[group_name:vars]` section. For example look at the group `juniper`:
 
-- ansible_network_os - This variable is necessary while using the network_cli or netconf connection type within a play definition, as we will see shortly.
-- ansible_connection - This variable sets the connection plugin for this group. This can be set to values such as netconf, httpapi and network_cli depending on what this particular network platform supports.
+- `ansible_network_os` - This variable is necessary while using the network_cli or netconf connection type within a play definition, as we will see shortly.
+- `ansible_connection` - This variable sets the connection plugin for this group. This can be set to values such as netconf, httpapi and network_cli depending on what this particular network platform supports.
 
 ## Part 3 - Examine Ansible configuration file
 
-Look at the contents of the ansible.cfg file
+The `ansible.cfg` file allows us to give Ansible instructions for how to operate. We can easily inspect the contents:
 
 ```
 cat ansible.cfg
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
 
-Note the following parameters within the ansible.cfg file:
+Note the following parameters within `ansible.cfg`:
 
 - `stdout_callback` - this is setting the console output to yaml versus the default to make it more human readable
-- `inventory` - shows the location of the Ansible Inventory being used by Ansible Playbooks
+- `inventory` - shows the location of the Ansible Inventory being used by Ansible Playbooks - note that this currently set to the same location for the inventory file we explored in a previous step.
 
 Configuration files are searched for in the following order:
 
-- ANSIBLE_CONFIG (environment variable if set)
-- ansible.cfg (in the current directory)
-- ~/.ansible.cfg (in the home directory)
-- /etc/ansible/ansible.cfg
+- `ANSIBLE_CONFIG` (environment variable if set)
+- `ansible.cfg` (in the current directory)
+- `~/.ansible.cfg` (in the home directory)
+- `/etc/ansible/ansible.cfg`
 
-
-There is a full example of a ansible.cfg on [Github here](https://github.com/ansible/ansible/blob/devel/examples/ansible.cfg).
+You can find a full example of an `ansible.cfg` file on Github [here](https://github.com/ansible/ansible/blob/devel/examples/ansible.cfg). This is useful for understanding the various configuration options that can be set by this file.
 
 ## Part 4 - Examine Ansible Playbook
 
-Next, show Ansible Playbook contents:
+In Ansible, the "playbook" is a core concept - it is a file, written in YAML, which describes the various tasks we want to perform against our infrastructure.
+
+We'll start off with a simple example, called `netconf.yml` - inspect this file to see its contents:
 
 ```
 cat netconf.yml
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
 
-Lets examine each part of this Ansible Playbook:
+The purpose of this playbook is to log into a Juniper device and enable NETCONF. Lets examine each part of this Ansible Playbook, line-by-line:
 
 - `name: Ansible test within NRE Labs lesson` - optional but highly encouraged description of what this Ansible Playbook will do
 - `hosts: vqfx1` - this is what hosts the Ansible Playbook will execute on.  This can be a group or a single host.
@@ -90,7 +99,7 @@ Lets examine each part of this Ansible Playbook:
 
 ## Part 5 - Execute the Ansible Playbook
 
-Run our simple Ansible Playbook to turn on netconf for our Juniper device.
+Now that our inventory has been set and our playbook has been written, executing it is a breeze - we only need to run the `ansible-playbook` command, with a single argument - the name of the playbook:
 
 ```
 ansible-playbook netconf.yml
@@ -106,7 +115,7 @@ show configuration system services
 
 ## Part 6 - Understand idempotency
 
-The junos_netconf module is idempotent. This means, a configuration change is pushed to the device if and only if that configuration does not exist on the end hosts.
+The `junos_netconf` module is idempotent. This means, a configuration change is pushed to the device if and only if that configuration does not exist on the end hosts.
 
 > Need help with Ansible Automation terminology? Check out the [glossary here](https://docs.ansible.com/ansible/latest/reference_appendices/glossary.html) for more information on terms like idempotency.
 
@@ -115,9 +124,11 @@ To validate the concept of idempotency, re-run the playbook:
 ```
 ansible-playbook netconf.yml
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', this)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
 
-Re-running the Ansible Playbook multiple times will result in the same exact output, with ok=1 and change=0. Unless another operator or process removes or modifies the existing configuration on the Juniper device.  This Ansible Playbook could be scheduled to enforce configuration state with the Red Hat Ansible Automation Platform across hundreds of Juniper devices.
+You'll notice that this time, the output did not say `changed=1`, as it did the first time. Instead, it says `ok=1`, with all green text. This is because Ansible determined that no change needed to be made, and therefore didn't try to make one. Unless another operator or process removes or modifies the existing configuration on the Juniper device, this will remain the case.  
+
+This Ansible Playbook could be scheduled to enforce configuration state with the Red Hat Ansible Automation Platform across hundreds of Juniper devices.
 
 ## Complete
 
