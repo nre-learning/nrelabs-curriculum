@@ -106,6 +106,12 @@ ansible-playbook solution.yml
 
 You have completed stage 2!
 
+## Takeaways
+
+- The double brackets (`{{`) and (`}}`) are used to perform variable substitution within an Ansible Playbook.
+- [Ansible Facts](https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#variables-discovered-from-systems-facts) are information derived from speaking with your remote systems.
+- The [debug module](https://docs.ansible.com/ansible/latest/modules/debug_module.html) can be useful to print variable information to the console window
+
 ---
 
 These exercises are made possible by [Juniper Networks](https://juniper.net) and the [Red Hat Ansible Automation Platform](https://www.ansible.com/products/automation-platform)

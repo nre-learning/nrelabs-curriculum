@@ -134,6 +134,12 @@ This Ansible Playbook could be scheduled to enforce configuration state with the
 
 You have completed stage 1!
 
+## Takeaways
+
+- Ansible requires an [inventory](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html) to execute Automation on
+- [Ansible Playbooks](https://docs.ansible.com/ansible/latest/user_guide/playbooks.html) are Ansible’s configuration, deployment, and orchestration language. They can describe a policy you want your remote systems to enforce, or a set of steps in a general IT process.
+- Ansible modules such as [junos_netconf](https://docs.ansible.com/ansible/latest/modules/junos_netconf_module.html) can be idempotent, meaning they are stateful
+
 ---
 
 These exercises are made possible by [Juniper Networks](https://juniper.net) and the [Red Hat Ansible Automation Platform](https://www.ansible.com/products/automation-platform)
