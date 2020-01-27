@@ -176,7 +176,9 @@ You have completed stage 4!
 
 ## Takeaways
 
-< TAKEAWAYS >
+- [Jinja2](https://docs.ansible.com/ansible/latest/user_guide/playbooks_templating.html) templates allow us to easily template out a device configuration.
+- The `os_config` (e.g. [junos_config](https://docs.ansible.com/ansible/latest/modules/junos_config_module.html)) and `cli_config` modules can source a jinja2 template file, and push directly to a device. If you want to just render a configuration locally on the control node, or template to a Linux device, use the [template module](https://docs.ansible.com/ansible/latest/modules/template_module.html).
+- Variables are mostly commonly stored in `group_vars` and `host_vars`. This short example only used `host_vars`.
 
 ---
 
