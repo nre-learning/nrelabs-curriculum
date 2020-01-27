@@ -1,4 +1,4 @@
-# Ansible Network Automation - Resource Facts
+# Ansible Network Automation - Network Configuration Management
 
 **Contributed by: [Red Hat](https://ansible.com)**
 

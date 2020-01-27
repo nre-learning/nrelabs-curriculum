@@ -49,3 +49,7 @@ stages:
     description: Enable NETCONF
   - id: 2
     description: Ansible Facts
+  - id: 3
+    description: Resource Facts
+  - id: 4
+    description: Network Configuration Management

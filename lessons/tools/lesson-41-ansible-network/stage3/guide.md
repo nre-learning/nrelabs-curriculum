@@ -14,16 +14,7 @@ This exercise will cover:
 - the `gather_network_resources` parameter
 - creating a structured data yaml file from `junos_facts`
 
-## Part 1 - Navigate to stage 3
-
-Navigate to lesson stage directory:
-
-```
-cd /antidote/stage3
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
-
-## Part 2 - Primer on Resource Modules
+## Part 1 - Primer on Resource Modules
 
 So what exactly is a “resource module?” Sections of a device’s configuration can be thought of as a resources provided by that device. Network resource modules are intentionally scoped to configure a single resource and can be combined as building blocks to configure complex network services.
 
@@ -46,7 +37,7 @@ Every resource module will have corresponding facts integration so that Ansible 
 | `junos_lacp` | `lacp` |
 | `junos_vlans` | `vlans` |
 
-## Part 3 - Examine Ansible Playbook
+## Part 2 - Examine Ansible Playbook
 
 Next, display the Ansible Playbook contents:
 
@@ -65,7 +56,7 @@ Lets examine the Ansible Playbook:
 
 The second task is using the `debug` module to print the facts to the console window.
 
-## Part 4 - Execute the Ansible Playbook
+## Part 3 - Execute the Ansible Playbook
 
 Next, run the Ansible Playbook with the `ansible-playbook` command:
 
@@ -93,7 +84,7 @@ ansible-playbook facts.yml -v
 
 This can be another way to quickly see what an Ansible Task is doing.
 
-## Part 5 - Variable Primer
+## Part 4 - Variable Primer
 
 Previously in stage1 we talked about variables in inventory.  Variables are pieces of data, in the form of key-value pairs that Ansible can use during play.  When using variables within an inventory it is recommended to only have variables that are used to connect and authenticate **to the device**.  
 
@@ -114,7 +105,7 @@ Examples for `group_vars` and `host_vars` are:
 
 For a complete guide on Ansible Varaibles please refer to the [documentation](https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html).
 
-## Part 6 - Saving variables to host_vars
+## Part 5 - Saving variables to host_vars
 
 For this next part we will use the resource module to save collected facts to a persistent file under the `host_vars` directory.
 
@@ -137,7 +128,7 @@ Lets examine the Ansible Playbook.  There is one new task:
 - `content: "{{ansible_network_resources | to_nice_yaml}}"` - the parameter content will push the variable `ansible_network_resources` that was collected by `junos_facts`.  The filter ` | to_nice_yaml` will convert this to a more human readable format.  This is purely for aesthetics and not required.  To learn more about filters like `to_nice_yaml` please refer to the [documentation](https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html).
 - `dest: "{{playbook_dir}}/host_vars/{{inventory_hostname}}"` - this line will create a file named `vqfx1` since that is the only host in our topology, and dump the contents from the previous line (the `ansible_network_resources` which contains are l3_interfaces variables).  If there was multiple hosts, Ansible would create a separate file for each host in parallel.
 
-## Part 7 - Execute the save playbook
+## Part 6 - Execute the save playbook
 
 ```
 ansible-playbook save.yml
@@ -160,7 +151,7 @@ show configuration interfaces
 
 Ansible creates a vendor agnostic representation of layer 3 information using the l3_interfaces resource module.  These variables can be stored into a database, cmdb or git repo to create a SoT (source of truth) for your network devices.
 
-## Part 8 - Examine the l3_interfaces Ansible Playbook
+## Part 7 - Examine the l3_interfaces Ansible Playbook
 
 Examine the `l3_interfaces.yml` Ansible Playbook that will use the resource module [`junos_l3_interfaces`](https://docs.ansible.com/ansible/latest/modules/junos_l3_interfaces_module.html) to push the configuration to the device.
 
@@ -186,7 +177,7 @@ ansible-playbook l3_interfaces.yml
 
 Since we have not modified the configuration at all, we are pushing back the exact same configuration that we just saved.  The Ansible Playbook will report green and `changed=0` indicating that the configuration is not modified.  The `junos_l3_interfaces` is idempotent meaning that it is aware of the configuration on the Juniper Junos device and won't modify it unless it has to.
 
-## Part 9 - Modify the configuration
+## Part 8 - Modify the configuration
 
 Now that we have our configuration as a flat file we can modify the source of truth and push the configuration.
 
