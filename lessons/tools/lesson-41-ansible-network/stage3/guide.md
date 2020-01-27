@@ -10,38 +10,58 @@ Demonstration use of resource modules used in combination with Ansible facts for
 
 This exercise will cover:
 
-- using `junos_facts` module
-- the `gather_network_resources` parameter
-- creating a structured data yaml file from `junos_facts`
+- Using `junos_facts` module
+- The `gather_network_resources` parameter
+- Creating a structured data yaml file from `junos_facts`
 
 ## Part 1 - Primer on Resource Modules
 
 So what exactly is a “resource module?” Sections of a device’s configuration can be thought of as a resources provided by that device. Network resource modules are intentionally scoped to configure a single resource and can be combined as building blocks to configure complex network services.
 
 For example the following are Juniper Junos resource modules:
-- [junos_interfaces](https://docs.ansible.com/ansible/latest/modules/junos_interfaces_module.html#junos-interfaces-module) - configures physical interface attributes such as duplex, hold_times, mtu, description fields and speed
-- [junos_l2_interfaces](https://docs.ansible.com/ansible/latest/modules/junos_l2_interfaces_module.html#junos-l2-interfaces-module) - configures interface attributes such as access vlans, trunks, interface-mode, native vlans and allowed_vlans
-- [junos_l3_interfaces](https://docs.ansible.com/ansible/latest/modules/junos_l3_interfaces_module.html#junos-l3-interfaces-module) - configures layer 3 interface attributes such as IPv4 and IPv6 address assignment
-- [junos_lacp](https://docs.ansible.com/ansible/latest/modules/junos_lacp_module.html#junos-lacp-module) - configures Link Aggregation Control Protocol global settings such as link_protection and system_priority
-- [junos_vlans](https://docs.ansible.com/ansible/latest/modules/junos_vlans_module.html#junos-vlans-module) - configures VLANs, and their respective descriptions and names
+- [`junos_interfaces`](https://docs.ansible.com/ansible/latest/modules/junos_interfaces_module.html#junos-interfaces-module) - configures physical interface attributes such as duplex, hold times, mtu, description fields and speed
+- [`junos_l2_interfaces`](https://docs.ansible.com/ansible/latest/modules/junos_l2_interfaces_module.html#junos-l2-interfaces-module) - configures interface attributes such as access vlans, trunks, interface-mode, native vlans and allowed vlans
+- [`junos_l3_interfaces`](https://docs.ansible.com/ansible/latest/modules/junos_l3_interfaces_module.html#junos-l3-interfaces-module) - configures layer 3 interface attributes such as IPv4 and IPv6 address assignment
+- [`junos_lacp`](https://docs.ansible.com/ansible/latest/modules/junos_lacp_module.html#junos-lacp-module) - configures Link Aggregation Control Protocol global settings such as `link_protection` and `system_priority`
+- [`junos_vlans`](https://docs.ansible.com/ansible/latest/modules/junos_vlans_module.html#junos-vlans-module) - configures VLANs, and their respective descriptions and names
 
 > **Note** For a full list of Juniper Junos modules please refer to the [documentation](https://docs.ansible.com/ansible/latest/modules/list_of_network_modules.html#junos).
 
 Every resource module will have corresponding facts integration so that Ansible Network Automation can both read and write for that particular resource.  There is a new keyword `gather_network_resources` that allows fact modules (e.g. `junos_facts`) to gather resource module facts for a particular resource.
 
-| **Resource Module** | **gather_network_resources** |
-| ------------- |:-------------:|
-| `junos_interfaces` | `interfaces` |
-| `junos_l2_interfaces`    | `l2_interfaces` |
-| `junos_l3_interfaces` | `l3_interfaces` |
-| `junos_lacp` | `lacp` |
-| `junos_vlans` | `vlans` |
+ <table>
+  <tr>
+    <th><b>Resource Module</b></th>
+    <th><b>gather_network_resources</b></th>
+  </tr>
+  <tr>
+    <td><pre>junos_interfaces</pre></td>
+    <td><pre>interfaces</pre></td>
+  </tr>
+  <tr>
+    <td><pre>junos_l2_interfaces</pre></td>
+    <td><pre>l2_interfaces</pre></td>
+  </tr>
+  <tr>
+    <td><pre>junos_l3_interfaces</pre></td>
+    <td><pre>l3_interfaces</pre></td>
+  </tr>
+  <tr>
+    <td><pre>junos_lacp</pre></td>
+    <td><pre>lacp</pre></td>
+  </tr>
+  <tr>
+    <td><pre>junos_vlans</pre></td>
+    <td><pre>vlans</pre></td>
+  </tr>
+</table> 
 
 ## Part 2 - Examine Ansible Playbook
 
 Next, display the Ansible Playbook contents:
 
 ```
+cd /antidote/stage3
 cat facts.yml
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
@@ -76,7 +96,7 @@ nano facts.yml
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
 
-Now re-run the `ansible-playbook` command with the verbostiy flag (`-v`).
+Now re-run the `ansible-playbook` command with the verbosity flag (`-v`).
 ```
 ansible-playbook facts.yml -v
 ```
@@ -86,7 +106,7 @@ This can be another way to quickly see what an Ansible Task is doing.
 
 ## Part 4 - Variable Primer
 
-Previously in stage1 we talked about variables in inventory.  Variables are pieces of data, in the form of key-value pairs that Ansible can use during play.  When using variables within an inventory it is recommended to only have variables that are used to connect and authenticate **to the device**.  
+Previously in the first part of this lesson, we talked about variables in inventory.  Variables are pieces of data, in the form of key-value pairs that Ansible can use during play.  When using variables within an inventory it is recommended to only have variables that are used to connect and authenticate **to the device**.  
 
 Examples for inventory variables include:
 - [Connection plugins](https://docs.ansible.com/ansible/latest/plugins/connection.html) (e.g. network_cli, netconf)
@@ -103,7 +123,7 @@ Examples for `group_vars` and `host_vars` are:
 - Routing configuration
 - System services (NTP, DNS, etc)
 
-For a complete guide on Ansible Varaibles please refer to the [documentation](https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html).
+For a complete guide on Ansible Variables, please refer to the [documentation](https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html).
 
 ## Part 5 - Saving variables to host_vars
 
@@ -117,7 +137,8 @@ cat save.yml
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
 
 Lets examine the Ansible Playbook.  There is one new task:
-```
+
+```yaml
   - name: push structured data to host vars
     copy:
       content: "{{ansible_network_resources | to_nice_yaml}}"
@@ -129,6 +150,15 @@ Lets examine the Ansible Playbook.  There is one new task:
 - `dest: "{{playbook_dir}}/host_vars/{{inventory_hostname}}"` - this line will create a file named `vqfx1` since that is the only host in our topology, and dump the contents from the previous line (the `ansible_network_resources` which contains are l3_interfaces variables).  If there was multiple hosts, Ansible would create a separate file for each host in parallel.
 
 ## Part 6 - Execute the save playbook
+
+First, let's create the directory `host_vars/`. Our playbook will write the collected facts here:
+
+```
+mkdir host_vars/
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
+
+Now, we can execute our playbook to save our structured data to this directory:
 
 ```
 ansible-playbook save.yml
@@ -142,7 +172,7 @@ cat host_vars/vqfx1
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
 
-Compare this to the `show configuration interfaces` configuration on the vqfx1 device:
+While the format for our `host_vars` is a little different, since this is written in YAML, it's not far off from the output of `show configuration interfaces` on the `vqfx1` device:
 
 ```
 show configuration interfaces
@@ -198,9 +228,20 @@ ansible-playbook l3_interfaces.yml -v
 
 Juniper vqfx1 port **em3** is connected to the Cumulus VX device's `swp1`. Look at the table below:
 
-| **Juniper vqfx1** | **interface** | **interface** | **Cumulus VX cvx1** |
-| ------------- |:-------------:|:-------------:|:-------------:|
-| `10.10.10.1/30`  | `em3` | `swp1` | `10.10.10.2/30` |
+<table>
+  <tr>
+    <th><b>Juniper vqfx1</b></th>
+    <th><b>interface</b></th>
+    <th><b>interface</b></th>
+    <th><b>Cumulus VX cvx1</b></th>
+  </tr>
+  <tr>
+    <td><pre>10.10.10.1/30</pre></td>
+    <td><pre>em3</pre></td>
+    <td><pre>swp1</pre></td>
+    <td><pre>10.10.10.2/30</pre></td>
+  </tr>
+</table>
 
 Perform a ping from the `vqfx1` device to verify we have connectivity after the new configuration has been pushed:
 
@@ -216,8 +257,8 @@ You have completed stage 3!
 ## Takeaways
 
 - Resource modules and facts have a direct relationship allowing Ansible to read existing brownfield networks and create a source of truth really quickly.
-- The `ansible_network_resources` parameter is used to collect facts around a specific resource such as l3_interfaces.
-- Variables are mostly commonly stored in group_vars and host_vars. This short example only used host_vars.
+- The `ansible_network_resources` parameter is used to collect facts around a specific resource such as `l3_interfaces`.
+- Variables are mostly commonly stored in `group_vars` and `host_vars`. This short example only used `host_vars`.
 
 For more information on why resource modules were developed please refer to [this blog post](https://www.ansible.com/blog/network-features-coming-soon-in-ansible-engine-2.9).
 
