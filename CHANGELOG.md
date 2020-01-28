@@ -16,7 +16,8 @@
 - Temporarily pin netmiko to 2.4.2 in st2 image [#293](https://github.com/nre-learning/nrelabs-curriculum/pull/293)
 - Added stage 4 for the "Network Automation with Salt" lesson (configuring junos). [#235](https://github.com/nre-learning/nrelabs-curriculum/pull/235)
 - Resized/moved some collections logos [#296](https://github.com/nre-learning/nrelabs-curriculum/pull/296)
-  
+- Cleaning up Troubleshooting Lesson [#299](https://github.com/nre-learning/nrelabs-curriculum/pull/299)
+
 ## v1.0.0 - August 08, 2019
 
 - Replaced all individual snippet indices with 'this' keyword [#221](https://github.com/nre-learning/nrelabs-curriculum/pull/221)
