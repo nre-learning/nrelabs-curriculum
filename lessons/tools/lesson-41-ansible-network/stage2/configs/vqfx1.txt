@@ -95,6 +95,32 @@
                     </family>
                 </unit>
             </interface>
+            <interface>
+                <name>em3</name>
+                <unit>
+                    <name>0</name>
+                    <family>
+                        <inet>
+                            <address>
+                                <name>10.12.0.11/24</name>
+                            </address>
+                        </inet>
+                    </family>
+                </unit>
+            </interface>
+            <interface>
+                <name>em4</name>
+                <unit>
+                    <name>0</name>
+                    <family>
+                        <inet>
+                            <address>
+                                <name>10.31.0.11/24</name>
+                            </address>
+                        </inet>
+                    </family>
+                </unit>
+            </interface>
         </interfaces>
         <forwarding-options>
             <storm-control-profiles>
