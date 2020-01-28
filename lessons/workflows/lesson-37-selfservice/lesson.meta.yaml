@@ -1,0 +1,77 @@
+---
+lessonName: Building a Self-Service Automation System
+lessonId: 37
+category: tools
+tier: prod
+lessonDiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-15/lessondiagram.png
+prereqs:
+  - 15  # StackStorm
+description: |
+  Self-Service is the dream for all automation initiatives. Unless we go beyond scripts and empower users to make the changes
+  they want with the guardrails we require, we'll never be free to work on other things. In this lesson we'll explore a few ways
+  to 
+
+slug: selfservice
+tags:
+- event-driven
+- event driven automation
+- stackstorm
+- st2
+
+endpoints:
+
+- name: st2
+  image: antidotelabs/stackstorm
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: selfservice
+  image: antidotelabs/selfservice-flask-app
+  presentations:
+  - name: web
+    port: 5000
+    type: http
+
+- name: vqfx1
+  image: antidotelabs/vqfx
+  configurationType: python
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: vqfx2
+  image: antidotelabs/vqfx
+  configurationType: python
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: vqfx3
+  image: antidotelabs/vqfx
+  configurationType: python
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+utilities:
+
+
+connections:
+- a: vqfx1
+  b: vqfx2
+- a: vqfx2
+  b: vqfx3
+- a: vqfx3
+  b: vqfx1
+
+stages:
+
+  - id: 1
+    description: Using EDI for Self-Service Automation
+  - id: 2
+    description: Change approval via Inquiries 
