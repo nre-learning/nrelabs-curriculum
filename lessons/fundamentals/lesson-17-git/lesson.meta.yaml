@@ -17,7 +17,7 @@ tags:
 endpoints:
 - name: linux1
   image: antidotelabs/utility
-  configurationType: ansible
+  configurationType: python
   presentations:
   - name: cli
     port: 22
