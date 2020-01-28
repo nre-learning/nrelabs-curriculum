@@ -54,7 +54,7 @@ Every resource module will have corresponding facts integration so that Ansible 
     <td><pre>junos_vlans</pre></td>
     <td><pre>vlans</pre></td>
   </tr>
-</table> 
+</table>
 
 ## Part 2 - Examine Ansible Playbook
 
@@ -257,6 +257,7 @@ You have completed stage 3!
 ## Takeaways
 
 - Resource modules and facts have a direct relationship allowing Ansible to read existing brownfield networks and create a source of truth really quickly.
+- verbose mode (`-v`) allows us to see more output to the terminal window, including which commands would be applied
 - The `ansible_network_resources` parameter is used to collect facts around a specific resource such as `l3_interfaces`.
 - Variables are mostly commonly stored in `group_vars` and `host_vars`. This short example only used `host_vars`.
 
