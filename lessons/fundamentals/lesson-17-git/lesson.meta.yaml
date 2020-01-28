@@ -17,7 +17,7 @@ tags:
 endpoints:
 - name: linux1
   image: antidotelabs/utility
-  # configurationType: ansible  # For ensuring each stage is usable on its own
+  configurationType: ansible
   presentations:
   - name: cli
     port: 22
@@ -28,11 +28,14 @@ stages:
     description: Your First Git Repository
   - id: 2
     description: Adding and Comitting Files
-  - id: 3
-    description: Parallelizing Your Work With Git Branches
-  - id: 4
-    description: Oops! I made a mistake.
-  
-  # TODO(mierdin): Future, once the gitlab image is working
+
+  # TODO in v1.1.1
+  # - id: 3
+  #   description: Parallelizing Your Work With Git Branches
+  # TODO in v1.1.2
+  # - id: 4
+  #   description: Oops! I made a mistake.
+  # TODO in v1.1.1
+  # TODO(mierdin): Get the gitlab image working by this point
   # - id: 4
   #   description: Working with Git Remotes
