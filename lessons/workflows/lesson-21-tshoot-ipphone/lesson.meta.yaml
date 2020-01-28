@@ -4,11 +4,12 @@ lessonId: 21
 category: workflows
 lessondiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-21/lessondiagram.png
 tier: prod
+
+# TODO(mierdin): add Python when there is a lesson for it
 prereqs:
-  - 22  # Python
   - 23  # Linux
 description: In this lesson, we'll explore the use of some custom Python scripts for doing some automated troubleshooting.
-slug: Derick's Troubleshooting Wizardry
+slug: Automated Troubleshooting
 tags:
 - troubleshooting
 - tshoot
