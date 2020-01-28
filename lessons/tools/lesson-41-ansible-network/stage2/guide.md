@@ -36,7 +36,7 @@ First, let's explain the beginning of this Ansible Playbook in detail:
   gather_facts: True
 ```
 
-On this Ansible Playbook instead of disabling `gather_facts` we will turn it on.  Fact gathering is the default behavior so we could have also just delete the line entirely.
+On this Ansible Playbook instead of disabling `gather_facts` we will turn it on.  Fact gathering is the default behavior so we could have also just deleted the line entirely.
 
 Next, the second part, which includes our tasks:
 
@@ -48,7 +48,7 @@ Next, the second part, which includes our tasks:
       msg: "{{ansible_facts}}"
 ```
 
-This task will simply print the `ansible_facts` for `vqfx1` to the console window.  This will be a very long list of facts that will scroll past the window.  The double curly brackets denoted by `{{` and `}}` are used as a variable lookup.  This is using a very simple Jinja2 template and perform a variable substitution.  More information can be found in the [documentation](https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#defining-variables-in-a-playbook).
+This task will simply print the `ansible_facts` for `vqfx1` to the console window.  This will be a very long list of facts that will scroll past the window.  The double curly brackets denoted by `{{` and `}}` are used as a variable lookup.  This is done using a very simple Jinja2 template and perform a variable substitution.  More information can be found in the [documentation](https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#defining-variables-in-a-playbook).
 
 ## Part 2 - Execute the Ansible Playbook
 

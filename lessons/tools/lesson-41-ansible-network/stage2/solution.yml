@@ -6,7 +6,7 @@
   tasks:
     - name: display version
       debug:
-        msg: "The Junos version is: {{ ansible_net_version }}"
+        msg: "The network operating system version is: {{ ansible_net_version }}"
 
     - name: display serial number
       debug:

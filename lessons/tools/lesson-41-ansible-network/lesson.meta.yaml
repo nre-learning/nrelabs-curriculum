@@ -2,7 +2,7 @@
 lessonName: Ansible for Network Automation
 lessonId: 41
 category: tools
-lessonDiagram: ""
+lessonDiagram: "https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/tools/lesson-41-ansible-network/diagram.png"
 tier: prod
 prereqs:
   - 22  # Python
