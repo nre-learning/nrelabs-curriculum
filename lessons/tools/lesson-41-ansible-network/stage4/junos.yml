@@ -1,0 +1,6 @@
+---
+- name: configure ospf
+  junos_config:
+    lines:
+      - set routing-options router-id {{router_id}}
+      - set protocols ospf area 0.0.0.0 interface em3 interface-type p2p

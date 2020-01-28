@@ -1,0 +1,10 @@
+---
+- name: Ansible Facts
+  hosts: vqfx1
+  gather_facts: yes
+
+  tasks:
+
+  - name: print facts to console
+    debug:
+      msg: "{{ansible_facts}}"

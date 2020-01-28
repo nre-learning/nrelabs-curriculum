@@ -46,3 +46,6 @@ stages:
 
   - id: 3
     description: Executing Junos commands in Salt
+
+  - id: 4
+    description: Junos Configuration Management with Salt

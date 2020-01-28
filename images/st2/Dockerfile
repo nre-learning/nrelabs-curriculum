@@ -70,6 +70,7 @@ RUN screen -d -m /start_st2_services.sh && sleep 15 \
     && st2 run packs.setup_virtualenv packs=examples \ 
     && st2 pack remove napalm && st2 pack install https://github.com/nre-learning/stackstorm-napalm.git
 RUN /opt/stackstorm/virtualenvs/napalm/bin/pip install ncclient==0.6.0
+RUN /opt/stackstorm/virtualenvs/napalm/bin/pip install --upgrade netmiko==2.4.2
 ARG CACHEBUST=0
 
 #####################################################################################################

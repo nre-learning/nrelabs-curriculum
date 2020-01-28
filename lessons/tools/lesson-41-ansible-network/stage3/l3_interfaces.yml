@@ -1,0 +1,7 @@
+---
+- hosts: juniper
+  gather_facts: false
+  tasks:
+    - name: push interfaces
+      junos_l3_interfaces:
+        config: "{{l3_interfaces}}"
