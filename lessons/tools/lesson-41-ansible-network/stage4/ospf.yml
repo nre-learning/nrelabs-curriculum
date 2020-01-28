@@ -1,0 +1,9 @@
+---
+- name: Ansible agnostic playbook for OSPF
+  hosts: devices
+  gather_facts: no
+
+  tasks:
+
+    - name: include relevant network playbook
+      include: "{{ansible_network_os}}.yml"
