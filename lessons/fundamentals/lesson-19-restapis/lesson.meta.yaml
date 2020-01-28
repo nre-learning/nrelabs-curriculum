@@ -32,9 +32,17 @@ endpoints:
   - name: cli
     port: 22
     type: ssh
+
+  # This may not work
   - name: explorer
     port: 8080
     type: http
+
+# Tbh this should probably be something that starts off much simpler and builds.
+# This was built as a very early PoC (one of the very first lesson) and it really
+# seems to sprint towards the point of just calling a full blown network device API.
+# Maybe a mixture of APIs, both for networking and not, taking a lot longer along the
+# way to cover a breadth of subtopics.
 
 # TODO(mierdin): Insert generic REST server with tracing enabled
 
