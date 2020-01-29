@@ -1,0 +1,16 @@
+---
+- name: Ansible Resource Facts
+  hosts: vqfx1
+  gather_facts: no
+
+  tasks:
+  - name: collect l3 interface configuration facts
+    junos_facts:
+      gather_subset: min
+      gather_network_resources:
+      - l3_interfaces
+
+  - name: push structured data to host vars
+    copy:
+      content: "{{ansible_network_resources | to_nice_yaml}}"
+      dest: "{{playbook_dir}}/host_vars/{{inventory_hostname}}"

@@ -12,21 +12,21 @@ Now let's configure the Proxy Minions. To do this, we must define the IP address
 ```
 cat /srv/pillar/vqfx1.sls
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('salt1', 0)">Verify Output (Optional)</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('salt1', this)">Verify Output (Optional)</button>
 
 
 At this point we have to write the top.sls file which maps the Proxy Minion to the [pillar](https://docs.saltstack.com/en/latest/topics/pillar/) file that contains its corresponding details (`vqfx1.sls`)
 ```
 cat /srv/pillar/top.sls
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('salt1', 1)">Verify Output (Optional)</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('salt1', this)">Verify Output (Optional)</button>
 
 
 We also have to configure the /etc/salt/proxy file to point to the Salt Master
 ```
 cat /etc/salt/proxy
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('salt1', 2)">Verify Output (Optional)</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('salt1', this)">Verify Output (Optional)</button>
 
 The Proxy Minion is now configured and is ready to start.
 ```

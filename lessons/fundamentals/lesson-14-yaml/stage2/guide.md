@@ -20,7 +20,7 @@ python
 import yaml
 import sys
 yamlFile = open('basicdict.yaml', 'r')
-yamlDict = yaml.load(yamlFile)
+yamlList = yaml.load(yamlFile, Loader=yaml.FullLoader)
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
@@ -53,7 +53,7 @@ YAML and Python are quite liberal with the types that can be stored in a diction
 
 <pre>
 yamlFile = open('complexdict.yaml', 'r')
-yamlDict = yaml.load(yamlFile)
+yamlList = yaml.load(yamlFile, Loader=yaml.FullLoader)
 for key, value in yamlDict.items():
     print("The key %s is of type %s and its value %s is of type %s" % (key, type(key), value, type(value)))
 
