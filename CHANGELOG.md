@@ -17,6 +17,7 @@
 - Added stage 4 for the "Network Automation with Salt" lesson (configuring junos). [#235](https://github.com/nre-learning/nrelabs-curriculum/pull/235)
 - Resized/moved some collections logos [#296](https://github.com/nre-learning/nrelabs-curriculum/pull/296)
 - Cleaning up Troubleshooting Lesson [#299](https://github.com/nre-learning/nrelabs-curriculum/pull/299)
+- Introduction to Git (Refurbished Lesson) [#183](https://github.com/nre-learning/nrelabs-curriculum/pull/183)
 
 ## v1.0.0 - August 08, 2019
 
