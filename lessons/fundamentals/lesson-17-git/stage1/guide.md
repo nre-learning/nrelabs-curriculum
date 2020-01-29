@@ -1,9 +1,9 @@
 # Version Control with Git
 ## Part 1 - Your First Git Repository
 
-Software developers have been using version control systems like Git to improve the way they manage changes to their code. Instead of just relying on the "undo" button, version control maintains a detailed history of every change to a file, so that you can roll back changes, maintain different versions, and more. 
+Software developers have been using version control systems like Git to improve the way they manage changes to their code. Instead of just relying on the "undo" button, version control maintains a detailed history of every change to a file, so that you can roll back changes, maintain different versions, and more.
 
-![Git](https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-lesson/lessons/lesson-17-git/git.jpg)
+<div style="text-align:center;margin-top:30px;"><img src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-lesson/lessons/fundamentals/lesson-17-git/git.png" width="300px"></div>
 
 However, there's **nothing** about Git or version control in general that requires you to be a software developer, or even that you manage code of any kind with it. At the end of the day, as long as you're managing some kind of text format, you should be using version control to record changes to it.
 
