@@ -61,8 +61,6 @@ connections:
 - a: vqfx2
   b: sipphone
 - a: vqfx1
-  b: netbox
-- a: vqfx1
   b: asterisk
 
 
