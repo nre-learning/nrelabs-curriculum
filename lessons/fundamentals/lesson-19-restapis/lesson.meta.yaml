@@ -1,11 +1,10 @@
 ---
-lessonName: Working with REST APIs
+lessonName: Introduction to REST APIs
 lessonId: 19
 category: fundamentals
-lessondiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-19/lessondiagram.png
 tier: prod
 prereqs:
-  - 22  # Python
+  # - 22  # Python
   - 23  # Linux
 description: REST APIs are an extremely popular, flexible option for remote programmability of a network device. In this lesson, we'll cover the basics of REST APIs, interact with one in the bash shell as well as Python, and prepare for using them for higher-order workflows in later lessons.
 slug: REST APIs
@@ -24,6 +23,9 @@ endpoints:
   - name: cli
     port: 22
     type: ssh
+  - name: cli2
+    port: 22
+    type: ssh
 
 - name: vqfx1
   image: antidotelabs/vqfx-snap1
@@ -32,8 +34,6 @@ endpoints:
   - name: cli
     port: 22
     type: ssh
-
-  # This may not work
   - name: explorer
     port: 8080
     type: http
