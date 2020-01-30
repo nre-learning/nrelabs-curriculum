@@ -18,6 +18,7 @@
 - Resized/moved some collections logos [#296](https://github.com/nre-learning/nrelabs-curriculum/pull/296)
 - Cleaning up Troubleshooting Lesson [#299](https://github.com/nre-learning/nrelabs-curriculum/pull/299)
 - Introduction to Git (Refurbished Lesson) [#183](https://github.com/nre-learning/nrelabs-curriculum/pull/183)
+- Introduction to REST APIs (Refurbished Lesson) [#291](https://github.com/nre-learning/nrelabs-curriculum/pull/291)
 
 ## v1.0.0 - August 08, 2019
 
