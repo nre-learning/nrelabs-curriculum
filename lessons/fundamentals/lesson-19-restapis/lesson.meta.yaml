@@ -1,11 +1,10 @@
 ---
-lessonName: Working with REST APIs
+lessonName: Introduction to REST APIs
 lessonId: 19
 category: fundamentals
-lessondiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-19/lessondiagram.png
 tier: prod
 prereqs:
-  - 22  # Python
+  # - 22  # Python
   - 23  # Linux
 description: REST APIs are an extremely popular, flexible option for remote programmability of a network device. In this lesson, we'll cover the basics of REST APIs, interact with one in the bash shell as well as Python, and prepare for using them for higher-order workflows in later lessons.
 slug: REST APIs
@@ -24,6 +23,9 @@ endpoints:
   - name: cli
     port: 22
     type: ssh
+  - name: cli2
+    port: 22
+    type: ssh
 
 - name: vqfx1
   image: antidotelabs/vqfx-snap1
@@ -32,41 +34,24 @@ endpoints:
   - name: cli
     port: 22
     type: ssh
-  additionalPorts: [8080]
-
-- name: vqfx2
-  image: antidotelabs/vqfx-snap2
-  configurationType: napalm-junos
-  presentations:
-  - name: cli
-    port: 22
-    type: ssh
-  additionalPorts: [8080]
-
-- name: vqfx3
-  image: antidotelabs/vqfx-snap3
-  configurationType: napalm-junos
-  presentations:
-  - name: cli
-    port: 22
-    type: ssh
-  additionalPorts: [8080]
-
-connections:
-- a: vqfx1
-  b: vqfx2
-- a: vqfx2
-  b: vqfx3
-- a: vqfx3
-  b: vqfx1
-- a: vqfx1
-  b: linux1
+  - name: explorer
+    port: 8080
+    type: http
 
 stages:
-  - id: 1
-    description: Your First API Call
 
-  - id: 2
-    description: Let's do it with Python!
-  # 3:
-  #   description: Diving Deep into an API
+  - id: 1
+    description: Your First API Request
+
+  # - id: 2
+  #   description: Parsing JSON Data with "jq"
+
+  # - id: 3
+  #   description: Python and the "requests" Library
+
+  # - id: 4
+  #   description: REST API Authentication Options
+
+  # - id: 5
+  #   description: Programming Network Devices with REST
+  # [Junos REST API](https://www.juniper.net/documentation/en_US/junos/topics/concept/rest-api-overview.html)

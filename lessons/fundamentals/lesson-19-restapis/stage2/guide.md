@@ -1,11 +1,9 @@
 # Working with Network APIs
 ## Part 2 - Let's do it in Python!
 
-Hopefully APIs don't seem so scary anymore. However, there's only so much we can get done on the bash shell. It's time to move into the world of Python to up-level our API game.
+<!-- TODO - this stage has been deprecated for now, will be improved in a future release -->
 
-<!-- <div class="alert alert-success" role="alert">
-  We covered Python in <a href="#" class="alert-link">INSERT LESSON HERE</a>. If you don't know much about Python yet, stop over there first for an introduction to the basics.
-</div> -->
+Hopefully APIs don't seem so scary anymore. However, there's only so much we can get done on the bash shell. It's time to move into the world of Python to up-level our API game.
 
 Python is very interesting for network automation, because it doesn't have the heavy feel of a full-blown programming language, but it's just as powerful. You can get a **lot** of work done in a small Python script you might only take a few minutes to write. Hopefully you'll find this to be true as we go through these examples.
 
