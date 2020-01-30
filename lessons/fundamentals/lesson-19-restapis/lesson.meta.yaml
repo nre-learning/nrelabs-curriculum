@@ -44,10 +44,14 @@ stages:
     description: Your First API Request
 
   # - id: 2
-  #   description: Python and the "requests" Library
+  #   description: Parsing JSON Data with "jq"
 
   # - id: 3
-  #   description: REST API Authentication Options
+  #   description: Python and the "requests" Library
 
   # - id: 4
+  #   description: REST API Authentication Options
+
+  # - id: 5
   #   description: Programming Network Devices with REST
+  # [Junos REST API](https://www.juniper.net/documentation/en_US/junos/topics/concept/rest-api-overview.html)
