@@ -1,13 +1,10 @@
 # Working with Network APIs
+
 ## Part 1 - Your First API Call
 
-<!-- <div class="alert alert-warning" role="alert">
-  This course comes with a video, and it's highly recommended that you watch this first. Click the "Lesson Video" button above to watch!
-</div> -->
+With all of the hubbub about automation and programmability, one thing you've probably heard a lot about is APIs, or "Application Programming Interfaces". However, if you don't have any experience with these, it may not be immediately obvious why these are important and why you as a network engineer should learn about them.
 
-<!-- https://www.juniper.net/documentation/en_US/junos/topics/task/configuration/rest-api-submitting-get-request.html -->
-
-You've undoubtedly heard a lot about APIs in recent years. But what are they all about? And why should you as, a network engineer, care?
+<div style="text-align:center;margin-top:30px;"><img src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/rest-lesson-updates/lessons/fundamentals/lesson-19-git/git.png" width="300px"></div>
 
 In much the same way that the CLI was built for humans to consume, an API is intended to be consumed by software. In the modern data center alone, there are a virtually unlimited number of interactions taking place between the various IT systems, such as sharing information, updating databases, performing configurations, and more. These are all happening without **direct** human intervention, even though a human at some point, probably long ago, told the software how to do that.
 
