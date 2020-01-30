@@ -9,3 +9,4 @@ jinja2
 paho-mqtt
 grpcio
 grpcio-tools
+flask
