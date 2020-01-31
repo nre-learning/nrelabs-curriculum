@@ -11,7 +11,7 @@ Don't forget your network chops in this lesson. You'll configure an interface, a
 
 ![Terraform](https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-31/stage1/terraformbasics.png)
 
-*Image borrowed from the Terraform website: terraform.io*
+*Image borrowed from [https://terraform.io](https://terraform.io)*
 
 Terraform for traditional networking is relatively unchartered ground because we don't think about switches, routers or firewalls as a set of immutable resources, or put in another way, things that can be created and destroyed easily. Imagine cutting out the bits you don't use and soldering them back in? Mentally it feels like a step, but in reality we can deal with this as an abstracted construct. This makes us think about things tangentially from what we're used to, but with little effort and thanks to NRE Labs, you can get a feel for how this works!
 
