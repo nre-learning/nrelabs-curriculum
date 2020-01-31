@@ -32,6 +32,9 @@ RUN echo "export VISIBLE=now" >> /etc/profile
 ADD requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt
 
+# Temporary fix to get NAPALM working. Long-term we should convert utility to use python 3
+RUN pip install --upgrade netmiko==2.4.2
+
 # The latest release of JSNAPy as of now was 1.3.2, released in
 # May of 2018. Since then, there have been many fixes, and the main one we care
 # about is the YAML deprecation notices. I will follow up with them and ask why
