@@ -40,7 +40,7 @@ The below snippet is used to import the data from the YAML file to our python co
 
 ```
 yaml_file = open('part4.yml', 'r')
-all_devices = yaml.load(yaml_file)
+all_devices = yaml.load(yaml_file, Loader=yaml.FullLoader)
 pprint(all_devices)
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
