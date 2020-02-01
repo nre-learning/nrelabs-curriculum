@@ -2,6 +2,9 @@
 
 ## In development
 
+
+## v1.1.0 - February 01, 2020
+
 - Set tshoot lesson images to use centos7 [#275](https://github.com/nre-learning/nrelabs-curriculum/pull/275)
 - Added FRR PTR demo [#273](https://github.com/nre-learning/nrelabs-curriculum/pull/273)
 - Fixed Cumulus PTR demo [#271](https://github.com/nre-learning/nrelabs-curriculum/pull/271)
