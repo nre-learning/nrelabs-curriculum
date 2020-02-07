@@ -5,7 +5,7 @@ category: tools
 lessonDiagram: "https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/tools/lesson-41-ansible-network/diagram.png"
 tier: prod
 prereqs:
-  - 22  # Python
+  # - 22  # Python
   - 23  # Linux
 description: In this lesson, we'll explore the use of Ansible for multi-vendor network automation
 slug: ansible-network-automation

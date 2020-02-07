@@ -5,7 +5,6 @@ category: fundamentals
 lessondiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-99/lessondiagram.png
 tier: ptr
 prereqs:
-  - 22  # Python
   - 23  # Linux
 description: Cumulus in NRELabs
 slug: Cumulus demo

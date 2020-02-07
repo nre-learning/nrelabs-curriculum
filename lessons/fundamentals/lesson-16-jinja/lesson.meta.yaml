@@ -5,7 +5,7 @@ category: fundamentals
 tier: prod
 prereqs:
   - 14  # YAML
-  - 22  # Python
+  # - 22  # Python
 description: Jinja is a popular language used to create repeatable textual output from a template. In this lesson, we'll explore the basics of Jinja, and prepare to use it for templating network configurations.
 slug: Jinja
 tags:
