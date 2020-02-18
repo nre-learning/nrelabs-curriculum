@@ -98,4 +98,3 @@ To summarize, the commands we learned in this section were:
 
 - `git init` - initialize a new git repository
 - `git config` - work with Git configuration options, both globally (with the `--global` flag) and locally in the current repository.
-- `git show` - show details about something in Git - in this case, a commit
