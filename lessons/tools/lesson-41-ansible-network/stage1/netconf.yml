@@ -1,0 +1,11 @@
+---
+- name: Ansible Network Automation Playbook
+  hosts: vqfx1
+  gather_facts: no
+
+  tasks:
+
+  - name: turn on netconf for juniper devices
+    vars:
+      ansible_connection: network_cli
+    junos_netconf:

@@ -22,7 +22,7 @@ For example,
 ```
 show route | display xml rpc
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', 1)">Verify Output (Optional)</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', this)">Verify Output (Optional)</button>
 
 From the above snippet, the RPC command equivalent for the 'show route' CLI command is 'get-route-information'
 Let us now run the junos.rpc command. We can specify a destination file where the output is directed to. The 'terse' keyword allows you to obtain a summary output.
@@ -37,6 +37,6 @@ To verify that the output was written to the '/var/tmp/route.xml', execute:
 ```
 cat /var/tmp/route.xml
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('salt1', 3)">Verify Output (Optional)</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('salt1', this)">Verify Output (Optional)</button>
 
-That's it for now - hopefully you enjoyed learning about Salt, and are ready to go automate!
+See the next part of this lesson to learn how to automate Junos configurations with Salt!

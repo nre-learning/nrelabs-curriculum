@@ -1,67 +1,100 @@
 # Version Control with Git
-## Part 1 - Your First Commit
+## Part 1 - Your First Git Repository
 
-Software developers have been using version control systems like Git to improve the way they manage changes to their code. Instead of just relying on the "undo" button, version control maintains a detailed history of every change to a file, so that you can roll back changes, maintain different versions, and more. 
+Software developers have been using version control systems like Git to improve the way they manage changes to their code. Instead of just relying on the "undo" button, version control maintains a detailed history of every change to a file, so that you can roll back changes, maintain different versions, and more.
+
+<div style="text-align:center;margin-top:30px;"><img src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/fundamentals/lesson-17-git/git.png" width="300px"></div>
 
 However, there's **nothing** about Git or version control in general that requires you to be a software developer, or even that you manage code of any kind with it. At the end of the day, as long as you're managing some kind of text format, you should be using version control to record changes to it.
 
 Incidentally, in the world of Network Reliability Engineering, not only do we have a need for using Git as a version control system for scripts or other kinds of code we might write for automation-related purposes, we can also use it to version-control things like YAML files, network configs, and more.
 
-In this lesson, we'll learn the very basics of Git, especially as it pertains to network automation and network reliability engineering.
+In this lesson, we'll learn the very basics of Git - enough to get you started using it in your network projects. Once you have a few of the commands in this lesson under your belt, there are a large number of resources on the internet that dive under the covers.
 
-We refer to a group of directories and files managed by Git as a "repository" (or often, a "repo")
+## Your First Repository
+
+We refer to a group of directories and files managed by Git as a "repository" (or often, a "repo"). By now you may already know how to create a directory in your favorite Linux distribution, and navigate into it:
 
 ```
 mkdir myfirstrepo/ && cd myfirstrepo/
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-Right now, `myfirstrepo` is just a regular directory. We can "initialize" a new git repository in this directory using `git init`:
+However, our newly created `myfirstrepo` is just a regular directory. To initialize a Git repository within it, we need to run the `git init` command:
 
 ```
 git init
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-Before we go further, we should tell Git some information about us. At a minimum, in order to make commits, we need to provide a username and an email address:
+## Configuring Git
+
+Git is highly configurable, in many different ways. You can tell Git what editor you want to use to make commit messages, what email address to use when signing commits, and what key to sign your commits with, and much more. These options can be configured on both a repository-specific level, as well as globally to your user or even the entire system.
+
+Canonically, the user-global configuration can be found within your user directory, in a file called `.gitconfig`:
 
 ```
-git config --global user.email "jane@labs.networkreliability.engineering"
+cat ~/.gitconfig
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
+
+Oops! That file doesn't exist. This is because we haven't told Git anything about our desired configuration. So, let's do that.
+
+A very common task to take on when setting up a system to use Git is to configure your name and email address. Not only does Git need to know who you are in order to make commits, most Git remotes (which we'll discuss later) like Github or Gitlab require you to sign your commits with an email address that is in your profile in order to attribute those commits to your username. And who wouldn't want credit for their work?
+
+The `git config` command is used to both view the existing configuration, as well as set values. We can do this:
+
+```
+git config --global user.email "jane@nrelabs.io"
 git config --global user.name "Jane Doe"
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-The `--global` flag sets this in your Git configuration for the entire machine. You can omit this flag to only set it for this repository. This information is used to identify who has made changes to the files in the repository.
+Git configurations are scoped, meaning that configuration options can be specified at one of three levels:
 
-A Git repository is nothing without some files to manage. Let's create a text file and add some text to it:
+- **System** - configuration options for all repositories on the system
+- **Global** - configuration options for all repositories for the current user
+- **Local** - per-repository configuration options
 
-```
-echo "this is some text" > newfile.txt
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
+Configuration options at the system level can be overridden by global options, and similarly, local options can override the previous two. So, if you have an option set in a local .gitconfig file, meaning one that is specific to a repository, then it takes precedence over a similar option defined globally or at a system level.
 
-We can use `git status` to see Git's current view of the repository:
-
-```
-git status
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
-
-Note that while the file exists, Git is listing it as "untracked", meaning it's not actually part of the Git repo. In order to formally include a file in a Git repository, we must commit it. In order to commit it, we must first add it to "staging". This is done using `git add`:
+Since we specified `--global` in our commands above, these options were written to the global Git configuration, located at `~/.gitconfig`. Previously, this file didn't exist, but since we've bootstrapped it, it's now there, and contains our configuration options:
 
 ```
-git add newfile.txt
+cat ~/.gitconfig
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-Now that the file is in staging, we can create our first commit! A commit is a way of marking a particular state of a repository, saying "I would like to remember what things were like at this point in time, so I can go back to it if I need to. Often, a commit is made when a developer makes a meaningful change to some code, or an NRE updates a YAML file with a new set of variables for a switch install. No matter the use case, **the commit is king**.
 
-Once we've used `git add` to include all the changes we want to commit into staging, we can use `git commit` to save those changes in a commit.
+We can use `--list` flag for this command to view the configuration, and by specifying `--global`, we can see what's effective at a global scope:
 
 ```
-git commit -m "My first commit!"
+git config --list --global 
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-> Note the use of the `-m` flag to specify the commit message inline - you can omit this if you wish, and Git will open a text editor for you to specify your commit message
+Sometimes, however, you may want to configure a different email address or name for a specific repository. The good news is that the default scope, `--local`, does just this. And remember, "local" scope always takes precedence over broader scopes like "global". Since this is the default, we can re-run these commands without any flag, and it will automatically go in our local repo's configuration:
 
+```
+git config user.email "jim@nrelabs.io"
+git config user.name "Jimmy Doe"
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
+
+These new `local` configuration options override the `global` ones - so this repository will now use our new email address and username, but all other repos will still use the global settings.
+
+Note that you can easily see the full config by re-running with the `--list` flag, and by also using the `--show-origin` flag, we can see where Git saw each individual option. Note that we're omitting any scope flag, which means we're again defaulting to `--local`.
+
+```
+git config --list --show-origin 
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
+
+We now have an initialized and configured Git repository, ready to track our files.
+
+## Commands Reference
+
+To summarize, the commands we learned in this section were:
+
+- `git init` - initialize a new git repository
+- `git config` - work with Git configuration options, both globally (with the `--global` flag) and locally in the current repository.

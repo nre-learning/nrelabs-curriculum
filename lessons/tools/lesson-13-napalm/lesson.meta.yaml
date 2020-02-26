@@ -4,7 +4,7 @@ lessonId: 13
 category: tools
 tier: prod
 prereqs:
-  - 22  # Python
+  # - 22  # Python
   - 23  # Linux
   - 16  # Jinja
 description: Each vendor has their own APIs for interacting with network devices. In this lesson, you'll learn about a Python library that abstracts all these, and allows you to do basic multivendor network automation.
@@ -44,5 +44,7 @@ stages:
   - id: 4
     description: Make configuration changes with NAPALM
     jupyterLabGuide: true
-    verifyCompleteness: true
-    verifyObjective: "Modify and re-execute the code in the Jupyter notebook so that the description for em1.0 exactly reads: 'Hello, World!'"
+
+    # This feature is not ready for primetime, so we're removing it for now.
+    # verifyCompleteness: true
+    # verifyObjective: "Modify and re-execute the code in the Jupyter notebook so that the description for em1.0 exactly reads: 'Hello, World!'"
