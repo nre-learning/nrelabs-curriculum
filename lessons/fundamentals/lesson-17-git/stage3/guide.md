@@ -1,7 +1,6 @@
 # Version Control with Git
 ## Part 3 - Parallelizing Your Work With Git Branches
 
-
 self explanatory - git branch/merge/checkout
 
 ```
