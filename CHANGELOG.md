@@ -2,6 +2,7 @@
 
 ## In development
 
+- Fix config for stage4 vqfx1 config in ansible lesson [#313](https://github.com/nre-learning/nrelabs-curriculum/pull/313)
 
 ## v1.1.0 - February 01, 2020
 
