@@ -1,10 +1,13 @@
 # Version Control with Git
 ## Part 2 - Adding and Comitting Files
 
-A Git repository is nothing without some files to manage. Within our new repo, let's create a text file and add some text to it:
+A Git repository is nothing without some files to manage. We have a sample configuration for a Junos device's
+network interfaces, and we can copy this file into our new repository after entering into it:
+
 
 ```
-cd ~/myfirstrepo/ && echo "this is some text" > newfile.txt
+cd ~/myfirstrepo/
+cp /antidote/stage2/interface-config.txt .
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
@@ -18,7 +21,7 @@ git status
 Note that the file exists, but Git is listing it as "untracked". This means Git knows the file is there, but is otherwise not paying attention to it. The first thing we need to do is add this file to a special Git environment known as "staging". This is a temporary bucket to place changes to files before we're ready to make a commit. This is done using `git add`:
 
 ```
-git add newfile.txt
+git add interface-config.txt
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
@@ -38,10 +41,17 @@ git diff --cached
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-The key concept with Git, especially when compared with other version control systems, is that it works on **changes** to files. We've added the file `newfile.txt` to staging, which was previously untracked, and therefore every line in that file is now in our staging environment. However, watch what happens when we add another line to the file:
+The key concept with Git, especially when compared with other version control systems, is that it works on **changes** to files. We've added the file `interface-config.txt` to staging, which was previously untracked, and therefore every line in that file is now in our staging environment. However, watch what happens when we add additional configuration to our file using some bash-foo, and then re-run `git status`:
 
 ```
-echo "this is even more text!" >> newfile.txt
+cat <<EOT >> ~/myfirstrepo/interface-config.txt
+vlans {
+    default {
+        vlan-id 1;
+    }
+}
+EOT
+
 git status
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
@@ -57,7 +67,7 @@ git diff
 There are a few things we can do at this point, depending on what we wanted to do with the additional change. Let's say we want to get rid of the second change, but keep the first in staging. In this case, the `git checkout` command can help us. By specifying this command with the name of the file, we're telling Git to revert back to the last known change for that file, which in this case is the one in staging:
 
 ```
-git checkout newfile.txt
+git checkout interface-config.txt
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
@@ -70,12 +80,12 @@ git status
 
 ## Your First Commit
 
-Now that we have all our desired changes in staging we can create our first commit! A commit is a way of marking a particular state of a repository, saying "I would like to remember what things were like at this point in time, so I can go back to it if I need to. Often, a commit is made when a developer makes a meaningful change to some code, or an NRE updates a YAML file with a new set of variables for a switch install. No matter the use case, **the commit is king** - if it's not in a commit, Git isn't permanently tracking that change yet.
+Now that we have all our desired changes in staging we can create our first commit! A commit is a way of marking a particular state of a repository, saying "I would like to remember what things were like at this point in time, so I can go back to it if I need to". Often, a commit is made when a developer makes a meaningful change to some code, or an NRE updates a YAML file with a new set of variables for a switch install. No matter the use case, **the commit is king** - if it's not in a commit, Git isn't permanently tracking that change yet.
 
 Once we've used `git add` to include all the changes we want to commit into staging, we can use `git commit` to save those changes in a commit.
 
 ```
-git commit -m "My first commit!"
+git commit -m "Adding new interface configuration file"
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
@@ -96,15 +106,13 @@ git log --oneline
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-At this point, you may be wondering what those jumbled letters and numbers are to the left of the screen. Each commit
-gets its own cryptographic hash that uniquely identifies it. This is made using a combination of the date/time the commit
-was made, the contents of the commit, the parent commit (the commit before this one, if any), and a few other things.
+At this point, you may be wondering what those jumbled letters and numbers are to the left of the screen. Each commit gets its own cryptographic hash that uniquely identifies it. This is made using a combination of the date/time the commit was made, the contents of the commit, the parent commit (the commit before this one, if any), and a few other things.
 
 If you look carefully at the output of the command `git commit`, which we ran a few steps ago, it actually gives you an abbreviated form of this commit ID right away - in this case, the ID is `bdb4902`:
 
 ```
-antidote@linux1:~/myfirstrepo$ git commit -m "My first commit!"
-[master (root-commit) bdb4902] My first commit!
+antidote@linux1:~/myfirstrepo$ git commit -m "Adding new interface configuration file"
+[master (root-commit) bdb4902] Adding new interface configuration file
 ...
 ```
 
