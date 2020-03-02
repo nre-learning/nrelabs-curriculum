@@ -20,7 +20,7 @@ ssh.exec_command('cd /home/antidote/myfirstrepo && git config --global user.name
 ssh.exec_command('cd /home/antidote/myfirstrepo && cp /antidote/stage3/interface-config.txt .')
 ssh.exec_command('cd /home/antidote/myfirstrepo && git add interface-config.txt')
 ssh.exec_command('cd /home/antidote/myfirstrepo && git commit -m "Adding new interface configuration file"')
-ssh.exec_command('cd /home/antidote/myfirstrepo && git checkout -b change-124 && sed -i s/10.31.0.11/10.31.0.12/ interface-config.txt && git add interface-config.txt && git commit -s -m "Updated em3 IP address" && git checkout master')
-
+ssh.exec_command('cd /home/antidote/myfirstrepo && git checkout -b change-124 && sed -i s/10.12.0.11/10.12.0.12/ interface-config.txt && git add interface-config.txt && git commit -s -m "Updated em4 IP address"')
+ssh.exec_command('cd /home/antidote/myfirstrepo && git checkout master')
 
 ssh.close()
