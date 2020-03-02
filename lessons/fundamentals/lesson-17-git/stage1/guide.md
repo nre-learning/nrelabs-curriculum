@@ -11,6 +11,10 @@ Incidentally, in the world of Network Reliability Engineering, not only do we ha
 
 In this lesson, we'll learn the very basics of Git - enough to get you started using it in your network projects. Once you have a few of the commands in this lesson under your belt, there are a large number of resources on the internet that dive under the covers.
 
+It's worth mentioning, it can take time to really become comfortable with Git. Git in particular emphasizes robustness and flexibility over ease-of-use, so if during this lesson or your day-to-day use of Git you feel overwhelmed or frustrated, know this is normal. Git is something you continually learn more about and add muscle memory for over time - not something anyone is expected to master in a few days.
+
+In these exercises, we'll try to keep things as simple as possible, and focus on how to practically get started using Git. However, within these exercises, we'll also link frequently to [the Git book](https://git-scm.com/book/en/v2) which is available online for free, or in print form, which is a great resource to have when you want to dive deeper into a particular step of your Git workflow.
+
 ## Your First Repository
 
 We refer to a group of directories and files managed by Git as a "repository" (or often, a "repo"). By now you may already know how to create a directory in your favorite Linux distribution, and navigate into it:
@@ -98,4 +102,3 @@ To summarize, the commands we learned in this section were:
 
 - `git init` - initialize a new git repository
 - `git config` - work with Git configuration options, both globally (with the `--global` flag) and locally in the current repository.
-- `git show` - show details about something in Git - in this case, a commit

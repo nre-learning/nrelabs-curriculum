@@ -12,6 +12,6 @@ def createSSHClient(server, port, user, password):
 
 ssh=createSSHClient(host,22,"antidote","antidotepassword")
 
-ssh.exec_command('/antidote/stage2/configs/catchup.sh')
+ssh.exec_command('/antidote/stage3/configs/catchup.sh')
 
 ssh.close()

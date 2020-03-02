@@ -1,0 +1,30 @@
+interfaces {
+    em0 {
+        unit 0 {
+            family inet {
+                address 10.0.0.15/24;
+            }
+        }
+    }
+    em1 {
+        unit 0 {
+            family inet {
+                address 169.254.0.2/24;
+            }
+        }
+    }
+    em3 {
+        unit 0 {
+            family inet {
+                address 10.31.0.11/24;
+            }
+        }
+    }
+    em4 {
+        unit 0 {
+            family inet {
+                address 10.12.0.11/24;
+            }
+        }
+    }
+}

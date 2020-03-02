@@ -28,10 +28,8 @@ stages:
     description: Your First Git Repository
   - id: 2
     description: Adding and Comitting Files
-
-  # TODO in v1.1.1
-  # - id: 3
-  #   description: Parallelizing Your Work With Git Branches
+  - id: 3
+    description: Parallelizing Your Work With Git Branches
   # TODO in v1.1.2
   # - id: 4
   #   description: Oops! I made a mistake.
