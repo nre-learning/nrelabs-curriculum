@@ -170,6 +170,7 @@ Git is telling us that it still sees an unresolved state, so we need to run a ne
 git add interface-config.txt
 git commit -s -m "Resolve merge conflict, overwrite Fred's change"
 ```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 ## The Final Merge
 
