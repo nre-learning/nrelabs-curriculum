@@ -1,0 +1,53 @@
+kernel:
+  image: linuxkit/kernel:4.19.104
+  cmdline: "console=tty0 console=ttyS0 console=ttyAMA0 console=ttysclp0"
+init:
+  - linuxkit/init:a4fcf333298f644dfac6adf680b83140927aa85e
+  - linuxkit/runc:69b4a35eaa22eba4990ee52cccc8f48f6c08ed03
+  - linuxkit/containerd:09553963ed9da626c25cf8acdf6d62ec37645412
+onboot:
+  - name: sysctl
+    image: linuxkit/sysctl:v0.7
+  - name: rngd1
+    image: linuxkit/rngd:02c555b50cd1887aa628836662d2eec54c0d7e81
+    command: ["/sbin/rngd", "-1"]
+  - name: dhcpcd
+    image: linuxkit/dhcpcd:v0.7
+    command: ["/sbin/dhcpcd", "--nobackground", "-f", "/dhcpcd.conf", "-1"]
+services:
+  - name: getty
+    image: linuxkit/getty:v0.7
+    env:
+     - INSECURE=true
+  - name: dhcpcd
+    image: linuxkit/dhcpcd:v0.7
+  - name: crpd
+    image: crpd-custom:latest
+    net: host
+    # runtime:
+    #   mkdir:
+    #   - /crpd-config
+    capabilities:
+    - all
+
+    # I had problems with binds. Seems like it tries to do a lot more than docker does in a similar
+    # volume mounting exercise, and resulted in crpd not being able to write to its filesystem in places.
+    # So, instead of trying to get that working, I commented the above out, and instead, in the Dockerfile, I am just adding
+    # the startup configuration (and a license file if you have it) to the root of the filesystem,
+    # and the `launch.sh` script for crpd will copy those files in place once started.
+    #
+    # Might be worth revisiting this later.
+    # 
+    # binds:
+    # - /crpd-config:/config:rw
+
+# files:
+#   - path: /crpd-config/license.conf
+#     source: license.conf
+#     mode: "0664"
+#   - path: /crpd-config/juniper.conf
+#     source: juniper.conf
+#     mode: "0664"
+trust:
+  org:
+    - linuxkit

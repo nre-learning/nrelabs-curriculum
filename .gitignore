@@ -47,3 +47,4 @@ __pycache__
 *.tgz
 
 !lessons/tools/lesson-41-ansible-network/stage1/hosts
+images/crpd/linuxkit/
