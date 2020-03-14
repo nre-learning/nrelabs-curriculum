@@ -37,12 +37,24 @@ commit and-quit
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('crpd2', this)">Run this snippet</button>
 
 
-Finally, verify that you can see the learned route, and can ping the loopback of `crpd1`:
+Verify that `crpd2` has formed an OSPF adjacency with `crpd1`, and that you can see the route to `123.123.123.123`:
 
 ```
 show ospf neighbor 
 show route 123.123.123.123
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('crpd2', this)">Run this snippet</button>
+
+Exit from the Junos CLI:
+
+```
 exit
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('crpd2', this)">Run this snippet</button>
+
+You should now be able to ping the loopback address of `crpd1` from `crpd2`:
+
+```
 ping 123.123.123.123
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('crpd2', this)">Run this snippet</button>

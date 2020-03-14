@@ -14,7 +14,11 @@ tags:
 endpoints:
 - name: crpd1
   image: antidotelabs/crpd
-  configurationType: napalm-junos
+
+  # configurationType: napalm-junos  # Commenting out until we can modify auth in config containers
+  # Also note that the health check is likely to return true way before you can actually log in to crpd. So you may
+  # want to either make the health checks more intelligent, or modify the TCP proxy in the container
+
   presentations:
   - name: cli
     port: 22
@@ -22,7 +26,7 @@ endpoints:
 
 - name: crpd2
   image: antidotelabs/crpd
-  configurationType: napalm-junos
+  # configurationType: napalm-junos  # Commenting out until we can modify auth in config containers
   presentations:
   - name: cli
     port: 22
