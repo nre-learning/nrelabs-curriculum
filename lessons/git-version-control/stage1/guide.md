@@ -1,104 +1,137 @@
 # Version Control with Git
-## Part 1 - Your First Git Repository
+## Part 2 - Adding and Comitting Files
 
-Software developers have been using version control systems like Git to improve the way they manage changes to their code. Instead of just relying on the "undo" button, version control maintains a detailed history of every change to a file, so that you can roll back changes, maintain different versions, and more.
+A Git repository is nothing without some files to manage. We have a sample configuration for a Junos device's
+network interfaces, and we can copy this file into our new repository after entering into it:
 
-<div style="text-align:center;margin-top:30px;"><img src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/fundamentals/lesson-17-git/git.png" width="300px"></div>
-
-However, there's **nothing** about Git or version control in general that requires you to be a software developer, or even that you manage code of any kind with it. At the end of the day, as long as you're managing some kind of text format, you should be using version control to record changes to it.
-
-Incidentally, in the world of Network Reliability Engineering, not only do we have a need for using Git as a version control system for scripts or other kinds of code we might write for automation-related purposes, we can also use it to version-control things like YAML files, network configs, and more.
-
-In this lesson, we'll learn the very basics of Git - enough to get you started using it in your network projects. Once you have a few of the commands in this lesson under your belt, there are a large number of resources on the internet that dive under the covers.
-
-It's worth mentioning, it can take time to really become comfortable with Git. Git in particular emphasizes robustness and flexibility over ease-of-use, so if during this lesson or your day-to-day use of Git you feel overwhelmed or frustrated, know this is normal. Git is something you continually learn more about and add muscle memory for over time - not something anyone is expected to master in a few days.
-
-In these exercises, we'll try to keep things as simple as possible, and focus on how to practically get started using Git. However, within these exercises, we'll also link frequently to [the Git book](https://git-scm.com/book/en/v2) which is available online for free, or in print form, which is a great resource to have when you want to dive deeper into a particular step of your Git workflow.
-
-## Your First Repository
-
-We refer to a group of directories and files managed by Git as a "repository" (or often, a "repo"). By now you may already know how to create a directory in your favorite Linux distribution, and navigate into it:
 
 ```
-mkdir myfirstrepo/ && cd myfirstrepo/
+cd ~/myfirstrepo/
+cp /antidote/stage1/interface-config.txt .
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-However, our newly created `myfirstrepo` is just a regular directory. To initialize a Git repository within it, we need to run the `git init` command:
+We can use `git status` to see Git's current view of the repository:
 
 ```
-git init
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
-
-## Configuring Git
-
-Git is highly configurable, in many different ways. You can tell Git what editor you want to use to make commit messages, what email address to use when signing commits, and what key to sign your commits with, and much more. These options can be configured on both a repository-specific level, as well as globally to your user or even the entire system.
-
-Canonically, the user-global configuration can be found within your user directory, in a file called `.gitconfig`:
-
-```
-cat ~/.gitconfig
+git status
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-Oops! That file doesn't exist. This is because we haven't told Git anything about our desired configuration. So, let's do that.
-
-A very common task to take on when setting up a system to use Git is to configure your name and email address. Not only does Git need to know who you are in order to make commits, most Git remotes (which we'll discuss later) like Github or Gitlab require you to sign your commits with an email address that is in your profile in order to attribute those commits to your username. And who wouldn't want credit for their work?
-
-The `git config` command is used to both view the existing configuration, as well as set values. We can do this:
+Note that the file exists, but Git is listing it as "untracked". This means Git knows the file is there, but is otherwise not paying attention to it. The first thing we need to do is add this file to a special Git environment known as "staging". This is a temporary bucket to place changes to files before we're ready to make a commit. This is done using `git add`:
 
 ```
-git config --global user.email "jane@nrelabs.io"
-git config --global user.name "Jane Doe"
+git add interface-config.txt
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-Git configurations are scoped, meaning that configuration options can be specified at one of three levels:
-
-- **System** - configuration options for all repositories on the system
-- **Global** - configuration options for all repositories for the current user
-- **Local** - per-repository configuration options
-
-Configuration options at the system level can be overridden by global options, and similarly, local options can override the previous two. So, if you have an option set in a local .gitconfig file, meaning one that is specific to a repository, then it takes precedence over a similar option defined globally or at a system level.
-
-Since we specified `--global` in our commands above, these options were written to the global Git configuration, located at `~/.gitconfig`. Previously, this file didn't exist, but since we've bootstrapped it, it's now there, and contains our configuration options:
+If we re-run `git status`, we'll now see the file is now colored green, and is in the section labeled "Changes to be committed".
 
 ```
-cat ~/.gitconfig
+git status
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
+The term for this area in Git is called "staging". It's a sort of "waiting room" for changes that are about to be committed.
 
-We can use `--list` flag for this command to view the configuration, and by specifying `--global`, we can see what's effective at a global scope:
-
-```
-git config --list --global 
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
-
-Sometimes, however, you may want to configure a different email address or name for a specific repository. The good news is that the default scope, `--local`, does just this. And remember, "local" scope always takes precedence over broader scopes like "global". Since this is the default, we can re-run these commands without any flag, and it will automatically go in our local repo's configuration:
+We can use the `git diff` comand with the `--cached` flag, which allows us to see the change we just staged:
 
 ```
-git config user.email "jim@nrelabs.io"
-git config user.name "Jimmy Doe"
+git diff --cached
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-These new `local` configuration options override the `global` ones - so this repository will now use our new email address and username, but all other repos will still use the global settings.
-
-Note that you can easily see the full config by re-running with the `--list` flag, and by also using the `--show-origin` flag, we can see where Git saw each individual option. Note that we're omitting any scope flag, which means we're again defaulting to `--local`.
+The key concept with Git, especially when compared with other version control systems, is that it works on **changes** to files. We've added the file `interface-config.txt` to staging, which was previously untracked, and therefore every line in that file is now in our staging environment. However, watch what happens when we add additional configuration to our file using some bash-foo, and then re-run `git status`:
 
 ```
-git config --list --show-origin 
+cat <<EOT >> ~/myfirstrepo/interface-config.txt
+vlans {
+    default {
+        vlan-id 1;
+    }
+}
+EOT
+
+git status
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-We now have an initialized and configured Git repository, ready to track our files.
+It looks like there are now two copies of the file, doesn't it? This isn't actually true, however. Remember that Git works on **changes** to files, and we staged the first change, and haven't staged the second. We can use the `git diff` command with the `--cached` flag as before to see that our staged change is still there. If we also run `git diff` without any flags, it will show us what has changed **outside** of staging:
+
+```
+git diff --cached
+git diff
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
+
+There are a few things we can do at this point, depending on what we wanted to do with the additional change. Let's say we want to get rid of the second change, but keep the first in staging. In this case, the `git checkout` command can help us. By specifying this command with the name of the file, we're telling Git to revert back to the last known change for that file, which in this case is the one in staging:
+
+```
+git checkout interface-config.txt
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
+
+As we can see, we're back to our original change, and we're ready to move on to the next step.
+
+```
+git status
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
+
+## Your First Commit
+
+Now that we have all our desired changes in staging we can create our first commit! A commit is a way of marking a particular state of a repository, saying "I would like to remember what things were like at this point in time, so I can go back to it if I need to". Often, a commit is made when a developer makes a meaningful change to some code, or an NRE updates a YAML file with a new set of variables for a switch install. No matter the use case, **the commit is king** - if it's not in a commit, Git isn't permanently tracking that change yet.
+
+Once we've used `git add` to include all the changes we want to commit into staging, we can use `git commit` to save those changes in a commit.
+
+```
+git commit -m "Adding new interface configuration file"
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
+
+> Note the use of the `-m` flag to specify the commit message inline - you can omit this if you wish, and Git will open a text editor for you to specify your commit message. You can specify which text editor Git uses in your Git configuration.
+
+Now that we've made a commit, we can use the `git log` command to see a list of the commits in this repository:
+
+```
+git log
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
+
+The `--oneline` flag is a very helpful addition to this command, and lets us see each commit on its own line. This is very
+useful if there are a lot of commits, and you want to see a high-level view of them:
+
+```
+git log --oneline
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
+
+At this point, you may be wondering what those jumbled letters and numbers are to the left of the screen. Each commit gets its own cryptographic hash that uniquely identifies it. This is made using a combination of the date/time the commit was made, the contents of the commit, the parent commit (the commit before this one, if any), and a few other things.
+
+If you look carefully at the output of the command `git commit`, which we ran a few steps ago, it actually gives you an abbreviated form of this commit ID right away - in this case, the ID is `bdb4902`:
+
+```
+antidote@linux1:~/myfirstrepo$ git commit -m "Adding new interface configuration file"
+[master (root-commit) bdb4902] Adding new interface configuration file
+...
+```
+
+The commit ID you see above, and in the `git log` output, will of course be different.
+
+You can use this hash, or an abbreviated form as long as they're unique, to look up this commit in all kinds of git commands. For instance, the `git show <commit_id`> is a good way to see the details about a specific commit. Why don't you try running the following command yourself, substituting `<commit_id>` for the commit ID you got in the output of `git log` or even the output of the `git commit` command?
+
+```
+git show <commit_id>
+```
 
 ## Commands Reference
 
 To summarize, the commands we learned in this section were:
 
-- `git init` - initialize a new git repository
-- `git config` - work with Git configuration options, both globally (with the `--global` flag) and locally in the current repository.
+- `git status` - view the current status of files within a Git repository
+- `git add` - add a file(s) or entire directory into staging
+- `git checkout` - this command does quite a few things, as we'll explore in future chapters, but for now, we used it to revert a file back to what was last tracked in Git.
+- `git commit` - Create an officially-tracked record of a change in Git
+- `git diff` - View changes between two refs in Git - in this case, between two different versions of a file
+- `git log` - View the log of commits in this Git repo.
+

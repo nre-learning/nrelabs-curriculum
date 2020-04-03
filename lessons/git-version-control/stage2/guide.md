@@ -1,137 +1,214 @@
 # Version Control with Git
-## Part 2 - Adding and Comitting Files
+## Part 3 - Parallelizing Your Work With Git Branches
 
-A Git repository is nothing without some files to manage. We have a sample configuration for a Junos device's
-network interfaces, and we can copy this file into our new repository after entering into it:
+As Git is a distributed version control system, it's often the case that you want to work in parallel with either other engineer, or even yourself, as you work on different aspects of a given repository. Imagine you have two change windows, one of which is more complicated but happens a few weeks away, and another which is tomorrow night but is fairly simple. If you have your configurations or scripts for these changes in a Git repository, it's likely that you'll have to work on both at the same time at some point, while making sure the two changes don't step on each other in the process.
 
+Enter the concept of "[branching](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell)" in Git, to solve this exact problem. Using branches, we can effectively manage two "versions" of the repository, making commits all along the way, and then only once we're ready, merge them back together (if that's what we want to do).
+
+Now, it's worth mentioning that for most that are new to Git or version control in general, this is where things start to get complicated. Stay persistent, and re-run this lesson a few times if you have to. This is part of the Git workflow you'll need to develop for yourself that will take a few times to get right, but once you have it, you'll be unstoppable.
+
+## Creating a Branch
+
+Let's get back into our repository.
 
 ```
 cd ~/myfirstrepo/
-cp /antidote/stage2/interface-config.txt .
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-We can use `git status` to see Git's current view of the repository:
+Git's default branch is called `master`. This is the starting place for most Git repositories you might come across. It's typically used as the "official" copy of the repository. The `master` branch is often where you might find the latest, somewhat stable version of a codebase or other repository.
+
+We can see our repository currently has the `master` branch checked out by using `git status` again (Note the text `On branch master`).
 
 ```
 git status
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-Note that the file exists, but Git is listing it as "untracked". This means Git knows the file is there, but is otherwise not paying attention to it. The first thing we need to do is add this file to a special Git environment known as "staging". This is a temporary bucket to place changes to files before we're ready to make a commit. This is done using `git add`:
+Generally, work-in-progress is not done here, but rather on other branches. Much of the reason we use branches in Git to do our work is in order to keep `master`  more pristine and stable. In fact, for many projects, it's okay to even have totally broken code in a branch as you work on it, but before it's merged back into `master`, it must pass tests, code review, etc. This gives us space to work on a problem without the restrictions of keeping things "working" for others that just want to use the code.
+
+In the beginning of this section, we used the example of a change window where you want to make a change to a network configuration. Let's say you've opened a ticket with your change review board, and you've been assigned a change ID of 123. Since you've already started using Git to track changes to your configurations, you can use this ID in your commits for tracking purposes.
+
+Remember that the idea is to keep `master` untouched until we're ready to proceed with the change. Perhaps your change review board wants to review your change before `master` is updated. This is a good use case for Git branching. To create a new branch, and check it out (so that commits go to this new branch), run:
 
 ```
-git add interface-config.txt
+git checkout -b change-123
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-If we re-run `git status`, we'll now see the file is now colored green, and is in the section labeled "Changes to be committed".
+If you went through the previous section, `git checkout` will look familiar to you. In this case, we're using this command with the `-b` flag to simultaneously create and switch to a new branch entitled `change-123`. This means that not only does the branch exist, but any commits we make will be made on this branch.
+
+> By the way, Git is full of shortcuts. As you continue in your Git journey, you'll notice that many commands in Git, like the one we just ran are just shortcuts for common workflows that might otherwise require 2 or more separate commands to perform.
+
+Let's say that for change #123, we want to change the IP address of em3 from `10.31.0.11` to `10.31.0.12`.
+You can do this yourself using one of the provided text editors like `vi` or `nano`, or you can run the below `sed` command to do it in in a one-liner:
+
+```
+sed -i s/10.31.0.11/10.31.0.12/ interface-config.txt
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
+
+As mentioned in the previous section, Git works on **changes** to files. The full, original contents of the file were added in a previous commit, but since we've made changes since then, those changes will show up in the outputs of `git status` and `git diff`:
 
 ```
 git status
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
-
-The term for this area in Git is called "staging". It's a sort of "waiting room" for changes that are about to be committed.
-
-We can use the `git diff` comand with the `--cached` flag, which allows us to see the change we just staged:
-
-```
-git diff --cached
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
-
-The key concept with Git, especially when compared with other version control systems, is that it works on **changes** to files. We've added the file `interface-config.txt` to staging, which was previously untracked, and therefore every line in that file is now in our staging environment. However, watch what happens when we add additional configuration to our file using some bash-foo, and then re-run `git status`:
-
-```
-cat <<EOT >> ~/myfirstrepo/interface-config.txt
-vlans {
-    default {
-        vlan-id 1;
-    }
-}
-EOT
-
-git status
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
-
-It looks like there are now two copies of the file, doesn't it? This isn't actually true, however. Remember that Git works on **changes** to files, and we staged the first change, and haven't staged the second. We can use the `git diff` command with the `--cached` flag as before to see that our staged change is still there. If we also run `git diff` without any flags, it will show us what has changed **outside** of staging:
-
-```
-git diff --cached
 git diff
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-There are a few things we can do at this point, depending on what we wanted to do with the additional change. Let's say we want to get rid of the second change, but keep the first in staging. In this case, the `git checkout` command can help us. By specifying this command with the name of the file, we're telling Git to revert back to the last known change for that file, which in this case is the one in staging:
+Again, we must first add this change to staging, and make a commit with a descriptive commit message:
 
 ```
-git checkout interface-config.txt
+git add interface-config.txt
+git commit -m "Changed IP address of em3"
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-As we can see, we're back to our original change, and we're ready to move on to the next step.
+We can analyze the contents of this commit using the `git show` command. Remember from the last exercise that we used the commit ID provided in the output as a parameter for this command. However, if you omit any commit ID, it will automatically show you details for the latest commit in the checked out branch. This is commonly referred to as the `HEAD`.
+
+```
+git show
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
+
+## Playing Catch-Up
+
+As was mentioned previously, Git branching is a powerful tool to have when multiple work streams are going on simultaneously. Let's say Fred is also working on his own change ticket (#124) which changes the IP address of em4, in branch `change-124`. Let's say that the change review board likes Fred better than you so his change gets approved before yours. Since we haven't managed to run fast enough to capture Fred and upload his brain into this lesson, we built a script to simulate this taking place. Run this script to merge Fred's change into the `master` branch:
+
+```
+/antidote/stage2/change-approval.sh
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
+
+Now, Fred's change is present on the `master` branch while you're still working in `change-123`. This means your branch is actually simultaneously **behind** and **ahead** of `master`, in that your branch has commits that `master` doesn't have, but the reverse is also true.
+
+One cool trick is that we can actually use the `git diff` command to compare entire branches, not just files, changes or commits. By comparing the `change-123` branch (our currently checked-out branch) with `master`, we can see that not only is our change to `em3` shown, but also Fred's change to `em4`:
+
+```
+git diff master change-123
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
+
+Fortunately, this is fairly easy to remedy, and a fairly common occurrence. Imagine you're working on a project with many other people, with changes going into the `master` branch all the time. You may have to "catch up" your working branch many times over the course of a given work cycle.
+
+The simplest and most common way to integrate these changes into your branch is via the `git merge` command. In short, this creates a commit which brings the contents of another branch into the one you have checked out. In this case, it brings the updates to the `master` branch that were created for change #124 into our branch so we can ensure we're working from the latest possible commit. This reduces the things we'll have to reason about when comparing our branch to `master`, and in some cases, prevent problems when we try to merge.
+
+> (You can also use a concept called ["rebasing"](https://git-scm.com/book/en/v2/Git-Branching-Rebasing) to catch your branch up with the latest changes from another branch. However, this works very differently to a simple merge, and is often better used for other niche use cases where it's needed. We will cover rebasing in a future section. For now, stick with `git merge`).
+
+```
+git merge master change-123 -m "Merge branch 'master' into change-123"
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
+
+Now, re-running `git diff` should show that only our change is what's left between our branch and `master`.
+
+```
+git diff master change-123
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
+
+## Merge Conflicts
+
+Fred's at it again!
+
+This time, not only is he making more changes, but he's making a change to **your** part of the configuration! On top of that, he convinced the change review board to merge his changes to `master`, even though it conflicted with your change!
+
+Run this script to simulate his conflicting changes.
+
+```
+/antidote/stage2/bumbling-fred.sh
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
+
+Of course, you're busy working on your own change, so just like before, you see there are new commits on the `master` branch you don't have, so you catch-up your branch with `master` using `git merge`:
+
+```
+git merge master change-123 -m "Catch-up again"
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
+
+**Oh no!** This time, you see a problematic error message:
+
+```
+CONFLICT (content): Merge conflict in interface-config.txt
+Automatic merge failed; fix conflicts and then commit the result.
+```
+
+In most cases, Git is smart enough to merge changes without issue. Since Fred was previously working on the em4 IP address, and we were working on em3's IP address, Git knew how to merge those changes together. However, since the last change Fred made was to the exact same line we changed, Git doesn't know which one should take precedence. Again, since we were working in two separate branches, this wasn't even a problem until we tried to merge, at which point Git throws up its hands and tells us we need to intervene to fix the problem. This is known commonly as a **merge conflict**.
+
+The way to fix this is to open the file `interface-config.txt`, as Git will insert lines into that file to highlight what's wrong. Sometimes there are multiple conflicts in a single file, but in this case, there's just one. It looks like this:
+
+```
+<<<<<<< HEAD
+                address 10.31.0.12/24;
+=======
+                address 123.123.123.123/24;
+>>>>>>> master
+```
+
+The anatomy is simple - there are two distinct sections we must choose from. Everything between the first set of arrows (`<<<<<<< HEAD`) and the line of equal signs (`=======`) is the valid change we've been working on. We know this because it's titled `HEAD`, which is currently pointing at our branch. Everything after the equal signs up to the second line of arrows (`>>>>>>> master`) is what we're trying to merge into our branch, in this case, the changes Fred made in `master`.
+
+Resolving conflicts like this are first and foremost a text editing process. We literally need to edit the text shown above so that we are left with only the text we want in this file. This means removing all of the lines that Git inserted, as well as the actual contents of the change we want to discard. Note that this choice is entirely up to you. You could choose to keep both changes, none of them, or even make an additional change to truly resolve the problem. It is entirely up to the context of the conflict. In this case, however, we want to totally get rid of Fred's change.
+
+You can edit this file with `nano` (don't forget to save by pressing Ctrl+`x`, `y`, and then "Enter"), or, you can run this handy bash-foo for doing it in a one-liner. Note this is only for simplicity in this lesson - you'll definitely want to get comfortable with making these changes in your own text editor:
+
+```
+grep -Ev "<<<<<<<|=======|>>>>>>>|123\.123\.123\.123" interface-config.txt > temp && mv -f temp interface-config.txt
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
+
+We've changed the contents of the conflicting file, but we still have a little more work to do. We need to tell Git that we've resolved the problem, and this is done with a new commit which resolves the conflict. Note the output of `git status`:
 
 ```
 git status
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-## Your First Commit
-
-Now that we have all our desired changes in staging we can create our first commit! A commit is a way of marking a particular state of a repository, saying "I would like to remember what things were like at this point in time, so I can go back to it if I need to". Often, a commit is made when a developer makes a meaningful change to some code, or an NRE updates a YAML file with a new set of variables for a switch install. No matter the use case, **the commit is king** - if it's not in a commit, Git isn't permanently tracking that change yet.
-
-Once we've used `git add` to include all the changes we want to commit into staging, we can use `git commit` to save those changes in a commit.
+Git is telling us that it still sees an unresolved state, so we need to run a new `git add` and `git commit` to tell Git that the current state of the file, with our manual fixes, resolves the conflict:
 
 ```
-git commit -m "Adding new interface configuration file"
+git add interface-config.txt
+git commit -s -m "Resolve merge conflict, overwrite Fred's change"
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-> Note the use of the `-m` flag to specify the commit message inline - you can omit this if you wish, and Git will open a text editor for you to specify your commit message. You can specify which text editor Git uses in your Git configuration.
+## The Final Merge
 
-Now that we've made a commit, we can use the `git log` command to see a list of the commits in this repository:
+It's time to merge our work into `master`. In practice, this is done typically by senior members of the team with "commit privileges". It's not uncommon to have a code review system like Gerrit, Github etc (which we'll discuss later) where only certain members of the team have permissions to actually make commits (including merge commits) to `master`, so that only approved changes get through to `master`. This is obviously totally dependent on the team structure and the Git workflow that works for your organization. For now, let's pretend we're a senior member of the team and we're merging the contents of `change-123`.
 
-```
-git log
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
-
-The `--oneline` flag is a very helpful addition to this command, and lets us see each commit on its own line. This is very
-useful if there are a lot of commits, and you want to see a high-level view of them:
+First, we want to check out the `master` branch:
 
 ```
-git log --oneline
+git checkout master
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-At this point, you may be wondering what those jumbled letters and numbers are to the left of the screen. Each commit gets its own cryptographic hash that uniquely identifies it. This is made using a combination of the date/time the commit was made, the contents of the commit, the parent commit (the commit before this one, if any), and a few other things.
-
-If you look carefully at the output of the command `git commit`, which we ran a few steps ago, it actually gives you an abbreviated form of this commit ID right away - in this case, the ID is `bdb4902`:
+Then, merging is simple, using the same `git merge` command we know and love. Since we have `master` checked out, the command for merging `change-123` just references that branch by name:
 
 ```
-antidote@linux1:~/myfirstrepo$ git commit -m "Adding new interface configuration file"
-[master (root-commit) bdb4902] Adding new interface configuration file
-...
+git merge change-123 -m "Merging change 123 into master"
 ```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-The commit ID you see above, and in the `git log` output, will of course be different.
+Note that during any merge operation, there may be merge conflicts like we dealt with before. In this case, we chose to deal with conflicts in `change-123` ahead of time, so that when we merged those changes back to `master`, no conflicts remain. It's fairly common to do it this way, so that merges to `master` can be done cleanly.
 
-You can use this hash, or an abbreviated form as long as they're unique, to look up this commit in all kinds of git commands. For instance, the `git show <commit_id`> is a good way to see the details about a specific commit. Why don't you try running the following command yourself, substituting `<commit_id>` for the commit ID you got in the output of `git log` or even the output of the `git commit` command?
+Since all of the commits from `change-123` are fully merged into `master`, we don't need that branch anymore, and can delete it like so:
 
 ```
-git show <commit_id>
+git branch -d change-123
 ```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-## Commands Reference
+The `-d` flag tells Git to delete the branch only if everything is fully merged. If there are unmerged commits, then Git would throw an error. We can forcefully delete a branch (unmerged commits or not) with the capitalized `-D` flag.
+
+## Conclusion
 
 To summarize, the commands we learned in this section were:
 
-- `git status` - view the current status of files within a Git repository
-- `git add` - add a file(s) or entire directory into staging
-- `git checkout` - this command does quite a few things, as we'll explore in future chapters, but for now, we used it to revert a file back to what was last tracked in Git.
-- `git commit` - Create an officially-tracked record of a change in Git
-- `git diff` - View changes between two refs in Git - in this case, between two different versions of a file
-- `git log` - View the log of commits in this Git repo.
+- `git checkout` - check out a branch (or with the `-b` flag, create it first)
+- `git merge` - bring the commits from another branch into the currently checked-out branch
+- `git branch` - work with Git branches, such as creating, viewing, or deleting them.
 
+We also learned how to resolve merge conflicts, which can arise when two branches make conflicting changes and we try to merge them together.
+
+Stay tuned for more!
