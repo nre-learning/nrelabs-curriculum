@@ -6,7 +6,7 @@ tier: ptr
 description: |
   TBD - TBD - TBD - TBD
 
-slug: working-remote-systems-python
+shortDescription: working-remote-systems-python
 tags:
 - automation
 - python

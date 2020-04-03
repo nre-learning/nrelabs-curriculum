@@ -7,7 +7,7 @@ tier: prod
 prereqs:
   - 24  # PyEZ
 description: Robot is a popular testing framework, allowing users to define testing workflows with plain language and keywords. In this lesson we'll cover an introduction to Robot as well as how to write test cases for Junos network devices.
-slug: Robot Framework
+shortDescription: Robot Framework
 tags:
 - robot
 - testing

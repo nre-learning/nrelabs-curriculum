@@ -10,7 +10,7 @@ prereqs:
   - 14  # YAML
   - 16  # Jinja
 description: StackStorm is an event-driven automation framework. In this lesson, we'll learn about the basic primitives you'll need to put StackStorm to work for you.
-slug: StackStorm
+shortDescription: StackStorm
 tags:
 - event-driven
 - event driven automation

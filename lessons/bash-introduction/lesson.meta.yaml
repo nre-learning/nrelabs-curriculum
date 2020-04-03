@@ -6,7 +6,7 @@ tier: prod
 prereqs:
   - 23  # Linux
 description: In production UNIX systems, BASH is the most common UNIX shell.  In this lesson, you'll learn how to write simple, but functional, BASH scripts. 
-slug: BASH
+shortDescription: BASH
 tags:
 - BASH
 - scripting
@@ -22,11 +22,10 @@ endpoints:
     type: ssh
 
 stages:
-  - id: 1
-    description: Introduction to Variables
-  - id: 2
-    description: Environment and Shell Variables
-  - id: 3
-    description: Positional Parameters
-#  - id: 3
+  - description: Introduction to Variables
+    guideType: markdown
+  - description: Environment and Shell Variables
+    guideType: markdown
+  - description: Positional Parameters
+    guideType: markdown
 #    description: Indexed and Associative Arrays

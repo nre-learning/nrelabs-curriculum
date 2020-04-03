@@ -11,7 +11,6 @@ prereqs:
 description: Security Technical Implementation Guides (STIGs) are the configuration standards for United States Department of Defense (DoD) infrastructure. Any network engineer that has experience in running any part of these systems has had to spent countless hours going over infrastructure elements and ensuring they're compliant with these standards. In this lesson, we'll explore two appraoches for automating STIG compliance checks, and saving countless hours of manual data-gathering.
 shortDescription: Automated STIG Compliance
 
-slug: STIG
 tags:
 - jsnapy
 - napalm

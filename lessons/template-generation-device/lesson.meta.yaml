@@ -9,7 +9,7 @@ prereqs:
   - 14  # Yaml
   - 16  # Jinja2
 description: Having the ability to generate device specific configurations from an approved device template can be beneficial especially for new deployments. 
-slug: TEMPLATEGEN
+shortDescription: Template Generation
 tags:
 - pyez
 - yaml

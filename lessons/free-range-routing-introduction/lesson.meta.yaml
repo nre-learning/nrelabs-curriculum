@@ -7,7 +7,7 @@ tier: ptr
 prereqs:
   - 23  # Linux
 description: FRR in NRELabs
-slug: FRR demo
+shortDescription: FRR in NRELabs
 tags:
 - troubleshooting
 - tshoot

@@ -8,7 +8,7 @@ prereqs:
   - 23  # Linux
   - 16  # Jinja
 description: Each vendor has their own APIs for interacting with network devices. In this lesson, you'll learn about a Python library that abstracts all these, and allows you to do basic multivendor network automation.
-slug: NAPALM
+shortDescription: NAPALM
 tags:
 - multi-vendor
 - multivendor

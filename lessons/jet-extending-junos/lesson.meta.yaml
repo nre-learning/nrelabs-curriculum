@@ -4,7 +4,7 @@ lessonId: 25
 category: tools
 description: "In this lesson, we'll explore the Juniper Extension Toolkit (JET), which is a powerful set of tools for building applications that work with Junos."
 tier: ptr
-slug: jet
+shortDescription: JET
 collection: 1
 
 endpoints:

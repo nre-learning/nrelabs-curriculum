@@ -8,7 +8,7 @@ prereqs:
   - 24  # PyEz
   - 14  # YAML
 description: Having an up to date device configuration is essential for disater recovery in the event of device failure or natural disaster. Being able to automate backup configurations makes recovery of the device that much easier (especially if it's a mission critical device). In this lesson, we'll backup the configuration using PyEZ. We will demostrate pulling configurations in the standard Junos format and display set formats with static and manual pasword entry. 
-slug: INVENTORY
+shortDescription: Automated Config Backup
 tags:
 - pyez
 - facts

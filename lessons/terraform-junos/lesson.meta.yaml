@@ -5,7 +5,7 @@ category: tools
 lessonDiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-31/lessondiagram.png
 description: Terraform provides a declarative way of managing resources and now you can experiment with controlling Junos resources through this exciting lesson! 
 tier: prod
-slug: Terraform
+shortDescription: Terraform
 tags:
   - terraform
   - declarative

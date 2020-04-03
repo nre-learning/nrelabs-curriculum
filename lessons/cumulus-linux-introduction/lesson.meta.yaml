@@ -7,7 +7,7 @@ tier: ptr
 prereqs:
   - 23  # Linux
 description: Cumulus in NRELabs
-slug: Cumulus demo
+shortDescription: Cumulus in NRELabs
 tags:
 - troubleshooting
 - tshoot

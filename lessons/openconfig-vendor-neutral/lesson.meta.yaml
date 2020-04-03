@@ -4,7 +4,7 @@ lessonId: 26
 category: tools
 tier: ptr
 description: "In this lesson, we'll explore OpenConfig - an industry effort to standardize network configuration and telemetry models"
-slug: openconfig
+shortDescription: openconfig
 
 endpoints:
 

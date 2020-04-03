@@ -7,7 +7,7 @@ prereqs:
   # - 22  # Python
   - 23  # Linux
 description: REST APIs are an extremely popular, flexible option for remote programmability of a network device. In this lesson, we'll cover the basics of REST APIs, interact with one in the bash shell as well as Python, and prepare for using them for higher-order workflows in later lessons.
-slug: REST APIs
+shortDescription: REST APIs
 tags:
 - rest
 - api
