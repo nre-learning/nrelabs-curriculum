@@ -41,7 +41,3 @@ stages:
     guideType: markdown
   - description: Make configuration changes with NAPALM
     guideType: jupyter
-    
-    # This feature is not ready for primetime, so we're removing it for now.
-    # verifyCompleteness: true
-    # verifyObjective: "Modify and re-execute the code in the Jupyter notebook so that the description for em1.0 exactly reads: 'Hello, World!'"

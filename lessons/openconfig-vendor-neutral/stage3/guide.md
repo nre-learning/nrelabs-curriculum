@@ -4,66 +4,73 @@
 
 ---
 
-### Chapter 3 - Custom YANG modules and custom Yang translator
-#### Custom YANG modules and Translation Script
-OpenConfig supports a variety of data models including BGP, interfaces, routing, MPLS, etc.  Sometimes, however, we might want to define a custom configuration hierarchy to simplify device configurations or standardize configuration across multi-vendor devices.
+### Chapter 4 - Custom YANG config provisioning using CLI and NETCONF
 
-Yang is a data modeling language for the Netconf protocol. For information about Yang, see [RFC 6020](https://tools.ietf.org/html/rfc6020).
+In this chapter, we will configure the L3VPN services using the `vpn-services` config knob defined by our custom YANG model.
 
-As discussed in the beginning of the course, the YANG configuration will be converted to device specific configuration via a translation mechanism. In Junos this translation mechansim is implemented by translation scripts.
+Since we installed the custom YANG model in the last lab, we can start configuring our device with it.
 
-#### Custom YANG Modules with Junos
-Juniper offers OpenConfig translation scripts to convert OpenConfig based configuration data into Junos.
-To use custom YANG modules, you will need to define the following items:
-- custom YANG config models
-- custom YANG to Junos translation script
-  - this can be implemented using SLAX/XSLT/Python
-- custom YANG action script for YANG based operational commands (_e.g. show commands_) (optional)
+#### Configuration Using Custom YANG
 
-In this lesson, we're going to define a custom YANG module to create new config stanza, and a custom YANG translation script to translate custom defined configuration to Junos config.
-
-#### Loading Custom YANG Modules
-Here we created a custom YANG module called `vpn-services` which helps to configure L3VPN in a service oriented way.
-It groups all the L3VPN related parameters (e.g., interfaces, VLAN Id, IP address, RD, RT, etc) into a single place.
-Let's take a look on the YANG file first.
+As you would expect, config using custom YANG is exactly the same way as in OpenConfig and native Junos config.
+Now, we configure a new L3VPN instance using CLI, notice the our custom vpn-service:vpn-service stanza:
 
 ```
-cd /antidote
-cat vpn-services.yang
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
-
-For the translation script, it supports both SLAX and Python language.  We're using Python language in this lesson as it's familiar to most people.  Different with commit script, to improve the efficiency, it processes the delta configuration only and therefore the translation script logic should take care the addition and removal of config knob. Let's take a look on the translation script.
-
-```
-cat vpn-services.py
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
-
-To install the custom YANG module, we have to copy both `vpn-services.yang` and `vpn-services.py` to vQFX:
-
-**Notes:** _if there are multiple Routing Engines in the device, make sure install the YANG modules on each of the Routing Engines._
-
-```
-sshpass -p antidotepassword scp -o StrictHostKeyChecking=no vpn-services.* antidote@vqfx:~
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
-
-Then we install the custom YANG module by `request system yang add` command:
-
-```
-request system yang add package vpn-services module vpn-services.yang translation-script vpn-services.py
+configure
+edit vpn-services:vpn-services l3vpn CustomerA
+set interface xe-0/0/4 vlan-id 10 ip-address 192.168.10.1/24
+set route-distinguisher 1.2.3.4:10 vrf-target 1.2.3.4:10
+set static-route route 192.168.0.0/17 next-hop 192.168.10.254
+set static-route route 192.168.128.0/17 next-hop 192.168.10.253
+commit and-quit
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
 
-After the installation completed, press `ENTER` key a few times to acknowledge the `cli` process restart request.
+#### Config Verification
 
-#### Validating custom YANG modules
-Use the following command to verify the YANG package `vpn-services` is installed and the translation script is enabled:
+We can also check the translated configuration:
 
 ```
-show system yang package vpn-services
+show configuration | display translation-script translated-config | no-more
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
 
-Now, the Junos device is ready to be provisioned using the custom yang module. In next lesson, we will configure some L3VPN services using the new `vpn-services` config knob.
+Verify a new routing instance is created.
+
+```
+show route table CustomerA.inet.0
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
+
+#### Config Custom YANG Configuration using NETCONF
+Now, let's try to create another L3VPN instance using NETCONF. Firstly, go to Python interactive prompt, load PyEZ module and create a Junos device object:
+
+```
+python
+from jnpr.junos import Device
+from jnpr.junos.utils.config import Config
+dev = Device('vqfx', user='antidote', password='antidotepassword')
+dev.bind(cu=Config)
+dev.open()
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
+
+Then we load the configuration, print the diff, and commit:
+
+```
+dev.cu.load(path='vpn-services.conf', format='text')
+dev.cu.pdiff()
+dev.cu.commit(timeout=600)
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
+
+Verify the translated config:
+
+```
+show configuration | display translation-script translated-config | no-more
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
+
+To conclude we demostrated how to provision Junos device using custom YANG modules via CLI and NETCONF. Custom YANG modules is flexible that it can be used to define custom service oriented configration models to suit your business needs. Please feel free to to modify the configuration by yourself and see how the translation script helps you to provision the corresponding Junos configuration.
+
+For further information about custom YANG on Junos please visit Juniper TechLibrary "[Understanding the Management of Nonnative YANG Modules on Devices Running Junos OS](https://www.juniper.net/documentation/en_US/junos/topics/concept/netconf-yang-modules-custom-managing-overview.html)"

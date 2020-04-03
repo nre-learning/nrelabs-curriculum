@@ -1,6 +1,6 @@
 ---
-lessonName: Vendor-Neutral Network Configuration with OpenConfig
-lessonId: 26
+name: Vendor-Neutral Network Configuration with OpenConfig
+slug: openconfig-vendor-neutral
 category: tools
 tier: ptr
 description: "In this lesson, we'll explore OpenConfig - an industry effort to standardize network configuration and telemetry models"
@@ -9,15 +9,15 @@ shortDescription: openconfig
 endpoints:
 
 - name: linux
-  image: antidotelabs/utility
+  image: utility
   presentations:
   - name: cli
     port: 22
     type: ssh
 
 - name: vqfx
-  image: antidotelabs/container-vqfx
-  configurationType: napalm-junos
+  image: container-vqfx
+  configurationType: napalm
   presentations:
   - name: cli
     port: 22
@@ -29,14 +29,14 @@ connections:
   b: linux
 
 stages:
-  - id: 1
-    description: Install Openconfig Yang module on Junos box
+  - description: Install Openconfig Yang module on Junos box
+    guideType: markdown
 
-  - id: 2
-    description: Provision Openconfig using CLI and Netconf
+  - description: Provision Openconfig using CLI and Netconf
+    guideType: markdown
 
-  - id: 3
-    description: Custom Yang modules and custom Yang translator
+  - description: Custom Yang modules and custom Yang translator
+    guideType: markdown
 
-  - id: 4
-    description: Custom Yang config provisioning using CLI and Netconf
+  - description: Custom Yang config provisioning using CLI and Netconf
+    guideType: markdown

@@ -3,50 +3,90 @@
 **Contributed by: [@valjeanchan](https://github.com/valjeanchan) and [@jnpr-raylam](https://github.com/jnpr-raylam)**
 
 ---
-### Preface
-While many network operating systems run on industry standard protocols such as OSPF / BGP, network device provisioning across multiple vendors' device is still challenging as configuration syntax and methods are different across vendors. Industry once tried to solve this problem using snmp (remember SNMP set?) without much success, a more flexible approach on data schema is required to solve this problem. Enter YANG and OpenConfig.
 
-### Chapter 1 - Install OpenConfig Yang module on Junos box
+### Chapter 2 - Provision Openconfig using CLI and Netconf
 
-#### What is YANG?
-[YANG](https://tools.ietf.org/html/rfc6020) is a data modeling language used to
-model configuration and state data manipulated by [Netconf Protocol](https://tools.ietf.org/html/rfc4741#section-1.1) (rpc and notifications). However as YANG is protocol independent, YANG data models can be used independent of the transport protocols and can be converted into any encoding format supported by the network configuration protocols (such as GRPC).
+As with normal Junos configuration, we can use CLI and Netconf to provision Openconfig based configuration.
 
-#### What is OpenConfig
-[OpenConfig](http://www.openconfig.net/) is an informal working group of network operators focusing on developing a consistent set of **vendor-neutral** data models using YANG based on actual operational needs from use cases and requirements from multiple network operators. These data models define the configuration and operational state of network devices for common network protocols or services.
 
-#### Junos and YANG/OpenConfig
-Junos OS supports the YANG data models configuration by importing a third-party schema package, such as OpenConfig. The package contains translation logic between the YANG schema and the Junos configuration. Juniper offers OpenConfig package starting with Junos Release 16.1.
-
-#### Junos Openconfig package
-To use OpenConfig to provision configurations, we have to install the OpenConfig package. Firstly, download the OpenConfig package from [Juniper support website](https://support.juniper.net/support/downloads/?p=openconfig).
-
-The OpenConfig package has already been uploaded to our virtual QFX image, so we just need to install it:
-
-<pre>
-request system software add /var/db/vmm/junos-openconfig-0.0.0.10-1-signed.tgz no-validate
-yes
-</pre>
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
-
-_Starting in Junos 18.3R1, the OpenConfig package is bundled with Junos image and therefore you do not need to install it separately._
-
-> **Note:** This will take a few minutes. **BE PATIENT**
-
-Once the installation has completed, you can verify it with the `show version` command.
+#### Config using CLI
+For example, to add an interface with OpenConfig, we apply configuration under `openconfig-interfaces:interfaces` stanza.
 
 ```
-show version
+configure
+set openconfig-interfaces:interfaces interface xe-0/0/0 subinterfaces subinterface 0 openconfig-if-ip:ipv4 addresses address 192.168.10.1/24
+commit and-quit
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
 
-After installing the OpenConfig package, a few config stanzas with prefix `openconfig-` are added automatically. Let's take a look on the new config knob:
+
+Verify the new interface is created.
 
 ```
-show configuration openconfig-
+show interfaces terse xe-0/0/0
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
 
-This verifies the OpenConfig package is installed properly.
+As discussed in chapter 1, the Junos OpenConfig package contains scripts to translate OpenConfig based configuration into Junos format. We can show the  translated Junos config with the following command:
 
-In next lesson, we will provision the vQFX using OpenConfig format with both CLI and Netconf.
+```
+show configuration | display translation-scripts translated-config | no-more
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
+
+As you can see the fundamental data values are the same across OpenConfig and Junos Config, only the schema differs.
+
+#### Config using Netconf
+
+Now, let's try to configure a new BGP neighbor with Openconfig using Netconf. First, take a look on the openconfig-bgp configuration we're going to apply.
+
+```
+cd /antidote
+cat openconfig-bgp.conf
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
+
+As you can see, the OpenConfig BGP schema contains common data that BGP requires. This configuration should be able to be provisioned to any network devices that support netconf with OpenConfig.
+
+Here we are using PyEZ (a python module for Junos Netconf connecitity) as a netconf client.
+Start a Python interactive prompt, then load the PyEZ module and create a Junos device object.
+
+_(If you're not familiar with PyEZ, check out the lesson "Junos Automation with PyEZ"!)_
+
+```
+python
+from jnpr.junos import Device
+from jnpr.junos.utils.config import Config
+dev = Device('vqfx', user='antidote', password='antidotepassword')
+dev.bind(cu=Config)
+dev.open()
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
+
+Next, we load the configuration, print the diff, and  commit:
+
+```
+dev.cu.load(path='openconfig-bgp.conf', format='text')
+dev.cu.pdiff()
+dev.cu.commit()
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
+
+Verify a new BGP neighbor is being created.
+**Note:** _the peering neighbor doesn't exist in the setup, therefore the BGP state is expected to be `Connect` or `Active`_
+
+```
+show bgp summary
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
+
+Again we inspect the translated Junos config:
+
+```
+show configuration | display translation-scripts translated-config | no-more
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
+
+Now you can see that OpenConfig is vendor-neutral and therefore this exercise can be applied to any other vendor that also supports OpenConfig (_by using a vendor neutral NetConf Client_).
+
+In the next chapter we will explore custom yang modules where you may define custom data schema for different business needs.
