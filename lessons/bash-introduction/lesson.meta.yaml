@@ -1,21 +1,21 @@
 ---
-lessonName: Introduction to BASH
-lessonId: 50
+name: Introduction to BASH
+slug: bash-introduction
 category: fundamentals
 tier: prod
 prereqs:
-  - 23  # Linux
+  - linux-basics
 description: In production UNIX systems, BASH is the most common UNIX shell.  In this lesson, you'll learn how to write simple, but functional, BASH scripts. 
 shortDescription: BASH
 tags:
 - BASH
 - scripting
 - linux
-collection: 9 # PacketPushers
+collection: packet-pushers
 
 endpoints:
 - name: linux1
-  image: antidotelabs/utility
+  image: utility
   presentations:
   - name: cli
     port: 22
@@ -28,4 +28,5 @@ stages:
     guideType: markdown
   - description: Positional Parameters
     guideType: markdown
-#    description: Indexed and Associative Arrays
+  # - description: Indexed and Associative Arrays
+  #   guideType: markdown
