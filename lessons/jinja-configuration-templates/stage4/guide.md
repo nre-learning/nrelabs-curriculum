@@ -11,7 +11,7 @@ In the previous section, we loaded data from a YAML file and used that data in o
 We have already created a sample template file called `static_route.j2` in the sub-directory `dir1` for our use. Run the below snippet to view the template file:
 
 ```
-cd /antidote/stage5/
+cd /antidote/stage4/
 cat dir1/static_route.j2
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
@@ -84,4 +84,4 @@ print(str(render_device))
 
 Good Job! You are now ready to render your own network configuration templates!
 
-You may want to check out the lesson on using <a href="/labs/?lessonId=24&lessonStage=1" target="_blank">PyEZ for Junos Automation</a>. Instead of just printing these configs, you can pass them into the PyEZ Python library to push them automatically to your network devices!
+You may want to check out the lesson on using "PyEZ for Junos Automation". Instead of just printing these configs, you can pass them into the PyEZ Python library to push them automatically to your network devices!

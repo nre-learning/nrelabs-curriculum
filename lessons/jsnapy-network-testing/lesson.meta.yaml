@@ -1,12 +1,12 @@
 ---
-lessonName: Network Unit Testing with JSNAPY
-lessonId: 12
+name: Network Unit Testing with JSNAPY
+slug: jsnapy-network-testing
 category: tools
-lessonDiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-12/lessondiagram.png
+diagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-12/lessondiagram.png
 tier: prod
 prereqs:
-  - 14  # YAML
-  - 23  # Linux
+  - yaml-introduction
+  - linux-basics
 description: Unit testing your network devices is one of the fundamental building blocks to CI/CD for networking. In this lesson, we'll explore the use of an open source tool - JSNAPy - for doing just this with Junos devices.
 shortDescription: JSNAPy
 tags:
@@ -18,30 +18,30 @@ collection: 1
 
 endpoints:
 - name: linux1
-  image: antidotelabs/utility
+  image: utility
   presentations:
   - name: cli
     port: 22
     type: ssh
 
 - name: vqfx1
-  image: antidotelabs/vqfx-snap1
-  configurationType: napalm-junos
+  image: vqfx-snap1
+  configurationType: napalm
   presentations:
   - name: cli
     port: 22
     type: ssh
 
 - name: vqfx2
-  image: antidotelabs/vqfx-snap2
-  configurationType: napalm-junos
+  image: vqfx-snap2
+  configurationType: napalm
   presentations:
   - name: cli
     port: 22
     type: ssh
 
 - name: vqfx3
-  image: antidotelabs/vqfx-snap3
+  image: vqfx-snap3
   configurationType: napalm-junos
   presentations:
   - name: cli
@@ -57,9 +57,9 @@ connections:
   b: vqfx1
 
 stages:
-  - id: 1
-    description: No BGP config - tests fail
+  - description: No BGP config - tests fail
+    guideType: markdown
 
-  - id: 2
-    description: Correct BGP config - tests pass
+  - description: Correct BGP config - tests pass
+    guideType: markdown
 
