@@ -23,9 +23,9 @@ ssh.exec_command("sudo hostname branch-1")
 
 #Copy configuration files over
 
-ssh.exec_command('sudo cp /antidote/stage1/configs/branch-1/interfaces /etc/network/interfaces')
-ssh.exec_command('sudo cp /antidote/stage1/configs/branch-1/daemons /etc/frr/daemons')
-ssh.exec_command('sudo cp /antidote/stage1/configs/branch-1/*.conf /etc/frr')
+ssh.exec_command('sudo cp /antidote/stage0/configs/branch-1/interfaces /etc/network/interfaces')
+ssh.exec_command('sudo cp /antidote/stage0/configs/branch-1/daemons /etc/frr/daemons')
+ssh.exec_command('sudo cp /antidote/stage0/configs/branch-1/*.conf /etc/frr')
 
 ssh.exec_command('sudo chown frr:frr /etc/frr/*.conf')
 ssh.exec_command('sudo chown frr:frrvty /etc/frr/vtysh.conf')
