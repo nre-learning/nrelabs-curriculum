@@ -4,85 +4,84 @@
 
 ---
 
-## Part 4 - Passing Data into a Template From YAML
+## Part 5 - Importing a Jinja Template from a File
 
-In the previous sections we used a Python list of dictionaries for generating configs for multiple interfaces.
+In the previous section, we loaded data from a YAML file and used that data in our templates. You are likely wondering if you can do the same thing with your templates too, so that you can focus on logic in your Python scripts, and maintain data (YAML) and templates (Jinja) separately? You can, and we'll do that in this section.
 
-This is a very cumbersome way of modeling your data, largely because we've mixed our data with the program that's meant to use that data (Python script).
-It's a very good idea to maintain this data separately - but for that, we need a solid data serialization format that's also easy to read.
+We have already created a sample template file called `static_route.j2` in the sub-directory `dir1` for our use. Run the below snippet to view the template file:
 
-Fortunately, we have YAML. This allows us to create data structures that are very easily importable into Python, while maintaining it separately, outside
-our Python logic.
-
-We cover YAML in more detail in <a href="/labs/?lessonId=14&lessonStage=1" target="_blank">Lesson 14</a> - if you haven't gone through that lesson, you should check it out, so the next few examples make a bit more sense. In this section we will go over how you can import data from a YAML file and use it to render a Jinja template.
-
-We have a YAML file already stored in the machine for you! Lets start by taking a look at it.
 ```
-cd /antidote/stage4/
-cat part4.yml
+cd /antidote/stage5/
+cat dir1/static_route.j2
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-It is so much easier to read our data now! Now lets start with our lesson.
-
-As you already know by now, our first step is to start the Python interpreter and import `Environment` module from Jinja2 library.
-We will also import the `yaml` library and `pprint` for pretty printing our output.
+Start the python shell and import the `FileSystemLoader` and `Environment` for loading the Jinja template. The `env` instance allows you to use an external Jinja template using FileSystemLoader:
 
 ```
 python
-from jinja2 import Environment
-import yaml
-from pprint import pprint
+from jinja2 import FileSystemLoader, Environment
+loader = FileSystemLoader('./dir1')
+env = Environment(loader=loader, trim_blocks=True, lstrip_blocks=True)
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-The below snippet is used to import the data from the YAML file to our python code. The `open()` function opens our yaml file in the `read` mode and assigns it to the variable `yaml_file`. Just note that here we have only provided the name of our yaml file as it is in the same directory as our python code, in case it is in a different folder then you have to give the exact file path to the `open()`. The data from the YAML file can then be easily imported into Python simply by using `yaml.load()` function.
+We will now store our template in the `route_template` variable and render it with the required values:
 
 ```
-yaml_file = open('part4.yml', 'r')
-all_devices = yaml.load(yaml_file, Loader=yaml.FullLoader)
-pprint(all_devices)
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
-
-Does this output look familiar? Its a list of dictionaries - the same as what we were using in previous sections! You already know what to do now. We start by creating a config template to set the `system hostname` and obtain the interface config:
-
-```
-env = Environment(trim_blocks=True, lstrip_blocks=True)
-config_temp = env.from_string('''
-system {
-    host-name {{ device.hostname }};
-}
-{% for item  in device.interface %}
-interfaces {
-    {{ item.name }} {
-        unit {{ item.unit }} {
-            family inet {
-                address {{ item.ip_address }};
-            }
-        }
-    }
-}
-{% endfor %}
-''')
+route_template = env.get_template('static_route.j2')
+render_route = route_template.render(route='172.28.0.0/16',
+                                     next_hop='10.13.106.1')
+print(str(render_route))
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-Now that the template is defined we will render the config template for each device specified in the YAML file.
+Quit the interactive python shell to view the other two templates that we are going to use for the next example.
 
-The Python `enumerate()` function keeps a count of loop index so that we can print the number of device we are looping over, so we can keep track of the configs in our output.
-
-`%s` in the first print statement will take the value of `device_number` for the devices in `all_devices`.
-In case you are wondering what is `print('-'*30)`, it is just to make the output more presenatable, you will see when you run the below snippet!!
-
-<pre>
-for dev_number, device in enumerate(all_devices, 1):
-    render_1 = config_temp.render(device=device)
-    print('Configuration for Device %s' % (dev_number))
-    print('-'*30)
-    print(str(render_1))
-
-</pre>
+```
+quit()
+```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-So now in the next stage we will learn how to import multiple Jinja templates from different directories and use it in your script. We will also see how to `include` those imported templates in one main template which can then be used to configure the device.
+### Example: 2
+Below is the `l3_interface.j2` template stored in dir2 sub-directory.
+
+```
+cat dir2/l3_interface.j2
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
+
+Below is the `device_config.j2` template stored in our local directory. We will treat `device_config.j2` as our main template and include `l3_interface.j2` and `static_route.j2`.
+
+```
+cat device_config.j2
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
+
+Notice the keyword `include`, it is used to include the other external template files into a Jinja template. Below is the syntax for `include`:
+
+```
+{% include 'your_external_template_filename' %}
+```
+
+```
+python
+from jinja2 import FileSystemLoader, Environment
+loader = FileSystemLoader(['.','./dir1','./dir2'])
+env = Environment(loader=loader, trim_blocks=True, lstrip_blocks=True)
+
+device_template = env.get_template('device_config.j2')
+render_device = device_template.render(route='172.28.0.0/16',
+                                       next_hop='10.13.106.1',
+                                       name='ge-0/0/0',
+                                       unit='0',
+                                       ip_address='10.13.106.2',
+                                       hostname='qfx1')
+
+print(str(render_device))
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
+
+Good Job! You are now ready to render your own network configuration templates!
+
+You may want to check out the lesson on using <a href="/labs/?lessonId=24&lessonStage=1" target="_blank">PyEZ for Junos Automation</a>. Instead of just printing these configs, you can pass them into the PyEZ Python library to push them automatically to your network devices!
