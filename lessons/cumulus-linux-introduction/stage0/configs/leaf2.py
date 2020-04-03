@@ -14,9 +14,9 @@ ssh=createSSHClient(host,22,"antidote","antidotepassword")
 
 scp=SCPClient(ssh.get_transport())
 
-scp.put('/antidote/stage1/configs/leaf2/interfaces', '/home/antidote/interfaces')
-scp.put('/antidote/stage1/configs/leaf2/daemons', '/home/antidote/daemons')
-scp.put('/antidote/stage1/configs/leaf2/frr.conf', '/home/antidote/frr.conf')
+scp.put('/antidote/stage0/configs/leaf2/interfaces', '/home/antidote/interfaces')
+scp.put('/antidote/stage0/configs/leaf2/daemons', '/home/antidote/daemons')
+scp.put('/antidote/stage0/configs/leaf2/frr.conf', '/home/antidote/frr.conf')
 
 
 ssh.exec_command('sudo cp /home/antidote/interfaces /etc/network/interfaces')

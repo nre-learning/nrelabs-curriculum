@@ -2,7 +2,6 @@
 name: Automated Device Configuration Backup
 slug: config-backup-automated
 category: workflows
-lessonDiagram: 
 tier: prod
 prereqs:
   - pyez-junos-automation

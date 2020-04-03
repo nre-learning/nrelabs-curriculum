@@ -1,11 +1,10 @@
 ---
-lessonName: Cumulus in NRELabs
-lessonId: 90
+name: Cumulus in NRELabs
+slug: cumulus-linux-introduction
 category: fundamentals
-lessondiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-99/lessondiagram.png
 tier: ptr
 prereqs:
-  - 23  # Linux
+  - linux-basics
 description: Cumulus in NRELabs
 shortDescription: Cumulus in NRELabs
 tags:
@@ -14,21 +13,21 @@ tags:
 
 endpoints:
 - name: linux1
-  image: antidotelabs/utility
+  image: utility
   presentations:
   - name: cli
     port: 22
     type: ssh
 
 - name: linux2
-  image: antidotelabs/utility
+  image: utility
   presentations:
   - name: cli
     port: 22
     type: ssh
 
 - name: leaf1
-  image: antidotelabs/cvx
+  image: cvx
   configurationType: python
   presentations:
   - name: cli
@@ -36,7 +35,7 @@ endpoints:
     type: ssh
 
 - name: leaf2
-  image: antidotelabs/cvx
+  image: cvx
   configurationType: python
   presentations:
   - name: cli
@@ -44,7 +43,7 @@ endpoints:
     type: ssh
 
 - name: spine
-  image: antidotelabs/cvx
+  image: cvx
   configurationType: python
   presentations:
   - name: cli
@@ -63,6 +62,6 @@ connections:
 
 
 stages:
-  - id: 1
-    description: Cumulus in NRELabs
+  - description: Cumulus in NRELabs
+    guideType: markdown
 
