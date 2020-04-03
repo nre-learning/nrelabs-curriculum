@@ -42,7 +42,7 @@ endpoints:
 
 - name: vqfx3
   image: vqfx-snap3
-  configurationType: napalm-junos
+  configurationType: napalm
   presentations:
   - name: cli
     port: 22

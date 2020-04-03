@@ -1,6 +1,6 @@
 ---
-lessonName: Linux Basics
-lessonId: 23
+name: Linux Basics
+slug: linux-basics
 category: fundamentals
 tier: prod
 tags:
@@ -11,12 +11,12 @@ shortDescription: Linux
 
 endpoints:
 - name: linux1
-  image: antidotelabs/utility
+  image: utility
   presentations:
   - name: cli
     port: 22
     type: ssh
 
 stages:
-  - id: 1
-    description: Using the Bash Shell
+  - description: Using the Bash Shell
+    guideType: markdown
