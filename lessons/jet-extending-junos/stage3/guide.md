@@ -4,70 +4,28 @@
 
 ---
 
-### Chapter 3 - GRPC, IDL compilation and basic GRPC JET testing
+### Chapter 4 - JET Firewall API to create/update firewall filter
 
-#### Junos JET, gRPC and IDL
-
-Juniper JET uses <a href="http://www.grpc.io/" target="_blank">gRPC</a>, a remote procedure call (RPC) framework, for cross-language services as a mechanism to enable request-response service. gRPC provides an interface definition language (IDL) that enables you to define APIs. These IDL files (with .proto as the file extension) are compiled using the protoc compiler to generate source code to be used for the server and client applications. The gRPC server is part of the JET service process (jsd), which runs on Junos OS.
-
-![JET System Archtecture](https://www.juniper.net/documentation/images/g043543.png)
+In this stage, we demonstrate additional JET API capability by using JET firewall API to insert a new firewall filter to vQFX.
 
 
-#### Compiling Junos IDL into python library
-For details on downloading and compiling the IDL please refer <a href="https://www.juniper.net/documentation/en_US/jet1.0/topics/task/jet-complie-idl-using-thrift.html" target="_blank">here</a>
-
-For those who wants more details about gRPC in Python, there's a <a href="https://grpc.io/docs/quickstart/python.html" target="_blank">quick start guide</a> from grpc.io.
-
-We will use the protoc compiler to compile the IDL file. You can download the IDL file from <a href="https://support.juniper.net/support/downloads/?p=jet" target="_blank">Juniper support website</a>.
-
-It's time to start the lab!
-
-To save time, the IDL file is pre-downloaded already. First we need to unarchive it:
+#### Preperation
+Firstly, we repeat what we have done in previous stage - compile the IDL package, go to Python interactive prompt, import the JET GPRC module, and then login to the vQFX.
 
 ```
 cd /antidote
 tar -xzf jet-idl-17.4R1.16.tar.gz
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
-
-Next, compile the protocol buffer into python stub code:
-
-```
 python -m grpc_tools.protoc -I./proto --python_out=. --grpc_python_out=. ./proto/*.proto
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
-Verify the python stub class are generated:
-
-```
-ls  -l *pb2*
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
-
-The python stub class is now ready, the next step we will use it to perform gRPC to the Junos device.
-
-#### Python gRPC Client
-In this exercise  we are going to create a simple python gRPC client to manipulate the Junos routing table.
-
-First, go to Python interactive prompt and import the required modules - `authentication_service_pb2` for the Junos Authentication and `rib_service_pb2` is the Junos JET RIB gRPC service.
-
-```
 python
 import grpc
 import jnx_addr_pb2 as addr
-import prpd_common_pb2 as prpd
 import authentication_service_pb2 as auth
 import authentication_service_pb2_grpc
-import rib_service_pb2 as rib
-import rib_service_pb2_grpc
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
+import firewall_service_pb2 as fw
+import firewall_service_pb2_grpc
 
-Now we create a gRPC connection to the vQFX and perform the authentication.
-
-```
 channel = grpc.insecure_channel('vqfx:32767')
-
 auth_stub = authentication_service_pb2_grpc.LoginStub(channel)
 response = auth_stub.LoginCheck(
     auth.LoginRequest(
@@ -79,47 +37,96 @@ response = auth_stub.LoginCheck(
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
-Print the response to verify the connection is established.
+We simulate a neighboring device by creating a new routing instance in the vQFX. Interface xe-0/0/0 and xe-0/0/1 is connected together, so on vQFX we can ping from the master routing instance to 192.168.10.2, which is the IP address in the routing instance "VR". Let's try to verify it:
 
 ```
-print(response.result)
+ping 192.168.10.2 count 3
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
+
+#### Create ACL via JET
+Now, we use the JET firewall API to create a new firewall filter call `filter-by-jet`. This filter contains two terms, the first one is to log and permit ICMP traffic, and the last one is to log and discard all traffic.
+
+```
+fw_stub = firewall_service_pb2_grpc.AclServiceStub(channel)
+
+filter = fw.AccessList(
+    acl_name='filter-by-jet',
+    acl_type=fw.ACL_TYPE_CLASSIC,
+    acl_family=fw.ACL_FAMILY_INET,
+    acl_flag=fw.ACL_FLAGS_NONE,
+    ace_list=[
+        fw.AclEntry(inet_entry=fw.AclInetEntry(
+            ace_name='t1',
+            ace_op=fw.ACL_ENTRY_OPERATION_ADD,
+            adjacency=fw.AclAdjacency(type=fw.ACL_ADJACENCY_AFTER),
+            matches=fw.AclEntryMatchInet(match_protocols=[fw.AclMatchProtocol(min=1, max=1, match_op=fw.ACL_MATCH_OP_EQUAL)]),
+            actions=fw.AclEntryInetAction(
+                action_t=fw.AclEntryInetTerminatingAction(action_accept=1),
+                actions_nt=fw.AclEntryInetNonTerminatingAction(action_log=1)
+            )
+        )),
+        fw.AclEntry(inet_entry=fw.AclInetEntry(
+            ace_name='t2',
+            ace_op=fw.ACL_ENTRY_OPERATION_ADD,
+            adjacency=fw.AclAdjacency(type=fw.ACL_ADJACENCY_AFTER),
+            actions=fw.AclEntryInetAction(
+                action_t=fw.AclEntryInetTerminatingAction(action_discard=1),
+                actions_nt=fw.AclEntryInetNonTerminatingAction(action_log=1)
+            ),
+        ))
+    ]
+)
+result = fw_stub.AccessListAdd(filter)
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
-Now, we can call the Route Add API to insert a static route 192.168.20.0/24 with next-hop 192.168.10.2 dynamically.
+We can verify the firewall filter is actually added to the data plane by using the PFE command.
 
 ```
-rib_stub = rib_service_pb2_grpc.RibStub(channel)
-result = rib_stub.RouteAdd(
-    rib.RouteUpdateRequest(
-        routes=[rib.RouteEntry(
-            key=rib.RouteMatchFields(
-                dest_prefix=prpd.NetworkAddress(inet=addr.IpAddress(addr_string='192.168.20.0')),
-                dest_prefix_len=24,
-                table=prpd.RouteTable(rtt_name=prpd.RouteTableName(name='inet.0')),
-            ),
-            nexthop=rib.RouteNexthop(
-                gateways=[rib.RouteGateway(
-                    gateway_address=prpd.NetworkAddress(inet=addr.IpAddress(addr_string='192.168.10.2'))
-                )]
-            )
-        )]
+request pfe execute target fpc0 timeout 0 command "show firewall" | no-more
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
+
+#### Apply ACL to interface via JET
+Now, we apply the firewall filter to interface xe-0/0/0.
+
+```
+result = fw_stub.AccessListBindAdd(
+    fw.AccessListObjBind(
+        acl=filter,
+        obj_type=fw.ACL_BIND_OBJ_TYPE_INTERFACE,
+        bind_object=fw.AccessListBindObjPoint(intf='xe-0/0/0.0'),
+        bind_direction=fw.ACL_BIND_DIRECTION_INPUT,
+        bind_family=fw.ACL_FAMILY_INET
     )
 )
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
-Print the response to verify the route add status.
-```
-print(result)
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
-At last, verify the route is being added by doing CLI command `show route` on the vQFX.
+#### Verify the ACL
+
+To verify the firewall ACL is being applied, we ping 192.168.10.2 again and then check the firewall log.
 
 ```
-show route table inet.0
+ping 192.168.10.2 count 3
+show firewall log
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
 
-Easy isn't it? With Juniper JET you can dynamically manage device configuration and runtime status such as route tables, ACL, interface status, etc without touching the CLI at all. This API interfaces open a whole new world for network applications. For more information about the API, please refer to the <a href="https://www.juniper.net/documentation/en_US/jet18.2/topics/concept/jet-service-apis-overview.html" target="_blank">JET Service APIs guide</a>
+Then try to SSH to 192.168.10.2, it should fail.
+
+```
+ssh 192.168.10.2
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
+
+Press `Ctrl-C` now to stop the SSH, and the check the firewall log again.
+
+```
+show firewall log
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
+
+This concludes our Junos JET gRPC demostration. In the next lesson are we going explore closed loop automation by employing both JET Notification Service and JET RPC.

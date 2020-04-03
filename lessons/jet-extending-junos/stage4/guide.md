@@ -4,129 +4,93 @@
 
 ---
 
-### Chapter 4 - JET Firewall API to create/update firewall filter
+### Chapter 5 - Closed loop automation with JET
 
-In this stage, we demonstrate additional JET API capability by using JET firewall API to insert a new firewall filter to vQFX.
+In this lesson, we are going to combine what we have learnt previously to create a closed-loop automation script.
 
+The objective of this lesson is to use JET notification services to listen for any new interface addresses configured(IFA events). If the configured IP address is a public one, we use gRPC service to provision a firewall filter on the corresponding interface to protect the vQFX device.
 
-#### Preperation
-Firstly, we repeat what we have done in previous stage - compile the IDL package, go to Python interactive prompt, import the JET GPRC module, and then login to the vQFX.
+#### Create the close loop automation script
+To save time, we have already put the JET firewall API code we created in a previous stage in a file `add_firewall_filter.py`. Let's take a look on the code:
 
 ```
 cd /antidote
+cat add_firewall_filter.py
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
+
+Again, we repeat what we have done in previous stage - compile the IDL package, go to Python interactive prompt, import the required module.
+
+```
 tar -xzf jet-idl-17.4R1.16.tar.gz
 python -m grpc_tools.protoc -I./proto --python_out=. --grpc_python_out=. ./proto/*.proto
 
 python
-import grpc
-import jnx_addr_pb2 as addr
-import authentication_service_pb2 as auth
-import authentication_service_pb2_grpc
-import firewall_service_pb2 as fw
-import firewall_service_pb2_grpc
+import json
+import ipaddress
+import paho.mqtt.client as mqtt
+from add_firewall_filter import add_firewall_filter
 
-channel = grpc.insecure_channel('vqfx:32767')
-auth_stub = authentication_service_pb2_grpc.LoginStub(channel)
-response = auth_stub.LoginCheck(
-    auth.LoginRequest(
-        user_name='antidote',
-        password='antidotepassword',
-        client_id='jet',
-    )
-)
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
-We simulate a neighboring device by creating a new routing instance in the vQFX. Interface xe-0/0/0 and xe-0/0/1 is connected together, so on vQFX we can ping from the master routing instance to 192.168.10.2, which is the IP address in the routing instance "VR". Let's try to verify it:
+Then same as the first chapter of this lesson, we create a MQTT client and define `on_connect` callback function to subscribe to the topic "IFA add events" once the client connect to the JET MQTT broker.
 
 ```
-ping 192.168.10.2 count 3
+client = mqtt.Client()
+
+def on_connect(client, userdata, flags, rc):
+    client.subscribe("/junos/events/kernel/interfaces/ifa/add/#")
+
+client.on_connect = on_connect
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
+
+Next, define `on_message` callback function, to call the `add_firewall_filter` function if the new IP address is in the public range. After that, connect to vQFX and start to wait for event.
+
+```
+def on_message(client, userdata, msg):
+    payload = json.loads(msg.payload)
+    intf = '%s.%s' % (payload['jet-event']['attributes']['name'],
+                      payload['jet-event']['attributes']['subunit'])
+    ipaddr = payload['jet-event']['attributes']['local-address']
+    if not ipaddress.IPv4Network(ipaddr).is_private:
+        print('Apply firewall filter on interface %s' % intf)
+        add_firewall_filter(intf)
+    else:
+        print('No action for private IP %s' % ipaddr.split('/')[0])
+
+client.on_message = on_message
+
+client.connect('vqfx', 1883, 60)
+client.loop_forever()
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
+
+#### Testing the close loop automation
+To validate our automation, We simulate another neighboring device by creating one more routing instance in the vQFX. Interface xe-0/0/2 and xe-0/0/3 is connected together, and a public IP address `20.1.1.2/24` is pre-configured on xe-0/0/3 which is in routing instance `VR2`
+
+Now, let's create an IP address on xe-0/0/2 interface.
+
+```
+configure
+set interfaces xe-0/0/2 unit 0 family inet address 20.1.1.1/24
+commit and-quit
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
 
-#### Create ACL via JET
-Now, we use the JET firewall API to create a new firewall filter call `filter-by-jet`. This filter contains two terms, the first one is to log and permit ICMP traffic, and the last one is to log and discard all traffic.
+Verify the message `Apply firewall filter ...` is shown in `linux` terminal.
+
+To verify the firewall ACL is being applied, we ping 20.1.1.2 again and then check the firewall log.
 
 ```
-fw_stub = firewall_service_pb2_grpc.AclServiceStub(channel)
-
-filter = fw.AccessList(
-    acl_name='filter-by-jet',
-    acl_type=fw.ACL_TYPE_CLASSIC,
-    acl_family=fw.ACL_FAMILY_INET,
-    acl_flag=fw.ACL_FLAGS_NONE,
-    ace_list=[
-        fw.AclEntry(inet_entry=fw.AclInetEntry(
-            ace_name='t1',
-            ace_op=fw.ACL_ENTRY_OPERATION_ADD,
-            adjacency=fw.AclAdjacency(type=fw.ACL_ADJACENCY_AFTER),
-            matches=fw.AclEntryMatchInet(match_protocols=[fw.AclMatchProtocol(min=1, max=1, match_op=fw.ACL_MATCH_OP_EQUAL)]),
-            actions=fw.AclEntryInetAction(
-                action_t=fw.AclEntryInetTerminatingAction(action_accept=1),
-                actions_nt=fw.AclEntryInetNonTerminatingAction(action_log=1)
-            )
-        )),
-        fw.AclEntry(inet_entry=fw.AclInetEntry(
-            ace_name='t2',
-            ace_op=fw.ACL_ENTRY_OPERATION_ADD,
-            adjacency=fw.AclAdjacency(type=fw.ACL_ADJACENCY_AFTER),
-            actions=fw.AclEntryInetAction(
-                action_t=fw.AclEntryInetTerminatingAction(action_discard=1),
-                actions_nt=fw.AclEntryInetNonTerminatingAction(action_log=1)
-            ),
-        ))
-    ]
-)
-result = fw_stub.AccessListAdd(filter)
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
-
-We can verify the firewall filter is actually added to the data plane by using the PFE command.
-
-```
-request pfe execute target fpc0 timeout 0 command "show firewall" | no-more
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
-
-#### Apply ACL to interface via JET
-Now, we apply the firewall filter to interface xe-0/0/0.
-
-```
-result = fw_stub.AccessListBindAdd(
-    fw.AccessListObjBind(
-        acl=filter,
-        obj_type=fw.ACL_BIND_OBJ_TYPE_INTERFACE,
-        bind_object=fw.AccessListBindObjPoint(intf='xe-0/0/0.0'),
-        bind_direction=fw.ACL_BIND_DIRECTION_INPUT,
-        bind_family=fw.ACL_FAMILY_INET
-    )
-)
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
-
-
-#### Verify the ACL
-
-To verify the firewall ACL is being applied, we ping 192.168.10.2 again and then check the firewall log.
-
-```
-ping 192.168.10.2 count 3
+ping 20.1.1.2 count 3
 show firewall log
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
 
-Then try to SSH to 192.168.10.2, it should fail.
+The firewall log should capture the ping traffic. This verifies a firewall filter can be automatically provisioned to the interface dynamically without modifying the Junos configuration.
 
-```
-ssh 192.168.10.2
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
+This JET API automation capability opens up a whole new world to design and develop business logics within the network, such as customized traffic engineering, dynamic network protection, and so on.
 
-Press `Ctrl-C` now to stop the SSH, and the check the firewall log again.
-
-```
-show firewall log
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
-
-This concludes our Junos JET gRPC demostration. In the next lesson are we going explore closed loop automation by employing both JET Notification Service and JET RPC.
+This concludes our introduction to closed-loop automation using JET services and we hope you enjoy this course!
