@@ -1,4 +1,4 @@
-# Ansible Network Automation - Resource Facts
+# Ansible Network Automation - Network Configuration Templates
 
 **Contributed by: [Red Hat](https://ansible.com)**
 
@@ -6,262 +6,179 @@
 
 ## Objective
 
-Demonstration use of resource modules used in combination with Ansible facts for network infrastructure.
+In this section, we'll demonstrate templating a network configuration and pushing it a device. To do this, we'll employ a few new skills:
 
-This exercise will cover:
+- Use and understand [host variables](https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html)
+- Use simple [Jinja2 templating](https://docs.ansible.com/ansible/latest/user_guide/playbooks_templating.html)
+- Demonstrate use of the network automation [junos_config module](https://docs.ansible.com/ansible/latest/modules/junos_config_module.html) for Juniper Junos and the [template module](https://docs.ansible.com/ansible/latest/user_guide/playbooks_templating.html) for Cumulus Linux.
+- Use Ansible Network Automation to create an OSPF adjacency the Cumulus VX device vqfx1 and the Juniper Junos device vqfx1.
 
-- Using `junos_facts` module
-- The `gather_network_resources` parameter
-- Creating a structured data yaml file from `junos_facts`
+## Part 1 - Examining host_vars
 
-## Part 1 - Primer on Resource Modules
-
-So what exactly is a “resource module?” Sections of a device’s configuration can be thought of as a resources provided by that device. Network resource modules are intentionally scoped to configure a single resource and can be combined as building blocks to configure complex network services.
-
-For example the following are Juniper Junos resource modules:
-- [`junos_interfaces`](https://docs.ansible.com/ansible/latest/modules/junos_interfaces_module.html#junos-interfaces-module) - configures physical interface attributes such as duplex, hold times, mtu, description fields and speed
-- [`junos_l2_interfaces`](https://docs.ansible.com/ansible/latest/modules/junos_l2_interfaces_module.html#junos-l2-interfaces-module) - configures interface attributes such as access vlans, trunks, interface-mode, native vlans and allowed vlans
-- [`junos_l3_interfaces`](https://docs.ansible.com/ansible/latest/modules/junos_l3_interfaces_module.html#junos-l3-interfaces-module) - configures layer 3 interface attributes such as IPv4 and IPv6 address assignment
-- [`junos_lacp`](https://docs.ansible.com/ansible/latest/modules/junos_lacp_module.html#junos-lacp-module) - configures Link Aggregation Control Protocol global settings such as `link_protection` and `system_priority`
-- [`junos_vlans`](https://docs.ansible.com/ansible/latest/modules/junos_vlans_module.html#junos-vlans-module) - configures VLANs, and their respective descriptions and names
-
-> **Note** For a full list of Juniper Junos modules please refer to the [documentation](https://docs.ansible.com/ansible/latest/modules/list_of_network_modules.html#junos).
-
-Every resource module will have corresponding facts integration so that Ansible Network Automation can both read and write for that particular resource.  There is a new keyword `gather_network_resources` that allows fact modules (e.g. `junos_facts`) to gather resource module facts for a particular resource.
-
- <table>
-  <tr>
-    <th><b>Resource Module</b></th>
-    <th><b>gather_network_resources</b></th>
-  </tr>
-  <tr>
-    <td><pre>junos_interfaces</pre></td>
-    <td><pre>interfaces</pre></td>
-  </tr>
-  <tr>
-    <td><pre>junos_l2_interfaces</pre></td>
-    <td><pre>l2_interfaces</pre></td>
-  </tr>
-  <tr>
-    <td><pre>junos_l3_interfaces</pre></td>
-    <td><pre>l3_interfaces</pre></td>
-  </tr>
-  <tr>
-    <td><pre>junos_lacp</pre></td>
-    <td><pre>lacp</pre></td>
-  </tr>
-  <tr>
-    <td><pre>junos_vlans</pre></td>
-    <td><pre>vlans</pre></td>
-  </tr>
-</table>
-
-## Part 2 - Examine Ansible Playbook
-
-Next, display the Ansible Playbook contents:
+For this exercise examine the folder named `host_vars`:
 
 ```
 cd /antidote/stage3
-cat facts.yml
+ls host_vars/
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
 
-Lets examine the Ansible Playbook:
-
-- `name: collect l3 interface configuration facts` - description for the task
-- `junos_facts:` module being used for this task
-- `gather_subset: min` - must be set to min in order for `gather_network_resources` to work.  This is done for backwards compatibility for older Ansible Playbooks.
-- `gather_network_resources:` - parameter that needs a list of one or more network resources to gather.  Can also be set to `all` and will gather all network resources available for that version of Ansible.
-- `l3_interfaces` - the network resource to gather data on.
-
-The second task is using the `debug` module to print the facts to the console window.
-
-## Part 3 - Execute the Ansible Playbook
-
-Next, run the Ansible Playbook with the `ansible-playbook` command:
-
-```
-ansible-playbook facts.yml
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
-
-The Ansible Playbook output will appear in the console to the right.
-
-### OPTIONAL: Playing with verbosity
-
-Instead of using the debug module try deleting the `debug` task.  Use the text editor of your choice and delete the second task.
-
-```
-nano facts.yml
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
-
-Now re-run the `ansible-playbook` command with the verbosity flag (`-v`).
-```
-ansible-playbook facts.yml -v
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
-
-This can be another way to quickly see what an Ansible Task is doing.
-
-## Part 4 - Variable Primer
-
-Previously in the first part of this lesson, we talked about variables in inventory.  Variables are pieces of data, in the form of key-value pairs that Ansible can use during play.  When using variables within an inventory it is recommended to only have variables that are used to connect and authenticate **to the device**.  
-
-Examples for inventory variables include:
-- [Connection plugins](https://docs.ansible.com/ansible/latest/plugins/connection.html) (e.g. network_cli, netconf)
-- Usernames
-- [Platform types](https://docs.ansible.com/ansible/latest/network/user_guide/platform_index.html#settings-by-platform) (ansible_network_os)
-
-Variables stored for use to configure resources **on the device** are recommended to be in `group_vars` or `host_vars`.
-
-- **Host** variables apply to the host and override group vars.  These are stored in a directory `host_vars`.
-- **Group** variables apply for all devices in that group.  These are stored in a directory `group_vars`.
-
-Examples for `group_vars` and `host_vars` are:
-- VLANs
-- Routing configuration
-- System services (NTP, DNS, etc)
-
-For a complete guide on Ansible Variables, please refer to the [documentation](https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html).
-
-## Part 5 - Saving variables to host_vars
-
-For this next part we will use the resource module to save collected facts to a persistent file under the `host_vars` directory.
-
-Display the Ansible Playbook contents:
-
-```
-cat save.yml
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
-
-Lets examine the Ansible Playbook.  There is one new task:
-
-```yaml
-  - name: push structured data to host vars
-    copy:
-      content: "{{ansible_network_resources | to_nice_yaml}}"
-      dest: "{{playbook_dir}}/host_vars/{{inventory_hostname}}"
-```
-
-- `copy:` - this task uses the [copy module](https://docs.ansible.com/ansible/latest/modules/copy_module.html)
-- `content: "{{ansible_network_resources | to_nice_yaml}}"` - the parameter content will push the variable `ansible_network_resources` that was collected by `junos_facts`.  The filter ` | to_nice_yaml` will convert this to a more human readable format.  This is purely for aesthetics and not required.  To learn more about filters like `to_nice_yaml` please refer to the [documentation](https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html).
-- `dest: "{{playbook_dir}}/host_vars/{{inventory_hostname}}"` - this line will create a file named `vqfx1` since that is the only host in our topology, and dump the contents from the previous line (the `ansible_network_resources` which contains are l3_interfaces variables).  If there was multiple hosts, Ansible would create a separate file for each host in parallel.
-
-## Part 6 - Execute the save playbook
-
-First, let's create the directory `host_vars/`. Our playbook will write the collected facts here:
-
-```
-mkdir host_vars/
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
-
-Now, we can execute our playbook to save our structured data to this directory:
-
-```
-ansible-playbook save.yml
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
-
-Now examine the contents of `host_vars`:
+You'll notice that this directory contains two files - `vqfx1`, and `cvx1`. Let's take a look at these files' contents:
 
 ```
 cat host_vars/vqfx1
+cat host_vars/cvx1
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
 
-While the format for our `host_vars` is a little different, since this is written in YAML, it's not far off from the output of `show configuration interfaces` on the `vqfx1` device:
+For each device there is one key-value pair.  The router-id for the Juniper device `vqfx1` is `10.10.10.1` and the router-id for `cvx1` is `10.10.10.2`.  We can store key-value pairs in `host_vars` and use them later in Jinja2 templates. If you need a refresher on what variables are, the previous section in this lesson should be helpful.
+
+## Part 2 - Examining the frr.conf Jinja2 template
+
+Cumulus devices use [Free-Range Routing]((https://frrouting.org/)) for their routing stack, which is configured using a file called `frr.conf`:
 
 ```
-show configuration interfaces
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', this)">Run this snippet</button>
-
-Ansible creates a vendor agnostic representation of layer 3 information using the l3_interfaces resource module.  These variables can be stored into a database, cmdb or git repo to create a SoT (source of truth) for your network devices.
-
-## Part 7 - Examine the l3_interfaces Ansible Playbook
-
-Examine the `l3_interfaces.yml` Ansible Playbook that will use the resource module [`junos_l3_interfaces`](https://docs.ansible.com/ansible/latest/modules/junos_l3_interfaces_module.html) to push the configuration to the device.
-
-```
-cat l3_interfaces.yml
+cat frr.conf
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
 
-There is one task:
+You'll notice the use of Jinja2 snippets in this file. If you're not familiar with Jinja2, there's a whole lesson focused on
+this in another lesson. For now, lets examine the contents of this simple Jinja2 template in detail:
 
 ```
-      junos_l3_interfaces:
-        config: "{{l3_interfaces}}"
+interface swp1
+ ip ospf 1 area 0
+ ip ospf network point-to-point
+!
+router ospf 1
+ ospf router-id {{router_id}}
+!
 ```
 
-Since our variables are in the `host_vars` directory they are automatically loaded as variables into our Ansible Playbook and available to use.
+This is a configuration for the OSPF (Open Shortest Path First) routing protocol. There is one variable substitution taking place in this template for `{{router_id}}`.  The contents of `{{router_id}}` will be replaced with the value of `router_id` in `host_vars/cvx1` which is `10.10.10.2`.
 
-Run the Ansible Playbook:
+## Part 3 - Template module for Linux
+
+Variables and Jinja2 templates need to be combined by using a task in an Ansible Playbook. For Linux-based operating systems like Cumulus we can use the [template module](https://docs.ansible.com/ansible/latest/modules/template_module.html) to load and fill out the template and push it to a Linux device.  Look at this example:
+
 ```
-ansible-playbook l3_interfaces.yml
+- name: template out cumulus configuration for free range routing
+  become: true
+  template:
+    src: frr.conf
+    dest: /etc/frr/frr.conf
+```
+
+Here is a breakdown of each part of this task:
+- `name:` - this is a description of what the task does
+- `become: true` - this will make the task run at privileged mode (e.g. administrative or sudo) when it is required)
+- `template:` - this task is using the template module
+- `src: frr.conf` - this task will use the frr.conf Jinja2 template as the source
+- `dest: /etc/frr/frr.conf` - this task will overwrite the file frr.conf in the relevant directory with the rendered template.
+
+## Part 4 - Service module for Linux
+
+Since Cumulus Network's VX is Linux, it can use the native Ansible [service module](https://docs.ansible.com/ansible/latest/modules/service_module.html) to start, restart, stop and reload services such as FRR.  This is the same module you would use on Fedora, Red Hat Enterprise Linux or any Linux operating system for controlling services.
+
+Look at the following task:
+```
+- name: reload frr
+  become: true
+  service:
+    name: frr
+    state: reloaded
+```
+
+If we make a change to /etc/frr/frr.conf which is the file that holds the routing configurations for Cumulus Linux we need to reload frr for those changes to take affect.
+
+## Part 5 - Examine the cumulus.yml Ansible Playbook
+
+Examine the cumulus.yml Ansible Playbook that contains both the previous two tasks (using the template and service modules).
+
+```
+cat cumulus.yml
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
 
-Since we have not modified the configuration at all, we are pushing back the exact same configuration that we just saved.  The Ansible Playbook will report green and `changed=0` indicating that the configuration is not modified.  The `junos_l3_interfaces` is idempotent meaning that it is aware of the configuration on the Juniper Junos device and won't modify it unless it has to.
+These tasks are not a holistic Ansible Playbook and can't be run by themselves.  Notice how there is not `hosts` or `tasks` parameter.  Another Ansible Playbook will load these tasks dynamically.
 
-## Part 8 - Modify the configuration
+## Part 6 - Examine the junos.yml Ansible Playbook
 
-Now that we have our configuration as a flat file we can modify the source of truth and push the configuration.
-
-Use the text editor of your choice and open up the `host_vars` for vqfx1
+Examine the junos.yml Ansible Playbook:
 
 ```
-nano host_vars/vqfx1
+cat junos.yml
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
 
-Change the IP address for **em3** to `10.10.10.1/30`, save the file, and exit the text editor.
+This file has one task using the [junos_config module](https://docs.ansible.com/ansible/latest/modules/junos_config_module.html).  The junos_config can work exactly like the template module above where it loads a separate Jinja2 template file, but since there is only two lines we will just template directly into the `lines` parameter for the task.
 
-Now execute the `l3_interfaces.yml` Ansible Playbook again with the modified `host_vars` file.  Use the verbosity flag (`-v`) to see what commands the module will use
+Just like with the Cumulus VX template the "{{router_id}}" will be replaced with the `router_id` from `host_vars/vqfx1` and place the id `10.10.10.1`.
+
+## Part 7 - Examine the ospf.yml Ansible Playbook
+
+In the previous sections there were two separate list of tasks created per network operating system.  One for Cumulus VX called `cumulus.yml` and one for Juniper Junos called `junos.yml`.  These two plays match identically to the `ansible_network_os` host variable found in inventory. This will allow us to easily write an agnostic Ansible Playbook to load the correct list of tasks based on the `ansible_network_os`.
+
+Examine the ospf.yml Ansible Playbook:
 ```
-ansible-playbook l3_interfaces.yml -v
+cat ospf.yml
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
 
-Juniper vqfx1 port **em3** is connected to the Cumulus VX device's `swp1`. Look at the table below:
+This Ansible Playbook has two important differences from previous Ansible Playbooks shown.  
 
-<table>
-  <tr>
-    <th><b>Juniper vqfx1</b></th>
-    <th><b>interface</b></th>
-    <th><b>interface</b></th>
-    <th><b>Cumulus VX cvx1</b></th>
-  </tr>
-  <tr>
-    <td><pre>10.10.10.1/30</pre></td>
-    <td><pre>em3</pre></td>
-    <td><pre>swp1</pre></td>
-    <td><pre>10.10.10.2/30</pre></td>
-  </tr>
-</table>
+- The first is that the `hosts` parameter is running on the group devices that includes both the Juniper Junos vqfx1 and the Cumulus VX cvx1.
+- The second is that we use the [include module](https://docs.ansible.com/ansible/latest/modules/include_module.html) to dynamically load the correct list of tasks, keying off of the `ansible_network_os`.
 
-Perform a ping from the `vqfx1` device to verify we have connectivity after the new configuration has been pushed:
+```
+    - name: include relevant network playbook
+      include: "{{ansible_network_os}}.yml"
+```
+
+This task will load for `cumulus.yml` for cvx1 and `junos.yml` will load for vqfx1.  If you need a refresher where the `ansible_network_os` is set please look at the inventory again here:
+
+```
+cat /antidote/stage0/hosts
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
+
+For a full list of `ansible_network_os` values and supported network operating systems please refer to the [Ansible documentation](https://docs.ansible.com/ansible/latest/network/user_guide/platform_index.html#settings-by-platform).
+
+## Part 8 - Run the ospf.yml Ansible Playbook
+
+Run the Ansible Playbook `ospf.yml` with `ansible-playbook`:
+
+```
+ansible-playbook ospf.yml
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('ansible', this)">Run this snippet</button>
+
+When the Ansible Playbook runs successfully, OSPF will be configured between vqfx1 and cvx1.  Make sure you can ping between the devices or OSPF will not come up.
 
 ```
 ping 10.10.10.2 count 5
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', this)">Run this snippet</button>
 
+## Part 9 - Verify OSPF is up and there is an adjacency
+
+Now that you have automated OSPF configuration for the two devices you can verify that OSPF is up and there is an adjacency.  The Juniper device will use the command `show ospf neighbor`
+
+```
+show ospf neighbor
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', this)">Run this snippet</button>
+
+
 ## Complete
 
-You have completed stage 3!
+You have completed Part 3!
 
 ## Takeaways
 
-- Resource modules and facts have a direct relationship allowing Ansible to read existing brownfield networks and create a source of truth really quickly.
-- verbose mode (`-v`) allows us to see more output to the terminal window, including which commands would be applied
-- The `ansible_network_resources` parameter is used to collect facts around a specific resource such as `l3_interfaces`.
+- [Jinja2](https://docs.ansible.com/ansible/latest/user_guide/playbooks_templating.html) templates allow us to easily template out a device configuration.
+- The `os_config` (e.g. [junos_config](https://docs.ansible.com/ansible/latest/modules/junos_config_module.html)) and `cli_config` modules can source a jinja2 template file, and push directly to a device. If you want to just render a configuration locally on the control node, or template to a Linux device, use the [template module](https://docs.ansible.com/ansible/latest/modules/template_module.html).
 - Variables are mostly commonly stored in `group_vars` and `host_vars`. This short example only used `host_vars`.
-
-For more information on why resource modules were developed please refer to [this blog post](https://www.ansible.com/blog/network-features-coming-soon-in-ansible-engine-2.9).
 
 ---
 

@@ -1,10 +1,15 @@
 ---
-- name: Ansible Facts
+- name: Ansible Resource Facts
   hosts: vqfx1
-  gather_facts: yes
+  gather_facts: no
 
   tasks:
+  - name: collect l3 interface configuration facts
+    junos_facts:
+      gather_subset: min
+      gather_network_resources:
+      - l3_interfaces
 
   - name: print facts to console
     debug:
-      msg: "{{ansible_facts}}"
+      msg: "{{ansible_network_resources.l3_interfaces}}"

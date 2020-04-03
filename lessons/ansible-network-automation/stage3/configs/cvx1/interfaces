@@ -11,7 +11,7 @@ iface mgmt
     address 127.0.0.1/8
     vrf-table auto
 
-auto swp1 
+auto swp1
 allow-uplink swp1
 iface swp1 inet static
     address 10.10.10.2/30
@@ -20,4 +20,3 @@ auto swp2
 allow-uplink swp2
 iface swp2 inet static
     address 10.10.100.1/30
-

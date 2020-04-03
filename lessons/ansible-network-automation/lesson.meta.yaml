@@ -1,31 +1,31 @@
 ---
-lessonName: Ansible for Network Automation
-lessonId: 41
+name: Ansible for Network Automation
+slug: ansible-network-automation
 category: tools
-lessonDiagram: "https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/tools/lesson-41-ansible-network/diagram.png"
+diagram: "https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/ansible-network-automation/diagram.png"
 tier: prod
 prereqs:
-  # - 22  # Python
-  - 23  # Linux
+  # - python-intro  #not available yet
+  - linux-intro
 description: In this lesson, we'll explore the use of Ansible for multi-vendor network automation
-slug: ansible-network-automation
+shortDescription: Ansible
 tags:
 - ansible
 - automation
 - configuration
-collection: 7  # RedHat
+collection: red-hat
 
 endpoints:
 - name: ansible
-  image: antidotelabs/ansible
+  image: ansible
   presentations:
   - name: cli
     port: 22
     type: ssh
 
 - name: vqfx1
-  image: antidotelabs/vqfx-snap1
-  configurationType: napalm-junos
+  image: vqfx-snap1
+  configurationType: napalm
   presentations:
   - name: cli
     port: 22
@@ -33,7 +33,7 @@ endpoints:
   additionalPorts: [830]
 
 - name: cvx1
-  image: antidotelabs/cvx
+  image: cvx
   configurationType: python
   presentations:
   - name: cli
@@ -45,11 +45,11 @@ connections:
   b: cvx1
 
 stages:
-  - id: 1
-    description: Enable NETCONF
-  - id: 2
-    description: Ansible Facts
-  - id: 3
-    description: Resource Facts
-  - id: 4
-    description: Network Configuration Templates
+  - description: Enable NETCONF
+    guideType: markdown
+  - description: Ansible Facts
+    guideType: markdown
+  - description: Resource Facts
+    guideType: markdown
+  - description: Network Configuration Templates
+    guideType: markdown
