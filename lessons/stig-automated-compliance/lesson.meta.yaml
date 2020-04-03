@@ -1,14 +1,16 @@
 ---
-lessonName: Automated STIG Compliance Validation
-lessonId: 32
+name: Automated STIG Compliance Validation
+slug: stig-automated-compliance
 category: workflows
-lessonDiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-32/lessondiagram.png
+diagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/stig-automated-compliance/lessondiagram.png
 tier: prod
 prereqs:
-  - 13  # NAPALM
-  - 12  # JSNAPy
-  - 24  # PyEZ
+  - napalm-multi-vendor-network-automation
+  - jsnapy-network-testing
+  - pyez-junos-automation
 description: Security Technical Implementation Guides (STIGs) are the configuration standards for United States Department of Defense (DoD) infrastructure. Any network engineer that has experience in running any part of these systems has had to spent countless hours going over infrastructure elements and ensuring they're compliant with these standards. In this lesson, we'll explore two appraoches for automating STIG compliance checks, and saving countless hours of manual data-gathering.
+shortDescription: Automated STIG Compliance
+
 slug: STIG
 tags:
 - jsnapy
@@ -18,15 +20,15 @@ tags:
 
 endpoints:
 - name: linux1
-  image: antidotelabs/utility
+  image: utility
   presentations:
   - name: cli
     port: 22
     type: ssh
 
 - name: vqfx1
-  image: antidotelabs/vqfx-snap1
-  configurationType: napalm-junos
+  image: vqfx-snap1
+  configurationType: napalm
   presentations:
   - name: cli
     port: 22
@@ -34,9 +36,9 @@ endpoints:
   additionalPorts: [830]
 
 stages:
-  - id: 1
-    description: STIG Compliance Validation with NAPALM
-  - id: 2
-    description: STIG Compliance Validation with JSNAPy
-  - id: 3
-    description: STIG Compliance Validation with custom scripts
+  - description: STIG Compliance Validation with NAPALM
+    guideType: markdown
+  - description: STIG Compliance Validation with JSNAPy
+    guideType: markdown
+  - description: STIG Compliance Validation with custom scripts
+    guideType: markdown

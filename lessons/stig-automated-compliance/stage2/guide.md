@@ -3,9 +3,9 @@
 
 In the previous labs, we used NAPALM and JSNAPy to check the [STIG for Juniper devices](https://stigviewer.com/stig/infrastructure_router__juniper/) were found to be in compliance for the V-3969 finding.  NAPALM and JSNAPy are great for many compliance checks like looking for the existence of a configuration setting, but they may fall short when the check requires more detailed analysis of the network devices configuration and operational state or we need some "glue" to bind mutiple compliance checks together or report back findings in a specific manner.  
 
-In this lab, we'll look at what it takes to automate a STIG compliance check using python scripts and leveraging the [PyEZ framework](https://labs.networkreliability.engineering/labs/?lessonId=24&lessonStage=1) and [PyEZ Tables and Views] (https://labs.networkreliability.engineering/labs/?lessonId=24&lessonStage=5). We'll write our own custom table to retrieve specific configuration items to make it easier to deal with XML formatted data.  
+In this lab, we'll look at what it takes to automate a STIG compliance check using python scripts and leveraging the PyEZ framework and PyEZ Tables and Views (PyEZ is covered in another lesson). We'll write our own custom table to retrieve specific configuration items to make it easier to deal with XML formatted data.  
 
-Custom Op and Config tables are written in [YAML](https://labs.networkreliability.engineering/labs/?lessonId=14&lessonStage=1), their usage wth PyEZ is documented [here](https://pyez.readthedocs.io/en/latest/TableView.html).
+Custom Op and Config tables are written in YAML; their usage wth PyEZ is documented [here](https://pyez.readthedocs.io/en/latest/TableView.html).
 
 We'll begin by starting up the python interpretter, defining a PyEZ device and connecting to 'vqfx1'.
 
@@ -122,7 +122,7 @@ Running this from a python shell every time, on multiple devices can be tedious 
 We'll start by exiting the python shell, and making a directory to keep our Config and Op tables in called simply `tables`.  We'll be able to import these files into a python script (with a bit of preparation). We'll also create an `__init__.py` file since we're using Python2 to allow us to treat the directory as a python package.
 ```
 exit()
-cd /antidote/stage3/
+cd /antidote/stage2/
 mkdir tables
 touch tables/__init__.py
 ```
