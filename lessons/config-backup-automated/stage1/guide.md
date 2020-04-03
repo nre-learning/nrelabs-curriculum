@@ -4,41 +4,59 @@
 
 ---
 
-### Part 1  - Single Device Backup
+### Part 2  - Multiple Device Backup 
 
-Having an up to date device configuration is essential for disater recovery in the event of device failure or natural disaster. Being able to automate backup configurations makes recovery of the device that much easier (especially if it's a mission critical device). In this lesson we will pull the configuration from a single device and store it in **"display set"** format. 
+In this lesson we will expand on the last lesson and backup the configurations from multiple Junos devices. In this section the configuration will be stored in the native Junos format to a local file on the Linux system.
 
-First we will start the Python interactive shell, load the PyEz module so we can communicate with the Junos devices and load the `lxml` module to format the XML data returned from the Junos device.
+First we need a list of device names or IP addresses that we want to retrieve information from. We will use a YAML file to store the device list. The YAML file looks like this:
+<pre>
+cd /antidote/stage1/
+more devices.yml
+</pre>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
+
+With this method new devices can be easily added without editing in the script.
+
+Next we will start the Python interactive shell, load the YAML module to process the `devices.yml` file, load the PyEz module so we can communicate with our Junos devices and load the `lxml` module to format the XML data returned from the Junos devices.
 <pre>
 python
+import yaml
 from jnpr.junos import Device
 from lxml import etree
 </pre>
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button> 
 
-After that, we will create a new text file for the configuration to be saved. The file will be named **vqfx1-backup.txt** and will be in the home directory on the Linux system. 
+Next we have to read in the YAML file with the device hostnames. First, open the file as readonly and then use the YAML module to put it into a Python list, like so:
 <pre>
-outfile = open("vqfx1-backup.txt","w")
+deviceFile = open('devices.yml', 'r')
+deviceList = yaml.full_load(deviceFile)
+</pre>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button> 
+
+To ensure the `devices.yml` file was processed correctly we can print the `deviceList` variable.
+<pre>
+print deviceList
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-Next we create the `dev` variable that represents the device hostname and login credentials. Then we need to `open` a NETCONF connection to the device.
+We need to create a `for` loop so we can perform a series of actions on each device in the list (i.e. YAML file). The first thing we do is create the `dev` variable that represents the device hostname and login credentials. Then we need to `open` a NETCONF connection to the device.
 
+In order to save the configuration we need to `open` a local file on the Linux system with a unique name. To be descriptive the filename will be the **device**-backup.txt which can be accomplished with the `device` variable.
+
+Then we will use the `rpc.get_config` function to pull the device configuration and store it in a variable called `config`. Next we write the configuration to the local file and finally `close` the local file.
 <pre>
-dev = Device(host="vqfx1", user="antidote", password="antidotepassword")
-dev.open()
+for device in deviceList:
+	dev = Device(host=device, user="antidote", password="antidotepassword")
+	dev.open()
+	outfile = open(device + "-backup.txt","w")
+	config = dev.rpc.get_config(options={'format':'text'})
+	outfile.write(etree.tostring(config))
+	outfile.close()
+
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-Then we will use the `rpc.get_config` function to pull the device configuration and store it in a variable called `config`. Next we `write` the configuration to the local file and finally `close` the local file.
-<pre>
-config = dev.rpc.get_config(options={'format':'set'})
-outfile.write(etree.tostring(config))
-outfile.close()
-</pre>
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
-
-In the Linux terminal you can see it making a connection with each device and saving the configuration. Wait until you see the `>>>`  prompt before running the next snippet. 
+In the Linux terminal you can see the loop making a connection with each device and saving the configuration. Wait until you see the `>>>`  prompt before running the next snippet. 
 
 In order to verify the backed up configurations we will need to exit the Python shell.
 <pre>
@@ -46,13 +64,13 @@ exit()
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-Do a listing of the directory to see the **vqfx1-backup.txt** file with the current date and timestamp.  
+Lets do a directory listing looking for the backup files.
 <pre>
 ls -l
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-If you would like to see the configuration backed up you can use the `cat` command to view the backed up configuration file.
+View one of the backed up configuration files using the `cat` command. 
 <pre>
 cat vqfx1-backup.txt
 </pre>
