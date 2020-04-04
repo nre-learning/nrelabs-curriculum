@@ -1,58 +1,124 @@
 # Terraform & Junos
-## Part 2 - Planning the Resource Graph
+## Part 3 - Applying the Execution Plan
 
-This lesson introduces the planning phase of Terraform. Some exciting things happen here and Terraform beautifully deals with the complex stuff so you get the simple and effective outcomes.
+Here we go with the exciting bit! We're going to apply our Terraform configuration resources to device `vqfx01`.
 
-As we discovered in the first stage of the lesson, Terraform gives us the ability to approach configuration in an immutable declarative way, which is relatively unheard of for the kind of networking we're dealing with here. Just for the record, Terraform can also update named resources, but more on that later.
+What happens we do this is:
 
-Terraform deals with resources in a dependency graph manner, both implicitly and explicitly. This means the order of resource creation can be controlled along with order of updates. Some people refer to this as a 'blast radius' and a negative anecdote would be that of sawing the branch of the tree you happen to be sitting on. Terraform can help here.
+- Terraform applies the execution plan in dependency order (interface -> bgp session) per dependency.
+- Terraform provider functions import the device data `junos-qfx.tf`.
+- In turn the Terraform configuration is read from the `.tf` file for each resource being created.
+- The provider opens a NETCONF session to the target device, passes the XML for each resource and does a lazy close on the connection allowing other resource providers in the same provider to re-use it.
+- Once complete, the connection is closed, cache data is updated and Terraform exits.
 
-So long as you know what depends on what, Terraform will reflect that knowledge and deal with the creation of resources reflecting the dependency tree. This might not seem like a big deal at first and hopefully in this stage of the lesson some of the usefulness is exposed for your gain and benefit.
-
-To keep things easy.
+First we need to make sure we're in the correct working directory.
 
 ```
-cd /antidote/terraform
+cd /antidote/terraform/
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', this)">Run this snippet</button>
 
-## Planning
+Now let's apply the previously created execution plan.
 
-Terraform once initialized, is ready to plan what needs to be done. Once Plan is invoked, the resources are inspected in the directory along with a reconciliation against the plugin to ensure that at pre-run it's likely to work. It's often used not only to create the Terraform execution plan, but also to check if it will work before checking in a Terraform configuration in to a repository and committing.
+```
+terraform apply -auto-approve
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', this)">Run this snippet</button>
 
-Let's go ahead and run Terraform plan and see what's going to happen.
+When this completes, not only are the resources created on Junos but also Terraform creates a state file which can be inspected really easily.
+
+We can check on Junos that both the BGP peer is established and the interface is configured correctly.
+
+```
+show interfaces em4
+show bgp summary
+ping 10.31.0.13 count 10
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', this)">Run this snippet</button>
+
+```
+cat terraform.tfstate
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', this)">Run this snippet</button>
+
+At this point we can also check to make sure that the cache reflects the plan:
 
 ```
 terraform plan
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', this)">Run this snippet</button>
 
-What you should see is two resources being described and in what order; an interface inet configuration followed by a BGP peer. There is an explicit dependency made in the file `bgp_peer_1.tf`.
+You've just created some resources on Junos using Terraform! How cool is this? There are two view points here worth a brief discussion on (don't fear, it will be super brief so you can get back at it!). 
+
+__Immutable Infrastructure__
+
+Terraform allows us to create resources that can be destroyed cleanly when we're done with them. As network engineers, we know designs change over time, which can prove to be a challenge come removal time (if removed). Terraform uses named configuration group resources to provide this resource type management.
+
+You can check the resources created by Terraform by checking the current contents of the configuration group stanza on `vqfx1`.
 
 ```
-cat bgp_peer_1.tf
+show configuration groups
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', this)">Run this snippet</button>
+
+Like container and cloud approaches to applications, the ideas is we can just destroy the resources when we don't need them, without having to figure out dependencies like we traditionally would.
+
+__Mutability__
+
+Ok, so this isn't entirely immutable. We can update resources too. This is useful for developing a set of template resources or providing updates to in-situ deployments resulting in low risk changes against typos and input variables.
+
+This is a user exercise and you're next challenge is to change the IP address on the BGP peer resource to `.15` instead of `.13`. You can use `vim` or `nano` to achieve this on the Linux VM interface provided for you. Exit using the escape sequence: `esc` then `:wq!` then hit return.
+
+```
+vim bgp_peer_1.tf
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', this)">Run this snippet</button>
 
-Cool huh?
-
-It's also possible to view the data graphically (providing you have `graphviz` installed).
-
-Here's an example of the `graphviz dot` output for this Terraform execution plan.
+Once you've done this, run terraform plan again!
 
 ```
-terraform graph -type=plan
+terraform plan
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', this)">Run this snippet</button>
 
-You can feed the output of this operation to `dot` and generate graphics.
+Here's an example of what you should be seeing.
 
-This next step creates a PNG file containing the output. However, other than creating the file, you cannot currently view it dynamically using the lab system. Instead we've embedded the file for you to view at your convenience below.
+```bash
+------------------------------------------------------------------------
+
+An execution plan has been generated and is shown below.
+Resource actions are indicated with the following symbols:
+  ~ update in-place
+
+Terraform will perform the following actions:
+
+  ~ junos-qfx_native_bgp_peer.vqfx01_peer1
+      bgp_neighbor: "10.31.0.13" => "10.31.0.15"
+
+
+Plan: 0 to add, 1 to change, 0 to destroy.
+
+------------------------------------------------------------------------
+```
+
+Let's go ahead and apply the change.
 
 ```
-terraform graph -type=plan | dot -Tpng > plan_graph.png
+terraform apply -auto-approve
 ```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', this)">Run this snippet</button>
 
-<div style="text-align:center;"><img src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-31/stage2/plangraph.png"></div>
+Now the BGP session remote peer address has been changed and you're free to check the configuration group configuration entry on `vqfx` to gain evidence of this wizardy.
+
+Peaking under the hood, the Junos Terraform provider destroys the group by NETCONF then re-creates it with the same ID. In the grand scheme of things, it looks like an edit, but it's actually a full resource re-build.
+
+```
+show configuration groups
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', this)">Run this snippet</button>
+
+__Idempotency__
+
+Terraform provides an idempotent and safe way to create, update and destroy resources, so you can make execution plans and apply them as frequently or infrequently as you like and re-apply over and over again without worry about affecting state negatively.
 
 *The Terraform terraform-provider-junos-qfx is covered by a BSD-3-Clause license and copyrighted by Juniper Networks*
