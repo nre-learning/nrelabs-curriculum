@@ -1,11 +1,11 @@
 ---
-lessonName: Introduction to REST APIs
-lessonId: 19
+name: Introduction to REST APIs
+slug: rest-apis-introduction
 category: fundamentals
 tier: prod
 prereqs:
-  # - 22  # Python
-  - 23  # Linux
+  # - python-introduction
+  - linux-basics
 description: REST APIs are an extremely popular, flexible option for remote programmability of a network device. In this lesson, we'll cover the basics of REST APIs, interact with one in the bash shell as well as Python, and prepare for using them for higher-order workflows in later lessons.
 shortDescription: REST APIs
 tags:
@@ -18,7 +18,7 @@ tags:
 endpoints:
 
 - name: linux1
-  image: antidotelabs/utility
+  image: utility
   presentations:
   - name: cli
     port: 22
@@ -28,8 +28,8 @@ endpoints:
     type: ssh
 
 - name: vqfx1
-  image: antidotelabs/vqfx-snap1
-  configurationType: napalm-junos
+  image: vqfx-snap1
+  configurationType: napalm
   presentations:
   - name: cli
     port: 22
@@ -40,8 +40,8 @@ endpoints:
 
 stages:
 
-  - id: 1
-    description: Your First API Request
+  - description: Your First API Request
+    guideType: markdown
 
   # - id: 2
   #   description: Parsing JSON Data with "jq"
