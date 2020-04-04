@@ -1,15 +1,25 @@
 *** Settings ***
 Library	JunosDevice.py
 
+
+*** Keywords ***
+Log Facts
+	&{facts}=	Gather Device Info
+	:FOR  ${key}  IN  @{facts.keys()}  
+    \  Log  ${facts["${key}"]}
+
+Validate Facts
+	&{facts}=	Gather Device Info
+    Should Be Equal As Strings  ${facts["hostname"]}  vqfx1
+    Should Be Equal As Strings  ${facts["model"]}  VQFX-10000
+
 *** Test Cases ***
-Check Hostname
-	Connect Device	host=${HOST}	user=${USER}	password=${PASSWORD}
-	${hostname}=	Get Hostname
-	Should Be Equal As Strings	${hostname}	vqfx1
+Log Device Facts
+	Connect Device  host=${HOST}	user=${USER}	password=${PASSWORD}
+	Log Facts
 	Close Device
 
-Check Model
-	Connect Device	host=${HOST}	user=${USER}	password=${PASSWORD}
-	${model}=	Get Model
-	Should Be Equal As Strings	${model}	VQFX-10000
+Verify Facts
+	Connect Device  host=${HOST}	user=${USER}	password=${PASSWORD}
+	Validate Facts
 	Close Device

@@ -4,145 +4,129 @@
 
 ---
 
-### Chapter 1 - Introduction to Robot Framework
+### Chapter 2 - Writing Test Cases for Junos Devices
 
-Robot Framework is a Python based test automation framework, which is extensively used by the mobile, web, and embedded systems industry to perform acceptance testing. It provides a simple interface to write test-cases that can be arranged into a test-suite and is easy to implement.
+Now that we have covered how to write a simple test case using Robot framework, let's use our knowledge to form test cases that verify the state of Juniper devices.
 
-Robot is a `keyword-driven` testing framework, where all the actions and functions of the test suite are performed using simple, human-understandable keywords.
+In this section, we'll:
 
-A generic architecture of the Robot framework is shown in the lesson diagram.
+1. Understand the environment used for communicating with Junos devices
+2. Use keywords from Junos private library
+3. Pass command line arguments to Robot, and access them from inside the test case
+4. Pass arguments for private functions/keywords
 
-Reference: [Robot Framework User Guide](http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#id413)
+For our next example, we have a vQFX (virtual QFX) device `vqfx1` connected to a Linux machine. We will run our test-cases using Robot on the Linux machine, and talk to the vQFX via NETCONF to fetch information like its model name, OS version, hostname, and serial number.
 
-Let's move on to the various concepts used in Robot Framework. A typical Robot file is shown below:
+For simplicity, Robot framework will use the PyEZ library to communicate with Junos devices. PyEZ is a NETCONF library written in Python and can be used to communicate with devices running Junos. We cover PyEZ in a separate lesson - check it out!
 
->```
->*** Settings ***
->Library    myLibrary.py
->
->*** Variables ***
->${name1}=    Jane
->${name2}=    Jane Smith
->@{namelist}=    Steve   Walt    Craig   Zac
->&{namedict}=
->
->*** Keywords ***
->Print Log
->   Log ${name}
->
->*** Test Cases ***
->Check Name
->   Should Be Equal ${name1}    Jane
->```
+PyEZ can be installed on Linux based machines using the command  `pip install junos-eznc`. We've already done this in this lesson environment.
 
-The different sections `Settings`, `Variables`, `Keywords`, and `Testcases` are called *tables*. They are a way to arrange the different components of Robot in a neat, orderly manner.
+Similar to the example in the previous chapter, we will create a python file (Robot private library), where we will define functions that use the PyEZ library to open a connection to our device, fetch the necessary information, and close the connection to our device.
 
-The `Settings` section is used to import standard libraries, external libraries, resource files, variable files, and Setup/Teardown settings. The purpose of these libraries and files will be explained in the later sections.
-
-The `Variables` section defines the variables used in the test cases. There are four types of variables:
-
-* **Scalar variable**: A scalar variable is replaced by its value in test-cases. They are mostly used to hold strings, but they can also hold objects like lists. They are represented using the variable identifier `$`. Eg:
->```
->     *** Variables ***
->     ${NAME}         Jake Doyle
->```
-
-* **List variables**: Used to store lists (Eg: Python lists). The list variables can be used to reference the whole list or can be used to access individual list elements using the index. They are represented using the variable identifier `@`. Eg:
->```
->     *** Variables ***
->     @{NAMES}         Jake    Tinny    Des
->```
-
-* **Dictionary variables**: Used to store dictionary-like objects (like Python dict()), and they are referenced using the identifier `&`. Eg:
-
->```
->     *** Variables ***
->     &{Employees}         firstname=Jake    lastname=Doyle
->```
-
-* **Environment variables**: Used to store string environment variables, and are referenced using the identifier `%`. Eg:
->```
->     *** Test Cases ***
->     Log    %{HOME}
->```
-
-The `Keywords` section is where the real testing capability of the Robot framework is shown. These keywords are provided by various test libraries which are a part of the Robot Ecosystem. There are a few different types of libraries that Robot can use:
-
-  * **Standard Library** - Consists of a set of libraries come bundled-in as part of the Robot Framework. Example: OperatingSystem, Collections, DateTime etc.
-  * **Built-in keyword Library** - This is a part of the standard library which provides a set of frequently used generic keywords used for string comparison, logging, etc.
-  * **External Library** - Can be downloaded using pip. Example: Android library, HTTP library etc.
-  * **Private Library** - Can be a self created Python or Java file. Example: JunosDevice.py, a private library, described in stage2 of this tutorial.
-
-To use the keywords defined by the standard, external, and private libraries, the respective libraries first need to be imported in the `Settings` table of a Robot file. Built-in keywords can be used out-of-the-box without the need to import any library in the `Settings` section. Also, it should be noted that the keywords behave like functions - they can take in arguments and can return values back.
-
-A few examples of keywords are -
-+ Built-in keywords
->```
->     Should Be Equal    Jane    John
->```
-This built-in keyword `Should Be Equal` will check if the next two arguments are the same, and will throw an Exception if they are unequal.
-
-+ Private library keywords
-
-Suppose we have a custom Python file, which contains the below function -
->```
->     def is_a_substring(str1,str2)
->```
-This function maps into the keyword `Is A Substring` automatically, and can be invoked in Robot test-cases as below -
->```
->     Is A Substring    Jane    Janet
->```
-Finally, the `Test Cases` section contains the test-cases we would like to execute, using the keywords, variables, and the libraries that we imported earlier.
-
-The test cases are executed in the same order that they occur in the test-file.
-
-In the below example, `Check Name` is the name of the test case, which uses the built-in keyword `Should Be Equal` to compare two strings - the scalar variable name1, and "Jane".
-
->```
->*** Test Cases ***
->Check Name
->   Should Be Equal ${name1}    Jane
->```
-
-A few important syntax points to remember:
-
-1. There should be at least two spaces between the following:
-    - Keywords and Keywords
-    - Keywords and Arguments
-    - Arguments and Arguments
-2. Keywords and variables are case-insensitive
-
-### Running your first Robot file
-
-In our first example, we have a Robot file `chapter1_eg1.robot`, and a python file `substring.py`.
-
-Let's examine our python file `substring.py`:
-
+Let's examine the file `JunosDevice.py` and understand the different functions.:
 ```
-cat /antidote/stage1/substring.py
+cat /antidote/stage1/JunosDevice.py
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-It contains a single function `is_a_substring` that takes in two string arguments - str1 and str1. It then returns True if str1 is a substring of str2.
+Here's some detail around the functions we'll be using in our Robot tests from this library:
 
-Let's check out our Robot file now:
+---
+
+<table style="width:100%">
+  <tr>
+    <th>Function</th>
+    <th>Description</th>
+    <th>Keyword in Robot</th>
+  </tr>
+  <tr>
+    <td>connect_device</td>
+    <td>Initiates a connection to the Juniper device</td>
+    <td>Connect Device</td>
+  </tr>
+  <tr>
+    <td>gather_device_info</td>
+    <td>Fetches device facts from the Juniper</td>
+    <td>Gather Device Info</td>
+  </tr>
+  <tr>
+    <td>close_device</td>
+    <td>Gracefully closes the PyEZ connection, once an operation is completed</td>
+    <td>Close Device</td>
+  </tr>
+  <tr>
+    <td>get_hostname</td>
+    <td>Fetch hostname from the device</td>
+    <td>Get Hostname</td>
+  </tr>
+  <tr>
+    <td>get_model</td>
+    <td>Fetch model name from the device</td>
+    <td>Get Model</td>
+  </tr>
+</table>
+
+---
+
+Observe that theses python functions are exposed as Robot keywords inside the Robot files. Also note that the robot keywords, unlike the python functions, don't contain the underscore and are case insensitive. If you don't understand the implementation of these functions, do not worry! You only need to understand the functionality to use them in the Robot Framework.
+
+Okay, let's start developing our test cases! We will write two test cases, one for fetching and verifying the hostname, and another for the device model. We will use the keywords from our private library, `JunosDevice.py`, to achieve this.
+
+Let's examine our Robot test-case file `chapter1_eg1.robot`:
+
 ```
 cat /antidote/stage1/chapter1_eg1.robot
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-Under the Settings, we import our python file `substring.py` as a Library.
+In the `Settings` table, we define our private custom library `JunosDevice.py`:
 
-We have five test-cases in total, and these will be executed one after the other. The first three test cases perform string comparison, while the last two execute the substring function.
+>```
+>*** Settings ***
+>Library    JunosDevice.py
+>```
 
-We'll go ahead and start our test-cases:
+In the `Test Cases` table, we have the `Check Hostname` and `Check Model` test cases.
+
+The `Check Hostname` test-case verifies if the hostname of the device is 'vqfx1':
+
+>```
+>Check Hostname
+>    Connect Device    host=${HOST}    user=${USER}    password=${PASSWORD}
+>    ${hostname}=    Get Hostname
+>    Should Be Equal As Strings    ${hostname}    vqfx1
+>    Close Device
+>```
+
+The `Check Model` test-case verifies if the device model name is `VQFX-10000`:
+
+>```
+>Check Model
+>    Connect Device    host=${HOST}    user=${USER}    password=${PASSWORD}
+>    ${model}=    Get Model
+>    Should Be Equal As Strings    ${model}    VQFX-10000
+>    Close Device
+>```
+
+Here, each test case consists of four keywords - `Connect Device`, `Get Hostname`, `Should Be Equal As Strings`, and `Close Device`
+
+`Connect Device`, `Get Hostname`, and `Close Device` are keywords which are picked from our private Library `JunosDevice.py`.
+
+The keyword `Should Be Equal As Strings` is a "built-in" keyword that can be used in any Robot test case, and does not require any library to be imported. This keyword checks if two strings variables passed to it are the same.
+
+The IP address of the vQFX, the username, and password for login, are provided to Robot by passing as command line arguments. These arguments can be accessed within the .robot file by referencing them using their names, as shown below:
+
+>```
+>Connect Device    host=${HOST}    user=${USER}    password=${PASSWORD}
+>```
+
+Execute this test suite by running the below command (note the command line variables passed using the flag --variable)
 
 ```
-robot /antidote/stage1/chapter1_eg1.robot
+robot --variable HOST:vqfx1 --variable USER:antidote --variable PASSWORD:antidotepassword /antidote/stage1/chapter1_eg1.robot
 ```
-
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-As expected, test-cases `Check Equal1`, `Check Equal2`, `Check Substring2` fails, and `Check Equal1`, `Check Substring1` pass. Since all the test-cases did not pass, the test-suite result is "Fail".
+If both the test-cases succeed, the entire test-suite passes. If any of them fails, then the corresponding test-case raises an Exception which displays why the test case failed.
 
-In the next section, we'll use these fundamentals for writing tests for Junos network devices:
+To get a detailed report, we can also inspect the files log.html, report.html, and output.html, which are auto-generated for each run.

@@ -4,73 +4,37 @@
 
 ---
 
-### Chapter 2 - Writing Test Cases for Junos Devices
+### Chapter 3 - Robot Framework - Best Practices
 
-Now that we have covered how to write a simple test case using Robot framework, let's use our knowledge to form test cases that verify the state of Juniper devices.
+Now that we have covered how to write robot files which verify the state of Juniper devices, let's delve into more advanced concepts and discuss some best practices.
 
-In this section, we'll:
+### Defining User Keywords
 
-1. Understand the environment used for communicating with Junos devices
-2. Use keywords from Junos private library
-3. Pass command line arguments to Robot, and access them from inside the test case
-4. Pass arguments for private functions/keywords
+While writing more complex network validation robot files, you'll soon realize that you end up repeating and rewriting some fixed series of keywords and logical statements over and over again. These are usually common across all the test cases.
 
-For our next example, we have a vQFX (virtual QFX) device `vqfx1` connected to a Linux machine. We will run our test-cases using Robot on the Linux machine, and talk to the vQFX via NETCONF to fetch information like its model name, OS version, hostname, and serial number.
+To avoid doing this and also to decrease the overall length of the robot file, we define *user keywords*.  User keywords are new, high-level keywords which club together multiple preexisting keywords and logical statements. In a robot file, the user keywords are defined under the *Keywords* table. The use of user keywords will be demonstrated below.
 
-For simplicity, Robot framework will use the PyEZ library to communicate with Junos devices. PyEZ is a NETCONF library written in Python and can be used to communicate with devices running Junos. We cover PyEZ in <a href="/labs/?lessonId=16&lessonStage=1" target="_blank">it's own lesson</a> - check it out!
+### Using Resource Files
 
-PyEZ can be installed on Linux based machines using the command  `pip install junos-eznc`. We've already done this in this lesson environment.
+All the *variables* and *user keywords* defined inside a robot file can only be used within the file in which they were created. In order to reuse these variables and keywords across multiple robot files, we create "resource files".
 
-Similar to the example in the previous chapter, we will create a python file (Robot private library), where we will define functions that use the PyEZ library to open a connection to our device, fetch the necessary information, and close the connection to our device.
+Resource files have the same syntax as robot files, the only difference being, they cannot contain the *Test Case* table. Also, the *Settings* table can only contain the imported files (Library, Resource, Variables) and the documentation. The use of separate resource files also helps in separating test cases from auxiliary data.
 
-Let's examine the file `JunosDevice.py` and understand the different functions.:
-```
-cat /antidote/stage2/JunosDevice.py
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
+This approach helps in keeping the test cases file uncluttered and better organized, with only the relevant test cases being a part of it. Resource files can be imported by the other robot files inside the *Settings* table using the *resource* setting.
 
-Here's some detail around the functions we'll be using in our Robot tests from this library:
+### Variable Files
 
----
+Variable files, like resource files, can be used to share variables across multiple test case robot files. Variable files are implemented as a Python module. All the variables declared inside a Python module can be directly imported by a robot file, under the settings table with the variable keyword. Refer to the [Robot Documentation](http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#variable-files) for more info on Variable files.
 
-<table style="width:100%">
-  <tr>
-    <th>Function</th>
-    <th>Description</th>
-    <th>Keyword in Robot</th>
-  </tr>
-  <tr>
-    <td>connect_device</td>
-    <td>Initiates a connection to the Juniper device</td>
-    <td>Connect Device</td>
-  </tr>
-  <tr>
-    <td>gather_device_info</td>
-    <td>Fetches device facts from the Juniper</td>
-    <td>Gather Device Info</td>
-  </tr>
-  <tr>
-    <td>close_device</td>
-    <td>Gracefully closes the PyEZ connection, once an operation is completed</td>
-    <td>Close Device</td>
-  </tr>
-  <tr>
-    <td>get_hostname</td>
-    <td>Fetch hostname from the device</td>
-    <td>Get Hostname</td>
-  </tr>
-  <tr>
-    <td>get_model</td>
-    <td>Fetch model name from the device</td>
-    <td>Get Model</td>
-  </tr>
-</table>
+### Setup and Teardown
 
----
+The Robot framework supports two types of setup and teardown functions - "Test Setup", "Test Teardown" and "Suite Setup", "Suite Teardown". The keywords defined under the *Test* Setup and Teardown settings are run before and after every test case. The keywords defined under the *Suite* Setup and Teardown settings are run before and after every test suite(multiple test cases).
 
-Observe that theses python functions are exposed as Robot keywords inside the Robot files. Also note that the robot keywords, unlike the python functions, don't contain the underscore and are case insensitive. If you don't understand the implementation of these functions, do not worry! You only need to understand the functionality to use them in the Robot Framework.
+Consider a scenario where NETCONF/SSH connection is initialized and terminated, before and after every test case. In this case, the size of the robot file can be reduced by using the Setup and Teardown settings, as required.
 
-Okay, let's start developing our test cases! We will write two test cases, one for fetching and verifying the hostname, and another for the device model. We will use the keywords from our private library, `JunosDevice.py`, to achieve this.
+Now it's time to roll up your sleeves and jump on to tackling the final two test cases of this tutorial. Are you as thrilled as I am? Let's roll!
+
+### Test Case 1
 
 Let's examine our Robot test-case file `chapter2_eg1.robot`:
 
@@ -79,54 +43,75 @@ cat /antidote/stage2/chapter2_eg1.robot
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-In the `Settings` table, we define our private custom library `JunosDevice.py`:
+You must have noticed the new `Keywords` table in our robot file. Inside this table, two new keywords have been defined, Log Facts and Validate Facts. Allow me to explain each of these separately.
 
 >```
->*** Settings ***
->Library    JunosDevice.py
+>Log Facts
+>    &{facts}=	Gather Device Info
+>    :FOR  ${key}  IN  @{facts.keys()}
+>    \  Log  ${facts["${key}"]}
 >```
 
-In the `Test Cases` table, we have the `Check Hostname` and `Check Model` test cases.
+In this example, the `Gather Device Info` keyword returns a python dictionary, consisting of some basic device properties like serial number and the hostname, in a key-value format. Notice that we are using a "for" loop to parse a python dictionary which was stored in the `facts` variable. Observe that the syntax declaring a "for" loop in the robot framework is similar to that in Python.
 
-The `Check Hostname` test-case verifies if the hostname of the device is 'vqfx1':
+In the end, we are using the `Log` keyword to log the values for every key in the returned dictionary. All these functions defined under the `Log Facts` keyword get executed whenever this keyword is called inside the robot file.
 
->```
->Check Hostname
->    Connect Device    host=${HOST}    user=${USER}    password=${PASSWORD}
->    ${hostname}=    Get Hostname
->    Should Be Equal As Strings    ${hostname}    vqfx1
->    Close Device
->```
-
-The `Check Model` test-case verifies if the device model name is `VQFX-10000`:
+Let's now examine the second user keyword in the settings table.
 
 >```
->Check Model
->    Connect Device    host=${HOST}    user=${USER}    password=${PASSWORD}
->    ${model}=    Get Model
->    Should Be Equal As Strings    ${model}    VQFX-10000
->    Close Device
+>Validate Facts
+>	 &{facts}=	Gather Device Info
+>    Should Be Equal As Strings  ${facts["hostname"]}  vqfx1
+>    Should Be Equal As Strings  ${facts["model"]}  VQFX-10000
 >```
 
-Here, each test case consists of four keywords - `Connect Device`, `Get Hostname`, `Should Be Equal As Strings`, and `Close Device`
+In this user keyword, we are first gathering the device information, storing it in a variable and then comparing whether the value pertaining to the *hostname* key of *facts* variable is equal to the string "vqfx1" or not. We do the same for the `model` key of `facts` variable.
 
-`Connect Device`, `Get Hostname`, and `Close Device` are keywords which are picked from our private Library `JunosDevice.py`.
-
-The keyword `Should Be Equal As Strings` is a "built-in" keyword that can be used in any Robot test case, and does not require any library to be imported. This keyword checks if two strings variables passed to it are the same.
-
-The IP address of the vQFX, the username, and password for login, are provided to Robot by passing as command line arguments. These arguments can be accessed within the .robot file by referencing them using their names, as shown below:
+Let's now have a look at the test cases:
 
 >```
->Connect Device    host=${HOST}    user=${USER}    password=${PASSWORD}
+>*** Test Cases ***
+>Log Device Facts
+>	Connect Device  host=${HOST}	user=${USER}	password=${PASSWORD}
+>	Log Facts
+>	Close Device
+>
+>Verify Facts
+>	Connect Device  host=${HOST}	user=${USER}	password=${PASSWORD}
+>	Validate Facts
+>	Close Device
 >```
 
-Execute this test suite by running the below command (note the command line variables passed using the flag --variable)
-
+Notice that both of the test cases are using the previously defined user keywords from the Keywords section of the robot file. Execute these test cases by running the robot script using the following command (note the command line variables passed using the flag --variable)
 ```
 robot --variable HOST:vqfx1 --variable USER:antidote --variable PASSWORD:antidotepassword /antidote/stage2/chapter2_eg1.robot
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-If both the test-cases succeed, the entire test-suite passes. If any of them fails, then the corresponding test-case raises an Exception which displays why the test case failed.
+### Test Case 2
 
-To get a detailed report, we can also inspect the files log.html, report.html, and output.html, which are auto-generated for each run.
+Let's examine our Robot test-case file `chapter2_eg2.robot`:
+
+```
+cat /antidote/stage2/chapter2_eg2.robot
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
+
+Note that the robot file only has two sections and inside the `Settings` section, a separate robot file has been imported using the `Resource` setting. This file is called the resource file. Also observe that there are two other settings present inside the `Settings` table, namely "Test Setup" and "Test Teardown". These settings call keywords which have been originally defined in the resource file.
+
+Let's now check out our resource file `chapter2_resource.robot`:
+```
+cat /antidote/stage2/chapter2_resource.robot
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
+
+Notice that this time, we have declared all the required variables in the "Variables" section of the resource file. What this means is that we will no longer have to pass the variable names while running the robot file.
+
+Also, observe that three user keywords have been defined under the "Keywords" section in the resource file. Two of these keywords, "Setup Actions" and "Teardown Actions", have been used by the Setup and Teardown settings of our master robot file. The third keyword, Validate Facts, has been used by a test case inside the robot file. Execute the robot script by running the below command
+
+```
+robot /antidote/stage2/chapter2_eg2.robot
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
+
+That's it for now - have fun writing tests for your network infrastructure!
