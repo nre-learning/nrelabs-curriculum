@@ -1,14 +1,14 @@
 ---
-lessonName: Event-Driven Network Automation with StackStorm
-lessonId: 15
+name: Event-Driven Network Automation with StackStorm
+slug: stackstorm-event-driven-automation
 category: tools
 tier: prod
-lessonDiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-15/lessondiagram.png
-lessonVideo: https://www.youtube.com/embed/WhfAqnn2HMM
+diagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-15/lessondiagram.png
+video: https://www.youtube.com/embed/WhfAqnn2HMM
 prereqs:
-  - 13  # NAPALM
-  - 14  # YAML
-  - 16  # Jinja
+  - napalm-multi-vendor-network-automation
+  - yaml-introduction
+  - jinja-configuration-templates
 description: StackStorm is an event-driven automation framework. In this lesson, we'll learn about the basic primitives you'll need to put StackStorm to work for you.
 shortDescription: StackStorm
 tags:
@@ -19,31 +19,31 @@ tags:
 
 endpoints:
 - name: st2
-  image: antidotelabs/stackstorm
+  image: stackstorm
   presentations:
   - name: cli
     port: 22
     type: ssh
 
 - name: vqfx1
-  image: antidotelabs/vqfx-snap1
-  configurationType: napalm-junos
+  image: vqfx-snap1
+  configurationType: napalm
   presentations:
   - name: cli
     port: 22
     type: ssh
 
 - name: vqfx2
-  image: antidotelabs/vqfx-snap2
-  configurationType: napalm-junos
+  image: vqfx-snap2
+  configurationType: napalm
   presentations:
   - name: cli
     port: 22
     type: ssh
 
 - name: vqfx3
-  image: antidotelabs/vqfx-snap3
-  configurationType: napalm-junos
+  image: vqfx-snap3
+  configurationType: napalm
   presentations:
   - name: cli
     port: 22
@@ -58,20 +58,20 @@ connections:
   b: vqfx1
 
 stages:
-  - id: 1
-    description: StackStorm CLI and Basic Concepts
+  - description: StackStorm CLI and Basic Concepts
+    guideType: markdown
 
-  - id: 2
-    description: Actions
+  - description: Actions
+    guideType: markdown
 
-  - id: 3
-    description: Workflows
+  - description: Workflows
+    guideType: markdown
 
-  - id: 4
-    description: Sensors and Triggers
+  - description: Sensors and Triggers
+    guideType: markdown
 
-  - id: 5
-    description: Rules
+  - description: Rules
+    guideType: markdown
 
   # Removing for now, will move to separate lesson once category restructuring is finished
   # - id: 6

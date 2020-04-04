@@ -2,119 +2,144 @@
 
 ---
 
-### Part 1 - StackStorm CLI and Packs
+### Part 2 - Actions
 
-In this lesson, we'll explore the use of a powerful, open-source framework called StackStorm for event-driven automation within a networking context. For a primer on event-driven automation, as well as a very brief overview of the concepts in StackStorm, it's highly recommended that you start with the lesson video by clicking the button above.
+Though it's important to understand that StackStorm is all about event-driven automation, it's also useful to spend some time talking about what StackStorm can **do**. Being able to watch for all the events in the world isn't very useful if you can't do anything about what you see. In StackStorm, we can accomplish such things through "[Actions](https://docs.stackstorm.com/actions.html)". Some examples include:
 
-<div style="text-align:center;"><img src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-15/st2.jpeg" width="100"></div>
+- Push a configuration change to a network device
+- Restart a service on a server
+- Retrieve information about a virtual machine
+- Bounce a switchport
+- Send a message to Slack
 
-In this lesson, we'll be interacting with StackStorm using its command-line utility `st2`, so in this first lab, we'll take a moment to overview this, as well
-as how StackStorm integrates with other systems through something called `packs`.
+There are many others - and the list is growing all the time in the StackStorm [Exchange](https://exchange.stackstorm.org/). In short, Actions can be thought of simply as neatly contained bits of code to perform a task. They accept input, do work, and usually provide some output. They're the very last piece in the chain we'll be building to create an end-to-end event-driven automation solution in this lesson.
 
-Note that in many places in this lesson, we'll be linking to the [StackStorm docs](https://docs.stackstorm.com/).
-This is definitely the best place to go for more technical information on how StackStorm is installed, configured,
-and operated. This lesson will instead focus on the basic concepts to get you started.
+<div style="text-align:center;"><img src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-15/actions.png"></div>
 
-
-#### Command-Line Help
-
-Throughout these tutorials, you may have questions about a certain StackStorm command, such as what arguments are supported,
-or how to provide a certain parameter. Note that the StackStorm command-line utility, `st2`, allows you to use the `-h`
-flag at various levels to get help output. For instance, if you want an overview of global `st2` subcommands or flags, simply run:
+Many of the `st2` subcommands we saw in the previous lab use verbs like `get`, `create`, `delete`, `list` for their corresponding resources.
+For instance, to list the available actions that are currently present on our system, we can run:
 
 ```
-st2 -h
+st2 action list
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
-You'll notice there are several subcommands available to us. Many of these are StackStorm resources that fill specific roles in the event-driven
-automation paradigm, such as `trigger`, `rule`, and `action`. We'll be diving deeper into each of these in the following labs.
-
-You'll also notice some optional arguments you can supply, such as the immensely helpful `--debug` flag, which prints out all interactions
-between the CLI and the StackStorm API in a really cool way - the responses are pretty-printed as JSON to the terminal, and the requests
-are printed as the equivalent cURL command, so if you wanted to script your own StackStorm API calls, you just need to add this debug flag
-to your favorite command and.....and...... you know what, just run it and see for yourself - it's so cool!
-
-```
-st2 --debug run core.local date
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
-
-Don't worry about the details of the command we just ran, we'll cover that in detail in the next lab.
-
-As mentioned before, `-h` is useful at multiple levels in addition to the global `st2` command. For instance, we can use it for the `st2 run` command
-we just ran to see what options that subcommand supports:
+You can see that each action is located within a "pack", which we explained in the last lab. For instance, the "core" pack comes pre-installed with StackStorm,
+and contains many common actions for doing simple things like running bash commands, calling a REST API, and more.
 
 
-If you already know you want to run an action, but you want to know the proper syntax on top of that, see the contextual help there:
+#### Hello World!
+
+The `local` action in the `core` pack is referred to by it's "full name" as `core.local`. We can pass this to `st2 run` to execute this action:
 
 ```
-st2 run -h
+st2 run core.local "echo Hello World!"
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
-
-#### StackStorm Packs
-
-As mentioned before, StackStorm is highly extensible. It focuses entirely on the primitives necessary to enable event-driven automation,
-and integrates with existing tools to accomplish tasks or receive events.
-
-In StackStorm, all extensibility is done through something called a "Pack". Any time you want StackStorm to integrate with some
-third-party system, or if you want to upload some custom rules or workflows, you do this through a pack.
-
-The StackStorm project maintains its own [Exchange](https://exchange.stackstorm.org/) which is a centralized index containing many community-maintained packs
-that make it easier to install these integrations. This index is maintained to ensure the really popular packs have a more-or-less permanent home, and to allow
-much easier installation via the CLI.
+Not every action is created equal - like any program or script, each action comes with different parameters - some optional, some required - that are necessary for it
+to get its job done. Fortunately, we can use the handy `-h` flag to gain insight right at the command line into what parameters any action supports:
 
 ```
-~$ st2 pack install napalm
-
-For the "napalm" pack, the following content will be registered:
-
-rules     |  4
-sensors   |  1
-triggers  |  0
-actions   |  27
-aliases   |  1
-
-Installation may take a while for packs with many items.
-
-	[ succeeded ] download pack
-	[ succeeded ] make a prerun
-	[ succeeded ] install pack dependencies
-	[ succeeded ] register pack
-
-+-------------+----------------------------------------------------+
-| Property    | Value                                              |
-+-------------+----------------------------------------------------+
-| name        | napalm                                             |
-| description | NAPALM network automation library integration pack |
-| version     | 0.2.14                                             |
-| author      | mierdin, Rob Woodward                              |
-+-------------+----------------------------------------------------+
+st2 run core.local -h
 ```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
-In short, any time you want to integrate with something, find the pack for it. It's important to note also that not all packs need to be in the Exchange.
-You can also [install packs directly from any Git repository](https://docs.stackstorm.com/packs.html#installing-a-pack):
+You can see that the `cmd` parameter is required, and is what we supplied in double quotes - the command to run on the bash shell.
+
+The `echo` command usually takes a split second to execute. However, some actions can take much longer: minutes, hours, even more.
+While it's usually the case that these Actions are executed via Triggers (which we'll get to in a later lab), it may be necessary to
+start, or re-run them on the command-line as well. The `-a` flag allows us to execute an action in the same way, but we won't have to
+wait for the Action to complete in order to get our terminal back - the `st2` command will return an execution ID for us right away:
 
 ```
-~$ st2 pack install https://github.com/emedvedev/chatops_tutorial
+st2 run -a core.local "sleep 300"
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
-	[ succeeded ] download pack
-	[ succeeded ] make a prerun
-	[ succeeded ] install pack dependencies
-	[ succeeded ] register pack
+You may notice that the output contains a reference to another StackStorm command we haven't seen yet:
 
-+-------------+---------------------------+
-| Property    | Value                     |
-+-------------+---------------------------+
-| name        | Chatops Tutorial          |
-| description | Tutorial pack for ChatOps |
-| version     | 0.3.0                     |
-| author      | emedvedev                 |
-+-------------+---------------------------+
+```
+st2 execution get < EXECUTION ID >
 ```
 
-For simplicity, this lesson's instance of StackStorm will come pre-installed with all the packs we'll need, but it's important to keep these commands in mind if you want to use StackStorm in your own environment, so you can install the same extensions we refer to.
+In StackStorm, the term "execution" is used to describe an instance of a running action. Each time you run an action, it's given an execution ID, which is a unique identifier of that exact instance where that action was run. Since we told `st2` to run this Action asynchronously, it make sure the Action execution was scheduled, retrieved its ID, and returned it to us immediately, so we can use `st2 execution get` to retrieve status at any time, rather than waiting for it to finish.
 
-In the next lab, we'll start diving into the specific primitives that StackStorm uses to enable event-driven automation, starting with "Actions". See you then!
+This is also useful because, as we'll see in the next few labs, we don't always run actions on the command-line directly like this. Sometimes it's done for us by a rule, or a workflow. In those cases, retrieving execution details using `st2 execution get` is often the only way to know how an action performed. We can see a list of recent executions as well:
+
+```
+st2 execution list
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
+
+Now, this is a simple example, and there's way more to get into in the `core` pack, such as executing remote commands or scripts, calling REST APIs, and more. However,
+this is a network automation lesson, and there's way too much value in using a tool like StackStorm for event-driven network automation, so let's get
+into some more relevant examples.
+
+#### Running NAPALM Actions against network devices
+
+[NAPALM](https://github.com/napalm-automation/napalm) is an extremely useful tool in network automation. It's a Python library that sits on top of many vendor-specific
+APIs like Juniper's NETCONF, Arista's eAPI, and Cisco's NX-API and exposes common functions so you don't have to worry about these vendor's APIs. You just interact
+with NAPALM in your Python scripts, and NAPALM takes care of communicating with the upstream device(s).
+
+StackStorm's exchange includes a pack for exposing NAPALM's functionality. This means, among other things, we can use NAPALM functions as StackStorm actions.
+You might have noticed earlier that this pack is already installed, and the actions in the pack are available to us:
+
+```
+st2 action list --pack=napalm
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
+
+
+The `get_facts` action in this pack is a great place to get started. Like we saw in the NAPALM lesson, this action gathers some basic information about a network device, like the serial number and hostname:
+
+```
+st2 run napalm.get_facts hostname=vqfx1
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
+
+At this point, you might be asking "Where did we pass in the credentials for vqfx1"? Like many packs, these details are captured in the pack configuration:
+
+```
+cat /opt/stackstorm/configs/napalm.yaml
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
+
+This configuration is specific to the `napalm` pack, and consists of two main parts. A list of devices, which we referred to by name with the `hostname` parameter, and a list
+of credentials, which each device entry references in order to specify which credential set to use.
+
+Getting facts is kind of cool - but what about something a little more specific? How about the current BGP peers?
+
+```
+st2 run napalm.get_bgp_neighbors hostname=vqfx1
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
+
+Finally, it would be really great if we could actually push a config change with StackStorm.  If you pay attention to the output retrieved in the previous command, you may have noticed that one of our configured BGP peers is inactive. Upon further inspection, we see that the BGP configuration on vqfx1 is using the wrong `peer-as` attribute.
+
+As part of this lesson, we've included a configuration snippet that will replace only the relevant configuration with the corrected `peer-as` attribute:
+
+```
+cat /antidote/stage1/vqfx1-config-patch.txt
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
+
+The `loadconfig` action can accept this path as a parameter, and will perform a merge between this configuration, and the existing configuration:
+
+```
+st2 run napalm.loadconfig hostname=vqfx1 config_file="/antidote/stage1/vqfx1-config-patch.txt"
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
+
+If we go to vqfx1 now, we'll see that both BGP peers are active:
+
+```
+cli
+show bgp summary
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', this)">Run this snippet</button>
+
+This was a brief look at StackStorm actions, using the `napalm` pack as an example, since it's extremely useful for our purposes here, learning event-driven network automation. However, there are **many** more actions inside many more packs available on the [StackStorm Exchange](https://exchange.stackstorm.org/), and you should definitely check those out as well.
+
+In the next lab, we'll learn how to link actions together in a workflow, using the data we've retrieved in some of these actions to drive more complex decision-making.
+

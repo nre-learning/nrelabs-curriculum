@@ -2,145 +2,141 @@
 
 ---
 
-### Part 2 - Actions
+### Part 3 - Workflows
 
-Though it's important to understand that StackStorm is all about event-driven automation, it's also useful to spend some time talking about what StackStorm can **do**. Being able to watch for all the events in the world isn't very useful if you can't do anything about what you see. In StackStorm, we can accomplish such things through "[Actions](https://docs.stackstorm.com/actions.html)". Some examples include:
+Just like real "tasks" performed manually, or via another tool, StackStorm Actions almost never run in isolation. They're usually run in parallel with each other, or in sequence. They're usually run based off a decision that was made from information made available by an event, or another action's output.
 
-- Push a configuration change to a network device
-- Restart a service on a server
-- Retrieve information about a virtual machine
-- Bounce a switchport
-- Send a message to Slack
+In StackStorm, we call these complex logical structures ["Workflows"](https://docs.stackstorm.com/workflows.html).
 
-There are many others - and the list is growing all the time in the StackStorm [Exchange](https://exchange.stackstorm.org/). In short, Actions can be thought of simply as neatly contained bits of code to perform a task. They accept input, do work, and usually provide some output. They're the very last piece in the chain we'll be building to create an end-to-end event-driven automation solution in this lesson.
+<div style="text-align:center;"><img src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-15/workflows.png"></div>
 
-<div style="text-align:center;"><img src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-15/actions.png"></div>
+There are a few options for accomplishing this in StackStorm:
 
-Many of the `st2` subcommands we saw in the previous lab use verbs like `get`, `create`, `delete`, `list` for their corresponding resources.
-For instance, to list the available actions that are currently present on our system, we can run:
+- [ActionChain](https://docs.stackstorm.com/actionchain.html)
+- [Mistral](https://docs.stackstorm.com/mistral.html)
+- [Orquesta](https://docs.stackstorm.com/orquesta.html)
 
-```
-st2 action list
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
+There are, of course, other tools like Ansible that accomplish similar purposes. Especially if you have existing Ansible playbooks, you can certainly [execute those playbooks from StackStorm](https://github.com/StackStorm-Exchange/stackstorm-ansible). The benefit of using the options listed above is that they're more tightly integrated with StackStorm, meaning the workflow and StackStorm can work together for advanced features like parallelism, or flow control like pausing a workflow, or [asking for more information to continue](https://docs.stackstorm.com/inquiries.html).
 
-You can see that each action is located within a "pack", which we explained in the last lab. For instance, the "core" pack comes pre-installed with StackStorm,
-and contains many common actions for doing simple things like running bash commands, calling a REST API, and more.
+Regardless of the workflow mechanism you choose, Workflows allow us to create a logical decision path where we chain actions together to accomplish a broader objective, rather than simply "running a command" or "executing a script". We can use Workflows to commit our tribal knowledge about how we go about solving problems into an executable format that everyone can use.
 
+The `examples` pack, which is one of the few built-in StackStorm packs, is preloaded in our environment, and is a really good place to start for working examples of workflows, for all types. For each of these three Workflow options, we'll begin by showing a few examples in the `examples` pack, and then move into some more relevant examples for network automation.
 
-#### Hello World!
+#### Example 1 - ActionChain
 
-The `local` action in the `core` pack is referred to by it's "full name" as `core.local`. We can pass this to `st2 run` to execute this action:
+[ActionChains](https://docs.stackstorm.com/actionchain.html) are the simplest (but also the least robust) workflow option in StackStorm. If you want to run a sequence of actions, with some minimal error-handling, ActionChains are probably sufficient for your purposes. They're the "bare minimum" workflows option in StackStorm.
+
+The "hello world" example for ActionChains has to be the "echochain" - in particular, `examples.echochain_param`. This is a simple chain that takes a few parameters, and uses them as variables, inserted into a set of "echo" commands, resulting in some text in stdout:
 
 ```
-st2 run core.local "echo Hello World!"
+cat /opt/stackstorm/packs/examples/actions/chains/echochain_param.yaml
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
-Not every action is created equal - like any program or script, each action comes with different parameters - some optional, some required - that are necessary for it
-to get its job done. Fortunately, we can use the handy `-h` flag to gain insight right at the command line into what parameters any action supports:
+Like many things in StackStorm, ActionChain workflows are defined in YAML, and contain two high-level keys:
+
+- `chain` - A list of tasks to perform in this workflow. Each task specifies a `ref`, which refers to the Action that should be run in this step, as well as the `parameters` to pass to that Action, as well as which task to go to next based on success or failure.
+- `default` - this specifies the first task in the workflow. In this case, `c1`.
+
+> You may also notice that some parts of the workflow (`{{input1}}`, `{{c1.stdout}}`) look very similar to the variable substitution we saw in the previous lesson on Jinja templates. This is no accident - these are actually small Jinja templates, and StackStorm supports their use here, and in many other resources you may run into. You'll see this used throughout the rest of this lesson in order to make our Workflows, Rules, and Actions more dynamic. See the [docs](https://docs.stackstorm.com/reference/jinja.html) for more information on where Jinja is used in StackStorm.
+
+Just like we previously saw with Actions, we can see which parameters are required by this workflow by using `st2 run` with the `-h` flag:
 
 ```
-st2 run core.local -h
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
-
-You can see that the `cmd` parameter is required, and is what we supplied in double quotes - the command to run on the bash shell.
-
-The `echo` command usually takes a split second to execute. However, some actions can take much longer: minutes, hours, even more.
-While it's usually the case that these Actions are executed via Triggers (which we'll get to in a later lab), it may be necessary to
-start, or re-run them on the command-line as well. The `-a` flag allows us to execute an action in the same way, but we won't have to
-wait for the Action to complete in order to get our terminal back - the `st2` command will return an execution ID for us right away:
-
-```
-st2 run -a core.local "sleep 300"
+st2 run examples.echochain-param -h
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
-You may notice that the output contains a reference to another StackStorm command we haven't seen yet:
+Again, just like any other Action, we can execute this workflow by passing in the necessary parameters.
 
 ```
-st2 execution get < EXECUTION ID >
-```
-
-In StackStorm, the term "execution" is used to describe an instance of a running action. Each time you run an action, it's given an execution ID, which is a unique identifier of that exact instance where that action was run. Since we told `st2` to run this Action asynchronously, it make sure the Action execution was scheduled, retrieved its ID, and returned it to us immediately, so we can use `st2 execution get` to retrieve status at any time, rather than waiting for it to finish.
-
-This is also useful because, as we'll see in the next few labs, we don't always run actions on the command-line directly like this. Sometimes it's done for us by a rule, or a workflow. In those cases, retrieving execution details using `st2 execution get` is often the only way to know how an action performed. We can see a list of recent executions as well:
-
-```
-st2 execution list
+st2 run examples.echochain-param input1="Hello, NRE Labs"
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
-Now, this is a simple example, and there's way more to get into in the `core` pack, such as executing remote commands or scripts, calling REST APIs, and more. However,
-this is a network automation lesson, and there's way too much value in using a tool like StackStorm for event-driven network automation, so let's get
-into some more relevant examples.
+This output should look mostly familiar, with one big exception; the normal stuff like the execution id, input parameters,
+timestamps, and result values are all there, but there's also a table shown underneath that gives us the ID, status, and
+Action ref of each of the tasks in the workflow. We can use the `st2 execution get <execution ID>` command to retrieve this
+status, but also the status of any of these subexecutions - go ahead try it now!
 
-#### Running NAPALM Actions against network devices
+This is one of the benefits of using one of the built-in Workflow options in Stackstorm, as we not only get the advanced functionality of Workflows - allowing
+us to do more than just running Actions in isolation - but also we get detailed information inside the workflow execution itself, and it's children tasks.
 
-You may have seen [in another lesson](https://labs.networkreliability.engineering/labs/?lessonId=13&lessonStage=1) that
-[NAPALM](https://github.com/napalm-automation/napalm) is an extremely useful tool in network automation. It's a Python library that sits on top of many vendor-specific
-APIs like Juniper's NETCONF, Arista's eAPI, and Cisco's NX-API and exposes common functions so you don't have to worry about these vendor's APIs. You just interact
-with NAPALM in your Python scripts, and NAPALM takes care of communicating with the upstream device(s).
+That's a very light introduction to ActionChains. Check out the [docs](https://docs.stackstorm.com/actionchain.html) or
+the [examples pack](https://github.com/StackStorm/st2/tree/master/contrib/examples/actions/chains) for more information and working examples.
 
-StackStorm's exchange includes a pack for exposing NAPALM's functionality. This means, among other things, we can use NAPALM functions as StackStorm actions.
-You might have noticed earlier that this pack is already installed, and the actions in the pack are available to us:
+#### Example 2 - Mistral
 
-```
-st2 action list --pack=napalm
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
+[Mistral](https://docs.stackstorm.com/mistral.html), by contrast, is much more powerful than ActionChains. While ActionChains excel
+in simplicity, it's this simplicity that can, at times, prove inadequate for some of the decision-making power or execution style we need
+in our Workflows from time to time. In these cases, some of the [advanced features](https://docs.openstack.org/mistral/latest/main_features.html)
+that Mistral brings to the table may prove useful.
 
-
-The `get_facts` action in this pack is a great place to get started. Like we saw in the NAPALM lesson, this action gathers some basic information about a network device, like the serial number and hostname:
-
-```
-st2 run napalm.get_facts hostname=vqfx1
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
-
-At this point, you might be asking "Where did we pass in the credentials for vqfx1"? Like many packs, these details are captured in the pack configuration:
+However, unlike ActionChains, Mistral is an [OpenStack project](https://docs.openstack.org/mistral/latest/), and not part of the StackStorm codebase. Instead,
+StackStorm maintains [close integrations with Mistral](https://github.com/StackStorm/st2mistral) so that Mistral can run as a separate entity,
+and ensure StackStorm and Mistral remain in sync with each other regarding workflow and action executions.
 
 ```
-cat /opt/stackstorm/configs/napalm.yaml
+cat /opt/stackstorm/packs/examples/actions/workflows/mistral-jinja-branching.yaml
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
-This configuration is specific to the `napalm` pack, and consists of two main parts. A list of devices, which we referred to by name with the `hostname` parameter, and a list
-of credentials, which each device entry references in order to specify which credential set to use.
+Like ActionChains, Mistral workflows are written in YAML, and they also contain a set of tasks (defined as a YAML dictionary this time) under the `tasks` key.
+Each task refers to an `action`, which in the case of a Mistral+Stackstorm deployment like we have here, refers to a StackStorm action.
 
-Getting facts is kind of cool - but what about something a little more specific? How about the current BGP peers?
+The `publish` keyword allows us to create new variables to use later in the workflow. In this case, the variable `path` is being created, and the Jinja template we see being assigned to it: `"{{ task('t1').result.stdout }}"` captures the resulting text printed to stdout by the command run by `t1`. We can see that this command is `"echo {{ _.which }}"`, which itself has a Jinja template that passes in the `which` parameter, which we can see is a parameter required by the workflow as a whole.
+
+Let's give this a try:
 
 ```
-st2 run napalm.get_bgp_neighbors hostname=vqfx1
+st2 run examples.mistral-jinja-branching which=a
+..
+id: 5c490330e47a91335192263a
+action.ref: examples.mistral-jinja-branching
+parameters:
+  which: a
+status: succeeded
+result_task: a
+result:
+  failed: false
+  return_code: 0
+  stderr: ''
+  stdout: Took path A.
+  succeeded: true
+start_timestamp: Thu, 24 Jan 2019 00:13:36 UTC
+end_timestamp: Thu, 24 Jan 2019 00:13:40 UTC
++--------------------------+------------------------+------+------------+-------------------------------+
+| id                       | status                 | task | action     | start_timestamp               |
++--------------------------+------------------------+------+------------+-------------------------------+
+| 5c490331e47a91335192263d | succeeded (1s elapsed) | t1   | core.local | Thu, 24 Jan 2019 00:13:37 UTC |
+| 5c490332e47a91335192263f | succeeded (1s elapsed) | a    | core.local | Thu, 24 Jan 2019 00:13:38 UTC |
++--------------------------+------------------------+------+------------+-------------------------------+
+```
+
+(Mistral isn't installed in this version of the StackStorm lesson. We are planning to expand this lesson in the near future, diving deeper into these workflow options.)
+
+The output is similar to what we saw with ActionChains - because Mistral is also a Workflow option in StackStorm, we see a table of all our subexecutions. However, we
+only see two subexecutions, while we saw four tasks in the Mistral workflow: `t1`, `a`, `b`, and `c`.
+
+Like ActionChains, Mistral allows us to specify which task to run based on success or failure. However, as we can see, if `t1` succeeds, the workflow
+points to not one, but all three other tasks (`a`, `b`, and `c`). In addition, each reference contains a Jinja template that performs a conditional check.
+The way this works is that Mistral will evaluate these conditionals, and the ones that result in a boolean True will cause the workflow to execute the referenced task next.
+
+In the workflow we executed, we provided `a` as input to the `which` parameter, and based on this workflow logic, the `a` task was executed next.
+
+You can use this to make some pretty advanced decisions in your own workflows: executing actions only when the input to the workflow,
+or perhaps the output of one or more of that workflow's tasks, shows a certain value.
+
+#### Example 3 - Orquesta
+
+[Orquesta](https://docs.stackstorm.com/orquesta.html) is the new kid on the block - released recently, and currently a "beta" workflow
+option in StackStorm, it combines the advantage of ActionChain's "built-in" nature with the robustness and flexibility of Mistral.
+
+As a result, Orquesta workflows are very similar in syntax to Mistral workflows, so for the purposes of this lesson, there's not a lot more to cover on this front. We can see the contents of an example Orquesta workflow look quite familiar:
+
+```
+cat /opt/stackstorm/packs/examples/actions/workflows/orquesta-basic.yaml
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
-Finally, it would be really great if we could actually push a config change with StackStorm.  If you pay attention to the output retrieved in the previous command, you may have noticed that one of our configured BGP peers is inactive. Upon further inspection, we see that the BGP configuration on vqfx1 is using the wrong `peer-as` attribute.
-
-As part of this lesson, we've included a configuration snippet that will replace only the relevant configuration with the corrected `peer-as` attribute:
-
-```
-cat /antidote/stage2/vqfx1-config-patch.txt
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
-
-The `loadconfig` action can accept this path as a parameter, and will perform a merge between this configuration, and the existing configuration:
-
-```
-st2 run napalm.loadconfig hostname=vqfx1 config_file="/antidote/stage2/vqfx1-config-patch.txt"
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
-
-If we go to vqfx1 now, we'll see that both BGP peers are active:
-
-```
-cli
-show bgp summary
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', this)">Run this snippet</button>
-
-This was a brief look at StackStorm actions, using the `napalm` pack as an example, since it's extremely useful for our purposes here, learning event-driven network automation. However, there are **many** more actions inside many more packs available on the [StackStorm Exchange](https://exchange.stackstorm.org/), and you should definitely check those out as well.
-
-In the next lab, we'll learn how to link actions together in a workflow, using the data we've retrieved in some of these actions to drive more complex decision-making.
-
+See the [Orquesta](https://docs.stackstorm.com/orquesta.html) for more details on how to write these types of Workflows.

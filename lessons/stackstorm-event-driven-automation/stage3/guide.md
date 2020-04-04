@@ -2,141 +2,108 @@
 
 ---
 
-### Part 3 - Workflows
+### Part 4 - Sensors and Triggers
 
-Just like real "tasks" performed manually, or via another tool, StackStorm Actions almost never run in isolation. They're usually run in parallel with each other, or in sequence. They're usually run based off a decision that was made from information made available by an event, or another action's output.
+So far, we've seen a few options for "doing work" in StackStorm. That is, `Actions` give us a way of performing a simple, singular task, supporting both input parameters as well as output variables. We saw the myriad of `Workflow` options that allow us to create complex logical flows between multiple actions, to make more advanced decisions aimed at accomplishing a greater goal.
 
-In StackStorm, we call these complex logical structures ["Workflows"](https://docs.stackstorm.com/workflows.html).
+However, this lesson uses the term "Event-Driven Automation", and it's important that we learn how to take these concepts - many of which we know from other tools - 
+and begin to combine them with the event-driven primitives in StackStorm to allow us to perform this automation in an **autonomous** way. In other words, we don't
+want to just define **what** to do, we also want to define **when** to do it, so we aren't on the hook for executing scripts and workflows ourselves. We can describe the scenarios in which we would want these workflows to be executed, and StackStorm will take care of executing them on our behalf when those events take place.
 
-<div style="text-align:center;"><img src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-15/workflows.png"></div>
+#### Sensors
 
-There are a few options for accomplishing this in StackStorm:
+In order for StackStorm to know when a certain "event" has taken place, it needs to have some kind of process for gathering data about other systems or processes. It needs a mechanism for gathering "raw" data, so that it can make a decision about when that data represents something meaningful - an "event".
 
-- [ActionChain](https://docs.stackstorm.com/actionchain.html)
-- [Mistral](https://docs.stackstorm.com/mistral.html)
-- [Orquesta](https://docs.stackstorm.com/orquesta.html)
+StackStorm uses something called `sensors` to do this. These are little bits of Python code that run as separate processes within StackStorm.
 
-There are, of course, other tools like Ansible that accomplish similar purposes. Especially if you have existing Ansible playbooks, you can certainly [execute those playbooks from StackStorm](https://github.com/StackStorm-Exchange/stackstorm-ansible). The benefit of using the options listed above is that they're more tightly integrated with StackStorm, meaning the workflow and StackStorm can work together for advanced features like parallelism, or flow control like pausing a workflow, or [asking for more information to continue](https://docs.stackstorm.com/inquiries.html).
+<div style="text-align:center;"><img src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-15/sensors.png"></div>
 
-Regardless of the workflow mechanism you choose, Workflows allow us to create a logical decision path where we chain actions together to accomplish a broader objective, rather than simply "running a command" or "executing a script". We can use Workflows to commit our tribal knowledge about how we go about solving problems into an executable format that everyone can use.
-
-The `examples` pack, which is one of the few built-in StackStorm packs, is preloaded in our environment, and is a really good place to start for working examples of workflows, for all types. For each of these three Workflow options, we'll begin by showing a few examples in the `examples` pack, and then move into some more relevant examples for network automation.
-
-#### Example 1 - ActionChain
-
-[ActionChains](https://docs.stackstorm.com/actionchain.html) are the simplest (but also the least robust) workflow option in StackStorm. If you want to run a sequence of actions, with some minimal error-handling, ActionChains are probably sufficient for your purposes. They're the "bare minimum" workflows option in StackStorm.
-
-The "hello world" example for ActionChains has to be the "echochain" - in particular, `examples.echochain_param`. This is a simple chain that takes a few parameters, and uses them as variables, inserted into a set of "echo" commands, resulting in some text in stdout:
+As with everything else, Sensors are distributed within Packs. We can run the following command to see the list of sensors in the `napalm` pack:
 
 ```
-cat /opt/stackstorm/packs/examples/actions/chains/echochain_param.yaml
+st2 sensor list --pack=napalm
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
-Like many things in StackStorm, ActionChain workflows are defined in YAML, and contain two high-level keys:
+Of particular interest for this lab is the `napalm.InterfaceSensor`, which as described, is a sensor that polls network devices for interface up/down events. This sounds awesome, but how is it actually *done*?
 
-- `chain` - A list of tasks to perform in this workflow. Each task specifies a `ref`, which refers to the Action that should be run in this step, as well as the `parameters` to pass to that Action, as well as which task to go to next based on success or failure.
-- `default` - this specifies the first task in the workflow. In this case, `c1`.
-
-> You may also notice that some parts of the workflow (`{{input1}}`, `{{c1.stdout}}`) look very similar to the variable substitution we saw in the previous lesson on Jinja templates. This is no accident - these are actually small Jinja templates, and StackStorm supports their use here, and in many other resources you may run into. You'll see this used throughout the rest of this lesson in order to make our Workflows, Rules, and Actions more dynamic. See the [docs](https://docs.stackstorm.com/reference/jinja.html) for more information on where Jinja is used in StackStorm.
-
-Just like we previously saw with Actions, we can see which parameters are required by this workflow by using `st2 run` with the `-h` flag:
+The following `get` command gives us a clue:
 
 ```
-st2 run examples.echochain-param -h
+st2 sensor get napalm.InterfaceSensor
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
-Again, just like any other Action, we can execute this workflow by passing in the necessary parameters.
+Here, we see a lot more detail about this sensor, including the field `artifact_uri`, which is an absolute path to the actual Python code running this sensor. The contents of this Sensor is a bit beyond the scope of this lesson, but if you're curious, [the documentation](https://docs.stackstorm.com/sensors.html#creating-a-sensor) on creating a Sensor is really good, and it's a really good idea to have that up in another tab while perusing the contents of the Sensor code provided in the command below:
 
 ```
-st2 run examples.echochain-param input1="Hello, NRE Labs"
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
-
-This output should look mostly familiar, with one big exception; the normal stuff like the execution id, input parameters,
-timestamps, and result values are all there, but there's also a table shown underneath that gives us the ID, status, and
-Action ref of each of the tasks in the workflow. We can use the `st2 execution get <execution ID>` command to retrieve this
-status, but also the status of any of these subexecutions - go ahead try it now!
-
-This is one of the benefits of using one of the built-in Workflow options in Stackstorm, as we not only get the advanced functionality of Workflows - allowing
-us to do more than just running Actions in isolation - but also we get detailed information inside the workflow execution itself, and it's children tasks.
-
-That's a very light introduction to ActionChains. Check out the [docs](https://docs.stackstorm.com/actionchain.html) or
-the [examples pack](https://github.com/StackStorm/st2/tree/master/contrib/examples/actions/chains) for more information and working examples.
-
-#### Example 2 - Mistral
-
-[Mistral](https://docs.stackstorm.com/mistral.html), by contrast, is much more powerful than ActionChains. While ActionChains excel
-in simplicity, it's this simplicity that can, at times, prove inadequate for some of the decision-making power or execution style we need
-in our Workflows from time to time. In these cases, some of the [advanced features](https://docs.openstack.org/mistral/latest/main_features.html)
-that Mistral brings to the table may prove useful.
-
-However, unlike ActionChains, Mistral is an [OpenStack project](https://docs.openstack.org/mistral/latest/), and not part of the StackStorm codebase. Instead,
-StackStorm maintains [close integrations with Mistral](https://github.com/StackStorm/st2mistral) so that Mistral can run as a separate entity,
-and ensure StackStorm and Mistral remain in sync with each other regarding workflow and action executions.
-
-```
-cat /opt/stackstorm/packs/examples/actions/workflows/mistral-jinja-branching.yaml
+cat /opt/stackstorm/packs/napalm/sensors/interface_sensor.py
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
-Like ActionChains, Mistral workflows are written in YAML, and they also contain a set of tasks (defined as a YAML dictionary this time) under the `tasks` key.
-Each task refers to an `action`, which in the case of a Mistral+Stackstorm deployment like we have here, refers to a StackStorm action.
-
-The `publish` keyword allows us to create new variables to use later in the workflow. In this case, the variable `path` is being created, and the Jinja template we see being assigned to it: `"{{ task('t1').result.stdout }}"` captures the resulting text printed to stdout by the command run by `t1`. We can see that this command is `"echo {{ _.which }}"`, which itself has a Jinja template that passes in the `which` parameter, which we can see is a parameter required by the workflow as a whole.
-
-Let's give this a try:
+How did StackStorm know about this Python code? Every Sensor, like many things in StackStorm, is comprised of two components. A script file - which is what was referenced in the output above - and a metadata YAML file, which describes things like where to find the script file, and other useful metadata:
 
 ```
-st2 run examples.mistral-jinja-branching which=a
-..
-id: 5c490330e47a91335192263a
-action.ref: examples.mistral-jinja-branching
-parameters:
-  which: a
-status: succeeded
-result_task: a
-result:
-  failed: false
-  return_code: 0
-  stderr: ''
-  stdout: Took path A.
-  succeeded: true
-start_timestamp: Thu, 24 Jan 2019 00:13:36 UTC
-end_timestamp: Thu, 24 Jan 2019 00:13:40 UTC
-+--------------------------+------------------------+------+------------+-------------------------------+
-| id                       | status                 | task | action     | start_timestamp               |
-+--------------------------+------------------------+------+------------+-------------------------------+
-| 5c490331e47a91335192263d | succeeded (1s elapsed) | t1   | core.local | Thu, 24 Jan 2019 00:13:37 UTC |
-| 5c490332e47a91335192263f | succeeded (1s elapsed) | a    | core.local | Thu, 24 Jan 2019 00:13:38 UTC |
-+--------------------------+------------------------+------+------------+-------------------------------+
-```
-
-(Mistral isn't installed in this version of the StackStorm lesson. We are planning to expand this lesson in the near future, diving deeper into these workflow options.)
-
-The output is similar to what we saw with ActionChains - because Mistral is also a Workflow option in StackStorm, we see a table of all our subexecutions. However, we
-only see two subexecutions, while we saw four tasks in the Mistral workflow: `t1`, `a`, `b`, and `c`.
-
-Like ActionChains, Mistral allows us to specify which task to run based on success or failure. However, as we can see, if `t1` succeeds, the workflow
-points to not one, but all three other tasks (`a`, `b`, and `c`). In addition, each reference contains a Jinja template that performs a conditional check.
-The way this works is that Mistral will evaluate these conditionals, and the ones that result in a boolean True will cause the workflow to execute the referenced task next.
-
-In the workflow we executed, we provided `a` as input to the `which` parameter, and based on this workflow logic, the `a` task was executed next.
-
-You can use this to make some pretty advanced decisions in your own workflows: executing actions only when the input to the workflow,
-or perhaps the output of one or more of that workflow's tasks, shows a certain value.
-
-#### Example 3 - Orquesta
-
-[Orquesta](https://docs.stackstorm.com/orquesta.html) is the new kid on the block - released recently, and currently a "beta" workflow
-option in StackStorm, it combines the advantage of ActionChain's "built-in" nature with the robustness and flexibility of Mistral.
-
-As a result, Orquesta workflows are very similar in syntax to Mistral workflows, so for the purposes of this lesson, there's not a lot more to cover on this front. We can see the contents of an example Orquesta workflow look quite familiar:
-
-```
-cat /opt/stackstorm/packs/examples/actions/workflows/orquesta-basic.yaml
+cat /opt/stackstorm/packs/napalm/sensors/interface_sensor.yaml
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
-See the [Orquesta](https://docs.stackstorm.com/orquesta.html) for more details on how to write these types of Workflows.
+#### Triggers
+
+It's impossible to talk about Sensors in StackStorm without talking about Triggers. In fact, Sensors would have no point in existing if it wasn't for Triggers. You can think of Sensors as a bit of fairly self-contained code for constantly bringing in information about some external entity or system.
+
+It is up to the Sensor to determine if the information being brought in is *actionable*. For instance, our `napalm.InterfaceSensor` periodically polls our network devices for interface information. If nothing changes with respect to our network device's interfaces, no meaningful event has taken place. However, if we disabled an interface, the next time our Sensor polled that device, it would notice a change, and it's time to notify StackStorm that this meaningful event has taken place. This notification is called a *Trigger*.
+
+Each Sensor is responsible not only for deciding when to fire a Trigger, but also to register all possible triggers by declaring them in the Sensor's metadata file (you may have noticed this in the previous output).
+
+Similar to what we did with Sensors, we can list all registered Triggers in the NAPALM pack like so:
+
+```
+st2 trigger list --pack=napalm
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
+
+In this output, we see that there are two triggers related to interfaces, `napalm.InterfaceDown` and `napalm.InterfaceUp`. Drilling into the `InterfaceDown` trigger specifically:
+
+```
+st2 trigger get napalm.InterfaceDown
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
+
+We can see that triggers have properties. This one has two string properties, `device` and `interface`. We'll see those in action shortly, and especially in the next lab.
+
+This is all great, but how do we know when an event has actually taken place - that is, when a trigger has been fired? For this, we use a slightly different term, the `trigger-instance`. This is a special resource type within StackStorm that represents a discrete instance of a trigger being fired by a Sensor. Each time a Trigger is fired by a Sensor, a new `trigger-instance` is created for that point in time. This is very similar to the relationship between Actions and Executions. An Action is a type of task that can be performed in StackStorm - an Execution is an instance of that Action actually taking place at a point in time.
+
+We can see the list of `trigger-instances` using the command you have probably already anticipated by now (the st2 CLI is comfortably predictable), but let's add a special flag to limit the scope to the trigger we want:
+
+```
+st2 trigger-instance list --trigger=napalm.InterfaceDown
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
+
+Huh - an empty list? Well, this makes sense, doesn't it? Our Sensor has been busy collecting data, but that data hasn't shown any changes, and no meaningful event has taken place, deserving of a Trigger. Let's cause one. :)
+
+```
+configure
+set interfaces em4 disable
+commit
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', this)">Run this snippet</button>
+
+Let's see if we've been able to get a Trigger to fire. Note that this interface data is obtained by polling periodically,
+so you may have to run the following command a few times before it shows up:
+
+```
+st2 trigger-instance list --trigger=napalm.InterfaceDown
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
+
+Once we see a trigger-instance show up in the list, we can use the command `st2 trigger-instance get <trigger-instance-id>` (similar to what we did in a previous lesson with execution IDs) to view details about this trigger instance.
+Or if you're feeling lucky, you could use the below command with some bash-fu to get it for you :)
+
+```
+st2 trigger-instance get $(st2 trigger-instance list --trigger=napalm.InterfaceDown | grep napalm | tail -1 | awk '{ print $2}')
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
+
+Remember those fields from earlier - `device` and `interface`? Those are filled out now, with the device and interface that we changed to create the event. These fields can now be passed on to other entities in StackStorm, like Rules, to drive very powerful, autonomous decision-making. Check out the next lab in this lesson for more on that!
