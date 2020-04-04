@@ -1,0 +1,10 @@
+slug: st2
+description: st2
+privileged: false
+sshUser: antidote
+sshPassword: antidotepassword
+configUser: antidote
+configPassword: antidotepassword
+networkInterfaces:
+  - 'eth0'
+
