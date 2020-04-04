@@ -2,7 +2,7 @@
 name: Automated STIG Compliance Validation
 slug: stig-automated-compliance
 category: workflows
-diagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/stig-automated-compliance/lessondiagram.png
+diagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-32/lessondiagram.png
 tier: prod
 prereqs:
   - napalm-multi-vendor-network-automation
