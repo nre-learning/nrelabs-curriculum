@@ -2,12 +2,22 @@
 - HOSTNAME: ex4300-3
   MGMT_IP: 10.20.1.3/24  
   DEFAULT_GW: 10.20.1.1
+  UPLINKS: 
+    distro1: 
+      INTERFACE: xe-0/2/0
+      DESCRIPTION: "UPLINK to DISTRO-1"
+    distro2: 
+      INTERFACE: xe-0/2/1
+      DESCRIPTION: "UPLINK to DISTRO-2"
 
 - HOSTNAME: ex4300-4
   MGMT_IP: 10.20.1.4/24
   DEFAULT_GW: 10.20.1.1
-
-- HOSTNAME: ex4300-5
-  MGMT_IP: 10.20.1.5/24
-  DEFAULT_GW: 10.20.1.1
+  UPLINKS: 
+    distro1: 
+      INTERFACE: ge-0/2/0
+      DESCRIPTION: "UPLINK to DISTRO-1"
+    distro2: 
+      INTERFACE: ge-0/2/1
+      DESCRIPTION: "UPLINK to DISTRO-2"
 

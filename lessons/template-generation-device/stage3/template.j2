@@ -1,32 +1,7 @@
-system {
-    host-name {{ HOSTNAME }};
-}
-interfaces {
-    {%- for item in UPLINKS %}
-    {{ UPLINKS[item]['INTERFACE'] }} {
-        description "{{ UPLINKS[item]['DESCRIPTION'] }}";
-        unit 0 {
-            family ethernet-switching {
-                interface-mode trunk;
-                vlan {
-                    members all;
-                }
-                storm-control default;
-            }
-        }
+vlans {
+   {%- for vlan in VLANS %}
+    v{{ vlan['VLAN_ID'] }}.{{ vlan['VLAN_NAME'] }} {
+        vlan-id {{ vlan['VLAN_ID'] }};
     }
-{%- endfor %}
-    me0 {
-        unit 0 {
-            family inet {
-                address {{ MGMT_IP }};
-            }
-        }
-    }
-   
+   {%- endfor %}
 }
-routing-options {
-    static {
-        route 0.0.0.0/0 next-hop {{ DEFAULT_GW }};
-    }                                   
-}                                       

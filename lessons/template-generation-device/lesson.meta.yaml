@@ -1,13 +1,13 @@
 ---
-lessonName: Device Specific Template Generation
-lessonId: 35
-lessonDiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-35/lessondiagram.png
+name: Device Specific Template Generation
+slug: template-generation-device
+diagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-35/lessondiagram.png
 category: workflows
 tier: prod
 prereqs:
-  - 23  # Linux
-  - 14  # Yaml
-  - 16  # Jinja2
+  - linux-basics
+  - yaml-introduction
+  - jinja-configuration-templates
 description: Having the ability to generate device specific configurations from an approved device template can be beneficial especially for new deployments. 
 shortDescription: Template Generation
 tags:
@@ -18,15 +18,15 @@ tags:
 endpoints:
 
 - name: linux
-  image: antidotelabs/utility
+  image: utility
   presentations:
   - name: cli
     port: 22
     type: ssh
 
 - name: vqfx1
-  image: antidotelabs/vqfx-snap1
-  configurationType: napalm-junos
+  image: vqfx-snap1
+  configurationType: napalm
   presentations:
   - name: cli
     port: 22
@@ -34,8 +34,8 @@ endpoints:
   additionalPorts: [830]
 
 - name: vqfx2
-  image: antidotelabs/vqfx-snap2
-  configurationType: napalm-junos
+  image: vqfx-snap2
+  configurationType: napalm
   presentations:
   - name: cli
     port: 22
@@ -43,11 +43,11 @@ endpoints:
   additionalPorts: [830]
 
 stages:
-  - id: 1
-    description: Skills Review
-  - id: 2
-    description: Multiple Devices
-  - id: 3
-    description: Multiple Devices w/ Uplinks
-  - id: 4
-    description: Push Generated Configs
+  - description: Skills Review
+    guideType: markdown
+  - description: Multiple Devices
+    guideType: markdown
+  - description: Multiple Devices w/ Uplinks
+    guideType: markdown
+  - description: Push Generated Configs
+    guideType: markdown

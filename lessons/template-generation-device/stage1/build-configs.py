@@ -11,6 +11,10 @@ template_file = open('template.j2')
 template_data = template_file.read()
 template = Template(template_data)
 
-print(template.render(my_vars))
+for device in my_vars:
+	print "Creating config for " + device["HOSTNAME"]
+	outfile = open(device["HOSTNAME"] + ".conf", "w")
+	outfile.write(template.render(device))
+	outfile.close()
 
 ## End of script ##
