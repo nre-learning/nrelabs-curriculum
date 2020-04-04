@@ -4,48 +4,55 @@
 
 ---
 
-## Part 1 - Salt Master and Minion
+## Part 2 - Junos Proxy Minions
 
-[Salt](https://saltstack.com/) is a powerful, scalable, and flexible platform that allows you to automate key operational and configuration tasks in your
-infrastructure, including networks. Salt is open source and it comes packaged with modules supporting Junos OS right out of the box.
+To manage a Junos device, we do not run an on box Salt Minion. Instead we make use of a [Proxy Minion](https://docs.saltstack.com/en/latest/topics/proxyminion/index.html). A Proxy minion can be run on the Salt Master or the Salt Minion.
 
-Salt has a server-agent architecture where the Salt Master is the server and the agent is installed in the Salt Minions. The role of the Salt Master is to manage the state of the infrastructure.
-
-The Salt Master and the Salt Minion can run on seprate machines or can run on the same machine itself. In our case, the Salt Master and Minion are running on the same machine. We'll begin by making sure the `salt-minion` and `salt-master` services are started:
-
+Now let's configure the Proxy Minions. To do this, we must define the IP address, username, password and the proxy type which in our case is `junos`. All of these details are part of the vqfx1.sls. An SLS file is a Salt State file which can be in various formats. The simplest case is YAML, or it can be YAML+Jinja in case we require a templating language.
 ```
-service salt-master restart
-service salt-minion restart
+cat /srv/pillar/vqfx1.sls
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('salt1', this)">Verify Output (Optional)</button>
+
+
+At this point we have to write the top.sls file which maps the Proxy Minion to the [pillar](https://docs.saltstack.com/en/latest/topics/pillar/) file that contains its corresponding details (`vqfx1.sls`)
+```
+cat /srv/pillar/top.sls
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('salt1', this)">Verify Output (Optional)</button>
+
+
+We also have to configure the /etc/salt/proxy file to point to the Salt Master
+```
+cat /etc/salt/proxy
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('salt1', this)">Verify Output (Optional)</button>
+
+The Proxy Minion is now configured and is ready to start.
+```
+salt-proxy --proxyid=vqfx1 -d
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('salt1', this)">Run this snippet</button>
 
-Once the Salt minion is running, it will send its public key to the Salt Master. We can view the key's status by executing "salt-key -L".
-
-( Note: it might take sometime for the key to be populated. Keep executing the below command every few seconds, until you see the "minion" key listed. )
+( Note: it might take sometime for the key to be populated. Keep executing the below command every few seconds, until you see the "vqfx1" key listed. )
 ```
 salt-key -L
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('salt1', this)">Run this snippet</button>
 
-Let's accept the Salt Minion's public key using the command
-
+Let's accept the Salt Proxy Minion's public key using the command
 ```
-salt-key --accept="minion" -y
+salt-key --accept="vqfx1" -y
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('salt1', this)">Run this snippet</button>
 
-Once this is done, the Salt Master will be able to communicate with the Salt Minion and issue remote commands.
+Once this is done, the Salt Master will be able to communicate with the Salt Proxy Minion
 
-Next, we will run the test.ping command to ensure that the Salt Minion is connected and is responding to the Salt Master by using the
+Next, let's retrieve the device facts using the junos.facts execution module to verify that the device is connected to the Salt Master.
 (Note: give a few seconds for the keys to sync, before trying this command)
 ```
-salt '*' test.ping
+salt 'vqfx1' junos.facts
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('salt1', this)">Run this snippet</button>
 
-We can use the cmd.run execution module to run a remote command on the Salt Minion. In this case, we're checking what version of python is running on the Salt Minion.
-
-```
-salt minion* cmd.run 'python -V'
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('salt1', this)">Run this snippet</button>
+Now that the Salt Environment is setup, let's dive deeper into the world of Salt!

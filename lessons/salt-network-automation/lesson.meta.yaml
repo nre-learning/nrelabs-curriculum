@@ -1,12 +1,12 @@
 ---
-lessonName: Network Automation with Salt
-lessonId: 30
+name: Network Automation with Salt
+slug: salt-network-automation
 category: tools
-lessondiagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-30/salt.png
+diagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-30/salt.png
 tier: prod
 prereqs:
-  # - 22  # Python
-  - 23  # Linux
+  # - python-introduction
+  - linux-basics
 description: Salt is a powerful automation platform, and is one of the most popular choices in the world of network automation. We'll cover the basics of Salt in this lesson, and explore how to interact with our network devices using this framework.
 shortDescription: Salt
 tags:
@@ -18,15 +18,15 @@ tags:
 endpoints:
 
 - name: salt1
-  image: antidotelabs/salt
+  image: salt
   presentations:
   - name: cli
     port: 22
     type: ssh
 
 - name: vqfx1
-  image: antidotelabs/vqfx-snap1
-  configurationType: napalm-junos
+  image: vqfx-snap1
+  configurationType: napalm
   presentations:
   - name: cli
     port: 22
@@ -38,14 +38,14 @@ connections:
   b: salt1
 
 stages:
-  - id: 1
-    description: Salt Master and Minion
+  - description: Salt Master and Minion
+    guideType: markdown
 
-  - id: 2
-    description: Junos Proxy Minions
+  - description: Junos Proxy Minions
+    guideType: markdown
 
-  - id: 3
-    description: Executing Junos commands in Salt
+  - description: Executing Junos commands in Salt
+    guideType: markdown
 
-  - id: 4
-    description: Junos Configuration Management with Salt
+  - description: Junos Configuration Management with Salt
+    guideType: markdown
