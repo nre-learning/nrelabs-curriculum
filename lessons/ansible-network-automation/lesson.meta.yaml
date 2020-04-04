@@ -6,7 +6,7 @@ diagram: "https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/mast
 tier: prod
 prereqs:
   # - python-intro  #not available yet
-  - linux-intro
+  - linux-basics
 description: In this lesson, we'll explore the use of Ansible for multi-vendor network automation
 shortDescription: Ansible
 tags:
