@@ -4,103 +4,106 @@
 
 ---
 
-### Part 3 - Parse Information
+### Part 4 - Configuration Management
 
-#### Display as XML string
+#### Get Junos configuration
 
-In previous section, we assigned `intf` variable with the returned object from `dev.rpc.get_interface_information()`.
-
-Let's quickly connect to Junos device again and re-assign this variable.
+Before starting this section, let's apply the boilerplate code to import PyEZ module and connect to vQFX.
 
 ```
 python
 from jnpr.junos import Device
-dev = Device('vqfx', user='antidote', password='antidotepassword', normalize=True)
+dev = Device('vqfx', user='antidote', password='antidotepassword')
 dev.open()
-intf = dev.rpc.get_interface_information()
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
-From the `type()` function output, we know the object type is `lxml.etree._Element`:
+We use the `get_config()` function to get Junos configuration. The optional `options` argument
+allows us to provide some additional detail for the kind of configuration we're requesting, such as candidate vs committed, default vs inherit, etc.
+By default, `get_config()` returns the non-inherit candidate configuration.
+
+Let's use the `get_config()` function below and provide options to get the inherited and committed configuration:
 
 ```
-type(intf)
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
-
-To display the `xml.etree` object as XML string, we have to import the `etree` module from the `lxml` library (a popular Python library for dealing with XML),
-and then use the `dump()` function to convert our XML etree object to an XML string.
-
-```
-from lxml import etree
-etree.dump(intf)
+config = dev.rpc.get_config(
+    options={'database':'committed', 'inherit':'inherit'})
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
-#### Extract data
-
-Now that we have the `intf` variable for storing the etree object of `show interfaces terse` output, we will use the `xpath()` function to extract data from it.
-
-XPath is a query language for allowing us to search for specific elements within an XML document. We can use the `xpath()` function attached
-to our `xml.etree` object stored in `intf` to search for physical interfaces within the returned XML data.
-
-To extract all `<physical-interface>` elements, use the `xpath()` function with argument `'physical-interface'`, and the
-result is a list contains all `<physical-interface>` element nodes.
+Now that the configuration is stored in the `config` variable, we can use the `findtext()` function to get our device's host name:
 
 ```
-intf.xpath('physical-interface')
+config.findtext('system/host-name')
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
----
+We can also provide another optional argument for `get_config()` called `filter_xml`. This is used to limit the returned configuration hierarchy. This parameter requires us to pass
+in an XML `etree` object, so to build this, we use the `lxml` package we used previously. This package's `E()` function can be supplied inline to get us an `etree` object to provide to `filter_xml`.
 
-We can use the Python `len()` function to count the number of elements in a list.
-
-To check how many physical interface is in the Junos device, query `len()` of the `xpath()` function result.
-
-```
-len(intf.xpath('physical-interface'))
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
-
-**Result:** 28 physical interfaces
-
----
-
-Using the `xpath()` condition feature, we can filter on only physical interfaces have have been configured with an MTU of 1514.
+For example, the below function call retrieves and displays the **committed** Junos config with only the `system` and `protocols bgp` hierarchy in the **set** format:
 
 ```
-len(intf.xpath('physical-interface[mtu="1514"]'))
+from lxml.builder import E
+config = dev.rpc.get_config(
+    options={'database':'committed', 'format': 'set'},
+    filter_xml=E.configuration(
+        E.system,
+        E.protocols(
+            E.bgp
+        )
+    )
+)
+print(config.text)
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
-**Result:** 15 physical interfaces
+The `filter_xml` argument is useful when the Junos device contains a huge config; the retrieval of a very large config can take a long time and is CPU intensive. With this filter, we can retrieve only what we need.
 
----
+#### Provision Junos configuration
 
-Out of 15 physical interfaces with an MTU of 1514, how many have been configured with at least one logical interface?
+To work with a Junos configuration, first import `Config` module from `jnpr.junos.utils.config`, and then use the `bind()` function to create association with existing Device.
 
 ```
-len(intf.xpath('physical-interface[mtu="1514"]/logical-interface'))
+from jnpr.junos.utils.config import Config
+dev.bind(cu=Config)
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
-**Result:** 5 logical interfaces
+After that, use the `load()` function to load target config; it supports both text and set format. In the below example, we're providing a config snippet to set Junos device's host name to 'vqfx_new':
 
----
-
-Now that we have a pretty good handle on the XPath query we want to use, we can use a `for` loop to iterate over the
-returned list, and then print the IFD name, IFL name and family of those 5 logical interfaces.
-
-<pre>
-for ifl in intf.xpath('physical-interface[mtu="1514"]/logical-interface'):
-    print('IFD: %s, IFL: %s, family: %s' % (
-        ifl.findtext('../name'),
-        ifl.findtext('name'),
-        ifl.findtext('address-family/address-family-name')
-    ))
-
-</pre>
+```
+config_text = '''
+system {
+  host-name vqfx_new;
+}'''
+dev.cu.load(config_text, format='text')
+```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
-Now that you've learned how to extract the desired information from RPC responses, in the next section we'll talk about configuration provisioning using PyEZ.
+In this example, we provided the configuration as a multi-line string literal, stored in `config_text`. You can (and should) use a templating language like Jinja to create configuration snippets from a template, and pass the result into `dev.cu.load`, but this is sufficient for a quick example.
+
+##### Commit Junos configuration
+
+After loading the config, you can see the current candidate changes (similar to how you would use `show | compare` on the command-line) by calling the `pdiff()` function.
+
+```
+dev.cu.pdiff()
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
+
+
+Loading the configuration is only part of the story. Just like on the CLI, when we make a change to the config, we have to commit it to make those changes take effect:
+
+```
+dev.cu.commit()
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
+
+Finally, we can go to our Junos CLI to verify the last configuration change:
+
+```
+show configuration | compare rollback 1
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
+
+By now, you should know all the common operations on Junos automation in PyEZ. In the next section, we'll look at one more tool in the PyEZ arsenal - Tables and Views.
