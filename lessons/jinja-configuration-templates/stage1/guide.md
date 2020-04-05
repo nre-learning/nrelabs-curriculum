@@ -1,11 +1,3 @@
-## Using Jinja for Configuration Templates
-
-**Contributed by: [@ShrutiVPawaskar](https://github.com/ShrutiVPawaskar) and [@shahbhoomi](https://github.com/shahbhoomi)**
-
----
-
-## Part 2 – For Loops
-
 Now that you know what is a template and how it works, let’s dive deep into using `for` loops for variable assignment.
 For loops are very useful if you have your data in the form of a list/dictionary or the combination of both. In this part we will take an example which has data stored as a list of dictionaries.
 

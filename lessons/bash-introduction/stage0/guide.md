@@ -1,6 +1,3 @@
-# Introduction to BASH
-## Part 1 - Introduction to Variables
-
 BASH is by far the most common UNIX shell in production systems.  In this series of lessons, you'll learn how to build simple but functional BASH scripts.  At the end, you'll have a repeatable way to customize your scripts with variables from both a configuration file and from the command-line.
 
 Let's get some preliminary stuff out of the way.  Specifically, we're going to start with an introduction to variables in BASH.

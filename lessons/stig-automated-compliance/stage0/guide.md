@@ -1,6 +1,3 @@
-# Automated STIG Compliance Validation
-## Part 1  - STIG Compliance Validation with NAPALM
-
 Anyone who's worked on United States military networks and systems has had to go through the experience of making sure that everything is compliant with the [Security Technical Implementation Guides](https://iase.disa.mil/stigs/Pages/index.aspx), or STIGs. These are a set of guidelines that serve as the minimum standard for locking down and reducing the attack surface for IT infrastructure within the US Department of Defense. Other countries have equivalent guides and standards as well.
 
 Whether deploying greenfield network infrastructure, or running ongoing operations, ensuring STIG compliance is extremely important, but also extremely tedious. At best, network engineers have written their own scripts for running through the compliance checks they care about, but a large number of engineers do this work by hand. It

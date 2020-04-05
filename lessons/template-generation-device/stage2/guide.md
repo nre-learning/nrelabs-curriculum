@@ -1,11 +1,3 @@
-## Device Specific Template Generation
-
-**Contributed by: [@jweidley](https://github.com/jweidley)**
-
----
-
-### Part 3  - Multiple Devices w/ Uplinks
-
 The examples in the previous lesson were a little more realistic and in this section we'll take it to the next level. 
 
 There are times that you need to be able to create multiples of the same configuration line using different data sets. We will continue with the sample project of deploying a number of access switches. To explain this concept we will use uplink ports on Access switches. Access switches usually have two connections, one to each upstream distribution switch. In most situations those uplink ports would be the same on every access switch, but not always. In this session we will show you how to add those uplinks in a quick and consistant way but still allowing flexibility to change them as necessary.

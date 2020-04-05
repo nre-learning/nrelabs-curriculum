@@ -1,6 +1,3 @@
-# Terraform & Junos
-## Part 1 - Declarative Resources for Networking
-
 In this lesson, we will introduce Terraform, what it is and show you how it works.
 
 Terraform enables you to easily and predictably plan, create, update and destroy infrastructure resources in a graph based and network CLI free way. The strange thing for Terraform is it's mostly thought as of an application or cloud provisioner and not really focussed on the networking space. You'll see that thought is just not true!

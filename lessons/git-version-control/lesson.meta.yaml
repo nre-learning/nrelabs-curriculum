@@ -14,6 +14,10 @@ tags:
 - versioning
 - git
 
+authors:
+- name: Matt Oswalt
+  link: https://oswalt.dev
+
 endpoints:
 - name: linux1
   image: utility

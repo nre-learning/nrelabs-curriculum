@@ -15,6 +15,12 @@ tags:
 - configuration templates
 - configuration
 
+authors:
+- name: Bhoomi Shah
+  link: https://github.com/shahbhoomi
+- name: Shruti Pawaskar
+  link: https://github.com/ShrutiVPawaskar
+
 endpoints:
 - name: linux1
   image: utility
@@ -24,7 +30,7 @@ endpoints:
     type: ssh
 
 stages:
-  - description: Introduction
+  - description: Introduction to Jinja
     guideType: markdown
   - description: For Loops
     guideType: markdown

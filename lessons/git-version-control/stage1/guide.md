@@ -1,6 +1,3 @@
-# Version Control with Git
-## Part 2 - Adding and Comitting Files
-
 A Git repository is nothing without some files to manage. We have a sample configuration for a Junos device's
 network interfaces, and we can copy this file into our new repository after entering into it:
 

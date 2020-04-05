@@ -15,6 +15,12 @@ tags:
 - salt
 - saltstack
 
+authors:
+- name: Sudhishna Sendhilvelan
+  link: https://github.com/Sudhishna
+- name: Vinayak Iyer
+  link: https://github.com/vinayak-skywalker
+
 endpoints:
 
 - name: salt1

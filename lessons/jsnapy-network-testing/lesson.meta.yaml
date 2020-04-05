@@ -16,6 +16,10 @@ tags:
 - testing
 collection: 1
 
+authors:
+- name: Matt Oswalt
+  link: https://oswalt.dev
+
 endpoints:
 - name: linux1
   image: utility
@@ -57,9 +61,9 @@ connections:
   b: vqfx1
 
 stages:
-  - description: No BGP config - tests fail
+  - description: No BGP config - Tests Fail
     guideType: markdown
 
-  - description: Correct BGP config - tests pass
+  - description: Correct BGP config - Tests Pass
     guideType: markdown
 

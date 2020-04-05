@@ -1,6 +1,3 @@
-# Unit Testing Networks with JSNAPy
-## Part 2 - BGP Configured Correctly - Tests Pass
-
 In Part 1, we noticed that the router configuration didn't quite match up with what our [JSNAPy](https://github.com/Juniper/jsnapy) tests were stating should be true.
 
 ```

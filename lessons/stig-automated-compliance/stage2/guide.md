@@ -1,6 +1,3 @@
-# Automated STIG Compliance Validation
-## Part 3  - STIG Compliance Validation with custom Python scripts
-
 In the previous labs, we used NAPALM and JSNAPy to check the [STIG for Juniper devices](https://stigviewer.com/stig/infrastructure_router__juniper/) were found to be in compliance for the V-3969 finding.  NAPALM and JSNAPy are great for many compliance checks like looking for the existence of a configuration setting, but they may fall short when the check requires more detailed analysis of the network devices configuration and operational state or we need some "glue" to bind mutiple compliance checks together or report back findings in a specific manner.  
 
 In this lab, we'll look at what it takes to automate a STIG compliance check using python scripts and leveraging the PyEZ framework and PyEZ Tables and Views (PyEZ is covered in another lesson). We'll write our own custom table to retrieve specific configuration items to make it easier to deal with XML formatted data.  

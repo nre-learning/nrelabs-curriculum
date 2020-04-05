@@ -6,6 +6,12 @@ tier: ptr
 description: "In this lesson, we'll explore OpenConfig - an industry effort to standardize network configuration and telemetry models"
 shortDescription: openconfig
 
+authors:
+- name: Tony Chan
+  link: https://github.com/valjeanchan
+- name: Raymond Lam
+  link: https://github.com/jnpr-raylam
+
 endpoints:
 
 - name: linux
@@ -35,8 +41,8 @@ stages:
   - description: Provision Openconfig using CLI and Netconf
     guideType: markdown
 
-  - description: Custom Yang modules and custom Yang translator
+  - description: Custom Yang Modules and Custom Yang Translator
     guideType: markdown
 
-  - description: Custom Yang config provisioning using CLI and Netconf
+  - description: Custom Yang Config Provisioning using CLI and Netconf
     guideType: markdown

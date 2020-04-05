@@ -1,9 +1,3 @@
-## Event-Driven Network Automation with StackStorm
-
----
-
-### Part 1 - StackStorm CLI and Packs
-
 In this lesson, we'll explore the use of a powerful, open-source framework called StackStorm for event-driven automation within a networking context. For a primer on event-driven automation, as well as a very brief overview of the concepts in StackStorm, it's highly recommended that you start with the lesson video by clicking the button above.
 
 <div style="text-align:center;"><img src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-15/st2.jpeg" width="100"></div>

@@ -17,6 +17,10 @@ tags:
 - stackstorm
 - st2
 
+authors:
+- name: Matt Oswalt
+  link: https://oswalt.dev
+
 endpoints:
 - name: st2
   image: stackstorm
@@ -58,7 +62,7 @@ connections:
   b: vqfx1
 
 stages:
-  - description: StackStorm CLI and Basic Concepts
+  - description: StackStorm CLI and Packs
     guideType: markdown
 
   - description: Actions

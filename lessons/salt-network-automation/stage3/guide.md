@@ -1,11 +1,3 @@
-## Network Automation with Salt
-
-**Contributed by: [Ashwini Ravindra](https://github.com/ashwiniravindra) and [Shweta Kondvilkar](https://github.com/skondvilkar)**
-
----
-
-## Part 4 - Junos Configuration Management with Salt
-
 Now let's apply some Junos device configurations!
 
 To configure general infrastructure services such as DNS and NTP, we will take advantage of configuration templating provided by Salt. The template will isolate the variable data like IP addresses, VLAN numbers, etc. from the network device feature configuration. With Salt, the variable data is naturally stored in the pillar system.

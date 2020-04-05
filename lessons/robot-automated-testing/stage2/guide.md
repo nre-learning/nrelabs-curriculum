@@ -1,11 +1,3 @@
-## Using Robot Framework for Automated Testing
-
-**Contributed by: [@saimkhan92](https://github.com/saimkhan92) and [@lara29](https://github.com/lara29)**
-
----
-
-### Chapter 3 - Robot Framework - Best Practices
-
 Now that we have covered how to write robot files which verify the state of Juniper devices, let's delve into more advanced concepts and discuss some best practices.
 
 ### Defining User Keywords

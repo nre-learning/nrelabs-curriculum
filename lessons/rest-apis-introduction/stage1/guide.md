@@ -1,6 +1,3 @@
-# Working with Network APIs
-## Part 2 - Let's do it in Python!
-
 <!-- TODO - this stage has been deprecated for now, will be improved in a future release -->
 
 Hopefully APIs don't seem so scary anymore. However, there's only so much we can get done on the bash shell. It's time to move into the world of Python to up-level our API game.

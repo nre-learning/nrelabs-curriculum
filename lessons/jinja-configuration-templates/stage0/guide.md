@@ -1,11 +1,3 @@
-## Using Jinja for Configuration Templates
-
-**Contributed by: [@ShrutiVPawaskar](https://github.com/ShrutiVPawaskar) and [@shahbhoomi](https://github.com/shahbhoomi)**
-
----
-
-## Part 1 - Introduction to Jinja
-
 I am sure at some point you might have heard the word “Jinja”, or specifically "Jinja2" (the newest version of Jinja). So, what is Jinja? Why do you need to invest your time in learning Jinja and go through these lessons? We will attempt to answer these questions in this lesson.
 
 First, let's talk about templates in general. A template in this context is a text document where some or all of the content is dynamically generated. Data is automatically loaded to the templates with the help of template variables. You could also say that the templates are reusable text files.

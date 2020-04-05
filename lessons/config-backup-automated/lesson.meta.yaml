@@ -13,6 +13,12 @@ tags:
 - facts
 - yaml
 
+authors:
+- name: Mark Yeates
+  link: https://github.com/mayeates
+- name: John Weidley
+  link: https://github.com/jweidley
+
 endpoints:
 
 - name: linux1

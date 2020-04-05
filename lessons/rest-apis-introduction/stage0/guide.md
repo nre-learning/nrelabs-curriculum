@@ -1,7 +1,3 @@
-# Working with Network APIs
-
-## Part 1 - Your First API Call
-
 With all of the hubbub about automation and programmability, one thing you've probably heard a lot about is APIs, or "Application Programming Interfaces". However, if you don't have any experience with these, it may not be immediately obvious why these are important and why you as a network engineer should learn about them.
 
 <div style="text-align:center;margin-top:30px;"><img src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/fundamentals/lesson-19-restapis/rest.png" width="250px"></div>

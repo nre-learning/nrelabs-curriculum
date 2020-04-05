@@ -1,13 +1,3 @@
-## Junos Automation with PyEZ
-
-**Contributed by: [@jnpr-raylam](https://github.com/jnpr-raylam)**
-
----
-
-### Part 4 - Configuration Management
-
-#### Get Junos configuration
-
 Before starting this section, let's apply the boilerplate code to import PyEZ module and connect to vQFX.
 
 ```

@@ -1,9 +1,3 @@
-# Ansible Network Automation - Network Configuration Templates
-
-**Contributed by: [Red Hat](https://ansible.com)**
-
----
-
 ## Objective
 
 In this section, we'll demonstrate templating a network configuration and pushing it a device. To do this, we'll employ a few new skills:

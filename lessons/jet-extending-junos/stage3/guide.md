@@ -1,15 +1,7 @@
-## Juniper Extension Toolkit (JET)
-
-**Contributed by: [@valjeanchan](https://github.com/valjeanchan) and [@jnpr-raylam](https://github.com/jnpr-raylam)**
-
----
-
-### Chapter 4 - JET Firewall API to create/update firewall filter
-
 In this stage, we demonstrate additional JET API capability by using JET firewall API to insert a new firewall filter to vQFX.
 
+#### Preparation
 
-#### Preperation
 Firstly, we repeat what we have done in previous stage - compile the IDL package, go to Python interactive prompt, import the JET GPRC module, and then login to the vQFX.
 
 ```

@@ -1,11 +1,3 @@
-## Network Automation with Salt
-
-**Contributed by: [Sudhishna Sendhilvelan](https://github.com/Sudhishna) and [Vinayak Iyer](https://github.com/vinayak-skywalker)**
-
----
-
-## Part 1 - Salt Master and Minion
-
 [Salt](https://saltstack.com/) is a powerful, scalable, and flexible platform that allows you to automate key operational and configuration tasks in your
 infrastructure, including networks. Salt is open source and it comes packaged with modules supporting Junos OS right out of the box.
 

@@ -16,6 +16,10 @@ tags:
 - library
 collection: juniper-networks
 
+authors:
+- name: Raymond Lam
+  link: https://github.com/jnpr-raylam
+
 endpoints:
 
 - name: vqfx

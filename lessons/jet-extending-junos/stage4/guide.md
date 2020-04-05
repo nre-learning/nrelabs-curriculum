@@ -1,11 +1,3 @@
-## Juniper Extension Toolkit (JET)
-
-**Contributed by: [@valjeanchan](https://github.com/valjeanchan) and [@jnpr-raylam](https://github.com/jnpr-raylam)**
-
----
-
-### Chapter 5 - Closed loop automation with JET
-
 In this lesson, we are going to combine what we have learnt previously to create a closed-loop automation script.
 
 The objective of this lesson is to use JET notification services to listen for any new interface addresses configured(IFA events). If the configured IP address is a public one, we use gRPC service to provision a firewall filter on the corresponding interface to protect the vQFX device.

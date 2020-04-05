@@ -1,11 +1,3 @@
-## Device Specific Template Generation
-
-**Contributed by: [@jweidley](https://github.com/jweidley)**
-
----
-
-### Part 2 - Multiple Devices
-
 The examples in the previous lesson were purposefully simple so the basic concepts could be described in a way that is easy to understand. In this section we will create a template generator that creates device specific configurations for mulitple devices.
 
 The sample project we will use is deploying a large number of access switches. When deploying devices it is common for them to have a base configuration to include hostname, management IP address and a default gateway.

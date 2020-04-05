@@ -11,6 +11,10 @@ tags:
   - declarative
   - junos
 
+authors:
+- name: David Gee
+  link: https://dave.dev
+
 endpoints:
 - name: terraform1
   image: terraform
@@ -52,17 +56,17 @@ connections:
   b: vqfx1
 
 stages:
-  - description: Terraform Init
+  - description: Declarative Resources for Networking
     guideType: markdown
 
-  - description: Terraform Plan
+  - description: Planning the Resource Graph
     guideType: markdown
 
-  - description: Terraform Apply
+  - description: Applying the Execution Plan
     guideType: markdown
 
-  - description: Terraform Destroy
+  - description: Destroying Plans
     guideType: markdown
 
-  - description: Terraform Bonus
+  - description: Bonus Material
     guideType: markdown

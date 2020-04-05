@@ -1,11 +1,3 @@
-## Using Jinja for Configuration Templates
-
-**Contributed by: [@ShrutiVPawaskar](https://github.com/ShrutiVPawaskar) and [@shahbhoomi](https://github.com/shahbhoomi)**
-
----
-
-## Part 3 - "If" and "Set" Statements
-
 Now that you have tried the `for` loop, lets up-level. In this part we will try `if` and `set` statement along with `for` loops.
 
 Again, we want to start the Python interpreter and import `Environment` module from the Jinja2 library:

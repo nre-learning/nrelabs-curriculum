@@ -1,11 +1,3 @@
-## Juniper Extension Toolkit (JET)
-
-**Contributed by: [@valjeanchan](https://github.com/valjeanchan) and [@jnpr-raylam](https://github.com/jnpr-raylam)**
-
----
-
-### Chapter 2 - Receive events from notification service using MQTT client
-
 Before we deep dive into notification service, let's get an introduction on message broker and publish-subscribe (PUB-SUB) model.
 
 #### Message Broker and PUB-SUB model

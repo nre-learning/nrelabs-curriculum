@@ -15,6 +15,12 @@ tags:
 - yaml
 - jinja2
 
+authors:
+- name: Mark Yeates
+  link: https://github.com/mayeates
+- name: John Weidley
+  link: https://github.com/jweidley
+
 endpoints:
 
 - name: linux
@@ -49,5 +55,5 @@ stages:
     guideType: markdown
   - description: Multiple Devices w/ Uplinks
     guideType: markdown
-  - description: Push Generated Configs
+  - description: Push Generated Configs to Device
     guideType: markdown

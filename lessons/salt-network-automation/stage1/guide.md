@@ -1,11 +1,3 @@
-## Network Automation with Salt
-
-**Contributed by: [Sudhishna Sendhilvelan](https://github.com/Sudhishna) and [Vinayak Iyer](https://github.com/vinayak-skywalker)**
-
----
-
-## Part 2 - Junos Proxy Minions
-
 To manage a Junos device, we do not run an on box Salt Minion. Instead we make use of a [Proxy Minion](https://docs.saltstack.com/en/latest/topics/proxyminion/index.html). A Proxy minion can be run on the Salt Master or the Salt Minion.
 
 Now let's configure the Proxy Minions. To do this, we must define the IP address, username, password and the proxy type which in our case is `junos`. All of these details are part of the vqfx1.sls. An SLS file is a Salt State file which can be in various formats. The simplest case is YAML, or it can be YAML+Jinja in case we require a templating language.

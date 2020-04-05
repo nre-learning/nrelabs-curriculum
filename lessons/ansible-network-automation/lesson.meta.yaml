@@ -15,6 +15,10 @@ tags:
 - configuration
 collection: red-hat
 
+authors:
+- name: Red Hat
+  link: https://ansible.com
+
 endpoints:
 - name: ansible
   image: ansible
@@ -47,7 +51,7 @@ connections:
 stages:
   - description: Enable NETCONF
     guideType: markdown
-  - description: Ansible Facts
+  - description: Facts
     guideType: markdown
   - description: Resource Facts
     guideType: markdown

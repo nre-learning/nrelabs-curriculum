@@ -1,6 +1,3 @@
-# Terraform & Junos
-## Part 2 - Planning the Resource Graph
-
 This lesson introduces the planning phase of Terraform. Some exciting things happen here and Terraform beautifully deals with the complex stuff so you get the simple and effective outcomes.
 
 As we discovered in the first stage of the lesson, Terraform gives us the ability to approach configuration in an immutable declarative way, which is relatively unheard of for the kind of networking we're dealing with here. Just for the record, Terraform can also update named resources, but more on that later.

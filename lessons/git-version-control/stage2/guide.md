@@ -1,6 +1,3 @@
-# Version Control with Git
-## Part 3 - Parallelizing Your Work With Git Branches
-
 As Git is a distributed version control system, it's often the case that you want to work in parallel with either other engineer, or even yourself, as you work on different aspects of a given repository. Imagine you have two change windows, one of which is more complicated but happens a few weeks away, and another which is tomorrow night but is fairly simple. If you have your configurations or scripts for these changes in a Git repository, it's likely that you'll have to work on both at the same time at some point, while making sure the two changes don't step on each other in the process.
 
 Enter the concept of "[branching](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell)" in Git, to solve this exact problem. Using branches, we can effectively manage two "versions" of the repository, making commits all along the way, and then only once we're ready, merge them back together (if that's what we want to do).

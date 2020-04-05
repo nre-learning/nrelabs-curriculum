@@ -1,6 +1,3 @@
-# Introduction to BASH
-## Part 2 - Variable Scope
-
 This is the least exciting part of the lesson, but it's an important piece to understand.  Variable scope is commonly misunderstood in BASH.  If you're going to write BASH scripts, you must have a firm grasp on how variables are scoped.
 
 There are two kinds of variables in BASH: *Environment* and *Shell*.  The difference is whether or not the variable is visible to scripts or applications that are run from the current shell.

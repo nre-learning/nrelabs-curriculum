@@ -1,11 +1,3 @@
-## Vendor-Neutral Network Configuration with OpenConfig
-
-**Contributed by: [@valjeanchan](https://github.com/valjeanchan) and [@jnpr-raylam](https://github.com/jnpr-raylam)**
-
----
-
-### Chapter 3 - Custom YANG modules and custom Yang translator
-#### Custom YANG modules and Translation Script
 OpenConfig supports a variety of data models including BGP, interfaces, routing, MPLS, etc.  Sometimes, however, we might want to define a custom configuration hierarchy to simplify device configurations or standardize configuration across multi-vendor devices.
 
 Yang is a data modeling language for the Netconf protocol. For information about Yang, see [RFC 6020](https://tools.ietf.org/html/rfc6020).

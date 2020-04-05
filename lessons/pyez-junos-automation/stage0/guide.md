@@ -1,13 +1,3 @@
-## Junos Automation with PyEZ
-
-**Contributed by: [@jnpr-raylam](https://github.com/jnpr-raylam)**
-
----
-
-### Part 1 - Introduction
-
-#### What is PyEZ?
-
 Junos PyEZ is a micro-framework for Python that enables you to manage and automate Junos devices.
 
 For Junos devices, every management protocol including on-box CLI and J-Web, remote management from Junos Space, or PyEZ - all are based on XML/NETCONF.

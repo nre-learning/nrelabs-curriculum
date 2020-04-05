@@ -1,7 +1,3 @@
-# Automating the Troubleshooting Chain
-
-# Part 1 - Get IP address from Phone Extension
-
 In this lesson, we'll talk about breaking a common workflow down into smaller pieces.  Using the knowledge we gained from previous lessons, we'll build a small script for each piece of the workflow.  Finally, we'll string these small scripts together at the linux command-line in order to rebuild our workflow.
 
 ## Scenario:

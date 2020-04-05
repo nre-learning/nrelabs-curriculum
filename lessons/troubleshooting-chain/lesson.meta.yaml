@@ -13,6 +13,10 @@ tags:
 - troubleshooting
 - tshoot
 
+authors:
+- name: Derick Winkworth
+  link: https://twitter.com/cloudtoad
+
 endpoints:
 - name: linux1
   image: utility

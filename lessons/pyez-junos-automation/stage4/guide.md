@@ -1,11 +1,3 @@
-### Junos Automation with PyEZ
-
-**Contributed by: [@jnpr-raylam](https://github.com/jnpr-raylam)**
-
----
-
-#### Part 5 - PyEZ Tables and Views
-
 Tables and Views provide a simple and efficient way to extract information from complex operational command output or configuration data and map it to a Python data structure.
 In the previous sections we still had to know a significant amount of XML to get at what we want - with Tables and Views, this is abstracted from us so we just deal with Python.
 

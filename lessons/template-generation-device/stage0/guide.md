@@ -1,11 +1,3 @@
-## Device Specific Template Generation
-
-**Contributed by: [@jweidley](https://github.com/jweidley)**
-
----
-
-### Part 1  - Skills Review
-
 Having the ability to easily generate a device specific configuration from an approved template is a **HUGE** time saver and it provides the consistency that you need to avoid common configuration errors.
 
 In this section, we will do a quick review of the key concepts required to accomplish this task; specificially YAML and Jinja2. View the Lesson Diagram to see a visual representation of the process. For a complete review of YAML Jinja2 please go through those lessons.

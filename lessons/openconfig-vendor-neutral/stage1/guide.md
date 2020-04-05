@@ -1,13 +1,4 @@
-## Vendor-Neutral Network Configuration with OpenConfig
-
-**Contributed by: [@valjeanchan](https://github.com/valjeanchan) and [@jnpr-raylam](https://github.com/jnpr-raylam)**
-
----
-
-### Chapter 2 - Provision Openconfig using CLI and Netconf
-
 As with normal Junos configuration, we can use CLI and Netconf to provision Openconfig based configuration.
-
 
 #### Config using CLI
 For example, to add an interface with OpenConfig, we apply configuration under `openconfig-interfaces:interfaces` stanza.

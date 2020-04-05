@@ -12,6 +12,12 @@ tags:
 - robot
 - testing
 
+authors:
+- name: Saim Khan
+  link: https://github.com/saimkhan92
+- name: Lakshmi Rajan
+  link: https://github.com/lara29
+
 endpoints:
 - name: linux1
   image: utility

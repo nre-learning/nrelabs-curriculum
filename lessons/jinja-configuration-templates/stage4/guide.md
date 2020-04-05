@@ -1,11 +1,3 @@
-## Using Jinja for Configuration Templates
-
-**Contributed by: [@ShrutiVPawaskar](https://github.com/ShrutiVPawaskar) and [@shahbhoomi](https://github.com/shahbhoomi)**
-
----
-
-## Part 5 - Importing a Jinja Template from a File
-
 In the previous section, we loaded data from a YAML file and used that data in our templates. You are likely wondering if you can do the same thing with your templates too, so that you can focus on logic in your Python scripts, and maintain data (YAML) and templates (Jinja) separately? You can, and we'll do that in this section.
 
 We have already created a sample template file called `static_route.j2` in the sub-directory `dir1` for our use. Run the below snippet to view the template file:

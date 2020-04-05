@@ -1,11 +1,3 @@
-## Network Automation with Salt
-
-**Contributed by: [Sudhishna Sendhilvelan](https://github.com/Sudhishna) and [Vinayak Iyer](https://github.com/vinayak-skywalker)**
-
----
-
-## Part 3 - Executing Junos commands in Salt
-
 Let's explore the environment by executing some rpc's and cli commands on the Junos Proxy Minion.
 
 The junos.cli execution module allows the Salt Master to run cli commands on the Juniper device. You can use the  format argument to specify whether you want to view the output in xml or text.

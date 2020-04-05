@@ -1,13 +1,3 @@
-## Junos Automation with PyEZ
-
-**Contributed by: [@jnpr-raylam](https://github.com/jnpr-raylam)**
-
----
-
-### Part 3 - Parse Information
-
-#### Display as XML string
-
 In previous section, we assigned `intf` variable with the returned object from `dev.rpc.get_interface_information()`.
 
 Let's quickly connect to Junos device again and re-assign this variable.

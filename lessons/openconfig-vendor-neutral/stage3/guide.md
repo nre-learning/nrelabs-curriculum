@@ -1,11 +1,3 @@
-## Vendor-Neutral Network Configuration with OpenConfig
-
-**Contributed by: [@valjeanchan](https://github.com/valjeanchan) and [@jnpr-raylam](https://github.com/jnpr-raylam)**
-
----
-
-### Chapter 4 - Custom YANG config provisioning using CLI and NETCONF
-
 In this chapter, we will configure the L3VPN services using the `vpn-services` config knob defined by our custom YANG model.
 
 Since we installed the custom YANG model in the last lab, we can start configuring our device with it.

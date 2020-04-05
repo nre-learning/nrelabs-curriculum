@@ -1,11 +1,3 @@
-## Using Robot Framework for Automated Testing
-
-**Contributed by: [@saimkhan92](https://github.com/saimkhan92) and [@lara29](https://github.com/lara29)**
-
----
-
-### Chapter 2 - Writing Test Cases for Junos Devices
-
 Now that we have covered how to write a simple test case using Robot framework, let's use our knowledge to form test cases that verify the state of Juniper devices.
 
 In this section, we'll:

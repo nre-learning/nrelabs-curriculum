@@ -1,6 +1,3 @@
-# Terraform & Junos
-## Part 5 - Bonus Material
-
 Working declaratively with Terraform is an excellent way to work and can significantly remove brain cycles thanks to easy resource life-cycle management.
 
 Before we do any more, let's make sure we're in the correct working directory.

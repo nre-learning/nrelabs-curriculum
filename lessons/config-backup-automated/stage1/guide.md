@@ -1,11 +1,3 @@
-## Automated Device Configuration Backup
-
-**Contributed by: [@mayeates](https://github.com/mayeates) and [@jweidley](https://github.com/jweidley)**
-
----
-
-### Part 2  - Multiple Device Backup 
-
 In this lesson we will expand on the last lesson and backup the configurations from multiple Junos devices. In this section the configuration will be stored in the native Junos format to a local file on the Linux system.
 
 First we need a list of device names or IP addresses that we want to retrieve information from. We will use a YAML file to store the device list. The YAML file looks like this:

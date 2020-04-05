@@ -1,12 +1,3 @@
-## Juniper Extension Toolkit (JET)
-
-**Contributed by: [@valjeanchan](https://github.com/valjeanchan) and [@jnpr-raylam](https://github.com/jnpr-raylam)**
-
----
-
-### Chapter 1 - JET rpc/notification configuration
-
-#### What is JET?
 Juniper Extension Toolkit (JET) is a framework that exposes API functionality made available by the internal Junos OS daemons. Each internal daemon exposes its own APIs. All of the APIs are accessible using the gRPC framework for remote procedure calls (RPCs).
 
 JET supports the following:

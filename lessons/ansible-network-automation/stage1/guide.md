@@ -1,9 +1,3 @@
-# Ansible Network Automation - Facts
-
-**Contributed by: [Red Hat](https://ansible.com)**
-
----
-
 ## Objective
 
 In this section, we'll demonstrate the use of Ansible facts on network infrastructure.

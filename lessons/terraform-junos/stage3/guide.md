@@ -1,6 +1,3 @@
-# Terraform & Junos
-## Part 4 - Destroying Plans
-
 We're making great progress here. If you've followed each lesson stage sequentially, you have new or refreshed knowledge on declarative resource management using Terraform and in the field of networking, which is cool and super useful. We've created some resources and Terraform has accurate state. 
 
 The pointy haired boss comes along and says "Hey, that customer left and we need to remove the config". Did you prepare for this day when you implemented your configuration manually? Or do you have to back to your spreadsheets and text notes?

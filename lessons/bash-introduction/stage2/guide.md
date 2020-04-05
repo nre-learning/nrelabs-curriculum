@@ -1,6 +1,3 @@
-# Introduction to BASH
-## Part 3 - Positional Parameters
-
 You can pass values to a BASH script in two ways.  You can use *positional parameters* or you can use *options*.  Positional parameters are the easiest, so we'll start with that.  Let's have a look at a script that takes two parameters and echos them back to us.
 
 ```

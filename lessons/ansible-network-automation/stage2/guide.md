@@ -1,9 +1,3 @@
-# Ansible Network Automation - Resource Facts
-
-**Contributed by: [Red Hat](https://ansible.com)**
-
----
-
 ## Objective
 
 Demonstration use of resource modules used in combination with Ansible facts for network infrastructure.

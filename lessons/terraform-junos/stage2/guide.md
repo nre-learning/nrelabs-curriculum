@@ -1,6 +1,3 @@
-# Terraform & Junos
-## Part 3 - Applying the Execution Plan
-
 Here we go with the exciting bit! We're going to apply our Terraform configuration resources to device `vqfx01`.
 
 What happens we do this is:

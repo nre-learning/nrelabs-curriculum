@@ -7,6 +7,12 @@ tier: ptr
 shortDescription: JET
 collection: juniper-networks
 
+authors:
+- name: Tony Chan
+  link: https://github.com/valjeanchan
+- name: Raymond Lam
+  link: https://github.com/jnpr-raylam
+
 endpoints:
 
 - name: linux
@@ -30,17 +36,17 @@ connections:
   b: linux
 
 stages:
-  - description: JET rpc/notification configuration
+  - description: JET RPC/Notification Configuration
     guideType: markdown
 
-  - description: Receive events from notification service using MQTT client
+  - description: Receive Events from Notification Service using MQTT client
     guideType: markdown
 
-  - description: IDL compilation and basic GRPC JET testing
+  - description: IDL Compilation and Basic GRPC JET Testing
     guideType: markdown
 
-  - description: JET Firewall API to create/update firewall filter
+  - description: JET Firewall API to Create/Update Firewall Filter
     guideType: markdown
 
-  - description: Closed loop automation with JET
+  - description: Closed Loop Automation with JET
     guideType: markdown

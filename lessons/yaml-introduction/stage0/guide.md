@@ -1,6 +1,3 @@
-# Introduction to YAML
-## Part 1 - Lists
-
 Welcome to this introduction to YAML! From the very first moment you started looking into network automation, chances are you keep
 hearing about YAML. The reason for this is that YAML is a simple way to describe common data structures in a format that's both
 easily understood by humans, as well as easily parseable by machines. As a result, it powers a large number of automation tools,

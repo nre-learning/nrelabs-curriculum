@@ -1,6 +1,3 @@
-# Introduction to YAML
-## Part 2 - Dictionaries
-
 In this lesson, we'll give a quick overview of YAML - what it is, why we use it, and some of the basic concepts you'll need to know in order to use it in your network automation journey.
 
 Often, being able to represent an ordered list of values isn't enough. Sometimes we need to be able to look up certain configuration properties by name. For instance, in the previous example, in order to be able to look up the SNMP community string, you'd have to know which item that value was located in the list in order to look it up programmatically. 

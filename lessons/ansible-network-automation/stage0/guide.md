@@ -1,9 +1,3 @@
-# Ansible Network Automation - Enable Netconf
-
-**Contributed by: [Red Hat](https://ansible.com)**
-
----
-
 ## Objective
 
 This first exercise is mostly about exploring and understanding the lab environment, and the

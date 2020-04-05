@@ -1,11 +1,3 @@
-## Quick and Easy Device Inventory
-
-**Contributed by: [@jweidley](https://github.com/jweidley) and [@mayeates](https://github.com/mayeates)**
-
----
-
-### Part 2  - Multiple Device Inventory
-
 In the previous section, we reviewed using the PyEz module to obtain facts about a device and how we can print just the keys we want to see. In this section, we will pull together a few simple skills from other NRE Labs lessons to obtain specific facts about a list of network devices.
 
 There are so many uses for a script like this. For instance, you can find out what version of code is running on all your devices to plan code upgrades, get a list of serial numbers for maintenance renewal, find out which devices lost power as the result of a power outage and the list goes on!

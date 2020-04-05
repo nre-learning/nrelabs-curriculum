@@ -1,6 +1,3 @@
-# Version Control with Git
-## Part 1 - Your First Git Repository
-
 Software developers have been using version control systems like Git to improve the way they manage changes to their code. Instead of just relying on the "undo" button, version control maintains a detailed history of every change to a file, so that you can roll back changes, maintain different versions, and more.
 
 <div style="text-align:center;margin-top:30px;"><img src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/git-version-control/git.png" width="300px"></div>

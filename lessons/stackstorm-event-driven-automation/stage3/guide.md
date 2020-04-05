@@ -1,9 +1,3 @@
-## Event-Driven Network Automation with StackStorm
-
----
-
-### Part 4 - Sensors and Triggers
-
 So far, we've seen a few options for "doing work" in StackStorm. That is, `Actions` give us a way of performing a simple, singular task, supporting both input parameters as well as output variables. We saw the myriad of `Workflow` options that allow us to create complex logical flows between multiple actions, to make more advanced decisions aimed at accomplishing a greater goal.
 
 However, this lesson uses the term "Event-Driven Automation", and it's important that we learn how to take these concepts - many of which we know from other tools - 

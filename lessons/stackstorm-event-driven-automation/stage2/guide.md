@@ -1,9 +1,3 @@
-## Event-Driven Network Automation with StackStorm
-
----
-
-### Part 3 - Workflows
-
 Just like real "tasks" performed manually, or via another tool, StackStorm Actions almost never run in isolation. They're usually run in parallel with each other, or in sequence. They're usually run based off a decision that was made from information made available by an event, or another action's output.
 
 In StackStorm, we call these complex logical structures ["Workflows"](https://docs.stackstorm.com/workflows.html).

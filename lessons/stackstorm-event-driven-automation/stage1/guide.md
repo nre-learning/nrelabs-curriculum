@@ -1,9 +1,3 @@
-## Event-Driven Network Automation with StackStorm
-
----
-
-### Part 2 - Actions
-
 Though it's important to understand that StackStorm is all about event-driven automation, it's also useful to spend some time talking about what StackStorm can **do**. Being able to watch for all the events in the world isn't very useful if you can't do anything about what you see. In StackStorm, we can accomplish such things through "[Actions](https://docs.stackstorm.com/actions.html)". Some examples include:
 
 - Push a configuration change to a network device

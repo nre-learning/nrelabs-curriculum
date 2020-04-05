@@ -1,13 +1,3 @@
-## Junos Automation with PyEZ
-
-**Contributed by: [@jnpr-raylam](https://github.com/jnpr-raylam)**
-
----
-
-### Part 2 - Collect Data from Junos Devices
-
-#### Connect to Junos device
-
 The first thing you will want to do with PyEZ is learn how to connect to a device. Once we've connected,
 we can run PyEZ's various functions for getting facts about our device, applying a config, or retrieving more
 detailed information about operational state.

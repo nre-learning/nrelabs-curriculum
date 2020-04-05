@@ -1,6 +1,3 @@
-# Multi-Vendor Network Automation with NAPALM
-## Part 3 - The NAPALM Command-Line Utility
-
 Depending on the use case, you may want to use NAPALM's Python library directly, such as in scripts you've already written. However, NAPALM includes a command-line utility which provides a nice alternative to being able to run many of the same functions without writing any Python at all.
 
 First, let's create an alias so we can cut down on repetitive flags. We're always going to be connecting to the same device with the same credentials,

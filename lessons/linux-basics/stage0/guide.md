@@ -1,6 +1,3 @@
-# Linux Basics
-## Part 1 - Using the Bash Shell
-
 Welcome to "Linux Basics". While it's fun to talk about complex config management tools like Ansible, or get into scripting with Python, there's a more fundamental skill that underlies all of these. Knowing your way around a Linux system is becoming more than just a good idea, it's becoming table stakes if you want to get **anything** done in network automation or reliability engineering, and soon, it will be a given for all of networking.
 
 So, if you want to future-proof not only your network automation skills but also your networking skills as a whole, you've come to the right place. While a comprehensive overview of Linux is best saved for the massive amount of learning materials available on the subject, this lesson will focus on the really important aspects of knowing your way around a Linux system, especially as it pertains to being able to use Linux on your journey to Network Reliability Engineering.

@@ -1,10 +1,3 @@
-## Event-Driven Network Automation with StackStorm
-
----
-
-### Part 6 - Using StackStorm as a Self-Service Platform
-
-https://github.com/StackStorm/st2
 
 TBD
 ```

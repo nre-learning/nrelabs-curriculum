@@ -1,13 +1,3 @@
-## Juniper Extension Toolkit (JET)
-
-**Contributed by: [@valjeanchan](https://github.com/valjeanchan) and [@jnpr-raylam](https://github.com/jnpr-raylam)**
-
----
-
-### Chapter 3 - GRPC, IDL compilation and basic GRPC JET testing
-
-#### Junos JET, gRPC and IDL
-
 Juniper JET uses <a href="http://www.grpc.io/" target="_blank">gRPC</a>, a remote procedure call (RPC) framework, for cross-language services as a mechanism to enable request-response service. gRPC provides an interface definition language (IDL) that enables you to define APIs. These IDL files (with .proto as the file extension) are compiled using the protoc compiler to generate source code to be used for the server and client applications. The gRPC server is part of the JET service process (jsd), which runs on Junos OS.
 
 ![JET System Archtecture](https://www.juniper.net/documentation/images/g043543.png)

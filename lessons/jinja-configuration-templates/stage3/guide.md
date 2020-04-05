@@ -1,11 +1,3 @@
-## Using Jinja for Configuration Templates
-
-**Contributed by: [@ShrutiVPawaskar](https://github.com/ShrutiVPawaskar) and [@shahbhoomi](https://github.com/shahbhoomi)**
-
----
-
-## Part 4 - Passing Data into a Template From YAML
-
 In the previous sections we used a Python list of dictionaries for generating configs for multiple interfaces.
 
 This is a very cumbersome way of modeling your data, largely because we've mixed our data with the program that's meant to use that data (Python script).

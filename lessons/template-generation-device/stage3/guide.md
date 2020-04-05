@@ -1,11 +1,3 @@
-## Device Specific Template Generation
-
-**Contributed by: [@jweidley](https://github.com/jweidley)**
-
----
-
-### Part 4  - Push Template to Device
-
 After you generate a template configuration the next step is to push the configuration to a device or a series for devices so thats what we will do in this lesson. The sample project we will use is we have to generate a number of VLANs and then push them to a few QFX switches.
 
 First lets see what VLANs are already configured on the QFX switches, starting with vqfx1:
