@@ -3,7 +3,7 @@ from glob import glob
 import os
 from scp import SCPClient
 
-host=os.environ['SYRINGE_TARGET_HOST']
+host=os.environ['ANTIDOTE_TARGET_HOST']
 
 def createSSHClient(server, port, user, password):
     client = paramiko.SSHClient()
