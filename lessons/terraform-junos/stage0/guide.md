@@ -6,7 +6,7 @@ Infrastructure-as-Code Terraform resources are declarative versions of the netwo
 
 Don't forget your network chops in this lesson. You'll configure an interface, a BGP peer, a VLAN and a L3 interface for the VLAN. You can exercise your networking powers here and validate what Terraform does as it does it on `vqfx1`.
 
-![Terraform](https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-31/stage1/terraformbasics.png)
+<img class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-31/stage1/terraformbasics.png">
 
 *Image borrowed from [https://terraform.io](https://terraform.io)*
 
