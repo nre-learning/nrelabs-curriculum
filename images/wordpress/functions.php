@@ -9,8 +9,8 @@
  * @since 1.0.0
  */
 
-// define( 'WP_HOME', 'http://wordpress:8080/{{SYRINGE_FULL_REF}}/' );
-// define( 'WP_SITEURL', 'http://wordpress:8080/{{SYRINGE_FULL_REF}}/' );
+// define( 'WP_HOME', 'http://wordpress:8080/{{ANTIDOTE_FULL_REF}}/' );
+// define( 'WP_SITEURL', 'http://wordpress:8080/{{ANTIDOTE_FULL_REF}}/' );
 remove_filter('template_redirect', 'redirect_canonical');
 
 /**

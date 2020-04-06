@@ -28,7 +28,7 @@ def create_app(configfile=None):
     # http://flask.pocoo.org/docs/patterns/appfactories/
 
 
-    APPLICATION_ROOT = '/%s' % os.environ['SYRINGE_FULL_REF']
+    APPLICATION_ROOT = '/%s' % os.environ['ANTIDOTE_FULL_REF']
 
     app = Flask(__name__)
 
