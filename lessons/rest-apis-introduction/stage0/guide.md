@@ -1,6 +1,6 @@
 With all of the hubbub about automation and programmability, one thing you've probably heard a lot about is APIs, or "Application Programming Interfaces". However, if you don't have any experience with these, it may not be immediately obvious why these are important and why you as a network engineer should learn about them.
 
-<div style="text-align:center;margin-top:30px;"><img src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/fundamentals/lesson-19-restapis/rest.png" width="250px"></div>
+<div style="text-align:center;margin-top:30px;"><img src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v1.1.1/lessons/fundamentals/lesson-19-restapis/rest.png" width="250px"></div>
 
 In much the same way that the CLI was built for humans to consume, an API is intended to be consumed by software. In the modern data center alone, there are a virtually unlimited number of interactions taking place between the various IT systems, such as sharing information, updating databases, performing configurations, and more.
 
