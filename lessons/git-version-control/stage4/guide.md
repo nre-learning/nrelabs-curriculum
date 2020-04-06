@@ -1,6 +1,3 @@
-<<<<<<< HEAD:lessons/git-version-control/stage4/guide.md
-git push/pull/remote and if you can get it working, merge requests
-=======
 # Version Control with Git
 ## Part 4 - Oops! I Made A Mistake!
 
@@ -70,7 +67,6 @@ git status
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 Finally, we can also use `git reset` with the name of the file as a parameter to remove that file from staging. 
->>>>>>> master:lessons/fundamentals/lesson-17-git/stage4/guide.md
 
 ```
 git reset credentials.txt
