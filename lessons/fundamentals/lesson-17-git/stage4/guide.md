@@ -109,7 +109,7 @@ Finally, it may come to pass that you just need to blow a commit away. Let's say
 Again, the `HEAD~1` usage allows us to back-track to the commit prior to the most recent one, effectively wiping it out.
 
 ```
-git reset --hard
+git reset --hard HEAD~1
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
@@ -122,7 +122,7 @@ git log --oneline
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 
-### Tips for Using `git reset` when working with Remotes
+### Tips for Using "git reset" when working with Remotes
 
 We haven't covered remotes yet (which we will in the next part of this lesson) but there are some implications to using `git reset` when collaborating with others using a platform like GitHub or GitLab. Keep in mind that you're effectively changing history, and removing commits that others may be relying upon.
 
