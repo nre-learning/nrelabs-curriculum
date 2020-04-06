@@ -3,6 +3,7 @@
 ## In development
 
 - Updated Ansible to 2.9.2 in Ansible image [#310](https://github.com/nre-learning/nrelabs-curriculum/pull/310)
+- New Git Stage - "Fixing Mistakes" [#319](https://github.com/nre-learning/nrelabs-curriculum/pull/319)
 
 ## v1.1.1 - March 02, 2020
 
