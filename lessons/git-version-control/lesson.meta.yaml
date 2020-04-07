@@ -34,8 +34,8 @@ stages:
     guideType: markdown
   - description: Parallelizing Your Work With Git Branches
     guideType: markdown
-  - id: 4
-    description: Fixing Mistakes
+  - description: Fixing Mistakes
+    guideType: markdown
   # TODO in v1.1.3
   # TODO(mierdin): Get the gitlab image working by this point
   # - description: Working with Git Remotes
