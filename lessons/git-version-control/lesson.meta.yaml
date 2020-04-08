@@ -30,10 +30,13 @@ endpoints:
 stages:
   - description: Your First Git Repository
     guideType: markdown
+    stageVideo: https://www.youtube.com/embed/YAXWxA4x8vs
   - description: Adding and Comitting Files
     guideType: markdown
+    stageVideo: https://www.youtube.com/embed/b203WRT_hIg
   - description: Parallelizing Your Work With Git Branches
     guideType: markdown
+    stageVideo: https://www.youtube.com/embed/mOj7kCfu7TY
   - description: Fixing Mistakes
     guideType: markdown
   # TODO in v1.1.3
