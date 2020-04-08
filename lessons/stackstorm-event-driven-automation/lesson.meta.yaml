@@ -1,0 +1,84 @@
+---
+name: Event-Driven Network Automation with StackStorm
+slug: stackstorm-event-driven-automation
+category: tools
+tier: prod
+diagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-15/lessondiagram.png
+video: https://www.youtube.com/embed/WhfAqnn2HMM
+prereqs:
+  - napalm-multi-vendor-network-automation
+  - yaml-introduction
+  - jinja-configuration-templates
+description: StackStorm is an event-driven automation framework. In this lesson, we'll learn about the basic primitives you'll need to put StackStorm to work for you.
+shortDescription: StackStorm
+tags:
+- event-driven
+- event driven automation
+- stackstorm
+- st2
+
+authors:
+- name: Matt Oswalt
+  link: https://oswalt.dev
+
+endpoints:
+- name: st2
+  image: stackstorm
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: vqfx1
+  image: vqfx-snap1
+  configurationType: napalm
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: vqfx2
+  image: vqfx-snap2
+  configurationType: napalm
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: vqfx3
+  image: vqfx-snap3
+  configurationType: napalm
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+connections:
+- a: vqfx1
+  b: vqfx2
+- a: vqfx2
+  b: vqfx3
+- a: vqfx3
+  b: vqfx1
+
+stages:
+  - description: StackStorm CLI and Packs
+    guideType: markdown
+
+  - description: Actions
+    guideType: markdown
+
+  - description: Workflows
+    guideType: markdown
+
+  - description: Sensors and Triggers
+    guideType: markdown
+
+  - description: Rules
+    guideType: markdown
+
+  # Removing for now, will move to separate lesson once category restructuring is finished
+  # - id: 6
+  #   description: Using EDI for Self-Service Automation
+  # - id: 7
+  #   description: Change approval via Inquiries 

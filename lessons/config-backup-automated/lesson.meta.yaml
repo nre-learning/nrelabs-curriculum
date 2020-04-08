@@ -1,0 +1,53 @@
+---
+name: Automated Device Configuration Backup
+slug: config-backup-automated
+category: workflows
+tier: prod
+prereqs:
+  - pyez-junos-automation
+  - yaml-introduction
+description: Having an up to date device configuration is essential for disater recovery in the event of device failure or natural disaster. Being able to automate backup configurations makes recovery of the device that much easier (especially if it's a mission critical device). In this lesson, we'll backup the configuration using PyEZ. We will demostrate pulling configurations in the standard Junos format and display set formats with static and manual pasword entry. 
+shortDescription: Automated Config Backup
+tags:
+- pyez
+- facts
+- yaml
+
+authors:
+- name: Mark Yeates
+  link: https://github.com/mayeates
+- name: John Weidley
+  link: https://github.com/jweidley
+
+endpoints:
+
+- name: linux1
+  image: utility
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: vqfx1
+  image: vqfx-snap1
+  configurationType: napalm
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+  additionalPorts: [830]
+
+- name: vqfx2
+  image: vqfx-snap2
+  configurationType: napalm
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+  additionalPorts: [830]
+
+stages:
+  - description: Single Device Backup
+    guideType: markdown
+  - description: Multiple Device Backup
+    guideType: markdown

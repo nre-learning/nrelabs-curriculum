@@ -1,0 +1,67 @@
+---
+name: Cumulus in NRELabs
+slug: cumulus-linux-introduction
+category: fundamentals
+tier: ptr
+prereqs:
+  - linux-basics
+description: Cumulus in NRELabs
+shortDescription: Cumulus in NRELabs
+tags:
+- troubleshooting
+- tshoot
+
+endpoints:
+- name: linux1
+  image: utility
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: linux2
+  image: utility
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: leaf1
+  image: cvx
+  configurationType: python
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: leaf2
+  image: cvx
+  configurationType: python
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: spine
+  image: cvx
+  configurationType: python
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+connections:
+- a: spine
+  b: leaf1
+- a: spine
+  b: leaf2
+- a: leaf1
+  b: linux1
+- a: leaf2
+  b: linux2
+
+
+stages:
+  - description: Cumulus in NRELabs
+    guideType: markdown
+

@@ -1,0 +1,47 @@
+---
+name: Multi-Vendor Network Automation with NAPALM
+slug: napalm-multi-vendor-network-automation
+category: tools
+tier: prod
+prereqs:
+  # - python-introduction
+  - linux-basics
+  - jinja-configuration-templates
+description: Each vendor has their own APIs for interacting with network devices. In this lesson, you'll learn about a Python library that abstracts all these, and allows you to do basic multivendor network automation.
+shortDescription: NAPALM
+tags:
+- multi-vendor
+- multivendor
+- automation
+- network automation
+- napalm
+
+authors:
+- name: Matt Oswalt
+  link: https://oswalt.dev
+
+endpoints:
+- name: linux1
+  image: utility
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: vqfx1
+  image: vqfx-snap1
+  configurationType: napalm
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+stages:
+  - description: Get device facts
+    guideType: jupyter
+  - description: Get information with NAPALM "getter" functions
+    guideType: jupyter
+  - description: The NAPALM Command-Line Utility
+    guideType: markdown
+  - description: Make configuration changes with NAPALM
+    guideType: jupyter

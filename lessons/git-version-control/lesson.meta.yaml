@@ -1,0 +1,45 @@
+---
+name: Version Control with Git
+slug: git-version-control
+category: fundamentals
+tier: prod
+prereqs:
+  - linux-basics
+description: |
+  Git is an extremely popular version control system. In this lesson, we'll explore the basics of Git,
+  and prepare for using it with network automation tools and workflows.
+shortDescription: Git
+tags:
+- version control
+- versioning
+- git
+
+authors:
+- name: Matt Oswalt
+  link: https://oswalt.dev
+
+endpoints:
+- name: linux1
+  image: utility
+  configurationType: python
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+stages:
+  - description: Your First Git Repository
+    guideType: markdown
+    stageVideo: https://www.youtube.com/embed/YAXWxA4x8vs
+  - description: Adding and Comitting Files
+    guideType: markdown
+    stageVideo: https://www.youtube.com/embed/b203WRT_hIg
+  - description: Parallelizing Your Work With Git Branches
+    guideType: markdown
+    stageVideo: https://www.youtube.com/embed/mOj7kCfu7TY
+  - description: Fixing Mistakes
+    guideType: markdown
+  # TODO in v1.1.3
+  # TODO(mierdin): Get the gitlab image working by this point
+  # - description: Working with Git Remotes
+  #   guideType: markdown

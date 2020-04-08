@@ -1,0 +1,48 @@
+---
+name: Introduction to Free-Range Routing (FRR)
+slug: free-range-routing-introduction
+category: fundamentals
+tier: ptr
+prereqs:
+  - linux-basics
+description: FRR in NRELabs
+shortDescription: FRR in NRELabs
+tags:
+- troubleshooting
+- tshoot
+
+endpoints:
+- name: hub
+  image: frr
+  configurationType: python
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: branch-1
+  image: frr
+  configurationType: python
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: branch-2
+  image: frr
+  configurationType: python
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+connections:
+- a: hub
+  b: branch-1
+- a: hub
+  b: branch-2
+
+stages:
+  - description: FRR in NRELabs
+    guideType: markdown
+
