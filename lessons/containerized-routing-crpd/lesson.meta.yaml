@@ -1,0 +1,43 @@
+---
+name: Routing in a Container with cRPD
+slug: containerized-routing-crpd
+category: tools
+diagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/crpd-lesson-image/lessons/lesson-42-crpd/crpd-topology.png
+tier: prod
+description: Explore cRPD, and the interaction between a disaggregated routing stack and a Linux OS
+collection: juniper-networks
+tags:
+- crpd
+- containers
+shortDescription: crpd
+
+authors:
+- name: Arijit Paul
+  link: https://www.linkedin.com/in/arijit-p-a65ab41/
+
+endpoints:
+- name: crpd1
+  image: crpd
+  configurationType: napalm
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: crpd2
+  image: crpd
+  configurationType: napalm
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+connections:
+- a: crpd1
+  b: crpd2
+
+stages:
+  - description: Configuring basic networking and routing
+    guideType: markdown
+
+
