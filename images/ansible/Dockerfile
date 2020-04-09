@@ -37,5 +37,29 @@ RUN pip3 install -r /requirements.txt
 RUN mkdir /etc/ansible
 COPY ansible.cfg /etc/ansible/ansible.cfg
 
+# We should download a specific release in this Dockerfile for stability, but note that future releases
+# are available below:
+# https://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-latest.tar.gz
+
+RUN curl -o tower.tar.gz https://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-3.6.3-1.tar.gz \
+  && tar xvzf tower.tar.gz \
+  && cd ansible-tower-setup-* \
+  && ls -lha . \
+  && sed -i "s/rabbitmq_password=''/rabbitmq_password='password123'/g" inventory \
+  && sed -i "s/admin_password=''/admin_password='password123'/g" inventory \
+  && sed -i "s/pg_password=''/pg_password='password123'/g" inventory \
+  && sed -i "s@pg_initdb_command: '/usr/bin/postgresql-setup initdb'@pg_initdb_command: '/usr/bin/postgresql-setup --initdb'@g" roles/postgres/vars/RedHat-8.yml \
+  && ./setup.sh
+
+
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]
+
+
+
+# These seem to work but both run on Ubuntu
+# https://github.com/ybalt/ansible-tower
+# https://github.com/berndonline/ansible-tower-docker
+
+# RH solution?
+# https://access.redhat.com/solutions/3648711
