@@ -1,8 +1,3 @@
-# Exploring cRPD
-## Part 1 - Configuring Basic Networking and Routing
-
----
-
 First, configure `crpd1`:
 
 ```

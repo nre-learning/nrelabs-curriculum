@@ -18,7 +18,7 @@ authors:
 endpoints:
 - name: crpd1
   image: crpd
-  configurationType: napalm
+  # configurationType: napalm
   presentations:
   - name: cli
     port: 22
@@ -26,7 +26,7 @@ endpoints:
 
 - name: crpd2
   image: crpd
-  configurationType: napalm
+  # configurationType: napalm
   presentations:
   - name: cli
     port: 22
