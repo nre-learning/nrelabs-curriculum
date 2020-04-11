@@ -2,6 +2,10 @@
 
 ## In development
 
+- Updates for 0.6.0 Compatibility [#317](https://github.com/nre-learning/nrelabs-curriculum/pull/317)
+
+## v1.1.2 - April 06, 2020
+
 - Updated Ansible to 2.9.2 in Ansible image [#310](https://github.com/nre-learning/nrelabs-curriculum/pull/310)
 - New Git Stage - "Fixing Mistakes" [#319](https://github.com/nre-learning/nrelabs-curriculum/pull/319)
 

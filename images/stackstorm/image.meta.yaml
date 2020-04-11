@@ -1,5 +1,5 @@
-slug: st2
-description: st2
+slug: stackstorm
+description: stackstorm
 privileged: false
 sshUser: antidote
 sshPassword: antidotepassword

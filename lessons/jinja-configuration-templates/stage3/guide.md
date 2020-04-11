@@ -11,7 +11,7 @@ We cover YAML in more detail in the lesson "Introduction to YAML". If you haven'
 We have a YAML file already stored in the machine for you! Lets start by taking a look at it.
 ```
 cd /antidote/stage3/
-cat part3.yml
+cat devices.yml
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
@@ -31,7 +31,7 @@ from pprint import pprint
 The below snippet is used to import the data from the YAML file to our python code. The `open()` function opens our yaml file in the `read` mode and assigns it to the variable `yaml_file`. Just note that here we have only provided the name of our yaml file as it is in the same directory as our python code, in case it is in a different folder then you have to give the exact file path to the `open()`. The data from the YAML file can then be easily imported into Python simply by using `yaml.load()` function.
 
 ```
-yaml_file = open('part4.yml', 'r')
+yaml_file = open('devices.yml', 'r')
 all_devices = yaml.load(yaml_file, Loader=yaml.FullLoader)
 pprint(all_devices)
 ```
