@@ -20,6 +20,8 @@ tags:
 authors:
 - name: Matt Oswalt
   link: https://oswalt.dev
+- name: Ken Cope
+  link: https://github.com/kenthecope
 
 endpoints:
 - name: linux1
