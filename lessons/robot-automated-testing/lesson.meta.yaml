@@ -1,0 +1,49 @@
+---
+name: Using Robot Framework for Automated Testing
+slug: robot-automated-testing
+category: tools
+diagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-29/lessondiagram.png
+tier: prod
+prereqs:
+  - pyez-junos-automation
+description: Robot is a popular testing framework, allowing users to define testing workflows with plain language and keywords. In this lesson we'll cover an introduction to Robot as well as how to write test cases for Junos network devices.
+shortDescription: Robot Framework
+tags:
+- robot
+- testing
+
+authors:
+- name: Saim Khan
+  link: https://github.com/saimkhan92
+- name: Lakshmi Rajan
+  link: https://github.com/lara29
+
+endpoints:
+- name: linux1
+  image: utility
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: vqfx1
+  image: vqfx-snap1
+  configurationType: napalm
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+connections:
+- a: vqfx1
+  b: linux1
+
+stages:
+  - description: Introduction to Robot Framework
+    guideType: markdown
+
+  - description: Writing Testcases for Junos Devices
+    guideType: markdown
+
+  - description: Robot Framework - Best Practices
+    guideType: markdown

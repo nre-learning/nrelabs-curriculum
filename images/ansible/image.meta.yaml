@@ -1,0 +1,11 @@
+slug: ansible
+description: ansible
+privileged: false
+sshUser: antidote
+sshPassword: antidotepassword
+configUser: antidote
+configPassword: antidotepassword
+networkInterfaces:
+  - 'eth0'
+
+

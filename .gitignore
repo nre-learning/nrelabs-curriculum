@@ -46,4 +46,4 @@ __pycache__
 *.img
 *.tgz
 
-!lessons/tools/lesson-41-ansible-network/stage1/hosts
+!lessons/ansible-network-automation/stage0/hosts

@@ -1,0 +1,73 @@
+---
+name: Automating the Troubleshooting Chain
+slug: troubleshooting-chain
+category: workflows
+tier: prod
+
+prereqs:
+  # - python-introduction
+  - linux-basics
+description: In this lesson, we'll explore the use of some custom Python scripts for doing some automated troubleshooting.
+shortDescription: Automated Troubleshooting
+tags:
+- troubleshooting
+- tshoot
+
+authors:
+- name: Derick Winkworth
+  link: https://twitter.com/cloudtoad
+
+endpoints:
+- name: linux1
+  image: utility
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: sipphone
+  image: pjsua-lindsey
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: vqfx1
+  image: vqfx-snap1
+  configurationType: napalm
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: vqfx2
+  image: vqfx-snap2
+  configurationType: napalm
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: asterisk
+  image: asterisk
+  additionalPorts: [8088]
+
+# For future version of lesson
+#
+# - name: netbox
+#   image: antidotelabs/netbox
+#   additionalPorts: [8000]
+
+
+connections:
+- a: vqfx1
+  b: vqfx2
+- a: vqfx2
+  b: sipphone
+- a: vqfx1
+  b: asterisk
+
+
+stages:
+  - description: Get the IP Address for a Phone Extension
+    guideType: markdown

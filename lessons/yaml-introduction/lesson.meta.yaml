@@ -1,0 +1,30 @@
+---
+name: Introduction to YAML
+slug: yaml-introduction
+category: fundamentals
+tier: prod
+# prereqs:
+#   - python-introduction
+description: YAML is a human friendly data serialization standard. In this lesson, we'll explore the basics of YAML, and prepare for using it in a myriad of automation use cases.
+shortDescription: YAML
+tags:
+- YAML
+- data modeling
+- data model
+
+endpoints:
+- name: linux1
+  image: utility
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+stages:
+  - description: Lists
+    guideType: markdown
+  - description: Dictionaries (key/value pairs)
+    guideType: markdown
+
+  # 3:
+  #   description: What about JSON?

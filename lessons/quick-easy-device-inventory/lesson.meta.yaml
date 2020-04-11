@@ -1,0 +1,53 @@
+---
+name: Quick and Easy Device Inventory
+slug: quick-easy-device-inventory
+category: workflows
+tier: prod
+prereqs:
+  - pyez-junos-automation
+  - yaml-introduction
+description: Having an up to date device inventory serves many operational, asset management & deployment purposes. But being able to automate it reduces human error and allows it to be done more frequently to increase its level of effectiveness. In this lesson, we'll use the PyEz module to pull specific values from one and many devices as well as outputting the data in a common format for easy import into other tools. 
+shortDescription: Automated Inventory
+tags:
+- pyez
+- facts
+- yaml
+
+authors:
+- name: Mark Yeates
+  link: https://github.com/mayeates
+- name: John Weidley
+  link: https://github.com/jweidley
+
+endpoints:
+
+- name: linux1
+  image: utility
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: vqfx1
+  image: vqfx-snap1
+  configurationType: napalm
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+  additionalPorts: [830]
+
+- name: vqfx2
+  image: vqfx-snap2
+  configurationType: napalm
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+  additionalPorts: [830]
+
+stages:
+  - description: Single Device Inventory
+    guideType: markdown
+  - description: Multiple Device Inventory
+    guideType: markdown

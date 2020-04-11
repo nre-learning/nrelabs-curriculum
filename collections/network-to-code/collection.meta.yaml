@@ -1,0 +1,15 @@
+---
+slug: network-to-code
+title: Network To Code
+image: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v1.1.1/collections/ntc/ntc.png
+website: https://www.networktocode.com/
+contactEmail: "contact@networktocode.com"
+
+# Why should users view your collection?
+briefDescription: Network To Code is leading the way in empowering the network engineers of the future. Our classes take the traditional certified network engineer that have little to no development background and expose them to a variety of new technology including network APIs, DevOps tooling, programming, and much more!
+
+# Why should users continue and view your lessons?
+longDescription: |
+  Network to Code, THE Network Automation Company, is a network automation solution provider helping clients around the world reduce manual inefficiencies and operations costs while helping IT teams deliver services faster resulting in quicker time to market, faster recognition of revenue, and increased customer satisfaction. It is our mission to change the way networks are managed, consumed, and operated on a day to day basis. Simply put, Network to Code bridges the gap between DevOps and Network Engineering/Operations. This is accomplished by providing services using off the shelf open source software (OSS) as well as integrating to existing manufacturer tools and technologies.
+type: consultancy
+tier: prod

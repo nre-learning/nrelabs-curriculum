@@ -2,6 +2,7 @@
 
 ## In development
 
+- Updates for 0.6.0 Compatibility [#317](https://github.com/nre-learning/nrelabs-curriculum/pull/317)
 
 ## v1.1.2 - April 06, 2020
 

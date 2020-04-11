@@ -1,0 +1,10 @@
+slug: pjsua-lindsey
+description: SIP phone
+privileged: true
+sshUser: antidote
+sshPassword: antidotepassword
+configUser: antidote
+configPassword: antidotepassword
+networkInterfaces:
+  - 'eth0'
+

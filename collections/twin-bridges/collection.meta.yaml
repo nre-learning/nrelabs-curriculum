@@ -1,0 +1,14 @@
+---
+slug: twin-bridges
+title: Twin Bridges Technology
+image: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v1.1.1/collections/twinbridges/twinbridges.png
+website: https://pynet.twb-tech.com/
+
+# Why should users view your collection?
+briefDescription: Twin Bridges Technology is a business specializing in network automation training.
+
+# Why should users continue and view your lessons?
+longDescription: |
+  Twin Bridges Technology is a network automation training company that features courses on Python Network Automation, Ansible, and Nornir. We run a popular Python for Network Engineers training course and created the Python-Netmiko library. We also maintain the NAPALM project and have made contributions to Nornir.
+type: consultancy
+tier: prod

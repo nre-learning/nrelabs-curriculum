@@ -1,0 +1,42 @@
+---
+name: Using Jinja for Configuration Templates
+slug: jinja-configuration-templates
+category: fundamentals
+tier: prod
+prereqs:
+  - yaml-introduction
+  # - python-introduction
+description: Jinja is a popular language used to create repeatable textual output from a template. In this lesson, we'll explore the basics of Jinja, and prepare to use it for templating network configurations.
+shortDescription: Jinja
+tags:
+- jinja
+- templates
+- templating
+- configuration templates
+- configuration
+
+authors:
+- name: Bhoomi Shah
+  link: https://github.com/shahbhoomi
+- name: Shruti Pawaskar
+  link: https://github.com/ShrutiVPawaskar
+
+endpoints:
+- name: linux1
+  image: utility
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+stages:
+  - description: Introduction to Jinja
+    guideType: markdown
+  - description: For Loops
+    guideType: markdown
+  - description: '"If" and "Set" Statements'
+    guideType: markdown
+  - description: Passing Data into a Template From YAML
+    guideType: markdown
+  - description: Importing a Jinja Template from a File
+    guideType: markdown

@@ -1,0 +1,69 @@
+---
+name: Network Unit Testing with JSNAPY
+slug: jsnapy-network-testing
+category: tools
+diagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-12/lessondiagram.png
+tier: prod
+prereqs:
+  - yaml-introduction
+  - linux-basics
+description: Unit testing your network devices is one of the fundamental building blocks to CI/CD for networking. In this lesson, we'll explore the use of an open source tool - JSNAPy - for doing just this with Junos devices.
+shortDescription: JSNAPy
+tags:
+- jsnapy
+- test
+- unit test
+- testing
+collection: juniper-networks
+
+authors:
+- name: Matt Oswalt
+  link: https://oswalt.dev
+
+endpoints:
+- name: linux1
+  image: utility
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: vqfx1
+  image: vqfx-snap1
+  configurationType: napalm
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: vqfx2
+  image: vqfx-snap2
+  configurationType: napalm
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: vqfx3
+  image: vqfx-snap3
+  configurationType: napalm
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+connections:
+- a: vqfx1
+  b: vqfx2
+- a: vqfx2
+  b: vqfx3
+- a: vqfx3
+  b: vqfx1
+
+stages:
+  - description: No BGP config - Tests Fail
+    guideType: markdown
+
+  - description: Correct BGP config - Tests Pass
+    guideType: markdown
+
