@@ -1,5 +1,5 @@
 *** Settings ***
-Resource    chapter3_resource.robot
+Resource    chapter2_resource.robot
 Test Setup  Setup Actions
 Test Teardown   Teardown Actions
 

@@ -7,7 +7,7 @@ cd /home/antidote/myfirstrepo
 git init
 git config --global user.email "jane@nrelabs.io"
 git config --global user.name "Jane Doe"
-cp /antidote/stage3/interface-config.txt .
+cp /antidote/stage2/interface-config.txt .
 git add interface-config.txt
 git commit -m "Adding new interface configuration file"
 
@@ -24,7 +24,7 @@ git config --global user.email "jane@nrelabs.io"
 git config --global user.name "Jane Doe"
 git checkout master
 
-# from stage 3
+# from stage 2
 git checkout -b change-123
 sed -i s/10.31.0.11/10.31.0.12/ interface-config.txt
 git add interface-config.txt
