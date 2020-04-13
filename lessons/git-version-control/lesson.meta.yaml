@@ -26,6 +26,13 @@ endpoints:
   - name: cli
     port: 22
     type: ssh
+- name: remote
+  image: gitea
+  presentations:
+  - name: web
+    port: 3000
+    type: http
+  additionalPorts: [22]
 
 stages:
   - description: Your First Git Repository
@@ -40,7 +47,5 @@ stages:
   - description: Fixing Mistakes
     guideType: markdown
     stageVideo: https://www.youtube.com/embed/qOmQzUR5t0E
-  # TODO in v1.1.3
-  # TODO(mierdin): Get the gitlab image working by this point
-  # - description: Working with Git Remotes
-  #   guideType: markdown
+  - description: Working with Git Remotes
+    guideType: markdown
