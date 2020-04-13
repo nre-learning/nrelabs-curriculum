@@ -2,7 +2,7 @@
 
 set -e
 
-cd ../../initech-network-configs/
+cd /antidote/initech-network-configs/
 
 rm -rf .git/
 
