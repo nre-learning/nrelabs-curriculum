@@ -28,6 +28,7 @@ endpoints:
     type: ssh
 - name: remote
   image: gitea
+  configurationType: python
   presentations:
   - name: web
     port: 3000
