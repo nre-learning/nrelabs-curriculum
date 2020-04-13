@@ -26,7 +26,7 @@ endpoints:
   - name: cli
     port: 22
     type: ssh
-- name: gitea
+- name: remote
   image: gitea
   configurationType: python
   presentations:

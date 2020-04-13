@@ -37,9 +37,9 @@ ssh-keygen -b 2048 -t rsa -f ~/.ssh/id_rsa -q -N ""
 
 ### Use Case 1 - Push your own repository
 
-For our first exercise, we'll push the contents of the existing repository that we've been working with throughout this lesson to a new remote. For this, we'll use some software called "Gitea" which has a look and feel that is very similar to Github:
+For our first exercise, we'll push the contents of the existing repository that we've been working with throughout this lesson to a new remote. For this, we'll use some software called "Gitea" which has a look and feel that is very similar to Github. Much of what you're about to learn can be applied almost exactly to Github. Go to the `remote` tab now:
 
-<button type="button" class="btn btn-primary btn-sm" onclick="switchToTab('gitea')">Go to "remote"</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="switchToTab('remote')">Go to "remote"</button>
 
 First, click the button in the top-right corner of this tab pane titled "Login". When prompted, enter the username `jane` and the password `Password1!`.
 
