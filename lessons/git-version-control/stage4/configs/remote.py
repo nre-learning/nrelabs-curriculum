@@ -45,7 +45,7 @@ if create_repo.status_code >= 400:
     sys.exit(0)
   raise Exception(create_repo.text)
 
-ret = subprocess.call(['./push-initech.sh'])
+ret = subprocess.call(['/antidote/stage4/configs/push-initech.sh'])
 if ret != 0:
   raise Exception("push-initech.sh failed")
 
