@@ -1,5 +1,5 @@
-FROM gitea/gitea:latest
-# FROM gitea/gitea:1.4.1
+# FROM gitea/gitea:latest
+FROM gitea/gitea:1.11.4
 
 # https://discourse.gitea.io/t/i-cannot-programmatically-setup-users-in-a-docker-container/289/5
 
