@@ -1,5 +1,9 @@
 #!/bin/bash
 
+mkdir -p /home/antidote/.ssh
+touch /home/antidote/.ssh/config
+echo "StrictHostKeyChecking no" > /home/antidote/.ssh/config
+
 # Catch up from previous sections
 rm -rf /home/antidote/myfirstrepo
 mkdir -p /home/antidote/myfirstrepo
