@@ -6,7 +6,7 @@ Enter the concept of Git "remotes". Defining a remote is a way of telling Git th
 
 One advantage of doing this is that remotes offer a sort of neutral "middle ground" where users all over the world can collaborate on the same repository.
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/git-version-control/stage4/images/remotes.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v1.2.0/lessons/git-version-control/stage4/images/remotes.png"></div>
 
 A very popular choice for this is Github, which is a hosted Git service, and allows you to create internet-accessible Git repositories that anyone can contribute to or pull from.
 
@@ -14,7 +14,7 @@ It's useful to point out that everything we've talked about in this lesson thus 
 
 We'll be using a few of these features in this chapter - but it's important to remember that there is an important distinction between platform-agnostic "git fundamentals" like commits and branches, and platform-specific features like Issues and Pull Requests that may vary from platform to platform. They are complementary, but Git is not the same thing as Github.
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/git-version-control/stage4/images/gitnotgithub.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v1.2.0/lessons/git-version-control/stage4/images/gitnotgithub.png"></div>
 
 In your journey, you're likely to run into two main use cases for using Git remotes:
 
@@ -53,7 +53,7 @@ First, click the button in the top-right corner of this tab pane titled "Sign In
 
 Once signed in, click the dropdown in the top-right corner and select "Settings":
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/git-version-control/stage4/images/settings.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v1.2.0/lessons/git-version-control/stage4/images/settings.png"></div>
 
 On this screen, perform the steps listed and shown below:
 
@@ -62,7 +62,7 @@ On this screen, perform the steps listed and shown below:
 3. Click inside the box titled "Content" that opens, and press `Ctrl`+`v` to paste the contents of your clipboard, which should still contain the public SSH key we copied earlier.
 4. Click "Add Key"
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/git-version-control/stage4/images/addkey.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v1.2.0/lessons/git-version-control/stage4/images/addkey.png"></div>
 
 Once this is done, you should be ready to interact with Gitea via Git within the `linux1` tab as an authenticated user. The rest of this lesson won't work properly if you haven't done this, so make sure you've followed these instructions and you haven't seen any obvious errors before proceeding.
 
@@ -74,15 +74,15 @@ For our first exercise, we'll push the contents of the existing repository that 
 
 Click the plus (`+`) icon in the top-right and select "New Repository" from the drop-down.
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/git-version-control/stage4/images/newrepo.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v1.2.0/lessons/git-version-control/stage4/images/newrepo.png"></div>
 
 This will create a new repository within Gitea for us to push our local branch to. On the next screen, enter `myfirstrepo` into the box labeled "Repository Name", and then leave everything else blank and unchecked (this is important!). Scroll down to the bottom and click the green "Create Repository" button.
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/git-version-control/stage4/images/repocreate.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v1.2.0/lessons/git-version-control/stage4/images/repocreate.png"></div>
 
 If you've done it correctly, you should see something like this:
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/git-version-control/stage4/images/blankrepo.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v1.2.0/lessons/git-version-control/stage4/images/blankrepo.png"></div>
 
 This means that Gitea has successfully created the repository, but as instructed, it didn't pre-populate it with any commits, so it's empty. This is a good thing, because we've already been making commits to our repository in the previous sections, so what we would prefer to do is simply push these.
 
@@ -113,7 +113,7 @@ Next, go back to the `remote` tab and click on the "myfirstrepo" link at the top
 
 <button type="button" class="btn btn-primary btn-sm" onclick="switchToTab('remote')">Go to "remote"</button>
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/git-version-control/stage4/images/viewcommits.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v1.2.0/lessons/git-version-control/stage4/images/viewcommits.png"></div>
 
 This is actually a very common exercise. You might start work on a project by just working with Git only, using a local repo on your machine. Later on you might decide to publish your work, and/or collaborate with others, and this workflow allows you to push what you already have to a service like Github.
 
@@ -137,21 +137,21 @@ For this example, we want to take a look at a repository that already exists. He
 
 Click "Explore" at the top of the page. You'll see the repository we created in the previous exercise, but you'll also see one we haven't explored yet:
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/git-version-control/stage4/images/repositories.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v1.2.0/lessons/git-version-control/stage4/images/repositories.png"></div>
 
 Click the link to `initech/network-configs`:
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/git-version-control/stage4/images/initechrepo.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v1.2.0/lessons/git-version-control/stage4/images/initechrepo.png"></div>
 
 Let's say we want to change the autonomous system number in one of Initech's network configuration files. The difference here is that not only to we need to make a change to a remote repository, the `initech/network-configs` repository doesn't even belong to us; we are not permitted to simply push commits directly to the repository. This is where the "Fork and Pull" workflow comes in handy.
 
 Click the "fork" button in the top right of the `initech/network-configs` repository. This will bring up a form:
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/git-version-control/stage4/images/newfork.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v1.2.0/lessons/git-version-control/stage4/images/newfork.png"></div>
 
 Just accept the defaults here, and click "Fork Repository". This will result in the following screen:
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/git-version-control/stage4/images/janefork.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v1.2.0/lessons/git-version-control/stage4/images/janefork.png"></div>
 
 This is our new forked repository - a copy of the original repository that we are able to push directly to. Now that we have this, we can use a new command - `git clone`. This command downloads a remote repository to our local machine. Let's first navigate back to our home directory, so we don't accidentally clone this repository inside the one from the previous exercise.
 
@@ -224,19 +224,19 @@ In our case, we'll open a Pull Request now. Switch back to the `remote` tab:
 
 If you're not already there, navigate back to our fork via the "Explore" link on the top of the screen. On this page, you'll notice there's a button in the middle that says "New Pull Request":
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/git-version-control/stage4/images/janefork-newpr.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v1.2.0/lessons/git-version-control/stage4/images/janefork-newpr.png"></div>
 
 Select that, and you'll be presented with the option to select the branches you wish to compare. Make sure they're set like the screenshot below - you want be comparing `initech:master` with `jane:change-as-number`:
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/git-version-control/stage4/images/newpr1.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v1.2.0/lessons/git-version-control/stage4/images/newpr1.png"></div>
 
 Click the green "New Pull Request" button, and you'll be presented with a form:
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/git-version-control/stage4/images/newpr2.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v1.2.0/lessons/git-version-control/stage4/images/newpr2.png"></div>
 
 The title and description on this screen is up to you - and is likely to be another thing that will depend on the project that you are contributing to. Different projects require different information in these fields. For now, just click the green "Create Pull Request" button. If you've done this correctly, you'll see something like this:
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/git-version-control/stage4/images/propened.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v1.2.0/lessons/git-version-control/stage4/images/propened.png"></div>
 
 At this point, the PR is open, and conversation can take place within this page. You might get comments from a reviewer, asking for additional changes, in which case you can add commits to your local branch and re-run `git push`, and the PR will automatically be updated. This process continues until the PR is either closed or merged back into the upstream repository.
 
