@@ -1,0 +1,9 @@
+slug: gitea
+description: gitea
+privileged: false
+configUser: root
+configPassword: antidotepassword
+sshUser: "foo"
+sshPassword: "bar"
+networkInterfaces:
+  - 'eth0'

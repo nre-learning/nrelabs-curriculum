@@ -37,6 +37,7 @@
 - Downgrade netmiko since utility is still python2 [#301](https://github.com/nre-learning/nrelabs-curriculum/pull/301)
 - Fix Terraform diagram [#305](https://github.com/nre-learning/nrelabs-curriculum/pull/305)
 - Final fixes for v1.1.0 [#306](https://github.com/nre-learning/nrelabs-curriculum/pull/306)
+- Add stage4 for Git lesson: remotes [#322](https://github.com/nre-learning/nrelabs-curriculum/pull/322)
 
 ## v1.0.0 - August 08, 2019
 

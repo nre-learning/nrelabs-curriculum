@@ -1,6 +1,3 @@
-# Version Control with Git
-## Part 4 - Oops! I Made A Mistake!
-
 None of us are perfect, and we all make mistakes. The robustness and complexity of a tool like Git has a way of highlighting this truth. You've probably heard stories of people committing things like passwords or Slack tokens to a GitHub repository. The reality is that when you get into the groove with Git, it can be really easy to commit more than you intended.
 
 What's worse is that if you've committed sensitive information to a Git repository, simply adding another commit to remove the information isn't enough. Anyone can still plainly see the information in the Git history, even though it's been removed in a more recent commit. What we actually need to be able to do is go back in time and **actually** undo the change itself.
