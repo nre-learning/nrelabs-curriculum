@@ -6,15 +6,15 @@ Enter the concept of Git "remotes". Defining a remote is a way of telling Git th
 
 One advantage of doing this is that remotes offer a sort of neutral "middle ground" where users all over the world can collaborate on the same repository.
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-stage-4-remotes/lessons/git-version-control/stage4/images/remotes.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/git-version-control/stage4/images/remotes.png"></div>
 
 A very popular choice for this is Github, which is a hosted Git service, and allows you to create internet-accessible Git repositories that anyone can contribute to or pull from.
 
-It's useful to point out that everything we've talked about in this lesson thus far, including the concept of remotes in general, are core to Git itself. We will often refer to these as "Git fundamentals", meaning they apply to any software system or service like Github that is centered around Git. Services like Github, Gitlab, Bitbucket, Gitea, etc build on top of these fundamentals to add additional features to make it easier to collaborate on Git repositories. Things like Issues and Pull Requests are not built in to Git, but rather are features implemented by these services for the purposes of making Git a more collaborative experience on their platform.
+It's useful to point out that everything we've talked about in this lesson thus far, including the concept of remotes in general, are core to Git itself. We will often refer to these as "Git fundamentals", meaning they are the core features and tools within Git itself, and work the same way on any platform. Services like Github, Gitlab, Bitbucket, or Gitea build on top of these fundamentals by adding additional features for collaborating on Git repositories. Things like Issues and Pull Requests are not built in to Git, but rather are features implemented by these services for the purposes of making Git a more collaborative experience on their platform.
 
 We'll be using a few of these features in this chapter - but it's important to remember that there is an important distinction between platform-agnostic "git fundamentals" like commits and branches, and platform-specific features like Issues and Pull Requests that may vary from platform to platform. They are complementary, but Git is not the same thing as Github.
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-stage-4-remotes/lessons/git-version-control/stage4/images/gitnotgithub.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/git-version-control/stage4/images/gitnotgithub.png"></div>
 
 In your journey, you're likely to run into two main use cases for using Git remotes:
 
@@ -53,7 +53,7 @@ First, click the button in the top-right corner of this tab pane titled "Sign In
 
 Once signed in, click the dropdown in the top-right corner and select "Settings":
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-stage-4-remotes/lessons/git-version-control/stage4/images/settings.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/git-version-control/stage4/images/settings.png"></div>
 
 On this screen, perform the steps listed and shown below:
 
@@ -62,7 +62,7 @@ On this screen, perform the steps listed and shown below:
 3. Click inside the box titled "Content" that opens, and press `Ctrl`+`v` to paste the contents of your clipboard, which should still contain the public SSH key we copied earlier.
 4. Click "Add Key"
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-stage-4-remotes/lessons/git-version-control/stage4/images/addkey.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/git-version-control/stage4/images/addkey.png"></div>
 
 Once this is done, you should be ready to interact with Gitea via Git within the `linux1` tab as an authenticated user. The rest of this lesson won't work properly if you haven't done this, so make sure you've followed these instructions and you haven't seen any obvious errors before proceeding.
 
@@ -74,15 +74,15 @@ For our first exercise, we'll push the contents of the existing repository that 
 
 Click the plus (`+`) icon in the top-right and select "New Repository" from the drop-down.
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-stage-4-remotes/lessons/git-version-control/stage4/images/newrepo.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/git-version-control/stage4/images/newrepo.png"></div>
 
 This will create a new repository within Gitea for us to push our local branch to. On the next screen, enter `myfirstrepo` into the box labeled "Repository Name", and then leave everything else blank and unchecked (this is important!). Scroll down to the bottom and click the green "Create Repository" button.
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-stage-4-remotes/lessons/git-version-control/stage4/images/repocreate.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/git-version-control/stage4/images/repocreate.png"></div>
 
 If you've done it correctly, you should see something like this:
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-stage-4-remotes/lessons/git-version-control/stage4/images/blankrepo.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/git-version-control/stage4/images/blankrepo.png"></div>
 
 This means that Gitea has successfully created the repository, but as instructed, it didn't pre-populate it with any commits, so it's empty. This is a good thing, because we've already been making commits to our repository in the previous sections, so what we would prefer to do is simply push these.
 
@@ -90,7 +90,7 @@ You may notice that on the last screen there's a section titled "Pushing an exis
 
 As we covered earlier, a "remote" is a Git repository that's running on another computer. Git allows us to define these remotes by name first, and then gives us commands to interact with these remotes - either pulling commits from them, or pushing commits to them.
 
-The first command that Gitea wants us to run - `git remote add` defines a new remote with the name of `origin`, and stores this in the local repository configuration `.git/config`. By the way, the name `origin` is a common convention for the name of a Git remote, but not required (in the second use case we'll encounter a need to actually have two remotes defined for the same repository). The final parameter for this command is the location for this remote - in this case, we're using the hostname `remote` to indicate the system we want to connect to, and then `jane/myfirstrepo.git` to specify the path to the repository.
+The first command that Gitea wants us to run (`git remote add`) defines a new remote with the name of `origin`, and stores this in the local repository configuration `.git/config`. The name `origin` is a common convention for the name of a Git remote, but not a strict requirement. The final parameter for this command is the location for this remote - in this case, we're using the hostname `remote` to indicate the system we want to connect to, and then `jane/myfirstrepo.git` to specify the path to the repository.
 
 Enter the `myfirstrepo` repository that we've been working with, and run this command to set up the remote:
 
@@ -113,11 +113,13 @@ Next, go back to the `remote` tab and click on the "myfirstrepo" link at the top
 
 <button type="button" class="btn btn-primary btn-sm" onclick="switchToTab('remote')">Go to "remote"</button>
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-stage-4-remotes/lessons/git-version-control/stage4/images/viewcommits.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/git-version-control/stage4/images/viewcommits.png"></div>
 
 This is actually a very common exercise. You might start work on a project by just working with Git only, using a local repo on your machine. Later on you might decide to publish your work, and/or collaborate with others, and this workflow allows you to push what you already have to a service like Github.
 
 ### Use Case 2 - Contribute to Someone Else's Repository
+
+(This section runs a little long, so you may want to refresh the page here to ensure your lab environment stays active)
 
 The other big use case for working with Git remotes comes when you find an existing repository that belongs to someone else. Maybe this is a popular open source project, or maybe it's something as simple as a personal repository that belongs to a friend. In most cases, you don't have "write access" to these repositories - that is, you are not able to simply push a branch of commits directly to the repository.
 
@@ -135,21 +137,21 @@ For this example, we want to take a look at a repository that already exists. He
 
 Click "Explore" at the top of the page. You'll see the repository we created in the previous exercise, but you'll also see one we haven't explored yet:
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-stage-4-remotes/lessons/git-version-control/stage4/images/repositories.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/git-version-control/stage4/images/repositories.png"></div>
 
 Click the link to `initech/network-configs`:
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-stage-4-remotes/lessons/git-version-control/stage4/images/initechrepo.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/git-version-control/stage4/images/initechrepo.png"></div>
 
 Let's say we want to change the autonomous system number in one of Initech's network configuration files. The difference here is that not only to we need to make a change to a remote repository, the `initech/network-configs` repository doesn't even belong to us; we are not permitted to simply push commits directly to the repository. This is where the "Fork and Pull" workflow comes in handy.
 
 Click the "fork" button in the top right of the `initech/network-configs` repository. This will bring up a form:
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-stage-4-remotes/lessons/git-version-control/stage4/images/newfork.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/git-version-control/stage4/images/newfork.png"></div>
 
 Just accept the defaults here, and click "Fork Repository". This will result in the following screen:
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-stage-4-remotes/lessons/git-version-control/stage4/images/janefork.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/git-version-control/stage4/images/janefork.png"></div>
 
 This is our new forked repository - a copy of the original repository that we are able to push directly to. Now that we have this, we can use a new command - `git clone`. This command downloads a remote repository to our local machine. Let's first navigate back to our home directory, so we don't accidentally clone this repository inside the one from the previous exercise.
 
@@ -189,7 +191,7 @@ git checkout -b change-as-number
 
 Even if you want your work to be merged to the `master` branch of the upstream repository, this will still work. All popular platforms like Github are perfectly capable of merging from a non-standard branch in your repository into the `master` branch on the upstream repository.
 
-For this changes, we'll just change the configured autonomous system number for the `vqfx1.txt` file in this repository. This is just an example though - feel free to make any change you want using `nano` or `vim`:
+For this change, we'll just change the configured autonomous system number for the `vqfx1.txt` file in this repository. This is just an example though - feel free to make any change you want using `nano` or `vim`:
 
 ```
 sed -i s/64001/64010/ vqfx1.txt
@@ -222,27 +224,27 @@ In our case, we'll open a Pull Request now. Switch back to the `remote` tab:
 
 If you're not already there, navigate back to our fork via the "Explore" link on the top of the screen. On this page, you'll notice there's a button in the middle that says "New Pull Request":
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-stage-4-remotes/lessons/git-version-control/stage4/images/janefork-newpr.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/git-version-control/stage4/images/janefork-newpr.png"></div>
 
 Select that, and you'll be presented with the option to select the branches you wish to compare. Make sure they're set like the screenshot below - you want be comparing `initech:master` with `jane:change-as-number`:
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-stage-4-remotes/lessons/git-version-control/stage4/images/newpr1.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/git-version-control/stage4/images/newpr1.png"></div>
 
 Click the green "New Pull Request" button, and you'll be presented with a form:
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-stage-4-remotes/lessons/git-version-control/stage4/images/newpr2.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/git-version-control/stage4/images/newpr2.png"></div>
 
 The title and description on this screen is up to you - and is likely to be another thing that will depend on the project that you are contributing to. Different projects require different information in these fields. For now, just click the green "Create Pull Request" button. If you've done this correctly, you'll see something like this:
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-stage-4-remotes/lessons/git-version-control/stage4/images/propened.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/git-version-control/stage4/images/propened.png"></div>
 
-At this point, the PR is open, and conversation can take place within this page. You might get comments from a reviewer, asking for additional changes, in which case you can add commits to your local branch and re-run `git push`, and the PR will automatically be updated.
+At this point, the PR is open, and conversation can take place within this page. You might get comments from a reviewer, asking for additional changes, in which case you can add commits to your local branch and re-run `git push`, and the PR will automatically be updated. This process continues until the PR is either closed or merged back into the upstream repository.
 
 ## BONUS - How to stay up to date with upstream changes?
 
 Once again, Git is a distributed version control system, which means we **have** to expect that changes can and will happen all the time, and we have to be ready to incorporate these changes.
 
-Even though we've opened a Pull Request, the upstream project isn't going to wait for us. Keep in mind that some open source projects have thousands of contributors, with changes being merged all the time. It's actually quite common that shortly after opening a pull request, the upstream project continues to change, and sometimes these changes need to be brought back into our fork, so we can ensure we're working on the latest copy.
+Even though we've opened a Pull Request, the upstream project isn't going to wait for us. Keep in mind that some open source projects have thousands of contributors, with changes being merged all the time. It's actually quite common that shortly after opening a pull request, the upstream project continues to change, and sometimes these changes need to be brought back into our fork, so we can ensure we're working on the latest copy. However, our fork doesn't automatically update itself - this is something we have to do ourselves.
 
 Git actually allows us to configure multiple remotes in a given repository. Even though we cloned the `network-configs` repository from our fork (which is currently set to the remote named `origin`), we can add a second one for the purposes of pulling down changes from the upstream `initech` repository. This can be done using the same syntax we saw earlier - but note the name `upstream` so it's obvious where this remote comes from:
 
@@ -269,5 +271,5 @@ git push origin change-as-number
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-The initial step of adding the `upstream` remote should only be done once, but the remaining commands can be done repeatedly whenever you need to get your pull request updated with the latest commits from the `master` branch you're trying to merge into.
+The initial step of adding the `upstream` remote should only be done once, but the remaining commands can be done repeatedly whenever you need to get your pull request updated with the latest commits from the upstream repository's `master` branch. Doing so helps to ensure your pull request can eventually get merged without problems.
 
