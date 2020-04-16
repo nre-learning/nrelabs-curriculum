@@ -4,8 +4,12 @@ notifications:
 services:
   - docker
 before_install:
+  # TODO(mierdin): use binaries directly, in a separate script
   - docker pull antidotelabs/antidote-core:latest
   - docker run -v $(pwd):/antidote antidotelabs/antidote-core antidote validate /antidote
 install:
   - ./check-changelog.sh
 sudo: false
+after_success:
+  # - bash <(curl -s https://codecov.io/bash)
+  - ./request-preview.sh
