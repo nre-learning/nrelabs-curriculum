@@ -8,6 +8,21 @@ before_install:
   - docker pull antidotelabs/antidote-core:latest
   - docker run -v $(pwd):/antidote antidotelabs/antidote-core antidote validate /antidote
 install:
+
+  # TODO(mierdin): This is not working.
+  # $ ./check-changelog.sh
+
+  # From https://github.com/nre-learning/nrelabs-curriculum
+
+  #  * branch            master     -> FETCH_HEAD
+
+  # CHANGELOG.md check-changelog.sh collections CONTRIBUTING.md curriculum.meta.yaml images lessons LICENSE README.md request-preview.sh (HEAD detached at 305d3e4) master
+
+  # 305d3e479a8928712df3d2488b71bd370cf1ff52
+
+  # The command "./check-changelog.sh" exited with 0.
+
+
   - ./check-changelog.sh
 sudo: false
 after_success:
