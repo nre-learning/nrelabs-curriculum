@@ -1,11 +1,11 @@
 language: generic
 notifications:
   email: false
-services:
-  - docker
 before_install:
-  - docker pull antidotelabs/antidote-core:latest
-  - docker run -v $(pwd):/antidote antidotelabs/antidote-core antidote validate /antidote
+  - curl -Lo antidote.tar.gz https://github.com/nre-learning/antidote-core/releases/download/v0.6.0/antidote-linux-amd64.tar.gz && tar xvzf antidote.tar.gz
 install:
+  - ./antidote validate .
   - ./check-changelog.sh
 sudo: false
+after_success:
+  - ./request-preview.sh

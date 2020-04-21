@@ -2,7 +2,11 @@
 
 ## In development
 
+
+## v1.2.0 - April 14, 2020
+
 - Updates for 0.6.0 Compatibility [#317](https://github.com/nre-learning/nrelabs-curriculum/pull/317)
+- Add stage4 for Git lesson: remotes [#322](https://github.com/nre-learning/nrelabs-curriculum/pull/322)
 
 ## v1.1.2 - April 06, 2020
 
