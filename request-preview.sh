@@ -29,7 +29,7 @@ curl $url --header "Content-Type: application/json" \
   --data "{
     \"branch\":\"$TRAVIS_PULL_REQUEST_BRANCH\",
     \"pullRequest\":\"$TRAVIS_PULL_REQUEST\",
-    \"repoSlug\":\"$TRAVIS_REPO_SLUG\",
+    \"repoSlug\":\"$TRAVIS_PULL_REQUEST_SLUG\",
     \"prSha\":\"$TRAVIS_PULL_REQUEST_SHA\"
   }"
 
