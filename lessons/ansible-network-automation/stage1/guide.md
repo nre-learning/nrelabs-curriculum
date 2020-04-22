@@ -110,7 +110,7 @@ You have completed Part 2!
 
 These exercises are made possible by [Juniper Networks](https://juniper.net) and the [Red Hat Ansible Automation Platform](https://www.ansible.com/products/automation-platform)
 
-<img src="https://github.com/nre-learning/nrelabs-curriculum/blob/master/lessons/tools/lesson-41-ansible-network/rh-ansible-platform.png?raw=true"></div>
+<img src="https://github.com/nre-learning/nrelabs-curriculum/blob/v1.2.0/lessons/ansible-network-automation/rh-ansible-platform.png?raw=true"></div>
 
 Check out our free network automation e-books on https://ansible.com:
 - [Part 1: Modernize Your Network with Red Hat](https://www.ansible.com/resources/ebooks/network-automation-for-everyone)
