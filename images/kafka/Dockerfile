@@ -22,6 +22,12 @@ ENV KAFKA_VERSION=$kafka_version \
 
 ENV PATH=${PATH}:${KAFKA_HOME}/bin
 
+ENV KAFKA_ADVERTISED_LISTENERS="INSIDE://:9093,OUTSIDE://100.123.34.0:9092" \
+    KAFKA_LISTENER_SECURITY_PROTOCOL_MAP="INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT" \
+    KAFKA_LISTENERS="INSIDE://:9093,OUTSIDE://:9092" \
+    KAFKA_ZOOKEEPER_CONNECT="zookeeper:2181" \
+    KAFKA_INTER_BROKER_LISTENER_NAME="INSIDE"
+
 COPY download-kafka.sh start-kafka.sh broker-list.sh create-topics.sh versions.sh /tmp/
 
 RUN apk add --no-cache bash curl jq docker \
