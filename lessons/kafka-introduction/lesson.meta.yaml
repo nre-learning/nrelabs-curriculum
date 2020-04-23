@@ -1,0 +1,41 @@
+name: kafka
+slug: kafka event bus 
+category: tools
+diagram: https://github.com/wouyang628/kafkaForEventService/blob/master/images/highlevel.png
+video: ""
+tier: local
+description: using kafka event bus for event produce and consume
+shortDescription: short description
+tags:
+- kafka
+stages:
+- description: stage 0
+  guideType: markdown
+  stageVideo: ""
+endpoints:
+- name: linux
+  image: antidotelabs/utility
+  presentations:
+  - name: linux_cli
+    port: 22
+    type: ssh
+  - name: linux_cli2
+    port: 22
+    type: ssh  
+- name: zookeeper
+  image: wurstmeister/zookeeper
+  configurationType: ansible
+  additionalPorts: [2181]
+- name: kafka
+  image: wurstmeister/kafka
+  presentations:
+  - name: kafka_cli1
+    port: 22
+    type: ssh
+  - name: kafka_cli2
+    port: 22
+    type: ssh
+  additionalPorts: [9092]
+authors:
+- name: Wushu(Wilson) Ouyang
+  link: ""
