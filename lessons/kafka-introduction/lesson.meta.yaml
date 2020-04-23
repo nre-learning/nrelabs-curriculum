@@ -1,5 +1,5 @@
 name: kafka
-slug: kafka event bus 
+slug: kafka-bus 
 category: tools
 diagram: https://github.com/wouyang628/kafkaForEventService/blob/master/images/highlevel.png
 video: ""
@@ -14,7 +14,7 @@ stages:
   stageVideo: ""
 endpoints:
 - name: linux
-  image: antidotelabs/utility
+  image: utility
   presentations:
   - name: linux_cli
     port: 22
@@ -23,11 +23,10 @@ endpoints:
     port: 22
     type: ssh  
 - name: zookeeper
-  image: wurstmeister/zookeeper
-  configurationType: ansible
+  image: zookeeper
   additionalPorts: [2181]
 - name: kafka
-  image: wurstmeister/kafka
+  image: kafka
   presentations:
   - name: kafka_cli1
     port: 22
