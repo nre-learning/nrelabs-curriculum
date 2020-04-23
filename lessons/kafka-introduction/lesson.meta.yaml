@@ -1,11 +1,12 @@
-name: kafka
-slug: kafka-bus 
+---
+name: Kafka Introduction
+slug: kafka-introduction 
 category: tools
 diagram: https://github.com/wouyang628/kafkaForEventService/blob/master/images/highlevel.png
 video: ""
-tier: local
+tier: prod
 description: using kafka event bus for event produce and consume
-shortDescription: short description
+shortDescription: kafka
 tags:
 - kafka
 stages:
