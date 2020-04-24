@@ -1,0 +1,9 @@
+slug: kafka
+description: Kafka image
+privileged: false
+sshUser: antidote
+sshPassword: antidotepassword
+configUser: antidote
+configPassword: antidotepassword
+networkInterfaces:
+  - 'eth0'
