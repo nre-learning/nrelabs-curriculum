@@ -1,0 +1,109 @@
+admin/<blank>
+
+Takes a few seconds to start, will show pending-AAA in meantime, then show login prompt when ready
+
+
+```
+ ❯ docker exec -it exos /bin/bash                                                                                                [10:51:24]
+root@5984559aeda8:/# ps -aux
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.0   3736  2908 ?        Ss   17:49   0:00 /bin/bash /launch.sh
+root        78  0.0  0.0   5780  2296 ?        Ss   17:49   0:00 SCREEN -d -m socat TCP-LISTEN:22,fork TCP:127.0.0.1:2022
+root        80  0.1  0.0   6824  1968 pts/0    Ss+  17:49   0:00 socat TCP-LISTEN:22,fork TCP:127.0.0.1:2022
+root        81  0.0  0.0   5780  2292 ?        Ss   17:49   0:00 SCREEN -d -m socat UDP-LISTEN:161,fork UDP:127.0.0.1:2161
+root        83  0.1  0.0   6824  1968 pts/1    Ss+  17:49   0:00 socat UDP-LISTEN:161,fork UDP:127.0.0.1:2161
+root        84  0.0  0.0   5780  2348 ?        Ss   17:49   0:00 SCREEN -d -m socat TCP-LISTEN:830,fork TCP:127.0.0.1:2830
+root        86  0.1  0.0   6824  1992 pts/2    Ss+  17:49   0:00 socat TCP-LISTEN:830,fork TCP:127.0.0.1:2830
+root        87  0.0  0.0   5780  2308 ?        Ss   17:49   0:00 SCREEN -d -m socat TCP-LISTEN:8080,fork TCP:127.0.0.1:2880
+root        88  0.0  0.0   2296   688 ?        S    17:49   0:00 sleep 100000
+root        89  0.1  0.0   6824  1920 pts/3    Ss+  17:49   0:00 socat TCP-LISTEN:8080,fork TCP:127.0.0.1:2880
+root        90  0.0  0.0   4000  3252 pts/4    Ss   17:49   0:00 /bin/bash
+root       108 57.3  1.5 1448376 244336 pts/4  Sl+  17:51   0:04 /usr/bin/qemu-system-x86_64 --enable-kvm -cpu core2duo -display none -machine pc -monitor tcp:0.0.0.0:4000,server,nowait -m 1024 -serial telnet:0.
+root       112  0.0  0.0   3868  3244 pts/5    Ss   17:51   0:00 /bin/bash
+root       117  0.0  0.0   7924  2824 pts/5    R+   17:51   0:00 ps -aux
+root@5984559aeda8:/# telnet 127.0.0.1 5000
+Trying 127.0.0.1...
+Connected to 127.0.0.1.
+Escape character is '^]'.
+
+
+(pending-AAA) login: 
+
+(pending-AAA) login: 
+Maximum number of login attempts reached!
+
+
+Authentication Service (AAA) on the master node is now available for login.
+
+
+login: admin
+password: 
+
+ExtremeXOS
+Copyright (C) 1996-2020 Extreme Networks. All rights reserved.
+This product is protected by one or more US patents listed at https://www.extremenetworks.com/company/legal/patents/ along with their foreign counterparts.
+==============================================================================
+
+
+Press the <tab> or '?' key at any time for completions.
+Remember to save your configuration changes.
+
+
+This switch currently has some management methods enabled for convenience reasons.
+Please answer these questions about the security settings you would like to use.
+You may quit and accept the default settings by entering 'q' at any time.
+
+!!!!  NOTE: Spanning Tree default changed in ExtremeXOS 22.2  !!!!
+
+Multiple Spanning Tree Protocol (MSTP) is enabled by default to prevent
+broadcast storms
+
+Would you like to disable MSTP? [y/N/q]: [   82.893305] Process expy pid 973 died with signal 11
+[   82.895434] Code:
+[   82.896724] 7f4de2797468:   e7   e8   02   39   ff   ff   48   8b 
+[   82.899219] 7f4de2797470:   55   18   48   83   ec   08   49   89 
+[   82.901305] 7f4de2797478:   d9   48   8d   0d   40   97   00   00 
+[   82.903265] 7f4de2797480:   41   b8   2d   00   00   00   31   f6 
+[   82.905245] 7f4de2797488:  <88>  04   1a   48   8b   45   18   48 
+[   82.907063] 7f4de2797490:   8d   15   42   97   00   00   0f   be 
+
+quit
+
+The switch offers an enhanced security mode. Would you like to read more,
+and have the choice to enable this enhanced security mode? [y/N/q]: 
+
+Telnet is enabled by default. Telnet is unencrypted and has been the target of 
+security exploits in the past.
+
+Would you like to disable Telnet? [y/N/q]: 
+
+SNMP access is disabled by default. SNMPv1/v2c uses no encryption, SNMPv3 can be 
+configured to eliminate this problem.
+
+Would you like to enable SNMPv1/v2c? [y/N/q]: 
+
+Would you like to enable SNMPv3? [y/N/q]: 
+
+All ports are enabled by default. In some secure applications, it maybe more 
+desirable for the ports to be turned off.
+
+Would you like unconfigured ports to be turned off by default? [y/N/q]: 
+
+No failsafe account username and password are in effect.  If you choose to 
+configure them, please remember them because they cannot be recovered. 
+Would you like to configure the failsafe username and password now? [y/N/q]: 
+Since you have chosen less secure management methods, please remember to 
+increase the security of your network by taking the following actions: 
+
+  * change your admin password
+
+* EXOS-VM.1 # enable ssh
+WARNING: Generating new server host key
+This could take up to 1 minute and cannot be cancelled.  Continue? (y/N) Yes
+
+Key Generated.
+.* EXOS-VM.2 # Configuration session timed out!
+
+login: 
+
+```
