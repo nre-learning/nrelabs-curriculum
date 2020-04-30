@@ -1,0 +1,13 @@
+slug: exos
+description: exos
+privileged: true
+sshUser: antidote
+sshPassword: antidotepassword
+configUser: antidote
+configPassword: antidotepassword
+networkInterfaces:
+  - '1'
+  - '2'
+  - '3'
+  - '4'
+  - '5'
