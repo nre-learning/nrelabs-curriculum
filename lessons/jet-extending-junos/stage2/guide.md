@@ -12,7 +12,7 @@ We will use the protoc compiler to compile the IDL file. You can download the ID
 
 It's time to start the lab!
 
-To save time, the IDL file is pre-downloaded already. First we need to unarchive it:
+To save time, the IDL file is pre-downloaded already. First we need to extract it:
 
 ```
 cd /antidote

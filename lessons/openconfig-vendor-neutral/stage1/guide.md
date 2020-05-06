@@ -39,7 +39,7 @@ cat openconfig-bgp.conf
 
 As you can see, the OpenConfig BGP schema contains common data that BGP requires. This configuration should be able to be provisioned to any network devices that support netconf with OpenConfig.
 
-Here we are using PyEZ (a python module for Junos Netconf connecitity) as a netconf client.
+Here we are using PyEZ (a python module for Junos Netconf connectivity) as a netconf client.
 Start a Python interactive prompt, then load the PyEZ module and create a Junos device object.
 
 _(If you're not familiar with PyEZ, check out the lesson "Junos Automation with PyEZ"!)_

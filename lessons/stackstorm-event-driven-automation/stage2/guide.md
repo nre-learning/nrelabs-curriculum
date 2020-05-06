@@ -20,7 +20,7 @@ The `examples` pack, which is one of the few built-in StackStorm packs, is prelo
 
 [ActionChains](https://docs.stackstorm.com/actionchain.html) are the simplest (but also the least robust) workflow option in StackStorm. If you want to run a sequence of actions, with some minimal error-handling, ActionChains are probably sufficient for your purposes. They're the "bare minimum" workflows option in StackStorm.
 
-The "hello world" example for ActionChains has to be the "echochain" - in particular, `examples.echochain_param`. This is a simple chain that takes a few parameters, and uses them as variables, inserted into a set of "echo" commands, resulting in some text in stdout:
+The "hello world" example for ActionChains has to be the `echochain` - in particular, `examples.echochain_param`. This is a simple chain that takes a few parameters, and uses them as variables, inserted into a set of "echo" commands, resulting in some text in stdout:
 
 ```
 cat /opt/stackstorm/packs/examples/actions/chains/echochain_param.yaml

@@ -8,7 +8,7 @@ cat dir1/static_route.j2
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-Start the python shell and import the `FileSystemLoader` and `Environment` for loading the Jinja template. The `env` instance allows you to use an external Jinja template using FileSystemLoader:
+Start the python shell and import the `FileSystemLoader` and `Environment` for loading the Jinja template. The `env` instance allows you to use an external Jinja template using `FileSystemLoader`:
 
 ```
 python
@@ -36,7 +36,7 @@ quit()
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 ### Example: 2
-Below is the `l3_interface.j2` template stored in dir2 sub-directory.
+Below is the `l3_interface.j2` template stored in `dir2` sub-directory.
 
 ```
 cat dir2/l3_interface.j2
