@@ -2,6 +2,7 @@
 
 ## In development
 
+- Git lesson stage 5 [#324](https://github.com/nre-learning/nrelabs-curriculum/pull/324)
 
 ## v1.2.0 - April 14, 2020
 
