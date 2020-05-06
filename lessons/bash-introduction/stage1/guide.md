@@ -37,7 +37,7 @@ export foo
 The export command sets the "export" attribute of the variable.  This makes 'foo' an *environment variable*.  This just means that child processes of the current shell can access these variables.  The shell that is created to execute 'echofoo.sh' is a child process.  Without the export attribute being set, 'foo' is just a *shell variable.*
 
 ---
-> **_NOTE:_**  Environment variable names should be all uppercase.  Shell variables should be all undercase.  It is possible to start a variable name with something other than a letter, but don't do that.  It's not recommended.  In either case, you should use underscores to seperate words in a variable's name.
+> **_NOTE:_**  Environment variable names should be all uppercase.  Shell variables should be all undercase.  It is possible to start a variable name with something other than a letter, but don't do that.  It's not recommended.  In either case, you should use underscores to separate words in a variable's name.
 
 ---
 
@@ -53,7 +53,7 @@ cat /antidote/stage1/exportvar.sh
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-Ok, so we're going to create 'bar' then call a script to echo it's value back to us.  We know this won't work.  Then we export 'bar' and call that script again and of course we should now see the value of 'bar' echo'd back.
+Ok, so we're going to create 'bar' then call a script to echo it's value back to us.  We know this won't work.  Then we export 'bar' and call that script again and of course we should now see the value of 'bar' echoed back.
 
 ```
 /antidote/stage1/exportvar.sh

@@ -18,7 +18,7 @@ interfaces = [{'interface': 'ge-0/0/0', 'ip_address': '192.168.1.1'},
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-In Part2, we generated configurations for all interfaces that were passed to the template. Wwhat if you are only interested in generating the  configuration for the management interface? For this particular example we will be using the `if` condition. It is similar to the python `if` condition, except for some slight syntax differences:
+In Part2, we generated configurations for all interfaces that were passed to the template. What if you are only interested in generating the  configuration for the management interface? For this particular example we will be using the `if` condition. It is similar to the python `if` condition, except for some slight syntax differences:
 
 ```
 {% if condition %}

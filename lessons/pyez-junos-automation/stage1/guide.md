@@ -23,7 +23,7 @@ dev.open()
 
 This is a much simpler way to accomplish the same thing we did manually in the previous section!
 
-You should see `Device(vqfx)` in the terminal; that means PyEZ is successfully connect and authenticate to the Junos device, and return the Device object. If you're trying to implement this in your own environment, you may see an Exception raised, like a ConnectTimeoutError or ConnectAuthError. These mean that PyEZ cannot reach your device's NETCONF API, or that your credentials are invalid, respectively.
+You should see `Device(vqfx)` in the terminal; that means PyEZ is successfully connect and authenticate to the Junos device, and return the Device object. If you're trying to implement this in your own environment, you may see an Exception raised, like a `ConnectTimeoutError` or `ConnectAuthError`. These mean that PyEZ cannot reach your device's NETCONF API, or that your credentials are invalid, respectively.
 
 Next, we'll use a special `pprint()` function to print this device's basic information in a way that's easy for us to read.
 

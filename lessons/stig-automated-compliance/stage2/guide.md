@@ -1,10 +1,10 @@
-In the previous labs, we used NAPALM and JSNAPy to check the [STIG for Juniper devices](https://stigviewer.com/stig/infrastructure_router__juniper/) were found to be in compliance for the V-3969 finding.  NAPALM and JSNAPy are great for many compliance checks like looking for the existence of a configuration setting, but they may fall short when the check requires more detailed analysis of the network devices configuration and operational state or we need some "glue" to bind mutiple compliance checks together or report back findings in a specific manner.  
+In the previous labs, we used NAPALM and JSNAPy to check the [STIG for Juniper devices](https://stigviewer.com/stig/infrastructure_router__juniper/) were found to be in compliance for the V-3969 finding.  NAPALM and JSNAPy are great for many compliance checks like looking for the existence of a configuration setting, but they may fall short when the check requires more detailed analysis of the network devices configuration and operational state or we need some "glue" to bind multiple compliance checks together or report back findings in a specific manner.
 
 In this lab, we'll look at what it takes to automate a STIG compliance check using python scripts and leveraging the PyEZ framework and PyEZ Tables and Views (PyEZ is covered in another lesson). We'll write our own custom table to retrieve specific configuration items to make it easier to deal with XML formatted data.  
 
-Custom Op and Config tables are written in YAML; their usage wth PyEZ is documented [here](https://pyez.readthedocs.io/en/latest/TableView.html).
+Custom Op and Config tables are written in YAML, and their usage wth PyEZ is documented [here](https://pyez.readthedocs.io/en/latest/TableView.html).
 
-We'll begin by starting up the python interpretter, defining a PyEZ device and connecting to 'vqfx1'.
+We'll begin by starting up the python interpreter, defining a PyEZ device and connecting to 'vqfx1'.
 
 ```
 python -Wi
@@ -24,7 +24,7 @@ show configuration snmp | display xml
 ``` 
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', this)">Run this snippet</button>
 
-Since we are examining the configuration, we need to use a ConfigTable, which maps XML paths, elements and attributes into easier to understand and parse YAML syntax.  We need a list of communities, and their authorization level.  All of the relevant configuration we need to check is located under the XML element `community` with a parent of `snmp`.  We can translate this into an XPATH of `snmp/community` to use in our queries.  The communities are all listed at the XPATH `snmp/community`, so we will define a table called `SNMPTable`, and instruct it to fetch the configuration that matches this XPATH statment with a `get` instruction.  This will create a nested dictionary of element names to their values starting at our XPATH.
+Since we are examining the configuration, we need to use a ConfigTable, which maps XML paths, elements and attributes into easier to understand and parse YAML syntax.  We need a list of communities, and their authorization level.  All of the relevant configuration we need to check is located under the XML element `community` with a parent of `snmp`.  We can translate this into an XPATH of `snmp/community` to use in our queries.  The communities are all listed at the XPATH `snmp/community`, so we will define a table called `SNMPTable`, and instruct it to fetch the configuration that matches this XPATH statement with a `get` instruction.  This will create a nested dictionary of element names to their values starting at our XPATH.
 
 We can save this in python to a variable we'll call `SNMPYAML`.
 
@@ -60,7 +60,7 @@ globals().update(FactoryLoader().load(yaml.load(SNMPYAML)))
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-We can then fetch the configuraiton from the device. After the following snippet is run, you should see that we successfully retrieved 1 item, matching the number of communities that we have defined on vqfx1.
+We can then fetch the configuration from the device. After the following snippet is run, you should see that we successfully retrieved 1 item, matching the number of communities that we have defined on vqfx1.
 
 ```
 SNMPTable(dev).get()
@@ -76,7 +76,7 @@ type(SNMPTable(dev).get())
 
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-Using the builtin python `dir` function, we can take a quick peek at all of the attributes and objects that are part of our SNMPTable.
+Using the built-in python `dir` function, we can take a quick peek at all of the attributes and objects that are part of our `SNMPTable`.
 
 ```
 dir(SNMPTable(dev).get())
@@ -142,7 +142,7 @@ EOF
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
 
-We'll create an accompaning python file to allow us to import this YAML file as a module, doing the work of `FactoryLoader` above.  
+We'll create an accompanying python file to allow us to import this YAML file as a module, doing the work of `FactoryLoader` above.  
 
 ```
 cat > tables/config_tables.py << EOF
@@ -172,7 +172,7 @@ EOF
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-Next, we'll import all of the python modules needed to run our script, starting with the `Device` module from the `jnpr.junos` package.  We'll also import our `SNMPTable` ConfitTable we created earlier and placed in the `tables` directory, as well as a `warnings` module which we'll use to clean up some of our output at runtime.
+Next, we'll import all of the python modules needed to run our script, starting with the `Device` module from the `jnpr.junos` package.  We'll also import our `SNMPTable` Config Table we created earlier and placed in the `tables` directory, as well as a `warnings` module which we'll use to clean up some of our output at runtime.
 
 ```
 cat >> V_3969.py << EOF
@@ -185,7 +185,7 @@ EOF
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-We'll turn the brunt of our code into a Python function for the checking done above.  This check is for a STIG Rule called `NET0984`, which is a component of the STIG vulnerability `V-3969`.  A STIG vulnerability can consist of multiple rules, however in this case the only rule that we need to check is `NET0984`.  It will operate on any PyEZ `junpr.junos` Device which we'll pass to the function as an argument.  We'll add in a variable `check_pass` to keep track if we had any communties that violated our check for an overall pass/fail grade, some comments, and print statements that give some more information about what we've found, and what we need to do to fix any security vulnerabilities encountered.
+We'll turn the brunt of our code into a Python function for the checking done above.  This check is for a STIG Rule called `NET0984`, which is a component of the STIG vulnerability `V-3969`.  A STIG vulnerability can consist of multiple rules, however in this case the only rule that we need to check is `NET0984`.  It will operate on any PyEZ `junpr.junos` Device which we'll pass to the function as an argument.  We'll add in a variable `check_pass` to keep track if we had any communities that violated our check for an overall pass/fail grade, some comments, and print statements that give some more information about what we've found, and what we need to do to fix any security vulnerabilities encountered.
 
 At the end of our function, we'll return our pass/fail grade.
 
@@ -203,12 +203,12 @@ def NET0894(device):
 
     # Some extra information on what the script is doing
     print "CHECKING NET0894: This examines the configuration for",
-    print "SNMPv2 communties with write access."
+    print "SNMPv2 communities with write access."
 
     # Retrieve the SNMP configuration table
     snmp = SNMPTable(device).get()
 
-    # Loop through all the communties configured on the device
+    # Loop through all the communities configured on the device
     for mydev in snmp:
         # check that the authorization is 'read-only'
         if mydev.authorization != "read-only":
@@ -236,7 +236,7 @@ EOF
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-Then we'll add the main loop.  First it will define our PyEZ Device for `vqfx1`, then call our function using this device as the argument.  Then depending on what we receive back from our function, we'll print an overall pass/fail grade, and finallly nicely close the connection to `vqfx1`.
+Then we'll add the main loop.  First it will define our PyEZ Device for `vqfx1`, then call our function using this device as the argument.  Then depending on what we receive back from our function, we'll print an overall pass/fail grade, and finally nicely close the connection to `vqfx1`.
 
 ```python
 cat >> V_3969.py << EOF
@@ -279,7 +279,7 @@ chmod a+x V_3969.py
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-To make things interesting, we'll add in some new SNMP community vulnerabilies onto `vqfx1`.
+To make things interesting, we'll add in some new SNMP community vulnerabilities onto `vqfx1`.
 ```
 configure
 set snmp community public 
