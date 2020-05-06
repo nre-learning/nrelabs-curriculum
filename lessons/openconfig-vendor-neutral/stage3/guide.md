@@ -63,6 +63,6 @@ show configuration | display translation-script translated-config | no-more
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
 
-To conclude we demostrated how to provision Junos device using custom YANG modules via CLI and NETCONF. Custom YANG modules is flexible that it can be used to define custom service oriented configration models to suit your business needs. Please feel free to to modify the configuration by yourself and see how the translation script helps you to provision the corresponding Junos configuration.
+To conclude we demonstrated how to provision Junos device using custom YANG modules via CLI and NETCONF. Custom YANG modules is flexible that it can be used to define custom service oriented configuration models to suit your business needs. Please feel free to to modify the configuration by yourself and see how the translation script helps you to provision the corresponding Junos configuration.
 
 For further information about custom YANG on Junos please visit Juniper TechLibrary "[Understanding the Management of Nonnative YANG Modules on Devices Running Junos OS](https://www.juniper.net/documentation/en_US/junos/topics/concept/netconf-yang-modules-custom-managing-overview.html)"

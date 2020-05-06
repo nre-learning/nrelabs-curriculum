@@ -1,9 +1,9 @@
 Having the ability to easily generate a device specific configuration from an approved template is a **HUGE** time saver and it provides the consistency that you need to avoid common configuration errors.
 
-In this section, we will do a quick review of the key concepts required to accomplish this task; specificially YAML and Jinja2. View the Lesson Diagram to see a visual representation of the process. For a complete review of YAML Jinja2 please go through those lessons.
+In this section, we will do a quick review of the key concepts required to accomplish this task; specificially YAML and Jinja2. View the Lesson Diagram to see a visual representation of the process. For a complete review of YAML and Jinja2 please go through those lessons.
 
 #### Device Template File
-The most important part of the template generation process is to have a device template with a known good configuration. The configuration in this template usually has to be approved by a configuration control board and the security team. The approved template is then modified to include variables using  Jinja syntax so the substitions can be done by the script.
+The most important part of the template generation process is to have a device template with a known good configuration. The configuration in this template usually has to be approved by a configuration control board and the security team. The approved template is then modified to include variables using  Jinja syntax so the substitutions can be done by the script.
 
 Lets take a look at our sample configuration template that has already had the Jinja syntax added.
 <pre>
@@ -12,7 +12,7 @@ more template.j2
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
-Jinja2 variables can be almost any combinations of numbers or lower case or upper case letters but in this example we will use all captial letters so they stand out better. The variables are surrounded by double curly brackets, for example **{{ HOSTNAME }}**. In the output look for the three template variables (**HOSTNAME, MGMT\_IP and DEFAULT\_GW**). Pay attention to these variable names because they will be set to specific values in the next section using YAML.
+Jinja2 variables can be almost any combinations of numbers or lower case or upper case letters but in this example we will use all capital letters so they stand out better. The variables are surrounded by double curly brackets, for example **{{ HOSTNAME }}**. In the output look for the three template variables (**HOSTNAME, MGMT\_IP and DEFAULT\_GW**). Pay attention to these variable names because they will be set to specific values in the next section using YAML.
 
 #### YAML Review
 YAML is a human friendly data serialization standard but what does that mean? It means that it is a way to format data so that it is easy for humans to read and edit. The data in the YAML file will be used to make substitutions in the device template. We have a sample YAML file with prepopulated data.
@@ -47,7 +47,7 @@ print my_vars
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
-In the output you can see the upper case keys and their coresponding values, for example **'HOSTNAME': 'ex4300-3'**.
+In the output you can see the upper case keys and their corresponding values, for example **'HOSTNAME': 'ex4300-3'**.
 
 #### Template Generation
 Now we will generate a configuration based on the device template and YAML data. This is done using Jinja2 so we have to import the Jinja2 module.

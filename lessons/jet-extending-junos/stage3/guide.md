@@ -2,7 +2,7 @@ In this stage, we demonstrate additional JET API capability by using JET firewal
 
 #### Preparation
 
-Firstly, we repeat what we have done in previous stage - compile the IDL package, go to Python interactive prompt, import the JET GPRC module, and then login to the vQFX.
+Firstly, we repeat what we have done in previous stage - compile the IDL package, go to Python interactive prompt, import the JET GRPC module, and then login to the vQFX.
 
 ```
 cd /antidote
@@ -121,4 +121,4 @@ show firewall log
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx', this)">Run this snippet</button>
 
-This concludes our Junos JET gRPC demostration. In the next lesson are we going explore closed loop automation by employing both JET Notification Service and JET RPC.
+This concludes our Junos JET gRPC demonstration. In the next lesson are we going explore closed loop automation by employing both JET Notification Service and JET RPC.

@@ -2,6 +2,7 @@
 
 ## In development
 
+- Add spelling checks in CI pipeline [#276](https://github.com/nre-learning/nrelabs-curriculum/pull/276)
 
 ## v1.2.0 - April 14, 2020
 

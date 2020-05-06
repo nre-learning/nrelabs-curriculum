@@ -105,7 +105,7 @@ terraform apply -auto-approve
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('terraform1', this)">Run this snippet</button>
 
-Now the BGP session remote peer address has been changed and you're free to check the configuration group configuration entry on `vqfx` to gain evidence of this wizardy.
+Now the BGP session remote peer address has been changed and you're free to check the configuration group configuration entry on `vqfx` to gain evidence of this wizardry.
 
 Peaking under the hood, the Junos Terraform provider destroys the group by NETCONF then re-creates it with the same ID. In the grand scheme of things, it looks like an edit, but it's actually a full resource re-build.
 
