@@ -1,0 +1,93 @@
+{
+    "variables": {
+        "hostname": "ansible-tower-01",
+        "format": "qcow2",
+        "ssh_user": "root",
+        "ssh_pass": "passwd",
+        "tower_latest_release_url": "https://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-latest.tar.gz"
+    },
+
+    "builders": [
+        {
+            "accelerator": "kvm",
+            "boot_command": [
+                "<tab> console=ttyS0 text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos-8.ks<enter><wait>",
+                "hostname={{ user `hostname` }} "
+            ],
+            "boot_wait": "10s",
+            "cpus": "2",
+            "memory": "4096M",
+            "disk_interface": "virtio-scsi",
+            "disk_size": "4G",
+            "format": "{{ user `format` }}",
+            "headless": true,
+            "http_directory": "http",
+            "iso_checksum": "7fea13202bf2f26989df4175aace8fdc16e1137f7961c33512cbfad844008948",
+            "iso_checksum_type": "sha256",
+            "iso_url": "CentOS-8.1.1911-x86_64-boot.iso",
+            "net_device": "virtio-net",
+            "output_directory": "build",
+            "qemuargs": [
+                [
+                    "-monitor",
+                    "unix:qemu-monitor.sock,server,nowait"
+                ],
+                [
+                    "-serial",
+                    "pipe:/tmp/qemu-serial"
+                ],
+                [
+                    "-m",
+                    "4096M"
+                ],
+                [
+                    "-smp",
+                    "2"
+                ]
+
+            ],
+            "shutdown_command": "systemctl poweroff",
+            "ssh_timeout": "10m",
+            "ssh_username": "root",
+            "ssh_password": "passwd",
+            "type": "qemu",
+            "vm_name": "centos-8-amd64-{{ timestamp }}.{{ user `format` }}"
+        }
+    ],
+
+    "provisioners": [
+        {
+            "type": "shell",
+            "inline": "hostnamectl set-hostname ansible-tower-01"
+        },
+        {
+            "type": "shell",
+            "inline": "dnf update -y && dnf install python3 python3-pip wget tar -y"
+        },
+        {
+            "type": "shell",
+            "inline": "pip3 install ansible"
+        },
+        {
+            "type": "shell",
+            "inline": "pwd && ls -la && wget {{ user `tower_latest_release_url` }} -O ansible-tower-latest.tar.gz && pwd && ls -la && mkdir ansible-tower-latest && pwd && ls -la && tar xvfz ./ansible-tower-latest.tar.gz -C ./ansible-tower-latest --strip-components=1"
+        },
+        {
+            "type": "file",
+            "destination": "ansible-tower-latest/inventory",
+            "source": "./inventory"
+        },
+        {
+            "type": "shell",
+            "inline": "cd ansible-tower-latest && ./setup.sh"
+        },
+        {
+            "type": "shell",
+            "inline": "cd .. && rm -Rf ansible-tower-latest"
+        },
+        {
+            "type": "shell",
+            "inline": "dnf autoremove"
+        }
+    ]
+}
