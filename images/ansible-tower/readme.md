@@ -5,6 +5,7 @@ Build and run an Ansible tower image by using packer for image creation and qemu
 - Packer installed 
 - Docker environment
 - [Ansible tower requirements](https://docs.ansible.com/ansible-tower/latest/html/installandreference/requirements_refguide.html)
+- KVM kernel module must be loaded
 
 
 # Steps to create and run image
@@ -92,3 +93,4 @@ docker run -it --rm \
 - Container boot time is less than 1 min
 - 2GB of RAM seems to be enough to run all the services
 - License activation through WEB UI is broken since needed certificates are missing
+- KVM kernel module needed

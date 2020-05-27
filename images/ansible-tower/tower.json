@@ -2,8 +2,6 @@
     "variables": {
         "hostname": "ansible-tower-01",
         "format": "qcow2",
-        "ssh_user": "root",
-        "ssh_pass": "passwd",
         "tower_latest_release_url": "https://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-latest.tar.gz"
     },
 
@@ -11,12 +9,12 @@
         {
             "accelerator": "kvm",
             "boot_command": [
-                "<tab> console=ttyS0 text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos-8.ks<enter><wait>",
+                "<tab> console=ttyS0 text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>",
                 "hostname={{ user `hostname` }} "
             ],
             "boot_wait": "10s",
             "cpus": "2",
-            "memory": "4096M",
+            "memory": 4096,
             "disk_interface": "virtio-scsi",
             "disk_size": "4G",
             "format": "{{ user `format` }}",
@@ -24,7 +22,7 @@
             "http_directory": "http",
             "iso_checksum": "7fea13202bf2f26989df4175aace8fdc16e1137f7961c33512cbfad844008948",
             "iso_checksum_type": "sha256",
-            "iso_url": "CentOS-8.1.1911-x86_64-boot.iso",
+            "iso_url": "centos8-base.iso",
             "net_device": "virtio-net",
             "output_directory": "build",
             "qemuargs": [
@@ -51,7 +49,7 @@
             "ssh_username": "root",
             "ssh_password": "passwd",
             "type": "qemu",
-            "vm_name": "centos-8-amd64-{{ timestamp }}.{{ user `format` }}"
+            "vm_name": "centos-8-amd64.{{ user `format` }}"
         }
     ],
 
@@ -84,6 +82,18 @@
         {
             "type": "shell",
             "inline": "cd .. && rm -Rf ansible-tower-latest"
+        },
+        {
+            "type": "shell",
+            "inline": "groupadd antidote"
+        },
+        {
+            "type": "shell",
+            "inline": "useradd antidote -s /bin/bash -m -g antidote -G adm, cdrom, sudo, dip, plugdev, lxd, libvirt antidote"
+        },
+        {
+            "type": "shell",
+            "inline": "echo antidote:antidotepassword | sudo chpasswd"
         },
         {
             "type": "shell",
