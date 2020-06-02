@@ -2,14 +2,14 @@
     "variables": {
         "hostname": "ansible-tower-01",
         "format": "qcow2",
-        "tower_latest_release_url": "https://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-latest.tar.gz"
+        "tower_latest_release_url": "https://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-3.6.4-1.tar.gz"
     },
 
     "builders": [
         {
             "accelerator": "kvm",
             "boot_command": [
-                "<tab> console=ttyS0 text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>",
+                "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>",
                 "hostname={{ user `hostname` }} "
             ],
             "boot_wait": "10s",
@@ -31,10 +31,6 @@
                     "unix:qemu-monitor.sock,server,nowait"
                 ],
                 [
-                    "-serial",
-                    "pipe:/tmp/qemu-serial"
-                ],
-                [
                     "-m",
                     "4096M"
                 ],
@@ -44,8 +40,11 @@
                 ]
 
             ],
+	        "vnc_port_min": 5990,
+            "vnc_port_max": 5990,
+            "vnc_bind_address": "0.0.0.0",
             "shutdown_command": "systemctl poweroff",
-            "ssh_timeout": "10m",
+            "ssh_timeout": "90m",
             "ssh_username": "root",
             "ssh_password": "passwd",
             "type": "qemu",
@@ -60,7 +59,7 @@
         },
         {
             "type": "shell",
-            "inline": "dnf update -y && dnf install python3 python3-pip wget tar -y"
+            "inline": "dnf clean all && rm -r /var/cache/dnf  && dnf update -y && dnf install python3 python3-pip wget tar -y"
         },
         {
             "type": "shell",
@@ -89,7 +88,7 @@
         },
         {
             "type": "shell",
-            "inline": "useradd antidote -s /bin/bash -m -g antidote -G adm, cdrom, sudo, dip, plugdev, lxd, libvirt antidote"
+            "inline": "useradd antidote -s /bin/bash -m -g antidote -G adm, sudo, dip, plugdev, lxd, libvirt antidote"
         },
         {
             "type": "shell",
