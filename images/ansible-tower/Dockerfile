@@ -13,13 +13,13 @@ COPY tower.json /
 COPY inventory /
 RUN mkdir /http
 COPY ks.cfg /http/
+RUN mkfifo /tmp/qemu-serial.in /tmp/qemu-serial.out
 # RUN packer build /tower.json
-# RUN mkfifo /tmp/qemu-serial.in /tmp/qemu-serial.out
 CMD ["/usr/local/bin/packer", "build", "/tower.json"]
 
 
 # Runtime container
-#FROM tianon/qemu
+#FROM tianon/qemu AS runtime
 
 #EXPOSE 80
 #EXPOSE 443
@@ -28,4 +28,4 @@ CMD ["/usr/local/bin/packer", "build", "/tower.json"]
 #COPY launch.sh /usr/local/bin/
 #RUN chmod +x /usr/local/bin/launch.sh
 
-#CMD ["launch.sh"]
+# CMD ["launch.sh"]
