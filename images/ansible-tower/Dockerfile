@@ -14,18 +14,29 @@ COPY inventory /
 RUN mkdir /http
 COPY ks.cfg /http/
 RUN mkfifo /tmp/qemu-serial.in /tmp/qemu-serial.out
-# RUN packer build /tower.json
 CMD ["/usr/local/bin/packer", "build", "/tower.json"]
 
 
 # Runtime container
-#FROM tianon/qemu AS runtime
+FROM debian:stable AS runtime
 
-#EXPOSE 80
-#EXPOSE 443
+ENV DEBIAN_FRONTEND=noninteractive
 
-#COPY build/centos-8-amd64.qcow2 /tmp/hda.qcow2
-#COPY launch.sh /usr/local/bin/
-#RUN chmod +x /usr/local/bin/launch.sh
+RUN apt-get update -qy \
+ && apt-get upgrade -qy \
+ && apt-get install -y \
+    bridge-utils \
+    qemu-kvm \
+    vim \
+    procps \
+ && rm -rf /var/lib/apt/lists/*
 
-# CMD ["launch.sh"]
+
+COPY launch.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/launch.sh
+
+EXPOSE 22
+EXPOSE 80
+EXPOSE 443
+
+ENTRYPOINT ["/usr/local/bin/launch.sh"]
