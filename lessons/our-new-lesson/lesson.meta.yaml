@@ -1,0 +1,26 @@
+name: Our New Lesson
+slug: our-new-lesson
+category: fundamentals
+diagram: ""
+video: ""
+tier: prod
+description: This is our new lesson!
+shortDescription: New Lesson
+tags:
+- new
+- lesson
+stages:
+- description: Introduction to a new lesson
+  guideType: markdown
+  stageVideo: ""
+endpoints:
+- name: linux1
+  image: utility
+  configurationType: python
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+authors:
+- name: Matt Oswalt
+  link: https://oswalt.dev
