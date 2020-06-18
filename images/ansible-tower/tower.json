@@ -7,9 +7,9 @@
 
     "builders": [
         {
-            "accelerator": "kvm",
+            "accelerator": "none",
             "boot_command": [
-                "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>",
+                "<tab> console=ttyS0 text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>",
                 "hostname={{ user `hostname` }} "
             ],
             "boot_wait": "10s",
@@ -31,6 +31,10 @@
                     "unix:qemu-monitor.sock,server,nowait"
                 ],
                 [
+                    "-serial",
+                    "pipe:/tmp/qemu-serial"
+                ],
+                [
                     "-m",
                     "4096M"
                 ],
@@ -44,7 +48,7 @@
             "vnc_port_max": 5990,
             "vnc_bind_address": "0.0.0.0",
             "shutdown_command": "systemctl poweroff",
-            "ssh_timeout": "60m",
+            "ssh_timeout": "90m",
             "ssh_username": "root",
             "ssh_password": "passwd",
             "type": "qemu",
@@ -85,11 +89,11 @@
         {
             "type": "shell",
             "inline": [
-                        "groupadd antidote",
-                        "useradd antidote -s /bin/bash -m -g antidote",
-                        "echo antidote:antidotepassword | sudo chpasswd",
-                        "usermod -aG wheel antidote",
-                        "dnf autoremove"
+                                    "groupadd antidote",
+                                    "useradd antidote -s /bin/bash -m -g antidote",
+                    "echo antidote:antidotepassword | sudo chpasswd",
+                                    "usermod -aG wheel antidote",
+                                    "dnf autoremove"
                     ]
         }
     ]
