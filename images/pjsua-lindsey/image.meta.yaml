@@ -1,6 +1,6 @@
 slug: pjsua-lindsey
 description: SIP phone
-privileged: true
+flavor: untrusted  #TODO(mierdin): Test this as this was privileged before
 sshUser: antidote
 sshPassword: antidotepassword
 configUser: antidote

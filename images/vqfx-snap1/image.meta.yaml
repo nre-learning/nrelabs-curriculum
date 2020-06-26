@@ -1,6 +1,6 @@
 slug: vqfx-snap1
 description: vqfx
-privileged: true
+flavor: privileged
 sshUser: antidote
 sshPassword: antidotepassword
 configUser: antidote
