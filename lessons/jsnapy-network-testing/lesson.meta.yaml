@@ -28,24 +28,24 @@ endpoints:
     port: 22
     type: ssh
 
-- name: vqfx1
-  image: vqfx-snap1
+- name: junos1
+  image: crpd
   configurationType: napalm
   presentations:
   - name: cli
     port: 22
     type: ssh
 
-- name: vqfx2
-  image: vqfx-snap2
+- name: junos2
+  image: crpd
   configurationType: napalm
   presentations:
   - name: cli
     port: 22
     type: ssh
 
-- name: vqfx3
-  image: vqfx-snap3
+- name: junos3
+  image: crpd
   configurationType: napalm
   presentations:
   - name: cli
@@ -53,12 +53,12 @@ endpoints:
     type: ssh
 
 connections:
-- a: vqfx1
-  b: vqfx2
-- a: vqfx2
-  b: vqfx3
-- a: vqfx3
-  b: vqfx1
+- a: junos1
+  b: junos2
+- a: junos2
+  b: junos3
+- a: junos3
+  b: junos1
 
 stages:
   - description: No BGP config - Tests Fail

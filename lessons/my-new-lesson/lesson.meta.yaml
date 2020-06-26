@@ -1,0 +1,25 @@
+name: My New Lesson
+slug: my-new-lesson
+category: fundamentals
+diagram: ""
+video: ""
+tier: prod
+description: This is a new lesson!
+shortDescription: new lesson!
+tags:
+- foo
+- bare
+stages:
+- description: Explore the Antidote CLI
+  guideType: markdown
+  stageVideo: ""
+endpoints:
+- name: linux1
+  image: utility
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+authors:
+- name: Matt Oswalt
+  link: https://twitter.com/mierdin

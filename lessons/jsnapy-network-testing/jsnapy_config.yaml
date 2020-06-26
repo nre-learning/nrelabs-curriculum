@@ -1,14 +1,14 @@
 ---
 hosts:
-  - device: vqfx1
+  - device: junos1
     username : antidote
     passwd: antidotepassword
     port: 22
-  - device: vqfx2
+  - device: junos2
     username : antidote
     passwd: antidotepassword
     port: 22
-  - device: vqfx3
+  - device: junos3
     username : antidote
     passwd: antidotepassword
     port: 22
