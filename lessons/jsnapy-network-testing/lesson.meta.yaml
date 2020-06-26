@@ -30,7 +30,7 @@ endpoints:
 
 - name: junos1
   image: crpd
-  configurationType: napalm
+  # configurationType: napalm
   presentations:
   - name: cli
     port: 22
@@ -38,7 +38,7 @@ endpoints:
 
 - name: junos2
   image: crpd
-  configurationType: napalm
+  # configurationType: napalm
   presentations:
   - name: cli
     port: 22
@@ -46,7 +46,7 @@ endpoints:
 
 - name: junos3
   image: crpd
-  configurationType: napalm
+  # configurationType: napalm
   presentations:
   - name: cli
     port: 22
