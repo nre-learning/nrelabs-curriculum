@@ -55,10 +55,13 @@ endpoints:
 connections:
 - a: junos1
   b: junos2
+  subnet: 10.12.0.0/24
 - a: junos2
   b: junos3
+  subnet: 10.23.0.0/24
 - a: junos3
   b: junos1
+  subnet: 10.31.0.0/24
 
 stages:
   - description: No BGP config - Tests Fail
