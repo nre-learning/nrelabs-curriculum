@@ -1,6 +1,6 @@
 slug: asterisk
 description: asterisk
-privileged: true
+flavor: untrusted   # TODO(mierdin): test this, as this was running with privileges before.
 sshUser: antidote
 sshPassword: antidotepassword
 configUser: antidote

@@ -1,6 +1,6 @@
 slug: stackstorm
 description: stackstorm
-privileged: false
+flavor: untrusted
 sshUser: antidote
 sshPassword: antidotepassword
 configUser: antidote

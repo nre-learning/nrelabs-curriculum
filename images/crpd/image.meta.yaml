@@ -1,11 +1,13 @@
-slug: ansible
-description: ansible
+slug: crpd
+description: crpd
 flavor: untrusted
-sshUser: antidote
+sshUser: root
 sshPassword: antidotepassword
-configUser: antidote
+configUser: root
 configPassword: antidotepassword
 networkInterfaces:
   - 'eth0'
-
-
+  - 'eth1'
+  - 'eth2'
+  - 'eth3'
+  - 'eth4'

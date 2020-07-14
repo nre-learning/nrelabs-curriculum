@@ -1,6 +1,6 @@
 slug: terraform
 description: terraform
-privileged: false
+flavor: untrusted
 sshUser: antidote
 sshPassword: antidotepassword
 configUser: antidote

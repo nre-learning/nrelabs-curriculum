@@ -17,7 +17,7 @@ In this part (Part 2), our routers have been configured with the correct BGP pee
 ```
 show bgp summary
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', this)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('junos1', this)">Run this snippet</button>
 
 It *looks* good, but as they say, "successful tests or it didn't happen". Let's re-run JSNAPy to make sure our tests are passing with the new configuration:
 

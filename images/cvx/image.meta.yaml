@@ -1,6 +1,6 @@
 slug: cvx
 description: Cumulus Linux
-privileged: true
+flavor: trusted
 sshUser: antidote
 sshPassword: antidotepassword
 configUser: antidote
