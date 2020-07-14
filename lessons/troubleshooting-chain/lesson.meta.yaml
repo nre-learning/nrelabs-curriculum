@@ -32,17 +32,18 @@ endpoints:
     port: 22
     type: ssh
 
-- name: vqfx1
-  image: vqfx-snap1
-  configurationType: napalm
+- name: junos1
+  image: crpd
+  # configurationType: napalm-junos
   presentations:
   - name: cli
     port: 22
     type: ssh
 
-- name: vqfx2
-  image: vqfx-snap2
-  configurationType: napalm
+
+- name: junos2
+  image: crpd
+  # configurationType: napalm-junos
   presentations:
   - name: cli
     port: 22
@@ -60,13 +61,15 @@ endpoints:
 
 
 connections:
-- a: vqfx1
-  b: vqfx2
-- a: vqfx2
+- a: junos1
+  b: junos2
+  subnet: 10.10.0.0/24
+- a: junos2
   b: sipphone
-- a: vqfx1
+  subnet: 10.10.150.0/24
+- a: junos1
   b: asterisk
-
+  subnet: 10.10.200.0/24
 
 stages:
   - description: Get the IP Address for a Phone Extension
