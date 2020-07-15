@@ -1,6 +1,7 @@
 slug: crpd
 description: crpd
 flavor: untrusted
+enableForwarding: true
 sshUser: root
 sshPassword: antidotepassword
 configUser: root
