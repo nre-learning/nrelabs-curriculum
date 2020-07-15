@@ -14,8 +14,12 @@ system {
 protocols {
     ospf {
         area 0.0.0.0 {
-            interface net1;
-            interface net2;
+            interface net1 {
+                priority 1;
+            }
+            interface net2 {
+                priority 1;
+            }
         }
     }
 }
