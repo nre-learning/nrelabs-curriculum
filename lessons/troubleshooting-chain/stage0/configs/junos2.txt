@@ -1,0 +1,21 @@
+version 20200319.130545_builder.r1095278;
+system {
+    host-name crpd;
+    root-authentication {
+        encrypted-password "$6$67mBH$HCpbONRsrXLQKI.WP/fqhiZNVkC9MBLtQFzpy4GE/9CO3kTa4dVqSQzSl0z2jzXWHnn6fUO4NMOJ1lDy1ztRC."; ## SECRET-DATA
+    }
+    login {
+        password {
+            change-type set-transitions;
+            minimum-changes 0;
+        }
+    }
+}
+protocols {
+    ospf {
+        area 0.0.0.0 {
+            interface net1;
+            interface net2;
+        }
+    }
+}

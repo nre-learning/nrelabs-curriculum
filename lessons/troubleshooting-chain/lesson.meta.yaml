@@ -34,16 +34,15 @@ endpoints:
 
 - name: junos1
   image: crpd
-  # configurationType: napalm-junos
+  configurationType: napalm
   presentations:
   - name: cli
     port: 22
     type: ssh
 
-
 - name: junos2
   image: crpd
-  # configurationType: napalm-junos
+  configurationType: napalm
   presentations:
   - name: cli
     port: 22
