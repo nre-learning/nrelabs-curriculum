@@ -2,6 +2,7 @@
 
 ## In development
 
+- Update troubleshooting lesson with flavor and cRPD [#337](https://github.com/nre-learning/nrelabs-curriculum/pull/337)
 - Add spelling checks in CI pipeline [#276](https://github.com/nre-learning/nrelabs-curriculum/pull/276)
 - Add cRPD Image and image flavor params [#336](https://github.com/nre-learning/nrelabs-curriculum/pull/336)
 
