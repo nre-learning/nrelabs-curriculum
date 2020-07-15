@@ -18,19 +18,6 @@ authors:
   link: https://twitter.com/cloudtoad
 
 endpoints:
-- name: linux1
-  image: utility
-  presentations:
-  - name: cli
-    port: 22
-    type: ssh
-
-- name: sipphone
-  image: pjsua-lindsey
-  presentations:
-  - name: cli
-    port: 22
-    type: ssh
 
 - name: junos1
   image: crpd
@@ -43,6 +30,20 @@ endpoints:
 - name: junos2
   image: crpd
   configurationType: napalm
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: linux1
+  image: utility
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: sipphone
+  image: pjsua-lindsey
   presentations:
   - name: cli
     port: 22
