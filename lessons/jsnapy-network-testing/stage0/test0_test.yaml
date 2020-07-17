@@ -1,0 +1,9 @@
+---
+test_rpc_bgp:
+  - rpc: get-ospf-neighbor-information
+  - item:
+      xpath: '//ospf-neighbor-information/ospf-neighbor'
+      tests:
+        - is-equal: ospf-neighbor-state, Full
+          err: "Test Failed!! OSPF neighbor state is <{{post['ospf-neighbor-state']}}>"
+          info: "Test succeeded!! OSPF neighbor state is <{{post['ospf-neighbor-state']}}>"

@@ -13,4 +13,4 @@ hosts:
     passwd: antidotepassword
     port: 22
 tests:
-    - jsnapy_tests.yaml
+    - test0_test.yaml

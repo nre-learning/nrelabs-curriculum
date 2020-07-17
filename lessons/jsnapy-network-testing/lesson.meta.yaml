@@ -1,8 +1,8 @@
 ---
-name: Network Unit Testing with JSNAPY
+name: Network Unit Testing with JSNAPy
 slug: jsnapy-network-testing
 category: tools
-diagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-12/lessondiagram.png
+diagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/jsnapy-updates/lessons/jsnapy-network-testing/jsnapy-crpd.png
 tier: prod
 prereqs:
   - yaml-introduction
@@ -64,9 +64,5 @@ connections:
   subnet: 10.31.0.0/24
 
 stages:
-  - description: No BGP config - Tests Fail
+  - description: Your First JSNAPy Test
     guideType: markdown
-
-  - description: Correct BGP config - Tests Pass
-    guideType: markdown
-
