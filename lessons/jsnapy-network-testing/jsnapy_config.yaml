@@ -1,15 +1,15 @@
 ---
 hosts:
-  - device: junos1
-    username : antidote
+  - device: r1
+    username : root
     passwd: antidotepassword
     port: 22
-  - device: junos2
-    username : antidote
+  - device: r2
+    username : root
     passwd: antidotepassword
     port: 22
-  - device: junos3
-    username : antidote
+  - device: r3
+    username : root
     passwd: antidotepassword
     port: 22
 tests:

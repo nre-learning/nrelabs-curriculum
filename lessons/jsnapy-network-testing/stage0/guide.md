@@ -1,9 +1,10 @@
 In this lesson, we're going to talk about running tests against our network with a nifty open source tool called [JSNAPy](https://github.com/Juniper/jsnapy). Being able to describe what we expect "normal" to mean on our network in simple text files saves us a ton of time when troubleshooting, or when making changes. It also helps new engineers come up with speed quickly with what the network is supposed to look like on a normal day.
 
-First, let's take a peek at our network configuration by going to `junos1`. We can see that no BGP peers have been configured:
+First, let's take a peek at our network configuration by going to `junos1` - however, upon looking, we notice that OSPF isn't even configured!
 
 ```
-show bgp summary
+cli
+show ospf neighbor
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('junos1', this)">Run this snippet</button>
 

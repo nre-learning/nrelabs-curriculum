@@ -1,3 +1,4 @@
+version 20200319.130545_builder.r1095278;
 system {
     host-name crpd;
     root-authentication {
@@ -13,8 +14,12 @@ system {
 protocols {
     ospf {
         area 0.0.0.0 {
-            interface net1;
-            interface net2;
+            interface net1 {
+                interface-type p2p;
+            }
+            interface net2 {
+                interface-type p2p;
+            }
         }
     }
 }

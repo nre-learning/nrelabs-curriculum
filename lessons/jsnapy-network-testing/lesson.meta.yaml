@@ -21,46 +21,46 @@ authors:
   link: https://oswalt.dev
 
 endpoints:
-- name: linux1
+- name: linux
   image: utility
   presentations:
   - name: cli
     port: 22
     type: ssh
 
-- name: junos1
+- name: r1
   image: crpd
-  configurationType: python
+  configurationType: napalm
   presentations:
   - name: cli
     port: 22
     type: ssh
 
-- name: junos2
+- name: r2
   image: crpd
-  configurationType: python
+  configurationType: napalm
   presentations:
   - name: cli
     port: 22
     type: ssh
 
-- name: junos3
+- name: r3
   image: crpd
-  configurationType: python
+  configurationType: napalm
   presentations:
   - name: cli
     port: 22
     type: ssh
 
 connections:
-- a: junos1
-  b: junos2
+- a: r1
+  b: r2
   subnet: 10.12.0.0/24
-- a: junos2
-  b: junos3
+- a: r2
+  b: r3
   subnet: 10.23.0.0/24
-- a: junos3
-  b: junos1
+- a: r3
+  b: r1
   subnet: 10.31.0.0/24
 
 stages:
