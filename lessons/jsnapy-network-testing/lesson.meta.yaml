@@ -64,5 +64,20 @@ connections:
   subnet: 10.31.0.0/24
 
 stages:
-  - description: Your First JSNAPy Test
+  - description: Introduction to JSNAPy
     guideType: markdown
+
+  # Planned stages:
+  #
+  # 0. Quick overview of snapshots and tests. Basic example that gets you to something useful.
+  # 1. Deeper-dive into retrieving data. The various ways you can do this (RPC, CLI) (not everything has a dedicated RPC, but everything in Junos is XML. Also state vs config?
+  # 2. Deeper-drive into tests. All of the operators, etc.
+  # 3. Using JSNAPy with Python
+  # 4. Extra JSNAPy features like sqlite, email, etc? Not sure if this is worth it
+
+  # config, or command-line options?
+
+
+  # - Snapshots and Tests
+  # - Advanced Test Writing
+  # - Using JSNAPy from Python
