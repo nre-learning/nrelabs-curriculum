@@ -1,9 +1,24 @@
 ---
-test_rpc_bgp:
+assert_ospf_neighbor_full:
   - rpc: get-ospf-neighbor-information
+
+  # Since we want to make an assertion about a particular part of the RPC response, we
+  # first need to specify where in the XML tree this data can be located.
   - item:
+
+      # In this example, we're doing this using an XPATH expression. Note that each of the
+      # portions between the forward slashes refers to succeeding children nodes in the XML
+      # response we saw earlier (in the output of "show ospf neighbor | display xml")
       xpath: '//ospf-neighbor-information/ospf-neighbor'
+
+      # Once we've located the data, we can make some assertions on it. In this example we're
+      # just doing one, but as you'll see in upcoming sections, we can do multiple, provided
+      # the information is in the same place in the XML tree.
       tests:
+
+        # This test specifies that the `ospf-neighbor-state` field must be equal to "Full".
+        # it also provides the text to output when this assertion fails (is false), as well
+        # as when it succeeds.
         - is-equal: ospf-neighbor-state, Full
           err: "Test Failed!! OSPF neighbor state is <{{post['ospf-neighbor-state']}}>"
           info: "Test succeeded!! OSPF neighbor state is <{{post['ospf-neighbor-state']}}>"

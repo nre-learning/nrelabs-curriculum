@@ -18,7 +18,8 @@ hosts:
     passwd: antidotepassword
     port: 22
 
-# "tests" is a list of references to files that contain tests
-# to run. We'll explore this file in a little bit.
+# "tests" is a list of references to files that contain information
+# about what data to retrieve, or tests to run on that data,
+# if we want.
 tests:
-  - test0_test.yaml
+  - snapshot0.yaml
