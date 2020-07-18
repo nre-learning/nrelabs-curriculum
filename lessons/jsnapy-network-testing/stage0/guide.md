@@ -1,13 +1,13 @@
 A big part of what makes automation work in production, especially in environments that have adopted "infrastructure as code" is automated testing. It's not enough to just write some scripts to automate common tasks, you need to also automate the validation that your infrastructure is in the state you expect. This is exactly why software developers have adopted automated testing. It's not enough to just write some software and hope it works; rather, tests are written and often packaged with the software itself. Infrastructure testing can and should follow a similar model.
 
 You may be thinking to yourself "I can just run a bunch of 'show' commands really quickly and know if my network is working". Maybe you have a series of show commands in a notepad document on your laptop that you can paste into a terminal to help you troubleshoot. There are a few problems with this:
- 
+
 - Knowing what show commands to run on which devices isn't obvious to everyone on your team, present and future.
 - Knowing what output from those show commands is "normal" is equally non-obvious.
 - This model is fragile; one person running a bunch of show commands perfectly (not forgetting any devices or commands) and at the right time (it turns out, humans need sleep).
 
 It would be great if we could represent the series of data retrieval tasks (show commands) that need to take place to get an understanding of the current state of the the network, as well as the automated assertions about what that data **should look like** in a normal case, as simple text files in a version control repository, just like software developers do for their tests. Doing this would immediately give us some big benefits:
- 
+
 - Gets new engineers up to speed quickly on what "normal" is (everything's plainly laid out in the tests, not in someone's head).
 - Really helps in initial troubleshooting - at the beginning of each incident, run the test suite. Limit the scope of your initial discovery to the stuff that doesn't match the expectation.
 
@@ -87,7 +87,8 @@ ls -lha ~/jsnapy/snapshots/
 
 You'll notice there are files for each device in our inventory. You'll also notice that the filename contains the RPC used, so at-a-glance, we can quickly tell which file contains what kind of contents. Let's take a look at the one for `r1`:
 
-```And we're halfway there! rmation.xml | pygmentize
+```
+xmllint --format ~/jsnapy/snapshots/r1_22_snapshot0_get_ospf_neighbor_information.xml | pygmentize
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
@@ -136,8 +137,8 @@ jsnapy --snapcheck -f test0_config.yaml -v
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
-However, because we weren't asserting the **number** of OSPF neighbors there should be, the tests on `r2` and `r3` pass just fine; while there were only one neighbor relationship on each, the assertion was only that these neighbors have a "Full" state, which is true. This highlights the importance of writing exhaustive tests.
+However, because we weren't asserting the **number** of OSPF neighbors there should be, the tests on `r2` and `r3` pass just fine; while there were only one neighbor relationship on each, the assertion was only that whatever neighbors are there have a "Full" state, which is true. This highlights the importance of writing specific, and exhaustive tests. Maybe we could add to or change our test to capture the reduction in OSPF neighbors from the expected state? We'll explore this in future chapters.
 
-This is a very simple example, but hopefully you're starting to see the value in codifying the built-in assertions that we have about our infrastructure, so that we can very easily and quickly get a solid picture of what is "out of place". This becomes immensely valuable when you're in the hot seat, trying to figure out the cause of an outage, as you no longer have to poke around running "show" commands yourself - you can just run your tests, and see what fails.
+This has been a very simple example, but hopefully you're starting to see the value in codifying the built-in assertions that we have about our infrastructure, so that we can very easily and quickly get a solid picture of what is "out of place". This becomes immensely valuable when you're in the hot seat, trying to figure out the cause of an outage, as you no longer have to poke around running "show" commands yourself - you can just run your tests, and see what fails.
 
 This was a very quick introduction to JSNAPy. In future sections, we'll be diving into much more detail on both data retrieval, as well as testing, and the myriad of options available to use for both.
