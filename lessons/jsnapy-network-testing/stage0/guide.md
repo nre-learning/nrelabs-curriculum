@@ -1,13 +1,13 @@
 A big part of what makes automation work in production, especially in environments that have adopted "infrastructure as code" is automated testing. It's not enough to just write some scripts to automate common tasks, you need to also automate the validation that your infrastructure is in the state you expect. This is exactly why software developers have adopted automated testing. It's not enough to just write some software and hope it works; rather, tests are written and often packaged with the software itself. Infrastructure testing can and should follow a similar model.
 
 You may be thinking to yourself "I can just run a bunch of 'show' commands really quickly and know if my network is working". Maybe you have a series of show commands in a notepad document on your laptop that you can paste into a terminal to help you troubleshoot. There are a few problems with this:
-
+ 
 - Knowing what show commands to run on which devices isn't obvious to everyone on your team, present and future.
 - Knowing what output from those show commands is "normal" is equally non-obvious.
 - This model is fragile; one person running a bunch of show commands perfectly (not forgetting any devices or commands) and at the right time (it turns out, humans need sleep).
 
 It would be great if we could represent the series of data retrieval tasks (show commands) that need to take place to get an understanding of the current state of the the network, as well as the automated assertions about what that data **should look like** in a normal case, as simple text files in a version control repository, just like software developers do for their tests. Doing this would immediately give us some big benefits:
-
+ 
 - Gets new engineers up to speed quickly on what "normal" is (everything's plainly laid out in the tests, not in someone's head).
 - Really helps in initial troubleshooting - at the beginning of each incident, run the test suite. Limit the scope of your initial discovery to the stuff that doesn't match the expectation.
 
@@ -87,12 +87,13 @@ ls -lha ~/jsnapy/snapshots/
 
 You'll notice there are files for each device in our inventory. You'll also notice that the filename contains the RPC used, so at-a-glance, we can quickly tell which file contains what kind of contents. Let's take a look at the one for `r1`:
 
-```
-xmllint --format ~/jsnapy/snapshots/r1_22_snapshot0_get_ospf_neighbor_information.xml | pygmentize
+```And we're halfway there! rmation.xml | pygmentize
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
-We're halfway there! We've retrieved the necessary bits of data; now, let's make some assertions about what that data **should be**, using JSNAPy tests.
+You'll notice this exactly matches the XML data we retrieved via the command-line of `r1`.
+
+And we're halfway there! We've retrieved the necessary bits of data; now, let's make some assertions about what that data **should be**, using JSNAPy tests.
 
 ## Making Assertions About State With "Tests"
 

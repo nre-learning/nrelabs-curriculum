@@ -75,6 +75,10 @@ stages:
   # 3. Using JSNAPy with Python
   # 4. Extra JSNAPy features like sqlite, email, etc? Not sure if this is worth it
 
+
+  # xpath to show a specific node? And then make an assertion about that? Like ensuring that specific OSPF neighbors are present.
+
+
   # config, or command-line options?
 
 
