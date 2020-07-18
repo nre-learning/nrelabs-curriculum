@@ -1,24 +1,17 @@
-Concepts like "infrastructure as code" are becoming the preferred way to do network automation. A big part of this is writing automated tests.
+A big part of what makes automation work in production, especially in environments that have adopted "infrastructure as code" is automated testing. It's not enough to just write some scripts to automate common tasks, you need to also automate the validation that your infrastructure is in the state you expect. This is exactly why software developers have adopted automated testing. It's not enough to just write some software and hope it works; rather, tests are written and often packaged with the software itself. Infrastructure testing can and should follow a similar model.
 
-<div style="max-width:200px;text-align:center;margin-top:30px;"><img src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/jsnapy-updates/lessons/jsnapy-network-testing/jsnapy-logo.png"></div>
+You may be thinking to yourself "I can just run a bunch of 'show' commands really quickly and know if my network is working". Maybe you have a series of show commands in a notepad document on your laptop that you can paste into a terminal to help you troubleshoot. There are a few problems with this:
 
-## Why test your network?
+- Knowing what show commands to run on which devices isn't obvious to everyone on your team, present and future.
+- Knowing what output from those show commands is "normal" is equally non-obvious.
+- This model is fragile; one person running a bunch of show commands perfectly (not forgetting any devices or commands) and at the right time (it turns out, humans need sleep).
 
-You may be thinking to yourself "I can just run a bunch of 'show' commands really quickly and know if my network is working" Maybe you have a series of show commands in a notepad document that you can paste into a terminal to help you troubleshoot. There are a few problems with this:
+It would be great if we could represent the series of data retrieval tasks (show commands) that need to take place to get an understanding of the current state of the the network, as well as the automated assertions about what that data **should look like** in a normal case, as simple text files in a version control repository, just like software developers do for their tests. Doing this would immediately give us some big benefits:
 
-- Knowing what show commands to write isn't obvious to everyone on your team.
-- Knowing what output from those show commands is "normal" is DEFINITELY not obvious to everyone.
-- This model is based on one person running these show commands a) perfectly (not forgetting any devices or commands) and b) doing so at the right time (turns out humans need to sleep)
+- Gets new engineers up to speed quickly on what "normal" is (everything's plainly laid out in the tests, not in someone's head).
+- Really helps in initial troubleshooting - at the beginning of each incident, run the test suite. Limit the scope of your initial discovery to the stuff that doesn't match the expectation.
 
-Test allow you to commit as-code:
-
-- The series of data retrieval tasks (show commands) that need to take place to get an understanding of the current state of the the network
-- The automated assertions about that data. If the resulting data is within the bounds you define in the test, everything shows green. Red only shows when there is deviation.
-
-Benefits:
-
-- Gets new engineers up to speed quickly on what "normal" is. (normal is whats in the test, not in someone's head)
-- Really helps in initial troubleshooting
+<div style="text-align:center;margin-top:30px;"><img src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/jsnapy-updates/lessons/jsnapy-network-testing/jsnapy-logo.png"></div>
 
 In this lesson, we'll explore the ideas of writing automated tests against our network infrastructure using a tool called [JSNAPy](https://github.com/Juniper/jsnapy). This is a tool that allows us to reap the benefits of automated testing in two steps:
 
@@ -95,11 +88,11 @@ ls -lha ~/jsnapy/snapshots/
 You'll notice there are files for each device in our inventory. You'll also notice that the filename contains the RPC used, so at-a-glance, we can quickly tell which file contains what kind of contents. Let's take a look at the one for `r1`:
 
 ```
-xmllint --format ~/jsnapy/snapshots/r1_22_snapshot1_get_ospf_neighbor_information.xml | pygmentize
+xmllint --format ~/jsnapy/snapshots/r1_22_snapshot0_get_ospf_neighbor_information.xml | pygmentize
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
-At this point, we're halfway there. We've retrieved the necessary bits of data; now, let's make some assertions about what that data **should be**, using JSNAPy tests.
+We're halfway there! We've retrieved the necessary bits of data; now, let's make some assertions about what that data **should be**, using JSNAPy tests.
 
 ## Making Assertions About State With "Tests"
 
@@ -113,11 +106,11 @@ Let's take a look at a new pair of config/test files:"
 bat test0_config.yaml
 bat test0_test.yaml
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('r1', this)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
 In `test0_test.yaml` you'll notice we've added a lot more text. Please read the in-line comments for an explanation of each part of this test file. In short, we're making the assertion that each OSPF neighbor is in the "Full" state, by zooming in on the particular part of the XML response that contains that information, and using the `is-equal` operator to make the comparison. Don't worry, this is just a simple example. We'll go into a lot more detail on other operators you can use in a future chapter of this lesson.
 
-For now, let's execute this test and see what we get:
+We can execute this test using the `--snapcheck` flag to the `jsnapy` command. In effect, this will cause JSNAPy to first retrieve a fresh snapshot, and then immediately "check" that snapshot's contents using the instructions in our test file, for compliance with what we want:
 
 ```
 jsnapy --snapcheck -f test0_config.yaml -v
@@ -135,12 +128,14 @@ commit
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('r1', this)">Run this snippet</button>
 
-Simply re-running the exact same test shows that while the neighbor relationship between `r2` and `r3` is still solid, both of those devices' relationship with `r1` is not in compliance with our assertions.
+Simply re-running the exact same test shows that the assertion about OSPF state fails on `r1`, since it's not configured at all:
 
 ```
 jsnapy --snapcheck -f test0_config.yaml -v
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
+
+However, because we weren't asserting the **number** of OSPF neighbors there should be, the tests on `r2` and `r3` pass just fine; while there were only one neighbor relationship on each, the assertion was only that these neighbors have a "Full" state, which is true. This highlights the importance of writing exhaustive tests.
 
 This is a very simple example, but hopefully you're starting to see the value in codifying the built-in assertions that we have about our infrastructure, so that we can very easily and quickly get a solid picture of what is "out of place". This becomes immensely valuable when you're in the hot seat, trying to figure out the cause of an outage, as you no longer have to poke around running "show" commands yourself - you can just run your tests, and see what fails.
 
