@@ -11,7 +11,7 @@ It would be great if we could represent the series of data retrieval tasks (show
 - Gets new engineers up to speed quickly on what "normal" is (everything's plainly laid out in the tests, not in someone's head).
 - Really helps in initial troubleshooting - at the beginning of each incident, run the test suite. Limit the scope of your initial discovery to the stuff that doesn't match the expectation.
 
-<div style="text-align:center;margin-top:30px;"><img src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/jsnapy-updates/lessons/jsnapy-network-testing/jsnapy-logo.png"></div>
+<div style="text-align:center;margin-top:30px;"><img src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/jsnapy-network-testing/jsnapy-logo.png"></div>
 
 In this lesson, we'll explore the ideas of writing automated tests against our network infrastructure using a tool called [JSNAPy](https://github.com/Juniper/jsnapy). This is a tool that allows us to reap the benefits of automated testing in two steps:
 

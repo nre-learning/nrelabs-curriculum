@@ -2,7 +2,7 @@
 name: Network Unit Testing with JSNAPy
 slug: jsnapy-network-testing
 category: tools
-diagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/jsnapy-updates/lessons/jsnapy-network-testing/jsnapy-crpd.png
+diagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/jsnapy-network-testing/jsnapy-crpd.png
 tier: prod
 prereqs:
   - yaml-introduction
