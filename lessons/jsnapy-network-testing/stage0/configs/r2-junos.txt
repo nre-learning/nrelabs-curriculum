@@ -13,8 +13,14 @@ system {
 protocols {
     ospf {
         area 0.0.0.0 {
-            interface net1;
-            interface net2;
+            interface net2 {
+                interface-type p2p;
+            }
+        }
+        area 0.0.0.2 {
+            interface net1 {
+                interface-type p2p;
+            }
         }
     }
 }

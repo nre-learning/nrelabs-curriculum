@@ -1,0 +1,16 @@
+---
+hosts:
+  - device: r1
+    username : root
+    passwd: antidotepassword
+    port: 22
+  - device: r2
+    username : root
+    passwd: antidotepassword
+    port: 22
+  - device: r3
+    username : root
+    passwd: antidotepassword
+    port: 22
+tests:
+  - test0_test.yaml

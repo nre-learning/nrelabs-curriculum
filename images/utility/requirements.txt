@@ -10,3 +10,4 @@ paho-mqtt
 grpcio
 grpcio-tools
 flask
+pygments

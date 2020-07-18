@@ -1,0 +1,24 @@
+---
+# "hosts" is a list of devices we want to connect to in order
+# to run our tests. You can think of it like a very basic
+# inventory, containing all of the information JSNAPy needs
+# to connect to each of our devices programmatically and
+# retrieve state.
+hosts:
+  - device: r1
+    username : root
+    passwd: antidotepassword
+    port: 22
+  - device: r2
+    username : root
+    passwd: antidotepassword
+    port: 22
+  - device: r3
+    username : root
+    passwd: antidotepassword
+    port: 22
+
+# "tests" is a list of references to files that contain tests
+# to run. We'll explore this file in a little bit.
+tests:
+  - snapshot0.yaml

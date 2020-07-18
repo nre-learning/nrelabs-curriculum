@@ -1,8 +1,8 @@
 ---
-name: Network Unit Testing with JSNAPY
+name: Network Unit Testing with JSNAPy
 slug: jsnapy-network-testing
 category: tools
-diagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-12/lessondiagram.png
+diagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/jsnapy-network-testing/jsnapy-crpd.png
 tier: prod
 prereqs:
   - yaml-introduction
@@ -21,52 +21,62 @@ authors:
   link: https://oswalt.dev
 
 endpoints:
-- name: linux1
+- name: linux
   image: utility
   presentations:
   - name: cli
     port: 22
     type: ssh
 
-- name: junos1
+- name: r1
   image: crpd
-  configurationType: python
+  configurationType: napalm
   presentations:
   - name: cli
     port: 22
     type: ssh
 
-- name: junos2
+- name: r2
   image: crpd
-  configurationType: python
+  configurationType: napalm
   presentations:
   - name: cli
     port: 22
     type: ssh
 
-- name: junos3
+- name: r3
   image: crpd
-  configurationType: python
+  configurationType: napalm
   presentations:
   - name: cli
     port: 22
     type: ssh
 
 connections:
-- a: junos1
-  b: junos2
+- a: r1
+  b: r2
   subnet: 10.12.0.0/24
-- a: junos2
-  b: junos3
+- a: r2
+  b: r3
   subnet: 10.23.0.0/24
-- a: junos3
-  b: junos1
+- a: r3
+  b: r1
   subnet: 10.31.0.0/24
 
 stages:
-  - description: No BGP config - Tests Fail
+  - description: Introduction to JSNAPy
     guideType: markdown
 
-  - description: Correct BGP config - Tests Pass
-    guideType: markdown
-
+  # Planned stages:
+  #
+  # 0. (done) Quick overview of snapshots and tests. Basic example that gets you to something useful.
+  # 1. Deeper-dive into retrieving data. The various ways you can do this (RPC, CLI) (not everything has a dedicated RPC, but everything in Junos is XML. Also state vs config?
+  #
+  #     - config, or command-line options? do we need a config file for even simple snapshots?
+  #
+  # 2. Deeper-drive into tests. All of the operators, etc.
+  #
+  #     - xpath to show a specific node? And then make an assertion about that? Like ensuring that specific OSPF neighbors are present.
+  #
+  # 3. Using JSNAPy with Python
+  # 4. Misc JSNAPy features like sqlite, email, etc? (this one is tentative, depends on if this is interesting after the first four)
