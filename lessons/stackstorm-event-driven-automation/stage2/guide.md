@@ -6,9 +6,8 @@ In StackStorm, we call these complex logical structures ["Workflows"](https://do
 
 There are a few options for accomplishing this in StackStorm:
 
-- [ActionChain](https://docs.stackstorm.com/actionchain.html)
-- [Mistral](https://docs.stackstorm.com/mistral.html)
-- [Orquesta](https://docs.stackstorm.com/orquesta.html)
+- For simple workflows, try [ActionChain](https://docs.stackstorm.com/actionchain.html)
+- For complex workflows, your best bet is [Orquesta](https://docs.stackstorm.com/orquesta.html)
 
 There are, of course, other tools like Ansible that accomplish similar purposes. Especially if you have existing Ansible playbooks, you can certainly [execute those playbooks from StackStorm](https://github.com/StackStorm-Exchange/stackstorm-ansible). The benefit of using the options listed above is that they're more tightly integrated with StackStorm, meaning the workflow and StackStorm can work together for advanced features like parallelism, or flow control like pausing a workflow, or [asking for more information to continue](https://docs.stackstorm.com/inquiries.html).
 
@@ -16,7 +15,7 @@ Regardless of the workflow mechanism you choose, Workflows allow us to create a 
 
 The `examples` pack, which is one of the few built-in StackStorm packs, is preloaded in our environment, and is a really good place to start for working examples of workflows, for all types. For each of these three Workflow options, we'll begin by showing a few examples in the `examples` pack, and then move into some more relevant examples for network automation.
 
-#### Example 1 - ActionChain
+### ActionChain
 
 [ActionChains](https://docs.stackstorm.com/actionchain.html) are the simplest (but also the least robust) workflow option in StackStorm. If you want to run a sequence of actions, with some minimal error-handling, ActionChains are probably sufficient for your purposes. They're the "bare minimum" workflows option in StackStorm.
 
@@ -59,78 +58,75 @@ us to do more than just running Actions in isolation - but also we get detailed 
 That's a very light introduction to ActionChains. Check out the [docs](https://docs.stackstorm.com/actionchain.html) or
 the [examples pack](https://github.com/StackStorm/st2/tree/master/contrib/examples/actions/chains) for more information and working examples.
 
-#### Example 2 - Mistral
+### Orquesta
 
-[Mistral](https://docs.stackstorm.com/mistral.html), by contrast, is much more powerful than ActionChains. While ActionChains excel
-in simplicity, it's this simplicity that can, at times, prove inadequate for some of the decision-making power or execution style we need
-in our Workflows from time to time. In these cases, some of the [advanced features](https://docs.openstack.org/mistral/latest/main_features.html)
-that Mistral brings to the table may prove useful.
+[Orquesta](https://docs.stackstorm.com/orquesta.html) is StackStorm's solution to complex workflows, that don't follow a simple, linear path, and require more robust decision making, error handling, or retries.
 
-However, unlike ActionChains, Mistral is an [OpenStack project](https://docs.openstack.org/mistral/latest/), and not part of the StackStorm codebase. Instead,
-StackStorm maintains [close integrations with Mistral](https://github.com/StackStorm/st2mistral) so that Mistral can run as a separate entity,
-and ensure StackStorm and Mistral remain in sync with each other regarding workflow and action executions.
-
-```
-cat /opt/stackstorm/packs/examples/actions/workflows/mistral-jinja-branching.yaml
-```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
-
-Like ActionChains, Mistral workflows are written in YAML, and they also contain a set of tasks (defined as a YAML dictionary this time) under the `tasks` key.
-Each task refers to an `action`, which in the case of a Mistral+Stackstorm deployment like we have here, refers to a StackStorm action.
-
-The `publish` keyword allows us to create new variables to use later in the workflow. In this case, the variable `path` is being created, and the Jinja template we see being assigned to it: `"{{ task('t1').result.stdout }}"` captures the resulting text printed to stdout by the command run by `t1`. We can see that this command is `"echo {{ _.which }}"`, which itself has a Jinja template that passes in the `which` parameter, which we can see is a parameter required by the workflow as a whole.
-
-Let's give this a try:
-
-```
-st2 run examples.mistral-jinja-branching which=a
-..
-id: 5c490330e47a91335192263a
-action.ref: examples.mistral-jinja-branching
-parameters:
-  which: a
-status: succeeded
-result_task: a
-result:
-  failed: false
-  return_code: 0
-  stderr: ''
-  stdout: Took path A.
-  succeeded: true
-start_timestamp: Thu, 24 Jan 2019 00:13:36 UTC
-end_timestamp: Thu, 24 Jan 2019 00:13:40 UTC
-+--------------------------+------------------------+------+------------+-------------------------------+
-| id                       | status                 | task | action     | start_timestamp               |
-+--------------------------+------------------------+------+------------+-------------------------------+
-| 5c490331e47a91335192263d | succeeded (1s elapsed) | t1   | core.local | Thu, 24 Jan 2019 00:13:37 UTC |
-| 5c490332e47a91335192263f | succeeded (1s elapsed) | a    | core.local | Thu, 24 Jan 2019 00:13:38 UTC |
-+--------------------------+------------------------+------+------------+-------------------------------+
-```
-
-(Mistral isn't installed in this version of the StackStorm lesson. We are planning to expand this lesson in the near future, diving deeper into these workflow options.)
-
-The output is similar to what we saw with ActionChains - because Mistral is also a Workflow option in StackStorm, we see a table of all our subexecutions. However, we
-only see two subexecutions, while we saw four tasks in the Mistral workflow: `t1`, `a`, `b`, and `c`.
-
-Like ActionChains, Mistral allows us to specify which task to run based on success or failure. However, as we can see, if `t1` succeeds, the workflow
-points to not one, but all three other tasks (`a`, `b`, and `c`). In addition, each reference contains a Jinja template that performs a conditional check.
-The way this works is that Mistral will evaluate these conditionals, and the ones that result in a boolean True will cause the workflow to execute the referenced task next.
-
-In the workflow we executed, we provided `a` as input to the `which` parameter, and based on this workflow logic, the `a` task was executed next.
-
-You can use this to make some pretty advanced decisions in your own workflows: executing actions only when the input to the workflow,
-or perhaps the output of one or more of that workflow's tasks, shows a certain value.
-
-#### Example 3 - Orquesta
-
-[Orquesta](https://docs.stackstorm.com/orquesta.html) is the new kid on the block - released recently, and currently a "beta" workflow
-option in StackStorm, it combines the advantage of ActionChain's "built-in" nature with the robustness and flexibility of Mistral.
-
-As a result, Orquesta workflows are very similar in syntax to Mistral workflows, so for the purposes of this lesson, there's not a lot more to cover on this front. We can see the contents of an example Orquesta workflow look quite familiar:
+Like ActionChains, Orquesta workflows are written in YAML, and they also contain a set of tasks (defined as a YAML dictionary this time). Each task refers to an `action`, and has a series of much more robust tools for managing the way the workflow should proceed.
 
 ```
 cat /opt/stackstorm/packs/examples/actions/workflows/orquesta-basic.yaml
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
+Let's take a quick peek at this file - you can see the inline comments below for an explanation of the syntax involved:
+
+```yaml
+version: 1.0
+
+description: A basic workflow that runs an arbitrary linux command.
+
+# These are our input parameters. The top-level bits of information that
+# this workflow needs in order to function.
+input:
+  - cmd
+  - timeout
+
+# A list of tasks to perform in this workflow
+tasks:
+
+  # This is the first task
+  task1:
+
+    # This specifies which action to run. This could be a simple local shell command
+    # (like shown here), or some other action, including other workflows.
+    action: core.local cmd=<% ctx(cmd) %> timeout=<% ctx(timeout) %>
+
+    # This helps the workflow engine understand what comes after this task. It is here we
+    # can make decisions about whether to go to another task (including specifying which one),
+    # or exiting the workflow.
+    next:
+
+      # This condition (note that this is a list so we can have multiple) allows us to perform
+      # the below statement when this task has succeeded
+      - when: <% succeeded() %>
+
+        # 'publish' allows us to push information to a new variable within this workflow. In this
+        # case, the variable 'stdout' is being set to the contents of the stdout for the command
+        # we passed to core.local, and the same is true for stderr.
+        publish:
+          - stdout: <% result().stdout %>
+          - stderr: <% result().stderr %>
+
+# output allows us to control what this workflow publishes as variables to the caller. In this case,
+# we're expecting that 'stdout' has been set by the task above, so we can return that variable as output.
+output:
+  - stdout: <% ctx(stdout) %>
+```
+
+We can run this like any action:
+
+```
+st2 run examples.orquesta-basic cmd="uname -a"
+```
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
+
 See the [Orquesta](https://docs.stackstorm.com/orquesta.html) for more details on how to write these types of Workflows.
+
+### Mistral
+
+[Mistral](https://docs.stackstorm.com/mistral.html), was historically the preferred option for complex workflows. It is a workflow engine built within the OpenStack project, and was integrated and packaged with StackStorm for many years.
+
+However, at the time of this writing (mid-2020), Orquesta is mature enough that Mistral is now viewed as the legacy option. In fact, Mistral is not supported for [Ubuntu Bionic (18.04)](https://docs.stackstorm.com/install/u18.html) or [Centos8](https://docs.stackstorm.com/install/rhel8.html), which are the official deployment options for Python 3 support. Python 2, of course, is end-of-support, and even now, we're seeing all kinds of stuff break when not running on Python 3 (NAPALM library dropped support for Python 2 starting with 3.5.0).
+
+So, bottom line - if you're new to StackStorm, Mistral might be nice to know about anecdotally, but your time is much better invested in Orquesta. It is the future.
