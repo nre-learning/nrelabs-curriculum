@@ -1,4 +1,4 @@
-<configuration>
+<configuration operation="replace">
         <version>15.1X53-D60.4</version>
         <system>
             <host-name>vqfx1</host-name>
@@ -81,20 +81,7 @@
                 </providers>
             </extensions>
         </system>
-        <interfaces>
-            <interface>
-                <name>em0</name>
-                <unit>
-                    <name>0</name>
-                    <family>
-                        <inet>
-                            <address>
-                                <name>{{ mgmt_addr }}</name>
-                            </address>
-                        </inet>
-                    </family>
-                </unit>
-            </interface>
+        <interfaces operation="merge">
             <interface>
                 <name>em3</name>
                 <unit>

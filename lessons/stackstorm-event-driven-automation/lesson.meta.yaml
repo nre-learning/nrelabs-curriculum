@@ -3,7 +3,7 @@ name: Event-Driven Network Automation with StackStorm
 slug: stackstorm-event-driven-automation
 category: tools
 tier: prod
-diagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-15/lessondiagram.png
+# diagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-15/lessondiagram.png
 video: https://www.youtube.com/embed/WhfAqnn2HMM
 prereqs:
   - napalm-multi-vendor-network-automation
@@ -36,30 +36,6 @@ endpoints:
   - name: cli
     port: 22
     type: ssh
-
-- name: vqfx2
-  image: vqfx-snap2
-  configurationType: napalm
-  presentations:
-  - name: cli
-    port: 22
-    type: ssh
-
-- name: vqfx3
-  image: vqfx-snap3
-  configurationType: napalm
-  presentations:
-  - name: cli
-    port: 22
-    type: ssh
-
-connections:
-- a: vqfx1
-  b: vqfx2
-- a: vqfx2
-  b: vqfx3
-- a: vqfx3
-  b: vqfx1
 
 stages:
   - description: StackStorm CLI and Packs
