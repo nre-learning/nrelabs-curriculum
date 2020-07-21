@@ -31,14 +31,6 @@ endpoints:
     port: 22
     type: ssh
 
-connections:
-- a: vqfx1
-  b: vqfx2
-- a: vqfx2
-  b: vqfx3
-- a: vqfx3
-  b: vqfx1
-
 stages:
   - description: Declarative Resources for Networking
     guideType: markdown
