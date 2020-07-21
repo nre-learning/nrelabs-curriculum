@@ -2,7 +2,7 @@
 name: Terraform & Junos
 slug: terraform-junos
 category: tools
-diagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-31/lessondiagram.png
+# diagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/v0.3.2/lessons/lesson-31/lessondiagram.png
 description: Terraform provides a declarative way of managing resources and now you can experiment with controlling Junos resources through this exciting lesson! 
 tier: prod
 shortDescription: Terraform
@@ -25,22 +25,6 @@ endpoints:
 
 - name: vqfx1
   image: vqfx-snap1
-  configurationType: napalm
-  presentations:
-  - name: cli
-    port: 22
-    type: ssh
-
-- name: vqfx2
-  image: vqfx-snap2
-  configurationType: napalm
-  presentations:
-  - name: cli
-    port: 22
-    type: ssh
-
-- name: vqfx3
-  image: vqfx-snap3
   configurationType: napalm
   presentations:
   - name: cli
