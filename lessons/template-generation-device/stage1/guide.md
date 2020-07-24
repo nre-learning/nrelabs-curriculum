@@ -66,6 +66,7 @@ Lastly we will render the template based on the data from the YAML file. Since w
 <pre>
 for device in my_vars:
    print(template.render(device))
+
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
@@ -78,6 +79,7 @@ for device in my_vars:
    outfile = open(device["HOSTNAME"] + ".conf", "w")
    outfile.write(template.render(device))
    outfile.close()
+
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 

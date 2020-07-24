@@ -99,6 +99,7 @@ for device in deviceList:
   else:
      print('commit failed on ' + device.facts["hostname"])
      device.close()
+
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 

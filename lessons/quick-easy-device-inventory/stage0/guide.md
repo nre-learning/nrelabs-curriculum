@@ -7,7 +7,7 @@ python
 from jnpr.junos import Device
 dev = Device(host="vqfx1", user="antidote", password="antidotepassword")
 dev.open()
-print dev.facts
+print(dev.facts)
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
