@@ -54,11 +54,11 @@ st2 rule create /antidote/stage4/replace_interface_config.yaml
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
-The tabular output shows us that StackStorm has ingested our new Rule definition and is ready to watch for new trigger-instances. Now that the rule is in place, any new instances of the trigger `napalm.InterfaceDown` will be handled by this rule. In the name of variety, let's trigger an event on `vqfx2`:
+The tabular output shows us that StackStorm has ingested our new Rule definition and is ready to watch for new trigger-instances. Now that the rule is in place, any new instances of the trigger `napalm.InterfaceDown` will be handled by this rule. In the name of variety, let's re-trigger this event, but with `em3`:
 
 ```
 configure
-set interfaces em4 disable
+set interfaces em3 disable
 commit
 exit
 ```

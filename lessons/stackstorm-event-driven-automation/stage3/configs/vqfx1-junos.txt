@@ -82,7 +82,7 @@
             </extensions>
         </system>
         <interfaces operation="merge">
-            <interface>
+            <interface operation="replace">
                 <name>em3</name>
                 <unit>
                     <name>0</name>
@@ -95,7 +95,7 @@
                     </family>
                 </unit>
             </interface>
-            <interface>
+            <interface operation="replace">
                 <name>em4</name>
                 <unit>
                     <name>0</name>
