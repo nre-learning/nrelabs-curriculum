@@ -39,7 +39,8 @@ RUN mkdir -p /home/antidote/jsnapy/snapshots && chown -R antidote:antidote /home
 RUN curl -L -o yq https://github.com/mikefarah/yq/releases/download/3.3.2/yq_linux_amd64 && chmod +x yq && mv yq /usr/local/bin
 RUN wget https://github.com/sharkdp/bat/releases/download/v0.15.4/bat_0.15.4_amd64.deb && dpkg -i bat_0.15.4_amd64.deb
 
-COPY bashrc /home/antidote/.bashrc
+COPY bash_profile /home/antidote/.bash_profile
+RUN chown antidote:antidote /home/antidote/.bash_profile
 
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]
