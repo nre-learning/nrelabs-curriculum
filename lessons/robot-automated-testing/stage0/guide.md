@@ -135,6 +135,6 @@ robot /antidote/stage0/chapter0_eg1.robot
 
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
-As expected, test-cases `Check Equal1`, `Check Equal2`, `Check Substring2` fails, and `Check Equal1`, `Check Substring1` pass. Since all the test-cases did not pass, the test-suite result is "Fail".
+As expected, test-cases `Check Equal1`, `Check Equal2`, `Check Substring2` fails, and `Check Equal3`, `Check Substring1` pass. Since all the test-cases did not pass, the test-suite result is "Fail".
 
 In the next section, we'll use these fundamentals for writing tests for Junos network devices:
