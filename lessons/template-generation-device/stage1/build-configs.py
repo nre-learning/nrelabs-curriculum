@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import yaml
 from jinja2 import Template
@@ -12,7 +12,7 @@ template_data = template_file.read()
 template = Template(template_data)
 
 for device in my_vars:
-	print "Creating config for " + device["HOSTNAME"]
+	print("Creating config for " + device["HOSTNAME"])
 	outfile = open(device["HOSTNAME"] + ".conf", "w")
 	outfile.write(template.render(device))
 	outfile.close()

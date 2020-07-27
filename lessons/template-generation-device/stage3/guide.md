@@ -64,7 +64,6 @@ outfile = open("new-vlans.conf", "w")
 outfile.write(template.render(my_vars))
 outfile.close()
 print(template.render(my_vars))
-
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
@@ -81,7 +80,6 @@ We will use PyEz to connect to the QFX switches and push the configuration templ
 <pre>
 from jnpr.junos import Device
 from jnpr.junos.utils.config import Config
-
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
@@ -97,9 +95,9 @@ for device in deviceList:
   cfg=Config(device)
   cfg.load(path='new-vlans.conf', format='text')
   if cfg.commit() == True:
-     print ('configuration committed on ' + device.facts["hostname"])
+     print('configuration committed on ' + device.facts["hostname"])
   else:
-     print ('commit failed on ' + device.facts["hostname"])
+     print('commit failed on ' + device.facts["hostname"])
      device.close()
 
 </pre>

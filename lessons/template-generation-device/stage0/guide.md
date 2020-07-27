@@ -43,7 +43,7 @@ my_vars = yaml.full_load(var_data)
 
 Alright, now lets ensure the data has been properly read and loaded by printing the `my_vars` variable.
 <pre>
-print my_vars
+print(my_vars)
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 

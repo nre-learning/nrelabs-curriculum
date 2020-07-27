@@ -12,11 +12,3 @@ devices:
   port: 22
   driver: junos
   credentials: junosdevices
-- hostname: vqfx2
-  port: 22
-  driver: junos
-  credentials: junosdevices
-- hostname: vqfx3
-  port: 22
-  driver: junos
-  credentials: junosdevices

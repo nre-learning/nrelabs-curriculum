@@ -30,7 +30,7 @@ cat napalm_verify_snmp.yaml
 We've intentionally configured `vqfx1` ahead of time to have a read-write string, so that we see the violation when we run the napalm validate command with this test:
 
 ```
-napalm --user=antidote --password=antidotepassword --vendor=junos vqfx1 validate napalm_verify_snmp.yaml
+napalm --user=antidote --password=antidotepassword --vendor=junos vqfx1 validate napalm_verify_snmp.yaml | jq
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
@@ -49,7 +49,7 @@ commit and-quit
 We can re-execute this test now and see that the assertion passes:
 
 ```
-napalm --user=antidote --password=antidotepassword --vendor=junos vqfx1 validate napalm_verify_snmp.yaml
+napalm --user=antidote --password=antidotepassword --vendor=junos vqfx1 validate napalm_verify_snmp.yaml | jq
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
@@ -63,7 +63,7 @@ cat napalm_verify_bgp.yaml
 In this case, the regular expression `.+` is used to ensure that the authentication key used is **at least** one character. This means that, if there is no authentication key configured, this test would fail. As we've pre-configured this BGP configuration without authentication, we can see that it does:
 
 ```
-napalm --user=antidote --password=antidotepassword --vendor=junos vqfx1 validate napalm_verify_bgp.yaml
+napalm --user=antidote --password=antidotepassword --vendor=junos vqfx1 validate napalm_verify_bgp.yaml | jq
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
@@ -80,7 +80,7 @@ commit and-quit
 Now, we should again see all tests pass:
 
 ```
-napalm --user=antidote --password=antidotepassword --vendor=junos vqfx1 validate napalm_verify_bgp.yaml
+napalm --user=antidote --password=antidotepassword --vendor=junos vqfx1 validate napalm_verify_bgp.yaml | jq
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 

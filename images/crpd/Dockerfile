@@ -1,4 +1,4 @@
-FROM crpd:20.1R1.11
+FROM crpd:20.2R1.10
 
 ADD launch.sh /
 ADD sshd_config /

@@ -25,7 +25,7 @@ dev.open()
 Then we will use the `rpc.get_config` function to pull the device configuration and store it in a variable called `config`. Next we `write` the configuration to the local file and finally `close` the local file.
 <pre>
 config = dev.rpc.get_config(options={'format':'set'})
-outfile.write(etree.tostring(config))
+outfile.write(etree.tostring(config).decode("utf-8"))
 outfile.close()
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>

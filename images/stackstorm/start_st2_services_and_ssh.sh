@@ -15,3 +15,4 @@ sleep 10
 /opt/stackstorm/st2/bin/st2timersengine --config-file=/etc/st2/st2.conf &
 /opt/stackstorm/st2/bin/st2workflowengine --config-file=/etc/st2/st2.conf &
 
+/usr/sbin/sshd -D

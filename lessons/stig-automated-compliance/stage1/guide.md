@@ -1,6 +1,6 @@
 In the previous lab, we explored the use of NAPALM to verify that two particular findings in the [STIG for Juniper devices](https://stigviewer.com/stig/infrastructure_router__juniper/) were found to be in compliance.
 
-In this lab, we'll use another tool to accomplish the same purpose. This tool, [JSNAPy](https://github.com/Juniper/jsnapy), was explored in a [previous lesson](https://labs.networkreliability.engineering/labs?lessonId=12), and is a very useful tool for performing validations against any part of a Junos device's state or configuration.
+In this lab, we'll use another tool to accomplish the same purpose. This tool, [JSNAPy](https://github.com/Juniper/jsnapy), was explored in a [previous lesson](/labs?lessonSlug=jsnapy-network-testing), and is a very useful tool for performing validations against any part of a Junos device's state or configuration.
 
 Here's the key tradeoffs between NAPALM and JSNAPy for this purpose.
 - NAPALM is multi-vendor and JSNAPy is not (currently). If you want to write tests that work across multiple vendors, NAPALM is your best bet.

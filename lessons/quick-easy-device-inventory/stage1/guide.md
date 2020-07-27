@@ -29,7 +29,7 @@ deviceList = yaml.full_load(deviceFile)
 
 Lets print the `deviceList` variable to ensure the devices.yml file has been processed correctly.
 <pre>
-print deviceList
+print(deviceList)
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
