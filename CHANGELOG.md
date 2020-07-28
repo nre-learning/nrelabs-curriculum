@@ -2,6 +2,8 @@
 
 ## In development
 
+- Converged motd banners in crpd, added helper tip for 'cli' command [#343](https://github.com/nre-learning/nrelabs-curriculum/pull/343)
+- Misc curriculum updates for Antidote 0.7 compatibility [#341](https://github.com/nre-learning/nrelabs-curriculum/pull/341)
 - Refurbish JSNAPy lesson and move to cRPD [#338](https://github.com/nre-learning/nrelabs-curriculum/pull/338)
 - Update troubleshooting lesson with flavor and cRPD [#337](https://github.com/nre-learning/nrelabs-curriculum/pull/337)
 - Add spelling checks in CI pipeline [#276](https://github.com/nre-learning/nrelabs-curriculum/pull/276)
