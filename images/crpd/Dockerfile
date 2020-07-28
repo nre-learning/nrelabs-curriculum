@@ -11,9 +11,10 @@ ADD juniper.conf /
 #
 # ADD license.conf /
 
-# Adjust MOTD
+# Remove existing motd banners and add our own
 RUN rm -f /etc/update-motd.d/*
 RUN rm -f /etc/legal
+RUN rm -f cat /usr/bin/crpd_banner
 ADD motd.sh /etc/update-motd.d/00-antidote-motd
 
 CMD ["bash", "/launch.sh"]
