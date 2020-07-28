@@ -9,7 +9,7 @@ Another benefit of Python is that it's an **interpreted** language, which means 
 First, we want to start the Python interpreter:
 
 ```
-python
+python3
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 

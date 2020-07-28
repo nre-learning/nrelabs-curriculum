@@ -54,15 +54,15 @@ st2 rule create /antidote/stage4/replace_interface_config.yaml
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
-The tabular output shows us that StackStorm has ingested our new Rule definition and is ready to watch for new trigger-instances. Now that the rule is in place, any new instances of the trigger `napalm.InterfaceDown` will be handled by this rule. In the name of variety, let's trigger an event on `vqfx2`:
+The tabular output shows us that StackStorm has ingested our new Rule definition and is ready to watch for new trigger-instances. Now that the rule is in place, any new instances of the trigger `napalm.InterfaceDown` will be handled by this rule. In the name of variety, let's re-trigger this event, but with `em3`:
 
 ```
 configure
-set interfaces em4 disable
+set interfaces em3 disable
 commit
 exit
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx2', this)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', this)">Run this snippet</button>
 
 As with before, check the `trigger-instance` list until our new instance comes in. Again, this sensor works on a polling basis, so it may take a few seconds. Also note that if you went through the previous lab, our old trigger-instances will still be there, so pay attention to the timestamps.
 
@@ -87,12 +87,12 @@ st2 execution get $(st2 execution list --action=napalm.loadconfig | grep napalm 
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
-Looks like our `loadconfig` action executed successfully - we can verify this at the CLI of `vqfx2` and see the interface that we just disabled, is back up and running:
+Looks like our `loadconfig` action executed successfully - we can verify this at the CLI of `vqfx1` and see the interface that we just disabled, is back up and running:
 
 ```
-show interfaces em4
+show interfaces em3
 ```
-<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx2', this)">Run this snippet</button>
+<button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', this)">Run this snippet</button>
 
 That's it for now! To recap:
 

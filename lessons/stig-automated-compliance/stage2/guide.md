@@ -89,8 +89,8 @@ This has all of the elements required for a dictionary, so we should be able to 
 <pre>
 for mydev in SNMPTable(dev).get():
     if mydev.authorization != "read-only":
-        print "VIOLATION: SNMPv2 COMMUNITY {} HAS {} ACCESS".format(mydev.name,
-                                                                    mydev.authorization)
+        print("VIOLATION: SNMPv2 COMMUNITY {} HAS {} ACCESS".format(mydev.name,
+                                                                    mydev.authorization))
 
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
@@ -108,8 +108,8 @@ And rerun our check.  Nothing should be reported back if we correctly fixed ever
 <pre>
 for mydev in SNMPTable(dev).get():
     if mydev.authorization != "read-only":
-        print "VIOLATION: SNMPv2 COMMUNITY {} HAS {} ACCESS".format(mydev.name,
-                                                                    mydev.authorization)
+        print("VIOLATION: SNMPv2 COMMUNITY {} HAS {} ACCESS".format(mydev.name,
+                                                                    mydev.authorization))
 
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
@@ -166,7 +166,7 @@ We'll start to assemble our python script.  As a nod to the name of the vulnerab
 
 ```
 cat > V_3969.py << EOF
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 EOF
 ```
@@ -202,8 +202,8 @@ def NET0894(device):
     check_pass = True
 
     # Some extra information on what the script is doing
-    print "CHECKING NET0894: This examines the configuration for",
-    print "SNMPv2 communities with write access."
+    print("CHECKING NET0894: This examines the configuration for",)
+    print("SNMPv2 communities with write access.")
 
     # Retrieve the SNMP configuration table
     snmp = SNMPTable(device).get()
@@ -213,22 +213,22 @@ def NET0894(device):
         # check that the authorization is 'read-only'
         if mydev.authorization != "read-only":
             # print a violation message
-            print "VIOLATION: SNMPv2 COMMUNITY {}".format(mydev.name)
-            print "IS NOT RESTRICTED TO READ-ONLY ACCESS"
+            print("VIOLATION: SNMPv2 COMMUNITY {}".format(mydev.name))
+            print("IS NOT RESTRICTED TO READ-ONLY ACCESS")
 
-            # print some informaiton on how to fix the problem
-            print "JUNOS FIX: set snmp community {}".format(mydev.name)
-            print "authorization read-only"
-            print "\n"
+            # print some information on how to fix the problem
+            print("JUNOS FIX: set snmp community {}".format(mydev.name))
+            print("authorization read-only")
+            print("\n")
 
             # set our pass/fail grade to false
             check_pass = False
 
     # print the overall outcome of our rule check
     if check_pass:
-        print "NET0894 PASSED"
+        print("NET0894 PASSED")
     else:
-        print "NET0894 FAILED"
+        print("NET0894 FAILED")
 
     return check_pass
 
@@ -250,12 +250,12 @@ dev.open()
 
 # Evaluate it and save the results in a variable pass_fail
 pass_fail = NET0894(dev)
-print "VULNERABILITY ASSESSMENT FOR {}".format(dev.hostname)
-print "FOR V-3969: ",
+print("VULNERABILITY ASSESSMENT FOR {}".format(dev.hostname))
+print("FOR V-3969: ")
 if pass_fail:
-    print "PASSED"
+    print("PASSED")
 else:
-    print "FAILED!!!"
+    print("FAILED!!!")
 
 # close the device
 dev.close()

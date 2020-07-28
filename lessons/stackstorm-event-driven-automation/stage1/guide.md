@@ -109,7 +109,7 @@ st2 run napalm.get_bgp_neighbors hostname=vqfx1
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
-Finally, it would be really great if we could actually push a config change with StackStorm.  If you pay attention to the output retrieved in the previous command, you may have noticed that one of our configured BGP peers is inactive. Upon further inspection, we see that the BGP configuration on vqfx1 is using the wrong `peer-as` attribute.
+Finally, it would be really great if we could actually push a config change with StackStorm.  If you pay attention to the output retrieved in the previous command, you may have noticed that one of our configured BGP peers is using an incorrect `peer-as`: `64123`.
 
 As part of this lesson, we've included a configuration snippet that will replace only the relevant configuration with the corrected `peer-as` attribute:
 
@@ -125,7 +125,7 @@ st2 run napalm.loadconfig hostname=vqfx1 config_file="/antidote/stage1/vqfx1-con
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('st2', this)">Run this snippet</button>
 
-If we go to vqfx1 now, we'll see that both BGP peers are active:
+If we go to vqfx1 now, we'll see that our peer now has the corrected `peer-as` attribute:
 
 ```
 cli

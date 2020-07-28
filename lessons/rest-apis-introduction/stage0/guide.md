@@ -24,7 +24,7 @@ We'll be using a custom, simple REST API server for these examples, to keep thin
 It's **really important** that you run this command in `linux1-cli2` first; if you don't, the rest of this section won't work. Start the API server with this snippet:
 
 ```
-python /antidote/server.py
+python3 /antidote/server.py
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1-cli2', this)">Run this snippet</button>
 

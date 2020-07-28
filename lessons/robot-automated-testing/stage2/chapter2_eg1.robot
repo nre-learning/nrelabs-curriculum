@@ -4,9 +4,10 @@ Library	JunosDevice.py
 
 *** Keywords ***
 Log Facts
-	&{facts}=	Gather Device Info
-	:FOR  ${key}  IN  @{facts.keys()}  
-    \  Log  ${facts["${key}"]}
+	&{facts}=       Gather Device Info
+	FOR  ${key}  IN  @{facts.keys()}
+	Log  ${facts["${key}"]}
+	END
 
 Validate Facts
 	&{facts}=	Gather Device Info
