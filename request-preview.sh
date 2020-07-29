@@ -58,18 +58,15 @@ then
   exit 0
 fi
 
-PREVIEW_PAYLOAD="{
-  \"branch\":\"$GITHUB_HEAD_REF\",
-  \"pullRequest\":\"$PR_ID\",
-  \"repoSlug\":\"$GITHUB_REPOSITORY\",
-  \"prSha\":\"$GITHUB_SHA\"
-}"
-
 echo "Requesting preview...."
-echo $PREVIEW_PAYLOAD
 
 curl $url --header "Content-Type: application/json" \
-  --data $PREVIEW_PAYLOAD
+  --data "{
+    \"branch\":\"$GITHUB_HEAD_REF\",
+    \"pullRequest\":\"$PR_ID\",
+    \"repoSlug\":\"$GITHUB_REPOSITORY\",
+    \"prSha\":\"$GITHUB_SHA\"
+  }"
 
 
 echo "DONE!"
