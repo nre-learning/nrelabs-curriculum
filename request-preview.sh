@@ -58,7 +58,7 @@ then
   exit 0
 fi
 
-PREVIEW_PAYLOAD = "{
+PREVIEW_PAYLOAD="{
   \"branch\":\"$GITHUB_HEAD_REF\",
   \"pullRequest\":\"$PR_ID\",
   \"repoSlug\":\"$GITHUB_REPOSITORY\",
