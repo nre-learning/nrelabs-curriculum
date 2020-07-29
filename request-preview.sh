@@ -4,7 +4,7 @@ set -e +o pipefail
 
 url="https://preview.nrelabs.io/webhook"
 
-ech "ENV TO FOLLOW"
+echo "ENV TO FOLLOW"
 echo $(env)
 
 # # https://docs.travis-ci.com/user/environment-variables/
@@ -58,15 +58,18 @@ then
   exit 0
 fi
 
+PREVIEW_PAYLOAD = "{
+  \"branch\":\"$GITHUB_HEAD_REF\",
+  \"pullRequest\":\"$PR_ID\",
+  \"repoSlug\":\"$GITHUB_REPOSITORY\",
+  \"prSha\":\"$GITHUB_SHA\"
+}"
+
 echo "Requesting preview...."
+echo $PREVIEW_PAYLOAD
 
 curl $url --header "Content-Type: application/json" \
-  --data "{
-    \"branch\":\"$GITHUB_HEAD_REF\",
-    \"pullRequest\":\"$PR_ID\",
-    \"repoSlug\":\"$GITHUB_REPOSITORY\",
-    \"prSha\":\"$GITHUB_SHA\"
-  }"
+  --data $PREVIEW_PAYLOAD
 
 
 echo "DONE!"
