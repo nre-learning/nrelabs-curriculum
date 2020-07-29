@@ -1,0 +1,32 @@
+name: CI
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install xmllint
+      run: sudo apt-get install aspell aspell-en dictionaries-common
+
+    - name: Run spellchecker
+      run: ./check-spelling.sh
+
+    - name: Install antidote binaries
+      run: curl -Lo antidote.tar.gz https://github.com/nre-learning/antidote-core/releases/download/v0.6.2/antidote-linux-amd64.tar.gz && tar xvzf antidote.tar.gz
+
+    - name: Run antidote validation
+      run: ./antidote validate .
+
+    - name: Check changelog
+      run: ./check-changelog.sh
+
+    - name: Request preview
+      run: ./request-preview.sh
+      
