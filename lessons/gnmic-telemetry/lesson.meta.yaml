@@ -1,0 +1,37 @@
+---
+name: Telemetry At Your Fingertips with gNMIc
+slug: gnmic-telemetry
+category: tools
+diagram: ""
+video: ""
+tier: prod
+description: In this lesson, we'll explore the use of a tool called gNMIc to make sense of gNMI-based operations at the command-line.
+shortDescription: gnmic
+tags:
+- telemetry
+
+endpoints:
+
+- name: junos1
+  image: crpd
+  additionalPorts: [51051]
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: gnmic
+  image: gnmic
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+stages:
+- description: First Steps
+  guideType: markdown
+  stageVideo: ""
+
+authors:
+- name: Roman Dodin
+  link: https://github.com/hellt
