@@ -2,6 +2,7 @@
 
 ## In development
 
+- Fix troubleshooting lesson scripts to be py3 compatible [#345](https://github.com/nre-learning/nrelabs-curriculum/pull/345)
 - Migrating from travis to github actions [#344](https://github.com/nre-learning/nrelabs-curriculum/pull/344)
 - Converged motd banners in crpd, added helper tip for 'cli' command [#343](https://github.com/nre-learning/nrelabs-curriculum/pull/343)
 - Misc curriculum updates for Antidote 0.7 compatibility [#341](https://github.com/nre-learning/nrelabs-curriculum/pull/341)
