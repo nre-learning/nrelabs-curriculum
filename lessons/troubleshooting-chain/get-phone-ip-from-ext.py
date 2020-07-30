@@ -1,4 +1,4 @@
-#!/usr/bin/python2.7
+#!/usr/bin/env python3
 
 import requests
 import xml.etree.ElementTree as ET
@@ -8,9 +8,9 @@ import json
 
 def out(*args):
     if sys.stdout.isatty():
-        print ', '.join(args[0]["hosts"])
+        print(', '.join(args[0]["hosts"]))
     else:
-        print json.dumps(args[0])
+        print(json.dumps(args[0]))
 
 
 def myfunc(*args):
@@ -31,9 +31,7 @@ def myfunc(*args):
 
     resp = requests.get(baseurl, cookies=cookies, params={"action": "PJSIPShowRegistrationInboundContactStatuses"})
 
-    contacts = str(resp.content)
-
-    root = ET.fromstring(contacts)
+    root = ET.fromstring(resp.content.decode('ascii'))
 
     contacts = root.findall(".//*[@event='ContactStatusDetail']")
 
