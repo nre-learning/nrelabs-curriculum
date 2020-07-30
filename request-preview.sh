@@ -4,20 +4,12 @@ set -e +o pipefail
 
 url="https://preview.nrelabs.io/webhook"
 
-# https://docs.travis-ci.com/user/environment-variables/
-echo "TRAVIS_PULL_REQUEST_SHA - $TRAVIS_PULL_REQUEST_SHA"
-echo "TRAVIS_COMMIT - $TRAVIS_COMMIT"
-echo "TRAVIS_JOB_NUMBER - $TRAVIS_JOB_NUMBER"
-echo "TRAVIS_PULL_REQUEST - $TRAVIS_PULL_REQUEST"
-echo "TRAVIS_JOB_ID - $TRAVIS_JOB_ID"
-echo "TRAVIS_REPO_SLUG - $TRAVIS_REPO_SLUG"
-echo "env - $env"
-echo "TRAVIS_OS_NAME - $TRAVIS_OS_NAME"
-echo "TRAVIS_TAG - $TRAVIS_TAG"
-echo "TRAVIS_BRANCH - $TRAVIS_BRANCH"
-echo "TRAVIS_PULL_REQUEST_BRANCH - $TRAVIS_PULL_REQUEST_BRANCH"
+echo "ENV TO FOLLOW"
+echo $(env)
 
-if [ "$TRAVIS_PULL_REQUEST" == "false" ];
+PR_ID=$(echo $GITHUB_REF | sed "s/refs\/pull\/\(.*\)\/merge/\1/")
+
+if [ "$GITHUB_EVENT_NAME" != "pull_request" ];
 then
   echo "Not a PR build, skipping preview"
   exit 0
@@ -27,12 +19,11 @@ echo "Requesting preview...."
 
 curl $url --header "Content-Type: application/json" \
   --data "{
-    \"branch\":\"$TRAVIS_PULL_REQUEST_BRANCH\",
-    \"pullRequest\":\"$TRAVIS_PULL_REQUEST\",
-    \"repoSlug\":\"$TRAVIS_PULL_REQUEST_SLUG\",
-    \"prSha\":\"$TRAVIS_PULL_REQUEST_SHA\"
+    \"branch\":\"$GITHUB_HEAD_REF\",
+    \"pullRequest\":\"$PR_ID\",
+    \"repoSlug\":\"$GITHUB_REPOSITORY\",
+    \"prSha\":\"$GITHUB_SHA\"
   }"
-
 
 echo "DONE!"
 

@@ -17,16 +17,21 @@ jobs:
 
     - name: Run spellchecker
       run: ./check-spelling.sh
+      if: ${{ success() }}
 
     - name: Install antidote binaries
       run: curl -Lo antidote.tar.gz https://github.com/nre-learning/antidote-core/releases/download/v0.6.2/antidote-linux-amd64.tar.gz && tar xvzf antidote.tar.gz
+      if: ${{ success() }}
 
     - name: Run antidote validation
       run: ./antidote validate .
+      if: ${{ success() }}
 
     - name: Check changelog
       run: ./check-changelog.sh
+      if: ${{ success() }}
 
     - name: Request preview
       run: ./request-preview.sh
+      if: ${{ success() }}
       
