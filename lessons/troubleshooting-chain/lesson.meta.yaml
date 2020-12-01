@@ -18,23 +18,6 @@ authors:
   link: https://twitter.com/cloudtoad
 
 endpoints:
-
-- name: junos1
-  image: crpd
-  configurationType: napalm
-  presentations:
-  - name: cli
-    port: 22
-    type: ssh
-
-- name: junos2
-  image: crpd
-  configurationType: napalm
-  presentations:
-  - name: cli
-    port: 22
-    type: ssh
-
 - name: linux1
   image: utility
   presentations:
@@ -44,6 +27,22 @@ endpoints:
 
 - name: sipphone
   image: pjsua-lindsey
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: vqfx1
+  image: vqfx-snap1
+  configurationType: napalm
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+
+- name: vqfx2
+  image: vqfx-snap2
+  configurationType: napalm
   presentations:
   - name: cli
     port: 22
@@ -61,15 +60,13 @@ endpoints:
 
 
 connections:
-- a: junos1
-  b: junos2
-  subnet: 10.10.0.0/24
-- a: junos2
+- a: vqfx1
+  b: vqfx2
+- a: vqfx2
   b: sipphone
-  subnet: 10.10.150.0/24
-- a: junos1
+- a: vqfx1
   b: asterisk
-  subnet: 10.10.200.0/24
+
 
 stages:
   - description: Get the IP Address for a Phone Extension
