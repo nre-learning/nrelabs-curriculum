@@ -1,6 +1,6 @@
 slug: pjsua-lindsey
 description: SIP phone
-flavor: untrusted
+flavor: trusted
 sshUser: antidote
 sshPassword: antidotepassword
 configUser: antidote
