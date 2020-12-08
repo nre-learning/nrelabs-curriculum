@@ -2,7 +2,7 @@
 name: Automating the Troubleshooting Chain
 slug: troubleshooting-chain
 category: workflows
-tier: prod
+tier: local
 
 prereqs:
   # - python-introduction
