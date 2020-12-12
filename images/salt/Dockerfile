@@ -4,15 +4,13 @@ FROM antidotelabs/utility
 # your timezone
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata
 
-RUN wget -O - https://repo.saltstack.com/apt/ubuntu/16.04/amd64/archive/2018.3.2/SALTSTACK-GPG-KEY.pub | apt-key add - && \
-    echo "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/archive/2018.3.2 xenial main" >> /etc/apt/sources.list && \
-    apt-get update
+RUN wget -O - https://repo.saltstack.com/py3/ubuntu/18.04/amd64/latest/SALTSTACK-GPG-KEY.pub | apt-key add - && \
+    echo "deb http://repo.saltstack.com/py3/ubuntu/18.04/amd64/latest bionic main" >> /etc/apt/sources.list && \
+    apt-get update && apt-get upgrade -y
 RUN apt-get --auto-remove --yes remove python-openssl
-RUN pip install pyOpenSSL
-RUN pip install jxmlease
+RUN pip3 install -r requirements.txt
 
-RUN apt-get install -y salt-master
-RUN apt-get install -y salt-minion
+RUN apt-get install -y salt-master salt-minion
 
 # configure minion and proxy
 COPY ./salt_configs/master /etc/salt
@@ -45,7 +43,7 @@ RUN chown -R antidote:antidote /var/cache/salt
 RUN chown -R antidote:antidote /srv
 RUN chown -R antidote:antidote /var/log/salt
 RUN chown -R antidote:antidote /var/run/salt
-RUN chown -R antidote:antidote /var/run/salt-master.pid
-RUN chmod -R 777 /var/run/salt-master.pid
+# RUN chown -R antidote:antidote /var/run/salt-master.pid
+# RUN chmod -R 777 /var/run/salt-master.pid
 RUN chown antidote:antidote /var/run
 RUN chmod 777 /var/run
