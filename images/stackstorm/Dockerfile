@@ -28,20 +28,22 @@ ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 #####################################################################################################
 
 RUN mkdir -p /data/db
+RUN apt-get update -y && apt-get install -y crudini  rabbitmq-server
 
+#####################################################################################################
+# Install Mongo
+#
+# Mongo started adding a dependency on systemd in their packages, so we're installing from tarball now
+# https://www.mongodb.com/try/download/community
+# https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu-tarball/
+#####################################################################################################
 
-
-# Add key and repo for MongoDB (4.0)
-RUN wget -qO - https://www.mongodb.org/static/pgp/server-4.0.asc | apt-key add -
-RUN echo "deb http://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse"  > /etc/apt/sources.list.d/mongodb-org-4.0.list
-RUN apt-get update
-
-# # Add key and repo for the latest stable MongoDB (3.4)
-# RUN wget -qO - https://www.mongodb.org/static/pgp/server-3.4.asc | apt-key add -
-# RUN echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse" > /etc/apt/sources.list.d/mongodb-org-3.4.list
-# RUN apt-get update
-
-RUN apt-get install -y crudini mongodb-org rabbitmq-server
+RUN wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu1804-4.4.2.tgz \
+  && tar -zxvf mongodb-linux-x86_64-ubuntu1804-4.4.2.tgz \
+  && cp mongodb-linux-x86_64-ubuntu1804-4.4.2/bin/* /usr/local/bin/ \
+  && mkdir -p /var/lib/mongo \
+  && mkdir -p /var/log/mongo \
+  && rm -rf mongodb-linux-x86_64-ubuntu1804-4.4.2/
 
 #####################################################################################################
 ## Install StackStorm                 
