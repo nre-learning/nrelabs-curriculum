@@ -8,6 +8,7 @@
 
 \cp /sshd_config /etc/ssh/sshd_config
 
+echo "root:antidotepassword"|chpasswd
 service ssh start
 
 # cli load merge /config/license.conf

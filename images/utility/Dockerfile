@@ -37,7 +37,7 @@ RUN pip3 install -r /requirements.txt
 RUN mkdir -p /home/antidote/jsnapy/snapshots && chown -R antidote:antidote /home/antidote/jsnapy
 
 RUN curl -L -o yq https://github.com/mikefarah/yq/releases/download/3.3.2/yq_linux_amd64 && chmod +x yq && mv yq /usr/local/bin
-RUN wget https://github.com/sharkdp/bat/releases/download/v0.15.4/bat_0.15.4_amd64.deb && dpkg -i bat_0.15.4_amd64.deb
+RUN wget https://github.com/sharkdp/bat/releases/download/v0.17.1/bat_0.17.1_amd64.deb && dpkg -i bat_0.17.1_amd64.deb
 
 COPY bash_profile /home/antidote/.bash_profile
 RUN chown antidote:antidote /home/antidote/.bash_profile
