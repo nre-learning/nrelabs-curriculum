@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-/usr/bin/mongod &
+/usr/local/bin/mongod &
 rabbitmq-server &
 sleep 10
 /opt/stackstorm/st2/bin/st2actionrunner --config-file=/etc/st2/st2.conf &
