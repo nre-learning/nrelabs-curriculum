@@ -1,6 +1,6 @@
 [all:vars]
 ansible_user=antidote
-ansible_ssh_pass=antidotepassword
+ansible_password=antidotepassword
 
 [cumulus]
 cvx1
