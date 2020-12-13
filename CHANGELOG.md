@@ -2,6 +2,9 @@
 
 ## In development
 
+
+## v1.3.0 - December 13, 2020
+
 - Fix connectivity issues in Ansible lesson [#349](https://github.com/nre-learning/nrelabs-curriculum/pull/349)
 - Fixing Salt and St2 images/lessons [#350](https://github.com/nre-learning/nrelabs-curriculum/pull/350)
 - Revert tshoot lesson back to vQFX [#347](https://github.com/nre-learning/nrelabs-curriculum/pull/347)
