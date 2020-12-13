@@ -71,8 +71,8 @@ COPY ./salt_configs/master /etc/salt
 COPY ./salt_configs/minion /etc/salt
 COPY ./salt_configs/proxy /etc/salt
 
-# RUN service salt-minion restart
-# RUN service salt-master restart
+RUN service salt-minion restart
+RUN service salt-master restart
 
 # Add pillar file for vqfx1
 RUN mkdir /srv/pillar
@@ -97,8 +97,8 @@ RUN chown -R antidote:antidote /var/cache/salt
 RUN chown -R antidote:antidote /srv
 RUN chown -R antidote:antidote /var/log/salt
 RUN chown -R antidote:antidote /var/run/salt
-RUN chown -R antidote:antidote /var/run/salt-master.pid
-RUN chown -R antidote:antidote /var/run/process_responsibility_salt-minion.pid
-RUN chmod -R 777 /var/run/salt-master.pid
-RUN chown antidote:antidote /var/run
+RUN chown -R antidote:antidote /var/run/salt-master.pid || true
+RUN chown -R antidote:antidote /var/run/process_responsibility_salt-minion.pid || true
+RUN chmod -R 777 /var/run/salt-master.pid || true
+RUN chown antidote:antidote /var/run || true
 RUN chmod 777 /var/run
