@@ -36,14 +36,17 @@ RUN apt-get update -y && apt-get install -y crudini  rabbitmq-server
 # Mongo started adding a dependency on systemd in their packages, so we're installing from tarball now
 # https://www.mongodb.com/try/download/community
 # https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu-tarball/
+#
+# Careful not to use 4.4 - https://stackoverflow.com/questions/64059795/mongodb-get-error-message-mongoerror-path-collision-at-activity
+#
 #####################################################################################################
 
-RUN wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu1804-4.4.2.tgz \
-  && tar -zxvf mongodb-linux-x86_64-ubuntu1804-4.4.2.tgz \
-  && cp mongodb-linux-x86_64-ubuntu1804-4.4.2/bin/* /usr/local/bin/ \
+RUN wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu1804-4.0.21.tgz \
+  && tar -zxvf mongodb-linux-x86_64-ubuntu1804-4.0.21.tgz \
+  && cp mongodb-linux-x86_64-ubuntu1804-4.0.21/bin/* /usr/local/bin/ \
   && mkdir -p /var/lib/mongo \
   && mkdir -p /var/log/mongo \
-  && rm -rf mongodb-linux-x86_64-ubuntu1804-4.4.2/
+  && rm -rf mongodb-linux-x86_64-ubuntu1804-4.0.21/
 
 #####################################################################################################
 ## Install StackStorm                 
