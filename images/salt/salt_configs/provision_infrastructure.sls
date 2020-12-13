@@ -3,3 +3,5 @@ Install the infrastructure services config:
    - name: salt:///infrastructure_config.conf
    - replace: True
    - timeout: 100
+   - template_vars:
+       foo: bar
