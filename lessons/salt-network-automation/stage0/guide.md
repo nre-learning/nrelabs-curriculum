@@ -38,6 +38,6 @@ salt '*' test.ping
 We can use the cmd.run execution module to run a remote command on the Salt Minion. In this case, we're checking what version of python is running on the Salt Minion.
 
 ```
-salt minion* cmd.run 'python -V'
+salt minion* cmd.run 'python3 -V'
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('salt1', this)">Run this snippet</button>
