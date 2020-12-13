@@ -2,6 +2,7 @@
 
 ## In development
 
+- Fixing Salt and St2 images/lessons [#350](https://github.com/nre-learning/nrelabs-curriculum/pull/350)
 - Revert tshoot lesson back to vQFX [#347](https://github.com/nre-learning/nrelabs-curriculum/pull/347)
 - Fix troubleshooting lesson scripts to be py3 compatible [#345](https://github.com/nre-learning/nrelabs-curriculum/pull/345)
 - Migrating from travis to github actions [#344](https://github.com/nre-learning/nrelabs-curriculum/pull/344)
