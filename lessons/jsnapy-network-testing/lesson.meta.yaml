@@ -2,7 +2,7 @@
 name: Network Unit Testing with JSNAPy
 slug: jsnapy-network-testing
 category: tools
-diagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/jsnapy-network-testing/jsnapy-crpd.png
+diagram: https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/master/lessons/jsnapy-network-testing/jsnapy-crpd-subnet.png
 tier: prod
 prereqs:
   - yaml-introduction
@@ -15,6 +15,7 @@ tags:
 - unit test
 - testing
 collection: juniper-networks
+readyDelay: 20
 
 authors:
 - name: Matt Oswalt
