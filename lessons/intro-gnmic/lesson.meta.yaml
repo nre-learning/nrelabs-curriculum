@@ -1,0 +1,32 @@
+name: Introduction to gNMIc
+slug: intro-gnmic
+category: tools
+diagram: ""
+video: ""
+tier: prod
+description: This lesson introduces the learner to GNMIC, a command-line tool for
+  interacting with GNMI on network devices
+shortDescription: gNMIc
+stages:
+- description: Getting Started
+  guideType: markdown
+  stageVideo: ""
+endpoints:
+- name: gnmic
+  image: gnmic
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+- name: r1
+  image: crpd
+  configurationType: napalm
+  additionalPorts:
+  - 50051
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+authors:
+- name: Roman Dodin
+  link: https://github.com/hellt
