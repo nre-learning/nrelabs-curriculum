@@ -6,5 +6,8 @@ all: docker
 
 docker:
 	docker build --pull --no-cache -t antidotelabs/ansible:$(TARGET_VERSION) .
-	# docker build --pull -t antidotelabs/ansible:$(TARGET_VERSION) .
+	docker push antidotelabs/ansible:$(TARGET_VERSION)
+
+dockerfast:
+	docker build --pull -t antidotelabs/ansible:$(TARGET_VERSION) .
 	docker push antidotelabs/ansible:$(TARGET_VERSION)
