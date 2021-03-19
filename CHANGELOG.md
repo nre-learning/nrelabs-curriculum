@@ -2,6 +2,7 @@
 
 ## In development
 
+- Adding image build to preview pipeline [#352](https://github.com/nre-learning/nrelabs-curriculum/pull/352)
 
 ## v1.3.0 - December 13, 2020
 
