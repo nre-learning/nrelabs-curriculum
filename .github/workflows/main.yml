@@ -28,37 +28,40 @@ jobs:
       run: ./check-changelog.sh
       if: ${{ success() }}
 
-    - name: Create Preview
-      id: create_preview
-      run: |
-        echo ::set-output name=preview_id::$(./create-preview.sh | jq -r '.ID')
-      if: ${{ success() }}
+  # ---------------------------
 
-    - name: Get PR number
-      id: get_pr_number
-      run: |
-        echo ::set-output name=pr_number::$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
-      if: ${{ success() }}
 
-    - name: Build Preview Images
-      id: build_preview_images
-      run: |
-        curl -k -X POST https://abathur.nrelabs.io/api/v1/webhooks/preview_images_build -H "St2-Api-Key: $PREVIEWER_APIK" -H "Content-Type: application/json" \
-          --data "{\"preview_id\": \"$PREVIEW_ID\", \"pr_number\": \"$PREVIEW_PR_NUMBER\", \"status_commit_id\": \"$PREVIEW_STATUS_COMMIT\", \"github_token\": \"$GH_TOKEN\"}"
-      env:
-        PREVIEW_ID: ${{ steps.create_preview.outputs.preview_id }}
-        PREVIEW_STATUS_COMMIT: ${{ github.event.pull_request.head.sha }}
-        PREVIEW_PR_NUMBER: ${{ steps.get_pr_number.outputs.pr_number }}
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    # - name: Create Preview
+    #   id: create_preview
+    #   run: |
+    #     echo ::set-output name=preview_id::$(./create-preview.sh | jq -r '.ID')
+    #   if: ${{ success() }}
 
-        # Locked down account which can only invoke preview webhook
-        PREVIEWER_APIK: MjE0ZTlkYWZjMDg1OTNkOWJkMjQxZDA0Mzk0NzIzNDI1MTc2Nzk0NDVkMjk0MGE5NTNhODkxOTNiMzVmNWM5Mg
-      if: ${{ success() }}
+    # - name: Get PR number
+    #   id: get_pr_number
+    #   run: |
+    #     echo ::set-output name=pr_number::$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+    #   if: ${{ success() }}
 
-    - name: Wait for status
-      run: ./wait-for-status.sh ${{ github.event.pull_request.head.sha }}
-      if: ${{ success() }}
+    # - name: Build Preview Images
+    #   id: build_preview_images
+    #   run: |
+    #     curl -k -X POST https://abathur.nrelabs.io/api/v1/webhooks/preview_images_build -H "St2-Api-Key: $PREVIEWER_APIK" -H "Content-Type: application/json" \
+    #       --data "{\"preview_id\": \"$PREVIEW_ID\", \"pr_number\": \"$PREVIEW_PR_NUMBER\", \"status_commit_id\": \"$PREVIEW_STATUS_COMMIT\", \"github_token\": \"$GH_TOKEN\"}"
+    #   env:
+    #     PREVIEW_ID: ${{ steps.create_preview.outputs.preview_id }}
+    #     PREVIEW_STATUS_COMMIT: ${{ github.event.pull_request.head.sha }}
+    #     PREVIEW_PR_NUMBER: ${{ steps.get_pr_number.outputs.pr_number }}
+    #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Request preview
-      run: ./start-preview.sh ${{ steps.create_preview.outputs.preview_id }}
-      if: ${{ success() }}
+    #     # Locked down account which can only invoke preview webhook
+    #     PREVIEWER_APIK: MjE0ZTlkYWZjMDg1OTNkOWJkMjQxZDA0Mzk0NzIzNDI1MTc2Nzk0NDVkMjk0MGE5NTNhODkxOTNiMzVmNWM5Mg
+    #   if: ${{ success() }}
+
+    # - name: Wait for status
+    #   run: ./wait-for-status.sh ${{ github.event.pull_request.head.sha }}
+    #   if: ${{ success() }}
+
+    # - name: Request preview
+    #   run: ./start-preview.sh ${{ steps.create_preview.outputs.preview_id }}
+    #   if: ${{ success() }}
