@@ -15,7 +15,7 @@ jobs:
 
     - name: Debug stuff
       run: |
-        echo $GITHUB_EVENT_NAME && echo $GITHUB_REF && echo $PR_ID && echo $GITHUB_REPOSITORY && echo $GITHUB_SHA
+        echo ${{ secrets.DOCKERHUB_USERNAME }} && echo $GITHUB_REF && echo $PR_ID && echo $GITHUB_REPOSITORY && echo ${{ secrets.GITHUB_TOKEN }}
 
     - name: Get PR number
       id: get_pr_number
