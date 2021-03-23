@@ -4,14 +4,14 @@ set -e +o pipefail
 
 url="https://preview.nrelabs.io/create"
 
-PR_ID=$(echo $GITHUB_REF | sed "s/refs\/pull\/\(.*\)\/merge/\1/")
+PR_ID=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
 
-# MUST match the event in the workflow
-if [ "$GITHUB_EVENT_NAME" != "pull_request_target" ];
-then
-  echo "Not a PR build, skipping preview"
-  exit 0
-fi
+# PR_ID=$(echo $GITHUB_REF | sed "s/refs\/pull\/\(.*\)\/merge/\1/")
+# if [ "$GITHUB_EVENT_NAME" != "pull_request_target" ];
+# then
+#   echo "Not a PR build, skipping preview"
+#   exit 0
+# fi
 
 echo $(curl -s $url --header "Content-Type: application/json" \
   --data "{
