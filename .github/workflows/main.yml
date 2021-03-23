@@ -6,6 +6,7 @@ env:
   emptyArray: "[]"
   emptyLiteral: "empty"
   retagSource: "v1.3.0"
+  antidoteVersion: "v0.6.2"
 
 jobs:
   prebuild:
@@ -37,7 +38,7 @@ jobs:
       if: ${{ success() }}
 
     - name: Install antidote binaries
-      run: curl -Lo antidote.tar.gz https://github.com/nre-learning/antidote-core/releases/download/v0.6.2/antidote-linux-amd64.tar.gz && tar xvzf antidote.tar.gz
+      run: curl -Lo antidote.tar.gz https://github.com/nre-learning/antidote-core/releases/download/${{ env.antidoteVersion }}/antidote-linux-amd64.tar.gz && tar xvzf antidote.tar.gz
       if: ${{ success() }}
 
     - name: Run antidote validation
@@ -191,7 +192,7 @@ jobs:
 
     - name: Build image
       run: |
-        cd images/${{ matrix.image_to_build }} && make dockerfast TARGET_VERSION=${{ env.retagSource }}
+        cd images/${{ matrix.image_to_build }} && make dockerfast TARGET_VERSION=preview-${{ needs.prebuild.outputs.preview_id }}
       if: ${{ matrix.image_to_build != env.emptyLiteral }}       # Ugly hack to prevent this from running when the matrix array is "empty"
 
   retag_images:
