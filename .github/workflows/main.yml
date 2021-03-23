@@ -102,7 +102,7 @@ jobs:
     - name: Get Changed
       id: get_changed
       run: |
-        echo ::set-output name=changed::$(git diff --name-only master..HEAD images/ | sed -rn 's/images\/([^/]*)\/.*/\\1/p' | tr '\n' ';' | rev | cut -c 2- | rev)
+        echo ::set-output name=changed::$(git diff --name-only master..HEAD images/ | sed -rn 's/images\/([^/]*)\/.*/\1/p' | tr '\n' ';' | rev | cut -c 2- | rev)
 
     - name: Get Image Directives
       uses: actions/github-script@v3
