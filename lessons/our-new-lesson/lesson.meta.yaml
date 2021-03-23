@@ -1,0 +1,26 @@
+name: New Lesson
+slug: our-new-lesson
+category: fundamentals
+diagram: ""
+video: ""
+tier: prod
+description: this is out new lesson
+shortDescription: new lessons
+tags:
+- new
+- lesson
+stages:
+- description: introduction to new lesson
+  guideType: markdown
+  stageVideo: ""
+endpoints:
+- name: linux1
+  image: utility
+  configurationType: python
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+authors:
+- name: marek
+  link: ""
