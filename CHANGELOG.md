@@ -4,6 +4,7 @@
 
 - Adding image build to preview pipeline [#352](https://github.com/nre-learning/nrelabs-curriculum/pull/352)
 - New gNMIc Lesson POC [#353](https://github.com/nre-learning/nrelabs-curriculum/pull/353)
+- More image build changes (moving to GH actions) [#354](https://github.com/nre-learning/nrelabs-curriculum/pull/354)
 
 ## v1.3.0 - December 13, 2020
 
