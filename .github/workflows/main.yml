@@ -169,6 +169,11 @@ jobs:
         image_to_build: ${{ fromJson(needs.prebuild.outputs.image_directives).to_build }}
     steps:
     - uses: actions/checkout@v2
+    - name: Check out PR
+      run: |
+        hub pr checkout $(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Login to DockerHub
       uses: docker/login-action@v1
       with:
@@ -190,6 +195,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - name: Check out PR
+      run: |
+        hub pr checkout $(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Re-tag images
       run: |
         ./.scripts/retag-images.sh '${{ toJson(fromJson(needs.prebuild.outputs.image_directives).to_retag) }}' ${{ env.retagSource }} ${{ needs.prebuild.outputs.preview_id }}
@@ -203,7 +213,6 @@ jobs:
     steps:
 
     - uses: actions/checkout@v2
-
     - name: Request preview
       run: ./.scripts/start-preview.sh ${{ needs.prebuild.outputs.preview_id }}
       if: ${{ success() }}
