@@ -14,7 +14,7 @@ fi
 
 echo $(curl -s $url --header "Content-Type: application/json" \
   --data "{
-    \"branch\":\"$GITHUB_HEAD_REF\",
+    \"branch\":\"$GITHUB_REF\",
     \"pullRequest\":\"$PR_ID\",
     \"repoSlug\":\"$GITHUB_REPOSITORY\",
     \"prSha\":\"$GITHUB_SHA\"
