@@ -1,0 +1,9 @@
+slug: gnmic
+description: gnmic is a gNMI CLI client
+flavor: untrusted
+sshUser: antidote
+sshPassword: antidotepassword
+configUser: antidote
+configPassword: antidotepassword
+networkInterfaces:
+  - "eth0"

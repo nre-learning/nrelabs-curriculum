@@ -1,0 +1,14 @@
+slug: crpd
+description: crpd
+flavor: untrusted
+enableForwarding: true
+sshUser: root
+sshPassword: antidotepassword
+configUser: root
+configPassword: antidotepassword
+networkInterfaces:
+  - 'eth0'
+  - 'eth1'
+  - 'eth2'
+  - 'eth3'
+  - 'eth4'

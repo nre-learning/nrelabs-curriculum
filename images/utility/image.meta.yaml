@@ -1,6 +1,6 @@
 slug: utility
 description: Utility image
-privileged: false
+flavor: untrusted
 sshUser: antidote
 sshPassword: antidotepassword
 configUser: antidote

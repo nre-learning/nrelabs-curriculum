@@ -27,7 +27,7 @@ deviceList = yaml.full_load(deviceFile)
 
 To ensure the `devices.yml` file was processed correctly we can print the `deviceList` variable.
 <pre>
-print deviceList
+print(deviceList)
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
 
@@ -42,7 +42,7 @@ for device in deviceList:
 	dev.open()
 	outfile = open(device + "-backup.txt","w")
 	config = dev.rpc.get_config(options={'format':'text'})
-	outfile.write(etree.tostring(config))
+	outfile.write(etree.tostring(config).decode("utf-8"))
 	outfile.close()
 
 </pre>

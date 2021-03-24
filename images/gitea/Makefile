@@ -8,3 +8,8 @@ docker:
 
 	docker build --pull --no-cache -t antidotelabs/gitea:$(TARGET_VERSION) .
 	docker push antidotelabs/gitea:$(TARGET_VERSION)
+
+dockerfast:
+
+	docker build --pull -t antidotelabs/gitea:$(TARGET_VERSION) .
+	docker push antidotelabs/gitea:$(TARGET_VERSION)

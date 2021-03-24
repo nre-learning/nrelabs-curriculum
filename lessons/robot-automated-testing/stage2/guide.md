@@ -40,8 +40,9 @@ You must have noticed the new `Keywords` table in our robot file. Inside this ta
 >```
 >Log Facts
 >    &{facts}=	Gather Device Info
->    :FOR  ${key}  IN  @{facts.keys()}
->    \  Log  ${facts["${key}"]}
+> 	 FOR  ${key}  IN  @{facts.keys()}
+> 	 Log  ${facts["${key}"]}
+> 	 END
 >```
 
 In this example, the `Gather Device Info` keyword returns a python dictionary, consisting of some basic device properties like serial number and the hostname, in a key-value format. Notice that we are using a "for" loop to parse a python dictionary which was stored in the `facts` variable. Observe that the syntax declaring a "for" loop in the robot framework is similar to that in Python.

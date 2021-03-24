@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-RUN apt-get update && apt-get install -y openssh-server python python-pip dnsutils iputils-ping git vim curl util-linux sshpass nano jq
+RUN apt-get update && apt-get install -y openssh-server python3 python3-pip dnsutils iputils-ping git vim curl util-linux sshpass nano jq libxml2-utils
 RUN mkdir /var/run/sshd
 
 # Antidote user
@@ -26,25 +26,21 @@ RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so
 # Disable su for everyone not in the wheel group (no one is in the wheel group)
 RUN echo "auth required pam_wheel.so use_uid" >> /etc/pam.d/su
 
+# https://stackoverflow.com/questions/36292317/why-set-visible-now-in-etc-profile
 ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
 
 ADD requirements.txt /requirements.txt
-RUN pip install -r /requirements.txt
+RUN pip3 install -r /requirements.txt
 
-# Temporary fix to get NAPALM working. Long-term we should convert utility to use python 3
-RUN pip install --upgrade netmiko==2.4.2
+# The snapshots directory is apparently not being set up during installation so we'll do it here
+RUN mkdir -p /home/antidote/jsnapy/snapshots && chown -R antidote:antidote /home/antidote/jsnapy
 
-# The latest release of JSNAPy as of now was 1.3.2, released in
-# May of 2018. Since then, there have been many fixes, and the main one we care
-# about is the YAML deprecation notices. I will follow up with them and ask why
-# we haven't done a release in so long with many outstanding fixes already in
-# master, but in the meantime, we will clone and check out a commit manually so
-# we can avoid the YAML deprecation notices 
-RUN git clone https://github.com/Juniper/jsnapy.git /tmp/jsnapy \
-    && cd /tmp/jsnapy \
-    && git checkout bb8e02b1a9bd0e981c7d9a18cd1a08f5596cac65 \
-    && python setup.py install
+RUN curl -L -o yq https://github.com/mikefarah/yq/releases/download/3.3.2/yq_linux_amd64 && chmod +x yq && mv yq /usr/local/bin
+RUN wget https://github.com/sharkdp/bat/releases/download/v0.17.1/bat_0.17.1_amd64.deb && dpkg -i bat_0.17.1_amd64.deb
+
+COPY bash_profile /home/antidote/.bash_profile
+RUN chown antidote:antidote /home/antidote/.bash_profile
 
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]

@@ -71,7 +71,6 @@ Lastly we will render the template based on the data. Since we are dealing with 
 for device in my_vars:
    print(template.render(device))
 
-
 quit()
 </pre>
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>

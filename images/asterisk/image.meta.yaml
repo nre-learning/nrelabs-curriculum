@@ -1,6 +1,6 @@
 slug: asterisk
 description: asterisk
-privileged: true
+flavor: untrusted
 sshUser: antidote
 sshPassword: antidotepassword
 configUser: antidote

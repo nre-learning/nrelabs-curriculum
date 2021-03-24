@@ -1,0 +1,10 @@
+---
+# Here, "get_ospf" is an arbitrary name for the task we'll be
+# performing here. You can put whatever you want here.
+get_ospf:
+
+  # Here, we're specifying that we wish to retrieve state using
+  # an RPC (via the `rpc` keyword), and immediately after, providing
+  # the name of the RPC we wish to use: "get-ospf-neighbor-information".
+  - rpc: get-ospf-neighbor-information
+

@@ -6,8 +6,8 @@ There are two types of tables - Operational Tables (OpTables) and Config Tables 
 There are some predefined OpTables and ConfigTables, located in the `op` and `resources` folder of the PyEZ package directory:
 
 ```
-ls /usr/local/lib/python2.7/dist-packages/jnpr/junos/op
-ls /usr/local/lib/python2.7/dist-packages/jnpr/junos/resources
+ls /usr/local/lib/python3.6/dist-packages/jnpr/junos/op
+ls /usr/local/lib/python3.6/dist-packages/jnpr/junos/resources
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
@@ -16,7 +16,7 @@ ls /usr/local/lib/python2.7/dist-packages/jnpr/junos/resources
 `RouteTable` is a type of `OpTable` - it allows us to retrieve the routing information on a device. It is defined in `op/routes.yml` file.
 
 ```
-cat /usr/local/lib/python2.7/dist-packages/jnpr/junos/op/routes.yml
+cat /usr/local/lib/python3.6/dist-packages/jnpr/junos/op/routes.yml
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 
@@ -82,7 +82,7 @@ This section takes the `StaticRouteTable` ConfigTable as an example; it is defin
 
 ```
 exit()
-cat /usr/local/lib/python2.7/dist-packages/jnpr/junos/resources/staticroutes.yml
+cat /usr/local/lib/python3.6/dist-packages/jnpr/junos/resources/staticroutes.yml
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux', this)">Run this snippet</button>
 

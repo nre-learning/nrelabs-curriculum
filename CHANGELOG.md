@@ -3,7 +3,22 @@
 ## In development
 
 - Git lesson stage 5 [#324](https://github.com/nre-learning/nrelabs-curriculum/pull/324)
+- Adding image build to preview pipeline [#352](https://github.com/nre-learning/nrelabs-curriculum/pull/352)
+- More image build changes (moving to GH actions) [#354](https://github.com/nre-learning/nrelabs-curriculum/pull/354)
+
+## v1.3.0 - December 13, 2020
+
+- Fix connectivity issues in Ansible lesson [#349](https://github.com/nre-learning/nrelabs-curriculum/pull/349)
+- Fixing Salt and St2 images/lessons [#350](https://github.com/nre-learning/nrelabs-curriculum/pull/350)
+- Revert tshoot lesson back to vQFX [#347](https://github.com/nre-learning/nrelabs-curriculum/pull/347)
+- Fix troubleshooting lesson scripts to be py3 compatible [#345](https://github.com/nre-learning/nrelabs-curriculum/pull/345)
+- Migrating from travis to github actions [#344](https://github.com/nre-learning/nrelabs-curriculum/pull/344)
+- Converged motd banners in crpd, added helper tip for 'cli' command [#343](https://github.com/nre-learning/nrelabs-curriculum/pull/343)
+- Misc curriculum updates for Antidote 0.7 compatibility [#341](https://github.com/nre-learning/nrelabs-curriculum/pull/341)
+- Refurbish JSNAPy lesson and move to cRPD [#338](https://github.com/nre-learning/nrelabs-curriculum/pull/338)
+- Update troubleshooting lesson with flavor and cRPD [#337](https://github.com/nre-learning/nrelabs-curriculum/pull/337)
 - Add spelling checks in CI pipeline [#276](https://github.com/nre-learning/nrelabs-curriculum/pull/276)
+- Add cRPD Image and image flavor params [#336](https://github.com/nre-learning/nrelabs-curriculum/pull/336)
 
 ## v1.2.0 - April 14, 2020
 

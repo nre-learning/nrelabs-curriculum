@@ -1,0 +1,296 @@
+name: CI
+on:     # https://github.blog/2020-08-03-github-actions-improvements-for-fork-and-pull-request-workflows/
+  pull_request_target:
+    types: [assigned, opened, synchronize, reopened]
+env: 
+  emptyArray: "[]"
+  emptyLiteral: "empty"
+  retagSource: "v1.3.0"
+  antidoteVersion: "v0.6.2"
+
+jobs:
+  prebuild:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Get PR number
+      id: get_pr_number
+      run: |
+        echo ::set-output name=pr_number::$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+      if: ${{ success() }}
+
+    - name: Check out PR
+      run: |
+        hub pr checkout ${{ steps.get_pr_number.outputs.pr_number }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Install xmllint
+      run: sudo apt-get install aspell aspell-en dictionaries-common
+
+    - name: Run spellchecker
+      run: ./.scripts/check-spelling.sh
+      if: ${{ success() }}
+
+    - name: Install antidote binaries
+      run: curl -Lo antidote.tar.gz https://github.com/nre-learning/antidote-core/releases/download/${{ env.antidoteVersion }}/antidote-linux-amd64.tar.gz && tar xvzf antidote.tar.gz
+      if: ${{ success() }}
+
+    - name: Run antidote validation
+      run: ./antidote validate .
+      if: ${{ success() }}
+
+    - name: Check changelog
+      run: ./.scripts/check-changelog.sh
+      if: ${{ success() }}
+
+    - name: Create Preview
+      id: create_preview
+      run: |
+        echo ::set-output name=preview_id::$(./.scripts/create-preview.sh | jq -r '.ID')
+
+    - name: Create preview check
+      id: create_preview_check
+      uses: actions/github-script@v3
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        result-encoding: string
+        script: |
+
+          var check_result = await github.checks.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            name: "nrelabs-preview",
+            head_sha: "${{ github.event.pull_request.head.sha }}",
+            status: "in_progress",
+            output: {
+              "title": "Preview is being provisioned...",
+              "summary": "Your content preview is currently being provisioned, please wait. Once provisioned, detailed information about how to view it will appear here.",
+            },
+          });
+
+          console.log(check_result)
+          return check_result.data.id
+
+    - name: Create preview logs check
+      id: create_preview_logs_check
+      uses: actions/github-script@v3
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        result-encoding: string
+        script: |
+
+          var check_result = await github.checks.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            name: "nrelabs-preview-logs",
+            head_sha: "${{ github.event.pull_request.head.sha }}",
+            status: "in_progress",
+            output: {
+              "title": "Preview is being provisioned...",
+              "summary": "Your content preview is currently being provisioned, please wait. Once provisioned, detailed logs about the infrastructure provisioned to serve this preview will be provided here.",
+            },
+          });
+          console.log(check_result)
+          return check_result.data.id
+
+    - name: Get Buildables
+      id: get_buildables
+      run: |
+        echo ::set-output name=buildables::$(cd images && find . -maxdepth 2 -type f -name 'Makefile' -printf '%h;' | tr -d './' | rev | cut -c 2- | rev | jq -Rc 'split(";")')
+
+    - name: Get Changed
+      id: get_changed
+      run: |
+        echo ::set-output name=changed::$(git diff --name-only master..HEAD images/ | sed -rn 's/images\/([^/]*)\/.*/\1/p' | tr '\n' ';' | rev | cut -c 2- | rev | jq -Rc 'split(";")')
+
+    - name: Get Image Directives
+      uses: actions/github-script@v3
+      id: get_image_directives
+      with:
+        script: |
+          var to_retag = [
+            "vqfx-snap1",
+            "vqfx-snap2",
+            "vqfx-snap3",
+          ]
+          var to_build = []
+
+          var buildables = ${{ steps.get_buildables.outputs.buildables  || env.emptyArray }};
+          var changed = ${{ steps.get_changed.outputs.changed || env.emptyArray }};
+
+          buildables.forEach(function(buildable) {
+            if (!changed.includes(buildable)) {
+              console.log(buildable + " not found in changed, adding to to_retag");
+              to_retag.push(buildable);
+            } else {
+              console.log(buildable + " was found in changed, adding to to_build");
+              to_build.push(buildable);
+            }
+          });
+
+          // The strategy matrix can't handle empty arrays so we'll add this here and check for it during the retag/build jobs
+          if (to_build.length == 0) {
+            to_build.push("empty")
+          }
+          if (to_retag.length == 0) {
+            to_retag.push("empty")
+          }
+
+          return {
+            "to_build": to_build,
+            "to_retag": to_retag
+          }
+
+    outputs:
+      preview_id: ${{ steps.create_preview.outputs.preview_id }}
+      pr_number: ${{ steps.get_pr_number.outputs.pr_number }}
+      image_directives: ${{ steps.get_image_directives.outputs.result }}
+      preview_check_id: ${{ steps.create_preview_check.outputs.result }}
+      preview_logs_check_id: ${{ steps.create_preview_logs_check.outputs.result }}
+
+  logins:
+    needs: prebuild
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@master
+      with:
+        project_id: ${{ secrets.GCP_PROJECT_ID }}
+        service_account_key: ${{ secrets.GCP_SA_KEY }}
+        export_default_credentials: true
+
+  build_image:
+    needs: [prebuild, logins]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        image_to_build: ${{ fromJson(needs.prebuild.outputs.image_directives).to_build }}
+    steps:
+    - uses: actions/checkout@v2
+    - name: Check out PR
+      run: |
+        hub pr checkout $(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Login to DockerHub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    # - name: Set up QEMU
+    #   uses: docker/setup-qemu-action@v1
+    # - name: Set up Docker Buildx
+    #   uses: docker/setup-buildx-action@v1
+
+    - name: Build image
+      run: |
+        cd images/${{ matrix.image_to_build }} && make dockerfast TARGET_VERSION=preview-${{ needs.prebuild.outputs.preview_id }}
+      if: ${{ matrix.image_to_build != env.emptyLiteral }}       # Ugly hack to prevent this from running when the matrix array is "empty"
+
+  retag_images:
+    needs: [prebuild, logins]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Check out PR
+      run: |
+        hub pr checkout $(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Re-tag images
+      run: |
+        ./.scripts/retag-images.sh '${{ toJson(fromJson(needs.prebuild.outputs.image_directives).to_retag) }}' ${{ env.retagSource }} ${{ needs.prebuild.outputs.preview_id }}
+      env:
+        DOCKER_USER: ${{ secrets.DOCKERHUB_USERNAME }}
+        DOCKER_PASS: ${{ secrets.DOCKERHUB_TOKEN }}
+
+  deploy_preview:
+    needs: [prebuild, build_image, retag_images]
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v2
+    - name: Request preview
+      run: ./.scripts/start-preview.sh ${{ needs.prebuild.outputs.preview_id }}
+      if: ${{ success() }}
+
+    - name: Wait for status
+      run: ./.scripts/wait-for-status.sh ${{ needs.prebuild.outputs.preview_id }}
+      if: ${{ success() }}
+
+    - name: Retrieve Logs
+      id: retrieve_preview_logs
+      uses: actions/github-script@v3
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        result-encoding: string
+        script: |
+          const result = await github.request('https://preview.nrelabs.io/status?id=${{ needs.prebuild.outputs.preview_id }}')
+          console.log(result.data.PreviewLogs)
+          return result.data.PreviewLogs
+
+    - name: Update logs check
+      uses: actions/github-script@v3
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        script: |
+
+          var summary = `Aggregated logs for the provisioning of preview infrastructure are provided below.
+          
+          Note that these are only logs for the provisioning of the infrastructure necessary for your preview. For troubleshooting problems with an active lesson, your best bet is the Jaeger deployment available [here](https://inspect-preview.nrelabs.io/search?lookback=12h&operation=api_livelesson_request&service=preview-${{ needs.prebuild.outputs.preview_id }})
+          `;
+
+          var logsText = `${{ steps.retrieve_preview_logs.outputs.result }}`;
+
+          // https://octokit.github.io/rest.js/v18#checks-update
+          github.checks.update({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            check_run_id: "${{ needs.prebuild.outputs.preview_logs_check_id }}",
+            output: {
+              "title": "Preview Provisioning Logs",
+              "summary": summary,
+              "text": logsText,
+            },
+            conclusion: "neutral",
+          });
+
+    - name: Update status check
+      uses: actions/github-script@v3
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        script: |
+
+          var summary = `Your content is ready to be previewed, and is available at the link below:
+              
+          [Open Preview](https://preview-${{ needs.prebuild.outputs.preview_id }}.nrelabs.io)
+          
+          Note that this is a fully-deployed version of the main NRE Labs site, but includes the changes you've made in
+          this branch. Once you navigate to the site above, use the lesson catalog or other site navigation to find the content
+          you've added/changed.
+
+          For more information, see the [NRE Labs documentation](https://docs.nrelabs.io/creating-contributing/preview-your-changes).
+          `;
+          var detail_text = `Some additional tools for you to use can be found below:
+
+          - [Jaeger Traces (for troubleshooting lesson startup, etc)](https://inspect-preview.nrelabs.io/search?lookback=12h&operation=api_livelesson_request&service=preview-${{ needs.prebuild.outputs.preview_id }})
+          `;
+
+          // https://octokit.github.io/rest.js/v18#checks-update
+          github.checks.update({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            check_run_id: "${{ needs.prebuild.outputs.preview_check_id }}",
+            output: {
+              "title": "Preview is ready! Click 'Details' to continue.",
+              "summary": summary,
+              "text": detail_text,
+            },
+            conclusion: "success",
+          });
+
+    # TODO - consider posting a comment here that just instructs the contributor to scroll down? YOu'll have to remember to delete the comment like you did before.

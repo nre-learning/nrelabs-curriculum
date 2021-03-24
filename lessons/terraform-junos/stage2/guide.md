@@ -29,7 +29,6 @@ We can check on Junos that both the BGP peer is established and the interface is
 ```
 show interfaces em4
 show bgp summary
-ping 10.31.0.13 count 10
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('vqfx1', this)">Run this snippet</button>
 
@@ -64,7 +63,7 @@ __Mutability__
 
 Ok, so this isn't entirely immutable. We can update resources too. This is useful for developing a set of template resources or providing updates to in-situ deployments resulting in low risk changes against typos and input variables.
 
-This is a user exercise and you're next challenge is to change the IP address on the BGP peer resource to `.15` instead of `.13`. You can use `vim` or `nano` to achieve this on the Linux VM interface provided for you. Exit using the escape sequence: `esc` then `:wq!` then hit return.
+This is a user exercise and your next challenge is to change the IP address on the BGP peer resource to `.15` instead of `.13`. You can use `vim` or `nano` to achieve this on the Linux VM interface provided for you. Exit using the escape sequence: `esc` then `:wq!` then hit return.
 
 ```
 vim bgp_peer_1.tf

@@ -1,7 +1,7 @@
 <configuration>
     <interfaces>
         <interface>
-            <name>em4</name>
+            <name>em3</name>
             <disable operation="delete"/>
         </interface>
     </interfaces>

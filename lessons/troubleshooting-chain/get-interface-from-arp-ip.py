@@ -1,5 +1,7 @@
-#!/usr/bin/python2.7
+#!/usr/bin/env python3
 
+# cRPD probably won't work for this, this uses an RPC that's not available.
+# ./get-interface-from-arp-ip.py --devices=junos1:22 --username=root --password=antidotepassword --hosts=00:00:00:00:00:00
 
 import xml.etree.ElementTree as ET
 import sys
@@ -13,9 +15,9 @@ pp = pprint.PrettyPrinter(indent=4)
 def out(*args):
     if sys.stdout.isatty():
         for dev, ints in args[0].items():
-            print dev + ": " + ', '.join(ints)
+            print(dev + ": " + ', '.join(ints))
     else:
-        print json.dumps(args[0])
+        print(json.dumps(args[0]))
 
 
 

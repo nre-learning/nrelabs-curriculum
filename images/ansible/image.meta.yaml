@@ -1,6 +1,6 @@
 slug: ansible
 description: ansible
-privileged: false
+flavor: untrusted
 sshUser: antidote
 sshPassword: antidotepassword
 configUser: antidote

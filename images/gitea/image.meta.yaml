@@ -1,6 +1,6 @@
 slug: gitea
 description: gitea
-privileged: false
+flavor: untrusted
 configUser: root
 configPassword: antidotepassword
 sshUser: "foo"

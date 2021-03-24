@@ -1,10 +1,10 @@
-FROM ubuntu:xenial
+FROM ubuntu:bionic
 
 # Lovingly borrowed and modified from https://github.com/StackStorm/st2-dockerfiles/blob/master/base/Dockerfile
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-ARG ST2_VERSION=2.10.1
+ARG ST2_VERSION=3.2.0
 RUN : "${ST2_VERSION:?Docker build argument needs to be set and non-empty.}"
 
 ENV container docker
@@ -13,7 +13,7 @@ ENV TERM xterm
 
 # Generate and set locale to UTF-8
 RUN apt-get -qq update \
-  && apt-get install -y \
+  && apt-get install -y gnupg wget \
     curl \
     locales \
   && rm -rf /var/lib/apt/lists/* \
@@ -28,18 +28,25 @@ ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 #####################################################################################################
 
 RUN mkdir -p /data/db
-RUN apt-get update
-RUN apt-get install -y gnupg-curl
-RUN apt-get install -y curl wget
+RUN apt-get update -y && apt-get install -y crudini  rabbitmq-server
 
-# Add key and repo for the latest stable MongoDB (3.4)
-RUN wget -qO - https://www.mongodb.org/static/pgp/server-3.4.asc | apt-key add -
-RUN echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse" > /etc/apt/sources.list.d/mongodb-org-3.4.list
-RUN apt-get update
+#####################################################################################################
+# Install Mongo
+#
+# Mongo started adding a dependency on systemd in their packages, so we're installing from tarball now
+# https://www.mongodb.com/try/download/community
+# https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu-tarball/
+#
+# Careful not to use 4.4 - https://stackoverflow.com/questions/64059795/mongodb-get-error-message-mongoerror-path-collision-at-activity
+#
+#####################################################################################################
 
-RUN apt-get install -y crudini
-RUN apt-get install -y mongodb-org
-RUN apt-get install -y rabbitmq-server
+RUN wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu1804-4.0.21.tgz \
+  && tar -zxvf mongodb-linux-x86_64-ubuntu1804-4.0.21.tgz \
+  && cp mongodb-linux-x86_64-ubuntu1804-4.0.21/bin/* /usr/local/bin/ \
+  && mkdir -p /var/lib/mongo \
+  && mkdir -p /var/log/mongo \
+  && rm -rf mongodb-linux-x86_64-ubuntu1804-4.0.21/
 
 #####################################################################################################
 ## Install StackStorm                 
@@ -55,7 +62,7 @@ RUN curl -sf https://packagecloud.io/install/repositories/StackStorm/stable/scri
 ADD htpasswd /etc/st2/htpasswd
 
 RUN echo "stanley:stanley" | chpasswd
-ADD start_st2_services.sh /
+ADD start_st2_services.sh start_st2_services_and_ssh.sh /
 
 #####################################################################################################
 ## Additional installations / configuration             
@@ -63,14 +70,18 @@ ADD start_st2_services.sh /
 
 RUN apt-get update && apt-get install -y openssh-server python git vim screen
 ADD napalm.yaml /opt/stackstorm/configs
-RUN cp -r /usr/share/doc/st2/examples/ /opt/stackstorm/packs/
+
+# For some reason, in 3.x, /usr/share/doc/st2/examples/ is empty other than the directory structure. So I'm doing this to get
+# the examples pack.
+RUN git clone -b v${ST2_VERSION} https://github.com/StackStorm/st2 && cp -r st2/contrib/examples/ /opt/stackstorm/packs/
+RUN ls -lha /opt/stackstorm/packs/examples/actions/workflows/
+
 ARG CACHEBUST=1
-RUN screen -d -m /start_st2_services.sh && sleep 15 \
+RUN /start_st2_services.sh && sleep 15 \
     && st2ctl reload --register-all \
     && st2 run packs.setup_virtualenv packs=examples \ 
     && st2 pack remove napalm && st2 pack install https://github.com/nre-learning/stackstorm-napalm.git
-RUN /opt/stackstorm/virtualenvs/napalm/bin/pip install ncclient==0.6.0
-RUN /opt/stackstorm/virtualenvs/napalm/bin/pip install --upgrade netmiko==2.4.2
+
 ARG CACHEBUST=0
 
 #####################################################################################################
@@ -108,4 +119,4 @@ RUN echo "auth required pam_wheel.so use_uid" >> /etc/pam.d/su
 ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
 
-CMD /start_st2_services.sh
+CMD /start_st2_services_and_ssh.sh

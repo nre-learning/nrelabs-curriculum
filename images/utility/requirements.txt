@@ -1,6 +1,6 @@
-# https://github.com/paramiko/paramiko/issues/1369
-# (I think this is fixed now, so commenting this out. I ran into issues with this restriction on)
-# cryptography==2.4.2
+# https://github.com/Azure/azure-cli/issues/16858
+cryptography==3.3.2
+
 napalm
 netmiko
 jsnapy
@@ -10,3 +10,4 @@ paho-mqtt
 grpcio
 grpcio-tools
 flask
+pygments
