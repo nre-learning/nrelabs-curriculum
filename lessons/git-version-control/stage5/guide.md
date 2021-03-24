@@ -15,21 +15,21 @@ For this example, we want to take a look at a repository that already exists. He
 
 Click "Explore" at the top of the page. You'll see the repository we created in the previous exercise, but you'll also see one we haven't explored yet:
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-stage-5/lessons/git-version-control/stage4/images/repositories.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-stage-5/lessons/git-version-control/stage5/images/repositories.png"></div>
 
 Click the link to `initech/network-configs`:
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-stage-5/lessons/git-version-control/stage4/images/initechrepo.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-stage-5/lessons/git-version-control/stage5/images/initechrepo.png"></div>
 
 Let's say we want to change the autonomous system number in one of Initech's network configuration files. The difference here is that not only to we need to make a change to a remote repository, the `initech/network-configs` repository doesn't even belong to us; we are not permitted to simply push commits directly to the repository. This is where the "Fork and Pull" workflow comes in handy.
 
 Click the "fork" button in the top right of the `initech/network-configs` repository. This will bring up a form:
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-stage-5/lessons/git-version-control/stage4/images/newfork.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-stage-5/lessons/git-version-control/stage5/images/newfork.png"></div>
 
 Just accept the defaults here, and click "Fork Repository". This will result in the following screen:
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-stage-5/lessons/git-version-control/stage4/images/janefork.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-stage-5/lessons/git-version-control/stage5/images/janefork.png"></div>
 
 This is our new forked repository - a copy of the original repository that we are able to push directly to. Now that we have this, we can use a new command - `git clone`. This command downloads a remote repository to our local machine. Let's first navigate back to our home directory, so we don't accidentally clone this repository inside the one from the previous exercise.
 
@@ -102,19 +102,19 @@ In our case, we'll open a Pull Request now. Switch back to the `remote` tab:
 
 If you're not already there, navigate back to our fork via the "Explore" link on the top of the screen. On this page, you'll notice there's a button in the middle that says "New Pull Request":
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-stage-5/lessons/git-version-control/stage4/images/janefork-newpr.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-stage-5/lessons/git-version-control/stage5/images/janefork-newpr.png"></div>
 
 Select that, and you'll be presented with the option to select the branches you wish to compare. Make sure they're set like the screenshot below - you want be comparing `initech:master` with `jane:change-as-number`:
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-stage-5/lessons/git-version-control/stage4/images/newpr1.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-stage-5/lessons/git-version-control/stage5/images/newpr1.png"></div>
 
 Click the green "New Pull Request" button, and you'll be presented with a form:
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-stage-5/lessons/git-version-control/stage4/images/newpr2.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-stage-5/lessons/git-version-control/stage5/images/newpr2.png"></div>
 
 The title and description on this screen is up to you - and is likely to be another thing that will depend on the project that you are contributing to. Different projects require different information in these fields. For now, just click the green "Create Pull Request" button. If you've done this correctly, you'll see something like this:
 
-<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-stage-5/lessons/git-version-control/stage4/images/propened.png"></div>
+<div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-stage-5/lessons/git-version-control/stage5/images/propened.png"></div>
 
 At this point, the PR is open, and conversation can take place within this page. You might get comments from a reviewer, asking for additional changes, in which case you can add commits to your local branch and re-run `git push`, and the PR will automatically be updated. This process continues until the PR is either closed or merged back into the upstream repository.
 
