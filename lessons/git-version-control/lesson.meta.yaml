@@ -51,8 +51,6 @@ stages:
   - description: Working with Git Remotes
     guideType: markdown
     stageVideo: https://www.youtube.com/embed/Bqtk0wpgl4A
-
-    # TODO(mierdin): Automate key installation, and also make sure you cover what happens when you break history
   - description: Proposing a Change to Another Project
     guideType: markdown
-    # stageVideo: TBD
+    stageVideo: https://www.youtube.com/embed/TsTlwF2IgwQ

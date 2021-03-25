@@ -13,6 +13,8 @@ For this example, we want to take a look at a repository that already exists. He
 
 <button type="button" class="btn btn-primary btn-sm" onclick="switchToTab('remote')">Go to "remote"</button>
 
+**IMPORTANT** - if you see a "Sign In" button on the top right of the screen, you'll want to first sign in with the username `jane` and the password `Password1!` in order to finish this lab.
+
 Click "Explore" at the top of the page. You'll see the repository we created in the previous exercise, but you'll also see one we haven't explored yet:
 
 <div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-stage-5/lessons/git-version-control/stage5/images/repositories.png"></div>
@@ -21,7 +23,7 @@ Click the link to `initech/network-configs`:
 
 <div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-stage-5/lessons/git-version-control/stage5/images/initechrepo.png"></div>
 
-Let's say we want to change the autonomous system number in one of Initech's network configuration files. The difference here is that not only to we need to make a change to a remote repository, the `initech/network-configs` repository doesn't even belong to us; we are not permitted to simply push commits directly to the repository. This is where the "Fork and Pull" workflow comes in handy.
+Let's say we want to change the autonomous system number in one of Initech's network configuration files. We learned how to make a change to a remote repository in the last chapter. However, the difference here is that we don't have direct "write" access to the `initech/network-configs` repository; we are not permitted to simply push commits directly to the repository like we did before. This is where the "Fork and Pull" workflow comes in handy.
 
 Click the "fork" button in the top right of the `initech/network-configs` repository. This will bring up a form:
 
@@ -31,7 +33,7 @@ Just accept the defaults here, and click "Fork Repository". This will result in 
 
 <div style="text-align:center;margin-top:30px;"><img style="max-width: 70%;" class="full" src="https://raw.githubusercontent.com/nre-learning/nrelabs-curriculum/git-stage-5/lessons/git-version-control/stage5/images/janefork.png"></div>
 
-This is our new forked repository - a copy of the original repository that we are able to push directly to. Now that we have this, we can use a new command - `git clone`. This command downloads a remote repository to our local machine. Let's first navigate back to our home directory, so we don't accidentally clone this repository inside the one from the previous exercise.
+This is our new forked repository - a copy of the original repository that we are able to push directly to. Now that we have this, we can use a new command - `git clone`. This command downloads an existing remote repository to our local machine. Let's first navigate back to our home directory, so we don't accidentally clone this repository inside the one from the previous exercise.
 
 ```
 cd ~
@@ -44,6 +46,8 @@ Keeping it simple, we can append a single parameter to `git clone` which is the 
 git clone git@remote:jane/network-configs.git
 ```
 <button type="button" class="btn btn-primary btn-sm" onclick="runSnippetInTab('linux1', this)">Run this snippet</button>
+
+(type "yes" and hit enter if prompted "Are you sure you want to continue connecting")
 
 We now have a local repository where we can use all of the git fundamentals we've been learning thus far. Enter this directory and take a look at the commit history:
 
@@ -151,3 +155,4 @@ git push origin change-as-number
 
 The initial step of adding the `upstream` remote should only be done once, but the remaining commands can be done repeatedly whenever you need to get your pull request updated with the latest commits from the upstream repository's `master` branch. Doing so helps to ensure your pull request can eventually get merged without problems.
 
+**A final parting note** - while this chapter covered most of the technical steps required to contribute to a 3rd-party project, each project is different, and has different processes and cultures. You are likely to find that the real challenge isn't learning how Git works, but rather the culture and process **around** Git. For instance, some projects require a specific workflow, such as the creation of an Issue before a Pull Request. Some have a specific template you need to follow for either or both. A lot of projects have continuous integration in place that you'll need to learn about and satisfy before your contribution is accepted. In almost every case, learning these processes ends up being a lot more work than learning how to work with Git, so don't gloss over this.
