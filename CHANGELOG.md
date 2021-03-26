@@ -2,6 +2,7 @@
 
 ## In development
 
+- Git lesson stage 5 [#324](https://github.com/nre-learning/nrelabs-curriculum/pull/324)
 - Adding image build to preview pipeline [#352](https://github.com/nre-learning/nrelabs-curriculum/pull/352)
 - More image build changes (moving to GH actions) [#354](https://github.com/nre-learning/nrelabs-curriculum/pull/354)
 

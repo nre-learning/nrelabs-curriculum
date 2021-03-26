@@ -51,3 +51,6 @@ stages:
   - description: Working with Git Remotes
     guideType: markdown
     stageVideo: https://www.youtube.com/embed/Bqtk0wpgl4A
+  - description: Proposing a Change to Another Project
+    guideType: markdown
+    stageVideo: https://www.youtube.com/embed/TsTlwF2IgwQ
