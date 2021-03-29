@@ -1,0 +1,13 @@
+# https://github.com/Azure/azure-cli/issues/16858
+cryptography==3.3.2
+
+napalm
+netmiko
+jsnapy
+robotframework
+jinja2
+paho-mqtt
+grpcio
+grpcio-tools
+flask
+pygments
