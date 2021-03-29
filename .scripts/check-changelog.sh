@@ -14,7 +14,7 @@ echo "ENV TO FOLLOW"
 echo $(env)
 
 
-if [ "$GITHUB_EVENT_NAME" != "pull_request" ];
+if [ "$GITHUB_EVENT_NAME" != "pull_request_target" ];
 then
   echo "This is not a pull request, skipping the changelog check"
   exit 0
