@@ -1,5 +1,5 @@
 # https://github.com/Azure/azure-cli/issues/16858
 cryptography==3.3.2
 
-ansible==2.9.2
+ansible==2.10.0
 ncclient
