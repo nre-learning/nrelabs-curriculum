@@ -1,0 +1,12 @@
+name: CI
+on:
+  schedule:
+    # Every Sunday at midnight
+    - cron:  '0 0 * * 0'
+
+jobs:
+  prebuild:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check changelog
+      run: ./.scripts/prune-preview-tags.sh
