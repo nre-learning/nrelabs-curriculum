@@ -1,4 +1,4 @@
-name: CI
+name: prune-preview-tags
 on:
   schedule:
     # Every Sunday at midnight
