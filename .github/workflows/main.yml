@@ -273,6 +273,8 @@ jobs:
           this branch. Once you navigate to the site above, use the lesson catalog or other site navigation to find the content
           you've added/changed.
 
+          This preview will only be valid for 12 hours.
+
           For more information, see the [NRE Labs documentation](https://docs.nrelabs.io/creating-contributing/preview-your-changes).
           `;
           var detail_text = `Some additional tools for you to use can be found below:
