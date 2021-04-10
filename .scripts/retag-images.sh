@@ -17,7 +17,7 @@ then
       echo "Must provide preview ID as third parameter to this script"
 fi
 
-wget -q "https://raw.githubusercontent.com/nre-learning/docker-retag/d702a5a109af5e8f04baea2c80782dc107142f19/docker-retag" && chmod +x docker-retag
+wget -q "https://github.com/nre-learning/docker-housekeeping/releases/download/v0.1.0/docker-housekeeping-linux-amd64" && chmod +x docker-housekeeping-linux-amd64 && cp docker-housekeeping-linux-amd64 docker-housekeeping
 
 for row in $(echo "$1" | jq -r '.[] | @base64'); do
     _getimage() {
@@ -28,8 +28,8 @@ for row in $(echo "$1" | jq -r '.[] | @base64'); do
 
     if [ "$image" != "empty" ];
     then
-        $(pwd)/docker-retag antidotelabs/$image:$2 preview-$3
+        $(pwd)/docker-housekeeping retag --repository antidotelabs/$image --oldTag $2 --newTag preview-$3
     fi
 done
 
-rm -f $(pwd)/docker-retag
+rm -f $(pwd)/docker-housekeeping
