@@ -5,8 +5,9 @@ on:
     - cron:  '0 0 * * 0'
 
 jobs:
-  prebuild:
+  prune:
     runs-on: ubuntu-latest
     steps:
-    - name: Check changelog
+    - uses: actions/checkout@v2
+    - name: Prune preview tags
       run: ./.scripts/prune-preview-tags.sh
