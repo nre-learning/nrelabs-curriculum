@@ -1,5 +1,6 @@
 name: prune-preview-tags
 on:
+  workflow_dispatch:
   schedule:
     # Every Sunday at midnight
     - cron:  '0 0 * * 0'
