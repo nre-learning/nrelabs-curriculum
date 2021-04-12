@@ -12,3 +12,6 @@ jobs:
     - uses: actions/checkout@v2
     - name: Prune preview tags
       run: ./.scripts/prune-preview-tags.sh
+      env:
+        DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+        DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
