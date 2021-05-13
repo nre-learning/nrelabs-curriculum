@@ -1,0 +1,17 @@
+name: prune-preview-tags
+on:
+  workflow_dispatch:
+  schedule:
+    # Every Sunday at midnight
+    - cron:  '0 0 * * 0'
+
+jobs:
+  prune:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Prune preview tags
+      run: ./.scripts/prune-preview-tags.sh
+      env:
+        DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+        DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}

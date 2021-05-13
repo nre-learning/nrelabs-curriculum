@@ -17,7 +17,7 @@ then
       echo "Must provide preview ID as third parameter to this script"
 fi
 
-wget -q "https://github.com/nre-learning/docker-housekeeping/releases/download/v0.1.0/docker-housekeeping-linux-amd64" && chmod +x docker-housekeeping-linux-amd64 && cp docker-housekeeping-linux-amd64 docker-housekeeping
+wget -q "https://github.com/nre-learning/docker-housekeeping/releases/download/v0.1.0/docker-housekeeping-linux-amd64" && chmod +x docker-housekeeping-linux-amd64 && mv docker-housekeeping-linux-amd64 docker-housekeeping
 
 for row in $(echo "$1" | jq -r '.[] | @base64'); do
     _getimage() {
