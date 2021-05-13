@@ -1,5 +1,7 @@
 # CHANGELOG
 
+foo
+
 ## In development
 
 - Git lesson stage 5 [#324](https://github.com/nre-learning/nrelabs-curriculum/pull/324)
