@@ -205,8 +205,8 @@ jobs:
       run: |
         ./.scripts/retag-images.sh '${{ toJson(fromJson(needs.prebuild.outputs.image_directives).to_retag) }}' ${{ env.retagSource }} ${{ needs.prebuild.outputs.preview_id }}
       env:
-        DOCKER_USER: ${{ secrets.DOCKERHUB_USERNAME }}
-        DOCKER_PASS: ${{ secrets.DOCKERHUB_TOKEN }}
+        DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+        DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
 
   deploy_preview:
     needs: [prebuild, build_image, retag_images]
