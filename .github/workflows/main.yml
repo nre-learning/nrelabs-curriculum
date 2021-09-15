@@ -7,7 +7,7 @@ env:
   emptyLiteral: "empty"
   retagSource: "v1.3.0"
   # TODO - temporary, please update after next platform release
-  antidoteVersion: "v0.7.0-networkinterfaces-test"
+  antidoteVersion: "v0.7.0-networkinterfacestest"
 
 jobs:
   prebuild:
