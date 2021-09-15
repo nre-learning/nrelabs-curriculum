@@ -6,7 +6,8 @@ env:
   emptyArray: "[]"
   emptyLiteral: "empty"
   retagSource: "v1.3.0"
-  antidoteVersion: "v0.6.2"
+  # TODO - temporary, please update after next platform release
+  antidoteVersion: "v0.7.0-networkinterfaces-test"
 
 jobs:
   prebuild:
