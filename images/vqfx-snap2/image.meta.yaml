@@ -5,9 +5,3 @@ sshUser: antidote
 sshPassword: antidotepassword
 configUser: antidote
 configPassword: antidotepassword
-networkInterfaces:
-  - 'em0'
-  - 'em3'
-  - 'em4'
-  - 'em5'
-  - 'em6'

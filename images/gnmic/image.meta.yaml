@@ -5,5 +5,3 @@ sshUser: antidote
 sshPassword: antidotepassword
 configUser: antidote
 configPassword: antidotepassword
-networkInterfaces:
-  - "eth0"
