@@ -1,0 +1,31 @@
+name: Network Observability with SuzieQ
+slug: suzieq-network-observability
+category: tools
+diagram: ""
+video: ""
+tier: prod
+description: TBD
+shortDescription: suzieq
+stages:
+- description: Introduction
+  guideType: markdown
+  stageVideo: ""
+endpoints:
+- name: suzieq
+  image: suzieq
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+- name: cvx1
+  image: cvx
+  configurationType: python
+  presentations:
+  - name: cli
+    port: 22
+    type: ssh
+authors:
+- name: Dinesh Dutt
+  link: TBD
+- name: Justin Pietsch
+  link: TBD
