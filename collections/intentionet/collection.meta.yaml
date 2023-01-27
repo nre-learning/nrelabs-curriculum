@@ -1,0 +1,20 @@
+---
+id: 15
+title: Intentionet
+image: ./intentionet-batfish.png
+website: https://www.intentionet.com
+contactEmail: "support@intentionet.com"
+
+# Why should users view your collection?
+briefDescription: Intentionet develops and maintains Batfish - an open source network configuration analysis tool (https://www.batfish.org).
+    
+# Why should users continue and view your lessons?
+longDescription: |
+    The team at Intentionet created the open-source network validation solution - Batfish (https://www.batfish.org).
+
+    Batfish finds errors and guarantees the correctness of planned or current network configurations. It enables safe and rapid network evolution, without the fear of outages or security breaches.
+
+    Batfish was originally developed by researchers at Microsoft Research, UCLA, and USC. Many others have since contributed to it. It is currently maintained by Intentionet, who also offers Batfish Enterprise, a service that extends and enhances the core capabilities of Batfish.
+
+type: vendor
+tier: prod
